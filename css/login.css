@@ -1,0 +1,43 @@
+﻿/* Shiword v0.6 - stylesheet for login */
+
+#login h1 a {
+	background: url("../../../../wp-admin/images/wp-logo.png") no-repeat scroll center top transparent;
+	height:32px;
+	margin-left:285px;
+	width:32px;
+}
+body { 
+	background:url("../images/bg.jpg") repeat-x fixed left bottom #B6B6B6; !important; 
+	padding-bottom: 300px;
+	overflow: hidden;
+}
+#login {
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 0px 0px 8px #000;
+	-webkit-box-shadow: 0px 0px 8px #000;
+	box-shadow: 0px 0px 8px #000;
+	background-color:#262626;
+	border:1px solid #ccc;
+	padding-top:4px;
+}
+#login form {
+	color:#FFFFFF;
+	border: none;
+	background: none;
+	margin: 0;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+#login_error, .message {
+	margin: 0 8px 16px !important;
+}
+#nav {
+	text-shadow:0 1px 0 #000 !important;
+}
+#user_pass:hover , #user_login:hover , #user_email:hover, #user_pass:focus , #user_login:focus , #user_email:focus {
+	border-color :#FF8D39;
+}

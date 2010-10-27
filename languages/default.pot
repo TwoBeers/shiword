@@ -1,0 +1,331 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Text in function
+#: attachment.php:42
+#: index.php:69
+#: single.php:57
+#: page.php:34
+#: comments.php:12
+msgid "% Comments"
+msgstr ""
+
+#. Text in echo
+#: attachment.php:19
+#: functions.php:1
+#: functions.php:531
+#: index.php:33
+#: single.php:20
+#: page.php:18
+msgid "(no title)"
+msgstr ""
+
+#. Text in function
+#: attachment.php:42
+#: index.php:69
+#: single.php:57
+#: page.php:34
+#: comments.php:12
+msgid "1 Comment"
+msgstr ""
+
+#. Text in echo
+#: footer.php:100
+msgid "Add New Post"
+msgstr ""
+
+#. Text in echo
+#: allcat.php:10
+msgid "All Categories"
+msgstr ""
+
+#. Text in function
+#: index.php:3
+#: sidebar.php:18
+msgid "Archives"
+msgstr ""
+
+#. Text in echo
+#: sidebar.php:16
+msgid "Blogroll"
+msgstr ""
+
+#. Text in function
+#: comments.php:36
+msgid "Cancel reply"
+msgstr ""
+
+#. Text in echo
+#: allcat.php:6
+#: index.php:54
+#: single.php:42
+#: footer.php:53
+#: sidebar.php:17
+msgid "Categories"
+msgstr ""
+
+#. Text in function
+#: index.php:3
+msgid "Category"
+msgstr ""
+
+#. Text in echo
+#: attachment.php:10
+#: single.php:11
+#: page.php:10
+msgid "Close"
+msgstr ""
+
+#. Text in echo
+#: attachment.php:41
+#: index.php:68
+#: single.php:56
+#: page.php:33
+#: footer.php:103
+msgid "Comments"
+msgstr ""
+
+#. Text in function
+#: attachment.php:45
+#: index.php:72
+#: single.php:60
+#: page.php:38
+msgid "Edit"
+msgstr ""
+
+#. Text in function
+#: comments.php:26
+msgid "Email"
+msgstr ""
+
+#. Text in echo
+#: comments.php:6
+msgid "Enter your password to view comments."
+msgstr ""
+
+#. Text in function
+#: footer.php:116
+msgid "F j, Y"
+msgstr ""
+
+#. Text in echo
+#: footer.php:202
+msgid "Home"
+msgstr ""
+
+#. Text in function
+#: comments.php:36
+msgid "Leave a Reply"
+msgstr ""
+
+#. Text in echo
+#: footer.php:144
+#: footer.php:146
+msgid "Leave a comment"
+msgstr ""
+
+#. Text in function
+#: comments.php:36
+msgid "Logged in as <a href=\"%1$s\">%2$s</a>."
+msgstr ""
+
+#. Text in echo
+#: sidebar.php:8
+msgid "Meta"
+msgstr ""
+
+#. Text in echo
+#: footer.php:56
+msgid "More..."
+msgstr ""
+
+#. Text in function
+#: comments.php:26
+msgid "Name"
+msgstr ""
+
+#. Text in function
+#: footer.php:180
+msgid "Next Post"
+msgstr ""
+
+#. Text in function
+#: attachment.php:42
+#: index.php:69
+#: single.php:57
+#: page.php:34
+#: comments.php:12
+msgid "No Comments"
+msgstr ""
+
+#. Text in echo
+#: index.php:62
+#: single.php:50
+msgid "No Tags"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "No comments yet."
+msgstr ""
+
+#. Text in function
+#: functions.php:313
+msgid "Options saved."
+msgstr ""
+
+#. Text in echo
+#: 404.php:8
+msgid "Page not found"
+msgstr ""
+
+#. Text in echo
+#: sidebar.php:15
+msgid "Pages"
+msgstr ""
+
+#. Text in function
+#: attachment.php:94
+#: single.php:67
+#: page.php:45
+msgid "Pages:"
+msgstr ""
+
+#. Text in echo
+#: footer.php:18
+msgid "Powered by WordPress"
+msgstr ""
+
+#. Text in function
+#: footer.php:184
+msgid "Previous Post"
+msgstr ""
+
+#. Text in echo
+#: attachment.php:11
+#: single.php:12
+#: page.php:11
+#: footer.php:137
+msgid "Print"
+msgstr ""
+
+#. Text in function
+#: attachment.php:35
+#: index.php:48
+#: single.php:36
+msgid "Published on: <b>%1$s</b>"
+msgstr ""
+
+#. Text in echo
+#: footer.php:67
+msgid "Recent Comments"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+#: footer.php:40
+msgid "Recent Posts"
+msgstr ""
+
+#. Text in function
+#: comments.php:36
+msgid "Say It!"
+msgstr ""
+
+#. Text in echo
+#: searchform.php:3
+#: searchform.php:5
+msgid "Search"
+msgstr ""
+
+#. Text in function
+#: index.php:3
+msgid "Search Results"
+msgstr ""
+
+#. Text in function
+#: index.php:3
+msgid "Search results for &#8220;%s&#8221;"
+msgstr ""
+
+#. Text in function
+#: functions.php:568
+msgid "Shiword theme says: \"Dont forget to set <a href=\"%s\">my options</a> and the header image!\""
+msgstr ""
+
+#. Text in echo
+#: attachment.php:105
+#: index.php:91
+#: single.php:77
+#: page.php:54
+msgid "Sorry, no posts matched your criteria."
+msgstr ""
+
+#. Text in echo
+#: header.php:52
+msgid "Syndicate this site using RSS"
+msgstr ""
+
+#. Text in function
+#: index.php:3
+msgid "Tag"
+msgstr ""
+
+#. Text in echo
+#: index.php:61
+#: single.php:49
+msgid "Tags:"
+msgstr ""
+
+#. Text in function
+#: functions.php:313
+#: functions.php:384
+msgid "Theme Options"
+msgstr ""
+
+#. Text in echo
+#: footer.php:162
+msgid "Trackback URL"
+msgstr ""
+
+#. Text in echo
+#: footer.php:56
+msgid "View all categories"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "View all posts in %s"
+msgstr ""
+
+#. Text in function
+#: comments.php:26
+msgid "Website"
+msgstr ""
+
+#. Text in echo
+#: footer.php:116
+msgid "Welcome"
+msgstr ""
+
+#. Text in function
+#: comments.php:36
+msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
+msgstr ""
+
+#. Text in echo
+#: footer.php:98
+msgid "Your Profile"
+msgstr ""
+
+#. Text in function
+#: functions.php:547
+msgid "by"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "by %s"
+msgstr ""

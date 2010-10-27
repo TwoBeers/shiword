@@ -1,0 +1,295 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Text in function
+#: attachment.php:86
+msgid "&laquo; Previous Image"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- categories"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- recent comments"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- recent posts"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- sticky post slider"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- user"
+msgstr ""
+
+#. Text in echo
+#: footer.php:227
+#: footer.php:229
+msgid "Bottom of page"
+msgstr ""
+
+#. Text in function
+#: functions.php:295
+msgid "Child pages: "
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "Footer Widget Area #1"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "Footer Widget Area #2"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "Footer Widget Area #3"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "Header Widget Area"
+msgstr ""
+
+#. Text in function
+#: footer.php:83
+msgid "Logged in as %s"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "Main Navigation Menu"
+msgstr ""
+
+#. Text in function
+#: footer.php:213
+msgid "Newer Posts"
+msgstr ""
+
+#. Text in function
+#: attachment.php:87
+msgid "Next Image &raquo;"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "No preview: this is a comment of a protected post"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "No preview: this is a protected post"
+msgstr ""
+
+#. Text in function
+#: footer.php:83
+msgid "Not logged in"
+msgstr ""
+
+#. Text in function
+#: footer.php:210
+msgid "Older Posts"
+msgstr ""
+
+#. Text in function
+#: functions.php:295
+msgid "Parent page: "
+msgstr ""
+
+#. Text in function
+#: footer.php:189
+#: footer.php:191
+msgid "Return to %s"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "Sidebar Widget Area"
+msgstr ""
+
+#. Text in echo
+#: 404.php:10
+msgid "Sorry, you're looking for something that isn't here"
+msgstr ""
+
+#. Text in function
+#: functions.php:295
+msgid "This page has hierarchy"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "Tips: Don\\'t drag too much widgets here. Use small \"graphical\" widgets (eg icons, buttons, the search form, etc.)"
+msgstr ""
+
+#. Text in echo
+#: footer.php:220
+#: footer.php:222
+msgid "Top of page"
+msgstr ""
+
+#. Text in echo
+#: functions.php:412
+msgid "Undo Changes"
+msgstr ""
+
+#. Text in echo
+#: functions.php:411
+msgid "Update Options"
+msgstr ""
+
+#. Text in echo
+#: footer.php:80
+msgid "User"
+msgstr ""
+
+#. Text in echo
+#: attachment.php:88
+msgid "View full size"
+msgstr ""
+
+#. Text in echo
+#: 404.php:11
+msgid "You can try the following:"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "[default = disabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "[default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "about"
+msgstr ""
+
+#. Text in echo
+#: 404.php:15
+msgid "browse the site throught the navigation bar below"
+msgstr ""
+
+#. Text in echo
+#: attachment.php:31
+#: index.php:44
+#: single.php:32
+msgid "by"
+msgstr ""
+
+#. Text in echo
+#: functions.php:394
+msgid "description"
+msgstr ""
+
+#. Text in echo
+#: footer.php:151
+#: footer.php:153
+msgid "feed for comments on this post"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "javascript animations"
+msgstr ""
+
+#. Text in echo
+#: functions.php:392
+msgid "name"
+msgstr ""
+
+#. Text in function
+#: index.php:84
+msgid "page %1$s of %2$s"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "please, don\\'t hide theme credits [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "posts thumbnail"
+msgstr ""
+
+#. Text in function
+#: functions.php:568
+msgid "quoted on"
+msgstr ""
+
+#. Text in echo
+#: functions.php:395
+msgid "require"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "right sidebar"
+msgstr ""
+
+#. Text in echo
+#: 404.php:13
+msgid "search the site using the searchbox in the upper-right"
+msgstr ""
+
+#. Text in echo
+#: 404.php:14
+msgid "see the suggested pages in the above menu"
+msgstr ""
+
+#. Text in function
+#: functions.php:568
+msgid "shiword Default Gravatar"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "slideshow for your sticky posts [default = disabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "sliding menu"
+msgstr ""
+
+#. Text in echo
+#: functions.php:393
+msgid "status"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "theme credits"
+msgstr ""
+
+#. Text in echo
+#: functions.php:389
+msgid "theme features"
+msgstr ""
+
+#. Text in echo
+#: footer.php:116
+msgid "today is "
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "try disable animations if you encountered problems with javascript [default = enabled]"
+msgstr ""

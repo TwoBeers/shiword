@@ -1,0 +1,61 @@
+/* Shiword v0.6 - stylesheet for print */
+
+body {
+	font-size: 14px;
+}
+
+h1,h2,h3,h4,h5,h6,p {
+	margin:5px 0;
+}
+
+a {
+	text-decoration: none;
+	color: #000000;
+}
+
+#pages, #sidebardx, #quickbar, #edit_link, .avatar, .comment-edit-link, .comment-reply-link, #respond, .says , .description, #footer-widget-area {
+	display: none;
+}
+
+.metafield_content {
+	height: auto !important;
+}
+
+.meta, .comment-meta, #footer, #head {
+	font-size:11px;
+}
+
+.meta {
+border-left: 1px solid #CCCCCC;
+padding-left: 10px;
+margin:10px 0;
+}
+
+.comment-meta {
+	position: absolute;
+	top:2px;
+	right:2px;
+}
+
+.comment-body {
+border:1px solid #CCCCCC;
+padding: 3px;
+margin-bottom: 3px;
+	position: relative;
+}
+
+#commentlist li {
+	list-style: disc outside none;
+}
+
+.fn {
+	font-weight: bold;
+}
+
+#head, #footer {
+	text-align: right;
+}
+
+#comments {
+border-top:1px solid #CCCCCC;
+}
