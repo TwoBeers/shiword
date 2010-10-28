@@ -144,7 +144,7 @@ function shiword_scripts(){
 	if ($shiword_opt['shiword_jsani'] == 'true') {
 		if ( !$shiword_preview_mode ) { //script not to be loaded in print preview
 			wp_enqueue_script('sw-animations', get_bloginfo('stylesheet_directory').'/js/sw-animations.js',array('jquery'),$shiword_version, true); //shiword js
-			if ( $shiword_opt['shiword_sticky'] == 'true' ) wp_enqueue_script('sw-sticky-slider', get_bloginfo('stylesheet_directory').'/js/sw-sticky-slider.dev.js',array('jquery'),$shiword_version , false);
+			if ( $shiword_opt['shiword_sticky'] == 'true' ) wp_enqueue_script('sw-sticky-slider', get_bloginfo('stylesheet_directory').'/js/sw-sticky-slider.js',array('jquery'),$shiword_version , false);
 		}
 	}
 }
@@ -387,7 +387,7 @@ function edit_shiword_options() {
 				<?php settings_fields( 'shiw_settings_group' ); ?>
 				<div id="stylediv">
 					<h3><?php _e('theme features','shiword'); ?></h3>
-					<table style="border-collapse: collapse; width: 100%;">
+					<table style="border-collapse: collapse; width: 100%;background-color:#fff;">
 						<tr>
 							<th><?php _e('name','shiword'); ?></th>
 							<th><?php _e('status','shiword'); ?></th>

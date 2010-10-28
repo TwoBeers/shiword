@@ -6,9 +6,9 @@
 
 <div id="header-widget-area">
 	<?php if ( is_active_sidebar( 'header-widget-area' ) ) { ?>
-		<ul>
+		<div>
 			<?php dynamic_sidebar( 'header-widget-area' ); ?>
-		</ul>
+		</div>
 	<?php } ?>
 	<div class="fixfloat"></div> 
 </div><!-- #header-widget-area -->
