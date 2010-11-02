@@ -17,7 +17,8 @@
 #stylediv h3 {
 	color:#fff;
 }
-#stylediv td, #stylediv th {
+#stylediv td,
+#stylediv th {
 	border-top:1px solid #ddd;
 	padding:3px 10px;
 	font-size:11px;

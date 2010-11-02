@@ -17,7 +17,7 @@
 
 	<?php
 		global $shiword_opt;
-		global $shiword_preview_mode;
+		global $is_sw_printpreview;
 	?>
 
 	<style type="text/css">
@@ -41,6 +41,11 @@
 			<div id="head">
 				<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo('name'); ?></a></h1>
 				<div class="description"><?php bloginfo('description'); ?></div>
+				<div id="rss_imglink" class="minibutton">
+					<a href="<?php bloginfo('rss2_url'); ?>" title="<?php _e('Syndicate this site using RSS 2.0'); ?>">
+						<span class="minib_img" style="background-position: 0px -216px;">&nbsp;</span>
+					</a>
+				</div>
 			</div>
 		</div>
 	<div id="maincontent">
@@ -48,26 +53,8 @@
 			<?php get_sidebar( 'header' ); // show header widgets areas ?>
 		</div>
 		<div id="pages">
-			<?php wp_nav_menu( array( 'menu_id' => 'mainmenu', 'fallback_cb' => 'shiword_pages_menu', 'theme_location' => 'primary' ) ); ?>
-			<div id="rss_imglink"><a href="<?php bloginfo('rss2_url'); ?>" title="<?php _e('Syndicate this site using RSS'); ?>"><img alt="rsslink" src="<?php bloginfo('stylesheet_directory'); ?>/images/rss.png" /></a></div>
+			<?php wp_nav_menu( array( 'menu_id' => 'mainmenu', 'fallback_cb' => 'shiword_pages_menu', 'theme_location' => 'primary' ) ); //main menu ?>
 			<div class="fixfloat"></div>
 		</div>
-		<?php if ( ($shiword_opt['shiword_sticky'] == 'true') && is_home() ) sticky_slide(); // the sticky slider?> 
+		<?php if ( ($shiword_opt['shiword_sticky'] == 'true') && is_home() && !$is_sw_printpreview ) sw_sticky_slider(); // the sticky slider ?> 
 		<div class="<?php if ( is_singular() || ($shiword_opt['shiword_rsideb'] == 'false') ) { echo 'posts_wide'; } else { echo 'posts_narrow'; } ?> <?php if ( $shiword_opt['shiword_sticky'] != 'true' ) echo 'letsstick'; ?>">
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		

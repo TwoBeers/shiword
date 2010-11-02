@@ -21,8 +21,7 @@
 			$this.css({
 				'width' : '50000px',
 				'position' : 'relative',
-				'display' : 'block',
-				'opacity' : 0
+				'display' : 'block'
 			});
 			// initialize
 			$this.children().css({
@@ -31,7 +30,6 @@
 				'height' : $this.parent().css('height'),
 				'width' : $this.parent().css('width')
 			});
-			$this.animate({ opacity : 1 },2000);
 			if ($this.children().size() > 1) {
 			
 				// call the slide function.

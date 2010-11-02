@@ -24,7 +24,7 @@ body {
 	padding-top:4px;
 }
 #login form {
-	color:#FFFFFF;
+	color:#fff;
 	border: none;
 	background: none;
 	margin: 0;
@@ -32,12 +32,18 @@ body {
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }
-#login_error, .message {
+#login_error,
+.message {
 	margin: 0 8px 16px !important;
 }
 #nav {
 	text-shadow:0 1px 0 #000 !important;
 }
-#user_pass:hover , #user_login:hover , #user_email:hover, #user_pass:focus , #user_login:focus , #user_email:focus {
+#user_pass:hover,
+#user_login:hover,
+#user_email:hover,
+#user_pass:focus,
+#user_login:focus,
+#user_email:focus {
 	border-color :#FF8D39;
 }

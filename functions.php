@@ -42,9 +42,9 @@ if ( get_theme( 'Shiword' ) ) {
 
 
 // check if in preview mode or not
-$shiword_preview_mode = false;
+$is_sw_printpreview = false;
 if ( isset( $_GET['style'] ) && md5( $_GET['style'] ) == '8e77921d24c6f82c4bd783895e9d9cf1' ) { //print preview
-	$shiword_preview_mode = true;
+	$is_sw_printpreview = true;
 }
 
 // check if is "all category" page
@@ -123,10 +123,11 @@ add_action( 'widgets_init', 'shiword_widgets_init' );
 // Add stylesheets to page
 function shiword_stylesheet(){
 	global $shiword_version;
-	global $shiword_preview_mode;
+	global $is_sw_printpreview;
 	//shows print preview / normal view
-	if ( $shiword_preview_mode ) { //print preview
-		wp_enqueue_style( 'print-style-preview', get_bloginfo( 'stylesheet_directory' ) . '/css/print_preview.css', false, $shiword_version, 'screen' );
+	if ( $is_sw_printpreview ) { //print preview
+		wp_enqueue_style( 'print-style-preview', get_bloginfo( 'stylesheet_directory' ) . '/css/print.css', false, $shiword_version, 'screen' );
+		wp_enqueue_style( 'general-style-preview', get_bloginfo( 'stylesheet_directory' ) . '/css/print_preview.css', false, $shiword_version, 'screen' );
 	} else { //normal view 
 		wp_enqueue_style( 'general-style', get_stylesheet_uri(), false, $shiword_version, 'screen' );
 	}
@@ -139,10 +140,10 @@ add_action( 'wp_print_styles', 'shiword_stylesheet' );
 // add scripts
 function shiword_scripts(){
 	global $shiword_opt;
-	global $shiword_preview_mode;
+	global $is_sw_printpreview;
 	global $shiword_version;
 	if ($shiword_opt['shiword_jsani'] == 'true') {
-		if ( !$shiword_preview_mode ) { //script not to be loaded in print preview
+		if ( !$is_sw_printpreview ) { //script not to be loaded in print preview
 			wp_enqueue_script('sw-animations', get_bloginfo('stylesheet_directory').'/js/sw-animations.js',array('jquery'),$shiword_version, true); //shiword js
 			if ( $shiword_opt['shiword_sticky'] == 'true' ) wp_enqueue_script('sw-sticky-slider', get_bloginfo('stylesheet_directory').'/js/sw-sticky-slider.js',array('jquery'),$shiword_version , false);
 		}
@@ -524,7 +525,7 @@ add_action('login_head', 'my_custom_login_css');
 
 
 // display a slideshow for the sticky posts
-function sticky_slide() {
+function sw_sticky_slider() {
 	$ss_posts = get_posts(array('post__in' => get_option('sticky_posts'))); // get all the sticky posts ?>
 	<div id="sw_slider-wrap">	
 		<div id="sw_sticky_slider">	

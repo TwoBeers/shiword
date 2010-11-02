@@ -32,7 +32,7 @@
 				// show/hide sliding toolbar
 				if ($shiword_opt['shiword_qbar'] == 'true') { ?>
 					<div id="quickbar">
-						<?php if ($shiword_opt['shiword_qbar_recpost'] == 'true') { ?>
+						<?php if ($shiword_opt['shiword_qbar_recpost'] == 'true') { // recent posts menu ?>
 							<div class="menuitem">
 								<div class="menuitem_img mii_rpost"></div>
 								<div class="menuback">
@@ -45,7 +45,7 @@
 								</div>
 							</div>
 						<?php } ?>
-						<?php if ($shiword_opt['shiword_qbar_cat'] == 'true') { ?>
+						<?php if ($shiword_opt['shiword_qbar_cat'] == 'true') { // popular categories menu ?>
 							<div class="menuitem">
 								<div  class="menuitem_img mii_pcats"></div>
 								<div class="menuback">
@@ -59,7 +59,7 @@
 								</div>
 							</div>
 						<?php } ?>
-						<?php if ($shiword_opt['shiword_qbar_reccom'] == 'true') { ?>
+						<?php if ($shiword_opt['shiword_qbar_reccom'] == 'true') { // recent comments menu ?>
 							<div class="menuitem">
 								<div  class="menuitem_img mii_rcomm"></div>
 								<div class="menuback">
@@ -72,7 +72,7 @@
 								</div>
 							</div>
 						<?php } ?>
-						<?php if ($shiword_opt['shiword_qbar_user'] == 'true') { ?>
+						<?php if ($shiword_opt['shiword_qbar_user'] == 'true') { // user links menu ?>
 							<div class="menuitem">
 								<div  class="menuitem_img mii_cuser"></div>
 								<div class="menuback">

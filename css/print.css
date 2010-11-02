@@ -3,59 +3,85 @@
 body {
 	font-size: 14px;
 }
-
-h1,h2,h3,h4,h5,h6,p {
-	margin:5px 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 5px 0;
 }
-
 a {
 	text-decoration: none;
-	color: #000000;
+	color: #000;
 }
-
-#pages, #sidebardx, #quickbar, #edit_link, .avatar, .comment-edit-link, .comment-reply-link, #respond, .says , .description, #footer-widget-area {
+a img {
+	border: none;
+}
+pre,
+code,
+tt,
+kbd {
+	font: 1.1em "Courier New", monospace;
+	letter-spacing: 1px;
+	padding: 0 8px;
+}
+pre {
+	border: 1px solid #ccc;
+	display: block;
+	white-space: pre;
+	margin: 5px auto;
+	padding: 5px;
+}
+.avatar,
+.comment-edit-link,
+.comment-reply-link,
+.says,
+.description,
+.post-edit-link,
+#footer-widget-area,
+#headerimg,
+#respond,
+#pages,
+#sidebardx,
+#quickbar,
+#edit_link,
+#fixedfoot_cont {
 	display: none;
 }
-
 .metafield_content {
 	height: auto !important;
 }
-
-.meta, .comment-meta, #footer, #head {
-	font-size:11px;
+.meta,
+.comment-meta,
+#footer,
+#head {
+	font-size: 11px;
 }
-
 .meta {
-border-left: 1px solid #CCCCCC;
-padding-left: 10px;
-margin:10px 0;
+	border: 1px solid #ccc;
+	margin: 10px 0;
+	padding: 2px 2px 2px 10px;
 }
-
 .comment-meta {
 	position: absolute;
-	top:2px;
-	right:2px;
+	top: 2px;
+	right: 2px;
 }
-
 .comment-body {
-border:1px solid #CCCCCC;
-padding: 3px;
-margin-bottom: 3px;
+	border: 1px solid #ccc;
+	margin-bottom: 3px;
 	position: relative;
+	padding: 3px;
 }
-
 #commentlist li {
 	list-style: disc outside none;
 }
-
 .fn {
 	font-weight: bold;
 }
-
-#head, #footer {
+#head,
+#footer {
 	text-align: right;
-}
-
-#comments {
-border-top:1px solid #CCCCCC;
 }
