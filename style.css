@@ -1,6 +1,6 @@
 ﻿/*
 Theme Name: Shiword
-Theme URI: http://www.twobeers.net/annunci/tema-per-wordpress-fastfood
+Theme URI: http://www.twobeers.net/annunci/shiword
 Description: Simple dark theme with lots of features, like a "quick links" menu, footer sidebars or print preview. Full supports WP 3.0 new custom menu tool. Based on Fastfood theme v0.9
 Version: 0.7
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, right-sidebar
@@ -16,7 +16,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 body {
 	font-family: verdana;
 	font-size: 11px;
-	background: #b6b6b6 url('images/bg.jpg') bottom left repeat-x fixed;
+	background: #b6b6b6 url('images/bg.png') bottom left repeat-x fixed;
 	color: #aaa;
 	margin: 0;
 }
@@ -200,8 +200,7 @@ input[type=password]:focus {
 	background: #f2f2f2 url('images/reflect.png') center bottom no-repeat;
 }
 #fixedfoot {
-	width: 850px;
-	background: #0a0a0a url('images/pad.png') left bottom repeat-x;
+	width: 972px;
 	-moz-border-radius: 0 0 30px 30px;
 	-khtml-border-radius: 0 0 30px 30px;
 	-webkit-border-radius: 0 0 30px 30px;
@@ -209,6 +208,13 @@ input[type=password]:focus {
 	border-bottom: 1px solid #262626;
 	border-left: 1px solid #ccc;
 	border-right: 1px solid #777777;
+}
+#fixedfoot_overlay {
+	background: transparent url('images/pad_overlay.png') left bottom repeat-x;
+	-moz-border-radius: 0 0 30px 30px;
+	-khtml-border-radius: 0 0 30px 30px;
+	-webkit-border-radius: 0 0 30px 30px;
+	border-radius: 0 0 30px 30px;
 	padding: 0 61px;
 }
 #quickbar {
@@ -223,19 +229,29 @@ input[type=password]:focus {
 	text-align: right;
 	border-top: 1px solid #ccc;
 	padding: 10px;
+	color: #fff;
 }
 #close_preview {
 	display: none;
 	padding: 5px;
 }
 #sw_background {
-	background: url('images/body.png') repeat-y center top transparent;
 	top: 0;
 	height: 4000px;
 	left: 0;
 	position: fixed;
 	width: 100%;
 	z-index: -10;
+}
+#sw_body {
+	height:4000px;
+	margin:0 auto;
+	width:972px;
+}
+#sw_body_overlay {
+	background: url('images/body.png') repeat-y center top transparent;
+	height:4000px;
+	width:972px;
 }
 /* header 
 ----------------------------------------------------------*/
@@ -253,18 +269,24 @@ input[type=password]:focus {
 	-khtml-border-radius: 30px 30px 0 0;
 	-webkit-border-radius: 30px 30px 0 0;
 	border-radius: 30px 30px 0 0;
-	background: url('images/pad.png') repeat-x scroll left top #0A0A0A;
-	color: #fff;
-	font-size: 1.5em;
-	font-style: italic;
-	text-align: left;
-	width: 890px;
+	width: 972px;
 	border-left: 1px solid #ccc;
 	border-right: 1px solid #777777;
 	border-top: 1px solid;
 	margin: 0 auto;
-	padding: .6em 20px .6em 62px;
 	position: relative;
+}
+#head_overlay {
+	-moz-border-radius: 30px 30px 0 0;
+	-khtml-border-radius: 30px 30px 0 0;
+	-webkit-border-radius: 30px 30px 0 0;
+	border-radius: 30px 30px 0 0;
+	background: url('images/pad_overlay.png') repeat-x scroll left top transparent;
+	color: #fff;
+	font-size: 1.5em;
+	font-style: italic;
+	text-align: left;
+	padding: .6em 20px .6em 62px;
 }
 #head h1 {
 	font-size: 1.5em;

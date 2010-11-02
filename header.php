@@ -19,12 +19,6 @@
 		global $shiword_opt;
 		global $is_sw_printpreview;
 	?>
-
-	<style type="text/css">
-		#headerimg {
-			background: transparent url('<?php esc_url ( header_image() ); ?>') right bottom repeat-y;
-		}
-	</style>
 	
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 	<?php wp_get_archives('type=monthly&format=link'); ?>
@@ -35,16 +29,22 @@
 </head>
 
 <body <?php body_class(); ?>>
-	<div id="sw_background"></div>
+	<div id="sw_background">
+		<div id="sw_body" class="pad_bg">
+			<div id="sw_body_overlay"></div>
+		</div>
+	</div>
 	<div id="main">
 		<div id="head_cont">
-			<div id="head">
-				<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo('name'); ?></a></h1>
-				<div class="description"><?php bloginfo('description'); ?></div>
-				<div id="rss_imglink" class="minibutton">
-					<a href="<?php bloginfo('rss2_url'); ?>" title="<?php _e('Syndicate this site using RSS 2.0'); ?>">
-						<span class="minib_img" style="background-position: 0px -216px;">&nbsp;</span>
-					</a>
+			<div id="head" class="pad_bg">
+				<div id="head_overlay">
+					<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo('name'); ?></a></h1>
+					<div class="description"><?php bloginfo('description'); ?></div>
+					<div id="rss_imglink" class="minibutton">
+						<a href="<?php bloginfo('rss2_url'); ?>" title="<?php _e('Syndicate this site using RSS 2.0'); ?>">
+							<span class="minib_img" style="background-position: 0px -216px;">&nbsp;</span>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>

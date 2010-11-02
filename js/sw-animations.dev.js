@@ -33,19 +33,10 @@
 				{ 'width': mysize },
 				200
 			);
-			trig.animate(
-				{'opacity': 0.5},
-				250,
-				'swing',
-				function(){ 
-					trig.animate({'opacity': 1});
-				}
-			);
 		}).mouseleave( function(){ //when mouse leaves, hide the tooltip
 			list.stop();
 			trig.stop();
 			list.css({ 'opacity' : 1, 'display' : '', 'width' : 0 });
-			trig.css('opacity', 1);
 		});	
 	});
 
@@ -62,20 +53,11 @@
 				'swing',
 				function(){ list.addClass('mi_shadowed'); }
 			);
-			trig.animate(
-				{ 'opacity': 0.5},
-				250,
-				'swing',
-				function(){ 
-					trig.animate( { 'opacity': 1 } ); 
-				}
-			);
 		}).mouseleave( function(){ //when mouse leaves, hide the submenu
 			list.stop();
 			trig.stop();
 			list.removeClass('mi_shadowed');
 			list.css({ 'display' : '', 'width' : 0 });
-			trig.css( 'opacity', 1 );
 		});	
 	});
 

@@ -1,17 +1,9 @@
 <?php
-load_theme_textdomain('shiword', TEMPLATEPATH . '/languages' );
-
-
-// Register Features Support
-add_theme_support( 'automatic-feed-links' );
-add_theme_support( 'post-thumbnails' ); // Thumbnails support
-
 
 // Set the content width based on the theme's design
 if ( ! isset( $content_width ) ) {
 	$content_width = 560;
 }
-
 
 //complete options array, with defaults values, description, infos and required option
 $shiword_coa = array(
@@ -52,10 +44,6 @@ $shiword_is_allcat_page = false;
 if( isset( $_GET['allcat'] ) && ( md5( $_GET['allcat'] ) == '415290769594460e2e485922904f345d' ) ) {
 	$shiword_is_allcat_page = true;
 }
-
-// Theme uses wp_nav_menu() in one location
-register_nav_menus( array('primary' => __( 'Main Navigation Menu', 'shiword' ) ) );
-
 
 // Register sidebars by running shiword_widgets_init() on the widgets_init hook
 function shiword_widgets_init() {
@@ -423,7 +411,20 @@ function edit_shiword_options() {
 add_action( 'after_setup_theme', 'shiword_setup' );
 if ( ! function_exists( 'shiword_setup' ) ) {
 	function shiword_setup() {
+		// This theme uses post thumbnails
+		add_theme_support( 'post-thumbnails' );
 
+		// Add default posts and comments RSS feed links to head
+		add_theme_support( 'automatic-feed-links' );
+
+		// Make theme available for translation
+		load_theme_textdomain( 'shiword', TEMPLATEPATH . '/languages' );
+		
+		// Theme uses wp_nav_menu() in one location
+		register_nav_menus( array('primary' => __( 'Main Navigation Menu', 'shiword' ) ) );
+
+		// This theme allows users to set a custom background
+		add_custom_background('shiword_custom_background');
 		// Your changeable header business starts here
 		define( 'HEADER_TEXTCOLOR', '404040' );
 		// No CSS, just IMG call. The %s is a placeholder for the theme template directory URI.
@@ -439,7 +440,7 @@ if ( ! function_exists( 'shiword_setup' ) ) {
 
 		// Add a way for the custom header to be styled in the admin panel that controls
 		// custom headers. See shiword_admin_header_style(), below.
-		add_custom_image_header( '', 'shiword_admin_header_style' );
+		add_custom_image_header( 'shiword_header_style', 'shiword_admin_header_style' );
 
 		// ... and thus ends the changeable header business.
 
@@ -468,12 +469,37 @@ if ( ! function_exists( 'shiword_setup' ) ) {
 		) );
 	}
 }
-
 // Styles the header image displayed on the Appearance > Header admin panel.
 if ( ! function_exists( 'shiword_admin_header_style' ) ) {
 	function shiword_admin_header_style() {	
 		echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('stylesheet_directory') . '/css/custom-header.css" />'."\n";
 	}
+}
+// custom header image style - gets included in the site header
+function shiword_header_style() {
+    ?><style type="text/css">
+        #headerimg {
+            background: transparent url('<?php esc_url ( header_image() ); ?>') right bottom repeat-y;
+        }
+    </style><?php
+}
+// custom pad background style - gets included in the site header
+function shiword_custom_background() {
+	$background = get_background_image();
+	$color = get_background_color();
+	if ( ! $background && ! $color ) {
+		$style = "background-color: #0a0a0a;";
+	} else {
+		$style = $color ? "background-color: #$color;" : '';
+		if ( $background ) {
+			$style .= " background-image: url('$background');";
+		}
+	}
+?>
+<style type="text/css"> 
+	.pad_bg { <?php echo trim( $style ); ?> }
+</style>
+<?php
 }
 
 //get the theme options values. uses default values if options are empty or unset
@@ -555,7 +581,7 @@ function sw_sticky_slider() {
 			<?php } ?>
 		</div>
 	</div>
-	<?php add_action('wp_footer', 'init_sticky_slider'); //place the initialize code in footer
+	<?php add_action('wp_footer', 'init_sticky_slider'); //include the initialize code in footer
 }
 function init_sticky_slider() { ?>
 	<script type='text/javascript'>
