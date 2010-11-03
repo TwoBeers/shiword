@@ -303,7 +303,7 @@ msgstr "prova a disabilitare le animazioni se ci sono problemi con i javascript 
 #. Text in function
 #: functions.php:572
 msgid "Shiword theme says: \"Dont forget to set <a href=\"%s\">my options</a> and the header image!\""
-msgstr "Shiword dice: \"Non dimenticarti di impostare le <a href=\"%s\">mie opzioni</a> e l'immagine di testata"
+msgstr "Shiword dice: \"Non dimenticarti di impostare le <a href=\"%s\">mie opzioni</a> e l'immagine di testata!\""
 
 #~ msgid "All rights reserved"
 #~ msgstr "Tutti i diritti riservati"

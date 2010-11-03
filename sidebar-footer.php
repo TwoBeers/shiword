@@ -1,12 +1,9 @@
 <!-- here should be the footer widget area -->
 <?php
 	/* The footer widget area is triggered if any of the areas have widgets. */
-	if (   ! is_active_sidebar( 'first-footer-widget-area'  )
-		&& ! is_active_sidebar( 'second-footer-widget-area' )
-		&& ! is_active_sidebar( 'third-footer-widget-area'  )
-		&& ! is_active_sidebar( 'fourth-footer-widget-area' )
-	)
+	if ( !is_active_sidebar( 'first-footer-widget-area'  ) && !is_active_sidebar( 'second-footer-widget-area' ) && !is_active_sidebar( 'third-footer-widget-area'  )	&& !is_active_sidebar( 'fourth-footer-widget-area' ) ) {
 		return;
+	}
 ?>
 
 <div id="footer-widget-area">
