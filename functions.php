@@ -346,29 +346,33 @@ function shiword_theme_options_style() {
 function edit_shiword_options() {
 	//the option page
 	global $shiword_coa;
-	$shiword_options = get_option('shiword_options');
+	$shiword_options = get_option( 'shiword_options' );
 	//if options are empty, sets the default values
-	if(empty($shiword_options)) {
-		foreach ($shiword_coa as $key => $val) {
+	if ( empty( $shiword_options ) ) {
+		foreach ( $shiword_coa as $key => $val ) {
 			$shiword_options[$key] = $shiword_coa[$key]['default'];
 		}
 		$shiword_options['hidden_opt'] ='default'; //this hidden option avoids empty $shiword_options when updated
-		add_option('shiword_options', $shiword_options, '', 'yes');
+		add_option( 'shiword_options' , $shiword_options, '' , 'yes' );
 	}
 	//check for updated values and return false for disabled ones
 	if ( isset( $_REQUEST['updated'] ) ) {
-		foreach ($shiword_coa as $key => $val) {
-			if( !isset($shiword_options[$key]) ) : $shiword_options[$key] = 'false'; else : $shiword_options[$key] = 'true'; endif;
+		foreach ( $shiword_coa as $key => $val ) {
+			if( !isset( $shiword_options[$key] ) ) : $shiword_options[$key] = 'false'; else : $shiword_options[$key] = 'true'; endif;
 		}
 		// check for required options
-		foreach ($shiword_coa as $key => $val) {
-			if( $shiword_coa[$key]['req'] != '' ) { if( $shiword_options[$shiword_coa[$key]['req']] == 'false') $shiword_options[$key] = 'false'; }
+		foreach ( $shiword_coa as $key => $val ) {
+			if ( $shiword_coa[$key]['req'] != '' ) { if ( $shiword_options[$shiword_coa[$key]['req']] == 'false' ) $shiword_options[$key] = 'false'; }
 		}
-		update_option('shiword_options', $shiword_options);
+		update_option( 'shiword_options' , $shiword_options );
 
 		//return options save message
-		echo '<div id="message" class="updated"><p><strong>'.__('Options saved.').'</strong></p></div>';
+		echo '<div id="message" class="updated"><p><strong>' . __( 'Options saved.' ) . '</strong></p></div>';
 	}
+	foreach ( $shiword_coa as $key => $val ) {
+		if ( !isset( $shiword_options[$key] ) ) $shiword_options[$key] = $shiword_coa[$key]['default'];
+	}
+
 ?>
 	<div class="wrap">
 		<div class="icon32" id="icon-themes"><br></div>
@@ -377,35 +381,35 @@ function edit_shiword_options() {
 			<form method="post" action="options.php">
 				<?php settings_fields( 'shiw_settings_group' ); ?>
 				<div id="stylediv">
-					<h3><?php _e('theme features','shiword'); ?></h3>
+					<h3><?php _e( 'theme features' , 'shiword' ); ?></h3>
 					<table style="border-collapse: collapse; width: 100%;background-color:#fff;">
 						<tr>
-							<th><?php _e('name','shiword'); ?></th>
-							<th><?php _e('status','shiword'); ?></th>
-							<th><?php _e('description','shiword'); ?></th>
-							<th><?php _e('require','shiword'); ?></th>
+							<th><?php _e( 'name' , 'shiword' ); ?></th>
+							<th><?php _e( 'status' , 'shiword' ); ?></th>
+							<th><?php _e( 'description' , 'shiword' ); ?></th>
+							<th><?php _e( 'require' , 'shiword' ); ?></th>
 						</tr>
 					<?php foreach ($shiword_coa as $key => $val) { ?>
 						<tr>
 							<td style="width: 220px;font-weight:bold;border-right:1px solid #CCCCCC;"><?php echo $shiword_coa[$key]['description']; ?></td>
 							<td style="width: 20px;border-right:1px solid #CCCCCC;text-align:center;">
-								<input name="shiword_options[<?php echo $key; ?>]" value="<?php echo $shiword_options[$key]; ?>" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 'true', $shiword_options[$key] ); ?> />
+								<input name="shiword_options[<?php echo $key; ?>]" value="<?php echo $shiword_options[$key]; ?>" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 'true' , $shiword_options[$key] ); ?> />
 							</td>
 							<td style="font-style:italic;border-right:1px solid #CCCCCC;"><?php echo $shiword_coa[$key]['info']; ?></td>
-							<td><?php if ( $shiword_coa[$key]['req'] != '') echo $shiword_coa[$shiword_coa[$key]['req']]['description']; ?></td>
+							<td><?php if ( $shiword_coa[$key]['req'] != '' ) echo $shiword_coa[$shiword_coa[$key]['req']]['description']; ?></td>
 						</tr>
 					<?php }	?>
 					</table>
 				</div>
 				<p style="float:left; clear: both;">
 					<input type="hidden" name="shiword_options[hidden_opt]" value="default" />
-					<input class="button" type="submit" name="Submit" value="<?php _e('Update Options','shiword'); ?>" />
-					<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="themes.php?page=functions" target="_self"><?php _e('Undo Changes','shiword'); ?></a>
+					<input class="button" type="submit" name="Submit" value="<?php _e( 'Update Options' , 'shiword' ); ?>" />
+					<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="themes.php?page=functions" target="_self"><?php _e( 'Undo Changes' , 'shiword' ); ?></a>
 				</p>
 			</form>
 		</div>
 	</div>
-<?php 
+<?php
 }
 
 // Tell WordPress to run shiword_setup() when the 'after_setup_theme' hook is run.
