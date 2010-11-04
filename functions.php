@@ -1,4 +1,7 @@
 <?php
+// Make theme available for translation
+load_theme_textdomain( 'shiword', TEMPLATEPATH . '/languages' );
+		
 
 // Set the content width based on the theme's design
 if ( !isset( $content_width ) ) {
@@ -321,8 +324,10 @@ function shiword_content_replace(){
 
 // create custom theme settings menu
 function shiword_create_menu() {
-	//create new top-level menu
+	//create new top-level menu - Theme Options
 	$topage = add_theme_page( __( 'Theme Options' ), __( 'Theme Options' ), 'manage_options', 'tb_shiword_functions', 'edit_shiword_options' );
+	//create new top-level menu - Slideshow
+	$slidepage = add_theme_page( __( 'Slideshow' ), __( 'Slideshow' ), 'manage_options', 'tb_shiword_slideshow', 'edit_shiword_slideshow' );
 	//call register settings function
 	add_action( 'admin_init', 'register_mysettings' );
 	//call custom stylesheet function
@@ -334,6 +339,8 @@ add_action( 'admin_menu', 'shiword_create_menu' );
 function register_mysettings() {
 	//register our settings
 	register_setting( 'shiw_settings_group', 'shiword_options' );
+	//register slideshow post list
+	register_setting( 'shiw_slideshow_group', 'shiword_slideshow' );
 	//add custom stylesheet to admin
 	//wp_enqueue_style( 'ff-options-style', get_bloginfo( 'stylesheet_directory' ) . '/ff-opt.css', false, '', 'screen' );
 }
@@ -342,6 +349,77 @@ function shiword_theme_options_style() {
 	//add custom stylesheet
 	echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo( 'stylesheet_directory' ) . '/css/theme-options.css" />' . "\n";
 }
+
+// the slideshow admin panel - here you can select posts to be included in slideshow
+function edit_shiword_slideshow() {
+	$shiword_options = get_option( 'shiword_slideshow' );
+	//if options are empty, sets the default values
+	if( !isset( $shiword_options['shiword_slide'] ) )  {
+		$shiword_options['shiword_slide'] = array();
+		add_option( 'shiword_slideshow' , $shiword_options, '' , 'yes' );
+	}
+	//check for updated values and return false for disabled ones
+	if ( isset( $_REQUEST['updated'] ) ) {
+		foreach ( $shiword_options['shiword_slide'] as $key => $val ) {
+			if( !isset( $shiword_options['shiword_slide'][$key] ) ) : $shiword_options['shiword_slide'][$key] = ''; else : $shiword_options['shiword_slide'][$key] = $key; endif;
+		}
+		update_option( 'shiword_slideshow' , $shiword_options );
+
+		//return options save message
+		echo '<div id="message" class="updated"><p><strong>' . __( 'Options saved.' ) . '</strong></p></div>';
+	}
+	
+	$lastposts = get_posts( 'numberposts=-1' );
+
+?>
+	<div class="wrap">
+		<div class="icon32" id="icon-themes"><br></div>
+		<h2><?php echo get_current_theme() . ' - ' . __( 'Slideshow' ); ?></h2>
+		<div>
+			<form method="post" action="options.php">
+				<?php settings_fields( 'shiw_slideshow_group' ); ?>
+				<table cellspacing="0" class="widefat post fixed">
+					<thead>
+						<tr>
+							<th style="" class="manage-column column-cb check-column" id="cb" scope="col"><input type="checkbox"></th>
+							<th style="" class="manage-column column-title" id="title" scope="col"><?php _e('Title'); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach( $lastposts as $post ) { 
+							setup_postdata( $post );
+							$post_title = esc_html( $post->post_title );
+							if ( strlen( $post_title ) > 35 ) { //shrink the post title if > 35 chars
+								$post_title_short = substr( $post_title,0,35 ) . '&hellip;';
+							} else {
+								$post_title_short = $post_title;
+							}
+							if ( $post_title_short == "" ) {
+								$post_title_short = __( '(no title)' );
+							}
+							if( !isset( $shiword_options['shiword_slide'][$post->ID] ) ) $shiword_options['shiword_slide'][$post->ID] = 'false';
+						?>
+						<tr>
+							<th class="check-column" scope="row">
+								<input name="shiword_slideshow[shiword_slide][<?php echo $post->ID; ?>]" value="<?php echo $post->ID; ?>" type="checkbox" class="" <?php checked( $post->ID , $shiword_options['shiword_slide'][$post->ID] ); ?> />
+							</th>
+							<td class="post-title column-title">
+								<a class="row-title" href="<?php echo get_permalink( $post->ID ); ?>" title="<?php echo $post_title_short; ?>"><?php echo $post_title_short; ?></a>
+							</td>
+						</tr>
+						<?php } ?>
+					</tbody>
+				</table>
+				<p style="float:left; clear: both;">
+					<input class="button" type="submit" name="Submit" value="<?php _e( 'Update Options' , 'shiword' ); ?>" />
+					<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="#" target="_self"><?php _e( 'Undo Changes' , 'shiword' ); ?></a>
+				</p>
+			</form>
+		</div>
+	</div>
+				
+<?php }
+
 
 function edit_shiword_options() {
 	//the option page
@@ -355,7 +433,7 @@ function edit_shiword_options() {
 		$shiword_options['hidden_opt'] ='default'; //this hidden option avoids empty $shiword_options when updated
 		add_option( 'shiword_options' , $shiword_options, '' , 'yes' );
 	}
-	//check for updated values and return false for disabled ones
+	// check for updated values and return false for disabled ones
 	if ( isset( $_REQUEST['updated'] ) ) {
 		foreach ( $shiword_coa as $key => $val ) {
 			if( !isset( $shiword_options[$key] ) ) : $shiword_options[$key] = 'false'; else : $shiword_options[$key] = 'true'; endif;
@@ -369,6 +447,7 @@ function edit_shiword_options() {
 		//return options save message
 		echo '<div id="message" class="updated"><p><strong>' . __( 'Options saved.' ) . '</strong></p></div>';
 	}
+	// check for unset values and set them to default value
 	foreach ( $shiword_coa as $key => $val ) {
 		if ( !isset( $shiword_options[$key] ) ) $shiword_options[$key] = $shiword_coa[$key]['default'];
 	}
@@ -422,9 +501,6 @@ if ( !function_exists( 'shiword_setup' ) ) {
 		// Add default posts and comments RSS feed links to head
 		add_theme_support( 'automatic-feed-links' );
 
-		// Make theme available for translation
-		load_theme_textdomain( 'shiword', TEMPLATEPATH . '/languages' );
-		
 		// Theme uses wp_nav_menu() in one location
 		register_nav_menus( array( 'primary' => __( 'Main Navigation Menu', 'shiword' ) ) );
 
@@ -584,9 +660,12 @@ function my_custom_login_css() {
 add_action('login_head', 'my_custom_login_css');
 
 
-// display a slideshow for the sticky posts
+// display a slideshow for the selected posts
 function sw_sticky_slider() {
-	$ss_posts = get_posts( array( 'post__in' => get_option( 'sticky_posts' ) ) ); // get all the sticky posts ?>
+	$shiword_options = get_option( 'shiword_slideshow' ); //get the selected posts list
+	if ( !isset( $shiword_options['shiword_slide'] ) || empty( $shiword_options['shiword_slide'] )) return; // if no post is selected, exit
+	$posts_string = 'include=' . implode( "," , $shiword_options['shiword_slide'] ); // generate the 'include' string
+	$ss_posts = get_posts( $posts_string ); // get all the selected posts ?>
 	<div id="sw_slider-wrap">	
 		<div id="sw_sticky_slider">	
 			<?php foreach( $ss_posts as $post ) {

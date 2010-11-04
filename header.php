@@ -55,7 +55,7 @@
 			<?php wp_nav_menu( array( 'menu_id' => 'mainmenu', 'fallback_cb' => 'shiword_pages_menu', 'theme_location' => 'primary' ) ); //main menu ?>
 			<div class="fixfloat"></div>
 		</div>
-		<?php if ( $shiword_opt['shiword_sticky'] == 'true' && !is_singular() && !$is_sw_printpreview ) { sw_sticky_slider(); } // the sticky slider ?>
+		<?php if ( $shiword_opt['shiword_sticky'] == 'true' && !is_404() && !is_singular() && !$is_sw_printpreview ) { sw_sticky_slider(); } // the sticky slider ?>
 		<?php
 			$postswidth = 'posts_narrow';
 			if ( 
