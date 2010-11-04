@@ -14,6 +14,8 @@ $shiword_coa = array(
 	'shiword_qbar_recpost' => array( 'default'=>'true','description'=>__( '-- recent posts', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
 	'shiword_pthumb' => array( 'default'=>'false','description'=>__( 'posts thumbnail', 'shiword' ),'info'=>__( '[default = disabled]', 'shiword' ),'req'=>'' ),
 	'shiword_rsideb' => array( 'default'=>'true','description'=>__( 'right sidebar', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_rsidebpages' => array( 'default'=>'false','description'=>__( '-- on pages', 'shiword' ),'info'=>__( 'show right sidebar on pages [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
+	'shiword_rsidebposts' => array( 'default'=>'false','description'=>__( '-- on posts', 'shiword' ),'info'=>__( 'show right sidebar on posts [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
 	'shiword_jsani' => array( 'default'=>'true','description'=>__( 'javascript animations', 'shiword' ),'info'=>__( 'try disable animations if you encountered problems with javascript [default = enabled]', 'shiword' ),'req'=>'' ),
 	'shiword_sticky' => array( 'default'=>'false','description'=>__( '-- sticky post slider', 'shiword' ),'info'=>__( 'slideshow for your sticky posts [default = disabled]', 'shiword' ),'req'=>'shiword_jsani' ),
 	'shiword_tbcred' => array( 'default'=>'true','description'=>__( 'theme credits', 'shiword' ),'info'=>__( "please, don't hide theme credits [default = enabled]", 'shiword' ),'req'=>'' )
@@ -203,7 +205,7 @@ function get_shiword_recententries() {
 		if ( strlen( $post_auth ) > 35 ) { //shrink the post author if > 35 chars
 			$post_auth = substr( $post_auth,0,35 ) . '&hellip;';
 		}
-		echo '<li><a href=\"' . get_permalink( $post->ID ) . '" title="' . $post_title . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s' ), $post_auth ) . '<div class="preview">';
+		echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . $post_title . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s' ), $post_auth ) . '<div class="preview">';
 		if ( post_password_required( $post ) ) {
 			echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . get_bloginfo( 'stylesheet_directory' ) . '/images/thumb_50.png" alt="thumb" title="' . $post_title_short . '" />';
 			echo '[' . __('No preview: this is a protected post', 'shiword' ) . ']';
@@ -344,33 +346,25 @@ function shiword_theme_options_style() {
 function edit_shiword_options() {
 	//the option page
 	global $shiword_coa;
-	$shiword_options = get_option( 'shiword_options' );
-	//if options are empty, sets the default values
-	if( empty( $shiword_options ) ) {
-		foreach ( $shiword_coa as $key => $val ) {
-			$shiword_options[$key] = $shiword_coa[$key]['default'];
-		}
-		$shiword_options['hidden_opt'] ='default'; //this hidden option avoids empty $shiword_options when updated
-		add_option( 'shiword_options', $shiword_options, '', 'yes' );
-	}
+	global $shiword_opt;
 	//check for updated values and return false for disabled ones
 	if ( isset( $_REQUEST['updated'] ) ) {
 		foreach ( $shiword_coa as $key => $val ) {
-			if( !isset($shiword_options[$key]) ) {
-				$shiword_options[$key] = 'false';
+			if( !isset($shiword_opt[$key]) ) {
+				$shiword_opt[$key] = 'false';
 			} else {
-				$shiword_options[$key] = 'true';
+				$shiword_opt[$key] = 'true';
 			}
 		}
 		// check for required options
 		foreach ($shiword_coa as $key => $val) {
 			if( $shiword_coa[$key]['req'] != '' ) {
-				if( $shiword_options[$shiword_coa[$key]['req']] == 'false') {
-					$shiword_options[$key] = 'false';
+				if( $shiword_opt[$shiword_coa[$key]['req']] == 'false') {
+					$shiword_opt[$key] = 'false';
 				}
 			}
 		}
-		update_option( 'shiword_options', $shiword_options );
+		update_option( 'shiword_options', $shiword_opt );
 
 		//return options save message
 		echo '<div id="message" class="updated"><p><strong>' . __( 'Options saved.' ) . '</strong></p></div>';
@@ -395,7 +389,7 @@ function edit_shiword_options() {
 						<tr>
 							<td style="width: 220px;font-weight:bold;border-right:1px solid #CCCCCC;"><?php echo $shiword_coa[$key]['description']; ?></td>
 							<td style="width: 20px;border-right:1px solid #CCCCCC;text-align:center;">
-								<input name="shiword_options[<?php echo $key; ?>]" value="<?php echo $shiword_options[$key]; ?>" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 'true', $shiword_options[$key] ); ?> />
+								<input name="shiword_opt[<?php echo $key; ?>]" value="<?php echo $shiword_opt[$key]; ?>" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 'true', $shiword_opt[$key] ); ?> />
 							</td>
 							<td style="font-style:italic;border-right:1px solid #CCCCCC;"><?php echo $shiword_coa[$key]['info']; ?></td>
 							<td><?php if ( $shiword_coa[$key]['req'] != '') echo $shiword_coa[$shiword_coa[$key]['req']]['description']; ?></td>
@@ -404,7 +398,7 @@ function edit_shiword_options() {
 					</table>
 				</div>
 				<p style="float:left; clear: both;">
-					<input type="hidden" name="shiword_options[hidden_opt]" value="default" />
+					<input type="hidden" name="shiword_opt[hidden_opt]" value="default" />
 					<input class="button" type="submit" name="Submit" value="<?php _e( 'Update Options', 'shiword' ); ?>" />
 					<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="themes.php?page=functions" target="_self"><?php _e( 'Undo Changes', 'shiword' ); ?></a>
 				</p>
@@ -413,7 +407,6 @@ function edit_shiword_options() {
 	</div>
 <?php 
 }
-
 
 // Tell WordPress to run shiword_setup() when the 'after_setup_theme' hook is run.
 add_action( 'after_setup_theme', 'shiword_setup' );
@@ -431,8 +424,12 @@ if ( !function_exists( 'shiword_setup' ) ) {
 		// Theme uses wp_nav_menu() in one location
 		register_nav_menus( array( 'primary' => __( 'Main Navigation Menu', 'shiword' ) ) );
 
-		// This theme allows users to set a custom background
-		add_custom_background( 'shiword_custom_background' );
+		// This theme allows users to set the device appearance
+		add_custom_device_image( 'shiword_device_style' , 'shiword_admin_device_style' );
+		define( 'SW_DEVICE_TEXTCOLOR' , 'fff' );
+		define( 'SW_DEVICE_IMAGE' , '' );
+		define( 'SW_DEVICE_COLOR' , '0a0a0a' );
+		
 		// Your changeable header business starts here
 		define( 'HEADER_TEXTCOLOR', '404040' );
 		// No CSS, just IMG call. The %s is a placeholder for the theme template directory URI.
@@ -475,14 +472,39 @@ if ( !function_exists( 'shiword_setup' ) ) {
 				'description' => 'blue'
 			)
 		) );
+		register_default_device_images( array(
+			'green' => array(
+				'url' => '%s/images/device/white.png',
+				'description' => 'white'
+			),
+			'black' => array(
+				'url' => '%s/images/device/black.png',
+				'description' => 'black'
+			),
+			'brown' => array(
+				'url' => '%s/images/device/brown.png',
+				'description' => 'brown'
+			),
+			'blue' => array(
+				'url' => '%s/images/device/blue.png',
+				'description' => 'blue'
+			)
+		) );
 	}
 }
+
 // Styles the header image displayed on the Appearance > Header admin panel.
 if ( !function_exists( 'shiword_admin_header_style' ) ) {
 	function shiword_admin_header_style() {	
 		echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo( 'stylesheet_directory' ) . '/css/custom-header.css" />' . "\n";
 	}
 }
+
+// styles the "device color" admin panel (Appearance > Device Color).
+function shiword_admin_device_style() {
+		echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('stylesheet_directory') . '/css/custom-device-color.css" />'."\n";
+}
+
 // custom header image style - gets included in the site header
 function shiword_header_style() {
     ?>
@@ -493,21 +515,20 @@ function shiword_header_style() {
     </style>
     <?php
 }
+
 // custom pad background style - gets included in the site header
-function shiword_custom_background() {
-	$background = get_background_image();
-	$color = get_background_color();
-	if ( !$background && !$color  ) {
-		$style = "background-color: #0a0a0a;";
-	} else {
-		$style = $color ? "background-color: #$color;" : '';
-		if ( $background ) {
-			$style .= " background-image: url('$background');";
-		}
-	}
+function shiword_device_style() {
+	$device_image = get_sw_device_image();
+	$device_color = get_sw_device_color();
+	if ( 'transparent' != $device_color ) $device_color = '#' . $device_color;
+	$bgstyle = "background: $device_color url('$device_image') left top repeat;";
+	$device_textcolor = get_sw_device_textcolor();
+	if ( 'transparent' != $device_textcolor ) $device_textcolor = '#' . $device_textcolor;
+	$txtstyle = "color: $device_textcolor;";
 ?>
 <style type="text/css"> 
-	.pad_bg { <?php echo trim( $style ); ?> }
+	.pad_bg { <?php echo trim( $bgstyle ); ?> }
+	#head a, #head .description, #statusbar { <?php echo trim( $txtstyle ); ?> }
 </style>
 <?php
 }
@@ -525,7 +546,6 @@ function shiword_get_opt() {
 	}
 	return ( $shiword_options );
 }
-
 
 //custom excerpt maker
 function improved_trim_excerpt( $text ) {
@@ -635,5 +655,60 @@ function sw_add_quoted_on( $return ) {
 	return $text . $return;
 }
 add_filter( 'get_comment_author_link', 'sw_add_quoted_on' );
+
+// Retrieve the custom 'SW_DEVICE_TEXTCOLOR' theme mod
+function get_sw_device_textcolor() {
+	$default = defined( 'SW_DEVICE_TEXTCOLOR' ) ? SW_DEVICE_TEXTCOLOR : 'fff';
+
+	return get_theme_mod( 'sw_device_textcolor' , $default );
+}
+
+// Display text color for device title
+function sw_device_textcolor() {
+	echo get_sw_device_textcolor();
+}
+
+// Retrieve the custom 'SW_DEVICE_IMAGE' theme mod
+function get_sw_device_image() {
+	$default = defined( 'SW_DEVICE_IMAGE' ) ? SW_DEVICE_IMAGE : '';
+
+	return get_theme_mod( 'sw_device_image' , $default );
+}
+
+// Display background image for device
+function sw_device_image() {
+	echo get_sw_device_image();
+}
+
+// Retrieve the custom 'SW_DEVICE_COLOR' theme mod
+function get_sw_device_color() {
+	$default = defined( 'SW_DEVICE_COLOR' ) ? SW_DEVICE_COLOR : '0a0a0a';
+
+	return get_theme_mod( 'sw_device_color' , $default );
+}
+
+// Display background image for device
+function sw_device_color() {
+	echo get_sw_device_color();
+}
+
+// Register a selection of default images to be displayed as device backgrounds by the custom device color admin UI. based on WP theme.php -> register_default_headers()
+function register_default_device_images( $headers ) {
+	global $sw_default_device_images;
+
+	$sw_default_device_images = array_merge( (array) $sw_default_device_images , (array) $headers );
+}
+
+// Add callbacks for device color display. based on WP theme.php -> add_custom_image_header()
+function add_custom_device_image( $header_callback , $admin_header_callback , $admin_image_div_callback = '' ) {
+	if ( ! empty($header_callback) )
+		add_action( 'wp_head' , $header_callback );
+
+	if ( ! is_admin() )
+		return;
+	require_once( 'custom-device-color.php' );
+	$GLOBALS['custom_device_color'] =& new Custom_device_color( $admin_header_callback , $admin_image_div_callback );
+	add_action( 'admin_menu' , array(&$GLOBALS['custom_device_color'] , 'init' ));
+}
 
 ?>

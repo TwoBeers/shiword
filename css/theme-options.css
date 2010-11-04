@@ -8,7 +8,7 @@
 	-moz-box-shadow: 0px 0px 8px #000;
 	-webkit-box-shadow: 0px 0px 8px #000;
 	box-shadow: 0px 0px 8px #000;
-	background:url("../images/pad.png") repeat-x scroll left top #0A0A0A;
+	background:url("../images/pad_overlay.png") repeat-x scroll left top #0A0A0A;
 	border:1px solid #fff;
 	margin:20px 0 10px;
 	max-width:800px;

@@ -1,5 +1,8 @@
 <?php get_header(); ?>
-<?php global $shiword_opt; ?>
+<?php 
+	global $shiword_opt; 
+	global $query_string;
+?>
 <?php // search reminder
 	if ( is_category() ) {
 		echo '<div class="wp-caption aligncenter"><p class="wp-caption-text">' . __( 'Search Results' ) . ' <strong>' . __( 'Category' ) . ': ';
@@ -20,7 +23,6 @@
 		printf( '<div class="wp-caption aligncenter"><p class="wp-caption-text">' . __( 'Search results for &#8220;%s&#8221;' ) . '</p></div>', '<strong>' . esc_html( get_search_query() ) . '</strong>' );
 	}
 ?>
-<?php if ( $shiword_opt['shiword_sticky'] == 'true' && is_home() ) { query_posts( 'caller_get_posts=1' ); } // if stycky slideshow is visible, ignore the sticky attribute ?>
 <?php if ( have_posts() ) {
 	while ( have_posts() ) {
 		the_post(); ?>

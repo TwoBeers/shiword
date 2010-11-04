@@ -1,0 +1,58 @@
+﻿/* Shiword v0.7 - stylesheet for custom device color */
+
+#headimg-bg {
+	border: 1px solid #777 !important;
+	background:#fff url('../images/devbg.png') left top repeat;
+	padding:20px;
+}
+#headimage {
+	border-color:#fff #777 #404040 !important;
+	border-style:solid !important;
+	border-width:1px !important;
+	background-position:right bottom;
+	-moz-box-shadow: 0 0 7px #000;
+	-webkit-box-shadow: 0 0 7px #000;
+	box-shadow: 0 0 7px #000;
+	-moz-border-radius: 15px;
+	-khtml-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+}
+#headimg_overlay {
+	background: transparent url('../images/pad_overlay.png') left top repeat-x;
+	padding:20px;
+}
+#headimage h1 {
+	margin:0 0 5px;
+}
+#headimage #name {
+	font-size:1.5em;
+	font-style:italic;
+	text-decoration:none;
+}
+#headimage #desc {
+	font-size:11px;
+	font-style:italic;
+	padding-left:20px;
+}
+.default-device-image {
+	float: left;
+	margin:10px;
+}
+.default-device-image img{
+	background:#fff url('../images/devbg.png') left top repeat;
+	padding:10px;
+	vertical-align:middle;
+	border:1px solid #777;
+}
+.button,
+.button-secondary,
+.submit input,
+input[type="button"],
+input[type="submit"] {
+	vertical-align:middle;
+}
+.wrap .form-table td,
+.wrap .form-table th {
+	padding:16px 10px !important;
+}

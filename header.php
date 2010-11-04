@@ -55,5 +55,13 @@
 			<?php wp_nav_menu( array( 'menu_id' => 'mainmenu', 'fallback_cb' => 'shiword_pages_menu', 'theme_location' => 'primary' ) ); //main menu ?>
 			<div class="fixfloat"></div>
 		</div>
-		<?php if ( $shiword_opt['shiword_sticky'] == 'true' && is_home() && !$is_sw_printpreview ) { sw_sticky_slider(); } // the sticky slider ?> 
-		<div class="<?php if ( is_singular() || $shiword_opt['shiword_rsideb'] == 'false' ) { echo 'posts_wide'; } else { echo 'posts_narrow'; } ?> <?php if ( $shiword_opt['shiword_sticky'] != 'true' ) { echo 'letsstick'; } ?>">
+		<?php if ( $shiword_opt['shiword_sticky'] == 'true' && !is_singular() && !$is_sw_printpreview ) { sw_sticky_slider(); } // the sticky slider ?>
+		<?php
+			$postswidth = 'posts_narrow';
+			if ( 
+				( $shiword_opt['shiword_rsideb'] == 'false' ) || 
+				( is_page() && ( $shiword_opt['shiword_rsideb'] == 'true' ) && ( $shiword_opt['shiword_rsidebpages'] == 'false' ) ) ||
+				( is_single() && ( $shiword_opt['shiword_rsideb'] == 'true' ) && ( $shiword_opt['shiword_rsidebposts'] == 'false' ) )
+			) $postswidth = 'posts_wide';
+		?>
+		<div class="<?php echo $postswidth; ?> letsstick">

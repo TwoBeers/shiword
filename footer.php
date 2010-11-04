@@ -4,9 +4,11 @@
 		<?php
 			global $shiword_opt, $shiword_is_allcat_page;
 			if ( $shiword_opt['shiword_rsideb'] == 'true' ) {
-				if ( !is_singular() ) {
-					get_sidebar(); // show sidebar
-				}
+				if ( 
+					( !is_page() && !is_single() ) ||
+					( is_page() && ( $shiword_opt['shiword_rsidebpages'] == 'true' ) ) ||
+					( is_single() && ( $shiword_opt['shiword_rsidebposts'] == 'true' ) )
+				) get_sidebar(); // show sidebar
 			}
 		?>
 		<div id="footer">
