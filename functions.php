@@ -417,7 +417,7 @@ function edit_shiword_slideshow() {
 						</li>
 						<li style="float: right; margin-right: 30px;">
 							<div class="wp-menu-image"><br></div>
-							<a href="#shiwordSlide-bottom_ref" style="background: transparent url('<?php echo get_bloginfo( 'stylesheet_directory' ); ?> /images/minibuttons.png') no-repeat right -192px" ><?php _e( 'Submit' ); ?></a>
+							<a href="#shiwordSlide-bottom_ref" style="background: transparent url('<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/images/minibuttons.png') no-repeat right -192px" ><?php _e( 'Submit' ); ?></a>
 						</li>
 					</ul>
 					<div class="clear"></div>
