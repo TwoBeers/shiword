@@ -332,6 +332,7 @@ function shiword_create_menu() {
 	add_action( 'admin_init', 'register_mysettings' );
 	//call custom stylesheet function
 	add_action( 'admin_print_styles-' . $topage, 'shiword_theme_options_style' );
+	add_action( 'admin_print_styles-' . $slidepage, 'shiword_slide_options_style' );
 }
 add_action( 'admin_menu', 'shiword_create_menu' );
 
@@ -348,6 +349,11 @@ function register_mysettings() {
 function shiword_theme_options_style() {
 	//add custom stylesheet
 	echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo( 'stylesheet_directory' ) . '/css/theme-options.css" />' . "\n";
+}
+
+function shiword_slide_options_style() {
+	//add custom stylesheet
+	echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo( 'stylesheet_directory' ) . '/css/slide-options.css" />' . "\n";
 }
 
 // the slideshow admin panel - here you can select posts to be included in slideshow
@@ -368,54 +374,143 @@ function edit_shiword_slideshow() {
 		//return options save message
 		echo '<div id="message" class="updated"><p><strong>' . __( 'Options saved.' ) . '</strong></p></div>';
 	}
-	
-	$lastposts = get_posts( 'numberposts=-1' );
-
 ?>
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function shiwordSlideSwitchClass(a) { // simple animation for option tabs
+			switch(a) {
+				case 'shiwordSlide-posts':
+					document.getElementById('shiwordSlide-pages').className = 'tab-hidden';
+					document.getElementById('shiwordSlide-posts').className = '';
+					document.getElementById('shiwordSlide-pages-li').className = '';
+					document.getElementById('shiwordSlide-posts-li').className = 'tab-selected';
+				break;
+				case 'shiwordSlide-pages':
+					document.getElementById('shiwordSlide-pages').className = '';
+					document.getElementById('shiwordSlide-posts').className = 'tab-hidden';
+					document.getElementById('shiwordSlide-pages-li').className = 'tab-selected';
+					document.getElementById('shiwordSlide-posts-li').className = '';
+				break;
+			}
+		}
+		/* ]]> */
+	</script>
 	<div class="wrap">
 		<div class="icon32" id="icon-themes"><br></div>
 		<h2><?php echo get_current_theme() . ' - ' . __( 'Slideshow' ); ?></h2>
+		<div style="margin-top: 20px;">
+			<?php _e( 'Select posts or pages to be displaied in the index-page slideshow box.<br />Items will be ordered as display here.', 'shiword' ); ?>
+		</div>
 		<div>
 			<form method="post" action="options.php">
 				<?php settings_fields( 'shiw_slideshow_group' ); ?>
-				<table cellspacing="0" class="widefat post fixed">
-					<thead>
-						<tr>
-							<th style="" class="manage-column column-cb check-column" id="cb" scope="col"><input type="checkbox"></th>
-							<th style="" class="manage-column column-title" id="title" scope="col"><?php _e('Title'); ?></th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php foreach( $lastposts as $post ) { 
-							setup_postdata( $post );
-							$post_title = esc_html( $post->post_title );
-							if ( strlen( $post_title ) > 35 ) { //shrink the post title if > 35 chars
-								$post_title_short = substr( $post_title,0,35 ) . '&hellip;';
-							} else {
-								$post_title_short = $post_title;
-							}
-							if ( $post_title_short == "" ) {
-								$post_title_short = __( '(no title)' );
-							}
-							if( !isset( $shiword_options['shiword_slide'][$post->ID] ) ) $shiword_options['shiword_slide'][$post->ID] = 'false';
-						?>
-						<tr>
-							<th class="check-column" scope="row">
-								<input name="shiword_slideshow[shiword_slide][<?php echo $post->ID; ?>]" value="<?php echo $post->ID; ?>" type="checkbox" class="" <?php checked( $post->ID , $shiword_options['shiword_slide'][$post->ID] ); ?> />
-							</th>
-							<td class="post-title column-title">
-								<a class="row-title" href="<?php echo get_permalink( $post->ID ); ?>" title="<?php echo $post_title_short; ?>"><?php echo $post_title_short; ?></a>
-							</td>
-						</tr>
-						<?php } ?>
-					</tbody>
-				</table>
+		
+				<div id="tabs-container">				
+					<ul id="selector">
+						<li id="shiwordSlide-posts-li">
+							<div class="wp-menu-image"><br></div>
+							<a href="#shiwordSlide-posts" onClick="shiwordSlideSwitchClass('shiwordSlide-posts'); return false;"><?php _e( 'Posts' ); ?></a>
+						</li>
+						<li id="shiwordSlide-pages-li">
+							<div class="wp-menu-image"><br></div>
+							<a href="#shiwordSlide-pages" onClick="shiwordSlideSwitchClass('shiwordSlide-pages'); return false;"><?php _e( 'Pages' ); ?></a>
+						</li>
+						<li style="float: right; margin-right: 30px;">
+							<div class="wp-menu-image"><br></div>
+							<a href="#shiwordSlide-bottom_ref" style="background: transparent url('<?php echo get_bloginfo( 'stylesheet_directory' ); ?> /images/minibuttons.png') no-repeat right -192px" ><?php _e( 'Submit' ); ?></a>
+						</li>
+					</ul>
+					<div class="clear"></div>
+					
+					<?php $lastposts = get_posts( 'post_type=post&numberposts=-1&orderby=date' ); ?>
+					
+					<div id="shiwordSlide-posts">
+						<table cellspacing="0" class="widefat post fixed">
+							<thead>
+								<tr>
+									<th style="" class="manage-column column-cb check-column" id="cb" scope="col"><input type="checkbox"></th>
+									<th style="" class="manage-column column-title" id="title" scope="col"><?php _e('Title'); ?></th>
+									<th style="" class="manage-column column-categories" id="categories" scope="col"><?php _e('Categories'); ?></th>
+									<th style="" class="manage-column column-date" id="date" scope="col"><?php _e('Date'); ?></th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach( $lastposts as $post ) { 
+									$post_title = esc_html( $post->post_title );
+									if ( $post_title == "" ) {
+										$post_title = __( '(no title)' );
+									}
+									if( !isset( $shiword_options['shiword_slide'][$post->ID] ) ) $shiword_options['shiword_slide'][$post->ID] = 'false';
+									?>
+									<tr>
+										<th class="check-column" scope="row">
+											<input name="shiword_slideshow[shiword_slide][<?php echo $post->ID; ?>]" value="<?php echo $post->ID; ?>" type="checkbox" class="" <?php checked( $post->ID , $shiword_options['shiword_slide'][$post->ID] ); ?> />
+										</th>
+										<td class="post-title column-title">
+											<a class="row-title" href="<?php echo get_permalink( $post->ID ); ?>" title="<?php echo $post_title; ?>"><?php echo $post_title; ?></a>
+										</td>
+										<td class="categories column-categories">
+											<?php
+											foreach( ( get_the_category( $post->ID ) ) as $post_cat ) {
+												echo $post_cat->name . ', '; 
+											}
+											?>
+										</td>
+										<td class="date column-date"><?php echo date_i18n( get_option( 'date_format' ), strtotime( $post->post_date_gmt ) );  ?></td>
+									</tr>
+								<?php } ?>
+							</tbody>
+						</table>
+					</div>
+					
+					<?php $lastpages = get_posts( 'post_type=page&numberposts=-1&orderby=menu_order' ); ?>
+					
+					<div id="shiwordSlide-pages">
+						<table cellspacing="0" class="widefat post fixed">
+							<thead>
+								<tr>
+									<th style="" class="manage-column column-cb check-column" id="cb" scope="col"><input type="checkbox"></th>
+									<th style="" class="manage-column column-title" id="title" scope="col"><?php _e('Title'); ?></th>
+									<th style="" class="manage-column column-date" id="date" scope="col"><?php _e('Date'); ?></th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach( $lastpages as $page ) { 
+									$page_title = esc_html( $page->post_title );
+									if ( $page_title == "" ) {
+										$page_title = __( '(no title)' );
+									}
+									if( !isset( $shiword_options['shiword_slide'][$page->ID] ) ) $shiword_options['shiword_slide'][$page->ID] = 'false';
+									?>
+									<tr>
+										<th class="check-column" scope="row">
+											<input name="shiword_slideshow[shiword_slide][<?php echo $page->ID; ?>]" value="<?php echo $page->ID; ?>" type="checkbox" class="" <?php checked( $page->ID , $shiword_options['shiword_slide'][$page->ID] ); ?> />
+										</th>
+										<td class="post-title column-title">
+											<a class="row-title" href="<?php echo get_permalink( $page->ID ); ?>" title="<?php echo $page_title; ?>"><?php echo $page_title; ?></a>
+										</td>
+										<td class="date column-date"><?php echo date_i18n( get_option( 'date_format' ), strtotime( $page->post_date_gmt ) );  ?></td>
+									</tr>
+								<?php } ?>
+							</tbody>
+						</table>
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div id="shiwordSlide-bottom_ref" style="clear: both; height: 1px;"> </div>
 				<p style="float:left; clear: both;">
 					<input class="button" type="submit" name="Submit" value="<?php _e( 'Update Options' , 'shiword' ); ?>" />
 					<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="#" target="_self"><?php _e( 'Undo Changes' , 'shiword' ); ?></a>
 				</p>
 			</form>
 		</div>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			document.getElementById('shiwordSlide-pages').className = 'tab-hidden';
+			document.getElementById('shiwordSlide-posts-li').className = 'tab-selected';
+			/* ]]> */
+		</script>
 	</div>
 				
 <?php }
@@ -664,12 +759,12 @@ add_action('login_head', 'my_custom_login_css');
 function sw_sticky_slider() {
 	$shiword_options = get_option( 'shiword_slideshow' ); //get the selected posts list
 	if ( !isset( $shiword_options['shiword_slide'] ) || empty( $shiword_options['shiword_slide'] )) return; // if no post is selected, exit
-	$posts_string = 'include=' . implode( "," , $shiword_options['shiword_slide'] ); // generate the 'include' string
-	$ss_posts = get_posts( $posts_string ); // get all the selected posts ?>
+	$posts_string = 'include=' . implode( "," , $shiword_options['shiword_slide'] ) . '&post_type=any'; // generate the 'include' string for posts
+	$ss_posts = get_posts( $posts_string ); // get all the selected posts
+	?>
 	<div id="sw_slider-wrap">	
 		<div id="sw_sticky_slider">	
 			<?php foreach( $ss_posts as $post ) {
-				setup_postdata( $post );
 				$post_title = esc_html( $post->post_title );
 				if ( $post_title == "" ) {
 					$post_title = __( '(no title)' );
