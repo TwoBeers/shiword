@@ -765,6 +765,7 @@ function sw_sticky_slider() {
 	<div id="sw_slider-wrap">	
 		<div id="sw_sticky_slider">	
 			<?php foreach( $ss_posts as $post ) {
+				setup_postdata( $post );
 				$post_title = esc_html( $post->post_title );
 				if ( $post_title == "" ) {
 					$post_title = __( '(no title)' );
