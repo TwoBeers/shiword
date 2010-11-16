@@ -18,10 +18,10 @@
 				<strong><?php bloginfo( 'name' ); ?></strong>
 				<?php if ( $shiword_opt['shiword_tbcred'] == 'true' ) { ?>
 					<a href="http://www.twobeers.net/" title="Shiword theme<?php global $shiword_version; if( !empty( $shiword_version ) ) { echo ' v' . $shiword_version; } ?> by TwoBeers Crew">
-						<img alt="twobeers.net" src="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/images/tb_micrologo.png' ?>" />
+						<img alt="twobeers.net" src="<?php echo esc_url( get_bloginfo( 'stylesheet_directory' ) . '/images/tb_micrologo.png' ); ?>" />
 					</a>
 					<a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress' ); ?>">
-						<img alt="WordPress" src="<?php echo get_bloginfo( 'stylesheet_directory' ) . '/images/wp_micrologo.png' ?>" />
+						<img alt="WordPress" src="<?php echo esc_url( get_bloginfo( 'stylesheet_directory' ) . '/images/wp_micrologo.png' ); ?>" />
 					</a>
 				<?php } ?>
 			</div>
@@ -58,7 +58,7 @@
 											<div class="mentit"><?php _e( 'Categories' ); ?></div>
 											<ul class="solid_ul">
 												<?php get_shiword_categories_wpr(); ?>
-												<li style="text-align: right; margin:16px 0 10px;"><a title="<?php _e( 'View all categories' ); ?>" href="<?php echo home_url(); ?>/?allcat=y"><?php _e('More...'); ?></a></li>
+												<li style="text-align: right; margin:16px 0 10px;"><a title="<?php _e( 'View all categories' ); ?>" href="<?php echo esc_url( home_url() . '/?allcat=y' ); ?>"><?php _e('More...'); ?></a></li>
 											</ul>
 										</div>
 									</div>
@@ -89,7 +89,7 @@
 													if ( is_user_logged_in() ) { //fix for notice when user not log-in
 														get_currentuserinfo();
 														$email = $current_user->user_email;
-														echo get_avatar( $email, 50, $default=get_bloginfo( 'stylesheet_directory' ) . '/images/user.png','user-avatar' );
+														echo get_avatar( sanitize_email( $email ), 50, $default=get_bloginfo( 'stylesheet_directory' ) . '/images/user.png','user-avatar' );
 														printf( __( 'Logged in as %s','shiword' ), '<strong>' . $current_user->display_name . '</strong>' );
 													} else {
 														echo get_avatar( 'dummyemail', 50, $default=get_bloginfo( 'stylesheet_directory' ) . '/images/user.png','user-avatar' );
@@ -180,7 +180,25 @@
 								</a>
 							</div>
 
-							<?php if ( !is_attachment() ) { ?>
+							<?php if ( is_page() ) { 
+								$page_nav_links = shiword_page_navi($post->ID); // get the menu-ordered prev/next pages links
+								if ( isset ( $page_nav_links['prev'] ) ) { // prev page link ?>
+									<div class="minibutton">
+										<a href="<?php echo $page_nav_links['prev']['link']; ?>" title="<?php echo $page_nav_links['prev']['title']; ?>">
+											<span class="minib_img" style="background-position: center -120px;">&nbsp;</span>
+											<span class="nb_tooltip"><?php echo __( 'Previous page' ) . ': ' . $page_nav_links['prev']['title']; ?></span>
+										</a>
+									</div>
+								<?php }
+								if ( isset ( $page_nav_links['next'] ) ) { // next page link ?>
+									<div class="minibutton">
+										<a href="<?php echo $page_nav_links['next']['link']; ?>" title="<?php echo $page_nav_links['next']['title']; ?>">
+											<span class="minib_img" style="background-position: center -144px;">&nbsp;</span>
+											<span class="nb_tooltip"><?php echo __( 'Next page' ) . ': ' . $page_nav_links['next']['title']; ?></span>
+										</a>
+									</div>
+								<?php } ?>
+							<?php } elseif ( !is_attachment() ) { ?>
 								<div class="minibutton">
 									<?php next_post_link( '%link', '<span class="minib_img" style="background-position: 0px -120px;">&nbsp;</span><span class="nb_tooltip">' . __( 'Next Post' ) . ': %title</span>' ); ?>
 								</div>
