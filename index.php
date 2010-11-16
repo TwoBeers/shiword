@@ -1,7 +1,6 @@
 <?php get_header(); ?>
 <?php 
-	global $shiword_opt; 
-	global $query_string;
+	global $shiword_opt, $query_string;
 ?>
 <?php // search reminder
 	if ( is_category() ) {
