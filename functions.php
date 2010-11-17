@@ -27,6 +27,8 @@ $shiword_coa = array(
 
 //load options in $shiword_opt variable, globally retrieved in php files
 $shiword_opt = shiword_get_opt();
+$shiword_colors = get_option( 'shiword_colors' );
+
 
 
 //get theme version
@@ -656,9 +658,9 @@ if ( !function_exists( 'shiword_setup' ) ) {
 				'url' => '%s/images/device/black.png',
 				'description' => 'black'
 			),
-			'brown' => array(
-				'url' => '%s/images/device/brown.png',
-				'description' => 'brown'
+			'pink' => array(
+				'url' => '%s/images/device/pink.png',
+				'description' => 'pink'
 			),
 			'blue' => array(
 				'url' => '%s/images/device/blue.png',
@@ -879,15 +881,11 @@ function register_default_device_images( $headers ) {
 }
 
 // Add callbacks for device color display. based on WP theme.php -> add_custom_image_header()
-function add_custom_device_image( $header_callback , $admin_header_callback , $admin_image_div_callback = '' ) {
-	if ( ! empty($header_callback) )
-		add_action( 'wp_head' , $header_callback );
-
+function add_custom_device_image() {
 	if ( ! is_admin() )
 		return;
 	require_once( 'custom-device-color.php' );
-	$GLOBALS['custom_device_color'] =& new Custom_device_color( $admin_header_callback , $admin_image_div_callback );
-	add_action( 'admin_menu' , array(&$GLOBALS['custom_device_color'] , 'init' ));
+	$shi_cdcpanel = new Custom_device_color();
 }
 
 ?>
