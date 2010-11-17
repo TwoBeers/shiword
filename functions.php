@@ -607,7 +607,7 @@ function edit_shiword_options() {
 				<div class="stylediv" style="clear: both;">
 					<p style="margin: 10px; text-align: center; ">
 						<?php _e( 'If you like/dislike this plugin, or if you encounter any issues using it, please let us know it.', 'tbqb' ); ?><br />
-						<a href="<?php esc_url( 'http://www.twobeers.net/annunci/shiword' ); ?>" title="Shiword theme" target="_blank"><?php _e( 'Leave a feedback', 'shiword' ); ?></a> ?>
+						<a href="<?php esc_url( 'http://www.twobeers.net/annunci/shiword' ); ?>" title="Shiword theme" target="_blank"><?php _e( 'Leave a feedback', 'shiword' ); ?></a>
 					</p>
 				</div>
 		</div>
