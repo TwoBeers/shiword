@@ -117,8 +117,7 @@ add_action( 'widgets_init', 'shiword_widgets_init' );
 
 // Add stylesheets to page
 function shiword_stylesheet(){
-	global $shiword_version;
-	global $is_sw_printpreview;
+	global $shiword_version, $is_sw_printpreview;
 	//shows print preview / normal view
 	if ( $is_sw_printpreview ) { //print preview
 		wp_enqueue_style( 'print-style-preview', get_bloginfo( 'stylesheet_directory' ) . '/css/print.css', false, $shiword_version, 'screen' );
@@ -134,9 +133,7 @@ add_action( 'wp_print_styles', 'shiword_stylesheet' );
 
 // add scripts
 function shiword_scripts(){
-	global $shiword_opt;
-	global $is_sw_printpreview;
-	global $shiword_version;
+	global $shiword_opt, $is_sw_printpreview, $shiword_version;
 	if ($shiword_opt['shiword_jsani'] == 'true') {
 		if ( !$is_sw_printpreview ) { //script not to be loaded in print preview
 			wp_enqueue_script( 'sw-animations', get_bloginfo('stylesheet_directory').'/js/sw-animations.js',array('jquery'),$shiword_version, true ); //shiword js
@@ -268,10 +265,36 @@ function get_shiword_categories_wpr() {
 // Pages Menu
 function shiword_pages_menu() {
 	echo '<ul id="mainmenu">';
-	wp_list_pages( 'title_li=' );
+	wp_list_pages( 'sort_column=menu_order&title_li=' ); // menu-order sorted
 	echo '</ul>';
 }
 
+// pages navigation links
+function shiword_page_navi($this_page_id) {
+	$pages = get_pages( array('sort_column' => 'menu_order') ); // get the menu-ordered list of the pages
+	$page_links = array();
+	foreach ($pages as $k => $pagg) {
+		if ( $pagg->ID == $this_page_id ) { // we are in this $pagg
+			if ( $k == 0 ) { // is first page
+				$page_links['next']['link'] = get_page_link($pages[1]->ID);
+				$page_links['next']['title'] = $pages[1]->post_title;
+				if ( $page_links['next']['title'] == '' ) $page_links['next']['title'] = __( '(no title)' );
+			} elseif ( $k == ( count( $pages ) -1 ) ) { // is last page
+				$page_links['prev']['link'] = get_page_link($pages[$k - 1]->ID);
+				$page_links['prev']['title'] = $pages[$k - 1]->post_title;
+				if ( $page_links['prev']['title'] == '' ) $page_links['prev']['title'] = __( '(no title)' );
+			} else {
+				$page_links['next']['link'] = get_page_link($pages[$k + 1]->ID);
+				$page_links['next']['title'] = $pages[$k + 1]->post_title;
+				if ( $page_links['next']['title'] == '' ) $page_links['next']['title'] = __( '(no title)' );
+				$page_links['prev']['link'] = get_page_link($pages[$k - 1]->ID);
+				$page_links['prev']['title'] = $pages[$k - 1]->post_title;
+				if ( $page_links['prev']['title'] == '' ) $page_links['prev']['title'] = __( '(no title)' );
+			}
+		}
+	}
+	return $page_links;
+}
 
 // page hierarchy
 function shiword_multipages(){
@@ -331,7 +354,7 @@ function shiword_create_menu() {
 	//create new top-level menu - Slideshow
 	$slidepage = add_theme_page( __( 'Slideshow' ), __( 'Slideshow' ), 'manage_options', 'tb_shiword_slideshow', 'edit_shiword_slideshow' );
 	//call register settings function
-	add_action( 'admin_init', 'register_mysettings' );
+	add_action( 'admin_init', 'register_tb_sw_settings' );
 	//call custom stylesheet function
 	add_action( 'admin_print_styles-' . $topage, 'shiword_theme_options_style' );
 	add_action( 'admin_print_styles-' . $slidepage, 'shiword_slide_options_style' );
@@ -339,7 +362,7 @@ function shiword_create_menu() {
 add_action( 'admin_menu', 'shiword_create_menu' );
 
 
-function register_mysettings() {
+function register_tb_sw_settings() {
 	//register our settings
 	register_setting( 'shiw_settings_group', 'shiword_options' );
 	//register slideshow post list
@@ -549,7 +572,7 @@ function edit_shiword_options() {
 		if ( !isset( $shiword_options[$key] ) ) $shiword_options[$key] = $shiword_coa[$key]['default'];
 	}
 
-?>
+	?>
 	<div class="wrap">
 		<div class="icon32" id="icon-themes"><br></div>
 		<h2><?php echo get_current_theme() . ' - ' . __( 'Theme Options' ); ?></h2>
@@ -583,9 +606,15 @@ function edit_shiword_options() {
 					<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="themes.php?page=functions" target="_self"><?php _e( 'Undo Changes' , 'shiword' ); ?></a>
 				</p>
 			</form>
+				<div class="stylediv" style="clear: both;">
+					<p style="margin: 10px; text-align: center; ">
+						<?php _e( 'If you like/dislike this plugin, or if you encounter any issues using it, please let us know it.', 'tbqb' ); ?><br />
+						<a href="<?php esc_url( 'http://www.twobeers.net/annunci/shiword' ); ?>" title="Shiword theme" target="_blank"><?php _e( 'Leave a feedback', 'shiword' ); ?></a>
+					</p>
+				</div>
 		</div>
 	</div>
-<?php
+	<?php
 }
 
 // Tell WordPress to run shiword_setup() when the 'after_setup_theme' hook is run.
@@ -702,17 +731,16 @@ function shiword_device_style() {
 	$device_textcolor = get_sw_device_textcolor();
 	if ( 'transparent' != $device_textcolor ) $device_textcolor = '#' . $device_textcolor;
 	$txtstyle = "color: $device_textcolor;";
-?>
-<style type="text/css"> 
-	.pad_bg { <?php echo trim( $bgstyle ); ?> }
-	#head a, #head .description, #statusbar { <?php echo trim( $txtstyle ); ?> }
-</style>
-<?php
+	?>
+	<style type="text/css"> 
+		.pad_bg { <?php echo trim( $bgstyle ); ?> }
+		#head a, #head .description, #statusbar { <?php echo trim( $txtstyle ); ?> }
+	</style>
+	<?php
 }
 
 //get the theme options values. uses default values if options are empty or unset
 function shiword_get_opt() {
-
 	global $shiword_coa;
 	
 	$shiword_options = get_option( 'shiword_options' );
@@ -794,6 +822,7 @@ function sw_sticky_slider() {
 	</div>
 	<?php add_action( 'wp_footer', 'init_sticky_slider' ); //include the initialize code in footer
 }
+
 function init_sticky_slider() { ?>
 	<script type='text/javascript'>
 	// <![CDATA[
@@ -813,7 +842,6 @@ if ( is_admin() && isset( $_GET['activated'] ) && $pagenow == "themes.php" ) {
 	add_action( 'admin_notices', 'sw_setopt_admin_notice' );
 }
 
-
 //add a default gravatar
 if ( !function_exists( 'shiword_addgravatar' ) ) {
 	function shiword_addgravatar( $avatar_defaults ) {
@@ -824,7 +852,6 @@ if ( !function_exists( 'shiword_addgravatar' ) ) {
 	}
 	add_filter( 'avatar_defaults', 'shiword_addgravatar' );
 }
-
 
 // add 'quoted on' before trackback/pingback comments link
 function sw_add_quoted_on( $return ) {
