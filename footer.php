@@ -97,7 +97,6 @@
 													}
 													?>
 												</li>
-												<?php //wp_register(); ?>
 												<?php if ( current_user_can( 'read' ) ) { wp_register(); }?>
 												<?php if ( ( is_user_logged_in() ) && current_user_can( 'read' ) ) {?>
 													<li><a href="<?php echo esc_url( admin_url( 'profile.php' ) ); ?>"><?php _e( 'Your Profile' ); ?></a></li>
@@ -107,8 +106,11 @@
 													<?php if ( current_user_can( 'moderate_comments' ) ) { ?>
 														<li><a title="<?php _e( 'Comments' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments' ); ?></a></li>
 													<?php } ?>
+													<li><a title="<?php _e( 'Log out' ); ?>" href="<?php echo esc_url( wp_logout_url() ); ?>"><?php _e( 'Log out' ); ?></a></li>
 												<?php } ?>
-												<li><?php wp_loginout(); ?></li>
+												<?php if ( ! is_user_logged_in() ) {?>
+													<?php shiword_mini_login(); ?>
+												<?php } ?>
 											</ul>
 										</div>
 									</div>
