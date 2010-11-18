@@ -4,7 +4,7 @@
 	$('#mainmenu').children('li').each(function(){ //get every main list item
 		var d = $(this).children('ul'); //for each main item, get the sub list
 		if(d.size() !== 0){ //if the sub list exists...
-			$(this).children('a').append(" »"); //add a raquo to the main item
+			$(this).children('a').append('<span class="hiraquo"> »</span>'); //add a raquo to the main item
 			d.css({'opacity' : 0 , 'display' : 'block'});
 			var mysize = d.height(); //retrieve the height of the sub list
 			d.css({'opacity' : 1 , 'display' : '', 'height': 0});

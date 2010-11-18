@@ -27,7 +27,7 @@ $shiword_coa = array(
 
 //load options in $shiword_opt variable, globally retrieved in php files
 $shiword_opt = shiword_get_opt();
-$shiword_colors = get_option( 'shiword_colors' );
+$shiword_colors = shiword_get_colors();
 
 
 
@@ -130,14 +130,13 @@ function shiword_stylesheet(){
 }
 add_action( 'wp_print_styles', 'shiword_stylesheet' );
 
-
 // add scripts
 function shiword_scripts(){
 	global $shiword_opt, $is_sw_printpreview, $shiword_version;
 	if ($shiword_opt['shiword_jsani'] == 'true') {
 		if ( !$is_sw_printpreview ) { //script not to be loaded in print preview
-			wp_enqueue_script( 'sw-animations', get_bloginfo('stylesheet_directory').'/js/sw-animations.js',array('jquery'),$shiword_version, true ); //shiword js
-			if ( $shiword_opt['shiword_sticky'] == 'true' ) wp_enqueue_script( 'sw-sticky-slider', get_bloginfo('stylesheet_directory').'/js/sw-sticky-slider.js',array('jquery'),$shiword_version , false );
+			wp_enqueue_script( 'sw-animations', get_bloginfo('stylesheet_directory').'/js/sw-animations.min.js',array('jquery'),$shiword_version, true ); //shiword js
+			if ( $shiword_opt['shiword_sticky'] == 'true' ) wp_enqueue_script( 'sw-sticky-slider', get_bloginfo('stylesheet_directory').'/js/sw-sticky-slider.min.js',array('jquery'),$shiword_version , false );
 		}
 	}
 }
@@ -363,12 +362,12 @@ add_action( 'admin_menu', 'shiword_create_menu' );
 
 
 function register_tb_sw_settings() {
-	//register our settings
+	//register general settings
 	register_setting( 'shiw_settings_group', 'shiword_options' );
-	//register slideshow post list
+	//register slideshow settings
 	register_setting( 'shiw_slideshow_group', 'shiword_slideshow' );
-	//add custom stylesheet to admin
-	//wp_enqueue_style( 'ff-options-style', get_bloginfo( 'stylesheet_directory' ) . '/ff-opt.css', false, '', 'screen' );
+	//register colors settings
+	register_setting( 'shiw_colors_group', 'shiword_colors' );
 }
 
 function shiword_theme_options_style() {
@@ -631,10 +630,7 @@ if ( !function_exists( 'shiword_setup' ) ) {
 		register_nav_menus( array( 'primary' => __( 'Main Navigation Menu', 'shiword' ) ) );
 
 		// This theme allows users to set the device appearance
-		add_custom_device_image( 'shiword_device_style' , 'shiword_admin_device_style' );
-		define( 'SW_DEVICE_TEXTCOLOR' , 'fff' );
-		define( 'SW_DEVICE_IMAGE' , '' );
-		define( 'SW_DEVICE_COLOR' , '0a0a0a' );
+		add_custom_device_image();
 		
 		// Your changeable header business starts here
 		define( 'HEADER_TEXTCOLOR', '404040' );
@@ -706,37 +702,88 @@ if ( !function_exists( 'shiword_admin_header_style' ) ) {
 	}
 }
 
-// styles the "device color" admin panel (Appearance > Device Color).
-function shiword_admin_device_style() {
-		echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('stylesheet_directory') . '/css/custom-device-color.css" />'."\n";
-}
-
 // custom header image style - gets included in the site header
 function shiword_header_style() {
+	global $shiword_colors; 
     ?>
-    <style type="text/css">
-        #headerimg {
-            background: transparent url('<?php esc_url ( header_image() ); ?>') right bottom repeat-y;
-        }
-    </style>
-    <?php
-}
+<style type="text/css">
+	#headerimg { 
+		background: transparent url('<?php esc_url ( header_image() ); ?>') right bottom repeat-y; 
+		<?php if ( get_theme_mod( 'header_image' , HEADER_IMAGE ) == '' ) echo 'display: none;'; ?>
+	}
+	#sw_body,
+	#fixedfoot { 
+		background: <?php echo $shiword_colors['device_color']; ?> url('<?php echo $shiword_colors['device_image']; ?>') right top repeat 
+	}
+	#head { 
+		background: <?php echo $shiword_colors['device_color']; ?> url('<?php echo $shiword_colors['device_image']; ?>') right -0.7em repeat 
+	}
+	input[type="button"]:hover,
+	input[type="submit"]:hover,
+	input[type="reset"]:hover {
+		border-color: <?php echo $shiword_colors['main4']; ?>;
+	}
+	#head a, 
+	#head .description,
+	#statusbar {
+		color: <?php echo $shiword_colors['device_textcolor']; ?>; 
+	}
+	.menuitem:hover .menuitem_img,
+	.minib_img:hover {
+		border-color: <?php echo $shiword_colors['device_button']; ?>;
+	}
+	#maincontent a {
+		color : <?php echo $shiword_colors['main3']; ?>;
+	}
+	#maincontent a:hover {
+		color : <?php echo $shiword_colors['main4']; ?>;
+	}
+	#pages, 
+	#mainmenu > li.page_item > ul.children,
+	#mainmenu > li.menu-item > ul.sub-menu,
+	.minibutton .nb_tooltip,
+	.menuback { 
+		background-color: <?php echo $shiword_colors['menu1']; ?>;
+		border-color: <?php echo $shiword_colors['menu2']; ?>;
+		color: <?php echo $shiword_colors['menu3']; ?>;
+	}
+	#pages a, 
+	#pages > li.page_item > ul.children a,
+	#pages > li.menu-item > ul.sub-menu a,
+	.minibutton .nb_tooltip a,
+	.menuback a { 
+		color: <?php echo $shiword_colors['menu4']; ?>;
+	}
+	#pages a:hover, 
+	#pages > li.page_item > ul.children a:hover,
+	#pages > li.menu-item > ul.sub-menu a:hover,
+	.minibutton .nb_tooltip a:hover,
+	.menuback a:hover,
+	#pages .current-menu-item > a, 
+	#pages .current_page_item > a, 
+	li.current_page_ancestor .hiraquo, 
+	#pages .current-cat > a,
+	#pages a:hover,
+	#pages .current-menu-item a:hover,
+	#pages .current_page_item a:hover,
+	#pages .current-cat a:hover {
+		color: <?php echo $shiword_colors['menu5']; ?>;
+	}
+	.menu_sx > ul {
+		border-right:1px solid <?php echo $shiword_colors['menu6']; ?>;
+	}
+	.menuback .mentit { 
+		color: <?php echo $shiword_colors['menu6']; ?>;
+	}
+	.letsstick .sticky {
+		-moz-box-shadow: 0 0 8px <?php echo $shiword_colors['main3']; ?>;
+		box-shadow: 0 0 8px <?php echo $shiword_colors['main3']; ?>;
+		-webkit-box-shadow: 0 0 8px <?php echo $shiword_colors['main3']; ?>;
+	}
 
-// custom pad background style - gets included in the site header
-function shiword_device_style() {
-	$device_image = get_sw_device_image();
-	$device_color = get_sw_device_color();
-	if ( 'transparent' != $device_color ) $device_color = '#' . $device_color;
-	$bgstyle = "background: $device_color url('$device_image') left top repeat;";
-	$device_textcolor = get_sw_device_textcolor();
-	if ( 'transparent' != $device_textcolor ) $device_textcolor = '#' . $device_textcolor;
-	$txtstyle = "color: $device_textcolor;";
-	?>
-	<style type="text/css"> 
-		.pad_bg { <?php echo trim( $bgstyle ); ?> }
-		#head a, #head .description, #statusbar { <?php echo trim( $txtstyle ); ?> }
-	</style>
-	<?php
+</style>
+
+    <?php
 }
 
 //get the theme options values. uses default values if options are empty or unset
@@ -750,6 +797,34 @@ function shiword_get_opt() {
 		}
 	}
 	return ( $shiword_options );
+}
+
+//get the theme color values. uses default values if options are empty or unset
+function shiword_get_colors() {
+
+	/* Holds default colors. */
+	$default_device_colors = array(
+		'device_image' => '',
+		'device_color' => '#000',
+		'device_textcolor' => '#fff',
+		'device_button' => '#ff8d39',
+		'main3' => '#21759b',
+		'main4' => '#ff8d39',
+		'menu1' => '#21759b',
+		'menu2' => '#cccccc',
+		'menu3' => '#262626',
+		'menu4' => '#ffffff',
+		'menu5' => '#ff8d39',
+		'menu6' => '#cccccc',
+	);
+	
+	$shiword_colors = get_option( 'shiword_colors' );
+	foreach ( $default_device_colors as $key => $val ) {
+		if( ( !isset( $shiword_colors[$key] ) ) || empty( $shiword_colors[$key] ) ) { 
+			$shiword_colors[$key] = $default_device_colors[$key]; 
+		}
+	}
+	return ( $shiword_colors );
 }
 
 //custom excerpt maker
@@ -864,42 +939,6 @@ function sw_add_quoted_on( $return ) {
 }
 add_filter( 'get_comment_author_link', 'sw_add_quoted_on' );
 
-// Retrieve the custom 'SW_DEVICE_TEXTCOLOR' theme mod
-function get_sw_device_textcolor() {
-	$default = defined( 'SW_DEVICE_TEXTCOLOR' ) ? SW_DEVICE_TEXTCOLOR : 'fff';
-
-	return get_theme_mod( 'sw_device_textcolor' , $default );
-}
-
-// Display text color for device title
-function sw_device_textcolor() {
-	echo get_sw_device_textcolor();
-}
-
-// Retrieve the custom 'SW_DEVICE_IMAGE' theme mod
-function get_sw_device_image() {
-	$default = defined( 'SW_DEVICE_IMAGE' ) ? SW_DEVICE_IMAGE : '';
-
-	return get_theme_mod( 'sw_device_image' , $default );
-}
-
-// Display background image for device
-function sw_device_image() {
-	echo get_sw_device_image();
-}
-
-// Retrieve the custom 'SW_DEVICE_COLOR' theme mod
-function get_sw_device_color() {
-	$default = defined( 'SW_DEVICE_COLOR' ) ? SW_DEVICE_COLOR : '0a0a0a';
-
-	return get_theme_mod( 'sw_device_color' , $default );
-}
-
-// Display background image for device
-function sw_device_color() {
-	echo get_sw_device_color();
-}
-
 // Register a selection of default images to be displayed as device backgrounds by the custom device color admin UI. based on WP theme.php -> register_default_headers()
 function register_default_device_images( $headers ) {
 	global $sw_default_device_images;
@@ -912,7 +951,32 @@ function add_custom_device_image() {
 	if ( ! is_admin() )
 		return;
 	require_once( 'custom-device-color.php' );
-	$shi_cdcpanel = new Custom_device_color();
+	//$shi_cdcpanel = new Custom_device_color();
+	$GLOBALS['custom_device_color'] =& new Custom_device_color();
+	add_action( 'admin_menu' , array(&$GLOBALS['custom_device_color'] , 'init' ));
+}
+
+// display a simple login form in quickbar
+function shiword_mini_login() {
+	$args = array(
+		'redirect' => home_url(),
+		'form_id' => 'sw-loginform',
+		'id_username' => 'sw-user_login',
+		'id_password' => 'sw-user_pass',
+		'id_remember' => 'sw-rememberme',
+		'id_submit' => 'sw-submit' );
+	?>
+	<li class="ql_cat_li">
+		<a title="<?php _e( 'Log in' ); ?>" href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in' ); ?></a>
+		<div class="cat_preview" style="padding-left: 20px;">
+			<div class="mentit"><?php _e( 'Log in' ); ?></div>
+			<div id="sw_minilogin">
+				<?php wp_login_form($args); ?>
+			</div>
+		</div>
+	</li>
+
+	<?php
 }
 
 ?>

@@ -1,4 +1,4 @@
-﻿/* Shiword v0.7 - stylesheet for custom device color */
+﻿/* Shiword v0.8 - stylesheet for custom colors */
 
 #headimg-bg {
 	border: 1px solid #777 !important;
@@ -60,75 +60,99 @@ input[type="submit"] {
 .wrap .form-table th {
 	padding:5px 10px !important;
 }
-
 #preview-main {
-margin:10px 50px;
-padding-top:5px;
-position:relative;
-text-align:center;
-border-style:solid;
-border-width:1px;
+	margin:10px 50px;
+	padding-top:5px;
+	position:relative;
+	text-align:center;
+	border-style:solid;
+	border-width:1px;
+	background-color: #111;
+	color:#aaa;
 }
 #preview-main span{
-padding: 5px;
-border-right: 1px solid transparent;
+	padding: 5px;
+	border-right: 1px solid transparent;
 }
-
+#preview-button {
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border-style:solid;
+	border-width:3px;
+	bottom:5px;
+	display:block;
+	height:50px;
+	left:-64px;
+	position:absolute;
+	width:50px;
+}
 #preview-pages {
-border-bottom:5px solid #CCCCCC;
-border-top:5px solid #CCCCCC;
-padding:5px 0;
+	border-bottom:5px solid #ccc;
+	border-top:5px solid #ccc;
+	padding:5px 0;
 }
-
 #preview-meta {
--moz-border-radius:5px 5px 5px 5px;
-background:none repeat scroll 0 0 #CCCCCC;
-border:1px solid #FFFFFF;
-margin:10px 50px;
-padding:5px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #404040;
+	border:1px solid #fff;
+	margin:10px 50px;
+	padding:5px;
 }
-
 #preview-menu {
--moz-border-radius:10px 10px 10px 10px;
-background-color:#111111;
-border:5px solid #FFFFFF;
-bottom:5px;
-left:5px;
-padding:10px;
-position:absolute;
-height:60px;
--moz-box-shadow:1px 1px 5px #000000;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background-color:#111;
+	border:5px solid #fff;
+	bottom:5px;
+	left:5px;
+	padding:10px;
+	position:absolute;
+	height:60px;
+	-moz-box-shadow: 1px 1px 4px #000;
+	-webkit-box-shadow: 1px 1px 4px #000;
+	box-shadow: 1px 1px 4px #000;
 }
-
 #preview-footer {
-border-top:1px solid #CCCCCC;
-padding:10px 0 40px;
+	border-top:1px solid #ccc;
+	padding:10px 0 40px;
+	background-color: #404040;
+	color:#aaa;
 }
-
 #preview-body {
-margin:20px 100px;
-padding:10px;
+	margin:20px 100px;
+	padding:10px;
+	color:#aaa;
 }
-
 #preview-pages .preview-link, #preview-menu .preview-link,
 #preview-pages .preview-linkhi, #preview-menu .preview-linkhi {
-text-shadow:1px 1px 1px #000000;
+	text-shadow:1px 1px 1px #000;
 }
-
 .color_preview_box {
-width:2em;
-border:1px solid #262626;
+	width:2em;
+	border:1px solid #262626;
 }
 .h3_field {
--moz-border-radius:10px 10px 10px 10px;
--moz-box-shadow:0 0 8px #000000;
-background-color:#aaa;
-border:1px solid;
-color:#FFFFFF;
-padding:5px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 0 0 7px #000;
+	-webkit-box-shadow: 0 0 7px #000;
+	box-shadow: 0 0 7px #000;
+	background-color:#aaa;
+	border:1px solid;
+	color:#fff;
+	padding:5px;
 }
 .h3_field a {
-text-decoration:none;
+	text-decoration:none;
 }
 
 
