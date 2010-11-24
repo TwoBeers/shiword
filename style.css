@@ -16,7 +16,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 body {
 	font-family: verdana;
 	font-size: 11px;
-	background: #b6b6b6 url('images/bg.png') bottom left repeat-x fixed;
+	background: #b6b6b6 url('images/bg.jpg') bottom left repeat-x fixed;
 	color: #aaa;
 	margin: 0;
 }
@@ -406,7 +406,6 @@ input[type=password]:focus {
 	border-right: 1px solid #ccc;
 }
 .menu_sx li {
-	color: #262626;
 	background: transparent url('images/operafix.png') left top repeat;
 	padding: 1px 5px;
 }
@@ -831,6 +830,11 @@ h2.storytitle {
 	margin: 0 -5px 15px;
 	padding: 5px;
 }
+.dim_cpc {
+	background: transparent url('images/lens.png') left center no-repeat;
+	padding: 5px 0 5px 22px;
+}
+
 /* comments 
 ----------------------------------------------------------*/
 .comment,

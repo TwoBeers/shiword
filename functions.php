@@ -357,6 +357,7 @@ function shiword_create_menu() {
 	//call custom stylesheet function
 	add_action( 'admin_print_styles-' . $topage, 'shiword_theme_options_style' );
 	add_action( 'admin_print_styles-' . $slidepage, 'shiword_slide_options_style' );
+	add_action( 'admin_print_scripts-' . $slidepage, 'shiword_slide_options_script' );
 }
 add_action( 'admin_menu', 'shiword_create_menu' );
 
@@ -378,6 +379,11 @@ function shiword_theme_options_style() {
 function shiword_slide_options_style() {
 	//add custom stylesheet
 	echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo( 'stylesheet_directory' ) . '/css/slide-options.css" />' . "\n";
+}
+
+function shiword_slide_options_script() {
+	global $shiword_version;
+	wp_enqueue_script( 'sw_otp_script', get_bloginfo('stylesheet_directory').'/js/sw-otp-script.dev.js',array('jquery'),$shiword_version, true ); //shiword js
 }
 
 // the slideshow admin panel - here you can select posts to be included in slideshow
@@ -432,18 +438,17 @@ function edit_shiword_slideshow() {
 				<div id="tabs-container">				
 					<ul id="selector">
 						<li id="shiwordSlide-posts-li">
-							<div class="wp-menu-image"><br></div>
-							<a href="#shiwordSlide-posts" onClick="shiwordSlideSwitchClass('shiwordSlide-posts'); return false;"><?php _e( 'Posts' ); ?></a>
+							<a href="#shiwordSlide-posts" onClick="shiwordSlideSwitchClass('shiwordSlide-posts'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'Posts' ); ?></a>
 						</li>
 						<li id="shiwordSlide-pages-li">
-							<div class="wp-menu-image"><br></div>
-							<a href="#shiwordSlide-pages" onClick="shiwordSlideSwitchClass('shiwordSlide-pages'); return false;"><?php _e( 'Pages' ); ?></a>
-						</li>
-						<li style="float: right; margin-right: 30px;">
-							<div class="wp-menu-image"><br></div>
-							<a href="#shiwordSlide-bottom_ref" style="background: transparent url('<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/images/minibuttons.png') no-repeat right -192px" ><?php _e( 'Submit' ); ?></a>
+							<a href="#shiwordSlide-pages" onClick="shiwordSlideSwitchClass('shiwordSlide-pages'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'Pages' ); ?></a>
 						</li>
 					</ul>
+					<div class="jump_bottom">
+						<small>
+							<a href="#shiwordSlide-bottom_ref" title="<?php _e('Remember to click the Save Changes button at the bottom of the screen for new settings to take effect.'); ?>" ><?php _e( 'Save' ); ?></a>
+						</small>
+					</div>
 					<div class="clear"></div>
 					
 					<?php $lastposts = get_posts( 'post_type=post&numberposts=-1&orderby=date' ); ?>
@@ -466,7 +471,7 @@ function edit_shiword_slideshow() {
 									}
 									if( !isset( $shiword_options['shiword_slide'][$post->ID] ) ) $shiword_options['shiword_slide'][$post->ID] = 'false';
 									?>
-									<tr>
+									<tr class="sw_post_row">
 										<th class="check-column" scope="row">
 											<input name="shiword_slideshow[shiword_slide][<?php echo $post->ID; ?>]" value="<?php echo $post->ID; ?>" type="checkbox" class="" <?php checked( $post->ID , $shiword_options['shiword_slide'][$post->ID] ); ?> />
 										</th>
@@ -524,8 +529,8 @@ function edit_shiword_slideshow() {
 				</div>
 				<div id="shiwordSlide-bottom_ref" style="clear: both; height: 1px;"> </div>
 				<p style="float:left; clear: both;">
-					<input class="button" type="submit" name="Submit" value="<?php _e( 'Update Options' , 'shiword' ); ?>" />
-					<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="#" target="_self"><?php _e( 'Undo Changes' , 'shiword' ); ?></a>
+					<input class="button" type="submit" name="Submit" value="<?php _e( 'Save Changes' ); ?>" />
+					<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="<?php echo get_admin_url() . 'themes.php?page=tb_shiword_slideshow'; ?>" target="_self"><?php _e( 'Undo Changes' , 'shiword' ); ?></a>
 				</p>
 			</form>
 		</div>
@@ -589,11 +594,11 @@ function edit_shiword_options() {
 						</tr>
 					<?php foreach ($shiword_coa as $key => $val) { ?>
 						<tr>
-							<td style="width: 220px;font-weight:bold;border-right:1px solid #CCCCCC;"><?php echo $shiword_coa[$key]['description']; ?></td>
-							<td style="width: 20px;border-right:1px solid #CCCCCC;text-align:center;">
+							<td style="width: 220px;font-weight:bold;border-right:1px solid #ccc;"><?php echo $shiword_coa[$key]['description']; ?></td>
+							<td style="width: 20px;border-right:1px solid #ccc;text-align:center;">
 								<input name="shiword_options[<?php echo $key; ?>]" value="<?php echo $shiword_options[$key]; ?>" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 'true' , $shiword_options[$key] ); ?> />
 							</td>
-							<td style="font-style:italic;border-right:1px solid #CCCCCC;"><?php echo $shiword_coa[$key]['info']; ?></td>
+							<td style="font-style:italic;border-right:1px solid #ccc;"><?php echo $shiword_coa[$key]['info']; ?></td>
 							<td><?php if ( $shiword_coa[$key]['req'] != '' ) echo $shiword_coa[$shiword_coa[$key]['req']]['description']; ?></td>
 						</tr>
 					<?php }	?>
@@ -605,11 +610,11 @@ function edit_shiword_options() {
 					<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="themes.php?page=functions" target="_self"><?php _e( 'Undo Changes' , 'shiword' ); ?></a>
 				</p>
 			</form>
-				<div class="stylediv" style="clear: both;">
-					<p style="margin: 10px; text-align: center; ">
-						<?php _e( 'If you like/dislike this plugin, or if you encounter any issues using it, please let us know it.', 'tbqb' ); ?><br />
+				<div class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc;">
+					<small>
+						<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'shiword' ); ?><br />
 						<a href="<?php esc_url( 'http://www.twobeers.net/annunci/shiword' ); ?>" title="Shiword theme" target="_blank"><?php _e( 'Leave a feedback', 'shiword' ); ?></a>
-					</p>
+					</small>
 				</div>
 		</div>
 	</div>
@@ -750,7 +755,6 @@ function shiword_header_style() {
 	#pages a, 
 	#pages > li.page_item > ul.children a,
 	#pages > li.menu-item > ul.sub-menu a,
-	.minibutton .nb_tooltip a,
 	.menuback a { 
 		color: <?php echo $shiword_colors['menu4']; ?>;
 	}
@@ -780,7 +784,14 @@ function shiword_header_style() {
 		box-shadow: 0 0 8px <?php echo $shiword_colors['main3']; ?>;
 		-webkit-box-shadow: 0 0 8px <?php echo $shiword_colors['main3']; ?>;
 	}
-
+	textarea:hover,
+	input[type="text"]:hover,
+	input[type="password"]:hover,
+	textarea:focus,
+	input[type="text"]:focus,
+	input[type="password"]:focus {
+		border:1px solid <?php echo $shiword_colors['main4']; ?>;
+	}
 </style>
 
     <?php
@@ -811,11 +822,11 @@ function shiword_get_colors() {
 		'main3' => '#21759b',
 		'main4' => '#ff8d39',
 		'menu1' => '#21759b',
-		'menu2' => '#cccccc',
+		'menu2' => '#ccc',
 		'menu3' => '#262626',
 		'menu4' => '#ffffff',
 		'menu5' => '#ff8d39',
-		'menu6' => '#cccccc',
+		'menu6' => '#ccc',
 	);
 	
 	$shiword_colors = get_option( 'shiword_colors' );
@@ -972,6 +983,7 @@ function shiword_mini_login() {
 			<div class="mentit"><?php _e( 'Log in' ); ?></div>
 			<div id="sw_minilogin">
 				<?php wp_login_form($args); ?>
+				<a id="closeminilogin" href="#" style="display: none; margin-left:10px;"><?php _e('Close'); ?></a>
 			</div>
 		</div>
 	</li>

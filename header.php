@@ -61,7 +61,8 @@
 			if ( 
 				( $shiword_opt['shiword_rsideb'] == 'false' ) || 
 				( is_page() && ( $shiword_opt['shiword_rsideb'] == 'true' ) && ( $shiword_opt['shiword_rsidebpages'] == 'false' ) ) ||
-				( is_single() && ( $shiword_opt['shiword_rsideb'] == 'true' ) && ( $shiword_opt['shiword_rsidebposts'] == 'false' ) )
+				( is_single() && ( $shiword_opt['shiword_rsideb'] == 'true' ) && ( $shiword_opt['shiword_rsidebposts'] == 'false' ) ) || 
+				is_attachment()
 			) $postswidth = 'posts_wide';
 		?>
 		<div class="<?php echo $postswidth; ?> letsstick">

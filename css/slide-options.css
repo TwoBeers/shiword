@@ -1,24 +1,22 @@
-﻿/* Common Admin elements
-----------------------------------------------*/
-body {
-	background: url('../images/main.png') repeat-x scroll left 57px #f9f9f9;
-}
-#wpcontent #wphead {
-	border-bottom: 10px solid #404040;
-}
-
-/* Theme options elements
+﻿/* Theme options elements
 ----------------------------------------------*/
 #shiwordSlide-pages ul {
 	list-style: disc inside;
 	margin-left: 30px;
 }
-#shiwordSlide-pages-li div.wp-menu-image {
-	background: url('../../../wp-admin/images/menu.png') no-repeat scroll -38px -39px transparent;
+#shiwordSlide-pages-li span.wp-menu-image {
+	background: url('') no-repeat scroll -151px -39px transparent;
 }
-#shiwordSlide-pages-li:hover div.wp-menu-image,
-#shiwordSlide-pages-li.tab-selected div.wp-menu-image {
-	background: url('../../../wp-admin/images/menu.png') no-repeat scroll -38px -7px transparent;
+#shiwordSlide-pages-li a:hover span.wp-menu-image,
+#shiwordSlide-pages-li.tab-selected span.wp-menu-image {
+	background: url('') no-repeat scroll -151px -7px transparent;
+}
+#shiwordSlide-posts-li span.wp-menu-image {
+	background: url('') no-repeat scroll -272px -39px transparent;
+}
+#shiwordSlide-posts-li a:hover span.wp-menu-image,
+#shiwordSlide-posts-li.tab-selected span.wp-menu-image {
+	background: url('') no-repeat scroll -272px -7px transparent;
 }
 #shiwordSlide-posts div,
 #shiwordSlide-pages div {
@@ -38,57 +36,64 @@ body {
 }
 #shiwordSlide-posts,
 #shiwordSlide-pages {
-	background: url('../images/mainmenu.png') repeat-x scroll left -5px #f9f9f9;
-	border: 1px solid #fff;
-	border-top: none;
-	-moz-box-shadow: 0px 2px 8px #404040;
-	-webkit-box-shadow: 0px 2px 8px #404040;
-	box-shadow: 0px 2px 8px #404040;
-	margin: 0 0 20px;
-	padding: 20px 10px;
-}
-#shiwordSlide-posts-li div.wp-menu-image {
-	background: url('../../../wp-admin/images/menu.png') no-repeat scroll -247px -39px transparent;
-}
-#shiwordSlide-posts-li:hover div.wp-menu-image,
-#shiwordSlide-posts-li.tab-selected div.wp-menu-image {
-	background: url('../../../wp-admin/images/menu.png') no-repeat scroll -247px -7px transparent;
+	margin: 20px;
 }
 #selector {
 	list-style: none;
-	margin-left: 30px;
+	margin-left: 20px;
 }
-#selector a {
-	display: block;
+#tabs-container a {
 	font-weight: bold;
 	text-decoration: none;
 }
 #selector li {
-	border-left: 2px groove #fff;
-	border-right: 2px groove #fff;
-	border-top: 2px groove #fff;
 	float: left;
-	width: 150px;
+	width: 120px;
 	margin: 0;
-	padding: 5px;
+	padding: 5px 15px;
 }
-#selector li div.wp-menu-image {
+#selector li span.wp-menu-image {
 	float: left;
 	height: 16px;
-	width: 22px;
+	width: 28px;
 }
 #selector li.tab-selected {
 	background-color: #404040;
-	border-left: 2px solid #404040;
-	border-right: 2px solid #404040;
-	border-top: 2px solid #404040;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
 	-moz-box-shadow: 0px 2px 8px #404040;
 	-webkit-box-shadow: 0px 2px 8px #404040;
 	box-shadow: 0px 2px 8px #404040;
+	-moz-border-radius: 0 0 5px 5px;
+	-khtml-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+}
+#tabs-container .jump_bottom {
+	position: absolute;
+	right:20px;
+	top:10px;
+	padding:2px 25px 2px 2px;
+	background: #eee url('../images/minibuttons.png') no-repeat right -192px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
 #tabs-container {
+	background-color: #aaa;
 	width: 100%;
 	margin: 20px auto;
+	border: 1px solid #fff;
+	position: relative;
+	-moz-box-shadow: 0px 2px 8px #404040;
+	-webkit-box-shadow: 0px 2px 8px #404040;
+	box-shadow: 0px 2px 8px #404040;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
 .ff_opt_input {
 	text-align: center;
@@ -102,4 +107,18 @@ body {
 .tab-selected a:focus {
 	color: #fff;
 	text-shadow: 1px 1px 2px #000;
+}
+div#sw-paged {
+	text-align: center;
+	margin: 0 0 5px;
+}
+#sw-paged a {
+	border:1px solid #FFFFFF;
+	font-size:11px;
+	margin:0 2px;
+	padding:1px 4px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }

@@ -83,9 +83,9 @@
 			<?php if ( wp_attachment_is_image() ) { //from twentyten WP theme  ?>
 				<div>
 					<div class="comment_tools" style="text-align: center;">
-						<div  style="float: left;"><?php previous_image_link( false , __( '&laquo; Previous Image', 'shiword' ) ); // link to Previous image ?></div>
-						<div  style="float: right;"><?php next_image_link( false , __( 'Next Image &raquo;', 'shiword' ) ); // link to Next image ?></div>
-						<a href="<?php echo wp_get_attachment_url(); ?>" title="<?php echo esc_attr( get_the_title() ); ?>" rel="attachment" target="_blank"><?php _e( 'View full size', 'shiword' ) ;  // link to Full size image ?></a>
+						<div class="alignleft" style="min-height: 1px; width: 270px; text-align: left;"><?php previous_image_link( false , __( '&laquo; Previous Image', 'shiword' ) ); // link to Previous image ?></div>
+						<div class="alignright" style="min-height: 1px; width: 270px; text-align: right;"><?php next_image_link( false , __( 'Next Image &raquo;', 'shiword' ) ); // link to Next image ?></div>
+						<a class="dim_cpc" href="<?php echo wp_get_attachment_url(); ?>" title="<?php _e('View full size','shiword') ;  // link to Full size image ?>" rel="attachment" target="_blank">100%</a>
 						<div class="fixfloat"></div>
 					</div>
 				</div>

@@ -5,7 +5,7 @@ msgstr ""
 
 #. Text in function
 #: attachment.php:42
-#: index.php:80
+#: index.php:79
 #: single.php:60
 #: page.php:34
 #: comments.php:12
@@ -14,9 +14,11 @@ msgstr ""
 
 #. Text in echo
 #: attachment.php:19
-#: functions.php:533
-#: functions.php:588
-#: index.php:41
+#: functions.php:1
+#: functions.php:467
+#: functions.php:507
+#: functions.php:883
+#: index.php:40
 #: single.php:20
 #: page.php:18
 msgid "(no title)"
@@ -24,7 +26,7 @@ msgstr ""
 
 #. Text in function
 #: attachment.php:42
-#: index.php:80
+#: index.php:79
 #: single.php:60
 #: page.php:34
 #: comments.php:12
@@ -37,9 +39,14 @@ msgid "Add New Post"
 msgstr ""
 
 #. Text in function
-#: index.php:6
+#: index.php:5
 #: sidebar.php:18
 msgid "Archives"
+msgstr ""
+
+#. Text in echo
+#: custom-device-color.php:271
+msgid "Background Color"
 msgstr ""
 
 #. Text in echo
@@ -52,8 +59,9 @@ msgstr ""
 msgid "Cancel reply"
 msgstr ""
 
-#. Text in function
-#: index.php:65
+#. Text in echo
+#: functions.php:462
+#: index.php:64
 #: single.php:45
 #: footer.php:58
 #: sidebar.php:17
@@ -61,54 +69,51 @@ msgid "Categories"
 msgstr ""
 
 #. Text in function
-#: index.php:6
+#: index.php:5
 msgid "Category"
 msgstr ""
 
 #. Text in echo
-#: custom-device-color.php:303
+#: custom-device-color.php:236
 msgid "Choose an image from your computer:"
 msgstr ""
 
 #. Text in echo
 #: attachment.php:10
+#: functions.php:986
 #: single.php:11
 #: page.php:10
 msgid "Close"
 msgstr ""
 
 #. Text in echo
-#: custom-device-color.php:338
-msgid "Color"
-msgstr ""
-
-#. Text in echo
 #: attachment.php:41
-#: index.php:79
+#: index.php:78
 #: single.php:59
 #: page.php:33
 #: footer.php:108
 msgid "Comments"
 msgstr ""
 
-#. Text in echo
-#: custom-device-color.php:320
-msgid "Default Images"
-msgstr ""
-
-#. Text in echo
-#: custom-device-color.php:359
-msgid "Device Text Color"
-msgstr ""
-
 #. Text in function
-#: custom-device-color.php:244
-msgid "Device color"
+#: custom-device-color.php:1
+#: custom-device-color.php:217
+msgid "Custom Colors"
+msgstr ""
+
+#. Text in echo
+#: functions.php:503
+msgid "Date"
+msgstr ""
+
+#. Text in echo
+#: custom-device-color.php:253
+msgid "Default Images"
 msgstr ""
 
 #. Text in function
 #: attachment.php:45
-#: index.php:83
+#: index.php:82
 #: single.php:63
 #: page.php:38
 msgid "Edit"
@@ -125,17 +130,17 @@ msgid "Enter your password to view comments."
 msgstr ""
 
 #. Text in function
-#: footer.php:121
+#: footer.php:125
 msgid "F j, Y"
 msgstr ""
 
 #. Text in echo
-#: footer.php:207
+#: footer.php:229
 msgid "Home"
 msgstr ""
 
 #. Text in function
-#: custom-device-color.php:387
+#: custom-device-color.php:353
 msgid "Image Upload Error"
 msgstr ""
 
@@ -145,9 +150,25 @@ msgid "Leave a Reply"
 msgstr ""
 
 #. Text in echo
-#: footer.php:149
-#: footer.php:151
+#: footer.php:153
+#: footer.php:155
 msgid "Leave a comment"
+msgstr ""
+
+#. Text in echo
+#: custom-device-color.php:193
+msgid "Links"
+msgstr ""
+
+#. Text in echo
+#: functions.php:981
+#: functions.php:983
+msgid "Log in"
+msgstr ""
+
+#. Text in echo
+#: footer.php:111
+msgid "Log out"
 msgstr ""
 
 #. Text in function
@@ -171,13 +192,18 @@ msgid "Name"
 msgstr ""
 
 #. Text in function
-#: footer.php:185
+#: footer.php:207
 msgid "Next Post"
 msgstr ""
 
 #. Text in function
+#: footer.php:201
+msgid "Next page"
+msgstr ""
+
+#. Text in function
 #: attachment.php:42
-#: index.php:80
+#: index.php:79
 #: single.php:60
 #: page.php:34
 #: comments.php:12
@@ -185,18 +211,19 @@ msgid "No Comments"
 msgstr ""
 
 #. Text in echo
-#: index.php:73
+#: index.php:72
 #: single.php:53
 msgid "No Tags"
 msgstr ""
 
 #. Text in function
-#: functions.php:533
+#: functions.php:1
 msgid "No comments yet."
 msgstr ""
 
 #. Text in function
-#: functions.php:304
+#: functions.php:331
+#: functions.php:921
 msgid "Options saved."
 msgstr ""
 
@@ -206,6 +233,7 @@ msgid "Page not found"
 msgstr ""
 
 #. Text in echo
+#: functions.php:444
 #: sidebar.php:15
 msgid "Pages"
 msgstr ""
@@ -218,31 +246,36 @@ msgid "Pages:"
 msgstr ""
 
 #. Text in echo
+#: functions.php:441
+msgid "Posts"
+msgstr ""
+
+#. Text in echo
 #: footer.php:23
 msgid "Powered by WordPress"
 msgstr ""
 
-#. Text in echo
-#: custom-device-color.php:266
-msgid "Preview"
+#. Text in function
+#: footer.php:211
+msgid "Previous Post"
 msgstr ""
 
 #. Text in function
-#: footer.php:189
-msgid "Previous Post"
+#: footer.php:193
+msgid "Previous page"
 msgstr ""
 
 #. Text in echo
 #: attachment.php:11
 #: single.php:12
 #: page.php:11
-#: footer.php:142
+#: footer.php:146
 msgid "Print"
 msgstr ""
 
 #. Text in function
 #: attachment.php:35
-#: index.php:56
+#: index.php:55
 #: single.php:36
 msgid "Published on: <b>%1$s</b>"
 msgstr ""
@@ -253,28 +286,30 @@ msgid "Recent Comments"
 msgstr ""
 
 #. Text in function
-#: functions.php:533
+#: functions.php:1
 #: footer.php:45
 msgid "Recent Posts"
 msgstr ""
 
 #. Text in echo
-#: custom-device-color.php:330
+#: functions.php:449
+msgid "Remember to click the Save Changes button at the bottom of the screen for new settings to take effect."
+msgstr ""
+
+#. Text in echo
+#: custom-device-color.php:263
+#: custom-device-color.php:266
 msgid "Remove Image"
 msgstr ""
 
 #. Text in echo
-#: custom-device-color.php:349
-msgid "Reset Color"
+#: functions.php:449
+msgid "Save"
 msgstr ""
 
 #. Text in echo
-#: custom-device-color.php:373
-msgid "Reset Text Color"
-msgstr ""
-
-#. Text in echo
-#: custom-device-color.php:383
+#: functions.php:532
+#: custom-device-color.php:348
 msgid "Save Changes"
 msgstr ""
 
@@ -290,24 +325,32 @@ msgid "Search"
 msgstr ""
 
 #. Text in function
-#: index.php:6
+#: index.php:5
 msgid "Search Results"
 msgstr ""
 
 #. Text in function
-#: index.php:6
+#: index.php:5
 msgid "Search results for &#8220;%s&#8221;"
 msgstr ""
 
 #. Text in echo
-#: custom-device-color.php:341
-#: custom-device-color.php:366
+#: custom-device-color.php:277
+#: custom-device-color.php:292
+#: custom-device-color.php:307
+#: custom-device-color.php:333
 msgid "Select a Color"
+msgstr ""
+
+#. Text in function
+#: functions.php:331
+#: functions.php:430
+msgid "Slideshow"
 msgstr ""
 
 #. Text in echo
 #: attachment.php:105
-#: index.php:102
+#: index.php:101
 #: single.php:80
 #: page.php:54
 msgid "Sorry, no posts matched your criteria."
@@ -319,39 +362,49 @@ msgid "Syndicate this site using RSS 2.0"
 msgstr ""
 
 #. Text in function
-#: index.php:6
+#: index.php:5
 msgid "Tag"
 msgstr ""
 
 #. Text in echo
-#: index.php:72
+#: index.php:71
 #: single.php:52
 msgid "Tags:"
 msgstr ""
 
 #. Text in echo
-#: custom-device-color.php:363
+#: custom-device-color.php:193
+msgid "Text"
+msgstr ""
+
+#. Text in echo
+#: custom-device-color.php:286
 msgid "Text Color"
 msgstr ""
 
 #. Text in function
-#: functions.php:304
-#: functions.php:375
+#: functions.php:331
+#: functions.php:582
 msgid "Theme Options"
 msgstr ""
 
 #. Text in echo
-#: footer.php:167
+#: functions.php:502
+msgid "Title"
+msgstr ""
+
+#. Text in echo
+#: footer.php:171
 msgid "Trackback URL"
 msgstr ""
 
 #. Text in echo
-#: custom-device-color.php:307
+#: custom-device-color.php:240
 msgid "Upload"
 msgstr ""
 
 #. Text in echo
-#: custom-device-color.php:297
+#: custom-device-color.php:230
 msgid "Upload Image"
 msgstr ""
 
@@ -361,7 +414,7 @@ msgid "View all categories"
 msgstr ""
 
 #. Text in function
-#: functions.php:533
+#: functions.php:1
 msgid "View all posts in %s"
 msgstr ""
 
@@ -371,12 +424,12 @@ msgid "Website"
 msgstr ""
 
 #. Text in echo
-#: footer.php:121
+#: footer.php:125
 msgid "Welcome"
 msgstr ""
 
 #. Text in function
-#: custom-device-color.php:387
+#: custom-device-color.php:353
 msgid "You do not have permission to customize headers."
 msgstr ""
 
@@ -391,17 +444,16 @@ msgid "Your Profile"
 msgstr ""
 
 #. Text in function
-#: functions.php:604
+#: functions.php:899
 msgid "by"
 msgstr ""
 
 #. Text in function
-#: functions.php:533
+#: functions.php:1
 msgid "by %s"
 msgstr ""
 
 #. Text in echo
-#: custom-device-color.php:344
-#: custom-device-color.php:369
-msgid "set to \"transparent\""
+#: custom-device-color.php:327
+msgid "shiword"
 msgstr ""

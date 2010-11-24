@@ -5,9 +5,9 @@
 			global $shiword_opt, $shiword_is_allcat_page;
 			if ( $shiword_opt['shiword_rsideb'] == 'true' ) {
 				if ( 
-					( !is_page() && !is_single() ) ||
+					( !is_page() && !is_single() && !is_attachment() ) ||
 					( is_page() && ( $shiword_opt['shiword_rsidebpages'] == 'true' ) ) ||
-					( is_single() && ( $shiword_opt['shiword_rsidebposts'] == 'true' ) )
+					( is_single() && ( $shiword_opt['shiword_rsidebposts'] == 'true' && !is_attachment() ) )
 				) get_sidebar(); // show sidebar
 			}
 		?>
@@ -78,7 +78,7 @@
 								</div>
 							<?php } ?>
 							<?php if ( $shiword_opt['shiword_qbar_user'] == 'true' ) { // user links menu ?>
-								<div class="menuitem">
+								<div class="menuitem" id="user_menuback">
 									<div  class="menuitem_img mii_cuser"></div>
 									<div class="menuback">
 										<div class="menu_sx">
@@ -97,14 +97,16 @@
 													}
 													?>
 												</li>
-												<?php if ( current_user_can( 'read' ) ) { wp_register(); }?>
-												<?php if ( ( is_user_logged_in() ) && current_user_can( 'read' ) ) {?>
-													<li><a href="<?php echo esc_url( admin_url( 'profile.php' ) ); ?>"><?php _e( 'Your Profile' ); ?></a></li>
-													<?php if ( current_user_can( 'publish_posts' ) ) { ?>
-														<li><a title="<?php _e( 'Add New Post' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post' ); ?></a></li>
-													<?php } ?>
-													<?php if ( current_user_can( 'moderate_comments' ) ) { ?>
-														<li><a title="<?php _e( 'Comments' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments' ); ?></a></li>
+												<?php if ( ! is_user_logged_in() || current_user_can( 'read' ) ) { wp_register(); }?>
+												<?php if ( is_user_logged_in() ) { ?>
+													<?php if ( current_user_can( 'read' ) ) { ?>
+														<li><a href="<?php echo esc_url( admin_url( 'profile.php' ) ); ?>"><?php _e( 'Your Profile' ); ?></a></li>
+														<?php if ( current_user_can( 'publish_posts' ) ) { ?>
+															<li><a title="<?php _e( 'Add New Post' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post' ); ?></a></li>
+														<?php } ?>
+														<?php if ( current_user_can( 'moderate_comments' ) ) { ?>
+															<li><a title="<?php _e( 'Comments' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments' ); ?></a></li>
+														<?php } ?>
 													<?php } ?>
 													<li><a title="<?php _e( 'Log out' ); ?>" href="<?php echo esc_url( wp_logout_url() ); ?>"><?php _e( 'Log out' ); ?></a></li>
 												<?php } ?>

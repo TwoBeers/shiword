@@ -84,6 +84,23 @@
 			parent.css({ 'border-color' : '' });
 		});
 	});
-
 	
+	//add a "close" link after the submit button in minilogin form
+	$('.login-submit').append( $('#closeminilogin') );
+	$('#closeminilogin').css({ 'display' : 'inline' });
+	$('#closeminilogin').click( function() {
+		$('#sw-user_login').parents('.menuback').css({ 'display' : '' , 'width' : 0  });
+		$('#user_menuback').mouseleave( function(){ //when mouse leaves, hide the submenu
+			$('#sw-user_login').parents('.menuback').removeClass('mi_shadowed');
+			$('#sw-user_login').parents('.menuback').css({ 'display' : '' , 'width' : 0  });
+			$('#sw-user_login').parents('.cat_preview').css({ 'display' : '' });
+		});
+		return false;
+	});
+	
+	//preserve the menu div from disappear when loginform name input is clicked
+	$('#sw-user_login').mousedown( function() {
+		$('#user_menuback').unbind("mouseleave");
+		$('#sw-user_login').parents('.cat_preview').css({ 'display' : 'block' });
+	});
 });

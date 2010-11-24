@@ -33,14 +33,14 @@ class Custom_device_color {
 	
 	/* Holds default inside colors descriptions */
 	var $default_device_colors_descr = array(
-		'menu1' => 'background',
-		'menu2' => 'borders',
-		'menu3' => 'text',
-		'menu4' => 'links',
-		'menu5' => 'links highlighted',
-		'menu6' => 'inner borders',
-		'main3' => 'links',
-		'main4' => 'links highlighted',
+		'menu1' => 'Background',
+		'menu2' => 'Borders',
+		'menu3' => 'Text',
+		'menu4' => 'Links',
+		'menu5' => 'Highlighted Links',
+		'menu6' => 'Inner borders',
+		'main3' => 'Links',
+		'main4' => 'Highlighted Links',
 	);
 
 	/* Holds the page menu hook. */
@@ -55,7 +55,7 @@ class Custom_device_color {
 	function init() {
 		if ( ! current_user_can( 'edit_theme_options' ) )
 			return;
-		$this->page = $page = add_theme_page(__( 'Device color' , 'shiword' ), __( 'Device color' , 'shiword' ), 'edit_theme_options' , 'device-color' , array( &$this , 'admin_page' ));
+		$this->page = $page = add_theme_page(__( 'Custom Colors' ), __( 'Custom Colors' ), 'edit_theme_options' , 'device-color' , array( &$this , 'admin_page' ));
 		add_action( "admin_print_scripts-$page" , array(&$this, 'js_includes' ) );
 		add_action( "admin_print_styles-$page" , array(&$this, 'css_includes' ) );
 		add_action( "admin_head-$page" , array(&$this, 'take_action' ), 50 );
@@ -178,19 +178,19 @@ class Custom_device_color {
 								<div id="preview-main">
 									<div id="preview-button"></div>
 									<div id="preview-pages">
-										<span class="preview-text">text </span><span class="preview-link">link </span><span class="preview-linkhi">link hover</span>
+										<span class="preview-text"><?php _e( 'Text' ); ?> </span><span class="preview-link"><?php _e( 'Links' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
 									</div>
 									<div id="preview-meta">
-										<span class="preview-text">text </span><span class="preview-link">link </span><span class="preview-linkhi">link hover</span>
+										<span class="preview-text"><?php _e( 'Text' ); ?> </span><span class="preview-link"><?php _e( 'Links' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
 									</div>
 									<div id="preview-body">
-										<span class="preview-text">text </span><span class="preview-link">link </span><span class="preview-linkhi">link hover</span>
+										<span class="preview-text"><?php _e( 'Text' ); ?> </span><span class="preview-link"><?php _e( 'Links' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
 									</div>
 									<div id="preview-footer">
-										<span class="preview-text">text </span><span class="preview-link">link </span><span class="preview-linkhi">link hover</span>
+										<span class="preview-text"><?php _e( 'Text' ); ?> </span><span class="preview-link"><?php _e( 'Links' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
 									</div>
 									<div id="preview-menu">
-										<span class="preview-text">text </span><span class="preview-link">link </span><span class="preview-linkhi">link hover</span>
+										<span class="preview-text"><?php _e( 'Text' ); ?> </span><span class="preview-link"><?php _e( 'Links' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
 									</div>
 								</div>
 								
@@ -214,20 +214,20 @@ class Custom_device_color {
 
 <div class="wrap">
 	<?php screen_icon(); ?>
-	<h2><?php _e( 'Custom Device Colors' , 'shiword' ); ?></h2>
+	<h2><?php echo get_current_theme() . ' - ' . __( 'Custom Colors' ); ?></h2>
 
 	<?php if ( ! empty( $this->updated ) ) { ?>
 		<div id="message" class="updated">
-			<p><?php printf( __( 'Device colors updated. <a href="%s">Visit your site</a> to see how it looks.' , 'shiword' ) , home_url( '/' ) ); ?></p>
+			<p><?php printf( __( 'Colors updated. <a href="%s">Visit your site</a> to see how it looks.' , 'shiword' ) , home_url( '/' ) ); ?></p>
 		</div>
 	<?php } ?>
 
 					<?php $this->show_preview(); ?>
-	<h3 class="h3_field"><?php _e( 'Background Color' , 'shiword' ) ?> <a class="hide-if-no-js" href="#" onclick="secOpen('.shi_bgc'); return false;">&raquo;</a></h3>
+	<h3 class="h3_field"><?php _e( 'Exterior Colors' , 'shiword' ) ?> <a class="hide-if-no-js" href="#" onclick="secOpen('.shi_bgc'); return false;">&raquo;</a></h3>
 	<table class="form-table shi_bgc">
 		<tbody>
 			<tr valign="top">
-				<td style="width:200px;"><?php _e( 'Upload Image' , 'shiword' ); ?></td>
+				<td style="width:200px;"><?php _e( 'Upload Image' ); ?></td>
 				<td>
 					<?php _e( 'You can upload a custom background image.' , 'shiword' ); ?>
 					<br />
@@ -250,7 +250,7 @@ class Custom_device_color {
 			<tbody>
 				<?php if ( ! empty( $this->default_device_images ) ) { ?>
 					<tr valign="top">
-						<td style="width:200px;"><?php _e( 'Default Images' , 'shiword' ); ?></td>
+						<td style="width:200px;"><?php _e( 'Default Images' ); ?></td>
 						<td>
 							<?php _e( 'If you don&lsquo;t want to upload your own image, you can use one of these images.' , 'shiword' ) ?>
 							<?php $this->show_default_header_selector(); ?>
@@ -260,15 +260,15 @@ class Custom_device_color {
 
 				if ( $shiword_colors['device_image'] != '' ) { ?>
 					<tr valign="top">
-						<td style="width:200px;"><?php _e( 'Remove Image' , 'shiword' ); ?></td>
+						<td style="width:200px;"><?php _e( 'Remove Image' ); ?></td>
 						<td>
 							<?php _e( 'This will remove the background image.' , 'shiword' ) ?>
-							<input type="submit" class="button" name="removedeviceimage" value="<?php esc_attr_e( 'Remove Image' , 'shiword' ); ?>" />
+							<input type="submit" class="button" name="removedeviceimage" value="<?php esc_attr_e( 'Remove Image' ); ?>" />
 						</td>
 					</tr>
 				<?php } ?>
 				<tr valign="top">
-					<td style="width:200px;"><?php _e( 'Background Color' , 'shiword' ) ?></td>
+					<td style="width:200px;"><?php _e( 'Background Color' ) ?></td>
 					<td>
 						<input style="background-color:<?php echo $shiword_colors['device_color']; ?>;" class="color_preview_box" type="text" id="shi_box_1" value="" readonly="readonly" />
 						<input type="text" name="devicecolor" id="shi_input_1" value="<?php echo $shiword_colors['device_color']; ?>" />
@@ -276,14 +276,14 @@ class Custom_device_color {
 						<span class="hide-if-no-js">
 							<a href="#" onclick="showMeColorPicker('1');return false;"><?php _e( 'Select a Color' ); ?></a>
 							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('1','transparent'); return false;"><?php _e( "set to \"transparent\"" , 'shiword' ); ?></a>
+							<a href="#" onclick="pickColor('1','transparent'); return false;"><?php _e( "Set to \"transparent\"" , 'shiword' ); ?></a>
 							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('1','<?php echo $this->default_device_bg['device_color']; ?>'); return false;"><?php _e( 'default color' , 'shiword' ); ?></a>
+							<a href="#" onclick="pickColor('1','<?php echo $this->default_device_bg['device_color']; ?>'); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
 						</span>
 					</td>
 				</tr>
 				<tr valign="top" id="text-color-row">
-					<td style="width:200px;"><?php _e( 'Text Color' , 'shiword' ); ?></td>
+					<td style="width:200px;"><?php _e( 'Text Color' ); ?></td>
 					<td>
 						<input style="background-color:<?php echo $shiword_colors['device_textcolor']; ?>;" class="color_preview_box" type="text" id="shi_box_2" value="" readonly="readonly" />
 						<input type="text" name="devicetextcolor" id="shi_input_2" value="<?php echo $shiword_colors['device_textcolor']; ?>" />
@@ -291,9 +291,9 @@ class Custom_device_color {
 						<span class="hide-if-no-js">
 							<a href="#" onclick="showMeColorPicker('2');return false;"><?php _e( 'Select a Color' ); ?></a>
 							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('2','transparent'); return false;"><?php _e( "set to \"transparent\"" , 'shiword' ); ?></a>
+							<a href="#" onclick="pickColor('2','transparent'); return false;"><?php _e( "Set to \"transparent\"" , 'shiword' ); ?></a>
 							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('2','<?php echo $this->default_device_bg['device_textcolor']; ?>'); return false;"><?php _e( 'default color' , 'shiword' ); ?></a>
+							<a href="#" onclick="pickColor('2','<?php echo $this->default_device_bg['device_textcolor']; ?>'); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
 						</span>
 					</td>
 				</tr>
@@ -306,9 +306,9 @@ class Custom_device_color {
 						<span class="hide-if-no-js">
 							<a href="#" onclick="showMeColorPicker('3');return false;"><?php _e( 'Select a Color' ); ?></a>
 							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('3','transparent'); return false;"><?php _e( "set to \"transparent\"" , 'shiword' ); ?></a>
+							<a href="#" onclick="pickColor('3','transparent'); return false;"><?php _e( "Set to \"transparent\"" , 'shiword' ); ?></a>
 							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('3','<?php echo $this->default_device_bg['device_button']; ?>'); return false;"><?php _e( 'default color' , 'shiword' ); ?></a>
+							<a href="#" onclick="pickColor('3','<?php echo $this->default_device_bg['device_button']; ?>'); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
 						</span>
 					</td>
 				</tr>
@@ -316,12 +316,12 @@ class Custom_device_color {
 		</table>
 		
 		<div id="" style="position: relative">
-			<h3 class="h3_field"><?php _e( 'Content Colors' , 'shiword' ) ?> <a class="hide-if-no-js" href="#" onclick="secOpen('.shi_cc'); return false;">&raquo;</a></h3>
+			<h3 class="h3_field"><?php _e( 'Interior Colors' , 'shiword' ) ?> <a class="hide-if-no-js" href="#" onclick="secOpen('.shi_cc'); return false;">&raquo;</a></h3>
 			<table class="form-table shi_cc">
 			<?php foreach ( $this->default_device_colors as $key => $val ) { ?>
 				<?php 
-					if ( $key == 'main3' ) echo '<tr><td style="font-weight:bold; colspan="2">' . __( 'main content', 'shiword' ) . '</td></tr>';
-					elseif ( $key == 'menu1' ) echo '<tr><td style="font-weight:bold; border-top:1px solid #CCCCCC;" colspan="2">' . __( 'pages menu and floating menu', 'shiword' ) . '</td></tr>';
+					if ( $key == 'main3' ) echo '<tr><td style="font-weight:bold; colspan="2">' . __( 'Main Content', 'shiword' ) . '</td></tr>';
+					elseif ( $key == 'menu1' ) echo '<tr><td style="font-weight:bold; border-top:1px solid #CCCCCC;" colspan="2">' . __( 'Pages Menu and Floating Menu', 'shiword' ) . '</td></tr>';
 				?>
 				<tr>
 					<td style="width:200px;"><?php _e( $this->default_device_colors_descr[$key], 'shiword' ); ?></td>
@@ -332,9 +332,9 @@ class Custom_device_color {
 						<span class="hide-if-no-js">
 							<a href="#" onclick="showMeColorPicker('<?php echo $key; ?>');return false;"><?php _e( 'Select a Color' ); ?></a>
 							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('<?php echo $key; ?>','transparent'); return false;"><?php _e( "set to \"transparent\"" , 'shiword' ); ?></a>
+							<a href="#" onclick="pickColor('<?php echo $key; ?>','transparent'); return false;"><?php _e( "Set to \"transparent\"" , 'shiword' ); ?></a>
 							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('<?php echo $key; ?>', '<?php echo $val; ?>' ); return false;"><?php _e( 'default color' , 'shiword' ); ?></a>
+							<a href="#" onclick="pickColor('<?php echo $key; ?>', '<?php echo $val; ?>' ); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
 						</span>
 					</td>
 				</tr>
@@ -456,11 +456,15 @@ class Custom_device_color {
 		
 			if ( isset( $_POST[$key] ) ) {
 				$_POST[$key] = str_replace( '#' , '' , $_POST[$key] );
-				$color = preg_replace( '/[^0-9a-fA-F]/' , '' , $_POST[$key] );
-				if ( strlen($color) == 6 || strlen($color) == 3 ) {
-					$shiword_colors[$key] = '#' . $color ;
+				if ( 'transparent' == $_POST[$key] ) {
+					$shiword_colors[$key] = 'transparent';
 				} else {
-					$shiword_colors[$key] = $val ;
+					$color = preg_replace( '/[^0-9a-fA-F]/' , '' , $_POST[$key] );
+					if ( strlen($color) == 6 || strlen($color) == 3 ) {
+						$shiword_colors[$key] = '#' . $color ;
+					} else {
+						$shiword_colors[$key] = $val ;
+					}
 				}
 			} else {
 				$shiword_colors[$key] = $val ;
