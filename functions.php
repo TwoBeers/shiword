@@ -15,7 +15,8 @@ $shiword_coa = array(
 	'shiword_qbar_reccom' => array( 'default'=>'true','description'=>__( '-- recent comments', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
 	'shiword_qbar_cat' => array( 'default'=>'true','description'=>__( '-- categories','shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
 	'shiword_qbar_recpost' => array( 'default'=>'true','description'=>__( '-- recent posts', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
-	'shiword_pthumb' => array( 'default'=>'false','description'=>__( 'posts thumbnail', 'shiword' ),'info'=>__( '[default = disabled]', 'shiword' ),'req'=>'' ),
+	'shiword_xcont' => array( 'default'=>'true','description'=>__( 'content summary', 'shiword' ),'info'=>__( 'use the summary instead of content in main post index [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_pthumb' => array( 'default'=>'false','description'=>__( 'posts thumbnail', 'shiword' ),'info'=>__( '[default = disabled]', 'shiword' ),'req'=>'shiword_xcont' ),
 	'shiword_rsideb' => array( 'default'=>'true','description'=>__( 'right sidebar', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'' ),
 	'shiword_rsidebpages' => array( 'default'=>'false','description'=>__( '-- on pages', 'shiword' ),'info'=>__( 'show right sidebar on pages [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
 	'shiword_rsidebposts' => array( 'default'=>'false','description'=>__( '-- on posts', 'shiword' ),'info'=>__( 'show right sidebar on posts [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
@@ -981,7 +982,7 @@ function shiword_mini_login() {
 		<a title="<?php _e( 'Log in' ); ?>" href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in' ); ?></a>
 		<div class="cat_preview" style="padding-left: 20px;">
 			<div class="mentit"><?php _e( 'Log in' ); ?></div>
-			<div id="sw_minilogin">
+			<div id="sw_minilogin" class="solid_ul">
 				<?php wp_login_form($args); ?>
 				<a id="closeminilogin" href="#" style="display: none; margin-left:10px;"><?php _e('Close'); ?></a>
 			</div>

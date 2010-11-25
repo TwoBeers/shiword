@@ -1,9 +1,9 @@
 ﻿/*
 Theme Name: Shiword
 Theme URI: http://www.twobeers.net/annunci/shiword
-Description: Simple dark theme with lots of features, like a "quick links" menu, footer sidebars or print preview. Full supports WP 3.0 new custom menu tool. Based on Fastfood theme v0.9
+Description: Simple dark theme with lots of features, like a "quick links" menu, an "easy navigation" bar, header and footer sidebars or print preview. Shiword is fully customizable (there's also a skin builder!), with one or two columns and up to 5 widgets areas. Supports WP 3.0 new menu tool and post thumbnails.
 Version: 0.8
-Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, right-sidebar
+Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, right-sidebar, custom-colors
 Author: TwoBeers Crew
 Author URI: http://www.twobeers.net/
 
@@ -817,7 +817,9 @@ h2.storytitle {
 	font-size: 12px;
 }
 .storycontent img {
-	max-width: 100%;
+	width:auto;
+	height:auto;
+	max-width:100%;
 }
 .storytitle {
 	margin-top: 0;

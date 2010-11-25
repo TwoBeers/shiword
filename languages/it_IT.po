@@ -49,6 +49,16 @@ msgstr "-- slider articoli in evidenza"
 msgid "-- user"
 msgstr "-- utente"
 
+#. Text in function
+#: functions.php:1
+msgid "content summary"
+msgstr "riassunto"
+
+#. Text in function
+#: functions.php:1
+msgid "use the summary instead of content in main post index [default = enabled]"
+msgstr "usa il riassunto al posto del contenuto nell'indice principale degli articoli [predefinito = abilitato]"
+
 #. Text in echo
 #: footer.php:254
 #: footer.php:256

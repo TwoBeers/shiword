@@ -83,7 +83,11 @@
 					</div>
 				</div>
 				<div class="storycontent">
-					<?php the_excerpt(); ?>
+					<?php if ( ( $shiword_opt['shiword_xcont'] == 'true' ) || is_category() || is_tag() || is_date() || is_search() ) 
+						the_excerpt();
+					else
+						shiword_content_replace();
+					?>
 				</div>
 			</div>
 

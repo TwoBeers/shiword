@@ -43,6 +43,16 @@ msgstr ""
 msgid "-- user"
 msgstr ""
 
+#. Text in function
+#: functions.php:1
+msgid "content summary"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "use the summary instead of content in main post index [default = enabled]"
+msgstr ""
+
 #. Text in echo
 #: footer.php:254
 #: footer.php:256
