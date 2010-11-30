@@ -4,7 +4,92 @@
 	max-width:800px;
 	
 }
-#stylediv {
+#stylediv h3 {
+	color:#fff;
+}
+#stylediv td,
+#stylediv th {
+	border-top:1px solid #ddd;
+	padding:3px 10px;
+	font-size:11px;
+}
+#shiword-infos ul {
+	list-style: disc outside;
+	margin-left: 30px;
+}
+#shiword-options div,
+#shiword-infos div {
+	margin: 0 0 20px;
+}
+#shiword-options p,
+#shiword-infos p {
+	background-color: #ccc;
+	display: block;
+	font-weight: bold;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	margin: 15px 0 3px;
+	padding: 3px;
+}
+#shiword-options,
+#shiword-infos {
+	background: #fff;
+	-moz-box-shadow: 0px 2px 8px #404040;
+	-webkit-box-shadow: 0px 2px 8px #404040;
+	box-shadow: 0px 2px 8px #404040;
+	margin: 20px 0;
+	padding: 0 10px 10px;
+}
+#selector {
+	list-style: none;
+}
+#selector a {
+	display: block;
+	font-weight: bold;
+	text-decoration: none;
+}
+#selector li {
+	float: left;
+	min-width: 150px;
+	margin: 0;
+	padding: 5px;
+	white-space: nowrap;
+}
+#selector li span.wp-menu-image {
+	float: left;
+	height: 16px;
+	width: 28px;
+}
+#shiword-options-li span.wp-menu-image {
+	background: url('') no-repeat scroll -244px -39px transparent;
+}
+#shiword-options-li a:hover span.wp-menu-image,
+#shiword-options-li.tab-selected span.wp-menu-image {
+	background: url('') no-repeat scroll -244px -7px transparent;
+}
+#shiword-infos-li span.wp-menu-image {
+	background: url('') no-repeat scroll -34px -39px transparent;
+}
+#shiword-infos-li a:hover span.wp-menu-image,
+#shiword-infos-li.tab-selected span.wp-menu-image {
+	background: url('') no-repeat scroll -34px -7px transparent;
+}
+#selector li.tab-selected {
+	background-color: #404040;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	-moz-box-shadow: 0px 2px 8px #404040;
+	-webkit-box-shadow: 0px 2px 8px #404040;
+	box-shadow: 0px 2px 8px #404040;
+	-moz-border-radius: 0 0 5px 5px;
+	-khtml-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+}
+#tabs-container {
 	-moz-border-radius: 5px;
 	-khtml-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -17,12 +102,12 @@
 	margin:20px 0 10px;
 	padding:0 20px 20px;	
 }
-#stylediv h3 {
-	color:#fff;
+.tab-hidden {
+	display: none;
 }
-#stylediv td,
-#stylediv th {
-	border-top:1px solid #ddd;
-	padding:3px 10px;
-	font-size:11px;
+.tab-selected a,
+.tab-selected a:hover,
+.tab-selected a:focus {
+	color: #fff;
+	text-shadow: 1px 1px 2px #000;
 }

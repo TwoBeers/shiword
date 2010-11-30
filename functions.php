@@ -581,43 +581,79 @@ function edit_shiword_options() {
 	<div class="wrap">
 		<div class="icon32" id="icon-themes"><br></div>
 		<h2><?php echo get_current_theme() . ' - ' . __( 'Theme Options' ); ?></h2>
-		<div>
-			<form method="post" action="options.php">
-				<?php settings_fields( 'shiw_settings_group' ); ?>
-				<div id="stylediv">
-					<h3><?php _e( 'theme features' , 'shiword' ); ?></h3>
-					<table style="border-collapse: collapse; width: 100%;background-color:#fff;">
-						<tr>
-							<th><?php _e( 'name' , 'shiword' ); ?></th>
-							<th><?php _e( 'status' , 'shiword' ); ?></th>
-							<th><?php _e( 'description' , 'shiword' ); ?></th>
-							<th><?php _e( 'require' , 'shiword' ); ?></th>
-						</tr>
-					<?php foreach ($shiword_coa as $key => $val) { ?>
-						<tr>
-							<td style="width: 220px;font-weight:bold;border-right:1px solid #ccc;"><?php echo $shiword_coa[$key]['description']; ?></td>
-							<td style="width: 20px;border-right:1px solid #ccc;text-align:center;">
-								<input name="shiword_options[<?php echo $key; ?>]" value="<?php echo $shiword_options[$key]; ?>" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 'true' , $shiword_options[$key] ); ?> />
-							</td>
-							<td style="font-style:italic;border-right:1px solid #ccc;"><?php echo $shiword_coa[$key]['info']; ?></td>
-							<td><?php if ( $shiword_coa[$key]['req'] != '' ) echo $shiword_coa[$shiword_coa[$key]['req']]['description']; ?></td>
-						</tr>
-					<?php }	?>
-					</table>
-				</div>
-				<p style="float:left; clear: both;">
-					<input type="hidden" name="shiword_options[hidden_opt]" value="default" />
-					<input class="button" type="submit" name="Submit" value="<?php _e( 'Update Options' , 'shiword' ); ?>" />
-					<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="themes.php?page=functions" target="_self"><?php _e( 'Undo Changes' , 'shiword' ); ?></a>
-				</p>
-			</form>
+		<div id="tabs-container">				
+			<ul id="selector">
+				<li id="shiword-options-li">
+					<a href="#shiword-options" onClick="shiwordSwitchClass('shiword-options'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'theme features' , 'shiword' ); ?></a>
+				</li>
+				<li id="shiword-infos-li">
+					<a href="#shiword-infos" onClick="shiwordSwitchClass('shiword-infos'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'About' ); ?></a>
+				</li>
+			</ul>
+			<div class="clear"></div>
+			<div id="shiword-options">
+				<form method="post" action="options.php">
+					<?php settings_fields( 'shiw_settings_group' ); ?>
+					<div id="stylediv">
+						<table style="border-collapse: collapse; width: 100%;background-color:#fff;">
+							<tr>
+								<th><?php _e( 'name' , 'shiword' ); ?></th>
+								<th><?php _e( 'status' , 'shiword' ); ?></th>
+								<th><?php _e( 'description' , 'shiword' ); ?></th>
+								<th><?php _e( 'require' , 'shiword' ); ?></th>
+							</tr>
+						<?php foreach ($shiword_coa as $key => $val) { ?>
+							<tr>
+								<td style="width: 220px;font-weight:bold;border-right:1px solid #ccc;"><?php echo $shiword_coa[$key]['description']; ?></td>
+								<td style="width: 20px;border-right:1px solid #ccc;text-align:center;">
+									<input name="shiword_options[<?php echo $key; ?>]" value="<?php echo $shiword_options[$key]; ?>" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 'true' , $shiword_options[$key] ); ?> />
+								</td>
+								<td style="font-style:italic;border-right:1px solid #ccc;"><?php echo $shiword_coa[$key]['info']; ?></td>
+								<td><?php if ( $shiword_coa[$key]['req'] != '' ) echo $shiword_coa[$shiword_coa[$key]['req']]['description']; ?></td>
+							</tr>
+						<?php }	?>
+						</table>
+					</div>
+					<div>
+						<input type="hidden" name="shiword_options[hidden_opt]" value="default" />
+						<input class="button" type="submit" name="Submit" value="<?php _e( 'Update Options' , 'shiword' ); ?>" />
+						<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="themes.php?page=functions" target="_self"><?php _e( 'Undo Changes' , 'shiword' ); ?></a>
+					</div>
+				</form>
+			</div>
+			<div id="shiword-infos">
+				<?php esc_attr( get_template_part( 'readme' ) ); ?>
+			</div>
+			<div class="clear"></div>
+		</div>
 				<div class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc;">
 					<small>
 						<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'shiword' ); ?><br />
 						<a href="<?php esc_url( 'http://www.twobeers.net/annunci/shiword' ); ?>" title="Shiword theme" target="_blank"><?php _e( 'Leave a feedback', 'shiword' ); ?></a>
 					</small>
 				</div>
-		</div>
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			function shiwordSwitchClass(a) { // simple animation for option tabs
+				switch(a) {
+					case 'shiword-options':
+						document.getElementById('shiword-infos').className = 'tab-hidden';
+						document.getElementById('shiword-options').className = '';
+						document.getElementById('shiword-options-li').className = 'tab-selected';
+						document.getElementById('shiword-infos-li').className = '';
+					break;
+					case 'shiword-infos':
+						document.getElementById('shiword-infos').className = '';
+						document.getElementById('shiword-options').className = 'tab-hidden';
+						document.getElementById('shiword-options-li').className = '';
+						document.getElementById('shiword-infos-li').className = 'tab-selected';
+					break;
+				}
+			}
+			document.getElementById('shiword-infos').className = 'tab-hidden';
+			document.getElementById('shiword-options-li').className = 'tab-selected';
+			/* ]]> */
+		</script>
 	</div>
 	<?php
 }
