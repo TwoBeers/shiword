@@ -213,9 +213,9 @@
 							<?php } else { ?>
 								<?php if ( !empty( $post->post_parent ) ) { ?>
 									<div class="minibutton">
-										<a href="<?php echo get_permalink( $post->post_parent ); ?>" title="<?php esc_attr( printf( __( 'Return to %s', 'shiword' ), get_the_title( $post->post_parent ) ) ); ?>" rel="gallery">
+										<a href="<?php echo get_permalink( $post->post_parent ); ?>" title="<?php esc_attr( printf( __( 'Return to %s', 'shiword' ), strip_tags( get_the_title( $post->post_parent ) ) ) ); ?>" rel="gallery">
 											<span class="minib_img" style="background-position: 0px -144px;">&nbsp;</span>
-											<span class="nb_tooltip"><?php esc_attr( printf( __( 'Return to %s', 'shiword' ), get_the_title( $post->post_parent ) ) ); ?></span>
+											<span class="nb_tooltip"><?php esc_attr( printf( __( 'Return to %s', 'shiword' ), strip_tags( get_the_title( $post->post_parent ) ) ) ); ?></span>
 										</a>
 									</div>
 								<?php } ?>

@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div class="storycontent">
-				<?php shiword_content_replace();	?>
+				<?php the_content();	?>
 			</div>
 			<div>
 				<?php wp_link_pages( 'before=<div class="meta comment_tools" style="text-align: right;">' . __( 'Pages:' ) . '&after=</div><div class="fixfloat"></div>' ); ?>

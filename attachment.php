@@ -70,12 +70,12 @@
 							$next_attachment_url = wp_get_attachment_url();
 						}
 						?>
-						<p class="attachment"><a href="<?php echo $next_attachment_url; ?>#posts_content" title="<?php echo esc_attr( get_the_title() ); ?>" rel="attachment"><?php
+						<p class="attachment"><a href="<?php echo $next_attachment_url; ?>#posts_content" title="<?php echo esc_attr( strip_tags( get_the_title() ) ); ?>" rel="attachment"><?php
 							$attachment_size = apply_filters( 'shiword_attachment_size', 686 );
 							echo wp_get_attachment_image( $post->ID, array( $attachment_size, 9999 ) ); // filterable image width with, essentially, no limit for image height.
 						?></a></p>
 					<?php } else { ?>
-						<a href="<?php echo wp_get_attachment_url(); ?>" title="<?php echo esc_attr( get_the_title() ); ?>" rel="attachment"><?php echo basename( get_permalink() ); ?></a>
+						<a href="<?php echo wp_get_attachment_url(); ?>" title="<?php echo esc_attr( strip_tags( get_the_title() ) ); ?>" rel="attachment"><?php echo basename( get_permalink() ); ?></a>
 					<?php } ?>
 				</div><!-- .entry-attachment -->
 				<div class="entry-caption"><?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?></div>

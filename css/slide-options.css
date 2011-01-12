@@ -51,6 +51,13 @@
 	width: 120px;
 	margin: 0;
 	padding: 5px 15px;
+	border-left: 1px solid #999;
+	border-right: 1px solid #999;
+	border-bottom: 2px groove #ccc;
+	-moz-border-radius: 0 0 5px 5px;
+	-khtml-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
 }
 #selector li span.wp-menu-image {
 	float: left;
@@ -59,16 +66,6 @@
 }
 #selector li.tab-selected {
 	background-color: #404040;
-	border-left: 1px solid #fff;
-	border-right: 1px solid #fff;
-	border-bottom: 1px solid #fff;
-	-moz-box-shadow: 0px 2px 8px #404040;
-	-webkit-box-shadow: 0px 2px 8px #404040;
-	box-shadow: 0px 2px 8px #404040;
-	-moz-border-radius: 0 0 5px 5px;
-	-khtml-border-radius: 0 0 5px 5px;
-	-webkit-border-radius: 0 0 5px 5px;
-	border-radius: 0 0 5px 5px;
 }
 #tabs-container .jump_bottom {
 	position: absolute;

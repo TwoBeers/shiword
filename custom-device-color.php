@@ -77,13 +77,13 @@ class Custom_device_color {
 	function js_includes() {
 		global $shiword_version;
 		wp_enqueue_script('farbtastic');
-		wp_enqueue_script( 'sw-custom-colors', get_bloginfo('stylesheet_directory').'/js/custom-colors.min.js',array('jquery'),$shiword_version, true ); //shiword js
+		wp_enqueue_script( 'sw-custom-colors', get_template_directory_uri() . '/js/custom-colors.min.js', array('jquery'), $shiword_version, true ); //shiword js
 	}
 
 	/* Set up the enqueue for the CSS files */
 	function css_includes() {
 		wp_enqueue_style( 'farbtastic' );
-		wp_enqueue_style( 'shi_cdcpanel_style', get_bloginfo( 'stylesheet_directory' ) . '/css/custom-device-color.css', false, '', 'screen' );
+		wp_enqueue_style( 'shi_cdcpanel_style', get_template_directory_uri() . '/css/custom-device-color.css', false, '', 'screen' );
 	}
 
 	/* Options check. */
@@ -171,7 +171,7 @@ class Custom_device_color {
 						</style>
 						<div id="headimage">
 							<div id="headimg_overlay">
-								<h1><a id="name" onclick="return false;" href="<?php bloginfo( 'url' ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
+								<h1><a id="name" onclick="return false;" href=""><?php bloginfo( 'name' ); ?></a></h1>
 								<div id="desc"><?php bloginfo( 'description' ); ?></div>
 								
 							

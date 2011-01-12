@@ -4,17 +4,17 @@
 ?>
 <?php // search reminder
 	if ( is_category() ) {
-		echo '<div class="wp-caption aligncenter"><p class="wp-caption-text">' . __( 'Search Results' ) . ' <strong>' . __( 'Category' ) . ': ';
+		echo '<div class="wp-caption aligncenter"><p class="wp-caption-text"><strong>' . __( 'Category' ) . ': ';
 		wp_title( '',true,'right' );
 		echo ' </strong></p></div>'; 
 	}
 	elseif ( is_tag() ) {
-		echo '<div class="wp-caption aligncenter"><p class="wp-caption-text">' . __( 'Search Results' ) . ' <strong>' . __('Tag') . ': ';
+		echo '<div class="wp-caption aligncenter"><p class="wp-caption-text"><strong>' . __('Tag') . ': ';
 		wp_title( '',true,'right' );
 		echo ' </strong></p></div>'; 
 	}
 	elseif ( is_date() ) {
-		echo '<div class="wp-caption aligncenter"><p class="wp-caption-text">' . __( 'Search Results' ) . ' <strong>' . __( 'Archives' ) . ': ';
+		echo '<div class="wp-caption aligncenter"><p class="wp-caption-text"><strong>' . __( 'Archives' ) . ': ';
 		wp_title( '',true,'right' );
 		echo ' </strong></p></div>'; 
 	}
@@ -32,7 +32,7 @@
 					if( has_post_thumbnail() ) {
 						the_post_thumbnail( array( 120,120 ), array( 'class' => 'alignleft' ) );
 					} else {
-						echo '<img class="alignleft wp-post-image" alt="thumb" src="' . get_bloginfo( 'stylesheet_directory' ) . '/images/thumb_120.png" />';
+						echo '<img class="alignleft wp-post-image" alt="thumb" src="' . get_template_directory() . '/images/thumb_120.png" />';
 					}
 				}
 			?>
@@ -86,7 +86,7 @@
 					<?php if ( ( $shiword_opt['shiword_xcont'] == 'true' ) || is_category() || is_tag() || is_date() || is_search() ) 
 						the_excerpt();
 					else
-						shiword_content_replace();
+						the_content();
 					?>
 				</div>
 			</div>

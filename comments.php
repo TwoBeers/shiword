@@ -5,23 +5,27 @@
 	if ( post_password_required() ) { ?>
 		<div class="meta" id="comments" style="text-align: right;"><?php _e( 'Enter your password to view comments.' ); ?></div>
 		<?php return;
-	} ?>
+	} 
+?>
 
-<?php if ( comments_open() ) { ?>
-	<?php if ( have_comments() ) { ?>
-		<div class="meta" id="comments" style="text-align: right;"><?php comments_number( __( 'No Comments' ), __( '1 Comment' ), __( '% Comments' ) ); ?></div>
-		<ol id="commentlist">
-			<?php wp_list_comments( 'type=comment' ); ?>
-			<?php wp_list_comments( 'type=pings' ); ?>
-		</ol>
-		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) { ?>
-			<div class="navigate_comments">
-				<div class="nav-previous-comm"><?php previous_comments_link(); ?></div>
-				<div class="nav-next-comm"><?php next_comments_link(); ?></div>
-				<div class="fixfloat"> </div>
-			</div>
-		<?php } ?>
+<?php if ( have_comments() ) { ?>
+	<div class="meta" id="comments" style="text-align: right;"><?php comments_number( __( 'No Comments' ), __( '1 Comment' ), __( '% Comments' ) ); ?></div>
+	<ol class="commentlist">
+		<?php if ( get_option( 'page_comments' ) ) {
+			wp_list_comments();
+		} else {
+			wp_list_comments( 'type=comment' );
+			wp_list_comments( 'type=pings' );
+		} ?>
+	</ol>
+	<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) { ?>
+		<div class="navigate_comments">
+			<?php paginate_comments_links(); ?>
+		</div>
 	<?php } ?>
+<?php } ?>
+	
+<?php if ( comments_open() ) { ?>
 
 <?php
 $fields =  array(
@@ -36,7 +40,7 @@ $fields =  array(
 	<?php $custom_args = array(
 		'fields'               => apply_filters( 'comment_form_default_fields', $fields ),
 		'comment_field'        => '<p class="comment-form-comment" style="text-align: center;"><textarea id="comment" name="comment" cols="45" rows="7" style="width: 95%;" aria-required="true"></textarea></p>',
-		'comment_notes_after'  => '<p class="form-allowed-tags"><small style="float: right; color: #999999; text-align: justify; width: 85%;">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s' ), allowed_tags() ) . '</small></p>',
+		'comment_notes_after'  => '<p class="form-allowed-tags" style="color: #999999; text-align: center;"><small>' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s' ), allowed_tags() ) . '</small></p>',
 		'label_submit'         => __( 'Say It!' ),
 		'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>.' ), admin_url( 'profile.php' ), $user_identity ) . '</p>',
 		'cancel_reply_link'    => ' - ' . __( 'Cancel reply' ),

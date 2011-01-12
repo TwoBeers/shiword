@@ -7,6 +7,8 @@ load_theme_textdomain( 'shiword', TEMPLATEPATH . '/languages' );
 if ( !isset( $content_width ) ) {
 	$content_width = 560;
 }
+// add the editor style
+add_editor_style();
 
 //complete options array, with defaults values, description, infos and required option
 $shiword_coa = array(
@@ -29,7 +31,6 @@ $shiword_coa = array(
 //load options in $shiword_opt variable, globally retrieved in php files
 $shiword_opt = shiword_get_opt();
 $shiword_colors = shiword_get_colors();
-
 
 
 //get theme version
@@ -121,13 +122,13 @@ function shiword_stylesheet(){
 	global $shiword_version, $is_sw_printpreview;
 	//shows print preview / normal view
 	if ( $is_sw_printpreview ) { //print preview
-		wp_enqueue_style( 'print-style-preview', get_bloginfo( 'stylesheet_directory' ) . '/css/print.css', false, $shiword_version, 'screen' );
-		wp_enqueue_style( 'general-style-preview', get_bloginfo( 'stylesheet_directory' ) . '/css/print_preview.css', false, $shiword_version, 'screen' );
+		wp_enqueue_style( 'print-style-preview', get_template_directory_uri() . '/css/print.css', false, $shiword_version, 'screen' );
+		wp_enqueue_style( 'general-style-preview', get_template_directory_uri() . '/css/print_preview.css', false, $shiword_version, 'screen' );
 	} else { //normal view 
 		wp_enqueue_style( 'general-style', get_stylesheet_uri(), false, $shiword_version, 'screen' );
 	}
 	//print style
-	wp_enqueue_style( 'print-style', get_bloginfo( 'stylesheet_directory' ) . '/css/print.css', false, $shiword_version, 'print' );
+	wp_enqueue_style( 'print-style', get_template_directory_uri() . '/css/print.css', false, $shiword_version, 'print' );
 }
 add_action( 'wp_print_styles', 'shiword_stylesheet' );
 
@@ -136,8 +137,8 @@ function shiword_scripts(){
 	global $shiword_opt, $is_sw_printpreview, $shiword_version;
 	if ($shiword_opt['shiword_jsani'] == 'true') {
 		if ( !$is_sw_printpreview ) { //script not to be loaded in print preview
-			wp_enqueue_script( 'sw-animations', get_bloginfo('stylesheet_directory').'/js/sw-animations.min.js',array('jquery'),$shiword_version, true ); //shiword js
-			if ( $shiword_opt['shiword_sticky'] == 'true' ) wp_enqueue_script( 'sw-sticky-slider', get_bloginfo('stylesheet_directory').'/js/sw-sticky-slider.min.js',array('jquery'),$shiword_version , false );
+			wp_enqueue_script( 'sw-animations', get_template_directory_uri().'/js/sw-animations.min.js',array('jquery'),$shiword_version, true ); //shiword js
+			if ( $shiword_opt['shiword_sticky'] == 'true' ) wp_enqueue_script( 'sw-sticky-slider', get_template_directory_uri().'/js/sw-sticky-slider.min.js',array('jquery'),$shiword_version , false );
 		}
 	}
 }
@@ -209,13 +210,13 @@ function get_shiword_recententries() {
 		}
 		echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . $post_title . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s' ), $post_auth ) . '<div class="preview">';
 		if ( post_password_required( $post ) ) {
-			echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . get_bloginfo( 'stylesheet_directory' ) . '/images/thumb_50.png" alt="thumb" title="' . $post_title_short . '" />';
+			echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . get_template_directory_uri() . '/images/thumb_50.png" alt="thumb" title="' . $post_title_short . '" />';
 			echo '[' . __('No preview: this is a protected post', 'shiword' ) . ']';
 		} else {
 			if( has_post_thumbnail() ) {
 				the_post_thumbnail( array( 50,50 ), array( 'class' => 'alignleft' ) );
 			} else {
-				echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . get_bloginfo( 'stylesheet_directory' ) . '/images/thumb_50.png" alt="thumb" title="' . $post_title_short . '" />';
+				echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . get_template_directory_uri() . '/images/thumb_50.png" alt="thumb" title="' . $post_title_short . '" />';
 			}
 			echo improved_trim_excerpt( $post->post_content );
 		}
@@ -314,14 +315,14 @@ function shiword_multipages(){
 				<?php
 				echo __( 'This page has hierarchy', 'shiword' ) . ' - ';
 				if ( $the_parent_page ) {
-					$the_parent_link = '<a href="' . get_permalink( $the_parent_page ) . '" title="' . get_the_title( $the_parent_page ) . '">' . get_the_title( $the_parent_page ) . '</a>';
+					$the_parent_link = '<a href="' . get_permalink( $the_parent_page ) . '" title="' . esc_attr(strip_tags(get_the_title( $the_parent_page ))) . '">' . get_the_title( $the_parent_page ) . '</a>';
 					echo __( 'Parent page: ', 'shiword' ) . $the_parent_link ; // echoes the parent
 				}
 				if ( ( $childrens ) && ( $the_parent_page ) ) { echo ' - '; } // if parent & child, echoes the separator
 				if ( $childrens ) {
 					$the_child_list = '';
 					foreach ( $childrens as $children ) {
-						$the_child_list[] = '<a href="' . get_permalink( $children ) . '" title="' . get_the_title( $children ) . '">' . get_the_title( $children ) . '</a>';
+						$the_child_list[] = '<a href="' . get_permalink( $children ) . '" title="' . esc_attr(strip_tags(get_the_title( $children ))) . '">' . get_the_title( $children ) . '</a>';
 					}
 					$the_child_list = implode( ', ' , $the_child_list );
 					echo __( 'Child pages: ', 'shiword' ) . $the_child_list; // echoes the childs
@@ -337,15 +338,12 @@ function shiword_multipages(){
 
 
 //add a fix for embed videos overlaing quickbar
-function shiword_content_replace(){
-	$content = get_the_content();
-	$content = apply_filters( 'the_content', $content );
-	$content = str_replace( ']]>', ']]&gt;', $content );
+function shiword_content_replace( $content ) {
 	$content = str_replace( '<param name="allowscriptaccess" value="always">', '<param name="allowscriptaccess" value="always"><param name="wmode" value="transparent">', $content );
 	$content = str_replace( '<embed ', '<embed wmode="transparent" ', $content );
-	echo $content;
+	return $content;
 }
-
+add_filter( 'the_content', 'shiword_content_replace' );
 
 // create custom theme settings menu
 function shiword_create_menu() {
@@ -374,17 +372,17 @@ function register_tb_sw_settings() {
 
 function shiword_theme_options_style() {
 	//add custom stylesheet
-	echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo( 'stylesheet_directory' ) . '/css/theme-options.css" />' . "\n";
+	echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/theme-options.css" />' . "\n";
 }
 
 function shiword_slide_options_style() {
 	//add custom stylesheet
-	echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo( 'stylesheet_directory' ) . '/css/slide-options.css" />' . "\n";
+	echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/slide-options.css" />' . "\n";
 }
 
 function shiword_slide_options_script() {
 	global $shiword_version;
-	wp_enqueue_script( 'sw_otp_script', get_bloginfo('stylesheet_directory').'/js/sw-otp-script.dev.js',array('jquery'),$shiword_version, true ); //shiword js
+	wp_enqueue_script( 'sw_otp_script', get_template_directory_uri().'/js/sw-otp-script.dev.js',array('jquery'),$shiword_version, true ); //shiword js
 }
 
 // the slideshow admin panel - here you can select posts to be included in slideshow
@@ -629,7 +627,7 @@ function edit_shiword_options() {
 				<div class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc;">
 					<small>
 						<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'shiword' ); ?><br />
-						<a href="<?php esc_url( 'http://www.twobeers.net/annunci/shiword' ); ?>" title="Shiword theme" target="_blank"><?php _e( 'Leave a feedback', 'shiword' ); ?></a>
+						<a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/shiword' ); ?>" title="Shiword theme" target="_blank"><?php _e( 'Leave a feedback', 'shiword' ); ?></a>
 					</small>
 				</div>
 		<script type="text/javascript">
@@ -740,7 +738,7 @@ if ( !function_exists( 'shiword_setup' ) ) {
 // Styles the header image displayed on the Appearance > Header admin panel.
 if ( !function_exists( 'shiword_admin_header_style' ) ) {
 	function shiword_admin_header_style() {	
-		echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo( 'stylesheet_directory' ) . '/css/custom-header.css" />' . "\n";
+		echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/custom-header.css" />' . "\n";
 	}
 }
 
@@ -903,7 +901,7 @@ add_filter( 'excerpt_length', 'new_excerpt_length' );
 
 //styles the login page
 function my_custom_login_css() {
-    echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo( 'stylesheet_directory' ) . '/css/login.css" />' . "\n";
+    echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/login.css" />' . "\n";
 }
 add_action('login_head', 'my_custom_login_css');
 
@@ -929,7 +927,7 @@ function sw_sticky_slider() {
 							<?php if( has_post_thumbnail() ) :
 								the_post_thumbnail( array( 120,120 ), array( 'class' => 'alignleft' ) );
 							else :
-								echo '<img class="alignleft wp-post-image"  height="120" width="120" src="' . get_bloginfo( 'stylesheet_directory' ) . '/images/thumb_120.png" alt="thumb" title="' . $post_title . '" />';
+								echo '<img class="alignleft wp-post-image"  height="120" width="120" src="' . get_template_directory_uri() . '/images/thumb_120.png" alt="thumb" title="' . $post_title . '" />';
 							endif; ?>
 						</a>
 						<div style="padding-left: 130px;">
@@ -968,7 +966,7 @@ if ( is_admin() && isset( $_GET['activated'] ) && $pagenow == "themes.php" ) {
 //add a default gravatar
 if ( !function_exists( 'shiword_addgravatar' ) ) {
 	function shiword_addgravatar( $avatar_defaults ) {
-	  $myavatar = get_bloginfo( 'stylesheet_directory' ) . '/images/user.png';
+	  $myavatar = get_template_directory_uri() . '/images/user.png';
 	  $avatar_defaults[$myavatar] = __( 'shiword Default Gravatar', 'shiword' );
 	
 	  return $avatar_defaults;

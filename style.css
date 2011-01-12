@@ -2,7 +2,7 @@
 Theme Name: Shiword
 Theme URI: http://www.twobeers.net/annunci/shiword
 Description: Simple dark theme with lots of features, like a "quick links" menu, an "easy navigation" bar, header and footer sidebars or print preview. Shiword is fully customizable (there's also a skin builder!), with one or two columns and up to 5 widgets areas. Supports WP 3.0 new menu tool and post thumbnails.
-Version: 0.8
+Version: 0.9
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, right-sidebar, custom-colors
 Author: TwoBeers Crew
 Author URI: http://www.twobeers.net/
@@ -776,7 +776,6 @@ input[type=password]:focus {
 	padding: 0;
 }
 /* posts & pages
-----------------------------------------------------------
 ----------------------------------------------------------*/
 .posts_narrow {
 	width: 560px;
@@ -894,6 +893,7 @@ li.pingback {
 	list-style: none outside none;
 	background: url('images/litem.png') no-repeat left 6px transparent;
 	padding-left: 12px;
+	margin-left: -15px;
 }
 .trackback .comment-body,
 .pingback .comment-body {
@@ -905,12 +905,12 @@ li.pingback {
 .nav-next-comm {
 	float: right;
 }
-#commentlist {
+.commentlist {
 	position: relative;
 	list-style: decimal outside none;
 	margin-left:20px;
 }
-#commentlist ul.children {
+.commentlist ul.children {
 	list-style: none outside none;
 	margin: 0;
 	padding: 0 0 0 10px;
@@ -951,6 +951,25 @@ li.pingback {
 	margin-right: 10px;
 	margin-left: -1px;
 }
+.navigate_comments {
+    font-weight: bold;
+    margin: 10px;
+    text-align: center;
+}
+.navigate_comments a {
+    background-color: #222;
+    border: 1px solid #555;
+    font-weight: normal;
+    padding: 0.2em 0.5em;
+    text-decoration: none;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+.navigate_comments a, .navigate_comments span {
+    margin-right: 0.5em;
+}
 /* calendar 
 ----------------------------------------------------------*/
 #wp-calendar {
@@ -969,31 +988,30 @@ li.pingback {
 	margin-right: 20px;
 	margin-top: -4px;
 }
-#maincontent .category-gallery .entry-utility {
+.category-gallery .entry-utility {
 	padding-top: 4px;
 }
-#maincontent .gallery {
+.gallery {
 	margin: 0 auto 18px;
 }
-#maincontent .gallery .gallery-item {
+.gallery .gallery-item {
 	float: left;
 	margin-top: 0;
 	text-align: center;
 	width: 33%;
 }
-#maincontent .gallery .gallery-caption {
+.gallery .gallery-caption {
 	color: #777;
 	font-size: 10px;
 	margin: 0 0 12px;
 }
-#maincontent .gallery dl {
+.gallery dl {
 	margin: 0;
 }
-#maincontent .gallery img {
+.gallery img {
 	border: 1px solid #ccc;
-	padding: 9px;
 }
-#maincontent .gallery br+br {
+.gallery br+br {
 	display: none;
 }
 /* Simple spinner 
@@ -1079,6 +1097,7 @@ img.wp-post-image {
 	border-radius: 5px;
 	color: #fff;
 	margin: 10px;
+	max-width: 100%;
 }
 .wp-caption img {
 	border: 0 none;
