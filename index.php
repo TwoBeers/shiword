@@ -28,7 +28,7 @@
 		<div <?php post_class( 'sw-pthumb-'.$shiword_opt['shiword_pthumb'] ) ?> id="post-<?php the_ID(); ?>">
 			<?php
 			// Post thumbnail
-				if( $shiword_opt['shiword_pthumb'] =='true' ) {
+				if( $shiword_opt['shiword_pthumb'] ==1 ) {
 					if( has_post_thumbnail() ) {
 						the_post_thumbnail( array( 120,120 ), array( 'class' => 'alignleft' ) );
 					} else {
@@ -83,7 +83,7 @@
 					</div>
 				</div>
 				<div class="storycontent">
-					<?php if ( ( $shiword_opt['shiword_xcont'] == 'true' ) || is_category() || is_tag() || is_date() || is_search() ) 
+					<?php if ( ( $shiword_opt['shiword_xcont'] == 1 ) || is_category() || is_tag() || is_date() || is_search() ) 
 						the_excerpt();
 					else
 						the_content();

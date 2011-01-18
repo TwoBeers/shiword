@@ -3,11 +3,11 @@
 
 		<?php
 			global $shiword_opt, $shiword_is_allcat_page;
-			if ( $shiword_opt['shiword_rsideb'] == 'true' ) {
+			if ( $shiword_opt['shiword_rsideb'] == 1 ) {
 				if ( 
 					( !is_page() && !is_single() && !is_attachment() ) ||
-					( is_page() && ( $shiword_opt['shiword_rsidebpages'] == 'true' ) ) ||
-					( is_single() && ( $shiword_opt['shiword_rsidebposts'] == 'true' && !is_attachment() ) )
+					( is_page() && ( $shiword_opt['shiword_rsidebpages'] == 1 ) ) ||
+					( is_single() && ( $shiword_opt['shiword_rsidebposts'] == 1 && !is_attachment() ) )
 				) get_sidebar(); // show sidebar
 			}
 		?>
@@ -16,7 +16,7 @@
 			<div id="themecredits">
 				&copy; <?php echo date( 'Y' ); ?>
 				<strong><?php bloginfo( 'name' ); ?></strong>
-				<?php if ( $shiword_opt['shiword_tbcred'] == 'true' ) { ?>
+				<?php if ( $shiword_opt['shiword_tbcred'] == 1 ) { ?>
 					<a href="http://www.twobeers.net/" title="Shiword theme<?php global $shiword_version; if( !empty( $shiword_version ) ) { echo ' v' . $shiword_version; } ?> by TwoBeers Crew">
 						<img alt="twobeers.net" src="<?php echo esc_url( get_bloginfo( 'stylesheet_directory' ) . '/images/tb_micrologo.png' ); ?>" />
 					</a>
@@ -35,9 +35,9 @@
 			<div id="fixedfoot_overlay">
 				<?php global $current_user;
 					// show/hide sliding toolbar
-					if ( $shiword_opt['shiword_qbar'] == 'true' ) { ?>
+					if ( $shiword_opt['shiword_qbar'] == 1 ) { ?>
 						<div id="quickbar">
-							<?php if ( $shiword_opt['shiword_qbar_recpost'] == 'true' ) { // recent posts menu ?>
+							<?php if ( $shiword_opt['shiword_qbar_recpost'] == 1 ) { // recent posts menu ?>
 								<div class="menuitem">
 									<div class="menuitem_img mii_rpost"></div>
 									<div class="menuback">
@@ -50,7 +50,7 @@
 									</div>
 								</div>
 							<?php } ?>
-							<?php if ( $shiword_opt['shiword_qbar_cat'] == 'true' ) { // popular categories menu ?>
+							<?php if ( $shiword_opt['shiword_qbar_cat'] == 1 ) { // popular categories menu ?>
 								<div class="menuitem">
 									<div  class="menuitem_img mii_pcats"></div>
 									<div class="menuback">
@@ -64,7 +64,7 @@
 									</div>
 								</div>
 							<?php } ?>
-							<?php if ( $shiword_opt['shiword_qbar_reccom'] == 'true' ) { // recent comments menu ?>
+							<?php if ( $shiword_opt['shiword_qbar_reccom'] == 1 ) { // recent comments menu ?>
 								<div class="menuitem">
 									<div  class="menuitem_img mii_rcomm"></div>
 									<div class="menuback">
@@ -77,7 +77,7 @@
 									</div>
 								</div>
 							<?php } ?>
-							<?php if ( $shiword_opt['shiword_qbar_user'] == 'true' ) { // user links menu ?>
+							<?php if ( $shiword_opt['shiword_qbar_user'] == 1 ) { // user links menu ?>
 								<div class="menuitem" id="user_menuback">
 									<div  class="menuitem_img mii_cuser"></div>
 									<div class="menuback">

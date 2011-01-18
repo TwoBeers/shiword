@@ -55,13 +55,13 @@
 			<?php wp_nav_menu( array( 'menu_id' => 'mainmenu', 'fallback_cb' => 'shiword_pages_menu', 'theme_location' => 'primary' ) ); //main menu ?>
 			<div class="fixfloat"></div>
 		</div>
-		<?php if ( $shiword_opt['shiword_sticky'] == 'true' && !is_404() && !is_singular() && !$is_sw_printpreview ) { sw_sticky_slider(); } // the sticky slider ?>
+		<?php if ( $shiword_opt['shiword_sticky'] == 1 && !is_404() && !is_singular() && !$is_sw_printpreview ) { sw_sticky_slider(); } // the sticky slider ?>
 		<?php
 			$postswidth = 'posts_narrow';
 			if ( 
-				( $shiword_opt['shiword_rsideb'] == 'false' ) || 
-				( is_page() && ( $shiword_opt['shiword_rsideb'] == 'true' ) && ( $shiword_opt['shiword_rsidebpages'] == 'false' ) ) ||
-				( is_single() && ( $shiword_opt['shiword_rsideb'] == 'true' ) && ( $shiword_opt['shiword_rsidebposts'] == 'false' ) ) || 
+				( $shiword_opt['shiword_rsideb'] == 0 ) || 
+				( is_page() && ( $shiword_opt['shiword_rsideb'] == 1 ) && ( $shiword_opt['shiword_rsidebpages'] == 0 ) ) ||
+				( is_single() && ( $shiword_opt['shiword_rsideb'] == 1 ) && ( $shiword_opt['shiword_rsidebposts'] == 0 ) ) || 
 				is_attachment()
 			) $postswidth = 'posts_wide';
 		?>
