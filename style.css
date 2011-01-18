@@ -816,9 +816,8 @@ h2.storytitle {
 	font-size: 12px;
 }
 .storycontent img {
-	width:auto;
-	height:auto;
 	max-width:100%;
+	height:auto;
 }
 .storytitle {
 	margin-top: 0;

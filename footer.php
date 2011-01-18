@@ -18,10 +18,10 @@
 				<strong><?php bloginfo( 'name' ); ?></strong>
 				<?php if ( $shiword_opt['shiword_tbcred'] == 1 ) { ?>
 					<a href="http://www.twobeers.net/" title="Shiword theme<?php global $shiword_version; if( !empty( $shiword_version ) ) { echo ' v' . $shiword_version; } ?> by TwoBeers Crew">
-						<img alt="twobeers.net" src="<?php echo esc_url( get_bloginfo( 'stylesheet_directory' ) . '/images/tb_micrologo.png' ); ?>" />
+						<img alt="twobeers.net" src="<?php echo esc_url( get_template_directory_uri() . '/images/tb_micrologo.png' ); ?>" />
 					</a>
 					<a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress' ); ?>">
-						<img alt="WordPress" src="<?php echo esc_url( get_bloginfo( 'stylesheet_directory' ) . '/images/wp_micrologo.png' ); ?>" />
+						<img alt="WordPress" src="<?php echo esc_url( get_template_directory_uri() . '/images/wp_micrologo.png' ); ?>" />
 					</a>
 				<?php } ?>
 			</div>
@@ -89,10 +89,10 @@
 													if ( is_user_logged_in() ) { //fix for notice when user not log-in
 														get_currentuserinfo();
 														$email = $current_user->user_email;
-														echo get_avatar( sanitize_email( $email ), 50, $default=get_bloginfo( 'stylesheet_directory' ) . '/images/user.png','user-avatar' );
+														echo get_avatar( sanitize_email( $email ), 50, $default= get_template_directory_uri() . '/images/user.png','user-avatar' );
 														printf( __( 'Logged in as %s','shiword' ), '<strong>' . $current_user->display_name . '</strong>' );
 													} else {
-														echo get_avatar( 'dummyemail', 50, $default=get_bloginfo( 'stylesheet_directory' ) . '/images/user.png','user-avatar' );
+														echo get_avatar( 'dummyemail', 50, $default= get_template_directory_uri() . '/images/user.png','user-avatar' );
 														echo __( 'Not logged in', 'shiword' );
 													}
 													?>
