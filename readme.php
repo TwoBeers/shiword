@@ -1,6 +1,6 @@
 ﻿<p>Shiword - WordPress theme
 	<ul>
-		<li>version: 0.8</li>
+		<li>version: 1.0</li>
 	</ul>
 </p>
 <p>Project page:

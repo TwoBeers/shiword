@@ -214,7 +214,6 @@ msgstr "Imposta a \"trasparente\""
 
 #. Text in function
 #: functions.php:921
-#, fuzzy
 msgid "Shiword theme says: \"Dont forget to set <a href=\"%s\">my options</a> and the header image!\""
 msgstr "Shiword dice: \"Non dimenticarti di impostare le <a href=\"%s\">mie opzioni</a> e l'immagine di testata!\""
 

@@ -1,9 +1,9 @@
 <?php
 /**** begin theme hooks ****/
+// Make theme available for translation
+load_theme_textdomain( 'shiword', TEMPLATEPATH . '/languages' );
 // Tell WordPress to run shiword_setup() when the 'after_setup_theme' hook is run.
 add_action( 'after_setup_theme', 'shiword_setup' );
-// Theme uses wp_nav_menu() in one location
-register_nav_menus( array( 'primary' => __( 'Main Navigation Menu', 'fastfood' )	) );
 // Register sidebars by running shiword_widgets_init() on the widgets_init hook
 add_action( 'widgets_init', 'shiword_widgets_init' );
 // Add the editor style
@@ -728,9 +728,6 @@ function init_sticky_slider() { ?>
 if ( !function_exists( 'shiword_setup' ) ) {
 	function shiword_setup() {
 
-		// Make theme available for translation
-		load_theme_textdomain( 'shiword', TEMPLATEPATH . '/languages' );
-
 		// This theme uses post thumbnails
 		add_theme_support( 'post-thumbnails' );
 
@@ -902,24 +899,6 @@ function shiword_header_style() {
 
     <?php
 }
-
-//get the theme options values. uses default values if options are empty or unset
-/*function shiword_get_opt() {
-	global $shiword_coa;
-
-	$shiword_options = get_option( 'shiword_options' );
-	foreach ( $shiword_coa as $key => $val ) {
-		if( ( !isset( $shiword_options[$key] ) ) || empty( $shiword_options[$key] ) ) {
-			$shiword_options[$key] = $shiword_coa[$key]['default'];
-		}
-	}
-	return ( $shiword_options );
-}*/
-
-// sanitize options value -> already done in custom-device-color.php
-/*function shiword_sanitize_colors( $input ){
-	return $input;
-}*/
 
 //get the theme color values. uses default values if options are empty or unset
 function shiword_get_colors() {
