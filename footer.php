@@ -20,7 +20,7 @@
 					<a href="http://www.twobeers.net/" title="Shiword theme<?php global $shiword_version; if( !empty( $shiword_version ) ) { echo ' v' . $shiword_version; } ?> by TwoBeers Crew">
 						<img alt="twobeers.net" src="<?php echo esc_url( get_bloginfo( 'stylesheet_directory' ) . '/images/tb_micrologo.png' ); ?>" />
 					</a>
-					<a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress' ); ?>">
+					<a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress', 'shiword' ); ?>">
 						<img alt="WordPress" src="<?php echo esc_url( get_bloginfo( 'stylesheet_directory' ) . '/images/wp_micrologo.png' ); ?>" />
 					</a>
 				<?php } ?>
@@ -42,7 +42,7 @@
 									<div class="menuitem_img mii_rpost"></div>
 									<div class="menuback">
 										<div class="menu_sx">
-											<div class="mentit"><?php _e( 'Recent Posts' ); ?></div>
+											<div class="mentit"><?php _e( 'Recent Posts', 'shiword' ); ?></div>
 											<ul class="solid_ul">
 												<?php get_shiword_recententries() ?>
 											</ul>
@@ -55,10 +55,10 @@
 									<div  class="menuitem_img mii_pcats"></div>
 									<div class="menuback">
 										<div class="menu_sx">
-											<div class="mentit"><?php _e( 'Categories' ); ?></div>
+											<div class="mentit"><?php _e( 'Categories', 'shiword' ); ?></div>
 											<ul class="solid_ul">
 												<?php get_shiword_categories_wpr(); ?>
-												<li style="text-align: right; margin:16px 0 10px;"><a title="<?php _e( 'View all categories' ); ?>" href="<?php echo esc_url( home_url() . '/?allcat=y' ); ?>"><?php _e('More...'); ?></a></li>
+												<li style="text-align: right; margin:16px 0 10px;"><a title="<?php _e( 'View all categories', 'shiword' ); ?>" href="<?php echo esc_url( home_url() . '/?allcat=y' ); ?>"><?php _e( 'More...', 'shiword' ); ?></a></li>
 											</ul>
 										</div>
 									</div>
@@ -69,7 +69,7 @@
 									<div  class="menuitem_img mii_rcomm"></div>
 									<div class="menuback">
 										<div class="menu_sx">
-											<div class="mentit"><?php _e( 'Recent Comments' ); ?></div>
+											<div class="mentit"><?php _e( 'Recent Comments', 'shiword' ); ?></div>
 											<ul class="solid_ul">
 												<?php get_shiword_recentcomments(); ?>
 											</ul>
@@ -90,7 +90,7 @@
 														get_currentuserinfo();
 														$email = $current_user->user_email;
 														echo get_avatar( sanitize_email( $email ), 50, $default=get_bloginfo( 'stylesheet_directory' ) . '/images/user.png','user-avatar' );
-														printf( __( 'Logged in as %s','shiword' ), '<strong>' . $current_user->display_name . '</strong>' );
+														printf( __( 'Logged in as %s', 'shiword' ), '<strong>' . $current_user->display_name . '</strong>' );
 													} else {
 														echo get_avatar( 'dummyemail', 50, $default=get_bloginfo( 'stylesheet_directory' ) . '/images/user.png','user-avatar' );
 														echo __( 'Not logged in', 'shiword' );
@@ -100,15 +100,15 @@
 												<?php if ( ! is_user_logged_in() || current_user_can( 'read' ) ) { wp_register(); }?>
 												<?php if ( is_user_logged_in() ) { ?>
 													<?php if ( current_user_can( 'read' ) ) { ?>
-														<li><a href="<?php echo esc_url( admin_url( 'profile.php' ) ); ?>"><?php _e( 'Your Profile' ); ?></a></li>
+														<li><a href="<?php echo esc_url( admin_url( 'profile.php' ) ); ?>"><?php _e( 'Your Profile', 'shiword' ); ?></a></li>
 														<?php if ( current_user_can( 'publish_posts' ) ) { ?>
-															<li><a title="<?php _e( 'Add New Post' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post' ); ?></a></li>
+															<li><a title="<?php _e( 'Add New Post', 'shiword' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post', 'shiword' ); ?></a></li>
 														<?php } ?>
 														<?php if ( current_user_can( 'moderate_comments' ) ) { ?>
-															<li><a title="<?php _e( 'Comments' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments' ); ?></a></li>
+															<li><a title="<?php _e( 'Comments', 'shiword' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'shiword' ); ?></a></li>
 														<?php } ?>
 													<?php } ?>
-													<li><a title="<?php _e( 'Log out' ); ?>" href="<?php echo esc_url( wp_logout_url() ); ?>"><?php _e( 'Log out' ); ?></a></li>
+													<li><a title="<?php _e( 'Log out', 'shiword' ); ?>" href="<?php echo esc_url( wp_logout_url() ); ?>"><?php _e( 'Log out', 'shiword' ); ?></a></li>
 												<?php } ?>
 												<?php if ( ! is_user_logged_in() ) {?>
 													<?php shiword_mini_login(); ?>
@@ -122,7 +122,7 @@
 					<?php }
 				?>
 					<div id="statusbar">
-						<?php _e( 'Welcome' ); ?> <?php if ( is_user_logged_in() ) { echo $current_user->display_name; } ?>, <?php _e( 'today is ', 'shiword' ); echo date_i18n( 'l' ); ?> <?php echo date_i18n( __( 'F j, Y' ) ); ?>
+						<?php _e( 'Welcome', 'shiword' ); ?> <?php if ( is_user_logged_in() ) { echo $current_user->display_name; } ?>, <?php _e( 'today is ', 'shiword' ); echo date_i18n( 'l' ); ?> <?php echo date_i18n( __( 'F j, Y' ) ); ?>
 					</div>
 					<div id="navbuttons">
 						<?php if ( is_singular() ) { ?>
@@ -143,16 +143,16 @@
 									}
 									?>">
 									<span class="minib_img" style="background-position: 0px 0px;">&nbsp;</span>
-									<span class="nb_tooltip"><?php _e( 'Print' ); ?></span>
+									<span class="nb_tooltip"><?php _e( 'Print', 'shiword' ); ?></span>
 								</a>
 							</div>
 
 							<?php if ( comments_open( $post->ID ) && !post_password_required() ) { ?>
 
 								<div class="minibutton">
-									<a href="#respond" title="<?php _e( 'Leave a comment' ); ?>">
+									<a href="#respond" title="<?php _e( 'Leave a comment', 'shiword' ); ?>">
 										<span class="minib_img" style="background-position: 0px -24px;">&nbsp;</span>
-										<span class="nb_tooltip"><?php _e( 'Leave a comment' ); ?></span>
+										<span class="nb_tooltip"><?php _e( 'Leave a comment', 'shiword' ); ?></span>
 									</a>
 								</div>
 
@@ -168,7 +168,7 @@
 									<div class="minibutton">
 										<a href="<?php global $tmptrackback; echo $tmptrackback; ?>" rel="trackback" title="Trackback URL">
 											<span class="minib_img" style="background-position: 0px -72px;">&nbsp;</span>
-											<span class="nb_tooltip"><?php _e( 'Trackback URL' ); ?></span>
+											<span class="nb_tooltip"><?php _e( 'Trackback URL', 'shiword' ); ?></span>
 										</a>
 									</div>
 
@@ -180,7 +180,7 @@
 							<div class="minibutton">
 								<a href="<?php echo home_url(); ?>" title="home">
 									<span class="minib_img" style="background-position: 0px -96px;">&nbsp;</span>
-									<span class="nb_tooltip"><?php _e( 'Home' ); ?></span>
+									<span class="nb_tooltip"><?php _e( 'Home', 'shiword' ); ?></span>
 								</a>
 							</div>
 
@@ -190,7 +190,7 @@
 									<div class="minibutton">
 										<a href="<?php echo $page_nav_links['prev']['link']; ?>" title="<?php echo $page_nav_links['prev']['title']; ?>">
 											<span class="minib_img" style="background-position: center -120px;">&nbsp;</span>
-											<span class="nb_tooltip"><?php echo __( 'Previous page' ) . ': ' . $page_nav_links['prev']['title']; ?></span>
+											<span class="nb_tooltip"><?php echo __( 'Previous page', 'shiword' ) . ': ' . $page_nav_links['prev']['title']; ?></span>
 										</a>
 									</div>
 								<?php }
@@ -198,17 +198,17 @@
 									<div class="minibutton">
 										<a href="<?php echo $page_nav_links['next']['link']; ?>" title="<?php echo $page_nav_links['next']['title']; ?>">
 											<span class="minib_img" style="background-position: center -144px;">&nbsp;</span>
-											<span class="nb_tooltip"><?php echo __( 'Next page' ) . ': ' . $page_nav_links['next']['title']; ?></span>
+											<span class="nb_tooltip"><?php echo __( 'Next page', 'shiword' ) . ': ' . $page_nav_links['next']['title']; ?></span>
 										</a>
 									</div>
 								<?php } ?>
 							<?php } elseif ( !is_attachment() ) { ?>
 								<div class="minibutton">
-									<?php next_post_link( '%link', '<span class="minib_img" style="background-position: 0px -120px;">&nbsp;</span><span class="nb_tooltip">' . __( 'Next Post' ) . ': %title</span>' ); ?>
+									<?php next_post_link( '%link', '<span class="minib_img" style="background-position: 0px -120px;">&nbsp;</span><span class="nb_tooltip">' . __( 'Next Post', 'shiword' ) . ': %title</span>' ); ?>
 								</div>
 
 								<div class="minibutton">
-									<?php previous_post_link( '%link', '<span class="minib_img" style="background-position: 0px -144px;">&nbsp;</span><span class="nb_tooltip">' . __( 'Previous Post' ) . ': %title</span>' ); ?>
+									<?php previous_post_link( '%link', '<span class="minib_img" style="background-position: 0px -144px;">&nbsp;</span><span class="nb_tooltip">' . __( 'Previous Post', 'shiword' ) . ': %title</span>' ); ?>
 								</div>
 							<?php } else { ?>
 								<?php if ( !empty( $post->post_parent ) ) { ?>
@@ -226,7 +226,7 @@
 							<div class="minibutton">
 								<a href="<?php echo home_url(); ?>" title="home">
 									<span class="minib_img" style="background-position: 0px -96px;">&nbsp;</span>
-									<span class="nb_tooltip"><?php _e( 'Home' ); ?></span>
+									<span class="nb_tooltip"><?php _e( 'Home', 'shiword' ); ?></span>
 								</a>
 							</div>
 
@@ -234,10 +234,10 @@
 							if( !isset( $shiword_is_allcat_page ) || !$shiword_is_allcat_page ) {
 							?>
 								<div class="minibutton">
-									<?php next_posts_link( '<span class="minib_img" style="background-position: 0px -144px;">&nbsp;</span><span class="nb_tooltip">' . __('Older Posts','shiword') . '</span>' ); ?>
+									<?php next_posts_link( '<span class="minib_img" style="background-position: 0px -144px;">&nbsp;</span><span class="nb_tooltip">' . __( 'Older Posts', 'shiword' ) . '</span>' ); ?>
 								</div>
 								<div class="minibutton">
-									<?php previous_posts_link( '<span class="minib_img" style="background-position: 0px -120px;">&nbsp;</span><span class="nb_tooltip">' . __('Newer Posts','shiword') . '</span>' ); ?>
+									<?php previous_posts_link( '<span class="minib_img" style="background-position: 0px -120px;">&nbsp;</span><span class="nb_tooltip">' . __( 'Newer Posts', 'shiword' ) . '</span>' ); ?>
 								</div>
 							<?php
 							}

@@ -3,11 +3,11 @@ get_header(); //shows "all categories" page.
 ?>
 <div class="post">
 
-	<h2 class="storytitle"><?php _e( 'Categories' ); ?></h2>
+	<h2 class="storytitle"><?php _e( 'Categories', 'shiword' ); ?></h2>
 
 	<div style="position: relative; margin-right: 12px;">
 		<div class="comment_tools top_meta">
-			<?php _e( 'All Categories' ); ?>
+			<?php _e( 'All Categories', 'shiword' ); ?>
 		</div>
 	</div>
 

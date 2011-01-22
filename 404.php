@@ -5,7 +5,7 @@ $website = home_url();
 ?>
 
 <div class="post" id="post-404-not-found">
-	<div class="wp-caption aligncenter"><h2 class="storytitle">Error 404 - <?php _e( 'Page not found' ); ?></h2></div>
+	<div class="wp-caption aligncenter"><h2 class="storytitle">Error 404 - <?php _e( 'Page not found', 'shiword' ); ?></h2></div>
 	<div class="storycontent">
 		<p><?php _e( 'Sorry, you&lsquo;re looking for something that isn&lsquo;t here', 'shiword' ); ?>: <u><?php echo " ".$website.esc_url( $_SERVER['REQUEST_URI'] ); ?></u></p>
 		<p><?php _e( 'You can try the following:', 'shiword' ); ?></p>

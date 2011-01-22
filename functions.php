@@ -187,13 +187,13 @@ function get_shiword_recentcomments() {
 				$post_title_short = $post_title;
 			}
 			if ( $post_title_short == "" ) {
-				$post_title_short = __( '(no title)' );
+				$post_title_short = __( '(no title)', 'shiword' );
 			}
 			$com_auth = $comment->comment_author;
 			if ( strlen( $com_auth ) > 35 ) {  //shrink the comment author if > 35 chars
 				$com_auth = substr( $com_auth,0,35 ) . '&hellip;';
 			}
-		    echo '<li>'. $com_auth . ' ' . __( 'about','shiword' ) . ' <a href="' . get_permalink( $comment->comment_post_ID ) . '#comment-' . $comment->comment_ID . '">' . $post_title_short . '</a><div class="preview">';
+		    echo '<li>'. $com_auth . ' ' . __( 'about', 'shiword' ) . ' <a href="' . get_permalink( $comment->comment_post_ID ) . '#comment-' . $comment->comment_ID . '">' . $post_title_short . '</a><div class="preview">';
 		if ( post_password_required( get_post( $comment->comment_post_ID ) ) ) {
 			echo '[' . __( 'No preview: this is a comment of a protected post', 'shiword' ) . ']';
 		} else {
@@ -203,7 +203,7 @@ function get_shiword_recentcomments() {
 			echo '</div></li>';
 		}
 	} else {
-		echo '<li>' . __( 'No comments yet.' ) . '</li>';
+		echo '<li>' . __( 'No comments yet.', 'shiword' ) . '</li>';
 	}
 }
 
@@ -225,7 +225,7 @@ function get_shiword_recententries() {
 		if ( strlen( $post_auth ) > 35 ) { //shrink the post author if > 35 chars
 			$post_auth = substr( $post_auth,0,35 ) . '&hellip;';
 		}
-		echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . $post_title . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s' ), $post_auth ) . '<div class="preview">';
+		echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . $post_title . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '<div class="preview">';
 		if ( post_password_required( $post ) ) {
 			echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . get_template_directory_uri() . '/images/thumb_50.png" alt="thumb" title="' . $post_title_short . '" />';
 			echo '[' . __('No preview: this is a protected post', 'shiword' ) . ']';
@@ -250,7 +250,7 @@ function get_shiword_categories_wpr() {
 	);
 	$categories = get_categories( $args );
 	foreach( $categories as $category ) {
-		echo '<li><a href="' . get_category_link( $category->term_id ) . '" title="' . sprintf( __( "View all posts in %s" ), $category->name ) . '" >' . $category->name . '</a> (' . $category->count . ')<div class="cat_preview"><div class="mentit">' . __( 'Recent Posts' ) . '</div><ul class="solid_ul">';
+		echo '<li><a href="' . get_category_link( $category->term_id ) . '" title="' . sprintf( __( 'View all posts in %s', 'shiword' ), $category->name ) . '" >' . $category->name . '</a> (' . $category->count . ')<div class="cat_preview"><div class="mentit">' . __( 'Recent Posts', 'shiword' ) . '</div><ul class="solid_ul">';
 		$tmp_cat_ID = $category->cat_ID;
 		$post_search_args = array(
 			'numberposts' => 5,
@@ -266,13 +266,13 @@ function get_shiword_categories_wpr() {
 				$post_title_short = $post_title;
 			}
 			if ($post_title_short == "") {
-				$post_title_short = __( '(no title)' );
+				$post_title_short = __( '(no title)', 'shiword' );
 			}
 			$post_auth = get_the_author();
 			if ( strlen( $post_auth ) > 35 ) { //shrink the post author if > 35 chars
 				$post_auth = substr( $post_auth,0,35 ) . '&hellip;';
 			}
-			echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . $post_title . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s' ), $post_auth ) . '</li>';
+			echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . $post_title . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '</li>';
 		}
 		echo '</ul></div></li>';
 	}
@@ -294,18 +294,18 @@ function shiword_page_navi($this_page_id) {
 			if ( $k == 0 ) { // is first page
 				$page_links['next']['link'] = get_page_link($pages[1]->ID);
 				$page_links['next']['title'] = $pages[1]->post_title;
-				if ( $page_links['next']['title'] == '' ) $page_links['next']['title'] = __( '(no title)' );
+				if ( $page_links['next']['title'] == '' ) $page_links['next']['title'] = __( '(no title)', 'shiword' );
 			} elseif ( $k == ( count( $pages ) -1 ) ) { // is last page
 				$page_links['prev']['link'] = get_page_link($pages[$k - 1]->ID);
 				$page_links['prev']['title'] = $pages[$k - 1]->post_title;
-				if ( $page_links['prev']['title'] == '' ) $page_links['prev']['title'] = __( '(no title)' );
+				if ( $page_links['prev']['title'] == '' ) $page_links['prev']['title'] = __( '(no title)', 'shiword' );
 			} else {
 				$page_links['next']['link'] = get_page_link($pages[$k + 1]->ID);
 				$page_links['next']['title'] = $pages[$k + 1]->post_title;
-				if ( $page_links['next']['title'] == '' ) $page_links['next']['title'] = __( '(no title)' );
+				if ( $page_links['next']['title'] == '' ) $page_links['next']['title'] = __( '(no title)', 'shiword' );
 				$page_links['prev']['link'] = get_page_link($pages[$k - 1]->ID);
 				$page_links['prev']['title'] = $pages[$k - 1]->post_title;
-				if ( $page_links['prev']['title'] == '' ) $page_links['prev']['title'] = __( '(no title)' );
+				if ( $page_links['prev']['title'] == '' ) $page_links['prev']['title'] = __( '(no title)', 'shiword' );
 			}
 		}
 	}
@@ -330,14 +330,14 @@ function shiword_multipages(){
 				<?php
 				echo __( 'This page has hierarchy', 'shiword' ) . ' - ';
 				if ( $the_parent_page ) {
-					$the_parent_link = '<a href="' . get_permalink( $the_parent_page ) . '" title="' . esc_attr(strip_tags(get_the_title( $the_parent_page ))) . '">' . get_the_title( $the_parent_page ) . '</a>';
+					$the_parent_link = '<a href="' . get_permalink( $the_parent_page ) . '" title="' . esc_attr( strip_tags( get_the_title( $the_parent_page ) ) ) . '">' . get_the_title( $the_parent_page ) . '</a>';
 					echo __( 'Parent page: ', 'shiword' ) . $the_parent_link ; // echoes the parent
 				}
 				if ( ( $childrens ) && ( $the_parent_page ) ) { echo ' - '; } // if parent & child, echoes the separator
 				if ( $childrens ) {
 					$the_child_list = '';
 					foreach ( $childrens as $children ) {
-						$the_child_list[] = '<a href="' . get_permalink( $children ) . '" title="' . esc_attr(strip_tags(get_the_title( $children ))) . '">' . get_the_title( $children ) . '</a>';
+						$the_child_list[] = '<a href="' . get_permalink( $children ) . '" title="' . esc_attr( strip_tags( get_the_title( $children ) ) ) . '">' . get_the_title( $children ) . '</a>';
 					}
 					$the_child_list = implode( ', ' , $the_child_list );
 					echo __( 'Child pages: ', 'shiword' ) . $the_child_list; // echoes the childs
@@ -361,9 +361,9 @@ function shiword_content_replace( $content ) {
 // create custom theme settings menu
 function shiword_create_menu() {
 	//create new top-level menu - Theme Options
-	$topage = add_theme_page( __( 'Theme Options' ), __( 'Theme Options' ), 'edit_theme_options', 'tb_shiword_functions', 'edit_shiword_options' );
+	$topage = add_theme_page( __( 'Theme Options', 'shiword' ), __( 'Theme Options', 'shiword' ), 'edit_theme_options', 'tb_shiword_functions', 'edit_shiword_options' );
 	//create new top-level menu - Slideshow
-	$slidepage = add_theme_page( __( 'Slideshow' ), __( 'Slideshow' ), 'edit_theme_options', 'tb_shiword_slideshow', 'edit_shiword_slideshow' );
+	$slidepage = add_theme_page( __( 'Slideshow', 'shiword' ), __( 'Slideshow', 'shiword' ), 'edit_theme_options', 'tb_shiword_slideshow', 'edit_shiword_slideshow' );
 	//call register settings function
 	add_action( 'admin_init', 'register_tb_sw_settings' );
 	//call custom stylesheet function
@@ -417,7 +417,7 @@ function shiword_sanitize_options( $input ){
 // the option page
 function edit_shiword_options() {
   if ( !current_user_can( 'edit_theme_options' ) ) {
-    wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+    wp_die( __( 'You do not have sufficient permissions to access this page.', 'shiword' ) );
   }
 	global $shiword_coa, $shiword_opt;
 	
@@ -431,20 +431,20 @@ function edit_shiword_options() {
 	
 	// return options save message
 	if ( isset( $_REQUEST['updated'] ) ) {
-		echo '<div id="message" class="updated"><p><strong>' . __( 'Options saved.' ) . '</strong></p></div>';
+		echo '<div id="message" class="updated"><p><strong>' . __( 'Options saved.', 'shiword' ) . '</strong></p></div>';
 	}
 
 	?>
 	<div class="wrap">
 		<div class="icon32" id="icon-themes"><br></div>
-		<h2><?php echo get_current_theme() . ' - ' . __( 'Theme Options' ); ?></h2>
+		<h2><?php echo get_current_theme() . ' - ' . __( 'Theme Options', 'shiword' ); ?></h2>
 		<div id="tabs-container">
 			<ul id="selector">
 				<li id="shiword-options-li">
 					<a href="#shiword-options" onClick="shiwordSwitchClass('shiword-options'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'theme features' , 'shiword' ); ?></a>
 				</li>
 				<li id="shiword-infos-li">
-					<a href="#shiword-infos" onClick="shiwordSwitchClass('shiword-infos'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'About' ); ?></a>
+					<a href="#shiword-infos" onClick="shiwordSwitchClass('shiword-infos'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'About', 'shiword' ); ?></a>
 				</li>
 			</ul>
 			<div class="clear"></div>
@@ -532,7 +532,7 @@ function edit_shiword_slideshow() {
 	$shiword_options = get_option( 'shiword_slideshow' );
 	if ( isset( $_REQUEST['updated'] ) ) {
 		//return options save message
-		echo '<div id="message" class="updated"><p><strong>' . __( 'Options saved.' ) . '</strong></p></div>';
+		echo '<div id="message" class="updated"><p><strong>' . __( 'Options saved.', 'shiword' ) . '</strong></p></div>';
 	}
 ?>
 	<script type="text/javascript">
@@ -557,7 +557,7 @@ function edit_shiword_slideshow() {
 	</script>
 	<div class="wrap">
 		<div class="icon32" id="icon-themes"><br></div>
-		<h2><?php echo get_current_theme() . ' - ' . __( 'Slideshow' ); ?></h2>
+		<h2><?php echo get_current_theme() . ' - ' . __( 'Slideshow', 'shiword' ); ?></h2>
 		<div style="margin-top: 20px;">
 			<?php _e( 'Select posts or pages to be displaied in the index-page slideshow box.<br />Items will be ordered as display here.', 'shiword' ); ?>
 		</div>
@@ -568,15 +568,15 @@ function edit_shiword_slideshow() {
 				<div id="tabs-container">
 					<ul id="selector">
 						<li id="shiwordSlide-posts-li">
-							<a href="#shiwordSlide-posts" onClick="shiwordSlideSwitchClass('shiwordSlide-posts'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'Posts' ); ?></a>
+							<a href="#shiwordSlide-posts" onClick="shiwordSlideSwitchClass('shiwordSlide-posts'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'Posts', 'shiword' ); ?></a>
 						</li>
 						<li id="shiwordSlide-pages-li">
-							<a href="#shiwordSlide-pages" onClick="shiwordSlideSwitchClass('shiwordSlide-pages'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'Pages' ); ?></a>
+							<a href="#shiwordSlide-pages" onClick="shiwordSlideSwitchClass('shiwordSlide-pages'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'Pages', 'shiword' ); ?></a>
 						</li>
 					</ul>
 					<div class="jump_bottom">
 						<small>
-							<a href="#shiwordSlide-bottom_ref" title="<?php _e('Remember to click the Save Changes button at the bottom of the screen for new settings to take effect.'); ?>" ><?php _e( 'Save' ); ?></a>
+							<a href="#shiwordSlide-bottom_ref" title="<?php _e( 'Remember to click the Save Changes button at the bottom of the screen for new settings to take effect.', 'shiword' ); ?>" ><?php _e( 'Save', 'shiword' ); ?></a>
 						</small>
 					</div>
 					<div class="clear"></div>
@@ -588,16 +588,16 @@ function edit_shiword_slideshow() {
 							<thead>
 								<tr>
 									<th style="" class="manage-column column-cb check-column" id="cb" scope="col"><input type="checkbox"></th>
-									<th style="" class="manage-column column-title" id="title" scope="col"><?php _e('Title'); ?></th>
-									<th style="" class="manage-column column-categories" id="categories" scope="col"><?php _e('Categories'); ?></th>
-									<th style="" class="manage-column column-date" id="date" scope="col"><?php _e('Date'); ?></th>
+									<th style="" class="manage-column column-title" id="title" scope="col"><?php _e( 'Title', 'shiword' ); ?></th>
+									<th style="" class="manage-column column-categories" id="categories" scope="col"><?php _e( 'Categories', 'shiword' ); ?></th>
+									<th style="" class="manage-column column-date" id="date" scope="col"><?php _e( 'Date', 'shiword' ); ?></th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php foreach( $lastposts as $post ) {
 									$post_title = esc_html( $post->post_title );
 									if ( $post_title == "" ) {
-										$post_title = __( '(no title)' );
+										$post_title = __( '(no title)', 'shiword' );
 									}
 									if( !isset( $shiword_options[$post->ID] ) ) $shiword_options[$post->ID] = 0;
 									?>
@@ -629,15 +629,15 @@ function edit_shiword_slideshow() {
 							<thead>
 								<tr>
 									<th style="" class="manage-column column-cb check-column" id="cb" scope="col"><input type="checkbox"></th>
-									<th style="" class="manage-column column-title" id="title" scope="col"><?php _e('Title'); ?></th>
-									<th style="" class="manage-column column-date" id="date" scope="col"><?php _e('Date'); ?></th>
+									<th style="" class="manage-column column-title" id="title" scope="col"><?php _e( 'Title', 'shiword' ); ?></th>
+									<th style="" class="manage-column column-date" id="date" scope="col"><?php _e( 'Date', 'shiword' ); ?></th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php foreach( $lastpages as $page ) {
 									$page_title = esc_html( $page->post_title );
 									if ( $page_title == "" ) {
-										$page_title = __( '(no title)' );
+										$page_title = __( '(no title)', 'shiword' );
 									}
 									if( !isset( $shiword_options[$page->ID] ) ) $shiword_options[$page->ID] = 0;
 									?>
@@ -659,7 +659,7 @@ function edit_shiword_slideshow() {
 				</div>
 				<div id="shiwordSlide-bottom_ref" style="clear: both; height: 1px;"> </div>
 				<p style="float:left; clear: both;">
-					<input class="button" type="submit" name="Submit" value="<?php _e( 'Save Changes' ); ?>" />
+					<input class="button" type="submit" name="Submit" value="<?php _e( 'Save Changes', 'shiword' ); ?>" />
 					<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="<?php echo get_admin_url() . 'themes.php?page=tb_shiword_slideshow'; ?>" target="_self"><?php _e( 'Undo Changes' , 'shiword' ); ?></a>
 				</p>
 			</form>
@@ -688,7 +688,7 @@ function sw_sticky_slider() {
 				setup_postdata( $post );
 				$post_title = esc_html( $post->post_title );
 				if ( $post_title == "" ) {
-					$post_title = __( '(no title)' );
+					$post_title = __( '(no title)', 'shiword' );
 				} ?>
 				<div class="sss_item">
 					<div class="sss_inner_item">
@@ -700,7 +700,7 @@ function sw_sticky_slider() {
 							endif; ?>
 						</a>
 						<div style="padding-left: 130px;">
-							<h2 class="storytitle"><a href="<?php echo get_permalink( $post->ID ); ?>" title="<?php echo $post_title; ?>"><?php echo $post_title; ?></a></h2> <?php echo __( 'by' ) . " " . get_the_author(); ?>
+							<h2 class="storytitle"><a href="<?php echo get_permalink( $post->ID ); ?>" title="<?php echo $post_title; ?>"><?php echo $post_title; ?></a></h2> <?php echo __( 'by', 'shiword' ) . " " . get_the_author(); ?>
 							<div style="font-size:12px">
 								<?php the_excerpt(); ?>
 							</div>
@@ -1026,12 +1026,12 @@ function shiword_mini_login() {
 		'id_submit' => 'sw-submit' );
 	?>
 	<li class="ql_cat_li">
-		<a title="<?php _e( 'Log in' ); ?>" href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in' ); ?></a>
+		<a title="<?php _e( 'Log in', 'shiword' ); ?>" href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in', 'shiword' ); ?></a>
 		<div class="cat_preview" style="padding-left: 20px;">
-			<div class="mentit"><?php _e( 'Log in' ); ?></div>
+			<div class="mentit"><?php _e( 'Log in', 'shiword' ); ?></div>
 			<div id="sw_minilogin" class="solid_ul">
 				<?php wp_login_form($args); ?>
-				<a id="closeminilogin" href="#" style="display: none; margin-left:10px;"><?php _e('Close'); ?></a>
+				<a id="closeminilogin" href="#" style="display: none; margin-left:10px;"><?php _e( 'Close', 'shiword' ); ?></a>
 			</div>
 		</div>
 	</li>

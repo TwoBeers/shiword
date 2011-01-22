@@ -7,8 +7,8 @@
 		<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 
 			<div id="close_preview">
-				<a href="<?php the_permalink() ?>" rel="bookmark"><?php _e( 'Close' ); ?></a>
-				<a href="javascript:window.print()" id="print_button"><?php _e( 'Print' ); ?></a>
+				<a href="<?php the_permalink() ?>" rel="bookmark"><?php _e( 'Close', 'shiword' ); ?></a>
+				<a href="javascript:window.print()" id="print_button"><?php _e( 'Print', 'shiword' ); ?></a>
 				<script type="text/javascript" defer="defer">
 					document.getElementById("print_button").style.display = 'block'; // print button (available only with js active)
 				</script>
@@ -19,7 +19,7 @@
 				<?php
 				$post_title = the_title_attribute( 'echo=0' );
 				if ( !$post_title ) {
-					_e( '(no title)' );
+					_e( '(no title)', 'shiword' );
 				} else {
 					echo $post_title;
 				}
@@ -32,17 +32,17 @@
 					<div class="metafield">
 						<div class="metafield_trigger mft_date" style="right: 40px; width:16px"> </div>
 						<div class="metafield_content">
-							<?php printf( __( 'Published on: <b>%1$s</b>' ), '' ); the_time( get_option('date_format') ); ?>
+							<?php printf( __( 'Published on: <b>%1$s</b>', 'shiword' ), '' ); the_time( get_option( 'date_format' ) ); ?>
 						</div>
 					</div>
 					<div class="metafield">
 						<div class="metafield_trigger mft_comm" style="right: 10px; width:16px"> </div>
 						<div class="metafield_content">
-							<?php _e( 'Comments' ); ?>:
-							<?php comments_popup_link( __( 'No Comments' ), __( '1 Comment' ), __( '% Comments' ) ); // number of comments?>
+							<?php _e( 'Comments', 'shiword' ); ?>:
+							<?php comments_popup_link( __( 'No Comments', 'shiword' ), __( '1 Comment', 'shiword' ), __( '% Comments', 'shiword' ) ); // number of comments?>
 						</div>
 					</div>
-					<div class="metafield_trigger edit_link" style="right: 70px;"><?php edit_post_link( __( 'Edit' ),'' ); ?></div>
+					<div class="metafield_trigger edit_link" style="right: 70px;"><?php edit_post_link( __( 'Edit', 'shiword' ),'' ); ?></div>
 				</div>
 			</div>
 
@@ -85,13 +85,13 @@
 					<div class="comment_tools" style="text-align: center;">
 						<div class="alignleft" style="min-height: 1px; width: 270px; text-align: left;"><?php previous_image_link( false , __( '&laquo; Previous Image', 'shiword' ) ); // link to Previous image ?></div>
 						<div class="alignright" style="min-height: 1px; width: 270px; text-align: right;"><?php next_image_link( false , __( 'Next Image &raquo;', 'shiword' ) ); // link to Next image ?></div>
-						<a class="dim_cpc" href="<?php echo wp_get_attachment_url(); ?>" title="<?php _e('View full size','shiword') ;  // link to Full size image ?>" rel="attachment" target="_blank">100%</a>
+						<a class="dim_cpc" href="<?php echo wp_get_attachment_url(); ?>" title="<?php _e( 'View full size','shiword' ) ;  // link to Full size image ?>" rel="attachment" target="_blank">100%</a>
 						<div class="fixfloat"></div>
 					</div>
 				</div>
 			<?php } ?>
 			<div>
-					<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages:' ) . '&after=</div><div class="fixfloat"></div>' ); ?>
+					<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages:', 'shiword' ) . '&after=</div><div class="fixfloat"></div>' ); ?>
 			</div>
 			<div class="fixfloat"> </div>
 			<?php $tmptrackback = get_trackback_url(); ?>
@@ -102,7 +102,7 @@
 		<?php	} //end while
 	} else {?>
 
-		<p><?php _e( 'Sorry, no posts matched your criteria.' );?></p>
+		<p><?php _e( 'Sorry, no posts matched your criteria.', 'shiword' );?></p>
 
 	<?php } ?>
 

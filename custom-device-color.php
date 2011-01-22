@@ -55,7 +55,7 @@ class Custom_device_color {
 	function init() {
 		if ( ! current_user_can( 'edit_theme_options' ) )
 			return;
-		$this->page = $page = add_theme_page(__( 'Custom Colors' ), __( 'Custom Colors' ), 'edit_theme_options' , 'device-color' , array( &$this , 'admin_page' ));
+		$this->page = $page = add_theme_page(__( 'Custom Colors', 'shiword' ), __( 'Custom Colors', 'shiword' ), 'edit_theme_options' , 'device-color' , array( &$this , 'admin_page' ));
 		add_action( "admin_print_scripts-$page" , array(&$this, 'js_includes' ) );
 		add_action( "admin_print_styles-$page" , array(&$this, 'css_includes' ) );
 		add_action( "admin_head-$page" , array(&$this, 'take_action' ), 50 );
@@ -178,19 +178,19 @@ class Custom_device_color {
 								<div id="preview-main">
 									<div id="preview-button"></div>
 									<div id="preview-pages">
-										<span class="preview-text"><?php _e( 'Text' ); ?> </span><span class="preview-link"><?php _e( 'Links' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
+										<span class="preview-text"><?php _e( 'Text', 'shiword' ); ?> </span><span class="preview-link"><?php _e( 'Links', 'shiword' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
 									</div>
 									<div id="preview-meta">
-										<span class="preview-text"><?php _e( 'Text' ); ?> </span><span class="preview-link"><?php _e( 'Links' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
+										<span class="preview-text"><?php _e( 'Text', 'shiword' ); ?> </span><span class="preview-link"><?php _e( 'Links', 'shiword' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
 									</div>
 									<div id="preview-body">
-										<span class="preview-text"><?php _e( 'Text' ); ?> </span><span class="preview-link"><?php _e( 'Links' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
+										<span class="preview-text"><?php _e( 'Text', 'shiword' ); ?> </span><span class="preview-link"><?php _e( 'Links', 'shiword' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
 									</div>
 									<div id="preview-footer">
-										<span class="preview-text"><?php _e( 'Text' ); ?> </span><span class="preview-link"><?php _e( 'Links' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
+										<span class="preview-text"><?php _e( 'Text', 'shiword' ); ?> </span><span class="preview-link"><?php _e( 'Links', 'shiword' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
 									</div>
 									<div id="preview-menu">
-										<span class="preview-text"><?php _e( 'Text' ); ?> </span><span class="preview-link"><?php _e( 'Links' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
+										<span class="preview-text"><?php _e( 'Text', 'shiword' ); ?> </span><span class="preview-link"><?php _e( 'Links', 'shiword' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
 									</div>
 								</div>
 								
@@ -214,7 +214,7 @@ class Custom_device_color {
 
 <div class="wrap">
 	<?php screen_icon(); ?>
-	<h2><?php echo get_current_theme() . ' - ' . __( 'Custom Colors' ); ?></h2>
+	<h2><?php echo get_current_theme() . ' - ' . __( 'Custom Colors', 'shiword' ); ?></h2>
 
 	<?php if ( ! empty( $this->updated ) ) { ?>
 		<div id="message" class="updated">
@@ -227,17 +227,17 @@ class Custom_device_color {
 	<table class="form-table shi_bgc">
 		<tbody>
 			<tr valign="top">
-				<td style="width:200px;"><?php _e( 'Upload Image' ); ?></td>
+				<td style="width:200px;"><?php _e( 'Upload Image', 'shiword' ); ?></td>
 				<td>
 					<?php _e( 'You can upload a custom background image.' , 'shiword' ); ?>
 					<br />
 					<form enctype="multipart/form-data" id="upload-form" method="post" action="<?php echo esc_attr( add_query_arg( 'step' , 2 ) ) ?>">
 						<p>
-							<label for="upload"><?php _e( 'Choose an image from your computer:' ); ?></label><br />
+							<label for="upload"><?php _e( 'Choose an image from your computer:', 'shiword' ); ?></label><br />
 							<input type="file" id="upload" name="import" />
 							<input type="hidden" name="action" value="save" />
 							<?php wp_nonce_field( 'load-custom-image' , 'nonce-load-custom-image' ) ?>
-							<input type="submit" class="button" value="<?php esc_attr_e( 'Upload' ); ?>" />
+							<input type="submit" class="button" value="<?php esc_attr_e( 'Upload', 'shiword' ); ?>" />
 						</p>
 					</form>
 				</td>
@@ -250,7 +250,7 @@ class Custom_device_color {
 			<tbody>
 				<?php if ( ! empty( $this->default_device_images ) ) { ?>
 					<tr valign="top">
-						<td style="width:200px;"><?php _e( 'Default Images' ); ?></td>
+						<td style="width:200px;"><?php _e( 'Default Images', 'shiword' ); ?></td>
 						<td>
 							<?php _e( 'If you don&lsquo;t want to upload your own image, you can use one of these images.' , 'shiword' ) ?>
 							<?php $this->show_default_header_selector(); ?>
@@ -260,21 +260,21 @@ class Custom_device_color {
 
 				if ( $shiword_colors['device_image'] != '' ) { ?>
 					<tr valign="top">
-						<td style="width:200px;"><?php _e( 'Remove Image' ); ?></td>
+						<td style="width:200px;"><?php _e( 'Remove Image', 'shiword' ); ?></td>
 						<td>
 							<?php _e( 'This will remove the background image.' , 'shiword' ) ?>
-							<input type="submit" class="button" name="removedeviceimage" value="<?php esc_attr_e( 'Remove Image' ); ?>" />
+							<input type="submit" class="button" name="removedeviceimage" value="<?php esc_attr_e( 'Remove Image', 'shiword' ); ?>" />
 						</td>
 					</tr>
 				<?php } ?>
 				<tr valign="top">
-					<td style="width:200px;"><?php _e( 'Background Color' ) ?></td>
+					<td style="width:200px;"><?php _e( 'Background Color', 'shiword' ) ?></td>
 					<td>
 						<input style="background-color:<?php echo $shiword_colors['device_color']; ?>;" class="color_preview_box" type="text" id="shi_box_1" value="" readonly="readonly" />
 						<input type="text" name="devicecolor" id="shi_input_1" value="<?php echo $shiword_colors['device_color']; ?>" />
 						<div class="shi_cp" id="shi_colorpicker_1" style="z-index: 100; background:#eee; border:1px solid #ccc; position:absolute; display:none;"></div>
 						<span class="hide-if-no-js">
-							<a href="#" onclick="showMeColorPicker('1');return false;"><?php _e( 'Select a Color' ); ?></a>
+							<a href="#" onclick="showMeColorPicker('1');return false;"><?php _e( 'Select a Color', 'shiword' ); ?></a>
 							&nbsp;-&nbsp;
 							<a href="#" onclick="pickColor('1','transparent'); return false;"><?php _e( "Set to \"transparent\"" , 'shiword' ); ?></a>
 							&nbsp;-&nbsp;
@@ -283,13 +283,13 @@ class Custom_device_color {
 					</td>
 				</tr>
 				<tr valign="top" id="text-color-row">
-					<td style="width:200px;"><?php _e( 'Text Color' ); ?></td>
+					<td style="width:200px;"><?php _e( 'Text Color', 'shiword' ); ?></td>
 					<td>
 						<input style="background-color:<?php echo $shiword_colors['device_textcolor']; ?>;" class="color_preview_box" type="text" id="shi_box_2" value="" readonly="readonly" />
 						<input type="text" name="devicetextcolor" id="shi_input_2" value="<?php echo $shiword_colors['device_textcolor']; ?>" />
 						<div class="shi_cp" id="shi_colorpicker_2" style="z-index: 100; background:#eee; border:1px solid #ccc; position:absolute; display:none;"></div>
 						<span class="hide-if-no-js">
-							<a href="#" onclick="showMeColorPicker('2');return false;"><?php _e( 'Select a Color' ); ?></a>
+							<a href="#" onclick="showMeColorPicker('2');return false;"><?php _e( 'Select a Color', 'shiword' ); ?></a>
 							&nbsp;-&nbsp;
 							<a href="#" onclick="pickColor('2','transparent'); return false;"><?php _e( "Set to \"transparent\"" , 'shiword' ); ?></a>
 							&nbsp;-&nbsp;
@@ -304,7 +304,7 @@ class Custom_device_color {
 						<input type="text" name="devicebuttonborder" id="shi_input_3" value="<?php echo $shiword_colors['device_button']; ?>" />
 						<div class="shi_cp" id="shi_colorpicker_3" style="z-index: 100; background:#eee; border:1px solid #ccc; position:absolute; display:none;"></div>
 						<span class="hide-if-no-js">
-							<a href="#" onclick="showMeColorPicker('3');return false;"><?php _e( 'Select a Color' ); ?></a>
+							<a href="#" onclick="showMeColorPicker('3');return false;"><?php _e( 'Select a Color', 'shiword' ); ?></a>
 							&nbsp;-&nbsp;
 							<a href="#" onclick="pickColor('3','transparent'); return false;"><?php _e( "Set to \"transparent\"" , 'shiword' ); ?></a>
 							&nbsp;-&nbsp;
@@ -330,7 +330,7 @@ class Custom_device_color {
 						<input id="shi_input_<?php echo $key; ?>" name="<?php echo $key; ?>" value="<?php echo $shiword_colors[$key]; ?>" type="text" class="shi_input" />
 						<div class="shi_cp" id="shi_colorpicker_<?php echo $key; ?>" style="z-index: 100; background:#eee; border:1px solid #ccc; position:absolute; display:none;"></div>
 						<span class="hide-if-no-js">
-							<a href="#" onclick="showMeColorPicker('<?php echo $key; ?>');return false;"><?php _e( 'Select a Color' ); ?></a>
+							<a href="#" onclick="showMeColorPicker('<?php echo $key; ?>');return false;"><?php _e( 'Select a Color', 'shiword' ); ?></a>
 							&nbsp;-&nbsp;
 							<a href="#" onclick="pickColor('<?php echo $key; ?>','transparent'); return false;"><?php _e( "Set to \"transparent\"" , 'shiword' ); ?></a>
 							&nbsp;-&nbsp;
@@ -345,7 +345,7 @@ class Custom_device_color {
 		
 		<?php
 		wp_nonce_field( 'set-custom-colors' , 'nonce-set-custom-colors' ); ?>
-		<p class="submit"><input type="submit" class="button-primary" name="save-device-options" value="<?php esc_attr_e( 'Save Changes' ); ?>" /></p>
+		<p class="submit"><input type="submit" class="button-primary" name="save-device-options" value="<?php esc_attr_e( 'Save Changes', 'shiword' ); ?>" /></p>
 	</form>
 
 </div>
@@ -364,7 +364,7 @@ class Custom_device_color {
 		$file = wp_handle_upload( $_FILES['import'] , $overrides );
 
 		if ( isset($file['error']) )
-			wp_die( $file['error'],  __( 'Image Upload Error' ) );
+			wp_die( $file['error'],  __( 'Image Upload Error', 'shiword' ) );
 
 		$url = $file['url'];
 		$type = $file['type'];
@@ -483,7 +483,7 @@ class Custom_device_color {
 	/* Display the page based on the current step. */
 	function admin_page() {
 		if ( ! current_user_can( 'edit_theme_options' ) )
-			wp_die(__( 'You do not have permission to customize headers.' ));
+			wp_die( __( 'You do not have permission to customize headers.', 'shiword' ) );
 		$step = $this->step();
 		if ( 1 == $step )
 			$this->step_1();

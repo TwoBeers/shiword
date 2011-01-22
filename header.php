@@ -40,7 +40,7 @@
 					<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
 					<div class="description"><?php bloginfo( 'description' ); ?></div>
 					<div id="rss_imglink" class="minibutton">
-						<a href="<?php bloginfo( 'rss2_url' ); ?>" title="<?php _e( 'Syndicate this site using RSS 2.0' ); ?>">
+						<a href="<?php bloginfo( 'rss2_url' ); ?>" title="<?php _e( 'Syndicate this site using RSS 2.0', 'shiword' ); ?>">
 							<span class="minib_img" style="background-position: 0px -216px;">&nbsp;</span>
 						</a>
 					</div>
