@@ -138,12 +138,12 @@ msgstr "Categoria"
 #. Text in function
 #: functions.php:330
 msgid "Child pages: "
-msgstr "Pagina discendente"
+msgstr "Pagina discendente: "
 
 #. Text in echo
 #: custom-device-color.php:236
 msgid "Choose an image from your computer:"
-msgstr "Seleziona un'immagine dal tuo computer"
+msgstr "Seleziona un'immagine dal tuo computer:"
 
 #. Text in echo
 #: attachment.php:10
@@ -277,7 +277,7 @@ msgstr "Colori Interni"
 #. Text in function
 #: comments.php:40
 msgid "Leave a Reply"
-msgstr "Rispondi"
+msgstr "Lascia un commento"
 
 #. Text in echo
 #: footer.php:153
@@ -548,7 +548,7 @@ msgstr "Imposta a \"trasparente\""
 
 #. Text in function
 #: functions.php:1
-msgid "Shiword theme says: \"Dont forget to set <a href=\"%s\">my options</a> and the header image!\""
+msgid "Shiword theme says: \"Don't forget to set <a href=\"%s\">my options</a> and the header image!\""
 msgstr "Shiword dice: \"Non dimenticarti di impostare le <a href=\"%s\">mie opzioni</a> e l'immagine di testata!\""
 
 #. Text in function
@@ -851,7 +851,7 @@ msgstr "funzionalit&agrave; del tema"
 #. Text in echo
 #: footer.php:125
 msgid "today is "
-msgstr "oggi &egrave;"
+msgstr "oggi &egrave; "
 
 #. Text in function
 #: functions.php:1
@@ -862,4 +862,25 @@ msgstr "prova a disabilitare le animazioni se ci sono problemi con i javascript 
 #: functions.php:1
 msgid "use the summary instead of content in main post index [default = enabled]"
 msgstr "usa il riassunto al posto del contenuto nell'indice principale degli articoli [predefinito = abilitato]"
+
+msgid "Background"
+msgstr "Sfondo"
+
+msgid "Borders"
+msgstr "Bordi"
+
+msgid "Inner borders"
+msgstr "Bordi interni"
+
+msgid "on"
+msgstr "su"
+
+msgid "someone"
+msgstr "un tizio"
+
+msgid "classic navigation links"
+msgstr "links di navigazione classici"
+
+msgid "show the classic navigation links (paged posts navigation, next/prev post, etc). Note: the same links are already located in the easy-navigation bar [default = disabled]"
+msgstr "visualizza i classici link di navigazione (navigazione tra le pagine degli articoli, articolo precedente/successivo, etc). Nota: gli stessi link sono presenti nella barra di navigazione veloce [predefinito = disabilitato]"
 

@@ -7,7 +7,7 @@ add_action( 'after_setup_theme', 'shiword_setup' );
 // Register sidebars by running shiword_widgets_init() on the widgets_init hook
 add_action( 'widgets_init', 'shiword_widgets_init' );
 // Add the editor style
-add_editor_style();
+add_editor_style( 'css/editor-style.css' );
 // Add stylesheets
 add_action( 'wp_print_styles', 'shiword_stylesheet' );
 // Add js animations
@@ -43,6 +43,7 @@ $shiword_coa = array(
 	'shiword_rsidebposts' => array( 'default'=>0,'description'=>__( '-- on posts', 'shiword' ),'info'=>__( 'show right sidebar on posts [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
 	'shiword_jsani' => array( 'default'=>1,'description'=>__( 'javascript animations', 'shiword' ),'info'=>__( 'try disable animations if you encountered problems with javascript [default = enabled]', 'shiword' ),'req'=>'' ),
 	'shiword_sticky' => array( 'default'=>0,'description'=>__( '-- sticky post slider', 'shiword' ),'info'=>__( 'slideshow for your sticky posts [default = disabled]', 'shiword' ),'req'=>'shiword_jsani' ),
+	'shiword_navlinks' => array( 'default'=>0,'description'=>__( 'classic navigation links', 'shiword' ),'info'=>__( "show the classic navigation links (paged posts navigation, next/prev post, etc). Note: the same links are already located in the easy-navigation bar [default = disabled]", 'shiword' ),'req'=>'' ),
 	'shiword_tbcred' => array( 'default'=>1,'description'=>__( 'theme credits', 'shiword' ),'info'=>__( "please, don't hide theme credits [default = enabled]", 'shiword' ),'req'=>'' )
 );
 
@@ -190,10 +191,15 @@ function get_shiword_recentcomments() {
 				$post_title_short = __( '(no title)', 'shiword' );
 			}
 			$com_auth = $comment->comment_author;
+			if ( post_password_required( get_post( $comment->comment_post_ID ) ) ) {
+				$com_auth = __( 'someone','shiword' );
+			} else {
+				$com_auth = $comment->comment_author;
+			}
 			if ( strlen( $com_auth ) > 35 ) {  //shrink the comment author if > 35 chars
 				$com_auth = substr( $com_auth,0,35 ) . '&hellip;';
 			}
-		    echo '<li>'. $com_auth . ' ' . __( 'about', 'shiword' ) . ' <a href="' . get_permalink( $comment->comment_post_ID ) . '#comment-' . $comment->comment_ID . '">' . $post_title_short . '</a><div class="preview">';
+		    echo '<li>'. $com_auth . ' ' . __( 'on', 'shiword' ) . ' <a href="' . get_permalink( $comment->comment_post_ID ) . '#comment-' . $comment->comment_ID . '">' . $post_title_short . '</a><div class="preview">';
 		if ( post_password_required( get_post( $comment->comment_post_ID ) ) ) {
 			echo '[' . __( 'No preview: this is a comment of a protected post', 'shiword' ) . ']';
 		} else {

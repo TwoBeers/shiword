@@ -1,4 +1,4 @@
-msgid ""
+﻿msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -537,12 +537,12 @@ msgstr ""
 #: custom-device-color.php:294
 #: custom-device-color.php:309
 #: custom-device-color.php:335
-msgid "Set to \\\"transparent\\\""
+msgid "Set to \"transparent\""
 msgstr ""
 
 #. Text in function
 #: functions.php:1
-msgid "Shiword theme says: \\\"Don't forget to set <a href=\\\"%s\\\">my options</a> and the header image!\\\""
+msgid "Shiword theme says: \"Don't forget to set <a href=\"%s\">my options</a> and the header image!\""
 msgstr ""
 
 #. Text in function
@@ -856,3 +856,25 @@ msgstr ""
 #: functions.php:1
 msgid "use the summary instead of content in main post index [default = enabled]"
 msgstr ""
+
+msgid "Background"
+msgstr ""
+
+msgid "Borders"
+msgstr ""
+
+msgid "Inner borders"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
+msgid "someone"
+msgstr ""
+
+msgid "classic navigation links"
+msgstr ""
+
+msgid "show the classic navigation links (paged posts navigation, next/prev post, etc). Note: the same links are already located in the easy-navigation bar [default = disabled]"
+msgstr ""
+

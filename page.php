@@ -48,6 +48,14 @@
 			<?php $tmptrackback = get_trackback_url(); ?>
 		</div>	
 		<?php comments_template(); // Get wp-comments.php template ?>
+		
+		<?php if ( $shiword_opt['shiword_navlinks'] == 1 ) { ?>
+			<div class="w_title" style="border-bottom: none; border-top: 1px solid #404040;">
+				<?php next_post_link('&laquo; %link'); ?>
+				<span> - </span>
+				<?php previous_post_link('%link &raquo;'); ?>
+			</div>
+		<?php } ?>
 
 	<?php } 
 } else { ?>

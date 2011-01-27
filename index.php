@@ -32,7 +32,7 @@
 					if( has_post_thumbnail() ) {
 						the_post_thumbnail( array( 120,120 ), array( 'class' => 'alignleft' ) );
 					} else {
-						echo '<img class="alignleft wp-post-image" alt="thumb" src="' . get_template_directory() . '/images/thumb_120.png" />';
+						echo '<img class="alignleft wp-post-image" alt="thumb" src="' . get_template_directory_uri() . '/images/thumb_120.png" />';
 					}
 				}
 			?>
@@ -98,7 +98,9 @@
 		<?php //num of pages
 			global $paged;
 			if ( !$paged ) { $paged = 1; }
+			if ( $shiword_opt['shiword_navlinks'] == 1 ) { previous_posts_link( '&laquo; '. __( 'Newer Posts', 'shiword' ) . ' - ' ); }
 			printf( __( 'page %1$s of %2$s', 'shiword' ), $paged, $wp_query->max_num_pages );
+			if ( $shiword_opt['shiword_navlinks'] == 1 ) { next_posts_link( ' - ' . __( 'Older Posts', 'shiword' ) . ' &raquo;'); }
 		?>
 	</div>
 <?php } else { ?>
