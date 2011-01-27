@@ -76,7 +76,7 @@
 							<div class="metafield_trigger mft_comm" style="right: 70px; width:16px"> </div>
 							<div class="metafield_content">
 								<?php _e( 'Comments', 'shiword' ); ?>:
-								<?php comments_popup_link( __( 'No Comments', 'shiword' ), __( '1 Comment', 'shiword', 'shiword' ), __( '% Comments' ) ); // number of comments?>
+								<?php comments_popup_link( __( 'No Comments', 'shiword' ), __( '1 Comment', 'shiword', 'shiword' ), __( '% Comments', 'shiword' ) ); // number of comments?>
 							</div>
 						</div>
 						<div class="metafield_trigger edit_link" style="right: 130px;"><?php edit_post_link( __( 'Edit', 'shiword' ),'' ); ?></div>

@@ -42,7 +42,7 @@ $fields =  array(
 		'comment_field'        => '<p class="comment-form-comment" style="text-align: center;"><textarea id="comment" name="comment" cols="45" rows="7" style="width: 95%;" aria-required="true"></textarea></p>',
 		'comment_notes_after'  => '<p class="form-allowed-tags" style="color: #999999; text-align: center;"><small>' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'shiword' ), allowed_tags() ) . '</small></p>',
 		'label_submit'         => __( 'Say It!', 'shiword' ),
-		'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>.' ), admin_url( 'profile.php' ), $user_identity ) . '</p>',
+		'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>.', 'shiword' ), admin_url( 'profile.php' ), $user_identity ) . '</p>',
 		'cancel_reply_link'    => ' - ' . __( 'Cancel reply', 'shiword' ),
 		'title_reply'          => __( 'Leave a Reply', 'shiword' ) ,
 

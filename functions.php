@@ -62,7 +62,7 @@ if ( get_theme( 'Shiword' ) ) {
 
 // print a reminder message for set the options after the theme is installed
 function sw_setopt_admin_notice() {
-	echo '<div class="updated"><p><strong>' . sprintf( __( "Shiword theme says: \"Dont forget to set <a href=\"%s\">my options</a> and the header image!\"", 'shiword' ), get_admin_url() . 'themes.php?page=tb_shiword_functions' ) . '</strong></p></div>';
+	echo '<div class="updated"><p><strong>' . sprintf( __( "Shiword theme says: \"Don't forget to set <a href=\"%s\">my options</a> and the header image!\"", 'shiword' ), get_admin_url() . 'themes.php?page=tb_shiword_functions' ) . '</strong></p></div>';
 }
 if ( is_admin() && isset( $_GET['activated'] ) && $pagenow == "themes.php" ) {
 	add_action( 'admin_notices', 'sw_setopt_admin_notice' );
@@ -219,7 +219,7 @@ function get_shiword_recententries() {
 			$post_title_short = $post_title;
 		}
 		if ( $post_title_short == "" ) {
-			$post_title_short = __( '(no title)' );
+			$post_title_short = __( '(no title)', 'shiword' );
 		}
 		$post_auth = get_the_author();
 		if ( strlen( $post_auth ) > 35 ) { //shrink the post author if > 35 chars
@@ -485,7 +485,7 @@ function edit_shiword_options() {
 		</div>
 				<div class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc;">
 					<small>
-						<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'shiword' ); ?><br />
+						<?php _e( 'If you like/dislike this theme, or if you encounter any issues, please let us know it.', 'shiword' ); ?><br />
 						<a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/shiword' ); ?>" title="Shiword theme" target="_blank"><?php _e( 'Leave a feedback', 'shiword' ); ?></a>
 					</small>
 				</div>

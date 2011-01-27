@@ -252,7 +252,7 @@ class Custom_device_color {
 					<tr valign="top">
 						<td style="width:200px;"><?php _e( 'Default Images', 'shiword' ); ?></td>
 						<td>
-							<?php _e( 'If you don&lsquo;t want to upload your own image, you can use one of these images.' , 'shiword' ) ?>
+							<?php _e( 'If you don&lsquo;t want to upload your own image, you can choose from one of the following.' , 'shiword' ) ?>
 							<?php $this->show_default_header_selector(); ?>
 						</td>
 					</tr>
