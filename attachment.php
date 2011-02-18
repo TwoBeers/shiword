@@ -90,7 +90,7 @@
 					</div>
 				</div>
 			<?php } ?>
-			<div>
+			<div class="fixfloat">
 					<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages:', 'shiword' ) . '&after=</div><div class="fixfloat"></div>' ); ?>
 			</div>
 			<div class="fixfloat"> </div>
