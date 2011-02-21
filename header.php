@@ -30,7 +30,9 @@
 <body <?php body_class(); ?>>
 	<div id="sw_background">
 		<div id="sw_body" class="pad_bg">
-			<div id="sw_body_overlay"></div>
+			<div id="sw_body_overlay">
+				<div id="sw_body_inner"></div>
+			</div>
 		</div>
 	</div>
 	<div id="main">

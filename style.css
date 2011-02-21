@@ -2,7 +2,7 @@
 Theme Name: Shiword
 Theme URI: http://www.twobeers.net/annunci/shiword
 Description: Simple dark theme with lots of features, like a "quick links" menu, an "easy navigation" bar, header and footer sidebars or print preview. Shiword is fully customizable (there's also a skin builder!), with one or two columns and up to 5 widgets areas. Supports WP 3.0 new menu tool and post thumbnails.
-Version: 1.11
+Version: 1.12
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, right-sidebar, custom-colors
 Author: TwoBeers Crew
 Author URI: http://www.twobeers.net/
@@ -95,6 +95,9 @@ kbd {
 	letter-spacing: 1px;
 	padding: 0 8px;
 }
+code {
+	background-color: #262626;
+}
 pre {
 	background-color: #fff;
 	border: 1px solid #ccc;
@@ -104,6 +107,7 @@ pre {
 	max-width: 100%;
 	margin: 5px auto;
 	padding: 5px;
+	color: #404040;
 }
 /* table elements
 ----------------------------------------------------------*/
@@ -174,16 +178,12 @@ input[type=password]:focus {
 }
 #main {
 	width: 972px;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #777;
 	margin: 0 auto;
 }
 #maincontent {
-	background: none repeat scroll 0 0 #111111;
-	padding-top: 7em;
+    background-color: #111111;
+	padding-top: 79px;
 	width: 850px;
-	border-left: 1px solid #000;
-	border-right: 1px solid #777;
 	padding-bottom: 50px;
 	margin: 0 auto;
 }
@@ -247,11 +247,24 @@ input[type=password]:focus {
 	height:4000px;
 	margin:0 auto;
 	width:972px;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #777;
 }
 #sw_body_overlay {
 	background: url('images/body.png') repeat left top transparent;
 	height:4000px;
-	width:972px;
+}
+#sw_body_inner {
+    background-color: #111111;
+	border-left: 1px solid #000;
+	border-right: 1px solid #777;
+    height: 4000px;
+    margin: 0 auto;
+    width: 850px;
+}
+#footer-hook-cont {
+    margin: 0 auto;
+    width: 850px;
 }
 /* header 
 ----------------------------------------------------------*/
@@ -286,7 +299,8 @@ input[type=password]:focus {
 	font-size: 1.5em;
 	font-style: italic;
 	text-align: left;
-	padding: .6em 20px .6em 62px;
+	min-height: 50px;
+	padding: 10px 60px;
 }
 #head h1 {
 	font-size: 1.5em;
@@ -775,6 +789,13 @@ input[type=password]:focus {
 	margin: 0;
 	padding: 0;
 }
+.shi_widget_popular_posts img,
+.shi_widget_latest_commented_posts img,
+.shi_widget_latest_commentators img,
+.shi_widget_user_quick_links img,
+.shi_widget_categories img {
+	vertical-align: text-bottom;
+}
 /* posts & pages
 ----------------------------------------------------------*/
 .posts_narrow {
@@ -783,12 +804,14 @@ input[type=password]:focus {
 	float: left;
 	margin: 10px 0 10px 5px;
 	padding: 10px;
+	min-height: 300px;
 }
 .posts_wide {
 	float: left;
 	width: 698px;
 	margin: 10px 0;
 	padding: 10px 75px;
+	min-height: 300px;
 }
 div.sw-pthumb-1 .post-body {
 	margin-left: 130px;

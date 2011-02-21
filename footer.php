@@ -262,6 +262,8 @@
 	</div>
 </div>
 
-<?php wp_footer(); ?>
+<div id="footer-hook-cont">
+	<?php wp_footer(); ?>
+</div>
 </body>
 </html>

@@ -1,6 +1,6 @@
-﻿<p>Shiword - WordPress theme
+<p>Shiword - WordPress theme
 	<ul>
-		<li>version: 1.0</li>
+		<li>version: 1.12</li>
 	</ul>
 </p>
 <p>Project page:
@@ -48,9 +48,18 @@
 		<li>theme uses jQuery javascript framework</li>
 		<li>if you experience any javascript problem, try disable animations in admin -&gt; theme options</li>
 		<li>print_preview.css is a stylesheet file used to emulate a print preview.</li>
-		<li>default_extracted.pot file (in languages/) contains all the Wordpress standard expressions that Shiword use.</li>
 	</ul>
 </p>
+<p>CHANGE LOG (FROM VERSION 1.11):
+	<ul>
+		<li>Fixes:
+			<ul>
+				<li>Many minor graphical issues</li>
+			</ul>
+		</li>
+	</ul>
+</p>
+
 <p>SUPPORT:
 	<ul>
 		<li>for any question/problem contact us at
