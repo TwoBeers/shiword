@@ -2,7 +2,7 @@
 
 #headimg-bg {
 	border: 1px solid #777 !important;
-	background:#fff url('../images/devbg.png') left top repeat;
+	background: #F2F2F2 url('../images/bg.jpg') left top repeat-x;
 	padding:20px;
 }
 #headimage {
@@ -154,6 +154,26 @@ input[type="submit"] {
 .h3_field a {
 	text-decoration:none;
 }
-
-
-
+div.slider {
+	position: relative;
+	width: 220px;
+	padding: 8px 0;
+	display: inline-block;
+	margin-bottom: -5px;
+}
+div.slider div.handle { 
+	background:transparent url('../images/handle.png') left top no-repeat;
+	width:15px; 
+	height:20px; 
+	cursor:pointer; 
+	position: absolute;
+	top: 0;
+}
+#alpha_bar {
+	background-color: #CCCCCC;
+	border: 1px inset #999999;
+	height: 1px;
+	margin: 0 10px;
+	position: relative;
+	width: 200px;
+}

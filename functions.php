@@ -47,11 +47,35 @@ $shiword_coa = array(
 	'shiword_tbcred' => array( 'default'=>1,'description'=>__( 'theme credits', 'shiword' ),'info'=>__( "please, don't hide theme credits [default = enabled]", 'shiword' ),'req'=>'' )
 );
 
-
 //load options in $shiword_opt variable, globally retrieved in php files
 $shiword_opt = get_option( 'shiword_options' );
 $shiword_colors = shiword_get_colors();
 
+
+function shiword_get_default_colors($type) {
+	// Holds default outside colors
+	$shiword_default_device_bg = array(
+		'device_image' => '',
+		'device_color' => '#000',
+		'device_opacity' => '100',
+		'device_textcolor' => '#fff',
+		'device_button' => '#ff8d39'
+	);
+	// Holds default inside colors
+	$shiword_default_device_colors = array(
+		'main3' => '#21759b',
+		'main4' => '#ff8d39',
+		'menu1' => '#21759b',
+		'menu2' => '#cccccc',
+		'menu3' => '#262626',
+		'menu4' => '#ffffff',
+		'menu5' => '#ff8d39',
+		'menu6' => '#cccccc',
+	);
+	if ( $type == 'out') { return $shiword_default_device_bg; }
+	elseif ( $type == 'in') { return $shiword_default_device_colors; }
+	else { return array_merge( $shiword_default_device_bg , $shiword_default_device_colors ); }
+}
 
 //get theme version
 if ( get_theme( 'Shiword' ) ) {
@@ -816,9 +840,20 @@ if ( !function_exists( 'shiword_admin_header_style' ) ) {
 	}
 }
 
+function hex2rgba($hex,$alpha) {
+	$color = str_replace('#','',$hex);
+	if ( $color == 'transparent' ) { 
+		return 'transparent';
+	} else {
+		$rgba = 'rgba(' . hexdec(substr($color,0,2)) . ',' . hexdec(substr($color,2,2)) . ',' . hexdec(substr($color,4,2)) . ',' . round(intval($alpha) / 100, 3) . ')';
+		return $rgba;
+	}
+}
+
 // custom header image style - gets included in the site header
 function shiword_header_style() {
 	global $shiword_colors;
+	$device_rgba = hex2rgba( $shiword_colors['device_color'], $shiword_colors['device_opacity']);
     ?>
 <style type="text/css">
 	#headerimg {
@@ -827,10 +862,10 @@ function shiword_header_style() {
 	}
 	#sw_body,
 	#fixedfoot {
-		background: <?php echo $shiword_colors['device_color']; ?> url('<?php echo $shiword_colors['device_image']; ?>') right top repeat
+		background: <?php echo $device_rgba; ?> url('<?php echo $shiword_colors['device_image']; ?>') right top repeat
 	}
 	#head {
-		background: <?php echo $shiword_colors['device_color']; ?> url('<?php echo $shiword_colors['device_image']; ?>') right -0.7em repeat
+		background: <?php echo $device_rgba; ?> url('<?php echo $shiword_colors['device_image']; ?>') right -0.7em repeat
 	}
 	input[type="button"]:hover,
 	input[type="submit"]:hover,
@@ -910,20 +945,7 @@ function shiword_header_style() {
 function shiword_get_colors() {
 
 	/* Holds default colors. */
-	$default_device_colors = array(
-		'device_image' => '',
-		'device_color' => '#000',
-		'device_textcolor' => '#fff',
-		'device_button' => '#ff8d39',
-		'main3' => '#21759b',
-		'main4' => '#ff8d39',
-		'menu1' => '#21759b',
-		'menu2' => '#ccc',
-		'menu3' => '#262626',
-		'menu4' => '#ffffff',
-		'menu5' => '#ff8d39',
-		'menu6' => '#ccc',
-	);
+	$default_device_colors = shiword_get_default_colors('all');
 
 	$shiword_colors = get_option( 'shiword_colors' );
 	foreach ( $default_device_colors as $key => $val ) {
@@ -931,7 +953,7 @@ function shiword_get_colors() {
 			$shiword_colors[$key] = $default_device_colors[$key];
 		}
 	}
-	return ( $shiword_colors );
+	return $shiword_colors;
 }
 
 //custom excerpt maker
@@ -995,7 +1017,6 @@ function add_custom_device_image() {
 	if ( ! is_admin() )
 		return;
 	require_once( 'custom-device-color.php' );
-	//$shi_cdcpanel = new Custom_device_color();
 	$GLOBALS['custom_device_color'] =& new Custom_device_color();
 	add_action( 'admin_menu' , array(&$GLOBALS['custom_device_color'] , 'init' ));
 }

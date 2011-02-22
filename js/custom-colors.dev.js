@@ -114,3 +114,37 @@ jQuery(document).ready(function() {
 	jQuery('.form-table').css( 'display','none' );
 	
 });
+
+// alpha slider (uses scriptaculous-slider)
+(function() {
+	var alpha_slider = $('alpha_slider'),
+	box = $('shi_input_1a');
+	color = $('shi_input_1');
+	preview = $('headimage');
+
+	new Control.Slider(alpha_slider.down('.handle'), alpha_slider, {
+		range: $R(0, 100),
+		sliderValue: 100,
+		onSlide: function(value) {
+			box.value = Math.round(value);
+			tmp = hextorgba(color.value, box.value );
+			preview.setStyle({ backgroundColor: tmp });
+		}, 
+		onChange: function(value) { 
+			box.value = Math.round(value);
+			tmp = hextorgba(color.value, box.value );
+			preview.setStyle({ backgroundColor: tmp });
+		}
+	});
+	
+	function hextorgba(hex,alpha) {
+		hex = hex.replace("#", "")
+		var r = HexToVal(hex, 0, 2);
+		var g = HexToVal(hex, 2, 4);
+		var b = HexToVal(hex, 4, 6);
+		return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha/100 + ')';
+	};
+	
+	function HexToVal(h, start, end) { return parseInt(h.substring(start, end), 16) }
+
+})();

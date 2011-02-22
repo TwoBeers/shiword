@@ -9,40 +9,14 @@ Based on WP wp-admin/custom-header.php
 class Custom_device_color {
 
 	/* Holds default outside colors. */
-	var $default_device_bg = array(
-		'device_image' => '',
-		'device_color' => '#000',
-		'device_textcolor' => '#fff',
-		'device_button' => '#ff8d39'
-	);
+	var $default_device_bg = array();
 
 	/* Holds default headers. */
 	var $default_device_images = array();
 
 	/* Holds default inside colors. */
-	var $default_device_colors = array(
-		'main3' => '#21759b',
-		'main4' => '#ff8d39',
-		'menu1' => '#21759b',
-		'menu2' => '#cccccc',
-		'menu3' => '#262626',
-		'menu4' => '#ffffff',
-		'menu5' => '#ff8d39',
-		'menu6' => '#cccccc',
-	);
+	var $default_device_colors = array();
 	
-	/* Holds default inside colors descriptions */
-	var $default_device_colors_descr = array(
-		'menu1' => 'Background',
-		'menu2' => 'Borders',
-		'menu3' => 'Text',
-		'menu4' => 'Links',
-		'menu5' => 'Highlighted Links',
-		'menu6' => 'Inner borders',
-		'main3' => 'Links',
-		'main4' => 'Highlighted Links',
-	);
-
 	/* Holds the page menu hook. */
 	var $page = '';
 
@@ -55,6 +29,8 @@ class Custom_device_color {
 	function init() {
 		if ( ! current_user_can( 'edit_theme_options' ) )
 			return;
+		$this->default_device_bg = shiword_get_default_colors('out');
+		$this->default_device_colors = shiword_get_default_colors('in');
 		$this->page = $page = add_theme_page(__( 'Custom Colors', 'shiword' ), __( 'Custom Colors', 'shiword' ), 'edit_theme_options' , 'device-color' , array( &$this , 'admin_page' ));
 		add_action( "admin_print_scripts-$page" , array(&$this, 'js_includes' ) );
 		add_action( "admin_print_styles-$page" , array(&$this, 'css_includes' ) );
@@ -77,7 +53,7 @@ class Custom_device_color {
 	function js_includes() {
 		global $shiword_version;
 		wp_enqueue_script('farbtastic');
-		wp_enqueue_script( 'sw-custom-colors', get_template_directory_uri() . '/js/custom-colors.min.js', array('jquery'), $shiword_version, true ); //shiword js
+		wp_enqueue_script( 'sw-custom-colors', get_template_directory_uri() . '/js/custom-colors.min.js', array('jquery','scriptaculous-slider'), $shiword_version, true ); //shiword js
 	}
 
 	/* Set up the enqueue for the CSS files */
@@ -91,11 +67,11 @@ class Custom_device_color {
 		if ( ! current_user_can( 'edit_theme_options' ) )
 			return;
 		
-		$shiword_colors = get_option( 'shiword_colors' );
+		$colors = get_option( 'shiword_colors' );
 		//if options are empty, sets the default values
-		if ( empty( $shiword_colors ) ) {
-			$shiword_colors = array_merge( $this->default_device_colors , $this->default_device_bg );
-			update_option( 'shiword_colors' , $shiword_colors );
+		if ( empty( $colors ) ) {
+			$colors = array_merge( $this->default_device_colors , $this->default_device_bg );
+			update_option( 'shiword_colors' , $colors );
 		}
 	}
 
@@ -129,16 +105,16 @@ class Custom_device_color {
 		}
 		echo '<div class="clear"></div></div>';
 	}
-
+	
 	// display the preview div
 	function show_preview() {
 			global $shiword_colors;
-
+			$device_rgba = hex2rgba( $shiword_colors['device_color'], $shiword_colors['device_opacity']);
 ?>
 					<div id="headimg-bg">
 						<style type="text/css">
 #headimage {
-	background: <?php echo $shiword_colors['device_color']; ?> url('<?php echo $shiword_colors['device_image']; ?>') left top repeat;
+	background: <?php echo $device_rgba; ?> url('<?php echo $shiword_colors['device_image']; ?>') left top repeat;
 }
 #headimg_overlay a, #desc {
 	color:<?php echo $shiword_colors['device_textcolor']; ?>;
@@ -207,7 +183,18 @@ class Custom_device_color {
 	function step_1() {
 		
 		global $shiword_colors;
-		$shiword_colors = get_option( 'shiword_colors' );
+		
+		/* Holds the inside colors descriptions */
+		$default_device_colors_descr = array(
+			'menu1' => __('Background', 'shiword' ),
+			'menu2' => __('Borders', 'shiword' ),
+			'menu3' => __('Text', 'shiword' ),
+			'menu4' => __('Links', 'shiword' ),
+			'menu5' => __('Highlighted Links', 'shiword' ),
+			'menu6' => __('Inner borders', 'shiword' ),
+			'main3' => __('Links', 'shiword' ),
+			'main4' => __('Highlighted Links', 'shiword' ),
+		);
 
 		$this->process_default_device_images();
 ?>
@@ -280,6 +267,12 @@ class Custom_device_color {
 							&nbsp;-&nbsp;
 							<a href="#" onclick="pickColor('1','<?php echo $this->default_device_bg['device_color']; ?>'); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
 						</span>
+						<br />
+						<span class="opaopt" style="margin-left: 40px;"><?php _e( 'Opacity', 'shiword' ); ?> [0-100] <input type="text" name="deviceopacity" id="shi_input_1a" value="<?php echo $shiword_colors['device_opacity']; ?>" maxlength="3" size="3" /> %</span>
+						<div id="alpha_slider" class="slider hide-if-no-js">
+							<div id="alpha_bar"></div>
+							<div class="handle"></div>
+						</div>
 					</td>
 				</tr>
 				<tr valign="top" id="text-color-row">
@@ -324,7 +317,7 @@ class Custom_device_color {
 					elseif ( $key == 'menu1' ) echo '<tr><td style="font-weight:bold; border-top:1px solid #CCCCCC;" colspan="2">' . __( 'Pages Menu and Floating Menu', 'shiword' ) . '</td></tr>';
 				?>
 				<tr>
-					<td style="width:200px;"><?php _e( $this->default_device_colors_descr[$key], 'shiword' ); ?></td>
+					<td style="width:200px;"><?php echo $default_device_colors_descr[$key]; ?></td>
 					<td>
 						<input style="background-color:<?php echo $shiword_colors[$key]; ?>;" class="color_preview_box" type="text" id="shi_box_<?php echo $key; ?>" value="" readonly="readonly" />
 						<input id="shi_input_<?php echo $key; ?>" name="<?php echo $key; ?>" value="<?php echo $shiword_colors[$key]; ?>" type="text" class="shi_input" />
@@ -423,7 +416,7 @@ class Custom_device_color {
 					$shiword_colors['device_textcolor'] = '#' . $color;
 			}
 		}
-		$shiword_colors['devicecolor'] = $this->default_device_bg['device_color'];
+		$shiword_colors['device_color'] = $this->default_device_bg['device_color'];
 		if ( isset( $_POST['devicecolor'] ) ) {
 			$_POST['devicecolor'] = str_replace( '#' , '' , $_POST['devicecolor'] );
 			if ( 'transparent' == $_POST['devicecolor'] ) {
@@ -433,6 +426,12 @@ class Custom_device_color {
 				if ( strlen($color) == 6 || strlen($color) == 3 )
 					$shiword_colors['device_color'] = '#' . $color;
 			}
+		}
+		$shiword_colors['device_opacity'] = $this->default_device_bg['device_opacity'];
+		if ( isset( $_POST['deviceopacity'] ) ) {
+			$alpha = intval( $_POST['deviceopacity'] );
+			if ( ( $alpha < 0 ) || ( $alpha > 100 )) $alpha = 100;
+			$shiword_colors['device_opacity'] = strval( $alpha );
 		}
 		$shiword_colors['device_button'] = $this->default_device_bg['device_button'];
 		if ( isset( $_POST['devicebuttonborder'] ) ) {
@@ -476,6 +475,8 @@ class Custom_device_color {
 
 	/* Display last step of custom header image page. */
 	function finished() {
+		global $shiword_colors;
+		$shiword_colors = shiword_get_colors();
 		$this->updated = true;
 		$this->step_1();
 	}
