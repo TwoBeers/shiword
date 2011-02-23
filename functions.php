@@ -205,9 +205,11 @@ function get_shiword_recentcomments() {
 	$comments = get_comments( 'status=approve&number=10&type=comment' ); // valid type values (not documented) : 'pingback','trackback','comment'
 	if ( $comments ) {
 		foreach ( $comments as $comment ) {
-			$post_title = get_the_title( $comment->comment_post_ID );
-			if ( strlen( $post_title ) > 35 ) { //shrink the post title if > 35 chars
-				$post_title_short = substr( $post_title,0,35 ) . '&hellip;';
+			$post = get_post( $comment->comment_post_ID );
+			setup_postdata( $post );
+			$post_title = esc_html( $post->post_title );
+			if ( mb_strlen( $post_title ) > 35 ) { //shrink the post title if > 35 chars
+				$post_title_short = mb_substr( $post_title,0,35 ) . '&hellip;';
 			} else {
 				$post_title_short = $post_title;
 			}
@@ -215,20 +217,19 @@ function get_shiword_recentcomments() {
 				$post_title_short = __( '(no title)', 'shiword' );
 			}
 			$com_auth = $comment->comment_author;
-			if ( post_password_required( get_post( $comment->comment_post_ID ) ) ) {
+			if ( post_password_required( $post ) ) {
 				$com_auth = __( 'someone','shiword' );
 			} else {
 				$com_auth = $comment->comment_author;
 			}
-			if ( strlen( $com_auth ) > 35 ) {  //shrink the comment author if > 35 chars
-				$com_auth = substr( $com_auth,0,35 ) . '&hellip;';
+			if ( mb_strlen( $com_auth ) > 35 ) {  //shrink the comment author if > 35 chars
+				$com_auth = mb_substr( $com_auth,0,35 ) . '&hellip;';
 			}
-		    echo '<li>'. $com_auth . ' ' . __( 'on', 'shiword' ) . ' <a href="' . get_permalink( $comment->comment_post_ID ) . '#comment-' . $comment->comment_ID . '">' . $post_title_short . '</a><div class="preview">';
-		if ( post_password_required( get_post( $comment->comment_post_ID ) ) ) {
+		    echo '<li>'. $com_auth . ' ' . __( 'on', 'shiword' ) . ' <a href="' . get_permalink( $post->ID ) . '#comment-' . $comment->comment_ID . '">' . $post_title_short . '</a><div class="preview">';
+		if ( post_password_required( $post ) ) {
 			echo '[' . __( 'No preview: this is a comment of a protected post', 'shiword' ) . ']';
 		} else {
-			$comment_string = improved_trim_excerpt( $comment->comment_content );
-			echo $comment_string;
+			comment_excerpt( $comment->comment_ID );
 		}
 			echo '</div></li>';
 		}
@@ -243,8 +244,8 @@ function get_shiword_recententries() {
 	foreach( $lastposts as $post ) {
 		setup_postdata( $post );
 		$post_title = esc_html( $post->post_title );
-		if ( strlen( $post_title ) > 35 ) { //shrink the post title if > 35 chars
-			$post_title_short = substr( $post_title,0,35 ) . '&hellip;';
+		if ( mb_strlen( $post_title ) > 35 ) { //shrink the post title if > 35 chars
+			$post_title_short = mb_substr( $post_title,0,35 ) . '&hellip;';
 		} else {
 			$post_title_short = $post_title;
 		}
@@ -252,20 +253,20 @@ function get_shiword_recententries() {
 			$post_title_short = __( '(no title)', 'shiword' );
 		}
 		$post_auth = get_the_author();
-		if ( strlen( $post_auth ) > 35 ) { //shrink the post author if > 35 chars
-			$post_auth = substr( $post_auth,0,35 ) . '&hellip;';
+		if ( mb_strlen( $post_auth ) > 35 ) { //shrink the post author if > 35 chars
+			$post_auth = mb_substr( $post_auth,0,35 ) . '&hellip;';
 		}
 		echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . $post_title . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '<div class="preview">';
 		if ( post_password_required( $post ) ) {
 			echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . get_template_directory_uri() . '/images/thumb_50.png" alt="thumb" title="' . $post_title_short . '" />';
 			echo '[' . __('No preview: this is a protected post', 'shiword' ) . ']';
 		} else {
-			if( has_post_thumbnail() ) {
-				the_post_thumbnail( array( 50,50 ), array( 'class' => 'alignleft' ) );
+			if( has_post_thumbnail( $post->ID ) ) {
+				echo get_the_post_thumbnail( $post->ID, array( 50,50 ), array( 'class' => 'alignleft' ) );
 			} else {
 				echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . get_template_directory_uri() . '/images/thumb_50.png" alt="thumb" title="' . $post_title_short . '" />';
 			}
-			echo improved_trim_excerpt( $post->post_content );
+			the_excerpt();
 		}
 		echo '</div></li>';
 	}
@@ -290,8 +291,8 @@ function get_shiword_categories_wpr() {
 		foreach( $lastcatposts as $post ) {
 			setup_postdata( $post );
 			$post_title = esc_html( $post->post_title );
-			if ( strlen( $post_title ) > 35 ) { //shrink the post title if > 35 chars
-				$post_title_short = substr( $post_title,0,35 ) . '&hellip;';
+			if ( mb_strlen( $post_title ) > 35 ) { //shrink the post title if > 35 chars
+				$post_title_short = mb_substr( $post_title,0,35 ) . '&hellip;';
 			} else {
 				$post_title_short = $post_title;
 			}
@@ -299,8 +300,8 @@ function get_shiword_categories_wpr() {
 				$post_title_short = __( '(no title)', 'shiword' );
 			}
 			$post_auth = get_the_author();
-			if ( strlen( $post_auth ) > 35 ) { //shrink the post author if > 35 chars
-				$post_auth = substr( $post_auth,0,35 ) . '&hellip;';
+			if ( mb_strlen( $post_auth ) > 35 ) { //shrink the post author if > 35 chars
+				$post_auth = mb_substr( $post_auth,0,35 ) . '&hellip;';
 			}
 			echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . $post_title . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '</li>';
 		}
@@ -726,8 +727,8 @@ function sw_sticky_slider() {
 				<div class="sss_item">
 					<div class="sss_inner_item">
 						<a href="<?php echo get_permalink( $post->ID ); ?>" title="<?php echo $post_title; ?>">
-							<?php if( has_post_thumbnail() ) :
-								the_post_thumbnail( array( 120,120 ), array( 'class' => 'alignleft' ) );
+							<?php if( has_post_thumbnail( $post->ID ) ) :
+								echo get_the_post_thumbnail( $post->ID, array( 120,120 ), array( 'class' => 'alignleft' ) );
 							else :
 								echo '<img class="alignleft wp-post-image"  height="120" width="120" src="' . get_template_directory_uri() . '/images/thumb_120.png" alt="thumb" title="' . $post_title . '" />';
 							endif; ?>
@@ -968,24 +969,6 @@ function shiword_get_colors() {
 		}
 	}
 	return $shiword_colors;
-}
-
-//custom excerpt maker
-function improved_trim_excerpt( $text ) {
-	$text = apply_filters( 'the_content', $text );
-	$text = str_replace( ']]>', ']]&gt;', $text );
-	$text = preg_replace( '@<script[^>]*?>.*?</script>@si', '', $text );
-	$text = strip_tags( $text, '<p>' );
-	$text = preg_replace( '@<p[^>]*?>@si', '', $text );
-	$text = preg_replace( '@</p>@si', '<br/>', $text );
-	$excerpt_length = 50;
-	$words = explode(' ', $text, $excerpt_length + 1);
-	if ( count( $words ) > $excerpt_length ) {
-		array_pop( $words );
-		array_push( $words, '[...]' );
-		$text = implode( ' ', $words );
-	}
-	return $text;
 }
 
 //set the excerpt lenght
