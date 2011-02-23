@@ -104,8 +104,12 @@
 														<?php if ( current_user_can( 'publish_posts' ) ) { ?>
 															<li><a title="<?php _e( 'Add New Post', 'shiword' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post', 'shiword' ); ?></a></li>
 														<?php } ?>
-														<?php if ( current_user_can( 'moderate_comments' ) ) { ?>
-															<li><a title="<?php _e( 'Comments', 'shiword' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'shiword' ); ?></a></li>
+														<?php if ( current_user_can( 'moderate_comments' ) ) {
+															$awaiting_mod = wp_count_comments();
+															$awaiting_mod = $awaiting_mod->moderated;
+															$awaiting_mod = $awaiting_mod ? ' (' . number_format_i18n( $awaiting_mod ) . ')' : '';
+														?>
+															<li><a title="<?php _e( 'Comments', 'shiword' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'shiword' ); ?></a><?php echo $awaiting_mod; ?></li>
 														<?php } ?>
 													<?php } ?>
 													<li><a title="<?php _e( 'Log out', 'shiword' ); ?>" href="<?php echo esc_url( wp_logout_url() ); ?>"><?php _e( 'Log out', 'shiword' ); ?></a></li>

@@ -1,6 +1,6 @@
 <p>Shiword - WordPress theme
 	<ul>
-		<li>version: 1.13</li>
+		<li>version: 1.14</li>
 	</ul>
 </p>
 <p>Project page:
@@ -40,20 +40,23 @@
 		<li>Menu animations: jquery powered</li>
 		<li>Custom header: you are your blog!</li>
 		<li>Custom colors: paint your site with the skin builder tool</li>
+		<li>Custom widgets : five new widgets ("Popular Post", "Latest Activity", "User quick links", "Popular Categories" and "Latest comment authors") at your disposal</li>
 	</ul>
 </p>
 <p>TECHNICAL:
 	<ul>
 		<li>*.dev.js files are the same as *.min.js, but commented and uncompressed</li>
 		<li>theme uses jQuery javascript framework</li>
-		<li>if you experience any javascript problem, try disable animations in admin -&gt; theme options</li>
+		<li>if you experience any javascript problem, try disable animations in Appearance -&gt; Theme options</li>
 		<li>print_preview.css is a stylesheet file used to emulate a print preview.</li>
+		<li>In order to use the new widgets, you need to activate them in Appearance -&gt; Widgets </li>
 	</ul>
 </p>
 <p>CHANGE LOG (FROM VERSION 1.11):
 	<ul>
 		<li>Adds:
 			<ul>
+				<li>Custom widgets ("Popular Post", "Latest Activity", "User quick links", "Popular Categories" and "Latest comment authors")</li>
 				<li>Opacity setting for the custom device color</li>
 			</ul>
 		</li>

@@ -519,10 +519,8 @@ function edit_shiword_options() {
 						<a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/shiword' ); ?>" title="Shiword theme" target="_blank"><?php _e( 'Leave a feedback', 'shiword' ); ?></a>
 					</small>
 				</div>
-				<div class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc;">
-					<small>
-						<a href="<?php echo esc_url( 'http://www.twobeers.net/temi-wp/wordpress-themes-translations' ); ?>" title="Themes translation" target="_blank">Support the theme in your language, provide a translation.</a>
-					</small>
+				<div class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc; margin-top: 10px;">
+					<small>Support the theme in your language, provide a <a href="<?php echo esc_url( 'http://www.twobeers.net/temi-wp/wordpress-themes-translations' ); ?>" title="Themes translation" target="_blank">translation</a>.</small>
 				</div>
 		<script type="text/javascript">
 			/* <![CDATA[ */
@@ -867,10 +865,10 @@ function shiword_header_style() {
 	}
 	#sw_body,
 	#fixedfoot {
-		background: <?php echo $device_rgba; ?> url('<?php echo $shiword_colors['device_image']; ?>') right top repeat
+		background: <?php echo $device_rgba; ?> url('<?php echo $shiword_colors['device_image']; ?>') right top repeat;
 	}
 	#head {
-		background: <?php echo $device_rgba; ?> url('<?php echo $shiword_colors['device_image']; ?>') right -0.7em repeat
+		background: <?php echo $device_rgba; ?> url('<?php echo $shiword_colors['device_image']; ?>') right -0.7em repeat;
 	}
 	input[type="button"]:hover,
 	input[type="submit"]:hover,
@@ -942,7 +940,18 @@ function shiword_header_style() {
 		border:1px solid <?php echo $shiword_colors['main4']; ?>;
 	}
 </style>
-
+<!-- InternetExplorer really sucks! -->
+<!--[if lte IE 8]>
+<style type="text/css">
+	#sw_body,
+	#fixedfoot {
+		background: <?php echo $shiword_colors['device_color']; ?> url('<?php echo $shiword_colors['device_image']; ?>') right top repeat;
+	}
+	#head {
+		background: <?php echo $shiword_colors['device_color']; ?> url('<?php echo $shiword_colors['device_image']; ?>') right -0.7em repeat;
+	}
+</style>
+<![endif]-->
     <?php
 }
 
@@ -1049,5 +1058,8 @@ function shiword_mini_login() {
 
 	<?php
 }
+
+// load the custom widgets module
+get_template_part('widgets');
 
 ?>
