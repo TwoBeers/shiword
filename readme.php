@@ -81,3 +81,10 @@
 		</li>
 	</ul>
 </p>
+
+<p>CREDITS:
+	<ul>
+		<li>Thierry from <a href="http://www.open-blogue.fr/" target="_blank">Open Blogue</a> for the French translation</li>
+		<li>Dirk from <a href="http://dirkdejager.heliohost.org/" target="_blank">Nimrod</a> for the Dutch translation</li>
+	</ul>
+</p>

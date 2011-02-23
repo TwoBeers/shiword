@@ -519,6 +519,11 @@ function edit_shiword_options() {
 						<a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/shiword' ); ?>" title="Shiword theme" target="_blank"><?php _e( 'Leave a feedback', 'shiword' ); ?></a>
 					</small>
 				</div>
+				<div class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc;">
+					<small>
+						<a href="<?php echo esc_url( 'http://www.twobeers.net/temi-wp/wordpress-themes-translations' ); ?>" title="Themes translation" target="_blank">Support the theme in your language, provide a translation.</a>
+					</small>
+				</div>
 		<script type="text/javascript">
 			/* <![CDATA[ */
 			function shiwordSwitchClass(a) { // simple animation for option tabs
