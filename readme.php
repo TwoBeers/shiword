@@ -1,6 +1,6 @@
 <p>Shiword - WordPress theme
 	<ul>
-		<li>version: 1.12</li>
+		<li>version: 1.13</li>
 	</ul>
 </p>
 <p>Project page:
@@ -52,9 +52,15 @@
 </p>
 <p>CHANGE LOG (FROM VERSION 1.11):
 	<ul>
+		<li>Adds:
+			<ul>
+				<li>Opacity setting for the custom device color</li>
+			</ul>
+		</li>
 		<li>Fixes:
 			<ul>
 				<li>Many minor graphical issues</li>
+				<li>Code more neat</li>
 			</ul>
 		</li>
 	</ul>
