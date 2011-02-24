@@ -62,6 +62,7 @@
 		</li>
 		<li>Fixes:
 			<ul>
+				<li>Compatibility with Wordpress 3.1</li>
 				<li>Many minor graphical issues</li>
 				<li>Code more neat</li>
 			</ul>
