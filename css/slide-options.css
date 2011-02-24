@@ -119,3 +119,7 @@ div#sw-paged {
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
+.slide-thumb {
+	margin: 0;
+	vertical-align: text-top;
+}

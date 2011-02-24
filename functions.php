@@ -640,6 +640,13 @@ function edit_shiword_slideshow() {
 											<input name="shiword_slideshow[<?php echo $post->ID; ?>]" value="<?php echo $post->ID; ?>" type="checkbox" class="" <?php checked( $post->ID , $shiword_options[$post->ID] ); ?> />
 										</th>
 										<td class="post-title column-title">
+											<?php
+												if( has_post_thumbnail( $post->ID ) ) {
+													echo get_the_post_thumbnail( $post->ID, array( 40,40 ), array( 'class' => 'slide-thumb' ) );
+												} else {
+													echo '<img class="slide-thumb" height="40" width="40" src="' . get_template_directory_uri() . '/images/thumb_50.png" alt="thumb" title="' . $post_title . '" />';
+												}
+											?>
 											<a class="row-title" href="<?php echo get_permalink( $post->ID ); ?>" title="<?php echo $post_title; ?>"><?php echo $post_title; ?></a>
 										</td>
 										<td class="categories column-categories">

@@ -192,9 +192,9 @@ input[type=password]:focus {
 	margin: 0 auto;
 }
 #sidebardx {
-	width: 240px;
+	width: 245px;
 	float: left;
-	margin: 20px 10px 10px;
+	margin: 10px 5px 10px 10px;
 }
 #fixedfoot_cont {
 	position: fixed;
@@ -893,7 +893,7 @@ h2.storytitle {
 	background-color: #111111;
 	font-size: 12px;
 	margin: 2px 0;
-	padding: 3px 40px 3px 3px;
+	padding: 3px 40px 16px 3px;
 }
 .bypostauthor > .comment-body {
 	background-color: #262626;
@@ -1079,6 +1079,8 @@ li.pingback {
 }
 .sss_inner_item {
 	padding: 20px 150px;
+	max-height: 100px;
+	overflow: hidden;
 }
 #sw_sticky_slider .sss_item img {
 	float: left;
