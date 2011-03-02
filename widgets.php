@@ -282,6 +282,7 @@ class shiword_Widget_latest_commentators extends WP_Widget {
  			$number = 5;
  		else if ( $number < 1 )
  			$number = 1;
+		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
 
 		$comments = get_comments( array( 'status' => 'approve', 'type' => 'comment' ) );
 		$post_array = array();
@@ -289,15 +290,17 @@ class shiword_Widget_latest_commentators extends WP_Widget {
 		$output .= $before_widget;
 		if ( $title )
 			$output .= $before_title . $title . $after_title;
+		$ul_class = $use_thumbs ? ' class="social-like"' : '';
+		$grav_dim = $use_thumbs ? 40 : 32;
 
-		$output .= '<ul>';
+		$output .= '<ul' . $ul_class . '>';
 		if ( $comments ) {
 			foreach ( (array) $comments as $comment) {
 				if ( !in_array( $comment->comment_author_email, $post_array ) ) {
 					if ( $comment->comment_author_url == '' ) {
-						$output .=  '<li title="' .  $comment->comment_author . '">' . get_avatar( $comment, 32, $default=get_option('avatar_default') ) . ' ' . $comment->comment_author . '</li>';
+						$output .=  '<li title="' .  $comment->comment_author . '">' . get_avatar( $comment, $grav_dim, $default=get_option('avatar_default'), $comment->comment_author ) . '<span class="lc-user-name">' . $comment->comment_author . '</span></li>';
 					} else {
-						$output .=  '<li><a href="' . $comment->comment_author_url . '" title="' .  $comment->comment_author . '">' . get_avatar( $comment, 32, $default=get_option('avatar_default')) . ' ' . $comment->comment_author . '</a></li>';
+						$output .=  '<li><a href="' . $comment->comment_author_url . '" title="' .  $comment->comment_author . '">' . get_avatar( $comment, $grav_dim, $default=get_option('avatar_default'), $comment->comment_author ) . '<span class="lc-user-name">' . $comment->comment_author . '</span></a></li>';
 					}
 					$post_array[] = $comment->comment_author_email;
 					if ( ++$counter >= $number ) break;
@@ -316,6 +319,7 @@ class shiword_Widget_latest_commentators extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['number'] = (int) $new_instance['number'];
+		$instance['thumb'] = (int) $new_instance['thumb'] ? 1 : 0;
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
@@ -328,6 +332,9 @@ class shiword_Widget_latest_commentators extends WP_Widget {
 	function form( $instance ) {
 		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
 		$number = isset($instance['number']) ? absint($instance['number']) : 5;
+		$thumb = 1;
+		if ( isset($instance['thumb']) && !$thumb = (int) $instance['thumb'] )
+			$thumb = 0;
 
 		if ( get_option('require_name_email') != '1' ) {
 			printf ( __( 'Comment authors <strong>must</strong> use a name and a valid e-mail in order to use this widget. Check the <a href="%1$s">Discussion settings</a>','shiword' ), esc_url( admin_url( 'options-discussion.php' ) ) );
@@ -342,6 +349,10 @@ class shiword_Widget_latest_commentators extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of users to show:','shiword'); ?></label>
 			<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" />
+		</p>
+		<p>
+			<input id="<?php echo $this->get_field_id('thumb'); ?>" name="<?php echo $this->get_field_name('thumb'); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
+			<label for="<?php echo $this->get_field_id('thumb'); ?>"><?php _e('Compact view (only avatars)','shiword'); ?></label>
 		</p>
 <?php
 	}

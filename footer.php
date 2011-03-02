@@ -126,7 +126,7 @@
 					<?php }
 				?>
 					<div id="statusbar">
-						<?php _e( 'Welcome', 'shiword' ); ?> <?php if ( is_user_logged_in() ) { echo $current_user->display_name; } ?>, <?php _e( 'today is ', 'shiword' ); echo date_i18n( 'l' ); ?> <?php echo date_i18n( __( 'F j, Y', 'shiword' ) ); ?>
+						<?php _e( 'Welcome', 'shiword' ); ?> <?php if ( is_user_logged_in() ) { echo $current_user->display_name; } ?>, <?php printf( __('today is %1$s, %2$s','shiword'), date_i18n( __( 'l','shiword' ) ), date_i18n( get_option( 'date_format' ) ) ); ?>
 					</div>
 					<div id="navbuttons">
 						<?php if ( is_singular() ) { ?>

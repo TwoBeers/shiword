@@ -33,11 +33,13 @@ if ( !isset( $content_width ) ) {
 $shiword_coa = array(
 	'shiword_qbar' => array( 'default'=>1,'description'=>__( 'sliding menu', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'' ),
 	'shiword_qbar_user' => array( 'default'=>1,'description'=>__( '-- user', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
+	'shiword_qbar_minilogin' => array( 'default'=>0,'description'=>__( '---- mini login','shiword' ),'info'=>__( 'a small login form in the user panel [default = disabled]','shiword' ),'req'=>'shiword_qbar_user' ),
 	'shiword_qbar_reccom' => array( 'default'=>1,'description'=>__( '-- recent comments', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
 	'shiword_qbar_cat' => array( 'default'=>1,'description'=>__( '-- categories','shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
 	'shiword_qbar_recpost' => array( 'default'=>1,'description'=>__( '-- recent posts', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
 	'shiword_xcont' => array( 'default'=>1,'description'=>__( 'content summary', 'shiword' ),'info'=>__( 'use the summary instead of content in main post index [default = enabled]', 'shiword' ),'req'=>'' ),
 	'shiword_pthumb' => array( 'default'=>0,'description'=>__( 'posts thumbnail', 'shiword' ),'info'=>__( '[default = disabled]', 'shiword' ),'req'=>'shiword_xcont' ),
+	'shiword_xinfos' => array( 'default'=>1,'description'=>__( 'posts extra info', 'shiword' ),'info'=>__( 'show extra info (author, date, tags, etc) in posts overview', 'shiword' ),'req'=>'' ),
 	'shiword_rsideb' => array( 'default'=>1,'description'=>__( 'right sidebar', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'' ),
 	'shiword_rsidebpages' => array( 'default'=>0,'description'=>__( '-- on pages', 'shiword' ),'info'=>__( 'show right sidebar on pages [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
 	'shiword_rsidebposts' => array( 'default'=>0,'description'=>__( '-- on posts', 'shiword' ),'info'=>__( 'show right sidebar on posts [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
@@ -56,9 +58,9 @@ function shiword_get_default_colors($type) {
 	// Holds default outside colors
 	$shiword_default_device_bg = array(
 		'device_image' => '',
-		'device_color' => '#000',
+		'device_color' => '#000000',
 		'device_opacity' => '100',
-		'device_textcolor' => '#fff',
+		'device_textcolor' => '#ffffff',
 		'device_button' => '#ff8d39'
 	);
 	// Holds default inside colors
@@ -205,25 +207,21 @@ function get_shiword_recentcomments() {
 	$comments = get_comments( 'status=approve&number=10&type=comment' ); // valid type values (not documented) : 'pingback','trackback','comment'
 	if ( $comments ) {
 		foreach ( $comments as $comment ) {
+			//if( post_password_required( get_post( $comment->comment_post_ID ) ) ) { continue; } // uncomment to skip comments on protected posts. Hi Emma ;)
 			$post = get_post( $comment->comment_post_ID );
 			setup_postdata( $post );
-			$post_title = esc_html( $post->post_title );
-			if ( mb_strlen( $post_title ) > 35 ) { //shrink the post title if > 35 chars
-				$post_title_short = mb_substr( $post_title,0,35 ) . '&hellip;';
-			} else {
-				$post_title_short = $post_title;
-			}
-			if ( $post_title_short == "" ) {
+			if ( $post->post_title == "" ) {
 				$post_title_short = __( '(no title)', 'shiword' );
+			} else {
+				//shrink the post title if > 35 chars
+				$post_title_short = mb_strimwidth( esc_html( $post->post_title ), 0, 35, '&hellip;' );
 			}
-			$com_auth = $comment->comment_author;
 			if ( post_password_required( $post ) ) {
+				//hide comment author in protected posts
 				$com_auth = __( 'someone','shiword' );
 			} else {
-				$com_auth = $comment->comment_author;
-			}
-			if ( mb_strlen( $com_auth ) > 35 ) {  //shrink the comment author if > 35 chars
-				$com_auth = mb_substr( $com_auth,0,35 ) . '&hellip;';
+				//shrink the comment author if > 20 chars
+				$com_auth = mb_strimwidth( $comment->comment_author, 0, 20, '&hellip;' );
 			}
 		    echo '<li>'. $com_auth . ' ' . __( 'on', 'shiword' ) . ' <a href="' . get_permalink( $post->ID ) . '#comment-' . $comment->comment_ID . '">' . $post_title_short . '</a><div class="preview">';
 		if ( post_password_required( $post ) ) {
@@ -244,18 +242,14 @@ function get_shiword_recententries() {
 	foreach( $lastposts as $post ) {
 		setup_postdata( $post );
 		$post_title = esc_html( $post->post_title );
-		if ( mb_strlen( $post_title ) > 35 ) { //shrink the post title if > 35 chars
-			$post_title_short = mb_substr( $post_title,0,35 ) . '&hellip;';
-		} else {
-			$post_title_short = $post_title;
-		}
-		if ( $post_title_short == "" ) {
+		if ( $post->post_title == "" ) {
 			$post_title_short = __( '(no title)', 'shiword' );
+		} else {
+			//shrink the post title if > 35 chars
+			$post_title_short = mb_strimwidth( esc_html( $post->post_title ), 0, 35, '&hellip;' );
 		}
-		$post_auth = get_the_author();
-		if ( mb_strlen( $post_auth ) > 35 ) { //shrink the post author if > 35 chars
-			$post_auth = mb_substr( $post_auth,0,35 ) . '&hellip;';
-		}
+		//shrink the post author if > 20 chars
+		$post_auth = mb_strimwidth( get_the_author(), 0, 20, '&hellip;' );
 		echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . $post_title . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '<div class="preview">';
 		if ( post_password_required( $post ) ) {
 			echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . get_template_directory_uri() . '/images/thumb_50.png" alt="thumb" title="' . $post_title_short . '" />';
@@ -291,18 +285,14 @@ function get_shiword_categories_wpr() {
 		foreach( $lastcatposts as $post ) {
 			setup_postdata( $post );
 			$post_title = esc_html( $post->post_title );
-			if ( mb_strlen( $post_title ) > 35 ) { //shrink the post title if > 35 chars
-				$post_title_short = mb_substr( $post_title,0,35 ) . '&hellip;';
-			} else {
-				$post_title_short = $post_title;
-			}
-			if ($post_title_short == "") {
+			if ( $post->post_title == "" ) {
 				$post_title_short = __( '(no title)', 'shiword' );
+			} else {
+				//shrink the post title if > 35 chars
+				$post_title_short = mb_strimwidth( esc_html( $post->post_title ), 0, 35, '&hellip;' );
 			}
-			$post_auth = get_the_author();
-			if ( mb_strlen( $post_auth ) > 35 ) { //shrink the post author if > 35 chars
-				$post_auth = mb_substr( $post_auth,0,35 ) . '&hellip;';
-			}
+			//shrink the post author if > 20 chars
+			$post_auth = mb_strimwidth( get_the_author(), 0, 20, '&hellip;' );
 			echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . $post_title . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '</li>';
 		}
 		echo '</ul></div></li>';
@@ -459,16 +449,16 @@ function edit_shiword_options() {
 		}
 		update_option( 'shiword_options' , $shiword_opt );
 	}
-	
-	// return options save message
-	if ( isset( $_REQUEST['updated'] ) ) {
-		echo '<div id="message" class="updated"><p><strong>' . __( 'Options saved.', 'shiword' ) . '</strong></p></div>';
-	}
-
-	?>
+?>
 	<div class="wrap">
 		<div class="icon32" id="icon-themes"><br></div>
 		<h2><?php echo get_current_theme() . ' - ' . __( 'Theme Options', 'shiword' ); ?></h2>
+		<?php
+			// return options save message
+			if ( isset( $_REQUEST['settings-updated'] ) ) {
+				echo '<div id="message" class="updated"><p><strong>' . __( 'Options saved.', 'shiword' ) . '</strong></p></div>';
+			}
+		?>
 		<div id="tabs-container">
 			<ul id="selector">
 				<li id="shiword-options-li">
@@ -564,8 +554,8 @@ function shiword_sanitize_slideshow( $input ){
 // the slideshow admin panel - here you can select posts to be included in slideshow
 function edit_shiword_slideshow() {
 	$shiword_options = get_option( 'shiword_slideshow' );
-	if ( isset( $_REQUEST['updated'] ) ) {
-		//return options save message
+	//return options save message
+	if ( isset( $_REQUEST['settings-updated'] ) ) {
 		echo '<div id="message" class="updated"><p><strong>' . __( 'Options saved.', 'shiword' ) . '</strong></p></div>';
 	}
 ?>
@@ -947,6 +937,13 @@ function shiword_header_style() {
 	input[type="password"]:focus {
 		border:1px solid <?php echo $shiword_colors['main4']; ?>;
 	}
+	.social-like li a img {
+		border: 1px solid <?php echo $shiword_colors['main3']; ?>;
+
+	}
+	.social-like li a img:hover {
+		border: 1px solid <?php echo $shiword_colors['main4']; ?>;
+	}
 </style>
 <!-- InternetExplorer really sucks! -->
 <!--[if lte IE 8]>
@@ -980,7 +977,7 @@ function shiword_get_colors() {
 
 //set the excerpt lenght
 function new_excerpt_length( $length ) {
-	return 30;
+	return 50;
 }
 
 //styles the login page
@@ -1037,13 +1034,15 @@ function shiword_mini_login() {
 	?>
 	<li class="ql_cat_li">
 		<a title="<?php _e( 'Log in', 'shiword' ); ?>" href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in', 'shiword' ); ?></a>
-		<div class="cat_preview" style="padding-left: 20px;">
-			<div class="mentit"><?php _e( 'Log in', 'shiword' ); ?></div>
-			<div id="sw_minilogin" class="solid_ul">
-				<?php wp_login_form($args); ?>
-				<a id="closeminilogin" href="#" style="display: none; margin-left:10px;"><?php _e( 'Close', 'shiword' ); ?></a>
+		<?php if ( isset( $shiword_opt['shiword_qbar_minilogin'] ) && ( $shiword_opt['shiword_qbar_minilogin'] == 1 ) && ( !class_exists("siCaptcha") ) ) { ?>
+			<div class="cat_preview">
+				<div class="mentit"><?php _e( 'Log in', 'shiword' ); ?></div>
+				<div id="sw_minilogin" class="solid_ul">
+					<?php wp_login_form($args); ?>
+					<a id="closeminilogin" href="#" style="display: none; margin-left:10px;"><?php _e( 'Close', 'shiword' ); ?></a>
+				</div>
 			</div>
-		</div>
+		<?php } ?>
 	</li>
 
 	<?php

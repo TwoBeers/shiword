@@ -2,7 +2,7 @@
 Theme Name: Shiword
 Theme URI: http://www.twobeers.net/annunci/shiword
 Description: Simple dark theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, the custom header and the print preview. Shiword is fully customizable (there's also a skin builder!), with one or two columns and up to 5 widgets areas. Supports WP 3.0 new menu tool and post thumbnails.
-Version: 1.15
+Version: 1.16
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, right-sidebar, custom-colors
 Author: TwoBeers Crew
 Author URI: http://www.twobeers.net/
@@ -56,7 +56,7 @@ p {
 }
 ul,
 ol {
-	margin: 0;
+	margin: 0 0 0 18px;
 	padding: 0;
 }
 ul ul,
@@ -66,10 +66,10 @@ ol ul {
 	margin-left: 10px;
 }
 ul {
-	list-style: disc inside url('images/litem.png');
+	list-style: disc outside url('images/litem.png');
 }
 ol {
-	list-style: decimal inside none;
+	list-style: decimal outside none;
 }
 ul li,
 ol li {
@@ -361,6 +361,10 @@ input[type=password]:focus {
 #quickbar li {
 	margin: 0;
 }
+#quickbar ul {
+	margin: 0;
+	list-style-position: inside;
+}
 .menuitem_img {
 	height: 50px;
 	width: 50px;
@@ -450,7 +454,7 @@ input[type=password]:focus {
 }
 .cat_preview {
 	display: none;
-	left: 412px;
+	left: 422px;
 	position: absolute;
 	top: 0;
 	width: 420px;
@@ -511,7 +515,6 @@ input[type=password]:focus {
 }
 #sw_minilogin {
 	padding: 5px 10px;
-	color: #404040;
 }
 #sw_minilogin label {
 	display: block;
@@ -579,6 +582,12 @@ input[type=password]:focus {
 }
 /* main menu 
 ----------------------------------------------------------*/
+#mainmenu ul {
+	list-style-position: inside;
+}
+#mainmenu {
+	margin: 0;
+}
 #mainmenu .current-menu-item > a,
 #mainmenu .current_page_item > a,
 #mainmenu .current-cat > a {
@@ -810,8 +819,30 @@ input[type=password]:focus {
 	vertical-align: text-bottom;
 }
 .shi_widget_popular_posts img,
+.shi_widget_latest_commentators img,
 .shi_widget_latest_commented_posts img {
 	border: 1px solid #404040;
+}
+.social-like {
+	list-style: none outside none;
+	margin: 0;
+}
+.social-like li {
+	float: left;
+	margin: 5px 3px 0;
+}
+span.lc-user-name {
+	margin-left: 5px;
+}
+.social-like .lc-user-name {
+	display: none;
+}
+.social-like li a img {
+	border: 1px solid #21759b;
+
+}
+.social-like li a img:hover {
+	border: 1px solid #ff8d39;
 }
 /* posts & pages
 ----------------------------------------------------------*/
@@ -854,6 +885,9 @@ h2.storytitle {
 .storycontent {
 	margin-top: 40px;
 	font-size: 12px;
+}
+.no-info {
+	margin-top: 0;
 }
 .storycontent img {
 	max-width:100%;

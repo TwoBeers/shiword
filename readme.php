@@ -1,6 +1,6 @@
 <p>Shiword - WordPress theme
 	<ul>
-		<li>version: 1.14</li>
+		<li>version: 1.16</li>
 	</ul>
 </p>
 <p>Project page:
@@ -50,6 +50,24 @@
 		<li>if you experience any javascript problem, try disable animations in Appearance -&gt; Theme options</li>
 		<li>print_preview.css is a stylesheet file used to emulate a print preview.</li>
 		<li>In order to use the new widgets, you need to activate them in Appearance -&gt; Widgets </li>
+	</ul>
+</p>
+<p>CHANGE LOG (FROM VERSION 1.15):
+	<ul>
+		<li>Adds:
+			<ul>
+				<li>Compact view option for "Latest comment authors" widget</li>
+				<li>Option for hiding posts extra info in posts overview</li>
+				<li>Option for disabling mini-login (disabled even if siCaptcha plugin is active)</li>
+			</ul>
+		</li>
+		<li>Fixes:
+			<ul>
+				<li>"Today is" issue</li>
+				<li>Many minor graphical issues</li>
+				<li>Increased compatibility with multi-byte environments</li>
+			</ul>
+		</li>
 	</ul>
 </p>
 <p>CHANGE LOG (FROM VERSION 1.11):
