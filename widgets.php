@@ -507,6 +507,142 @@ class shiword_Widget_pop_categories extends WP_Widget {
 }
 
 /**
+ * Social network widget class.
+ * Social media services supported: Facebook, Twitter, Myspace, Youtube, LinkedIn, Del.icio.us, Digg, Flickr, Reddit, StumbleUpon, Technorati and Github.
+ * Optional: RSS icon. 
+ *
+ */
+
+class shiword_Widget_social extends WP_Widget {
+	function shiword_Widget_social() {
+		$widget_ops = array(
+            'classname' => 'shi-widget-social',
+            'description' => __("This widget lets visitors of your blog subscribe to it and follow you on popular social networks like Twitter, FaceBook etc.", "shiword"));
+		$control_ops = array('width' => 650);
+
+		$this->WP_Widget("shi-social", __("Follow Me", "shiword"), $widget_ops, $control_ops);
+        $this->follow_urls = array(
+            'Facebook',
+            'Twitter',
+            'Myspace',
+            'Youtube',
+            'LinkedIn',
+            'Delicious',
+            'Digg',
+            'Flickr',
+            'Reddit',
+            'StumbleUpon',
+            'Technorati',
+            'Github',
+            'RSS');
+	}
+
+    function form($instance) {
+        $defaults = array("title" => __("Follow Me", "shiword"),
+            "icon_size" => '48px',
+        );
+        foreach ($this->follow_urls as $follow_service ) {
+            $defaults[$follow_service."_icon"] = $follow_service;
+            $defaults["show_".$follow_service] = false;
+        }
+        $instance = wp_parse_args((array)$instance, $defaults);
+?>
+    <div>
+
+<?php
+        foreach($this->follow_urls as $follow_service ) {
+?>
+        <div style="float: left; width: 40%; margin: 0pt 5%;">
+			<h2>
+				<input id="<?php echo $this->get_field_id('show_'.$follow_service); ?>" name="<?php echo $this->get_field_name('show_'.$follow_service); ?>" type="checkbox" <?php checked( $instance['show_'.$follow_service], 'on'); ?>  class="checkbox" />
+				<img style="vertical-align:middle; width:40px; height:40px;" src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service; ?>.png" alt="<?php echo $follow_service; ?>" />
+				<?php echo $follow_service; ?>
+			</h2>
+<?php
+            if ($follow_service != 'RSS') {
+                $url_or_account = $follow_service;
+?>
+        <p>
+            <label for="<?php echo $this->get_field_id($follow_service.'_account'); ?>">
+<?php
+				printf(__('Enter %1$s account link:', 'shiword'), $follow_service);
+?>
+            </label>
+            <input id="<?php echo $this->get_field_id($follow_service.'_account'); ?>" name="<?php echo $this->get_field_name($follow_service.'_account'); ?>" value="<?php if (isset($instance[$follow_service.'_account'])) echo $instance[$follow_service.'_account']; ?>" class="widefat" />
+        </p>
+
+<?php
+            }
+?>
+        </div>
+<?php
+        }
+?>
+        <div class="clear" style="padding: 10px 0; border-top: 1px solid #DFDFDF; text-align: right;">
+            <label for="<?php echo $this->get_field_id('icon_size'); ?>"><?php _e('Select your icon size', 'shiword'); ?></label><br />
+            <select name="<?php echo $this->get_field_name('icon_size'); ?>" id="<?php echo $this->get_field_id('icon_size'); ?>" >
+<?php
+            $size_array = array ('16px', '24px', '32px', '40px', '48px', '64px');
+            foreach($size_array as $size) {
+?>
+                <option value="<?php echo $size; ?>" <?php if ($instance['icon_size'] == $size) { echo " selected "; } ?>><?php echo $size; ?></option>
+<?php
+            }
+?>
+            </select>
+        </div>
+    </div>
+<?php
+    }
+
+    function update($new_instance, $old_instance) {
+        $instance = $old_instance;
+        $instance["title"] = strip_tags($new_instance["title"]);
+        $instance["icon_size"] = $new_instance["icon_size"];
+
+        foreach ($this->follow_urls as $follow_service ) {
+            $instance['show_'.$follow_service] = $new_instance['show_'.$follow_service];
+            $instance[$follow_service.'_account'] = $new_instance[$follow_service.'_account'];
+        }
+
+        return $instance;
+    }
+
+	function widget( $args, $instance ) {
+		extract($args);
+        $title = apply_filters('widget_title', empty($instance['title']) ? '' : $instance['title']);
+        $icon_size = $instance['icon_size'];
+        echo $before_widget;
+        if (!empty($title)) {
+            echo $before_title;
+            echo $title;
+            echo $after_title;
+        }
+?>
+    <div class="fix" style="text-align: center;">
+<?php
+        foreach ($this->follow_urls as $follow_service ) {
+            $show = $instance['show_'.$follow_service];
+            $account = $instance[$follow_service.'_account'];
+            if ($follow_service == 'RSS') {
+                $account = get_bloginfo( 'rss2_url' );
+            }
+            if ($show && !empty($account)) {
+?>
+        <a href="<?php echo $account; ?>" class="shi-social-icon" title="<?php echo $follow_service;?>">
+            <img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service;?>.png" alt="<?php echo $follow_service;?>" style='width: <?php echo $icon_size;?>; height: <?php echo $icon_size;?>;' />
+        </a>
+<?php
+            }
+        }
+?>
+    </div>
+<?php
+        echo $after_widget;
+    }
+}
+
+/**
  * Register all of the default WordPress widgets on startup.
  */
 function shiword_register_widgets() {
@@ -522,6 +658,9 @@ function shiword_register_widgets() {
 	register_widget('shiword_Widget_user_quick_links');
 
 	register_widget('shiword_Widget_pop_categories');
+	
+	register_widget('shiword_Widget_social');
+	
 }
 
 add_action('widgets_init', 'shiword_register_widgets');
