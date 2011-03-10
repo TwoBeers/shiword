@@ -1,0 +1,45 @@
+#primary-widget-area {
+	background: url("../images/widgets/widget_s1.png") no-repeat center 10px transparent;
+	padding-top: 80px;
+}
+#first-footer-widget-area {
+	background: url("../images/widgets/widget_f1.png") no-repeat center 10px transparent;
+	padding-top: 80px;
+}
+#second-footer-widget-area {
+	background: url("../images/widgets/widget_f2.png") no-repeat center 10px transparent;
+	padding-top: 80px;
+}
+#third-footer-widget-area {
+	background: url("../images/widgets/widget_f3.png") no-repeat center 10px transparent;
+	padding-top: 80px;
+}
+#header-widget-area {
+	background: url("../images/widgets/widget_h1.png") no-repeat center 10px transparent;
+	padding-top: 80px;
+}
+
+div[id*=shi-recent-comments] .widget-title {
+	background: url("../images/tb_micrologo.png") no-repeat left center transparent;
+	padding-left: 42px;
+}
+div[id*=shi-social] .widget-title {
+	background: url("../images/tb_micrologo.png") no-repeat left center transparent;
+	padding-left: 42px;
+}
+div[id*=shi-categories] .widget-title {
+	background: url("../images/tb_micrologo.png") no-repeat left center transparent;
+	padding-left: 42px;
+}
+div[id*=shi-user-quick-links] .widget-title {
+	background: url("../images/tb_micrologo.png") no-repeat left center transparent;
+	padding-left: 42px;
+}
+div[id*=shi-recent-commentators] .widget-title {
+	background: url("../images/tb_micrologo.png") no-repeat left center transparent;
+	padding-left: 42px;
+}
+div[id*=shi-popular-posts] .widget-title {
+	background: url("../images/tb_micrologo.png") no-repeat left center transparent;
+	padding-left: 42px;
+}

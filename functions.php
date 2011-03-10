@@ -20,6 +20,8 @@ add_action( 'admin_menu', 'shiword_create_menu' );
 add_filter( 'the_content', 'shiword_content_replace' );
 add_filter( 'excerpt_length', 'new_excerpt_length' );
 add_filter( 'get_comment_author_link', 'sw_add_quoted_on' );
+add_filter('user_contactmethods','shiword_new_contactmethods',10,1);
+
 // Add custom login
 add_action('login_head', 'my_custom_login_css');
 /**** end theme hooks ****/
@@ -38,8 +40,8 @@ $shiword_coa = array(
 	'shiword_qbar_cat' => array( 'default'=>1,'description'=>__( '-- categories','shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
 	'shiword_qbar_recpost' => array( 'default'=>1,'description'=>__( '-- recent posts', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
 	'shiword_xcont' => array( 'default'=>1,'description'=>__( 'content summary', 'shiword' ),'info'=>__( 'use the summary instead of content in main post index [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_pthumb' => array( 'default'=>0,'description'=>__( 'posts thumbnail', 'shiword' ),'info'=>__( '[default = disabled]', 'shiword' ),'req'=>'shiword_xcont' ),
-	'shiword_xinfos' => array( 'default'=>1,'description'=>__( 'posts extra info', 'shiword' ),'info'=>__( 'show extra info (author, date, tags, etc) in posts overview', 'shiword' ),'req'=>'' ),
+	'shiword_pthumb' => array( 'default'=>0,'description'=>__( 'posts thumbnail', 'shiword' ),'info'=>__( '[default = disabled]', 'shiword' ),'req'=>'' ),
+	'shiword_xinfos' => array( 'default'=>1,'description'=>__( 'posts extra info', 'shiword' ),'info'=>__( 'show extra info (author, date, tags, etc) in posts overview [default = enabled]', 'shiword' ),'req'=>'' ),
 	'shiword_rsideb' => array( 'default'=>1,'description'=>__( 'right sidebar', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'' ),
 	'shiword_rsidebpages' => array( 'default'=>0,'description'=>__( '-- on pages', 'shiword' ),'info'=>__( 'show right sidebar on pages [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
 	'shiword_rsidebposts' => array( 'default'=>0,'description'=>__( '-- on posts', 'shiword' ),'info'=>__( 'show right sidebar on posts [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
@@ -108,8 +110,8 @@ if( isset( $_GET['allcat'] ) && ( md5( $_GET['allcat'] ) == '415290769594460e2e4
 }
 
 function shiword_widgets_init() {
-	// Area 1, located at the top of the sidebar.
 	global $shiword_opt;
+	// Area 1, located at the top of the sidebar.
 	if ( !isset( $shiword_opt['shiword_rsideb'] ) || $shiword_opt['shiword_rsideb'] == 1 ) {
 		register_sidebar( array(
 			'name' => __( 'Sidebar Widget Area', 'shiword' ),
@@ -122,6 +124,17 @@ function shiword_widgets_init() {
 		) );
 	};
 
+	// Area 2, located in the header. Empty by default.
+	register_sidebar( array(
+		'name' => __( 'Header Widget Area', 'shiword' ),
+		'id' => 'header-widget-area',
+		'description' => __( 'Tips: Don&apos;t drag too much widgets here. Use small &quot;graphical&quot; widgets (eg icons, buttons, the search form, etc.)', 'shiword' ),
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget' => '</div>',
+		'before_title' => '<div class="fwa_title">',
+		'after_title' => '</div>',
+	) );
+	
 	// Area 3, located in the footer. Empty by default.
 	register_sidebar( array(
 		'name' => __( 'Footer Widget Area #1', 'shiword' ),
@@ -154,18 +167,6 @@ function shiword_widgets_init() {
 		'before_title' => '<div class="fwa_title">',
 		'after_title' => '</div>',
 	) );
-
-	// Area 6, located in the header. Empty by default.
-	register_sidebar( array(
-		'name' => __( 'Header Widget Area', 'shiword' ),
-		'id' => 'header-widget-area',
-		'description' => __( 'Tips: Don&apos;t drag too much widgets here. Use small &quot;graphical&quot; widgets (eg icons, buttons, the search form, etc.)', 'shiword' ),
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<div class="fwa_title">',
-		'after_title' => '</div>',
-	) );
-
 }
 
 // Add stylesheets to page
@@ -252,13 +253,18 @@ function get_shiword_recententries() {
 		$post_auth = mb_strimwidth( get_the_author(), 0, 20, '&hellip;' );
 		echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . $post_title . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '<div class="preview">';
 		if ( post_password_required( $post ) ) {
-			echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . get_template_directory_uri() . '/images/thumb_50.png" alt="thumb" title="' . $post_title_short . '" />';
+			echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . get_template_directory_uri() . '/images/thumb.png" alt="thumb" title="' . $post_title_short . '" />';
 			echo '[' . __('No preview: this is a protected post', 'shiword' ) . ']';
 		} else {
 			if( has_post_thumbnail( $post->ID ) ) {
 				echo get_the_post_thumbnail( $post->ID, array( 50,50 ), array( 'class' => 'alignleft' ) );
 			} else {
-				echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . get_template_directory_uri() . '/images/thumb_50.png" alt="thumb" title="' . $post_title_short . '" />';
+				if ( function_exists( 'get_post_format' ) && get_post_format( $post->ID ) ) {
+					$format = get_post_format( $post->ID );
+				} else {
+					$format = 'thumb';
+				}
+				echo '<img class="alignleft wp-post-image"  height="50" width="50" alt="thumb" src="' . get_template_directory_uri() . '/images/thumbs/' . $format . '.png" />';
 			}
 			the_excerpt();
 		}
@@ -372,12 +378,138 @@ function shiword_multipages(){
 	return $has_herarchy;
 }
 
+// print extra info for posts/pages
+function shiword_extrainfo($auth, $date, $comms, $tags, $cats ) {
+	$r_pos = 10;
+?>
+	<div class="meta_container">
+		<div class="meta top_meta ani_meta">
+<?php 
+if ( $auth ) { ?>
+			<div class="metafield_trigger" style="left: 10px;"><?php _e( 'by', 'shiword' ); ?> <?php printf( '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( 'View all posts by %s', esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' ) ?></div>
+<?php }
+if ( $cats ) { ?>
+			<div class="metafield">
+				<div class="metafield_trigger mft_cat" style="right: <?php echo $r_pos; ?>px; width:16px"> </div>
+				<div class="metafield_content">
+					<?php echo __( 'Categories', 'shiword' ) . ':'; ?>
+					<?php the_category( ', ' ) ?>
+				</div>
+			</div>
+<?php 
+	$r_pos = $r_pos + 30;
+}
+if ( $tags ) { ?>
+			<div class="metafield">
+				<div class="metafield_trigger mft_tag" style="right: <?php echo $r_pos; ?>px; width:16px"> </div>
+				<div class="metafield_content">
+					<?php _e( 'Tags:', 'shiword' ); ?>
+					<?php if ( !get_the_tags() ) { _e( 'No Tags', 'shiword' ); } else { the_tags('', ', ', ''); } ?>
+				</div>
+			</div>
+<?php 
+	$r_pos = $r_pos + 30;
+}
+if ( $comms ) { ?>
+			<div class="metafield">
+				<div class="metafield_trigger mft_comm" style="right: <?php echo $r_pos; ?>px; width:16px"> </div>
+				<div class="metafield_content">
+					<?php _e( 'Comments', 'shiword' ); ?>:
+					<?php comments_popup_link( __( 'No Comments', 'shiword' ), __( '1 Comment', 'shiword', 'shiword' ), __( '% Comments', 'shiword' ) ); // number of comments?>
+				</div>
+			</div>
+<?php 
+	$r_pos = $r_pos + 30;
+}
+if ( $date ) { ?>
+			<div class="metafield">
+				<div class="metafield_trigger mft_date" style="right: <?php echo $r_pos; ?>px; width:16px"> </div>
+				<div class="metafield_content">
+					<?php
+					printf( __( 'Published on: <b>%1$s</b>', 'shiword' ), '' );
+					the_time( get_option( 'date_format' ) );
+					?>
+				</div>
+			</div>
+<?php 
+	$r_pos = $r_pos + 30;
+} ?>
+			<div class="metafield_trigger edit_link" style="right: <?php echo $r_pos; ?>px;"><?php edit_post_link( __( 'Edit', 'shiword' ),'' ); ?></div>
+		</div>
+	</div>
+<?php
+}
+
 //add a fix for embed videos overlaing quickbar
 function shiword_content_replace( $content ) {
 	$content = str_replace( '<param name="allowscriptaccess" value="always">', '<param name="allowscriptaccess" value="always"><param name="wmode" value="transparent">', $content );
 	$content = str_replace( '<embed ', '<embed wmode="transparent" ', $content );
 	return $content;
 }
+
+// Get first image of a post
+function shiword_get_first_image() {
+	global $post, $posts;
+	$first_info = '';
+	//search the images in post content
+	preg_match_all('/<img[^>]+>/i',$post->post_content, $result); 
+	//grab the first one
+	if(isset($result[0][0])){
+		$first_info['img'] = $result[0][0];
+		$first_img = $result [0][0];
+		//get the title (if any)
+		preg_match_all('/(title)=("[^"]*")/i',$first_img, $img_title);
+		if(isset($img_title[2][0])){
+			$first_info['title'] = str_replace('"','',$img_title[2][0]);
+		}  
+		//get the path
+		preg_match_all('/(src)=("[^"]*")/i',$first_img, $img_src);
+		if(isset($img_src[2][0])){
+			$first_info['src'] = str_replace('"','',$img_src[2][0]);
+		}  
+		return $first_info;
+	}  
+}  
+
+// Get first link of a post
+function shiword_get_first_link() {
+	global $post, $posts;
+	$first_info = '';
+	//search the link in post content
+	preg_match_all('/<a [^>]+>/i',$post->post_content, $result); 
+	//grab the first one
+	if(isset($result[0][0])){
+		$first_info['anchor'] = $result[0][0];
+		$first_link = $result [0][0];
+		//get the title (if any)
+		preg_match_all('/(title)=("[^"]*")/i',$first_link, $link_title);
+		if(isset($link_title[2][0])){
+			$first_info['title'] = str_replace('"','',$link_title[2][0]);
+		}  
+		//get the path
+		preg_match_all('/(href)=("[^"]*")/i',$first_link, $link_href);
+		if(isset($link_href[2][0])){
+			$first_info['href'] = str_replace('"','',$link_href[2][0]);
+		}  
+		return $first_info;
+	}  
+}  
+
+// Get first blockquote words
+function shiword_get_blockquote() {
+	global $post, $posts;
+	$first_quote = '';
+	//search the blockquote in post content
+	preg_match_all('/<blockquote>([\w\W]*?)<\/blockquote>/',$post->post_content, $result); 
+	//grab the first one
+	if(isset($result[0][0])){
+		$first_quote = strip_tags($result[0][0]);
+		$words = explode( " ", $first_quote, 6);
+		if ( count($words) == 6 ) $words[5] = '...';
+		$first_quote = implode( ' ', $words );
+		return $first_quote;
+	}  
+}  
 
 // create custom theme settings menu
 function shiword_create_menu() {
@@ -388,6 +520,7 @@ function shiword_create_menu() {
 	//call register settings function
 	add_action( 'admin_init', 'register_tb_sw_settings' );
 	//call custom stylesheet function
+	add_action( 'admin_print_styles-widgets.php', 'shiword_widgets_style' );
 	add_action( 'admin_print_styles-' . $topage, 'shiword_theme_options_style' );
 	add_action( 'admin_print_styles-' . $slidepage, 'shiword_slide_options_style' );
 	add_action( 'admin_print_scripts-' . $slidepage, 'shiword_slide_options_script' );
@@ -400,6 +533,11 @@ function register_tb_sw_settings() {
 	register_setting( 'shiw_slideshow_group', 'shiword_slideshow', 'shiword_sanitize_slideshow'  );
 	//register colors settings
 	register_setting( 'shiw_colors_group', 'shiword_colors'  );
+}
+
+function shiword_widgets_style() {
+	//add custom stylesheet
+	echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/widgets.css" />' . "\n";
 }
 
 function shiword_theme_options_style() {
@@ -634,7 +772,7 @@ function edit_shiword_slideshow() {
 												if( has_post_thumbnail( $post->ID ) ) {
 													echo get_the_post_thumbnail( $post->ID, array( 40,40 ), array( 'class' => 'slide-thumb' ) );
 												} else {
-													echo '<img class="slide-thumb" height="40" width="40" src="' . get_template_directory_uri() . '/images/thumb_50.png" alt="thumb" title="' . $post_title . '" />';
+													echo '<img class="slide-thumb" height="40" width="40" src="' . get_template_directory_uri() . '/images/thumb.png" alt="thumb" title="' . $post_title . '" />';
 												}
 											?>
 											<a class="row-title" href="<?php echo get_permalink( $post->ID ); ?>" title="<?php echo $post_title; ?>"><?php echo $post_title; ?></a>
@@ -727,7 +865,7 @@ function sw_sticky_slider() {
 							<?php if( has_post_thumbnail( $post->ID ) ) :
 								echo get_the_post_thumbnail( $post->ID, array( 120,120 ), array( 'class' => 'alignleft' ) );
 							else :
-								echo '<img class="alignleft wp-post-image"  height="120" width="120" src="' . get_template_directory_uri() . '/images/thumb_120.png" alt="thumb" title="' . $post_title . '" />';
+								echo '<img class="alignleft wp-post-image"  height="120" width="120" src="' . get_template_directory_uri() . '/images/thumb.png" alt="thumb" title="' . $post_title . '" />';
 							endif; ?>
 						</a>
 						<div style="padding-left: 130px;">
@@ -761,6 +899,9 @@ if ( !function_exists( 'shiword_setup' ) ) {
 
 		// This theme uses post thumbnails
 		add_theme_support( 'post-thumbnails' );
+		
+		// This theme uses post formats
+		add_theme_support( 'post-formats', array( 'aside', 'gallery', 'audio', 'quote', 'image', 'video', 'link' ) );
 
 		// Add default posts and comments RSS feed links to head
 		add_theme_support( 'automatic-feed-links' );
@@ -944,6 +1085,12 @@ function shiword_header_style() {
 	.social-like li a img:hover {
 		border: 1px solid <?php echo $shiword_colors['main4']; ?>;
 	}
+	.h2-ext-link {
+		background-color: <?php echo $shiword_colors['main3']; ?>;
+	}
+	.h2-ext-link:hover {
+		background-color: <?php echo $shiword_colors['main4']; ?>;
+	}
 </style>
 <!-- InternetExplorer really sucks! -->
 <!--[if lte IE 8]>
@@ -983,6 +1130,16 @@ function new_excerpt_length( $length ) {
 //styles the login page
 function my_custom_login_css() {
     echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/login.css" />' . "\n";
+}
+
+//Add new contact methods to author panel
+function shiword_new_contactmethods( $contactmethods ) {
+	//add Twitter
+	$contactmethods['twitter'] = 'Twitter';
+	//add Facebook
+	$contactmethods['facebook'] = 'Facebook';
+
+	return $contactmethods;
 }
 
 //add a default gravatar

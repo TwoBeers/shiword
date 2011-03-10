@@ -13,7 +13,7 @@ class shiword_Widget_popular_posts extends WP_Widget {
 
 	function shiword_Widget_popular_posts() {
 		$widget_ops = array('classname' => 'shi_widget_popular_posts', 'description' => __( 'The most commented posts on your site','shiword') );
-		$this->WP_Widget('shi-popular-posts', __('([][]) - Popular Posts','shiword'), $widget_ops);
+		$this->WP_Widget('shi-popular-posts', __('Popular Posts','shiword'), $widget_ops);
 		$this->alt_option_name = 'shi_widget_popular_posts';
 
 		add_action( 'save_post', array(&$this, 'flush_widget_cache') );
@@ -128,7 +128,7 @@ class shiword_Widget_latest_commented_posts extends WP_Widget {
 
 	function shiword_Widget_latest_commented_posts() {
 		$widget_ops = array('classname' => 'shi_widget_latest_commented_posts', 'description' => __( 'The latest commented posts/pages of your site','shiword' ) );
-		$this->WP_Widget('shi-recent-comments', __('([][]) - Latest activity','shiword'), $widget_ops);
+		$this->WP_Widget('shi-recent-comments', __('Latest activity','shiword'), $widget_ops);
 		$this->alt_option_name = 'shi_widget_latest_commented_posts';
 
 		add_action( 'comment_post', array(&$this, 'flush_widget_cache') );
@@ -248,7 +248,7 @@ class shiword_Widget_latest_commentators extends WP_Widget {
 
 	function shiword_Widget_latest_commentators() {
 		$widget_ops = array('classname' => 'shi_widget_latest_commentators', 'description' => __( 'The latest comment authors','shiword' ) );
-		$this->WP_Widget('shi-recent-commentators', __('([][]) - Latest comment authors','shiword'), $widget_ops);
+		$this->WP_Widget('shi-recent-commentators', __('Latest comment authors','shiword'), $widget_ops);
 		$this->alt_option_name = 'shi_widget_latest_commentators';
 
 		add_action( 'comment_post', array(&$this, 'flush_widget_cache') );
@@ -366,7 +366,7 @@ class shiword_Widget_user_quick_links extends WP_Widget {
 
 	function shiword_Widget_user_quick_links() {
 		$widget_ops = array('classname' => 'shi_widget_user_quick_links', 'description' => __( 'Some useful links for users','shiword' ) );
-		$this->WP_Widget('shi-user-quick-links', __('([][]) - User quick links','shiword'), $widget_ops);
+		$this->WP_Widget('shi-user-quick-links', __('User quick links','shiword'), $widget_ops);
 		$this->alt_option_name = 'shi_widget_user_quick_links';
 	}
 
@@ -448,7 +448,7 @@ class shiword_Widget_pop_categories extends WP_Widget {
 
 	function shiword_Widget_pop_categories() {
 		$widget_ops = array( 'classname' => 'shi_widget_categories', 'description' => __( 'A list of popular categories', 'shiword' ) );
-		$this->WP_Widget('shi-categories', __('([][]) - Popular Categories', 'shiword'), $widget_ops);
+		$this->WP_Widget('shi-categories', __('Popular Categories', 'shiword'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {
@@ -522,19 +522,25 @@ class shiword_Widget_social extends WP_Widget {
 
 		$this->WP_Widget("shi-social", __("Follow Me", "shiword"), $widget_ops, $control_ops);
         $this->follow_urls = array(
-            'Facebook',
-            'Twitter',
-            'Myspace',
-            'Youtube',
-            'LinkedIn',
-            'Delicious',
-            'Digg',
-            'Flickr',
-            'Reddit',
-            'StumbleUpon',
-            'Technorati',
-            'Github',
-            'RSS');
+			'Buzz',
+			'Delicious',
+			'Deviantart',
+			'Digg',
+			'Dropbox',
+			'Facebook',
+			'Flickr',
+			'Github',
+			'Hi5',
+			'LinkedIn',
+			'Myspace',
+			'Orkut',
+			'Reddit',
+			'Vimeo',
+			'StumbleUpon',
+			'Technorati',
+			'Twitter',
+			'Youtube',
+			'Rss');
 	}
 
     function form($instance) {
@@ -642,6 +648,73 @@ class shiword_Widget_social extends WP_Widget {
     }
 }
 
+
+/**
+ * Popular asides widget class
+ *
+ */
+class shiword_Widget_asides extends WP_Widget {
+
+	function shiword_Widget_asides() {
+		$widget_ops = array( 'classname' => 'shi_widget_asides', 'description' => __( 'A list of popular asides', 'shiword' ) );
+		$this->WP_Widget('shi-asides', __('Popular asides', 'shiword'), $widget_ops);
+	}
+
+	function widget( $args, $instance ) {
+		extract( $args );
+		global $posts;
+		
+		rewind_posts();
+
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Popular asides', 'shiword' ) : $instance['title'], $instance, $this->id_base);
+
+		echo $before_widget;
+		if ( $title )
+			echo $before_title . $title . $after_title;
+?>
+		<ul>
+<?php
+if ($posts) : foreach ($posts as $post) : the_post();
+?>
+<?php if ( function_exists( 'get_post_format' ) && 'aside' === get_post_format( $post->ID ) ) { ?>
+<li class="asides_sidebar">
+ <?php echo $post->post_excerpt ?> <?php the_content(); ?>
+ <small><?php comments_popup_link(__('#'), __('(1)'), __('(%)')); ?>
+   <?php edit_post_link('Edit', ' — '); ?></small>
+</li>
+<?php } ?>
+<?php endforeach; else: ?>
+<p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
+<?php endif; ?>
+		</ul>
+<?php
+		echo $after_widget;
+	}
+
+	function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+		$instance['title'] = strip_tags($new_instance['title']);
+
+		return $instance;
+	}
+
+	function form( $instance ) {
+		//Defaults
+		$instance = wp_parse_args( (array) $instance, array( 'title' => '') );
+		$title = esc_attr( $instance['title'] );
+?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:','shiword'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+		</p>
+
+<?php
+	}
+
+}
+
+
+
 /**
  * Register all of the default WordPress widgets on startup.
  */
@@ -661,6 +734,8 @@ function shiword_register_widgets() {
 	
 	register_widget('shiword_Widget_social');
 	
+	register_widget('shiword_Widget_asides');
+
 }
 
 add_action('widgets_init', 'shiword_register_widgets');

@@ -327,7 +327,7 @@ input[type=password]:focus {
 	position: relative;
 }
 #header-widget-area {
-	padding: 5px;
+	padding: 5px 5px 0;
 }
 #header-widget-area .widget {
 	clear: both;
@@ -713,9 +713,9 @@ input[type=password]:focus {
 .meta_container {
 	display: block;
 	width: auto;
-	height: 1px;
+	height: 24px;
 	position: relative;
-	margin-right: 12px;
+	margin: 0 12px 10px 0;
 }
 .metafield_content {
 	display: none;
@@ -883,11 +883,7 @@ h2.storytitle {
 	font-size: 1.5em;
 }
 .storycontent {
-	margin-top: 40px;
 	font-size: 12px;
-}
-.no-info {
-	margin-top: 0;
 }
 .storycontent img {
 	max-width:100%;
@@ -902,11 +898,44 @@ h2.storytitle {
 	-webkit-box-shadow: 0 0 8px steelblue;
 	border: 1px solid #777;
 	margin: 0 -5px 15px;
-	padding: 5px;
+	padding: 5px 5px 10px;
 }
 .dim_cpc {
 	background: transparent url('images/lens.png') left center no-repeat;
 	padding: 5px 0 5px 22px;
+}
+.format-gallery .gallery-thumb, .category-gallery .gallery-thumb {
+    float: left;
+    margin-right: 5px;
+    margin-top: -4px;
+}
+.format-gallery .size-thumbnail img, .category-gallery .size-thumbnail img {
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #404040;
+	padding: 5px;
+}
+.format-aside, .category-aside {
+    background-color: #1A1A1A;
+    padding: 5px;
+	border:none;
+}
+div.format-aside .post-body, div.category-aside .post-body {
+	margin: 0;
+}
+.format-aside .wp-post-image, .category-aside .wp-post-image {
+	width: 50px;
+	height: 50px;
+	margin-right: 5px;
+}
+.h2-ext-link {
+    background-color: #21759b;
+    vertical-align: text-bottom;
+}
+.h2-ext-link:hover {
+    background-color: #ff8d39;
 }
 
 /* comments 
@@ -1055,10 +1084,6 @@ li.pingback {
 }
 /* Gallery listing 
 ----------------------------------------------------------*/
-.category-gallery .size-thumbnail img {
-	border: 10px solid #fff;
-	margin-bottom: 0;
-}
 .category-gallery .gallery-thumb {
 	float: left;
 	margin-right: 20px;
@@ -1190,4 +1215,16 @@ img.wp-post-image {
 }
 .wp-pagenavi {
 	text-align: center;
+}
+#entry-author-info {
+	padding:10px;
+	text-align: left;
+	border-top: 1px solid #404040;
+}
+#entry-author-info img.avatar {
+	float: left;
+	margin:0 5px 5px 0;
+}
+#entry-author-info span {
+	color:#404040;
 }
