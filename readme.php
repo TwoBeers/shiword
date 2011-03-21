@@ -87,7 +87,6 @@
 		</li>
 	</ul>
 </p>
-
 <p>SUPPORT:
 	<ul>
 		<li>for any question/problem contact us at
@@ -106,7 +105,11 @@
 
 <p>CREDITS:
 	<ul>
-		<li>Thierry from <a href="http://www.open-blogue.fr/" target="_blank">Open Blogue</a> for the French translation</li>
+		<li>BeckMInt from <a href="http://beckmint.com/" target="_blank">BeckMInt</a> for the Chinese translation</li>
+		<li>Jirka from <a href="http://www.meizu-m9.cz/" target="_blank">Meizu M9</a> for the Czech translation</li>
 		<li>Dirk from <a href="http://dirkdejager.heliohost.org/" target="_blank">Nimrod</a> for the Dutch translation</li>
+		<li>Thierry from <a href="http://www.open-blogue.fr/" target="_blank">Open Blogue</a> for the French translation</li>
+		<li>ChelAxe from <a href="http://chelaxe.narod.ru/" target="_blank">ChelAxe@DFH:~$</a> for the Russian translation</li>
+		<li>Koala from <a href="http://www.vecierka.com/" target="_blank">Vecierka</a> for the Slovak translation</li>
 	</ul>
 </p>
