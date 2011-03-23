@@ -16,9 +16,8 @@
 		</title>
 
 	<?php
-		global $shiword_opt, $is_sw_printpreview;
+		global $shiword_opt, $shiword_is_printpreview;
 	?>
-	
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 	<?php wp_get_archives( 'type=monthly&format=link' ); ?>
 	
@@ -53,11 +52,18 @@
 		<div id="headerimg">
 			<?php get_sidebar( 'header' ); // show header widgets areas ?>
 		</div>
-		<div id="pages">
-			<?php wp_nav_menu( array( 'menu_id' => 'mainmenu', 'fallback_cb' => 'shiword_pages_menu', 'theme_location' => 'primary' ) ); //main menu ?>
-			<div class="fixfloat"></div>
-		</div>
-		<?php if ( $shiword_opt['shiword_sticky'] == 1 && !is_404() && !is_singular() && !$is_sw_printpreview ) { sw_sticky_slider(); } // the sticky slider ?>
+		<?php $headmenu = wp_nav_menu( array( 'echo' => 0, 'menu_id' => 'mainmenu', 'fallback_cb' => 'shiword_pages_menu', 'theme_location' => 'primary' ) ); //main menu ?>
+		<?php if ( $headmenu ) echo '<div class="sw-menu">'.$headmenu.'<div class="fixfloat"> </div></div>' ?>
+		<?php  // the sticky slider 
+			if ( $shiword_opt['shiword_sticky'] == 1 && !is_404() && !$shiword_is_printpreview ) {
+				if (
+					( is_page() && ( $shiword_opt['shiword_sticky_pages'] == 1 ) ) ||
+					( is_single() && ( $shiword_opt['shiword_sticky_posts'] == 1 ) ) ||
+					( is_front_page() && ( $shiword_opt['shiword_sticky_front'] == 1 ) ) ||
+					( ( is_archive() || is_search() ) && ( $shiword_opt['shiword_sticky_over'] == 1 ) )
+				) shiword_sticky_slider(); 
+			}
+		?>
 		<?php
 			$postswidth = 'posts_narrow';
 			if ( 

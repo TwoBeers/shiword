@@ -1,8 +1,8 @@
 ﻿/*
 Theme Name: Shiword
 Theme URI: http://www.twobeers.net/annunci/shiword
-Description: Simple dark theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, the custom header and the print preview. Shiword is fully customizable (there's also a skin builder!), with one or two columns and up to 5 widgets areas. Supports WP 3.0 new menu tool and post thumbnails.
-Version: 1.16
+Description: Simple dark theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, a post slideshow, the custom header, the print preview and many other. Shiword is fully customizable (there's also a skin builder!), with one or two columns, up to 6 widgets areas, six custom widgets ( "Social links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories" and "Latest comment authors" ) and two menu. It supports custom menus, posts thumbnail and post formats.
+Version: 2.0
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, right-sidebar, custom-colors
 Author: TwoBeers Crew
 Author URI: http://www.twobeers.net/
@@ -202,6 +202,7 @@ input[type=password]:focus {
 	padding-bottom: 10px;
 	margin-left: -1px;
 	background: #f2f2f2 url('images/reflect.png') center bottom no-repeat;
+	z-index: 300;
 }
 #fixedfoot {
 	width: 972px;
@@ -585,23 +586,33 @@ input[type=password]:focus {
 #mainmenu ul {
 	list-style-position: inside;
 }
-#mainmenu {
-	margin: 0;
+#mainmenu,
+#bottommenu {
+	margin: 2px 0;
+	padding: 0;
+	display: block;
 }
 #mainmenu .current-menu-item > a,
 #mainmenu .current_page_item > a,
-#mainmenu .current-cat > a {
+#mainmenu .current-cat > a,
+#bottommenu .current-menu-item > a,
+#bottommenu .current_page_item > a,
+#bottommenu .current-cat > a {
 	color: #f4a460;
 }
 #mainmenu > li.page_item,
-#mainmenu > li.menu-item {
+#mainmenu > li.menu-item,
+#bottommenu > li.page_item,
+#bottommenu > li.menu-item {
 	float: left;
 	list-style: none inside none;
 	margin: 0 5px;
 	padding: 2px 10px;
 }
 #mainmenu > li.page_item > a,
-#mainmenu > li.menu-item > a {
+#mainmenu > li.menu-item > a,
+#bottommenu > li.page_item > a,
+#bottommenu > li.menu-item > a {
 	display: block;
 }
 #mainmenu > li.page_item > ul.children,
@@ -627,14 +638,17 @@ input[type=password]:focus {
 #mainmenu > li.menu-item:hover > ul.sub-menu {
 	display: block;
 }
-#pages {
+.sw-menu {
+	clear: both;
 	background: none repeat scroll 0 0 #21759b;
 	border-bottom: 10px solid #aaa;
 	border-top: 10px solid #aaa;
 	position: relative;
 	z-index: 10;
 	color: #262626;
-	padding: 2px 30px 2px 0;
+	padding: 0;
+	margin: 0;
+	display: block;
 }
 #mainmenu ul.children li,
 #mainmenu ul.sub-menu li {
@@ -822,6 +836,13 @@ input[type=password]:focus {
 .shi_widget_latest_commentators img,
 .shi_widget_latest_commented_posts img {
 	border: 1px solid #404040;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+.shi_widget_latest_commentators img {
+	padding: 3px;
 }
 .social-like {
 	list-style: none outside none;
@@ -839,7 +860,6 @@ span.lc-user-name {
 }
 .social-like li a img {
 	border: 1px solid #21759b;
-
 }
 .social-like li a img:hover {
 	border: 1px solid #ff8d39;
@@ -900,23 +920,6 @@ h2.storytitle {
 	margin: 0 -5px 15px;
 	padding: 5px 5px 10px;
 }
-.dim_cpc {
-	background: transparent url('images/lens.png') left center no-repeat;
-	padding: 5px 0 5px 22px;
-}
-.format-gallery .gallery-thumb, .category-gallery .gallery-thumb {
-    float: left;
-    margin-right: 5px;
-    margin-top: -4px;
-}
-.format-gallery .size-thumbnail img, .category-gallery .size-thumbnail img {
-	-moz-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	border: 1px solid #404040;
-	padding: 5px;
-}
 .format-aside, .category-aside {
     background-color: #1A1A1A;
     padding: 5px;
@@ -936,6 +939,21 @@ div.format-aside .post-body, div.category-aside .post-body {
 }
 .h2-ext-link:hover {
     background-color: #ff8d39;
+}
+.format-status, .category-status {
+    border: 1px solid #ccc;
+}
+.img-navi img {
+    vertical-align: middle;
+}
+.img-navi .img-navi-curimg img {
+	border: 1px solid #404040;
+	padding: 5px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	margin: 0 10px;
 }
 
 /* comments 
@@ -1084,37 +1102,39 @@ li.pingback {
 }
 /* Gallery listing 
 ----------------------------------------------------------*/
-.category-gallery .gallery-thumb {
-	float: left;
-	margin-right: 20px;
-	margin-top: -4px;
+.format-gallery .gallery-thumb, .category-gallery .gallery-thumb,
+.format-image .gallery-thumb, .category-image .gallery-thumb {
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 5px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #404040;
+	padding: 5px;
 }
-.category-gallery .entry-utility {
-	padding-top: 4px;
+.format-gallery .size-thumbnail img,
+.category-gallery .size-thumbnail img,
+.format-image .size-thumbnail img,
+.category-image .size-thumbnail img {
 }
 .gallery {
 	margin: 0 auto 18px;
 }
 .gallery .gallery-item {
 	float: left;
-	margin-top: 0;
+	margin: 0 6px 12px;
+	border: 1px solid #404040;
+	padding: 5px;
 	text-align: center;
-	width: 33%;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	color: #fff;
 }
-.gallery .gallery-caption {
-	color: #777;
-	font-size: 10px;
-	margin: 0 0 12px;
-}
-.gallery dl {
-	margin: 0;
-}
-.gallery img {
-	border: 1px solid #ccc;
-}
-.gallery br+br {
-	display: none;
-}
+
 /* Simple spinner 
 ----------------------------------------------------------*/
 #sw_slider-wrap {
@@ -1156,7 +1176,44 @@ li.pingback {
 	font-size: 18px;
 	margin: 5px 0 10px;
 }
-/* Captions & aligment 
+/* Captions
+----------------------------------------------------------*/
+.img-caption {
+	border: 1px solid #404040;
+	padding: 5px;
+	text-align: center;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	color: #fff;
+	margin: 10px;
+	max-width: 94%;
+}
+.img-caption img {
+	border: 0 none;
+	margin: 0;
+	padding: 0;
+}
+.img-caption .img-caption-inside {
+	position: relative;
+}
+.img-caption .img-caption-text {
+	font-size: 11px;
+	line-height: 17px;
+	margin: 0;
+	width: 100%;
+	padding: 0 0 5px;
+	background: url('images/device/black.png') repeat left top transparent;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+.img-caption:hover .img-caption-text {
+	display: none;
+}
+
+/* Aligment 
 ----------------------------------------------------------*/
 .aligncenter,
 div.aligncenter,
@@ -1168,50 +1225,24 @@ img.aligncenter {
 }
 img.alignleft,
 .alignleft {
-	display: inline;
 	float: left;
-	margin-right: 24px;
+	margin-right: 12px;
 }
 img.alignright,
 .alignright {
-	display: inline;
 	float: right;
-	margin-left: 24px;
+	margin-left: 12px;
 }
 img.alignleft,
 img.alignright,
 img.aligncenter {
 	margin-bottom: 12px;
 }
+
+/* Other 
+----------------------------------------------------------*/
 img.wp-post-image {
 	margin: 0;
-}
-.wp-caption {
-	-moz-box-shadow: 2px 2px 2px #000;
-	box-shadow: 2px 2px 2px #000;
-	-webkit-box-shadow: 2px 2px 2px #000;
-	background-color: #262626;
-	border: 1px solid #ccc;
-	padding-top: 4px;
-	text-align: center;
-	-moz-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	color: #fff;
-	margin: 10px;
-	max-width: 100%;
-}
-.wp-caption img {
-	border: 0 none;
-	margin: 0;
-	padding: 0;
-}
-.wp-caption p.wp-caption-text {
-	font-size: 11px;
-	line-height: 17px;
-	margin: 0;
-	padding: 0 4px 5px;
 }
 .wp-pagenavi {
 	text-align: center;

@@ -177,15 +177,10 @@ class shiword_Widget_latest_commented_posts extends WP_Widget {
 					$post = get_post( $comment->comment_post_ID );
 					setup_postdata( $post );
 					if ( $use_thumbs ) {
-						if( has_post_thumbnail($post->ID) ) {
-							$the_thumb = get_the_post_thumbnail( $post->ID, array( 40,40 ) );
-						} else {
-							$the_thumb = '<img width="40" height="40" src="' . get_template_directory_uri() . '/images/thumb_50.png' . '" alt="post-thumb" />';
-						}
+						$the_thumb = shiword_get_the_thumb( $post->ID, 50, 50, '' );
 					} else {
 						$the_thumb = '';
 					}
-					
 					$output .=  '<li>' . $the_thumb . ' <a href="' . get_permalink( $post->ID ) . '" title="' .  esc_html( $post->post_title ) . '">' . $post->post_title . '</a></li>';
 					$post_array[] = $comment->comment_post_ID;
 					if ( ++$counter >= $number ) break;
@@ -279,12 +274,12 @@ class shiword_Widget_latest_commentators extends WP_Widget {
  		$title = apply_filters('widget_title', empty($instance['title']) ? __('Latest comment authors','shiword') : $instance['title']);
 
 		if ( ! $number = (int) $instance['number'] )
- 			$number = 5;
+ 			$number = 4;
  		else if ( $number < 1 )
  			$number = 1;
 		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
 
-		$comments = get_comments( array( 'status' => 'approve', 'type' => 'comment' ) );
+		$comments = get_comments( array( 'status' => 'approve', 'type' => 'comment', 'number' => 100 ) );
 		$post_array = array();
 		$counter = 0;
 		$output .= $before_widget;
@@ -331,7 +326,7 @@ class shiword_Widget_latest_commentators extends WP_Widget {
 
 	function form( $instance ) {
 		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
-		$number = isset($instance['number']) ? absint($instance['number']) : 5;
+		$number = isset($instance['number']) ? absint($instance['number']) : 4;
 		$thumb = 1;
 		if ( isset($instance['thumb']) && !$thumb = (int) $instance['thumb'] )
 			$thumb = 0;
@@ -540,7 +535,7 @@ class shiword_Widget_social extends WP_Widget {
 			'Technorati',
 			'Twitter',
 			'Youtube',
-			'Rss');
+			'RSS');
 	}
 
     function form($instance) {
@@ -588,7 +583,7 @@ class shiword_Widget_social extends WP_Widget {
             <label for="<?php echo $this->get_field_id('icon_size'); ?>"><?php _e('Select your icon size', 'shiword'); ?></label><br />
             <select name="<?php echo $this->get_field_name('icon_size'); ?>" id="<?php echo $this->get_field_id('icon_size'); ?>" >
 <?php
-            $size_array = array ('16px', '24px', '32px', '40px', '48px', '64px');
+            $size_array = array ('16px', '24px', '32px', '40px', '50px', '60px');
             foreach($size_array as $size) {
 ?>
                 <option value="<?php echo $size; ?>" <?php if ($instance['icon_size'] == $size) { echo " selected "; } ?>><?php echo $size; ?></option>
@@ -650,72 +645,6 @@ class shiword_Widget_social extends WP_Widget {
 
 
 /**
- * Popular asides widget class
- *
- */
-class shiword_Widget_asides extends WP_Widget {
-
-	function shiword_Widget_asides() {
-		$widget_ops = array( 'classname' => 'shi_widget_asides', 'description' => __( 'A list of popular asides', 'shiword' ) );
-		$this->WP_Widget('shi-asides', __('Popular asides', 'shiword'), $widget_ops);
-	}
-
-	function widget( $args, $instance ) {
-		extract( $args );
-		global $posts;
-		
-		rewind_posts();
-
-		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Popular asides', 'shiword' ) : $instance['title'], $instance, $this->id_base);
-
-		echo $before_widget;
-		if ( $title )
-			echo $before_title . $title . $after_title;
-?>
-		<ul>
-<?php
-if ($posts) : foreach ($posts as $post) : the_post();
-?>
-<?php if ( function_exists( 'get_post_format' ) && 'aside' === get_post_format( $post->ID ) ) { ?>
-<li class="asides_sidebar">
- <?php echo $post->post_excerpt ?> <?php the_content(); ?>
- <small><?php comments_popup_link(__('#'), __('(1)'), __('(%)')); ?>
-   <?php edit_post_link('Edit', ' — '); ?></small>
-</li>
-<?php } ?>
-<?php endforeach; else: ?>
-<p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
-<?php endif; ?>
-		</ul>
-<?php
-		echo $after_widget;
-	}
-
-	function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
-		$instance['title'] = strip_tags($new_instance['title']);
-
-		return $instance;
-	}
-
-	function form( $instance ) {
-		//Defaults
-		$instance = wp_parse_args( (array) $instance, array( 'title' => '') );
-		$title = esc_attr( $instance['title'] );
-?>
-		<p>
-			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:','shiword'); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
-		</p>
-
-<?php
-	}
-
-}
-
-
-
-/**
  * Register all of the default WordPress widgets on startup.
  */
 function shiword_register_widgets() {
@@ -733,8 +662,6 @@ function shiword_register_widgets() {
 	register_widget('shiword_Widget_pop_categories');
 	
 	register_widget('shiword_Widget_social');
-	
-	register_widget('shiword_Widget_asides');
 
 }
 
