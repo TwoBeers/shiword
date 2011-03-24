@@ -1,11 +1,11 @@
 <?php get_header(); ?>
-<?php global $is_sw_printpreview; ?>
+<?php global $shiword_is_printpreview; ?>
 
 <?php if ( have_posts() ) {
 	while ( have_posts() ) {
 		the_post(); ?>
 		<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
-			<?php if ( $is_sw_printpreview ) { // print buttons. visible only in print preview mode ?>
+			<?php if ( $shiword_is_printpreview ) { // print buttons. visible only in print preview mode ?>
 				<div id="close_preview">
 					<a href="<?php the_permalink() ?>" rel="bookmark"><?php _e( 'Close', 'shiword' ); ?></a>
 					<a href="javascript:window.print()" id="print_button"><?php _e( 'Print', 'shiword' ); ?></a>

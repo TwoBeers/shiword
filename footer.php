@@ -11,6 +11,8 @@
 				) get_sidebar(); // show sidebar
 			}
 		?>
+		<?php $headmenu = wp_nav_menu( array( 'echo' => 0, 'menu_id' => 'bottommenu', 'fallback_cb' => false, 'theme_location' => 'secondary', 'depth' => 1 ) ); ?>
+		<?php if ( $headmenu ) echo '<div class="sw-menu">'.$headmenu.'<div class="fixfloat"></div></div>' ?>
 		<div id="footer">
 			<?php get_sidebar( 'footer' ); // show footer widgets areas ?>
 			<div id="themecredits">
@@ -44,7 +46,7 @@
 										<div class="menu_sx">
 											<div class="mentit"><?php _e( 'Recent Posts', 'shiword' ); ?></div>
 											<ul class="solid_ul">
-												<?php get_shiword_recententries() ?>
+												<?php shiword_get_recententries() ?>
 											</ul>
 										</div>
 									</div>
@@ -57,7 +59,7 @@
 										<div class="menu_sx">
 											<div class="mentit"><?php _e( 'Categories', 'shiword' ); ?></div>
 											<ul class="solid_ul">
-												<?php get_shiword_categories_wpr(); ?>
+												<?php shiword_get_categories_wpr(); ?>
 												<li style="text-align: right; margin:16px 0 10px;"><a title="<?php _e( 'View all categories', 'shiword' ); ?>" href="<?php echo esc_url( home_url() . '/?allcat=y' ); ?>"><?php _e( 'More...', 'shiword' ); ?></a></li>
 											</ul>
 										</div>
@@ -71,7 +73,7 @@
 										<div class="menu_sx">
 											<div class="mentit"><?php _e( 'Recent Comments', 'shiword' ); ?></div>
 											<ul class="solid_ul">
-												<?php get_shiword_recentcomments(); ?>
+												<?php shiword_get_recentcomments(); ?>
 											</ul>
 										</div>
 									</div>

@@ -109,7 +109,7 @@ class Custom_device_color {
 	// display the preview div
 	function show_preview() {
 			global $shiword_colors;
-			$device_rgba = hex2rgba( $shiword_colors['device_color'], $shiword_colors['device_opacity']);
+			$device_rgba = shiword_hex2rgba( $shiword_colors['device_color'], $shiword_colors['device_opacity']);
 ?>
 					<div id="headimg-bg">
 						<style type="text/css">
@@ -284,8 +284,6 @@ class Custom_device_color {
 						<span class="hide-if-no-js">
 							<a href="#" onclick="showMeColorPicker('2');return false;"><?php _e( 'Select a Color', 'shiword' ); ?></a>
 							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('2','transparent'); return false;"><?php _e( "Set to \"transparent\"" , 'shiword' ); ?></a>
-							&nbsp;-&nbsp;
 							<a href="#" onclick="pickColor('2','<?php echo $this->default_device_bg['device_textcolor']; ?>'); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
 						</span>
 					</td>
@@ -298,8 +296,6 @@ class Custom_device_color {
 						<div class="shi_cp" id="shi_colorpicker_3" style="z-index: 100; background:#eee; border:1px solid #ccc; position:absolute; display:none;"></div>
 						<span class="hide-if-no-js">
 							<a href="#" onclick="showMeColorPicker('3');return false;"><?php _e( 'Select a Color', 'shiword' ); ?></a>
-							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('3','transparent'); return false;"><?php _e( "Set to \"transparent\"" , 'shiword' ); ?></a>
 							&nbsp;-&nbsp;
 							<a href="#" onclick="pickColor('3','<?php echo $this->default_device_bg['device_button']; ?>'); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
 						</span>
@@ -324,8 +320,6 @@ class Custom_device_color {
 						<div class="shi_cp" id="shi_colorpicker_<?php echo $key; ?>" style="z-index: 100; background:#eee; border:1px solid #ccc; position:absolute; display:none;"></div>
 						<span class="hide-if-no-js">
 							<a href="#" onclick="showMeColorPicker('<?php echo $key; ?>');return false;"><?php _e( 'Select a Color', 'shiword' ); ?></a>
-							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('<?php echo $key; ?>','transparent'); return false;"><?php _e( "Set to \"transparent\"" , 'shiword' ); ?></a>
 							&nbsp;-&nbsp;
 							<a href="#" onclick="pickColor('<?php echo $key; ?>', '<?php echo $val; ?>' ); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
 						</span>

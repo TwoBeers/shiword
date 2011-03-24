@@ -11,6 +11,21 @@
 	padding:3px 10px;
 	font-size:11px;
 }
+.sh-opt-descr {
+	width: 220px;
+	font-weight:bold;
+	border-right:1px solid #ccc;
+}
+.sh-opt-chk {
+	width: 20px;
+	border-right:1px solid #ccc;
+	text-align:center;
+	height: 50px;
+}
+.sh-opt-nfo {
+	font-style:italic;
+	border-right:1px solid #ccc;
+}
 #shiword-infos ul {
 	list-style: disc outside;
 	margin-left: 30px;
@@ -21,14 +36,18 @@
 }
 #shiword-options p,
 #shiword-infos p {
-	background-color: #ccc;
 	display: block;
+	margin: 15px 0 3px;
+	padding: 3px;
+}
+#shiword-options h3,
+#shiword-infos h3 {
+	background-color: #ccc;
 	font-weight: bold;
 	-moz-border-radius: 5px;
 	-khtml-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	margin: 15px 0 3px;
 	padding: 3px;
 }
 #shiword-options,
@@ -38,7 +57,7 @@
 	-webkit-box-shadow: 0px 2px 8px #404040;
 	box-shadow: 0px 2px 8px #404040;
 	margin: 20px 0;
-	padding: 0 10px 10px;
+	padding: 10px;
 }
 #selector {
 	list-style: none;
