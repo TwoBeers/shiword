@@ -84,7 +84,7 @@
 								<?php 
 									$otherimgs = array_slice( $images, 0, 4 );
 									foreach ($otherimgs as $image) {
-										$image_img_tag = wp_get_attachment_image( $image->ID, 'thumbnail' );
+										$image_img_tag = wp_get_attachment_image( $image->ID, array( 75, 75 ) );
 										?>
 											<div class="gallery-thumb" style="width: <?php echo floor( get_option('thumbnail_size_w')/2 ); ?>px;">
 												<a class="size-thumbnail" href="<?php the_permalink(); ?>"><?php echo $image_img_tag; ?></a>
@@ -107,7 +107,7 @@
 				<?php } elseif ( function_exists( 'get_post_format' ) && 'aside' == get_post_format( $post->ID ) ) { ?>
 					<div class="storycontent">
 						<?php the_content(); ?>
-						<span style="font-size: 11px; font-style: italic; color: #404040;"><?php the_author(); ?> - <?php the_time( get_option( 'date_format' ) ); ?> - <?php comments_popup_link('(0)', '(1)','(%)'); ?></span>
+						<span style="font-size: 11px; font-style: italic; color: #404040;"><?php the_author(); ?> - <?php the_time( get_option( 'date_format' ) ); ?> - <?php comments_popup_link('(0)', '(1)','(%)'); ?><?php edit_post_link( __( 'Edit', 'shiword' ),' - ' ); ?></span>
 					</div>
 <?php // display posts of the Image format ?>
 				<?php } elseif ( function_exists( 'get_post_format' ) && 'image' == get_post_format( $post->ID ) ) { ?>
@@ -152,7 +152,7 @@
 							if ( $first_link['title'] != '' )
 								$post_title = $first_link['title'];
 					?>
-					<h2 class="storytitle"><a href="<?php the_permalink() ?>" rel="bookmark"><?php echo $post_title; ?></a> - <a href="<?php echo $first_link['href']; ?>" rel="bookmark"><img class="h2-ext-link" alt="link" src="<?php echo get_template_directory_uri() . '/images/link.png'; ?>" /></a></h2>
+					<h2 class="storytitle"><a href="<?php the_permalink() ?>" rel="bookmark"><?php echo $post_title; ?></a> - <a href="<?php echo $first_link['href']; ?>" rel="bookmark"><img class="h2-ext-link" alt="link" src="<?php echo get_stylesheet_directory_uri() . '/images/link.png'; ?>" /></a></h2>
 					<?php if ( $show_xinfo ) { shiword_extrainfo( false, true, true, true, true ); } ?>
 					<?php 
 						} 
@@ -179,7 +179,7 @@
 <?php // display posts of the Status format ?>
 				<?php } elseif ( function_exists( 'get_post_format' ) && 'status' == get_post_format( $post->ID ) ) { ?>
 					<div class="storycontent">
-						<p><span style="font-size: 11px; font-style: italic; color: #404040;"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_time( get_option( 'date_format' ) ); ?></a></span></p>
+						<span style="font-size: 11px; font-style: italic; color: #404040;"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_time( get_option( 'date_format' ) ); ?></a><?php edit_post_link( __( 'Edit', 'shiword' ),' - ' ); ?></span>
 						<?php the_content(); ?>
 					</div>
 <?php // display posts of the other formats ?>

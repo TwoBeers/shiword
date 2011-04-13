@@ -162,7 +162,7 @@ class shiword_Widget_latest_commented_posts extends WP_Widget {
  			$number = 1;
 		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
 
-		$comments = get_comments( array( 'status' => 'approve', 'type' => 'comment' ) );
+		$comments = get_comments( array( 'status' => 'approve', 'type' => 'comment', 'number' => 200 ) );
 		$post_array = array();
 		$counter = 0;
 		$output .= $before_widget;
@@ -279,7 +279,7 @@ class shiword_Widget_latest_commentators extends WP_Widget {
  			$number = 1;
 		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
 
-		$comments = get_comments( array( 'status' => 'approve', 'type' => 'comment', 'number' => 100 ) );
+		$comments = get_comments( array( 'status' => 'approve', 'type' => 'comment', 'number' => 200 ) );
 		$post_array = array();
 		$counter = 0;
 		$output .= $before_widget;

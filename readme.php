@@ -47,7 +47,7 @@
 		<li>Menu animations: jquery powered</li>
 		<li>Custom header: you are your blog!</li>
 		<li>Custom colors: paint your site with the skin builder tool</li>
-		<li>Custom widgets : six new widgets ("Social network", "Popular Post", "Latest Activity", "User quick links", "Popular Categories" and "Latest comment authors") at your disposal</li>
+		<li>Custom widgets : six new widgets ("Social Links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories" and "Latest comment authors") at your disposal</li>
 		<li>Post formats: support for post formats ("aside", "gallery", "audio", "quote", "image", "video", "link", "status")</li>
 	</ul>
 </p>
@@ -87,7 +87,7 @@
 				<li>Options for extra info management</li>
 				<li>Option for disabling mini-login (disabled if siCaptcha plugin is active)</li>
 				<li>New contact methods in user profile (Twitter, Facebook)</li>
-				<li>Social Network widget</li>
+				<li>Social Links widget</li>
 				<li>New look for post attachments navigation</li>
 				<li>"quote selected text" function</li>
 				<li>6 new predefined textures</li>

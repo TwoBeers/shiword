@@ -935,6 +935,7 @@ function shiword_edit_slideshow() {
 
 // display a slideshow for the selected posts
 function shiword_sticky_slider() {
+	global $post;
 	$shiword_options = get_option( 'shiword_slideshow' ); //get the selected posts list
 	if ( !isset( $shiword_options ) || empty( $shiword_options ) ) return; // if no post is selected, exit
 	$posts_string = 'include=' . implode( "," , $shiword_options ) . '&post_type=any'; // generate the 'include' string for posts
