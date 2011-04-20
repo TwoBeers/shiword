@@ -128,7 +128,7 @@
 					<?php }
 				?>
 					<div id="statusbar">
-						<?php _e( 'Welcome', 'shiword' ); ?> <?php if ( is_user_logged_in() ) { echo $current_user->display_name; } ?>, <?php printf( __('today is %1$s, %2$s','shiword'), date_i18n( __( 'l','shiword' ) ), date_i18n( get_option( 'date_format' ) ) ); ?>
+						<?php printf( __( 'Welcome %s', 'shiword' ), ( is_user_logged_in() ) ? $current_user->display_name : '' ); ?>, <?php printf( __('today is %1$s, %2$s','shiword'), date_i18n( __( 'l','shiword' ) ), date_i18n( get_option( 'date_format' ) ) ); ?>
 					</div>
 					<div id="navbuttons">
 						<?php if ( is_singular() ) { ?>
@@ -269,6 +269,9 @@
 </div>
 
 <div id="footer-hook-cont">
+	<!-- Shiword version: <?php global $shiword_version; echo ( !empty( $shiword_version ) ) ? $shiword_version : 'unknown' ; ?>
+		Wordpress version: <?php echo get_bloginfo ( 'version' ); ?>
+		Language: <?php echo get_bloginfo ( 'language' ); ?> -->
 	<?php wp_footer(); ?>
 </div>
 </body>

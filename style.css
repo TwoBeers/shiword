@@ -2,7 +2,7 @@
 Theme Name: Shiword
 Theme URI: http://www.twobeers.net/annunci/shiword
 Description: Simple dark theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, a post slideshow, the custom header, the print preview and many other. Shiword is fully customizable (there's also a skin builder!), with one or two columns, up to 6 widgets areas, six custom widgets ( "Social links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories" and "Latest comment authors" ) and two menu. It supports custom menus, posts thumbnail and post formats.
-Version: 2.0
+Version: 2.01
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, right-sidebar, custom-colors
 Author: TwoBeers Crew
 Author URI: http://www.twobeers.net/
@@ -31,7 +31,6 @@ a {
 .menuback a,
 #navbuttons a {
 	color: #fff;
-	text-shadow: 1px 1px 1px #000;
 }
 a:hover,
 #mainmenu a:hover,
@@ -592,6 +591,10 @@ input[type=password]:focus {
 	padding: 0;
 	display: block;
 }
+#bottommenu {
+	text-align: center;
+	line-height: 1.8em;
+}
 #mainmenu .current-menu-item > a,
 #mainmenu .current_page_item > a,
 #mainmenu .current-cat > a,
@@ -601,18 +604,21 @@ input[type=password]:focus {
 	color: #f4a460;
 }
 #mainmenu > li.page_item,
-#mainmenu > li.menu-item,
-#bottommenu > li.page_item,
-#bottommenu > li.menu-item {
+#mainmenu > li.menu-item {
 	float: left;
 	list-style: none inside none;
 	margin: 0 5px;
 	padding: 2px 10px;
 }
+#bottommenu > li.page_item,
+#bottommenu > li.menu-item {
+	list-style: none inside none;
+	display: inline;
+	margin: 0 15px;
+	padding: 0;
+}
 #mainmenu > li.page_item > a,
-#mainmenu > li.menu-item > a,
-#bottommenu > li.page_item > a,
-#bottommenu > li.menu-item > a {
+#mainmenu > li.menu-item > a {
 	display: block;
 }
 #mainmenu > li.page_item > ul.children,
@@ -920,8 +926,8 @@ h2.storytitle {
 	margin: 0 -5px 15px;
 	padding: 5px 5px 10px;
 }
-.format-aside,
-.category-aside {
+.sw-use-format-style.format-aside,
+.sw-use-format-style.category-aside {
     background-color: #1A1A1A;
     padding: 5px;
 	border:none;
@@ -930,8 +936,8 @@ div.format-aside .post-body,
 div.category-aside .post-body {
 	margin: 0;
 }
-.format-aside .wp-post-image,
-.category-aside .wp-post-image {
+.sw-use-format-style.format-aside .wp-post-image,
+.sw-use-format-style.category-aside .wp-post-image {
 	width: 50px;
 	height: 50px;
 	margin-right: 5px;
@@ -943,8 +949,8 @@ div.category-aside .post-body {
 .h2-ext-link:hover {
     background-color: #ff8d39;
 }
-.format-status,
-.category-status {
+.sw-use-format-style.format-status,
+.sw-use-format-style.category-status {
     border: 1px solid #ccc;
 	padding: 4px;
 }
