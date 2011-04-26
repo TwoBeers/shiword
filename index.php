@@ -45,17 +45,22 @@
 <?php if ( have_posts() ) {
 	while ( have_posts() ) {
 		the_post(); ?>
-		<div <?php post_class( 'sw-pthumb-'.$shiword_opt['shiword_pthumb'] ) ?> id="post-<?php the_ID(); ?>">
+		<?php
+			$sw_use_format_style = ( function_exists( 'get_post_format' ) && isset( $shiword_opt['shiword_postformat_' . get_post_format( $post->ID ) ] ) && $shiword_opt['shiword_postformat_' . get_post_format( $post->ID ) ] == 1 ) ? ' sw-use-format-style' : '' ;
+		?>
+		<div <?php post_class( 'sw-pthumb-'.$shiword_opt['shiword_pthumb'] . $sw_use_format_style ) ?> id="post-<?php the_ID(); ?>">
 			<?php if ( ! post_password_required() ) {
 				// Post thumbnail
 				if( $shiword_opt['shiword_pthumb'] ==1 ) {
 					$thumbed_link = shiword_get_the_thumb( $post->ID, 120, 120, 'alignleft' );
-					?><a href="<?php the_permalink() ?>" rel="bookmark"><?php echo $thumbed_link; ?></a><?php
+			?>
+			<a href="<?php the_permalink() ?>" rel="bookmark"><?php echo $thumbed_link; ?></a>
+			<?php
 				}
 			?>
 			<div class="post-body">
 <?php // display posts of the Gallery format ?>
-				<?php if ( function_exists( 'get_post_format' ) && 'gallery' == get_post_format( $post->ID ) ) { ?>
+				<?php if ( function_exists( 'get_post_format' ) && 'gallery' == get_post_format( $post->ID ) && $shiword_opt['shiword_postformat_gallery'] == 1 ) { ?>
 					<h2 class="storytitle"><a href="<?php the_permalink() ?>" rel="bookmark"><?php 
 						$post_title = the_title( '','',false );
 						if ( !$post_title ) {
@@ -104,13 +109,13 @@
 						<?php the_excerpt(); ?>
 					</div>
 <?php // display posts of the Aside format ?>
-				<?php } elseif ( function_exists( 'get_post_format' ) && 'aside' == get_post_format( $post->ID ) ) { ?>
+				<?php } elseif ( function_exists( 'get_post_format' ) && 'aside' == get_post_format( $post->ID ) && $shiword_opt['shiword_postformat_aside'] == 1 ) { ?>
 					<div class="storycontent">
 						<?php the_content(); ?>
 						<span style="font-size: 11px; font-style: italic; color: #404040;"><?php the_author(); ?> - <?php the_time( get_option( 'date_format' ) ); ?> - <?php comments_popup_link('(0)', '(1)','(%)'); ?><?php edit_post_link( __( 'Edit', 'shiword' ),' - ' ); ?></span>
 					</div>
 <?php // display posts of the Image format ?>
-				<?php } elseif ( function_exists( 'get_post_format' ) && 'image' == get_post_format( $post->ID ) ) { ?>
+				<?php } elseif ( function_exists( 'get_post_format' ) && 'image' == get_post_format( $post->ID ) && $shiword_opt['shiword_postformat_image'] == 1 ) { ?>
 					<?php
 						$post_title = the_title( '','',false );
 						
@@ -141,7 +146,7 @@
 						} 
 					?>
 <?php // display posts of the Link format ?>
-				<?php } elseif ( function_exists( 'get_post_format' ) && 'link' == get_post_format( $post->ID ) ) { ?>
+				<?php } elseif ( function_exists( 'get_post_format' ) && 'link' == get_post_format( $post->ID ) && $shiword_opt['shiword_postformat_link'] == 1 ) { ?>
 					<?php
 						$post_title = the_title( '','',false );
 						
@@ -158,7 +163,7 @@
 						} 
 					?>
 <?php // display posts of the Quote format ?>
-				<?php } elseif ( function_exists( 'get_post_format' ) && 'quote' == get_post_format( $post->ID ) ) { ?>
+				<?php } elseif ( function_exists( 'get_post_format' ) && 'quote' == get_post_format( $post->ID ) && $shiword_opt['shiword_postformat_quote'] == 1 ) { ?>
 					<?php
 						$first_quote = shiword_get_blockquote();
 						$post_title = the_title( '','',false );
@@ -177,7 +182,7 @@
 						}
 					?>
 <?php // display posts of the Status format ?>
-				<?php } elseif ( function_exists( 'get_post_format' ) && 'status' == get_post_format( $post->ID ) ) { ?>
+				<?php } elseif ( function_exists( 'get_post_format' ) && 'status' == get_post_format( $post->ID ) && $shiword_opt['shiword_postformat_status'] == 1 ) { ?>
 					<div class="storycontent">
 						<span style="font-size: 11px; font-style: italic; color: #404040;"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_time( get_option( 'date_format' ) ); ?></a><?php edit_post_link( __( 'Edit', 'shiword' ),' - ' ); ?></span>
 						<?php the_content(); ?>

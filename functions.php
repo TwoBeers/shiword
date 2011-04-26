@@ -54,6 +54,15 @@ $shiword_coa = array(
 	'shiword_xinfos_comm' => array( 'default'=>1,'description'=>__( '-- post comments', 'shiword' ),'info'=>__( 'show comments on posts/pages info [default = enabled]', 'shiword' ),'req'=>'' ),
 	'shiword_xinfos_tag' => array( 'default'=>1,'description'=>__( '-- post tags', 'shiword' ),'info'=>__( 'show tags on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
 	'shiword_xinfos_cat' => array( 'default'=>1,'description'=>__( '-- post categories', 'shiword' ),'info'=>__( 'show categories on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_postformats' => array( 'default'=>1,'description'=>__( 'post formats support', 'shiword' ),'info'=>__( 'use the <a href="http://codex.wordpress.org/Post_Formats" target="_blank">Post Formats</a> new feature [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_postformat_aside' => array( 'default'=>1,'description'=>__( '-- aside', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_audio' => array( 'default'=>1,'description'=>__( '-- audio', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_gallery' => array( 'default'=>1,'description'=>__( '-- gallery', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_image' => array( 'default'=>1,'description'=>__( '-- image', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_link' => array( 'default'=>1,'description'=>__( '-- link', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_quote' => array( 'default'=>1,'description'=>__( '-- quote', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_status' => array( 'default'=>1,'description'=>__( '-- status', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_video' => array( 'default'=>1,'description'=>__( '-- video', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
 	'shiword_quotethis' => array( 'default'=>1,'description'=>__( 'quote link', 'shiword' ),'info'=>__( 'show a link for easily add the selected text as a quote inside the comment form [default = enabled]', 'shiword' ),'req'=>'' ),
 	'shiword_rsideb' => array( 'default'=>1,'description'=>__( 'right sidebar', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'' ),
 	'shiword_rsidebpages' => array( 'default'=>0,'description'=>__( '-- on pages', 'shiword' ),'info'=>__( 'show right sidebar on pages [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
@@ -1077,7 +1086,7 @@ if ( !function_exists( 'shiword_setup' ) ) {
 		add_theme_support( 'post-thumbnails' );
 
 		// This theme uses post formats
-		add_theme_support( 'post-formats', array( 'aside', 'gallery', 'audio', 'quote', 'image', 'video', 'link', 'status' ) );
+		if ( isset( $shiword_opt['shiword_postformats'] ) && ( $shiword_opt['shiword_postformats'] == 1 ) ) add_theme_support( 'post-formats', array( 'aside', 'gallery', 'audio', 'quote', 'image', 'video', 'link', 'status' ) );
 
 		// Add default posts and comments RSS feed links to head
 		add_theme_support( 'automatic-feed-links' );

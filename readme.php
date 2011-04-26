@@ -1,7 +1,7 @@
 <h3>Shiword - WordPress theme</h3>
 <p>
 	<ul>
-		<li>version: 2.00</li>
+		<li>version: 2.01</li>
 	</ul>
 </p>
 <h3>Project page:</h3>
@@ -153,6 +153,7 @@
 		<li>Thierry from <a href="http://www.open-blogue.fr/" target="_blank">Open Blogue</a> for the French translation</li>
 		<li>ChelAxe from <a href="http://chelaxe.narod.ru/" target="_blank">ChelAxe@DFH:~$</a> for the Russian translation</li>
 		<li>Koala from <a href="http://www.vecierka.com/" target="_blank">Vecierka</a> for the Slovak translation</li>
+		<li>Pedro Jaramillo from <a href="http://www.radioagricola.com/" target="_blank">Radio Agricola</a> for the Spanish translation</li>
 		<li>Everyone who helped us with bug reports and suggestions. Thanks!</li>
 	</ul>
 </p>
