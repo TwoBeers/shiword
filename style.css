@@ -27,17 +27,17 @@ a {
 	text-decoration: none;
 	color: #21759b;
 }
-#mainmenu a,
+.sw-menu a,
 .menuback a,
 #navbuttons a {
 	color: #fff;
 }
 a:hover,
-#mainmenu a:hover,
+.sw-menu a:hover,
 .menuback a:hover,
-#mainmenu .current-menu-item a:hover,
-#mainmenu .current_page_item a:hover,
-#mainmenu .current-cat a:hover {
+.sw-menu .current-menu-item a:hover,
+.sw-menu .current_page_item a:hover,
+.sw-menu .current-cat a:hover {
 	color: #ff8d39;
 }
 h1,
@@ -594,14 +594,6 @@ input[type=password]:focus {
 #bottommenu {
 	text-align: center;
 	line-height: 1.8em;
-}
-#mainmenu .current-menu-item > a,
-#mainmenu .current_page_item > a,
-#mainmenu .current-cat > a,
-#bottommenu .current-menu-item > a,
-#bottommenu .current_page_item > a,
-#bottommenu .current-cat > a {
-	color: #f4a460;
 }
 #mainmenu > li.page_item,
 #mainmenu > li.menu-item {

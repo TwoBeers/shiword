@@ -39,42 +39,43 @@ if ( !isset( $content_width ) ) {
 
 //complete options array, with defaults values, description, infos and required option
 $shiword_coa = array(
-	'shiword_qbar' => array( 'default'=>1,'description'=>__( 'sliding menu', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_qbar_user' => array( 'default'=>1,'description'=>__( '-- user', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
-	'shiword_qbar_minilogin' => array( 'default'=>0,'description'=>__( '---- mini login','shiword' ),'info'=>__( 'a small login form in the user panel [default = disabled]','shiword' ),'req'=>'shiword_qbar_user' ),
-	'shiword_qbar_reccom' => array( 'default'=>1,'description'=>__( '-- recent comments', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
-	'shiword_qbar_cat' => array( 'default'=>1,'description'=>__( '-- categories','shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
-	'shiword_qbar_recpost' => array( 'default'=>1,'description'=>__( '-- recent posts', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
-	'shiword_xcont' => array( 'default'=>1,'description'=>__( 'content summary', 'shiword' ),'info'=>__( 'use the summary instead of content in main post index [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_pthumb' => array( 'default'=>0,'description'=>__( 'posts thumbnail', 'shiword' ),'info'=>__( '[default = disabled]', 'shiword' ),'req'=>'shiword_xcont' ),
-	'shiword_xinfos' => array( 'default'=>1,'description'=>__( 'posts extra info', 'shiword' ),'info'=>__( 'show extra info (author, date, tags, etc) in posts overview [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_xinfos_static' => array( 'default'=>0,'description'=>__( '-- static info', 'shiword' ),'info'=>__( 'show extra info as a static list (not dropdown animated) [default = disabled]', 'shiword' ),'req'=>'' ),
-	'shiword_byauth' => array( 'default'=>1,'description'=>__( '-- post author', 'shiword' ),'info'=>__( 'show author on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_xinfos_date' => array( 'default'=>1,'description'=>__( '-- post date', 'shiword' ),'info'=>__( 'show date on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_xinfos_comm' => array( 'default'=>1,'description'=>__( '-- post comments', 'shiword' ),'info'=>__( 'show comments on posts/pages info [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_xinfos_tag' => array( 'default'=>1,'description'=>__( '-- post tags', 'shiword' ),'info'=>__( 'show tags on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_xinfos_cat' => array( 'default'=>1,'description'=>__( '-- post categories', 'shiword' ),'info'=>__( 'show categories on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_postformats' => array( 'default'=>1,'description'=>__( 'post formats support', 'shiword' ),'info'=>__( 'use the <a href="http://codex.wordpress.org/Post_Formats" target="_blank">Post Formats</a> new feature [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_postformat_aside' => array( 'default'=>1,'description'=>__( '-- aside', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_postformat_audio' => array( 'default'=>1,'description'=>__( '-- audio', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_postformat_gallery' => array( 'default'=>1,'description'=>__( '-- gallery', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_postformat_image' => array( 'default'=>1,'description'=>__( '-- image', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_postformat_link' => array( 'default'=>1,'description'=>__( '-- link', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_postformat_quote' => array( 'default'=>1,'description'=>__( '-- quote', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_postformat_status' => array( 'default'=>1,'description'=>__( '-- status', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_postformat_video' => array( 'default'=>1,'description'=>__( '-- video', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_quotethis' => array( 'default'=>1,'description'=>__( 'quote link', 'shiword' ),'info'=>__( 'show a link for easily add the selected text as a quote inside the comment form [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_rsideb' => array( 'default'=>1,'description'=>__( 'right sidebar', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_rsidebpages' => array( 'default'=>0,'description'=>__( '-- on pages', 'shiword' ),'info'=>__( 'show right sidebar on pages [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
-	'shiword_rsidebposts' => array( 'default'=>0,'description'=>__( '-- on posts', 'shiword' ),'info'=>__( 'show right sidebar on posts [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
-	'shiword_jsani' => array( 'default'=>1,'description'=>__( 'javascript animations', 'shiword' ),'info'=>__( 'try disable animations if you encountered problems with javascript [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_sticky' => array( 'default'=>0,'description'=>__( 'slideshow', 'shiword' ),'info'=>__( 'slideshow for your most important posts/pages [default = disabled]', 'shiword' ),'req'=>'shiword_jsani' ),
-	'shiword_sticky_front' => array( 'default'=>1,'description'=>__( '-- in home/front page', 'shiword' ),'info'=>__( 'display slideshow in home/front page [default = enabled]', 'shiword' ),'req'=>'shiword_sticky' ),
-	'shiword_sticky_pages' => array( 'default'=>0,'description'=>__( '-- in pages', 'shiword' ),'info'=>__( 'display slideshow in pages [default = disabled]', 'shiword' ),'req'=>'shiword_sticky' ),
-	'shiword_sticky_posts' => array( 'default'=>0,'description'=>__( '-- in posts', 'shiword' ),'info'=>__( 'display slideshow in posts [default = disabled]', 'shiword' ),'req'=>'shiword_sticky' ),
-	'shiword_sticky_over' => array( 'default'=>1,'description'=>__( '-- in posts overview', 'shiword' ),'info'=>__( 'display slideshow in posts overview (posts page, search results, archives, categories, etc.) [default = enabled]', 'shiword' ),'req'=>'shiword_sticky' ),
-	'shiword_navlinks' => array( 'default'=>0,'description'=>__( 'classic navigation links', 'shiword' ),'info'=>__( "show the classic navigation links (paged posts navigation, next/prev post, etc). Note: the same links are already located in the easy-navigation bar [default = disabled]", 'shiword' ),'req'=>'' ),
-	'shiword_tbcred' => array( 'default'=>1,'description'=>__( 'theme credits', 'shiword' ),'info'=>__( "please, don't hide theme credits [default = enabled]<br />TwoBeers.net's authors reserve themselfs to give support only to those who recognize TwoBeers work, keeping TwoBeers.net credits visible on their site.", 'shiword' ),'req'=>'' )
+	'shiword_qbar' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'sliding menu', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_qbar_user' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- user', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
+	'shiword_qbar_minilogin' => array( 'type' =>'chk', 'default'=>0,'description'=>__( '---- mini login','shiword' ),'info'=>__( 'a small login form in the user panel [default = disabled]','shiword' ),'req'=>'shiword_qbar_user' ),
+	'shiword_qbar_reccom' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- recent comments', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
+	'shiword_qbar_cat' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- categories','shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
+	'shiword_qbar_recpost' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- recent posts', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
+	'shiword_xcont' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'content summary', 'shiword' ),'info'=>__( 'use the summary instead of content in main post index [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_pthumb' => array( 'type' =>'chk', 'default'=>0,'description'=>__( 'posts thumbnail', 'shiword' ),'info'=>__( '[default = disabled]', 'shiword' ),'req'=>'shiword_xcont' ),
+	'shiword_xinfos' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'posts extra info', 'shiword' ),'info'=>__( 'show extra info (author, date, tags, etc) in posts overview [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_xinfos_static' => array( 'type' =>'chk', 'default'=>0,'description'=>__( '-- static info', 'shiword' ),'info'=>__( 'show extra info as a static list (not dropdown animated) [default = disabled]', 'shiword' ),'req'=>'' ),
+	'shiword_byauth' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- post author', 'shiword' ),'info'=>__( 'show author on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_xinfos_date' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- post date', 'shiword' ),'info'=>__( 'show date on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_xinfos_comm' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- post comments', 'shiword' ),'info'=>__( 'show comments on posts/pages info [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_xinfos_tag' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- post tags', 'shiword' ),'info'=>__( 'show tags on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_xinfos_cat' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- post categories', 'shiword' ),'info'=>__( 'show categories on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_postformats' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'post formats support', 'shiword' ),'info'=>__( 'use the <a href="http://codex.wordpress.org/Post_Formats" target="_blank">Post Formats</a> new feature [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_postformat_aside' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- aside', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_audio' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- audio', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_gallery' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- gallery', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_image' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- image', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_link' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- link', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_quote' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- quote', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_status' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- status', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_video' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- video', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_quotethis' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'quote link', 'shiword' ),'info'=>__( 'show a link for easily add the selected text as a quote inside the comment form [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_rsideb' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'right sidebar', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_rsidebpages' => array( 'type' =>'chk', 'default'=>0,'description'=>__( '-- on pages', 'shiword' ),'info'=>__( 'show right sidebar on pages [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
+	'shiword_rsidebposts' => array( 'type' =>'chk', 'default'=>0,'description'=>__( '-- on posts', 'shiword' ),'info'=>__( 'show right sidebar on posts [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
+	'shiword_jsani' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'javascript animations', 'shiword' ),'info'=>__( 'try disable animations if you encountered problems with javascript [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_sticky' => array( 'type' =>'chk', 'default'=>0,'description'=>__( 'slideshow', 'shiword' ),'info'=>__( 'slideshow for your most important posts/pages [default = disabled]', 'shiword' ),'req'=>'shiword_jsani' ),
+	'shiword_sticky_front' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- in home/front page', 'shiword' ),'info'=>__( 'display slideshow in home/front page [default = enabled]', 'shiword' ),'req'=>'shiword_sticky' ),
+	'shiword_sticky_pages' => array( 'type' =>'chk', 'default'=>0,'description'=>__( '-- in pages', 'shiword' ),'info'=>__( 'display slideshow in pages [default = disabled]', 'shiword' ),'req'=>'shiword_sticky' ),
+	'shiword_sticky_posts' => array( 'type' =>'chk', 'default'=>0,'description'=>__( '-- in posts', 'shiword' ),'info'=>__( 'display slideshow in posts [default = disabled]', 'shiword' ),'req'=>'shiword_sticky' ),
+	'shiword_sticky_over' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- in posts overview', 'shiword' ),'info'=>__( 'display slideshow in posts overview (posts page, search results, archives, categories, etc.) [default = enabled]', 'shiword' ),'req'=>'shiword_sticky' ),
+	'shiword_navlinks' => array( 'type' =>'chk', 'default'=>0,'description'=>__( 'classic navigation links', 'shiword' ),'info'=>__( "show the classic navigation links (paged posts navigation, next/prev post, etc). Note: the same links are already located in the easy-navigation bar [default = disabled]", 'shiword' ),'req'=>'' ),
+	'shiword_head_h' => array( 'type' =>'sel', 'default'=>'100px', 'options'=>array( '0px', '100px', '150px', '200px', '250px', '300px' ), 'description'=>__( 'Header height','shiword' ),'info'=>__( '[default = 100px]','shiword' ),'req'=>'' ),
+	'shiword_tbcred' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'theme credits', 'shiword' ),'info'=>__( "please, don't hide theme credits [default = enabled]<br />TwoBeers.net's authors reserve themselfs to give support only to those who recognize TwoBeers work, keeping TwoBeers.net credits visible on their site.", 'shiword' ),'req'=>'' )
 );
 
 //load options in $shiword_opt variable, globally retrieved in php files
@@ -712,18 +713,18 @@ if ( !function_exists( 'shiword_slide_options_script' ) ) {
 if ( !function_exists( 'shiword_sanitize_options' ) ) {
 	function shiword_sanitize_options( $input ){
 		global $shiword_coa, $shiword_current_theme;
-		// check updated values
-		foreach ( $input as $key => $val ) {
-			if ( $key == 'shiword_head_h') {
-				$size_array = array ('0px', '100px', '150px', '200px', '250px', '300px');
-				$input[$key] = in_array( $input[$key], $size_array) ? $input[$key] : '100px';
-			} else {
-				$input[$key] = ( $input[$key] == 1 ? 1 : 0 );
-			}
-		}
 		// check for updated values and return 0 for disabled ones <- index notice prevention
 		foreach ( $shiword_coa as $key => $val ) {
-			if ( !isset( $input[$key] ) ) $input[$key] = 0;
+
+			if( $shiword_coa[$key]['type'] == 'chk' ) {
+				if( !isset( $input[$key] ) ) {
+					$input[$key] = 0;
+				} else {
+					$input[$key] = ( $input[$key] == 1 ? 1 : 0 );
+				}
+			} elseif( $shiword_coa[$key]['type'] == 'sel' ) {
+				if ( !in_array( $input[$key], $shiword_coa[$key]['options'] ) ) $input[$key] = $shiword_coa[$key]['default'];
+			}
 		}
 		// check for required options
 		foreach ( $shiword_coa as $key => $val ) {
@@ -787,6 +788,7 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 									<th><?php _e( 'require' , 'shiword' ); ?></th>
 								</tr>
 							<?php foreach ($shiword_coa as $key => $val) { ?>
+								<?php if ( $shiword_coa[$key]['type'] == 'chk' ) { ?>
 								<tr>
 									<td class="sh-opt-descr"><?php echo $shiword_coa[$key]['description']; ?></td>
 									<td class="sh-opt-chk">
@@ -795,20 +797,21 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 									<td class="sh-opt-nfo"><?php echo $shiword_coa[$key]['info']; ?></td>
 									<td><?php if ( $shiword_coa[$key]['req'] != '' ) echo $shiword_coa[$shiword_coa[$key]['req']]['description']; ?></td>
 								</tr>
-							<?php }	?>
+								<?php } elseif ( $shiword_coa[$key]['type'] == 'sel' ) { ?>
 								<tr>
 									<td class="sh-opt-descr"><?php _e('Header height' , 'shiword' ); ?></td>
 									<td class="sh-opt-chk">
-										<select name="shiword_options[shiword_head_h]">
-										<?php $size_array = array ('0px', '100px', '150px', '200px', '250px', '300px'); ?>
-										<?php foreach($size_array as $size) { ?>
-											<option value="<?php echo $size; ?>" <?php if ( $shiword_opt['shiword_head_h'] == $size ) { echo " selected "; } ?>><?php echo $size; ?></option>
+										<select name="shiword_options[<?php echo $key; ?>]">
+										<?php foreach($shiword_coa[$key]['options'] as $option) { ?>
+											<option value="<?php echo $option; ?>" <?php if ( $shiword_opt[$key] == $option ) echo " selected "; ?>><?php echo $option; ?></option>
 										<?php } ?>
 										</select>
 									</td>
 									<td class="sh-opt-nfo"><?php _e('[default = 100px]' , 'shiword' ); ?></td>
 									<td></td>
 								</tr>
+								<?php }	?>
+							<?php }	?>
 
 							</table>
 						</div>
@@ -1239,10 +1242,10 @@ if ( !function_exists( 'shiword_header_style' ) ) {
 		.minib_img:hover {
 			border-color: <?php echo $shiword_colors['device_button']; ?>;
 		}
-		#maincontent a {
+		a {
 			color : <?php echo $shiword_colors['main3']; ?>;
 		}
-		#maincontent a:hover {
+		a:hover {
 			color : <?php echo $shiword_colors['main4']; ?>;
 		}
 		.sw-menu,
@@ -1413,108 +1416,106 @@ if ( !function_exists( 'shiword_img_caption_shortcode' ) ) {
 }
 
 // custom gallery shortcode function
-if ( !function_exists( 'shiword_gallery_shortcode' ) ) {
-	function shiword_gallery_shortcode($attr) {
-		global $post, $wp_locale;
+function shiword_gallery_shortcode($attr) {
+	global $post, $wp_locale;
 
-		static $instance = 0;
-		$instance++;
+	static $instance = 0;
+	$instance++;
 
-		// Allow plugins/themes to override the default gallery template.
-		$output = apply_filters('post_gallery', '', $attr);
-		if ( $output != '' )
-			return $output;
+	// Allow plugins/themes to override the default gallery template.
+	$output = apply_filters('post_gallery', '', $attr);
+	if ( $output != '' )
+		return $output;
 
-		// We're trusting author input, so let's at least make sure it looks like a valid orderby statement
-		if ( isset( $attr['orderby'] ) ) {
-			$attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
-			if ( !$attr['orderby'] )
-				unset( $attr['orderby'] );
+	// We're trusting author input, so let's at least make sure it looks like a valid orderby statement
+	if ( isset( $attr['orderby'] ) ) {
+		$attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
+		if ( !$attr['orderby'] )
+			unset( $attr['orderby'] );
+	}
+
+	extract(shortcode_atts(array(
+		'order'      => 'ASC',
+		'orderby'    => 'menu_order ID',
+		'id'         => $post->ID,
+		'itemtag'    => 'dl',
+		'icontag'    => 'dt',
+		'captiontag' => 'dd',
+		'columns'    => 3,
+		'size'       => 'thumbnail',
+		'include'    => '',
+		'exclude'    => ''
+	), $attr));
+
+	$id = intval($id);
+	if ( 'RAND' == $order )
+		$orderby = 'none';
+
+	if ( !empty($include) ) {
+		$include = preg_replace( '/[^0-9,]+/', '', $include );
+		$_attachments = get_posts( array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
+
+		$attachments = array();
+		foreach ( $_attachments as $key => $val ) {
+			$attachments[$val->ID] = $_attachments[$key];
 		}
+	} elseif ( !empty($exclude) ) {
+		$exclude = preg_replace( '/[^0-9,]+/', '', $exclude );
+		$attachments = get_children( array('post_parent' => $id, 'exclude' => $exclude, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
+	} else {
+		$attachments = get_children( array('post_parent' => $id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
+	}
 
-		extract(shortcode_atts(array(
-			'order'      => 'ASC',
-			'orderby'    => 'menu_order ID',
-			'id'         => $post->ID,
-			'itemtag'    => 'dl',
-			'icontag'    => 'dt',
-			'captiontag' => 'dd',
-			'columns'    => 3,
-			'size'       => 'thumbnail',
-			'include'    => '',
-			'exclude'    => ''
-		), $attr));
+	if ( empty($attachments) )
+		return '';
 
-		$id = intval($id);
-		if ( 'RAND' == $order )
-			$orderby = 'none';
-
-		if ( !empty($include) ) {
-			$include = preg_replace( '/[^0-9,]+/', '', $include );
-			$_attachments = get_posts( array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
-
-			$attachments = array();
-			foreach ( $_attachments as $key => $val ) {
-				$attachments[$val->ID] = $_attachments[$key];
-			}
-		} elseif ( !empty($exclude) ) {
-			$exclude = preg_replace( '/[^0-9,]+/', '', $exclude );
-			$attachments = get_children( array('post_parent' => $id, 'exclude' => $exclude, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
-		} else {
-			$attachments = get_children( array('post_parent' => $id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
-		}
-
-		if ( empty($attachments) )
-			return '';
-
-		if ( is_feed() ) {
-			$output = "\n";
-			foreach ( $attachments as $att_id => $attachment )
-				$output .= wp_get_attachment_link($att_id, $size, true) . "\n";
-			return $output;
-		}
-
-		$itemtag = tag_escape($itemtag);
-		$captiontag = tag_escape($captiontag);
-		$columns = intval($columns);
-		$itemwidth = $columns > 0 ? floor(100/$columns) : 100;
-		$float = is_rtl() ? 'right' : 'left';
-
-		$selector = "gallery-{$instance}";
-
-		$gallery_style = $gallery_div = '';
-		if ( apply_filters( 'use_default_gallery_style', true ) )
-			$gallery_style = '';
-		$size_class = sanitize_html_class( $size );
-		$gallery_div = "<div id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class}'>";
-		$output = apply_filters( 'gallery_style', $gallery_style . "\n\t\t" . $gallery_div );
-
-		$i = 0;
-		foreach ( $attachments as $id => $attachment ) {
-			$link = isset($attr['link']) && 'file' == $attr['link'] ? wp_get_attachment_link($id, $size, false, false) : wp_get_attachment_link($id, $size, true, false);
-
-			$output .= '
-				<div class="gallery-item img-caption" style="width: ' . get_option('thumbnail_size_w') . 'px;">';
-			$output .= "
-					<div class='img-caption-inside'>
-						$link";
-			if ( $captiontag && trim($attachment->post_excerpt) ) {
-				$output .= "
-					<div class='img-caption-text'>
-					" . wptexturize($attachment->post_excerpt) . "
-					</div>";
-			}
-			$output .= "
-					</div>
-				</div>";
-		}
-
-		$output .= "
-				<br style='clear: both;' />
-			</div>\n";
-
+	if ( is_feed() ) {
+		$output = "\n";
+		foreach ( $attachments as $att_id => $attachment )
+			$output .= wp_get_attachment_link($att_id, $size, true) . "\n";
 		return $output;
 	}
+
+	$itemtag = tag_escape($itemtag);
+	$captiontag = tag_escape($captiontag);
+	$columns = intval($columns);
+	$itemwidth = $columns > 0 ? floor(100/$columns) : 100;
+	$float = is_rtl() ? 'right' : 'left';
+
+	$selector = "gallery-{$instance}";
+
+	$gallery_style = $gallery_div = '';
+	if ( apply_filters( 'use_default_gallery_style', true ) )
+		$gallery_style = '';
+	$size_class = sanitize_html_class( $size );
+	$gallery_div = "<div id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class}'>";
+	$output = apply_filters( 'gallery_style', $gallery_style . "\n\t\t" . $gallery_div );
+
+	$i = 0;
+	foreach ( $attachments as $id => $attachment ) {
+		$link = isset($attr['link']) && 'file' == $attr['link'] ? wp_get_attachment_link($id, $size, false, false) : wp_get_attachment_link($id, $size, true, false);
+
+		$output .= '
+			<div class="gallery-item img-caption" style="width: ' . get_option('thumbnail_size_w') . 'px;">';
+		$output .= "
+				<div class='img-caption-inside'>
+					$link";
+		if ( $captiontag && trim($attachment->post_excerpt) ) {
+			$output .= "
+				<div class='img-caption-text'>
+				" . wptexturize($attachment->post_excerpt) . "
+				</div>";
+		}
+		$output .= "
+				</div>
+			</div>";
+	}
+
+	$output .= "
+			<br style='clear: both;' />
+		</div>\n";
+
+	return $output;
 }
 
 
