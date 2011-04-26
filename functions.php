@@ -1261,6 +1261,7 @@ if ( !function_exists( 'shiword_header_style' ) ) {
 			color: <?php echo $shiword_colors['menu4']; ?>;
 		}
 		.sw-menu a:hover,
+		.sw-menu li:hover .hiraquo,
 		.sw-menu > li.page_item > ul.children a:hover,
 		.sw-menu > li.menu-item > ul.sub-menu a:hover,
 		.minibutton .nb_tooltip a:hover,
