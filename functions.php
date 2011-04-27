@@ -4,6 +4,8 @@
 load_theme_textdomain( 'shiword', TEMPLATEPATH . '/languages' );
 // Tell WordPress to run shiword_setup() when the 'after_setup_theme' hook is run.
 add_action( 'after_setup_theme', 'shiword_setup' );
+// Tell WordPress to run shiword_default_options()
+add_action( 'init', 'shiword_default_options' );
 // Register sidebars by running shiword_widgets_init() on the widgets_init hook
 add_action( 'widgets_init', 'shiword_widgets_init' );
 // Add the editor style
@@ -17,7 +19,7 @@ add_action( 'template_redirect', 'shiword_allcat' );
 // Add custom menus
 add_action( 'admin_menu', 'shiword_create_menu' );
 // Add the "quote" link
-add_action('wp_footer', 'shiword_quote_scripts');
+add_action( 'wp_footer', 'shiword_quote_scripts' );
 // Custom filters
 add_filter( 'the_content', 'shiword_content_replace' );
 add_filter( 'excerpt_length', 'shiword_excerpt_length' );
@@ -112,25 +114,27 @@ if ( get_theme( 'Shiword' ) ) {
 	$shiword_current_theme = get_theme( 'Shiword' );
 }
 
-// theme version's check
-if ( isset( $shiword_current_theme ) ) {
-	if ( !isset( $shiword_opt['version'] ) && isset( $_GET['activated'] ) ) {
-		$shiword_version = $shiword_current_theme['Version'];
-	} elseif ( !isset( $shiword_opt['version'] ) && !isset( $_GET['activated'] ) ) {
-		if ( current_user_can( 'manage_options' ) ) {
-			$shiword_version_notice = 1;
-		}
-		$shiword_version = $shiword_current_theme['Version'];
-	} else {
-		if ( current_user_can( 'manage_options' ) && $shiword_opt['version'] < $shiword_current_theme['Version'] && !isset( $_GET['activated'] ) ) {
-			$shiword_version_notice = 1;
-		}
-		$shiword_version = $shiword_opt['version'];
-	}
-} else {
-	$shiword_version = '';
-}
+// check and set default options 
+function shiword_default_options() {
+		global $shiword_coa, $shiword_current_theme;
+		$shiword_opt = get_option( 'shiword_options' );
 
+		// if options are empty, sets the default values
+		if ( empty( $shiword_opt ) || !isset( $shiword_opt ) ) {
+			foreach ( $shiword_coa as $key => $val ) {
+				$shiword_opt[$key] = $shiword_coa[$key]['default'];
+			}
+			$shiword_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
+			update_option( 'shiword_options' , $shiword_opt );
+		} else if ( !isset( $shiword_opt['version'] ) || $shiword_opt['version'] < $shiword_current_theme['Version'] ) {
+			// check for unset values and set them to default value -> when updated to new version
+			foreach ( $shiword_coa as $key => $val ) {
+				if ( !isset( $shiword_opt[$key] ) ) $shiword_opt[$key] = $shiword_coa[$key]['default'];
+			}
+			$shiword_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
+			update_option( 'shiword_options' , $shiword_opt );
+		}
+}
 
 // print a reminder message for set the options after the theme is installed
 if ( !function_exists( 'shiword_setopt_admin_notice' ) ) {
@@ -138,10 +142,10 @@ if ( !function_exists( 'shiword_setopt_admin_notice' ) ) {
 		echo '<div class="updated"><p><strong>' . sprintf( __( "Shiword theme says: \"Don't forget to set <a href=\"%s\">my options</a> and the header image!\"", 'shiword' ), get_admin_url() . 'themes.php?page=tb_shiword_functions' ) . '</strong></p></div>';
 	}
 }
-if ( current_user_can( 'manage_options' ) && isset( $shiword_version_notice ) && $shiword_version_notice == 1 ) {
+
+if ( current_user_can( 'manage_options' ) && $shiword_opt['version'] < $shiword_current_theme['Version'] ) {
 	add_action( 'admin_notices', 'shiword_setopt_admin_notice' );
 }
-
 
 // check if in preview mode or not
 $shiword_is_printpreview = false;
@@ -742,18 +746,10 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 	    wp_die( __( 'You do not have sufficient permissions to access this page.', 'shiword' ) );
 	  }
 		global $shiword_coa, $shiword_opt, $shiword_current_theme;
-
-		// if options are empty, sets the default values
-		if ( empty( $shiword_opt ) || !isset( $shiword_opt ) ) {
-			foreach ( $shiword_coa as $key => $val ) {
-				$shiword_opt[$key] = $shiword_coa[$key]['default'];
-			}
-			update_option( 'shiword_options' , $shiword_opt );
-		} else if ( !isset( $shiword_opt['version'] ) || $shiword_opt['version'] < $shiword_current_theme['Version'] ) {
-			// check for unset values and set them to default value -> when updated to new version
-			foreach ( $shiword_coa as $key => $val ) {
-				if ( !isset( $shiword_opt[$key] ) ) $shiword_opt[$key] = $shiword_coa[$key]['default'];
-			}
+		
+		// update version value when admin visit options page
+		if ( $shiword_opt['version'] < $shiword_current_theme['Version'] ) {
+			$shiword_opt['version'] = $shiword_current_theme['Version'];
 			update_option( 'shiword_options' , $shiword_opt );
 		}
 	?>
