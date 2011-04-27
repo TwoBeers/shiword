@@ -5,7 +5,7 @@ load_theme_textdomain( 'shiword', TEMPLATEPATH . '/languages' );
 // Tell WordPress to run shiword_setup() when the 'after_setup_theme' hook is run.
 add_action( 'after_setup_theme', 'shiword_setup' );
 // Tell WordPress to run shiword_default_options()
-add_action( 'init', 'shiword_default_options' );
+add_action( 'admin_init', 'shiword_default_options' );
 // Register sidebars by running shiword_widgets_init() on the widgets_init hook
 add_action( 'widgets_init', 'shiword_widgets_init' );
 // Add the editor style
@@ -24,14 +24,14 @@ add_action( 'wp_footer', 'shiword_quote_scripts' );
 add_filter( 'the_content', 'shiword_content_replace' );
 add_filter( 'excerpt_length', 'shiword_excerpt_length' );
 add_filter( 'get_comment_author_link', 'shiword_add_quoted_on' );
-add_filter('user_contactmethods','shiword_new_contactmethods',10,1);
-add_filter('img_caption_shortcode', 'shiword_img_caption_shortcode', 10, 3);
+add_filter( 'user_contactmethods','shiword_new_contactmethods',10,1 );
+add_filter( 'img_caption_shortcode', 'shiword_img_caption_shortcode', 10, 3 );
 add_filter( 'avatar_defaults', 'shiword_addgravatar' );
 // custom gallery shortcode function
-remove_shortcode('gallery', 'gallery_shortcode');
-add_shortcode('gallery', 'shiword_gallery_shortcode');
+remove_shortcode( 'gallery', 'gallery_shortcode' );
+add_shortcode( 'gallery', 'shiword_gallery_shortcode' );
 // Add custom login
-add_action('login_head', 'shiword_custom_login_css');
+add_action( 'login_head', 'shiword_custom_login_css' );
 /**** end theme hooks ****/
 
 // Set the content width based on the theme's design
