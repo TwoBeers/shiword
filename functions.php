@@ -41,43 +41,43 @@ if ( !isset( $content_width ) ) {
 
 //complete options array, with defaults values, description, infos and required option
 $shiword_coa = array(
-	'shiword_qbar' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'sliding menu', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_qbar_user' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- user', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
-	'shiword_qbar_minilogin' => array( 'type' =>'chk', 'default'=>0,'description'=>__( '---- mini login','shiword' ),'info'=>__( 'a small login form in the user panel [default = disabled]','shiword' ),'req'=>'shiword_qbar_user' ),
-	'shiword_qbar_reccom' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- recent comments', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
-	'shiword_qbar_cat' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- categories','shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
-	'shiword_qbar_recpost' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- recent posts', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
-	'shiword_xcont' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'content summary', 'shiword' ),'info'=>__( 'use the summary instead of content in main post index [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_pthumb' => array( 'type' =>'chk', 'default'=>0,'description'=>__( 'posts thumbnail', 'shiword' ),'info'=>__( '[default = disabled]', 'shiword' ),'req'=>'shiword_xcont' ),
-	'shiword_xinfos' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'posts extra info', 'shiword' ),'info'=>__( 'show extra info (author, date, tags, etc) in posts overview [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_xinfos_static' => array( 'type' =>'chk', 'default'=>0,'description'=>__( '-- static info', 'shiword' ),'info'=>__( 'show extra info as a static list (not dropdown animated) [default = disabled]', 'shiword' ),'req'=>'' ),
-	'shiword_byauth' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- post author', 'shiword' ),'info'=>__( 'show author on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_xinfos_date' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- post date', 'shiword' ),'info'=>__( 'show date on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_xinfos_comm' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- post comments', 'shiword' ),'info'=>__( 'show comments on posts/pages info [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_xinfos_tag' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- post tags', 'shiword' ),'info'=>__( 'show tags on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_xinfos_cat' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- post categories', 'shiword' ),'info'=>__( 'show categories on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_postformats' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'post formats support', 'shiword' ),'info'=>__( 'use the <a href="http://codex.wordpress.org/Post_Formats" target="_blank">Post Formats</a> new feature [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_postformat_aside' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- aside', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_postformat_audio' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- audio', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_postformat_gallery' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- gallery', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_postformat_image' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- image', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_postformat_link' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- link', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_postformat_quote' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- quote', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_postformat_status' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- status', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_postformat_video' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- video', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
-	'shiword_quotethis' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'quote link', 'shiword' ),'info'=>__( 'show a link for easily add the selected text as a quote inside the comment form [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_rsideb' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'right sidebar', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_rsidebpages' => array( 'type' =>'chk', 'default'=>0,'description'=>__( '-- on pages', 'shiword' ),'info'=>__( 'show right sidebar on pages [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
-	'shiword_rsidebposts' => array( 'type' =>'chk', 'default'=>0,'description'=>__( '-- on posts', 'shiword' ),'info'=>__( 'show right sidebar on posts [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
-	'shiword_jsani' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'javascript animations', 'shiword' ),'info'=>__( 'try disable animations if you encountered problems with javascript [default = enabled]', 'shiword' ),'req'=>'' ),
-	'shiword_sticky' => array( 'type' =>'chk', 'default'=>0,'description'=>__( 'slideshow', 'shiword' ),'info'=>__( 'slideshow for your most important posts/pages [default = disabled]', 'shiword' ),'req'=>'shiword_jsani' ),
-	'shiword_sticky_front' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- in home/front page', 'shiword' ),'info'=>__( 'display slideshow in home/front page [default = enabled]', 'shiword' ),'req'=>'shiword_sticky' ),
-	'shiword_sticky_pages' => array( 'type' =>'chk', 'default'=>0,'description'=>__( '-- in pages', 'shiword' ),'info'=>__( 'display slideshow in pages [default = disabled]', 'shiword' ),'req'=>'shiword_sticky' ),
-	'shiword_sticky_posts' => array( 'type' =>'chk', 'default'=>0,'description'=>__( '-- in posts', 'shiword' ),'info'=>__( 'display slideshow in posts [default = disabled]', 'shiword' ),'req'=>'shiword_sticky' ),
-	'shiword_sticky_over' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- in posts overview', 'shiword' ),'info'=>__( 'display slideshow in posts overview (posts page, search results, archives, categories, etc.) [default = enabled]', 'shiword' ),'req'=>'shiword_sticky' ),
-	'shiword_navlinks' => array( 'type' =>'chk', 'default'=>0,'description'=>__( 'classic navigation links', 'shiword' ),'info'=>__( "show the classic navigation links (paged posts navigation, next/prev post, etc). Note: the same links are already located in the easy-navigation bar [default = disabled]", 'shiword' ),'req'=>'' ),
-	'shiword_head_h' => array( 'type' =>'sel', 'default'=>'100px', 'options'=>array( '0px', '100px', '150px', '200px', '250px', '300px' ), 'description'=>__( 'Header height','shiword' ),'info'=>__( '[default = 100px]','shiword' ),'req'=>'' ),
-	'shiword_tbcred' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'theme credits', 'shiword' ),'info'=>__( "please, don't hide theme credits [default = enabled]<br />TwoBeers.net's authors reserve themselfs to give support only to those who recognize TwoBeers work, keeping TwoBeers.net credits visible on their site.", 'shiword' ),'req'=>'' )
+	'shiword_qbar' => array( 'group' =>'quickbar', 'type' =>'chk', 'default'=>1,'description'=>__( 'sliding menu', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_qbar_user' => array( 'group' =>'quickbar', 'type' =>'chk', 'default'=>1,'description'=>__( '-- user', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
+	'shiword_qbar_minilogin' => array( 'group' =>'quickbar', 'type' =>'chk', 'default'=>0,'description'=>__( '---- mini login','shiword' ),'info'=>__( 'a small login form in the user panel [default = disabled]','shiword' ),'req'=>'shiword_qbar_user' ),
+	'shiword_qbar_reccom' => array( 'group' =>'quickbar', 'type' =>'chk', 'default'=>1,'description'=>__( '-- recent comments', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
+	'shiword_qbar_cat' => array( 'group' =>'quickbar', 'type' =>'chk', 'default'=>1,'description'=>__( '-- categories','shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
+	'shiword_qbar_recpost' => array( 'group' =>'quickbar', 'type' =>'chk', 'default'=>1,'description'=>__( '-- recent posts', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_qbar' ),
+	'shiword_xcont' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( 'content summary', 'shiword' ),'info'=>__( 'use the summary instead of content in main post index [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_pthumb' => array( 'group' =>'content', 'type' =>'chk', 'default'=>0,'description'=>__( 'posts thumbnail', 'shiword' ),'info'=>__( '[default = disabled]', 'shiword' ),'req'=>'shiword_xcont' ),
+	'shiword_xinfos' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( 'posts extra info', 'shiword' ),'info'=>__( 'show extra info (author, date, tags, etc) in posts overview [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_xinfos_static' => array( 'group' =>'content', 'type' =>'chk', 'default'=>0,'description'=>__( '-- static info', 'shiword' ),'info'=>__( 'show extra info as a static list (not dropdown animated) [default = disabled]', 'shiword' ),'req'=>'' ),
+	'shiword_byauth' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( '-- post author', 'shiword' ),'info'=>__( 'show author on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_xinfos_date' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( '-- post date', 'shiword' ),'info'=>__( 'show date on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_xinfos_comm' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( '-- post comments', 'shiword' ),'info'=>__( 'show comments on posts/pages info [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_xinfos_tag' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( '-- post tags', 'shiword' ),'info'=>__( 'show tags on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_xinfos_cat' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( '-- post categories', 'shiword' ),'info'=>__( 'show categories on posts info [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_postformats' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( 'post formats support', 'shiword' ),'info'=>__( 'use the <a href="http://codex.wordpress.org/Post_Formats" target="_blank">Post Formats</a> new feature [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_postformat_aside' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( '-- aside', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_audio' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( '-- audio', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_gallery' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( '-- gallery', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_image' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( '-- image', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_link' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( '-- link', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_quote' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( '-- quote', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_status' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( '-- status', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_postformat_video' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( '-- video', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'shiword_postformats' ),
+	'shiword_quotethis' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'quote link', 'shiword' ),'info'=>__( 'show a link for easily add the selected text as a quote inside the comment form [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_rsideb' => array( 'group' =>'sidebar', 'type' =>'chk', 'default'=>1,'description'=>__( 'right sidebar', 'shiword' ),'info'=>__( '[default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_rsidebpages' => array( 'group' =>'sidebar', 'type' =>'chk', 'default'=>0,'description'=>__( '-- on pages', 'shiword' ),'info'=>__( 'show right sidebar on pages [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
+	'shiword_rsidebposts' => array( 'group' =>'sidebar', 'type' =>'chk', 'default'=>0,'description'=>__( '-- on posts', 'shiword' ),'info'=>__( 'show right sidebar on posts [default = disabled]', 'shiword' ),'req'=>'shiword_rsideb' ),
+	'shiword_jsani' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'javascript animations', 'shiword' ),'info'=>__( 'try disable animations if you encountered problems with javascript [default = enabled]', 'shiword' ),'req'=>'' ),
+	'shiword_sticky' => array( 'group' =>'slideshow', 'type' =>'chk', 'default'=>0,'description'=>__( 'slideshow', 'shiword' ),'info'=>sprintf( __( 'slideshow for your most important posts/pages. Select them <a href="%s"">here</a> [default = disabled]', 'shiword' ), get_admin_url() . 'themes.php?page=tb_shiword_slideshow' ),'req'=>'shiword_jsani' ),
+	'shiword_sticky_front' => array( 'group' =>'slideshow', 'type' =>'chk', 'default'=>1,'description'=>__( '-- in home/front page', 'shiword' ),'info'=>__( 'display slideshow in home/front page [default = enabled]', 'shiword' ),'req'=>'shiword_sticky' ),
+	'shiword_sticky_pages' => array( 'group' =>'slideshow', 'type' =>'chk', 'default'=>0,'description'=>__( '-- in pages', 'shiword' ),'info'=>__( 'display slideshow in pages [default = disabled]', 'shiword' ),'req'=>'shiword_sticky' ),
+	'shiword_sticky_posts' => array( 'group' =>'slideshow', 'type' =>'chk', 'default'=>0,'description'=>__( '-- in posts', 'shiword' ),'info'=>__( 'display slideshow in posts [default = disabled]', 'shiword' ),'req'=>'shiword_sticky' ),
+	'shiword_sticky_over' => array( 'group' =>'slideshow', 'type' =>'chk', 'default'=>1,'description'=>__( '-- in posts overview', 'shiword' ),'info'=>__( 'display slideshow in posts overview (posts page, search results, archives, categories, etc.) [default = enabled]', 'shiword' ),'req'=>'shiword_sticky' ),
+	'shiword_navlinks' => array( 'group' =>'other', 'type' =>'chk', 'default'=>0,'description'=>__( 'classic navigation links', 'shiword' ),'info'=>__( "show the classic navigation links (paged posts navigation, next/prev post, etc). Note: the same links are already located in the easy-navigation bar [default = disabled]", 'shiword' ),'req'=>'' ),
+	'shiword_head_h' => array( 'group' =>'other', 'type' =>'sel', 'default'=>'100px', 'options'=>array( '0px', '100px', '150px', '200px', '250px', '300px' ), 'description'=>__( 'Header height','shiword' ),'info'=>__( '[default = 100px]','shiword' ),'req'=>'' ),
+	'shiword_tbcred' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'theme credits', 'shiword' ),'info'=>__( "please, don't hide theme credits [default = enabled]<br />TwoBeers.net's authors reserve themselfs to give support only to those who recognize TwoBeers work, keeping TwoBeers.net credits visible on their site.", 'shiword' ),'req'=>'' )
 );
 
 //load options in $shiword_opt variable, globally retrieved in php files
@@ -669,6 +669,7 @@ if ( !function_exists( 'shiword_create_menu' ) ) {
 		//call custom stylesheet function
 		add_action( 'admin_print_styles-widgets.php', 'shiword_widgets_style' );
 		add_action( 'admin_print_styles-' . $topage, 'shiword_theme_options_style' );
+		add_action( 'admin_print_scripts-' . $topage, 'shiword_theme_options_script' );
 		add_action( 'admin_print_styles-' . $slidepage, 'shiword_slide_options_style' );
 		add_action( 'admin_print_scripts-' . $slidepage, 'shiword_slide_options_script' );
 	}
@@ -710,6 +711,13 @@ if ( !function_exists( 'shiword_slide_options_script' ) ) {
 	function shiword_slide_options_script() {
 		global $shiword_version;
 		wp_enqueue_script( 'sw_otp_script', get_template_directory_uri().'/js/sw-otp-script.dev.js',array('jquery'),$shiword_version, true ); //shiword js
+	}
+}
+
+if ( !function_exists( 'shiword_theme_options_script' ) ) {
+	function shiword_theme_options_script() {
+		global $shiword_version;
+		wp_enqueue_script( 'sw_otp_tabs_script', get_template_directory_uri().'/js/sw-otp-tabs-script.dev.js',array('jquery'),$shiword_version, true ); //shiword js
 	}
 }
 
@@ -776,7 +784,16 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 					<form method="post" action="options.php">
 						<?php settings_fields( 'shiw_settings_group' ); ?>
 						<div id="stylediv">
-							<table style="border-collapse: collapse; width: 100%;background-color:#fff;">
+						
+							<ul id="sw-tabselector" class="hide-if-no-js">
+								<li class="sw-selgroup-other"><a href="#" onClick="shiwordSwitchTab.set('other'); return false;"><?php _e( 'other' , 'shiword' ); ?></a></li>
+								<li class="sw-selgroup-slideshow"><a href="#" onClick="shiwordSwitchTab.set('slideshow'); return false;"><?php _e( 'slideshow' , 'shiword' ); ?></a></li>
+								<li class="sw-selgroup-sidebar"><a href="#" onClick="shiwordSwitchTab.set('sidebar'); return false;"><?php _e( 'sidebar' , 'shiword' ); ?></a></li>
+								<li class="sw-selgroup-postformats"><a href="#" onClick="shiwordSwitchTab.set('postformats'); return false;"><?php _e( 'post formats' , 'shiword' ); ?></a></li>
+								<li class="sw-selgroup-content"><a href="#" onClick="shiwordSwitchTab.set('content'); return false;"><?php _e( 'content' , 'shiword' ); ?></a></li>
+								<li class="sw-selgroup-quickbar"><a href="#" onClick="shiwordSwitchTab.set('quickbar'); return false;"><?php _e( 'quickbar' , 'shiword' ); ?></a></li>
+							</ul>
+							<table style="border-collapse: collapse; width: 100%;background-color:#fff;" id="sw-opt-table">
 								<tr>
 									<th><?php _e( 'name' , 'shiword' ); ?></th>
 									<th><?php _e( 'status' , 'shiword' ); ?></th>
@@ -785,17 +802,17 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 								</tr>
 							<?php foreach ($shiword_coa as $key => $val) { ?>
 								<?php if ( $shiword_coa[$key]['type'] == 'chk' ) { ?>
-								<tr>
+								<tr class="sw-tab-opt sw-tabgroup-<?php echo $shiword_coa[$key]['group']; ?>">
 									<td class="sh-opt-descr"><?php echo $shiword_coa[$key]['description']; ?></td>
 									<td class="sh-opt-chk">
 										<input name="shiword_options[<?php echo $key; ?>]" value="1" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 1 , $shiword_opt[$key] ); ?> />
 									</td>
 									<td class="sh-opt-nfo"><?php echo $shiword_coa[$key]['info']; ?></td>
-									<td><?php if ( $shiword_coa[$key]['req'] != '' ) echo $shiword_coa[$shiword_coa[$key]['req']]['description']; ?></td>
+									<td class="sh-opt-req"><?php if ( $shiword_coa[$key]['req'] != '' ) echo $shiword_coa[$shiword_coa[$key]['req']]['description']; ?></td>
 								</tr>
 								<?php } elseif ( $shiword_coa[$key]['type'] == 'sel' ) { ?>
-								<tr>
-									<td class="sh-opt-descr"><?php _e('Header height' , 'shiword' ); ?></td>
+								<tr class="sw-tab-opt sw-tabgroup-<?php echo $shiword_coa[$key]['group']; ?>">
+									<td class="sh-opt-descr"><?php echo $shiword_coa[$key]['description']; ?></td>
 									<td class="sh-opt-chk">
 										<select name="shiword_options[<?php echo $key; ?>]">
 										<?php foreach($shiword_coa[$key]['options'] as $option) { ?>
@@ -803,8 +820,8 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 										<?php } ?>
 										</select>
 									</td>
-									<td class="sh-opt-nfo"><?php _e('[default = 100px]' , 'shiword' ); ?></td>
-									<td></td>
+									<td class="sh-opt-nfo"><?php echo $shiword_coa[$key]['info']; ?></td>
+									<td class="sh-opt-req"><?php if ( $shiword_coa[$key]['req'] != '' ) echo $shiword_coa[$shiword_coa[$key]['req']]['description']; ?></td>
 								</tr>
 								<?php }	?>
 							<?php }	?>
@@ -1139,6 +1156,11 @@ if ( !function_exists( 'shiword_setup' ) ) {
 				'url' => '%s/images/headers/blue.jpg',
 				'thumbnail_url' => '%s/images/headers/blue_thumbnail.jpg',
 				'description' => 'blue'
+			),
+			'butterflies' => array(
+				'url' => '%s/images/headers/butterflies.gif',
+				'thumbnail_url' => '%s/images/headers/butterflies_thumbnail.jpg',
+				'description' => 'butterflies'
 			)
 		) );
 		shiword_register_default_device_images( array(

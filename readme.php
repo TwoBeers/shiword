@@ -1,7 +1,7 @@
 <h3>Shiword - WordPress theme</h3>
 <p>
 	<ul>
-		<li>version: 2.03</li>
+		<li>version: 2.04</li>
 	</ul>
 </p>
 <h3>Project page:</h3>

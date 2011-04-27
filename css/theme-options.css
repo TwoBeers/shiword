@@ -1,4 +1,4 @@
-﻿/* Shiword v0.7 - stylesheet for theme options */
+﻿/* Shiword v2.04 - stylesheet for theme options */
 
 .wrap {
 }
@@ -25,6 +25,9 @@
 .sh-opt-nfo {
 	font-style:italic;
 	border-right:1px solid #ccc;
+}
+.sh-opt-req {
+	width: 150px;
 }
 #shiword-infos ul {
 	list-style: disc outside;
@@ -58,6 +61,7 @@
 	box-shadow: 0px 2px 8px #404040;
 	margin: 20px 0;
 	padding: 10px;
+	position: relative;
 }
 #selector {
 	list-style: none;
@@ -123,4 +127,33 @@
 .tab-selected a:focus {
 	color: #fff;
 	text-shadow: 1px 1px 2px #000;
+}
+#sw-tabselector {
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: -30px;
+}
+#sw-tabselector a {
+	text-decoration: none;
+}
+#sw-tabselector li {
+	-moz-border-radius: 5px 5px 0 0;
+	-khtml-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+	background:#ccc;
+	float: right;
+	font-weight: bold;
+	height: 30px;
+	line-height: 30px;
+	margin-right: 5px;
+	min-width: 60px;
+	padding: 0 5px;
+}
+#sw-tabselector li.sel-active {
+	background:#fff;
+}
+#sw-tabselector li.sel-active a {
+	color:#333;
 }
