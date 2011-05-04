@@ -115,6 +115,7 @@ function shiword_get_default_colors($type) {
 // get theme version
 if ( get_theme( 'Shiword' ) ) {
 	$shiword_current_theme = get_theme( 'Shiword' );
+	$shiword_version = $shiword_current_theme['Version'];
 }
 
 // check if is mobile browser
