@@ -13,9 +13,11 @@ add_editor_style( 'css/editor-style.css' );
 // Add stylesheets
 add_action( 'wp_print_styles', 'shiword_stylesheet' );
 // Add js animations
-add_action( 'template_redirect', 'shiword_scripts' );
+add_action( 'wp_print_scripts', 'shiword_scripts' );
 // Add custom category page
 add_action( 'template_redirect', 'shiword_allcat' );
+// mobile support
+add_action( 'template_redirect', 'shiword_mobile' );
 // Add custom menus
 add_action( 'admin_menu', 'shiword_create_menu' );
 // Add the "quote" link
@@ -77,6 +79,7 @@ $shiword_coa = array(
 	'shiword_sticky_over' => array( 'group' =>'slideshow', 'type' =>'chk', 'default'=>1,'description'=>__( '-- in posts overview', 'shiword' ),'info'=>__( 'display slideshow in posts overview (posts page, search results, archives, categories, etc.) [default = enabled]', 'shiword' ),'req'=>'shiword_sticky' ),
 	'shiword_navlinks' => array( 'group' =>'other', 'type' =>'chk', 'default'=>0,'description'=>__( 'classic navigation links', 'shiword' ),'info'=>__( "show the classic navigation links (paged posts navigation, next/prev post, etc). Note: the same links are already located in the easy-navigation bar [default = disabled]", 'shiword' ),'req'=>'' ),
 	'shiword_head_h' => array( 'group' =>'other', 'type' =>'sel', 'default'=>'100px', 'options'=>array( '0px', '100px', '150px', '200px', '250px', '300px' ), 'description'=>__( 'Header height','shiword' ),'info'=>__( '[default = 100px]','shiword' ),'req'=>'' ),
+	'shiword_mobile_css' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'mobile support', 'shiword' ),'info'=>__( "detect mobile devices and use a dedicated style [default = enabled]", 'shiword' ),'req'=>'' ),
 	'shiword_tbcred' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'theme credits', 'shiword' ),'info'=>__( "please, don't hide theme credits [default = enabled]<br />TwoBeers.net's authors reserve themselfs to give support only to those who recognize TwoBeers work, keeping TwoBeers.net credits visible on their site.", 'shiword' ),'req'=>'' )
 );
 
@@ -112,6 +115,19 @@ function shiword_get_default_colors($type) {
 // get theme version
 if ( get_theme( 'Shiword' ) ) {
 	$shiword_current_theme = get_theme( 'Shiword' );
+}
+
+// check if is mobile browser
+$sw_is_mobile_browser = shiword_mobile_device_detect();//true;
+
+function shiword_mobile_device_detect() {
+	global $shiword_opt;
+	$user_agent = $_SERVER['HTTP_USER_AGENT'];
+    if ( ( !isset( $shiword_opt['shiword_mobile_css'] ) || ( $shiword_opt['shiword_mobile_css'] == 1) ) && preg_match( '/(ipad|ipod|iphone|android|opera mini|blackberry|palm|symbian|palm os|palm|hiptop|avantgo|plucker|xiino|blazer|elaine|iris|3g_t|windows ce|opera mobi|windows ce; smartphone;|windows ce; iemobile|mini 9.5|vx1000|lge |m800|e860|u940|ux840|compal|wireless| mobi|ahong|lg380|lgku|lgu900|lg210|lg47|lg920|lg840|lg370|sam-r|mg50|s55|g83|t66|vx400|mk99|d615|d763|el370|sl900|mp500|samu3|samu4|vx10|xda_|samu5|samu6|samu7|samu9|a615|b832|m881|s920|n210|s700|c-810|_h797|mob-x|sk16d|848b|mowser|s580|r800|471x|v120|rim8|c500foma:|160x|x160|480x|x640|t503|w839|i250|sprint|w398samr810|m5252|c7100|mt126|x225|s5330|s820|htil-g1|fly v71|s302|-x113|novarra|k610i|-three|8325rc|8352rc|sanyo|vx54|c888|nx250|n120|mtk |c5588|s710|t880|c5005|i;458x|p404i|s210|c5100|teleca|s940|c500|s590|foma|samsu|vx8|vx9|a1000|_mms|myx|a700|gu1100|bc831|e300|ems100|me701|me702m-three|sd588|s800|8325rc|ac831|mw200|brew |d88|htc\/|htc_touch|355x|m50|km100|d736|p-9521|telco|sl74|ktouch|m4u\/|me702|8325rc|kddi|phone|lg |sonyericsson|samsung|240x|x320|vx10|nokia|sony cmd|motorola|up.browser|up.link|mmp|symbian|smartphone|midp|wap|vodafone|o2|pocket|kindle|mobile|psp|treo)/i' , $user_agent ) ) { // there were other words for mobile detecting but this is enought ;-)
+		return true;
+	} else {
+		return false;
+	}
 }
 
 // check and set default options 
@@ -224,7 +240,11 @@ if ( !function_exists( 'shiword_widgets_init' ) ) {
 // Add stylesheets to page
 if ( !function_exists( 'shiword_stylesheet' ) ) {
 	function shiword_stylesheet(){
-		global $shiword_version, $shiword_is_printpreview;
+		global $shiword_version, $shiword_is_printpreview, $sw_is_mobile_browser;
+		if ( $sw_is_mobile_browser ) {
+			wp_enqueue_style( 'mobile-style', get_template_directory_uri() . '/mobile/style.css', false, $shiword_version, 'screen' );
+			return;
+		}
 		//shows print preview / normal view
 		if ( $shiword_is_printpreview ) { //print preview
 			wp_enqueue_style( 'print-style-preview', get_template_directory_uri() . '/css/print.css', false, $shiword_version, 'screen' );
@@ -240,7 +260,8 @@ if ( !function_exists( 'shiword_stylesheet' ) ) {
 // add scripts
 if ( !function_exists( 'shiword_scripts' ) ) {
 	function shiword_scripts(){
-		global $shiword_opt, $shiword_is_printpreview, $shiword_version;
+		global $shiword_opt, $shiword_is_printpreview, $shiword_version, $sw_is_mobile_browser;
+		if ( $sw_is_mobile_browser ) return;
 		if ($shiword_opt['shiword_jsani'] == 1) {
 			if ( !$shiword_is_printpreview ) { //script not to be loaded in print preview
 				wp_enqueue_script( 'sw-animations', get_template_directory_uri().'/js/sw-animations.min.js',array('jquery'),$shiword_version, true ); //shiword js
@@ -261,10 +282,26 @@ if ( !function_exists( 'shiword_allcat' ) ) {
 	}
 }
 
+// show mobile version
+if ( !function_exists( 'shiword_mobile' ) ) {
+	function shiword_mobile () {
+		global $sw_is_mobile_browser;
+		if ( $sw_is_mobile_browser ) {
+			if ( is_singular() ) { 
+				get_template_part( 'mobile/single' ); 
+			} else {
+				get_template_part( 'mobile/index' );
+			}
+			exit;
+		}
+	}
+}
+
 // add "quote" link
 if ( !function_exists( 'shiword_quote_scripts' ) ) {
 	function shiword_quote_scripts(){
-		global $shiword_opt;
+		global $shiword_opt, $sw_is_mobile_browser;
+		if ( $sw_is_mobile_browser ) return;
 		if (! is_admin() && ( $shiword_opt['shiword_quotethis'] == 1 ) ) {
 		?>
 			<script>
@@ -409,6 +446,15 @@ if ( !function_exists( 'shiword_pages_menu' ) ) {
 	}
 }
 
+// Pages Menu (mobile)
+if ( !function_exists( 'shiword_pages_menu_mobile' ) ) {
+	function shiword_pages_menu_mobile() {
+		echo '<div id="sw-pri-menu" class="sw-menu "><ul id="mainmenu" class="sw-group">';
+		wp_list_pages( 'sort_column=menu_order&title_li=&depth=1' ); // menu-order sorted
+		echo '</ul><div class="fixfloat"></div></div>';
+	}
+}
+
 // pages navigation links
 if ( !function_exists( 'shiword_page_navi' ) ) {
 	function shiword_page_navi($this_page_id) {
@@ -444,7 +490,10 @@ if ( !function_exists( 'shiword_multipages' ) ) {
 		global $post;
 		$args = array(
 			'post_type' => 'page',
-			'post_parent' => $post->ID
+			'post_parent' => $post->ID,
+			'order' => 'ASC',
+			'orderby' => 'menu_order',
+			'numberposts' => 0
 			);
 		$childrens = get_posts( $args ); // retrieve the child pages
 		$the_parent_page = $post->post_parent; // retrieve the parent page
@@ -481,7 +530,7 @@ if ( !function_exists( 'shiword_multipages' ) ) {
 
 // print extra info for posts/pages
 if ( !function_exists( 'shiword_extrainfo' ) ) {
-	function shiword_extrainfo( $auth, $date, $comms, $tags, $cats ) {
+	function shiword_extrainfo( $auth, $date, $comms, $tags, $cats, $hiera = false ) {
 		global $shiword_opt;
 		$r_pos = 10;
 		if ( $shiword_opt['shiword_xinfos_static'] == 0 ) {
@@ -542,6 +591,11 @@ if ( !function_exists( 'shiword_extrainfo' ) ) {
 				</div>
 			<?php
 				$r_pos = $r_pos + 30;
+			}
+			if ( $hiera ) {
+			?>
+			<?php if ( shiword_multipages() ) { $r_pos = $r_pos + 30; } ?>
+			<?php
 			}
 			?>
 				<div class="metafield_trigger edit_link" style="right: <?php echo $r_pos; ?>px;"><?php edit_post_link( __( 'Edit', 'shiword' ),'' ); ?></div>
@@ -1230,7 +1284,8 @@ if ( !function_exists( 'shiword_hex2rgba' ) ) {
 // custom header image style - gets included in the site header
 if ( !function_exists( 'shiword_header_style' ) ) {
 	function shiword_header_style() {
-		global $shiword_colors;
+		global $shiword_colors, $sw_is_mobile_browser;
+		if ( $sw_is_mobile_browser ) return;
 		$device_rgba = shiword_hex2rgba( $shiword_colors['device_color'], $shiword_colors['device_opacity']);
 	    ?>
 	<style type="text/css">

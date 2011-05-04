@@ -1,0 +1,426 @@
+﻿/*
+Theme Name: Shiword
+Theme URI: http://www.twobeers.net/annunci/shiword
+Description: Simple dark theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, a post slideshow, the custom header, the print preview and many other. Shiword is fully customizable (there's also a skin builder!), with one or two columns, up to 6 widgets areas, six custom widgets ( "Social links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories" and "Latest comment authors" ) and two menu. It supports custom menus, posts thumbnail and post formats.
+Version: 2.05
+Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, left-sidebar, custom-colors
+Author: TwoBeers Crew
+Author URI: http://www.twobeers.net/
+
+License: GNU General Public License, version 2
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+/* standard tags 
+----------------------------------------------------------*/
+body {
+	background: #b6b6b6 url('images/bg.jpg') bottom right repeat-x fixed;
+}
+
+ul,
+ol {
+	margin: 0 18px 0 0;
+}
+
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+	margin-right: 10px;
+	margin-left: auto;
+}
+
+dd {
+	margin: 0 40px .5em 0;
+}
+
+blockquote {
+	border-right: 5px solid #ccc;
+	margin-right: 15px;
+	padding-right: 15px;
+	padding-left: 0;
+	margin-left: auto;
+	border-left: none;
+}
+
+/* table elements
+----------------------------------------------------------*/
+
+/* containers 
+----------------------------------------------------------*/
+
+#sidebardx {
+	float: right;
+	margin: 10px 10px 10px 5px;
+}
+
+#fixedfoot_cont {
+	margin-right: -1px;
+	margin-left: auto;
+}
+
+#fixedfoot {
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #777;
+}
+
+#fixedfoot_overlay {
+	background: transparent url('images/pad_overlay.png') right bottom repeat-x;
+}
+
+#quickbar {
+	right: 0;
+	padding-right: 5px;
+	left: auto;
+	padding-left: 0;
+}
+
+#statusbar {
+	text-align: left;
+}
+
+#sw_background {
+	right: 0;
+	left: auto;
+}
+
+#sw_body {
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #777;
+}
+
+#sw_body_overlay {
+	background: url('images/body.png') repeat right top transparent;
+}
+
+#sw_body_inner {
+	border-right: 1px solid #000;
+	border-left: 1px solid #777;
+}
+
+/* header 
+----------------------------------------------------------*/
+#head_cont {
+	right: 0;
+	left: auto;
+}
+
+#head {
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #777;
+}
+
+#head_overlay {
+	background: url('images/pad_overlay.png') repeat-x scroll right top transparent;
+	text-align: right;
+}
+
+#header-widget-area .widget {
+	float: left;
+}
+
+/* footer 
+----------------------------------------------------------*/
+#footer {
+	text-align: left;
+}
+
+#themecredits img {
+	margin-right: 5px;
+	margin-left: auto;
+}
+
+/* menu items (quickbar)
+----------------------------------------------------------*/
+
+.menuitem:hover {
+	background: transparent url('images/operafix.png') right top repeat;
+}
+
+.menuback {
+	right: 66px;
+	left: auto;
+}
+
+.solid_ul {
+	background: transparent url('images/operafix.png') right top repeat;
+}
+
+.menu_sx {
+	right: 0;
+	left: auto;
+}
+
+.menu_sx > ul {
+	border-left: 1px solid #ccc;
+	border-right: none;
+}
+
+.menu_sx li {
+	background: transparent url('images/operafix.png') right top repeat;
+}
+
+.cat_preview {
+	right: 422px;
+	left: auto;
+}
+
+.preview {
+	right: 430px;
+	left: auto;
+}
+
+.preview p {
+	padding: 0 0 0 20px;
+}
+
+.preview .wp-post-image {
+	margin: 0 0 0 5px;
+}
+
+/* navigation buttons 
+----------------------------------------------------------*/
+#navbuttons {
+	margin-left: 18px;
+	left: 0;
+	right: auto;
+	margin-right: auto;
+}
+
+.minibutton .nb_tooltip {
+	background: url('images/litem.png') no-repeat scroll left center #21759B;
+	left: 48px;
+	text-align: left;
+	padding: 3px 5px 3px 20px;
+	right: auto;
+}
+
+/* main menu 
+----------------------------------------------------------*/
+
+#mainmenu > li.page_item,
+#mainmenu > li.menu-item {
+	float: right;
+}
+
+#mainmenu > li.page_item > ul.children,
+#mainmenu > li.menu-item > ul.sub-menu {
+	background: #21759B url('images/operafix.png') right top repeat;
+}
+
+#rss_imglink {
+	left:17px;
+	right: auto;
+}
+
+/* meta 
+----------------------------------------------------------*/
+
+.top_meta {
+	right: 0;
+	left: auto;
+}
+
+.meta_container {
+	margin: 0 0 10px 12px;
+}
+
+.metafield_content {
+	text-align: left;
+	background: transparent url('images/operafix.png') right top repeat;
+}
+
+/* widgets (sidebar & footer)
+----------------------------------------------------------*/
+
+.widget-area {
+	float: right;
+	text-align: right;
+}
+
+.search-form {
+	padding: 4px 15% 4px 4px;
+}
+
+.social-like li {
+	float: right;
+}
+
+span.lc-user-name {
+	margin-right: 5px;
+	margin-left: auto;
+}
+
+/* posts & pages
+----------------------------------------------------------*/
+.posts_narrow {
+	border-left: 1px solid #404040;
+	float: right;
+	margin: 10px 5px 10px 0;
+	border-right: none;
+}
+
+.posts_wide {
+	float: right;
+}
+
+div.sw-pthumb-1 .post-body {
+	margin-right: 130px;
+	margin-left: auto;
+}
+
+div.sw-pthumb-0 .post-body {
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.sw-use-format-style.format-aside .wp-post-image,
+.sw-use-format-style.category-aside .wp-post-image {
+	margin-left: 5px;
+	margin-right: auto;
+}
+
+/* comments 
+----------------------------------------------------------*/
+
+.comment-body {
+	padding: 3px 3px 16px 40px;
+}
+
+.comment-body .avatar {
+	left: 2px;
+	right: auto;
+}
+
+.comment-reply-link {
+	background: url('images/comment_reply.png') no-repeat scroll right center transparent;
+	left: 2px;
+	padding: 4px 24px 0 0;
+	right: auto;
+}
+
+li.trackback,
+li.pingback {
+	background: url('images/litem.png') no-repeat right 6px transparent;
+	padding-right: 12px;
+	margin-right: -15px;
+	padding-left: 0;
+	margin-left: auto;
+}
+
+.nav-previous-comm {
+	float: right;
+}
+
+.nav-next-comm {
+	float: left;
+}
+
+.commentlist {
+	margin-right:20px;
+	margin-left: auto;
+}
+
+.commentlist ul.children {
+	padding: 0 10px 0 0;
+}
+
+#reply-title,
+#reply-title small {
+	text-align: left;
+}
+
+#author,
+#email,
+#url {
+	margin-left: 10px;
+	margin-right: -1px;
+}
+
+.navigate_comments a, .navigate_comments span {
+	margin-left: 0.5em;
+	margin-right: auto;
+}
+
+/* calendar 
+----------------------------------------------------------*/
+
+/* Gallery listing 
+----------------------------------------------------------*/
+.format-gallery .gallery-thumb, .category-gallery .gallery-thumb,
+.format-image .gallery-thumb, .category-image .gallery-thumb {
+	float: right;
+	margin-left: 5px;
+	margin-right: auto;
+}
+
+.gallery .gallery-item {
+	float: right;
+}
+
+/* Simple spinner 
+----------------------------------------------------------*/
+#sw_slider-wrap {
+	background: url('images/meta_overlay.png') repeat-x scroll right -20px #262626;
+}
+
+#sw_sticky_slider .sss_item {
+	float: right;
+}
+
+#sw_sticky_slider .sss_item img {
+	float: right;
+	margin-left: 15px;
+	margin-right: auto;
+}
+
+#sw_sticky_slider .sss_item h1 {
+	text-align: left;
+}
+
+/* Captions
+----------------------------------------------------------*/
+
+.img-caption .img-caption-text {
+	background: url('images/device/black.png') repeat right top transparent;
+	right: 0;
+	left: auto;
+}
+
+/* Aligment 
+----------------------------------------------------------*/
+.aligncenter,
+div.aligncenter,
+img.aligncenter {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+img.alignright,
+.alignright {
+	float: right;
+	margin-left: 12px;
+	margin-right: auto;
+}
+
+img.alignleft,
+.alignleft {
+	float: left;
+	margin-right: 12px;
+	margin-left: auto;
+}
+
+/* Other 
+----------------------------------------------------------*/
+
+#entry-author-info {
+	text-align: right;
+}
+
+#entry-author-info img.avatar {
+	float: right;
+	margin:0 0 5px 5px;
+}
+
+
+/* Generated by the RTLer - http://wordpress.org/extend/plugins/rtler/ */

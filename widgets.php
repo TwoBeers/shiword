@@ -52,15 +52,7 @@ class shiword_Widget_popular_posts extends WP_Widget {
 		<ul<?php if ( $use_thumbs ) echo ' class="with-thumbs"'; ?>>
 		<?php  while ($r->have_posts()) : $r->the_post(); ?>
 			<li>
-				<?php
-					if ( $use_thumbs ) {
-						if( has_post_thumbnail() ) {
-							the_post_thumbnail( array( 40,40 ) );
-						} else {
-							echo '<img width="40" height="40" src="' . get_template_directory_uri() . '/images/thumb_50.png' . '" alt="post-thumb" />';
-						}
-					}
-				 ?>
+				<?php if ( $use_thumbs ) echo shiword_get_the_thumb( get_the_ID(), 50, 50, '' ); ?>
 				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_ID()); ?>"><?php if ( get_the_title() ) the_title(); else the_ID(); ?></a> <span>(<?php echo get_comments_number(); ?>)</span>
 			</li>
 		<?php endwhile; ?>
@@ -643,6 +635,127 @@ class shiword_Widget_social extends WP_Widget {
     }
 }
 
+/**
+ * Recent Posts in Category widget class
+ *
+ */
+class shiword_Widget_recent_posts extends WP_Widget {
+
+	function shiword_Widget_recent_posts() {
+		$widget_ops = array('classname' => 'shi_widget_recent_entries', 'description' => __( "The most recent posts in a single category", 'shiword' ) );
+		$this->WP_Widget('shi-recent-posts', __('Recent Posts in Category', 'shiword' ), $widget_ops);
+		$this->alt_option_name = 'shi_widget_recent_entries';
+
+		add_action( 'save_post', array(&$this, 'flush_widget_cache') );
+		add_action( 'deleted_post', array(&$this, 'flush_widget_cache') );
+		add_action( 'switch_theme', array(&$this, 'flush_widget_cache') );
+	}
+
+	function widget($args, $instance) {
+		$cache = wp_cache_get('shi_widget_recent_posts', 'widget');
+
+		if ( !is_array($cache) )
+			$cache = array();
+
+		if ( isset($cache[$args['widget_id']]) ) {
+			echo $cache[$args['widget_id']];
+			return;
+		}
+
+		ob_start();
+		extract($args);
+
+		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
+		$category = isset( $instance['category']) ? absint($instance['category'] ) : '';
+		$title = apply_filters('widget_title', empty($instance['title']) ? __('Recent Posts in %s', 'shiword' ) : $instance['title'], $instance, $this->id_base);
+		$title = sprintf( $title, '<a href="' . get_category_link( $category ) . '">' . get_cat_name( $category ) . '</a>' );
+		if ( ! $number = absint( $instance['number'] ) )
+ 			$number = 10;
+
+		$r = new WP_Query( array( 'cat' => $category, 'posts_per_page' => $number, 'nopaging' => 0, 'post_status' => 'publish', 'ignore_sticky_posts' => true ) );
+		if ($r->have_posts()) :
+?>
+		<?php echo $before_widget; ?>
+		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
+		<ul<?php if ( $use_thumbs ) echo ' class="with-thumbs"'; ?>>
+		<?php  while ($r->have_posts()) : $r->the_post(); ?>
+			<li>
+				<?php if ( $use_thumbs ) echo shiword_get_the_thumb( get_the_ID(), 50, 50, '' ); ?>
+				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_ID()); ?>"><?php if ( get_the_title() ) the_title(); else the_ID(); ?></a>
+			</li>
+		<?php endwhile; ?>
+		</ul>
+		<?php echo $after_widget; ?>
+<?php
+		// Reset the global $the_post as this query will have stomped on it
+		wp_reset_postdata();
+
+		endif;
+
+		$cache[$args['widget_id']] = ob_get_flush();
+		wp_cache_set('shi_widget_recent_posts', $cache, 'widget');
+	}
+
+	function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+		$instance['title'] = strip_tags($new_instance['title']);
+		$instance['number'] = (int) $new_instance['number'];
+		$instance['category'] = (int) $new_instance['category'];
+		$instance['thumb'] = (int) $new_instance['thumb'] ? 1 : 0;
+		$this->flush_widget_cache();
+
+		$alloptions = wp_cache_get( 'alloptions', 'options' );
+		if ( isset($alloptions['shi_widget_recent_entries']) )
+			delete_option('shi_widget_recent_entries');
+
+		return $instance;
+	}
+
+	function flush_widget_cache() {
+		wp_cache_delete('shi_widget_recent_posts', 'widget');
+	}
+
+	function form( $instance ) {
+		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
+		$number = isset($instance['number']) ? absint($instance['number']) : 5;
+		$category = isset($instance['category']) ? absint($instance['category']) : '';
+		$thumb = isset($instance['thumb']) ? absint($instance['thumb']) : 1;
+?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'shiword' ); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id('category'); ?>"><?php _e('Title:', 'shiword' ); ?></label>
+			<?php wp_dropdown_categories( Array(
+						'orderby'            => 'ID', 
+						'order'              => 'ASC',
+						'show_count'         => 1,
+						'hide_empty'         => 0,
+						'hide_if_empty'      => false,
+						'echo'               => 1,
+						'selected'           => $category,
+						'hierarchical'       => 1, 
+						'name'               => $this->get_field_name('category'),
+						'id'                 => $this->get_field_id('category'),
+						'class'              => 'widefat',
+						'taxonomy'           => 'category',
+					) ); ?>
+		</p>
+
+		<p><label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of posts to show:', 'shiword' ); ?></label>
+		<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" /></p>
+
+		<p>
+			<input id="<?php echo $this->get_field_id('thumb'); ?>" name="<?php echo $this->get_field_name('thumb'); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
+			<label for="<?php echo $this->get_field_id('thumb'); ?>"><?php _e('Show post thumbnails','shiword'); ?></label>
+		</p>	
+
+<?php
+	}
+}
+
 
 /**
  * Register all of the default WordPress widgets on startup.
@@ -663,6 +776,8 @@ function shiword_register_widgets() {
 	
 	register_widget('shiword_Widget_social');
 
+	register_widget('shiword_Widget_recent_posts');
+	
 }
 
 add_action('widgets_init', 'shiword_register_widgets');

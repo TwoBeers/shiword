@@ -1,8 +1,8 @@
 ﻿/*
 Theme Name: Shiword
 Theme URI: http://www.twobeers.net/annunci/shiword
-Description: Simple dark theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, a post slideshow, the custom header, the print preview and many other. Shiword is fully customizable (there's also a skin builder!), with one or two columns, up to 6 widgets areas, six custom widgets ( "Social links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories" and "Latest comment authors" ) and two menu. It supports custom menus, posts thumbnail and post formats.
-Version: 2.04
+Description: Simple dark theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, a post slideshow, the custom header, the print preview and many other. Shiword is fully customizable (there's also a skin builder!), with one or two columns, up to 6 widgets areas, six custom widgets ( "Social links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories", "Latest comment authors" and "Recent Posts in Category" ) and two menu. It supports custom menus, posts thumbnail and post formats.
+Version: 2.05
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, right-sidebar, custom-colors
 Author: TwoBeers Crew
 Author URI: http://www.twobeers.net/
@@ -827,11 +827,13 @@ input[type=password]:focus {
 .shi_widget_latest_commented_posts img,
 .shi_widget_latest_commentators img,
 .shi_widget_user_quick_links img,
+.shi_widget_recent_entries img,
 .shi_widget_categories img {
 	vertical-align: text-bottom;
 }
 .shi_widget_popular_posts img,
 .shi_widget_latest_commentators img,
+.shi_widget_recent_entries img,
 .shi_widget_latest_commented_posts img {
 	border: 1px solid #404040;
 	-moz-border-radius: 5px;

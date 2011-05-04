@@ -43,3 +43,7 @@ div[id*=shi-popular-posts] .widget-title {
 	background: url("../images/tb_micrologo.png") no-repeat left center transparent;
 	padding-left: 42px;
 }
+div[id*=shi-recent-posts] .widget-title {
+	background: url("../images/tb_micrologo.png") no-repeat left center transparent;
+	padding-left: 42px;
+}

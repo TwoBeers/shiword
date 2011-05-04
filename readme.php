@@ -1,7 +1,7 @@
 <h3>Shiword - WordPress theme</h3>
 <p>
 	<ul>
-		<li>version: 2.04</li>
+		<li>version: 2.05</li>
 	</ul>
 </p>
 <h3>Project page:</h3>
@@ -47,7 +47,8 @@
 		<li>Menu animations: jquery powered</li>
 		<li>Custom header: you are your blog!</li>
 		<li>Custom colors: paint your site with the skin builder tool</li>
-		<li>Custom widgets : six new widgets ("Social Links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories" and "Latest comment authors") at your disposal</li>
+		<li>Custom widgets : seven new widgets ("Social Links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories", "Latest comment authors" and "Recent Posts in Category") at your disposal</li>
+		<li>Mobile support : Shiword has a dedicated style for mobile view (touchscreen friendly)</li>
 		<li>Post formats: support for post formats ("aside", "gallery", "audio", "quote", "image", "video", "link", "status")</li>
 	</ul>
 </p>
@@ -60,6 +61,7 @@
 		<li>print_preview.css is a stylesheet file used to emulate a print preview.</li>
 		<li>in order to use the new widgets, you need to activate them in Appearance -&gt; Widgets </li>
 		<li>the secondary menu (above the footer widget area) support only one level of hierarchy</li>
+		<li>the theme detects the following mobile devices/browsers/os : ipod, iphone, android, opera mini, blackberry, palm, symbian and many more</li>
 	</ul>
 </p>
 <h3>POST FORMATS:</h3>
@@ -83,6 +85,7 @@
 		<li>Adds:
 			<ul>
 				<li>Post formats support</li>
+				<li>Custom widget "Recent Posts in Category"</li>
 				<li>Compact view option for "Latest comment authors" widget</li>
 				<li>Options for extra info management</li>
 				<li>Option for disabling mini-login (disabled if siCaptcha plugin is active)</li>
@@ -94,6 +97,7 @@
 				<li>Selectable height for header image</li>
 				<li>Options for displaying slideshow in front page, posts, pages or archives</li>
 				<li>Secondary menu, above the footer widget area</li>
+				<li>Mobile dedicated style (touchscreen friendly)</li>
 			</ul>
 		</li>
 		<li>Fixes:

@@ -15,7 +15,7 @@
 				</div>
 			<?php } ?>
 			<h2 class="storytitle"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-			<?php shiword_extrainfo( false, false, true, false, false ); ?>
+			<?php shiword_extrainfo( false, false, true, false, false, true ); ?>
 			<div class="storycontent">
 				<?php the_content();	?>
 			</div>
