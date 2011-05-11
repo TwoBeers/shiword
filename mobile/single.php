@@ -49,7 +49,7 @@
 						<?php the_content(); ?>
 						<?php if ( ! is_page() ) { ?>
 							<div class="commentmetadata fixfloat">
-								<?php if ( ( $shiword_opt['shiword_byauth'] == 1 ) ) { echo __( 'by', 'shiword' ) . ' '; printf( '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( 'View all posts by %s', esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' ); echo '<br />'; }; ?>
+								<?php if ( ( $shiword_opt['shiword_byauth'] == 1 ) ) { printf( __( 'by %s', 'shiword' ), '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( 'View all posts by %s', esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' ); echo '<br />'; }; ?>
 								<?php if ( ( $shiword_opt['shiword_xinfos_date'] == 1 ) ) { printf( __( 'Published on: %1$s', 'shiword' ), get_the_time( get_option( 'date_format' ) ) ) ; echo '<br />'; }?>
 								<?php if ( ( $shiword_opt['shiword_xinfos_cat'] == 1 ) ) { echo __( 'Categories', 'shiword' ) . ':'; the_category( ', ' ); echo '<br />'; } ?>
 								<?php if ( ( $shiword_opt['shiword_xinfos_tag'] == 1 ) ) { echo __( 'Tags:', 'shiword' ) . ' '; if ( !get_the_tags() ) { _e( 'No Tags', 'shiword' ); } else { the_tags('', ', ', ''); }; echo '<br />';  } ?>

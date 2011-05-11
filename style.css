@@ -2,7 +2,7 @@
 Theme Name: Shiword
 Theme URI: http://www.twobeers.net/annunci/shiword
 Description: Simple dark theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, a post slideshow, the custom header, the print preview and many other. Shiword is fully customizable (there's also a skin builder!), with one or two columns, up to 6 widgets areas, six custom widgets ( "Social links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories", "Latest comment authors" and "Recent Posts in Category" ) and two menu. It supports custom menus, posts thumbnail and post formats.
-Version: 2.05
+Version: 2.06
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, right-sidebar, custom-colors
 Author: TwoBeers Crew
 Author URI: http://www.twobeers.net/
@@ -51,7 +51,7 @@ p {
 }
 .storycontent p {
 	line-height: 1.3em;
-	margin: 1em 0;
+	margin: 0 0 1em;
 }
 ul,
 ol {
@@ -587,7 +587,7 @@ input[type=password]:focus {
 }
 #mainmenu,
 #bottommenu {
-	margin: 2px 0;
+	margin: 0;
 	padding: 0;
 	display: block;
 }
@@ -612,6 +612,7 @@ input[type=password]:focus {
 #mainmenu > li.page_item > a,
 #mainmenu > li.menu-item > a {
 	display: block;
+	line-height: 1.8em;
 }
 #mainmenu > li.page_item > ul.children,
 #mainmenu > li.menu-item > ul.sub-menu {
@@ -670,6 +671,15 @@ input[type=password]:focus {
 	margin-top: 2px;
 	text-align: center;
 	text-transform: uppercase;
+}
+.menu-float-fixer {
+	float: none;
+	list-style: none inside none;
+	margin: 0;
+	padding: 0;
+	clear: both;
+	display: block;
+	height: 0;
 }
 /* meta 
 ----------------------------------------------------------*/
@@ -840,6 +850,7 @@ input[type=password]:focus {
 	-khtml-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
+	background: #111111;
 }
 .shi_widget_latest_commentators img {
 	padding: 3px;
@@ -881,11 +892,17 @@ span.lc-user-name {
 	padding: 10px 75px;
 	min-height: 300px;
 }
-div.sw-pthumb-1 .post-body {
+.sw-pthumb-1 .post-body {
 	margin-left: 130px;
 }
-div.sw-pthumb-0 .post-body {
+.sw-pthumb-0 .post-body {
 	padding-left: 0;
+}
+.format-aside.sw-pthumb-1.sw-use-format-style .post-body,
+.category-aside.sw-pthumb-1.sw-use-format-style .post-body,
+.format-status.sw-use-format-style .post-body,
+.category-status.sw-use-format-style .post-body {
+	margin: 0 0 0 60px;
 }
 .type-post,
 .type-page {
@@ -926,15 +943,10 @@ h2.storytitle {
     padding: 5px;
 	border:none;
 }
-div.format-aside .post-body,
-div.category-aside .post-body {
-	margin: 0;
-}
-.sw-use-format-style.format-aside .wp-post-image,
-.sw-use-format-style.category-aside .wp-post-image {
-	width: 50px;
-	height: 50px;
-	margin-right: 5px;
+.sw-use-format-style.format-status,
+.sw-use-format-style.category-status {
+    border: 1px solid #ccc;
+	padding: 4px;
 }
 .h2-ext-link {
     background-color: #21759b;
@@ -942,11 +954,6 @@ div.category-aside .post-body {
 }
 .h2-ext-link:hover {
     background-color: #ff8d39;
-}
-.sw-use-format-style.format-status,
-.sw-use-format-style.category-status {
-    border: 1px solid #ccc;
-	padding: 4px;
 }
 .img-navi img {
     vertical-align: middle;
@@ -960,7 +967,19 @@ div.category-aside .post-body {
 	border-radius: 5px;
 	margin: 0 10px;
 }
-
+.swf-audio-player{
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #404040;
+	margin: 5px 0;
+	padding: 5px;
+	text-align: center;
+}
+.status-image {
+	float: left;
+}
 /* comments 
 ----------------------------------------------------------*/
 .comment,

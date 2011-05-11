@@ -1,10 +1,14 @@
+<?php
+/**
+ * Template Name: One column, no sidebar
+ *
+ * A custom page template without sidebar.
+ */
+?>
 <?php get_header(); ?>
 <?php global $shiword_is_printpreview; ?>
-<?php
-	$sw_use_side = ( ( $shiword_opt['shiword_rsideb'] == 0 ) || ( ( $shiword_opt['shiword_rsideb'] == 1 ) && ( $shiword_opt['shiword_rsidebpages'] == 0 ) ) ) ? false : true; 
-	$postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
-?>
-<div class="<?php echo $postswidth; ?> letsstick">
+
+<div class="posts_wide letsstick">
 
 <?php if ( have_posts() ) {
 	while ( have_posts() ) {
@@ -45,7 +49,5 @@
 	<p><?php _e( 'Sorry, no posts matched your criteria.', 'shiword' );?></p>
 <?php } ?>
 </div>
-
-<?php if ( $sw_use_side ) get_sidebar(); // show sidebar ?>
 
 <?php get_footer(); ?>

@@ -521,11 +521,13 @@ class shiword_Widget_social extends WP_Widget {
 			'LinkedIn',
 			'Myspace',
 			'Orkut',
+			'Qzone',
 			'Reddit',
-			'Vimeo',
 			'StumbleUpon',
 			'Technorati',
 			'Twitter',
+			'Vimeo',
+			'WindowsLive',
 			'Youtube',
 			'RSS');
 	}

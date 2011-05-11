@@ -1,5 +1,7 @@
 <?php get_header(); ?>
 
+<div class="posts_wide letsstick">
+
 <?php if ( have_posts() ) {
 	while ( have_posts() ) {
 		the_post(); ?>
@@ -66,5 +68,6 @@
 		<p><?php _e( 'Sorry, no posts matched your criteria.', 'shiword' );?></p>
 
 	<?php } ?>
+</div>
 
 <?php get_footer(); ?>

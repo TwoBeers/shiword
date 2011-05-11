@@ -1,31 +1,26 @@
 <?php get_header(); ?>
-<?php global $shiword_opt; ?>
-
+<?php global $shiword_opt, $query_string; ?>
+<?php $author = get_queried_object(); ?>
 <?php
-	$sw_use_side = ( ( $shiword_opt['shiword_rsideb'] == 0 ) || ( is_single() && ( $shiword_opt['shiword_rsideb'] == 1 ) && ( $shiword_opt['shiword_rsidebposts'] == 0 ) ) ) ? false : true; 
+	$sw_use_side = ( $shiword_opt['shiword_rsideb'] == 0 ) ? false : true; 
 	$postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
 ?>
 <div class="<?php echo $postswidth; ?> letsstick">
 
-<?php if ( is_archive() ) { // archive reminder ?>
 	<div class="meta">
-		<p style="text-align: center;">
-		<?php 
-			if ( is_category() )	{ $strtype = __( 'Category', 'shiword' ) . ' : %s'; }
-			elseif ( is_tag() )		{ $strtype = __( 'Tag', 'shiword' ) . ' : %s'; }
-			elseif ( is_date() )	{ $strtype = __( 'Archives', 'shiword' ) . ' : %s'; }
-		?>
-		<?php printf( $strtype, '<strong style="font-size: 15px; color: #fff;">' . wp_title( '',false ) . '</strong>'); ?>
-		</p>
+		<p style="text-align: center;"><?php printf( __( 'Posts by %s', 'shiword'), '<strong style="font-size: 15px; color: #fff;">' . wp_title( '',false ) . '</strong>'); ?></p>
+		<?php if ( $author->description ) { // If a user has filled out their description, show a bio on their entries ?>
+			<div id="entry-author-info">
+				<?php echo get_avatar( $author->user_email, 32, $default= get_template_directory_uri() . '/images/user.png','user-avatar' ); ?>
+				<?php
+					if ( $author->twitter ) echo '<a title="' . sprintf( __('follow %s on Twitter', 'shiword'), $author->display_name ) . '" href="'.$author->twitter.'"><img alt="twitter" class="avatar" width=32 height=32 src="' . get_template_directory_uri() . '/images/follow/Twitter.png" /></a>';
+					if ( $author->facebook ) echo '<a title="' . sprintf( __('follow %s on Facebook', 'shiword'), $author->display_name ) . '" href="'.$author->facebook.'"><img alt="facebook" class="avatar" width=32 height=32 src="' . get_template_directory_uri() . '/images/follow/Facebook.png" /></a>';
+				?>
+				<?php echo $author->description; ?>
+				<div class="fixfloat" ></div>
+			</div><!-- #entry-author-info -->
+		<?php } ?>
 	</div>
-<?php } elseif ( is_search() ) { // search reminder ?>
-	<div class="meta">
-		<p style="text-align: center;">
-		<?php printf( __( 'Search results for &#8220;%s&#8221;', 'shiword' ), '<strong style="font-size: 15px; color: #fff;">' . esc_html( get_search_query() ) . '</strong>' ); ?>
-		</p>
-	</div>
-<?php } ?>
-
 <?php if ( have_posts() ) {
 	while ( have_posts() ) {
 		the_post(); ?>
@@ -54,5 +49,4 @@
 </div>
 
 <?php if ( $sw_use_side ) get_sidebar(); // show sidebar ?>
-
 <?php get_footer(); ?>

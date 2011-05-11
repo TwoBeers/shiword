@@ -4,16 +4,14 @@
 <head profile="http://gmpg.org/xfn/11">
 	<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 
-		<title>
-			<?php
+		<title><?php
 			if ( is_front_page() ) {
 				bloginfo( 'name' ); ?> - <?php bloginfo( 'description' );
 			} else {
 				wp_title( '&laquo;', true, 'right' );
 				bloginfo( 'name' );
 			}
-			?>
-		</title>
+			?></title>
 
 	<?php
 		global $shiword_opt, $shiword_is_printpreview;
@@ -53,7 +51,7 @@
 			<?php get_sidebar( 'header' ); // show header widgets areas ?>
 		</div>
 		<?php $headmenu = wp_nav_menu( array( 'echo' => 0, 'menu_id' => 'mainmenu', 'fallback_cb' => 'shiword_pages_menu', 'theme_location' => 'primary' ) ); //main menu ?>
-		<?php if ( $headmenu ) echo '<div class="sw-menu">'.$headmenu.'<div class="fixfloat"> </div></div>' ?>
+		<?php if ( $headmenu ) echo '<div class="sw-menu">'.$headmenu.'<div style="height:4px;" class="fixfloat"> </div></div>' ?>
 		<?php  // the sticky slider 
 			if ( $shiword_opt['shiword_sticky'] == 1 && !is_404() && !$shiword_is_printpreview ) {
 				if (
@@ -64,13 +62,3 @@
 				) shiword_sticky_slider(); 
 			}
 		?>
-		<?php
-			$postswidth = 'posts_narrow';
-			if ( 
-				( $shiword_opt['shiword_rsideb'] == 0 ) || 
-				( is_page() && ( $shiword_opt['shiword_rsideb'] == 1 ) && ( $shiword_opt['shiword_rsidebpages'] == 0 ) ) ||
-				( is_single() && ( $shiword_opt['shiword_rsideb'] == 1 ) && ( $shiword_opt['shiword_rsidebposts'] == 0 ) ) || 
-				is_attachment()
-			) $postswidth = 'posts_wide';
-		?>
-		<div class="<?php echo $postswidth; ?> letsstick">

@@ -1,7 +1,7 @@
 <h3>Shiword - WordPress theme</h3>
 <p>
 	<ul>
-		<li>version: 2.05</li>
+		<li>version: 2.06</li>
 	</ul>
 </p>
 <h3>Project page:</h3>
@@ -50,6 +50,7 @@
 		<li>Custom widgets : seven new widgets ("Social Links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories", "Latest comment authors" and "Recent Posts in Category") at your disposal</li>
 		<li>Mobile support : Shiword has a dedicated style for mobile view (touchscreen friendly)</li>
 		<li>Post formats: support for post formats ("aside", "gallery", "audio", "quote", "image", "video", "link", "status")</li>
+		<li>Custom Template "One column, no sidebar": a custom page template without sidebar</li>
 	</ul>
 </p>
 <h3>TECHNICAL:</h3>
@@ -70,7 +71,7 @@
 	<ul>
 		<li>aside: nothing special to do here</li>
 		<li>gallery: the code will search for the first gallery shortcode inside the post content. Make sure there's one, at least</li>
-		<li>audio: nothing special to do here</li>
+		<li>audio: the code will search for all the linked mp3's inside the post content. Make sure there's one, at least</li>
 		<li>quote: the code will search for the first &lt;blockquote&gt; tag inside the post content. Make sure there's one, at least</li>
 		<li>image: the code will search for the first &lt;img&gt; tag inside the post content. Make sure there's one, at least</li>
 		<li>video: nothing special to do here</li>
@@ -98,6 +99,7 @@
 				<li>Options for displaying slideshow in front page, posts, pages or archives</li>
 				<li>Secondary menu, above the footer widget area</li>
 				<li>Mobile dedicated style (touchscreen friendly)</li>
+				<li>Custom template "One column, no sidebar"</li>
 			</ul>
 		</li>
 		<li>Fixes:
@@ -106,6 +108,7 @@
 				<li>Many minor graphical issues</li>
 				<li>Increased compatibility with multi-byte environments</li>
 				<li>Increased compatibility with WP admin bar</li>
+				<li>Strange behaviour of post excerpts in quickbar</li>
 				<li>Theme functions, variables, options, etc. prefixed with theme-slug (WP require)</li>
 			</ul>
 		</li>
@@ -150,6 +153,9 @@
 
 <h3>CREDITS:</h3>
 <p>
+	<ul>
+		<li>Dewplayer flash audio player by <a href="http://www.alsacreations.fr/dewplayer-en" title="AlsaCreations" target="_blank" >AlsaCreations</a></li>
+	</ul>
 	<ul>
 		<li>BeckMInt from <a href="http://beckmint.com/" target="_blank">BeckMInt</a> for the Chinese translation</li>
 		<li>Jirka from <a href="http://www.meizu-m9.cz/" target="_blank">Meizu M9</a> for the Czech translation</li>

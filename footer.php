@@ -1,16 +1,6 @@
-<!-- begin footer -->
-		</div>
+<?php global $shiword_opt, $shiword_is_allcat_page; ?>
 
-		<?php
-			global $shiword_opt, $shiword_is_allcat_page;
-			if ( $shiword_opt['shiword_rsideb'] == 1 ) {
-				if ( 
-					( !is_page() && !is_single() && !is_attachment() ) ||
-					( is_page() && ( $shiword_opt['shiword_rsidebpages'] == 1 ) ) ||
-					( is_single() && ( $shiword_opt['shiword_rsidebposts'] == 1 && !is_attachment() ) )
-				) get_sidebar(); // show sidebar
-			}
-		?>
+<!-- begin footer -->
 		<?php $headmenu = wp_nav_menu( array( 'echo' => 0, 'menu_id' => 'bottommenu', 'fallback_cb' => false, 'theme_location' => 'secondary', 'depth' => 1 ) ); ?>
 		<?php if ( $headmenu ) echo '<div class="sw-menu">'.$headmenu.'<div class="fixfloat"></div></div>' ?>
 		<div id="footer">
