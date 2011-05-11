@@ -752,6 +752,7 @@ if ( !function_exists( 'shiword_create_menu' ) ) {
 		add_action( 'admin_init', 'shiword_register_settings' );
 		//call custom stylesheet function
 		add_action( 'admin_print_styles-widgets.php', 'shiword_widgets_style' );
+		add_action( 'admin_print_styles-appearance_page_custom-background', 'shiword_custom_background_style' );
 		add_action( 'admin_print_styles-' . $topage, 'shiword_theme_options_style' );
 		add_action( 'admin_print_scripts-' . $topage, 'shiword_theme_options_script' );
 		add_action( 'admin_print_styles-' . $slidepage, 'shiword_slide_options_style' );
@@ -767,6 +768,13 @@ if ( !function_exists( 'shiword_register_settings' ) ) {
 		register_setting( 'shiw_slideshow_group', 'shiword_slideshow', 'shiword_sanitize_slideshow'  );
 		//register colors settings
 		register_setting( 'shiw_colors_group', 'shiword_colors'  );
+	}
+}
+
+if ( !function_exists( 'shiword_custom_background_style' ) ) {
+	function shiword_custom_background_style() {
+		//add custom stylesheet
+		echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/custom-background.css" />';
 	}
 }
 
@@ -1217,6 +1225,9 @@ if ( !function_exists( 'shiword_setup' ) ) {
 		// custom headers. See shiword_admin_header_style(), below.
 		add_custom_image_header( 'shiword_header_style', 'shiword_admin_header_style' );
 
+		// Add a way for the custom background to be styled in the admin panel that controls
+		add_custom_background( 'shiword_custom_bg' , '' , '' );
+
 		// ... and thus ends the changeable header business.
 
 		// Default custom headers packaged with the theme. %s is a placeholder for the theme template directory URI.
@@ -1299,6 +1310,7 @@ if ( !function_exists( 'shiword_admin_header_style' ) ) {
 	}
 }
 
+// convert hex color value to rgba
 if ( !function_exists( 'shiword_hex2rgba' ) ) {
 	function shiword_hex2rgba($hex,$alpha) {
 		$color = str_replace('#','',$hex);
@@ -1431,6 +1443,20 @@ if ( !function_exists( 'shiword_header_style' ) ) {
 	</style>
 	<![endif]-->
 	  <?php
+	}
+}
+
+// custom background style - gets included in the site header
+if ( !function_exists( 'shiword_custom_bg' ) ) {
+	function shiword_custom_bg() {
+		$color = get_background_color();
+		if ( ! $color ) return;
+		?>
+		<style type="text/css"> 
+			body { background-color: #<?php echo $color; ?>; }
+			#head_cont { background: #<?php echo $color; ?>; }
+		</style>
+		<?php
 	}
 }
 

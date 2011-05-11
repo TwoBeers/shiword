@@ -60,6 +60,9 @@ class Custom_device_color {
 	function css_includes() {
 		wp_enqueue_style( 'farbtastic' );
 		wp_enqueue_style( 'shi_cdcpanel_style', get_template_directory_uri() . '/css/custom-device-color.css', false, '', 'screen' );
+		$color = get_background_color();
+		if ( ! $color ) $color = 'b6b6b6';
+		echo '<style type="text/css">#headimg-bg { background-color: #' . $color . ' !important; }</style>';
 	}
 
 	/* Options check. */

@@ -1,0 +1,15 @@
+#custom-background > table tr {
+	display: none;
+}
+#custom-background > table tr:first-child {
+	display: table-row;
+}
+#custom-background > h3 {
+	display: none;
+}
+div#custom-background-image {
+	height: 400px;
+	background-image: url('../images/custombg.png');
+	background-position: 30px left;
+	background-repeat: repeat-x;
+}

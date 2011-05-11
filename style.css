@@ -16,7 +16,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 body {
 	font-family: verdana;
 	font-size: 11px;
-	background: #b6b6b6 url('images/bg.jpg') bottom left repeat-x fixed;
+	background: #b6b6b6 url('images/custombg.png') bottom left repeat-x fixed;
 	color: #aaa;
 	margin: 0;
 }
