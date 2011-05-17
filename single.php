@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-<?php global $shiword_is_printpreview; ?>
 <?php
 	$sw_use_side = ( ( $shiword_opt['shiword_rsideb'] == 0 ) || ( ( $shiword_opt['shiword_rsideb'] == 1 ) && ( $shiword_opt['shiword_rsidebposts'] == 0 ) ) ) ? false : true; 
 	$postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
@@ -9,28 +8,14 @@
 <?php if ( have_posts() ) {
 	while ( have_posts() ) {
 		the_post(); ?>
-		<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
-			<?php if ( $shiword_is_printpreview ) { // print buttons. visible only in print preview mode ?>
-				<div id="close_preview">
-					<a href="<?php the_permalink() ?>" rel="bookmark"><?php _e( 'Close', 'shiword' ); ?></a>
-					<a href="javascript:window.print()" id="print_button"><?php _e( 'Print', 'shiword' ); ?></a>
-					<script type="text/javascript" defer="defer">
-						document.getElementById("print_button").style.display = "block"; // print button (available only with js active)
-					</script>
-				</div>
-			<?php } ?>
-			<h2 class="storytitle"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-			<?php shiword_extrainfo( true, true, true, true, true ); ?>
-			<div class="storycontent">
-				<?php if ( get_post_format( $post->ID ) == 'audio' ) shiword_add_audio_player(); ?>
-				<?php the_content(); ?>
-			</div>
-			<div class="fixfloat">
-				<?php wp_link_pages( 'before=<div class="meta comment_tools" style="text-align: right;">' . __( 'Pages:', 'shiword' ) . '&after=</div><div class="fixfloat"></div>' ); ?>
-			</div>
-			<div class="fixfloat"> </div>
-			<?php $tmptrackback = get_trackback_url(); ?>
-		</div>	
+		
+		<?php if ( post_password_required() ) {
+			$sw_use_format = 'protected';
+		} else {
+			$sw_use_format = ( function_exists( 'get_post_format' ) && isset( $shiword_opt['shiword_postformat_' . get_post_format( $post->ID ) ] ) && $shiword_opt['shiword_postformat_' . get_post_format( $post->ID ) ] == 1 ) ? get_post_format( $post->ID ) : 'standard' ;
+		} ?>
+		<?php get_template_part( 'single/post', $sw_use_format ); ?>
+		
 		<?php comments_template(); // Get wp-comments.php template ?>
 		
 		<?php if ( $shiword_opt['shiword_navlinks'] == 1 ) { ?>
@@ -40,7 +25,7 @@
 				<?php previous_post_link('%link &raquo;'); ?>
 			</div>
 		<?php } ?>
-		
+		<?php $tmptrackback = get_trackback_url(); ?>
 	<?php }
 } else { ?>
 	<p><?php _e( 'Sorry, no posts matched your criteria.', 'shiword' );?></p>

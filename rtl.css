@@ -1,22 +1,5 @@
-﻿/*
-Theme Name: Shiword
-Theme URI: http://www.twobeers.net/annunci/shiword
-Description: Simple dark theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, a post slideshow, the custom header, the print preview and many other. Shiword is fully customizable (there's also a skin builder!), with one or two columns, up to 6 widgets areas, six custom widgets ( "Social links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories" and "Latest comment authors" ) and two menu. It supports custom menus, posts thumbnail and post formats.
-Version: 2.05
-Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, left-sidebar, custom-colors
-Author: TwoBeers Crew
-Author URI: http://www.twobeers.net/
-
-License: GNU General Public License, version 2
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-*/
-
-/* standard tags 
+﻿/* standard tags 
 ----------------------------------------------------------*/
-body {
-	background: #b6b6b6 url('images/bg.jpg') bottom right repeat-x fixed;
-}
-
 ul,
 ol {
 	margin: 0 18px 0 0;
@@ -30,6 +13,9 @@ ol ul {
 	margin-left: auto;
 }
 
+ul {
+    list-style: disc outside url("images/rtl-litem.png");
+}
 dd {
 	margin: 0 40px .5em 0;
 }
@@ -188,9 +174,9 @@ blockquote {
 }
 
 .minibutton .nb_tooltip {
-	background: url('images/litem.png') no-repeat scroll left center #21759B;
+	background: url('images/rtl-litem.png') no-repeat scroll left center #21759B;
 	left: 48px;
-	text-align: left;
+	text-align: right;
 	padding: 3px 5px 3px 20px;
 	right: auto;
 }
@@ -226,7 +212,6 @@ blockquote {
 }
 
 .metafield_content {
-	text-align: left;
 	background: transparent url('images/operafix.png') right top repeat;
 }
 
@@ -279,7 +264,9 @@ div.sw-pthumb-0 .post-body {
 	margin-left: 5px;
 	margin-right: auto;
 }
-
+.status-image {
+    float: right;
+}
 /* comments 
 ----------------------------------------------------------*/
 
@@ -301,7 +288,7 @@ div.sw-pthumb-0 .post-body {
 
 li.trackback,
 li.pingback {
-	background: url('images/litem.png') no-repeat right 6px transparent;
+	background: url('images/rtl-litem.png') no-repeat right 6px transparent;
 	padding-right: 12px;
 	margin-right: -15px;
 	padding-left: 0;
@@ -396,15 +383,15 @@ img.aligncenter {
 	margin-left: auto;
 }
 
-img.alignright,
-.alignright {
+img.alignleft,
+.alignleft {
 	float: right;
 	margin-left: 12px;
 	margin-right: auto;
 }
 
-img.alignleft,
-.alignleft {
+img.alignright,
+.alignright {
 	float: left;
 	margin-right: 12px;
 	margin-left: auto;

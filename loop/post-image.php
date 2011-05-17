@@ -29,7 +29,7 @@
 				<?php if ( ( $shiword_opt['shiword_xcont'] == 1 ) || is_archive() || is_search() ) { ?>
 					<div class="alignleft">
 						<a href="<?php echo $first_img['src']; ?>" title="<?php echo $first_img['title']; ?>">
-							<img style="max-height: <?php echo get_option('thumbnail_size_w'); ?>px; max-width: <?php echo get_option('medium_size_h'); ?>px;" title="<?php echo $first_img['title']; ?>" src="<?php echo $first_img['src']; ?>" />
+							<img style="max-height: <?php echo get_option('medium_size_w'); ?>px; max-width: <?php echo get_option('medium_size_h'); ?>px;" title="<?php echo $first_img['title']; ?>" src="<?php echo $first_img['src']; ?>" />
 						</a>
 					</div>
 					<?php the_title(); ?>

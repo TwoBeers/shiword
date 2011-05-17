@@ -29,24 +29,22 @@ h6 {
 }
 p {
 	line-height: 1.3em;
-	margin: 1em 0;
+	margin: 0 0 1em;
 }
 ul,
 ol {
-	margin: 0;
+	margin: 0 0 0 20px;
 	padding: 0;
 }
-ul ul,
-ul ol,
-ol ol,
-ol ul {
-	margin-left: 10px;
-}
 ul {
-	list-style: disc inside url('images/litem.png');
+	list-style: disc outside url('images/litem.png');
 }
 ol {
-	list-style: decimal inside none;
+	list-style: decimal outside none;
+}
+ul li,
+ol li {
+	margin-top: 3px;
 }
 dt {
 	font-weight: bold;
@@ -72,6 +70,9 @@ kbd {
 	letter-spacing: 1px;
 	padding: 0 8px;
 }
+code {
+	background-color: #262626;
+}
 pre {
 	background-color: #fff;
 	border: 1px solid #ccc;
@@ -81,6 +82,7 @@ pre {
 	max-width: 100%;
 	margin: 5px auto;
 	padding: 5px;
+	color: #404040;
 }
 table {
 	background-color: #262626;
@@ -89,12 +91,10 @@ table {
 }
 th {
 	border-bottom: 1px solid #aaa;
+	padding: 3px 6px;
 }
 td {
 	border-bottom: 1px solid #404040;
-}
-td,
-th {
 	padding: 3px 6px;
 }
 input {
@@ -131,7 +131,7 @@ input[type=reset] {
 input[type=button]:hover,
 input[type=submit]:hover,
 input[type=reset]:hover {
-	border: 2px solid #ff8d39;
+	border: 2px solid Chocolate;
 	cursor: pointer;
 }
 textarea:hover,
@@ -140,8 +140,13 @@ input[type=password]:hover,
 textarea:focus,
 input[type=text]:focus,
 input[type=password]:focus {
-	border: 1px solid #ff8d39;
+	border: 1px solid Chocolate;
 }
+img {
+	max-width:100%;
+	height:auto;
+}
+
 .fixfloat {
 	clear: both;
 }
@@ -155,15 +160,13 @@ img.aligncenter {
 }
 img.alignleft,
 .alignleft {
-	display: inline;
 	float: left;
-	margin-right: 24px;
+	margin-right: 12px;
 }
 img.alignright,
 .alignright {
-	display: inline;
 	float: right;
-	margin-left: 24px;
+	margin-left: 12px;
 }
 img.alignleft,
 img.alignright,
@@ -200,41 +203,72 @@ img.wp-post-image {
 	margin: 0;
 	padding: 0 4px 5px;
 }
+.img-caption {
+	border: 1px solid #404040;
+	padding: 5px;
+	text-align: center;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	color: #fff;
+	margin: 10px;
+	max-width: 94%;
+}
+.img-caption img {
+	border: 0 none;
+	margin: 0;
+	padding: 0;
+}
+.img-caption .img-caption-inside {
+	position: relative;
+}
+.img-caption .img-caption-text {
+	font-size: 11px;
+	line-height: 17px;
+	margin: 0;
+	width: 100%;
+	padding: 0 0 5px;
+	background: url('images/device/black.png') repeat left top transparent;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+.img-caption:hover .img-caption-text {
+	display: none;
+}
 .wp-pagenavi {
 	text-align: center;
 }
-.category-gallery .size-thumbnail img {
-	border: 10px solid #fff;
-	margin-bottom: 0;
+.format-gallery .gallery-thumb, .category-gallery .gallery-thumb,
+.format-image .gallery-thumb, .category-image .gallery-thumb {
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 5px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #404040;
+	padding: 5px;
 }
-.category-gallery .gallery-thumb {
-	float: left;
-	margin-right: 20px;
-	margin-top: -4px;
-}
-.category-gallery .entry-utility {
-	padding-top: 4px;
+.format-gallery .size-thumbnail img,
+.category-gallery .size-thumbnail img,
+.format-image .size-thumbnail img,
+.category-image .size-thumbnail img {
 }
 .gallery {
 	margin: 0 auto 18px;
 }
 .gallery .gallery-item {
 	float: left;
-	margin-top: 0;
+	margin: 0 6px 12px;
+	border: 1px solid #404040;
+	padding: 5px;
 	text-align: center;
-	width: 33%;
-}
-.gallery .gallery-caption {
-	color: #777;
-	font-size: 10px;
-	margin: 0 0 12px;
-}
-.gallery dl {
-	margin: 0;
-}
-.gallery img {
-	border: 1px solid #ccc;
-}
-.gallery br+br {
-	display: none;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	color: #fff;
 }

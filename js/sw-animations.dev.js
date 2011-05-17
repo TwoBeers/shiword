@@ -50,7 +50,7 @@
 			list.animate(
 				{ 'width': 832 },
 				400,
-				'swing',
+				'',
 				function(){ list.addClass('mi_shadowed'); }
 			);
 		}).mouseleave( function(){ //when mouse leaves, hide the submenu

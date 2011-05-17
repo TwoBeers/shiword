@@ -87,7 +87,34 @@ input[type="submit"] {
 	left:-64px;
 	position:absolute;
 	width:50px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: -140px top;
 }
+#preview-navi {
+	display:block;
+	height:240px;
+	right:-49px;
+	position:absolute;
+	width:24px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center top;
+	bottom:5px;
+}
+#preview-navi.sw-variant-light {
+	background-image: url('../images/minibuttons-light.png');
+}
+#preview-navi.sw-variant-dark {
+	background-image: url('../images/minibuttons-dark.png');
+}
+#preview-button.sw-variant-light {
+	background-image: url('../images/qbar-light.png');
+}
+#preview-button.sw-variant-dark {
+	background-image: url('../images/qbar-dark.png');
+}
+
 #preview-pages {
 	border-bottom:5px solid #ccc;
 	border-top:5px solid #ccc;

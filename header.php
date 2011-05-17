@@ -17,7 +17,7 @@
 		global $shiword_opt, $shiword_is_printpreview;
 	?>
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-	<?php wp_get_archives( 'type=monthly&format=link' ); ?>
+	<?php wp_get_archives( 'type=monthly&format=link&limit=10' ); ?>
 	
 	<?php if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); ?> 
 	<?php wp_head(); ?>

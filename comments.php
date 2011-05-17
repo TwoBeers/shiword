@@ -11,18 +11,16 @@
 <?php if ( have_comments() ) { ?>
 	<div class="meta" id="comments" style="text-align: right;"><?php comments_number( __( 'No Comments', 'shiword' ), __( '1 Comment', 'shiword' ), __( '% Comments', 'shiword' ) ); ?></div>
 	<ol class="commentlist">
-		<?php if ( get_option( 'page_comments' ) ) {
-			wp_list_comments();
-		} else {
-			wp_list_comments( 'type=comment' );
-			wp_list_comments( 'type=pings' );
-		} ?>
+		<?php wp_list_comments( 'type=comment' ); ?>
 	</ol>
 	<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) { ?>
 		<div class="navigate_comments">
 			<?php paginate_comments_links(); ?>
 		</div>
 	<?php } ?>
+	<ol class="commentlist pings">
+		<?php wp_list_comments( 'type=pings' ); ?>
+	</ol>
 <?php } ?>
 	
 <?php if ( comments_open() ) { ?>

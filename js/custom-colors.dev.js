@@ -1,4 +1,3 @@
-﻿
 var farbtastic;
 
 // display the color picker
@@ -24,6 +23,8 @@ function updateShiPreview(domid,color) {
 	{
 	case '1':
 	  jQuery('#headimage').css('background-color', color );
+	  jQuery('#shi_input_1a').val(100);
+	  jQuery('#alpha_slider .handle').css('left', 205 );
 	  break;
 	case '2':
 	  jQuery('#headimage a').css('color', color );
@@ -86,7 +87,7 @@ jQuery(document).ready(function() {
 	jQuery('.shi_input').keyup(function() {
 		var _hex = jQuery(this).val();
 		var hex = _hex;
-		if ( hex[0] != '#' )
+		if ( hex.substr(0,1) != '#' )
 			hex = '#' + hex;
 		hex = hex.replace(/[^#a-fA-F0-9]+/, '');
 		hex = hex.substring(0,7);
@@ -113,18 +114,24 @@ jQuery(document).ready(function() {
 
 	jQuery('.form-table').css( 'display','none' );
 	
+	jQuery('#shi_select_1').change(function(){
+		var val = jQuery(this).find('option:selected').val();
+		jQuery('#preview-button').removeClass().addClass('sw-variant-' + val);
+		jQuery('#preview-navi').removeClass().addClass('sw-variant-' + val);
+	});
+	
 });
 
 // alpha slider (uses scriptaculous-slider)
 (function() {
-	var alpha_slider = $('alpha_slider'),
+	var alpha_slider = $('alpha_slider');
 	box = $('shi_input_1a');
 	color = $('shi_input_1');
 	preview = $('headimage');
 
 	new Control.Slider(alpha_slider.down('.handle'), alpha_slider, {
 		range: $R(0, 100),
-		sliderValue: 100,
+		sliderValue: box.value,
 		onSlide: function(value) {
 			box.value = Math.round(value);
 			tmp = hextorgba(color.value, box.value );

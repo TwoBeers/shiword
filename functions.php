@@ -8,8 +8,6 @@ add_action( 'after_setup_theme', 'shiword_setup' );
 add_action( 'admin_init', 'shiword_default_options' );
 // Register sidebars by running shiword_widgets_init() on the widgets_init hook
 add_action( 'widgets_init', 'shiword_widgets_init' );
-// Add the editor style
-add_editor_style( 'css/editor-style.css' );
 // Add stylesheets
 add_action( 'wp_print_styles', 'shiword_stylesheet' );
 // Add js animations
@@ -22,6 +20,8 @@ add_action( 'template_redirect', 'shiword_mobile' );
 add_action( 'admin_menu', 'shiword_create_menu' );
 // Add the "quote" link
 add_action( 'wp_footer', 'shiword_quote_scripts' );
+// setup for audio player
+add_action( 'wp_head', 'shiword_setup_player' );
 // Custom filters
 add_filter( 'the_content', 'shiword_content_replace' );
 add_filter( 'excerpt_length', 'shiword_excerpt_length' );
@@ -31,6 +31,7 @@ add_filter( 'img_caption_shortcode', 'shiword_img_caption_shortcode', 10, 3 );
 add_filter( 'avatar_defaults', 'shiword_addgravatar' );
 add_filter( 'wp_nav_menu_items', 'shiword_new_nav_menu_items' );
 add_filter( 'wp_list_pages', 'shiword_new_nav_menu_items' );
+add_filter('get_comments_number', 'shiword_comment_count', 0);
 // custom gallery shortcode function
 remove_shortcode( 'gallery', 'gallery_shortcode' );
 add_shortcode( 'gallery', 'shiword_gallery_shortcode' );
@@ -81,6 +82,7 @@ $shiword_coa = array(
 	'shiword_sticky_over' => array( 'group' =>'slideshow', 'type' =>'chk', 'default'=>1,'description'=>__( '-- in posts overview', 'shiword' ),'info'=>__( 'display slideshow in posts overview (posts page, search results, archives, categories, etc.) [default = enabled]', 'shiword' ),'req'=>'shiword_sticky' ),
 	'shiword_navlinks' => array( 'group' =>'other', 'type' =>'chk', 'default'=>0,'description'=>__( 'classic navigation links', 'shiword' ),'info'=>__( "show the classic navigation links (paged posts navigation, next/prev post, etc). Note: the same links are already located in the easy-navigation bar [default = disabled]", 'shiword' ),'req'=>'' ),
 	'shiword_head_h' => array( 'group' =>'other', 'type' =>'sel', 'default'=>'100px', 'options'=>array( '0px', '100px', '150px', '200px', '250px', '300px' ), 'description'=>__( 'Header height','shiword' ),'info'=>__( '[default = 100px]','shiword' ),'req'=>'' ),
+	'shiword_editor_style' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'post editor style', 'shiword' ),'info'=>__( "add style to the editor in order to write the post exactly how it will appear on the site [default = enabled]", 'shiword' ),'req'=>'' ),
 	'shiword_mobile_css' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'mobile support', 'shiword' ),'info'=>__( "detect mobile devices and use a dedicated style [default = enabled]", 'shiword' ),'req'=>'' ),
 	'shiword_tbcred' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'theme credits', 'shiword' ),'info'=>__( "please, don't hide theme credits [default = enabled]<br />TwoBeers.net's authors reserve themselfs to give support only to those who recognize TwoBeers work, keeping TwoBeers.net credits visible on their site.", 'shiword' ),'req'=>'' )
 );
@@ -96,7 +98,8 @@ function shiword_get_default_colors($type) {
 		'device_color' => '#000000',
 		'device_opacity' => '100',
 		'device_textcolor' => '#ffffff',
-		'device_button' => '#ff8d39'
+		'device_button' => '#ff8d39',
+		'device_button_style' => 'light'
 	);
 	// Holds default inside colors
 	$shiword_default_device_colors = array(
@@ -264,13 +267,12 @@ if ( !function_exists( 'shiword_stylesheet' ) ) {
 if ( !function_exists( 'shiword_scripts' ) ) {
 	function shiword_scripts(){
 		global $shiword_opt, $shiword_is_printpreview, $shiword_version, $sw_is_mobile_browser;
-		if ( $sw_is_mobile_browser || is_admin() ) return;
+		if ( $sw_is_mobile_browser || is_admin() || $shiword_is_printpreview ) return;
 		if ($shiword_opt['shiword_jsani'] == 1) {
-			if ( !$shiword_is_printpreview ) { //script not to be loaded in print preview
-				wp_enqueue_script( 'sw-animations', get_template_directory_uri().'/js/sw-animations.min.js',array('jquery'),$shiword_version, true ); //shiword js
-				if ( $shiword_opt['shiword_sticky'] == 1 ) wp_enqueue_script( 'sw-sticky-slider', get_template_directory_uri().'/js/sw-sticky-slider.min.js',array('jquery'),$shiword_version , false );
-			}
+			wp_enqueue_script( 'sw-animations', get_template_directory_uri().'/js/sw-animations.min.js',array('jquery'),$shiword_version, true ); //shiword js
+			if ( $shiword_opt['shiword_sticky'] == 1 ) wp_enqueue_script( 'sw-sticky-slider', get_template_directory_uri().'/js/sw-sticky-slider.min.js',array('jquery'),$shiword_version , false );
 		}
+		wp_enqueue_script( 'sw-audio-player', get_template_directory_uri().'/resources/audio-player/audio-player-noswfobject.js',array('swfobject'),$shiword_version, false ); //audio player
 	}
 }
 
@@ -300,6 +302,31 @@ if ( !function_exists( 'shiword_mobile' ) ) {
 	}
 }
 
+// setup for audio player
+if ( !function_exists( 'shiword_setup_player' ) ) {
+	function shiword_setup_player(){
+		global $shiword_is_printpreview, $shiword_colors, $sw_is_mobile_browser;
+		if ( $sw_is_mobile_browser || is_admin() || $shiword_is_printpreview ) return;
+		?>
+<script type="text/javascript">
+	/* <![CDATA[ */
+	swAudioPlayer.setup("<?php echo get_template_directory_uri().'/resources/audio-player/player.swf'; ?>", {  
+		width: 415,
+		loop: "yes",
+		transparentpagebg: "yes",
+		leftbg: "262626",
+		lefticon: "aaaaaa",
+		rightbg: "262626",
+		righticon: "<?php echo str_replace("#", "", $shiword_colors['main3']); ?>",
+		righticonhover: "<?php echo str_replace("#", "", $shiword_colors['main4']); ?>",
+		animation: "no"
+	});  
+	/* ]]> */
+</script>
+		<?php
+	}
+}
+
 // add "quote" link
 if ( !function_exists( 'shiword_quote_scripts' ) ) {
 	function shiword_quote_scripts(){
@@ -310,7 +337,7 @@ if ( !function_exists( 'shiword_quote_scripts' ) ) {
 				/* <![CDATA[ */
 				if ( document.getElementById('reply-title') ) {
 					sw_qdiv = document.createElement('small');
-					sw_qdiv.innerHTML = ' - <a href="#" onclick="sw_quotethis(); return false" title="Add selected text as quote" ><?php _e( 'Quote', 'shiword' ) ?></a>';
+					sw_qdiv.innerHTML = ' - <a href="#" onclick="sw_quotethis(); return false" title="Add selected text as quote" ><?php _e( 'Quote', 'shiword' ); ?></a>';
 					sw_replink = document.getElementById('reply-title');
 					sw_replink.appendChild(sw_qdiv);
 				}
@@ -714,14 +741,26 @@ if ( !function_exists( 'shiword_get_blockquote' ) ) {
 
 // search for linked mp3's and add an audio player
 if ( !function_exists( 'shiword_add_audio_player' ) ) {
-	function shiword_add_audio_player() {
+	function shiword_add_audio_player( $text = '' ) {
 		global $post;
 		$pattern = "/<a ([^=]+=['\"][^\"']+['\"] )*href=['\"](([^\"']+\.mp3))['\"]( [^=]+=['\"][^\"']+['\"])*>([^<]+)<\/a>/i";
-		preg_match_all( $pattern,$post->post_content, $result );
+		if ( $text == '')
+			preg_match_all( $pattern, $post->post_content, $result );
+		else
+			preg_match_all( $pattern, $text, $result );
 		$data = $result[3];
 		if ( $data ) { ?>
-			<div class="swf-audio-player"><object type="application/x-shockwave-flash" data="<?php echo get_template_directory_uri(); ?>/resources/dewplayer-multi.swf?mp3=<?php echo implode( "|" , $data ); ?>" width="240" height="20"><param name="wmode" value="transparent" /><param name="movie" value="<?php echo get_template_directory_uri(); ?>/resources/dewplayer-multi.swf?mp3=<?php echo implode( "|" , $data ); ?>" /></object></div>
-		<?php }
+			<div class="swf-audio-player"><div id="swf-audio-player-<?php the_ID(); ?>"></div><small>Audio clip: Adobe Flash Player (version 9 or above) is required to play this audio clip. Download the latest version <a href="http://get.adobe.com/flashplayer/" title="Download Adobe Flash Player">here</a>. You also need to have JavaScript enabled in your browser.</small></div>
+			<script type="text/javascript">  
+				/* <![CDATA[ */
+				swAudioPlayer.embed("swf-audio-player-<?php the_ID(); ?>", {  
+					soundFile: "<?php echo implode( "," , $data ); ?>"
+				});  
+				/* ]]> */
+			</script>  			
+			<?php return true;
+		}
+		return false;
 	}
 }
 
@@ -859,7 +898,7 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 			<?php
 				// return options save message
 				if ( isset( $_REQUEST['settings-updated'] ) ) {
-					echo '<div id="message" class="updated"><p><strong>' . __( 'Options saved.', 'shiword' ) . '</strong></p></div>';
+					echo '<div id="message" class="updated fade"><p><strong>' . __( 'Options saved.', 'shiword' ) . '</strong></p></div>';
 				}
 			?>
 			<div id="tabs-container">
@@ -908,7 +947,7 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 									<td class="sh-opt-chk">
 										<select name="shiword_options[<?php echo $key; ?>]">
 										<?php foreach($shiword_coa[$key]['options'] as $option) { ?>
-											<option value="<?php echo $option; ?>" <?php if ( $shiword_opt[$key] == $option ) echo " selected "; ?>><?php echo $option; ?></option>
+											<option value="<?php echo $option; ?>" <?php selected( $shiword_opt[$key], $option ); ?>><?php echo $option; ?></option>
 										<?php } ?>
 										</select>
 									</td>
@@ -1199,6 +1238,9 @@ if ( !function_exists( 'shiword_setup' ) ) {
 		// Add default posts and comments RSS feed links to head
 		add_theme_support( 'automatic-feed-links' );
 
+		// Add the editor style
+		if ( isset( $shiword_opt['shiword_editor_style'] ) && ( $shiword_opt['shiword_editor_style'] == 1 ) ) add_editor_style( 'css/editor-style.css' );
+
 		// Theme uses wp_nav_menu() in two locations
 		register_nav_menus( array( 'primary' => __( 'Main Navigation Menu', 'shiword' ), 'secondary' => __( 'Secondary Navigation Menu', 'shiword' ) ) );
 
@@ -1364,6 +1406,7 @@ if ( !function_exists( 'shiword_header_style' ) ) {
 			color : <?php echo $shiword_colors['main4']; ?>;
 		}
 		.sw-menu,
+		#mainmenu > li:hover,
 		#mainmenu > li.page_item > ul.children,
 		#mainmenu > li.menu-item > ul.sub-menu,
 		.minibutton .nb_tooltip,
@@ -1395,7 +1438,7 @@ if ( !function_exists( 'shiword_header_style' ) ) {
 			color: <?php echo $shiword_colors['menu5']; ?>;
 		}
 		.menu_sx > ul {
-			border-right:1px solid <?php echo $shiword_colors['menu6']; ?>;
+			border-color: <?php echo $shiword_colors['menu6']; ?>;
 		}
 		.menuback .mentit {
 			color: <?php echo $shiword_colors['menu3']; ?>;
@@ -1425,6 +1468,12 @@ if ( !function_exists( 'shiword_header_style' ) ) {
 		}
 		.h2-ext-link:hover {
 			background-color: <?php echo $shiword_colors['main4']; ?>;
+		}
+		.minib_img {
+			background-image: url('<?php echo get_template_directory_uri(); ?>/images/minibuttons-<?php echo $shiword_colors['device_button_style']; ?>.png');
+		}
+		.menuitem_img {
+			background-image: url('<?php echo get_template_directory_uri(); ?>/images/qbar-<?php echo $shiword_colors['device_button_style']; ?>.png');
 		}
 	</style>
 	<!-- InternetExplorer really sucks! -->
@@ -1521,6 +1570,19 @@ if ( !function_exists( 'shiword_add_quoted_on' ) ) {
 		}
 		return $text . $return;
 	}
+}
+
+// the real comment count
+if ( !function_exists( 'shiword_comment_count' ) ) {
+	function shiword_comment_count( $count ) {
+		if ( ! is_admin() ) {
+			global $id;
+			$comments_by_type = &separate_comments(get_comments('status=approve&post_id=' . $id));
+			return count($comments_by_type['comment']);
+		} else {
+			return $count;
+		}
+	} 
 }
 
 // custom image caption

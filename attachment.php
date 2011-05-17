@@ -48,7 +48,9 @@
 							echo wp_get_attachment_image( $post->ID, array( $attachment_width, $attachment_height ) ); // filterable image width with, essentially, no limit for image height.
 						?></a></p>
 					<?php } else { ?>
-						<a href="<?php echo wp_get_attachment_url(); ?>" title="<?php echo esc_attr( strip_tags( get_the_title() ) ); ?>" rel="attachment"><?php echo basename( get_permalink() ); ?></a>
+						<?php if ( ! shiword_add_audio_player( '<a href="' . wp_get_attachment_url() . '">link</a>' ) ) { ?>
+							<a href="<?php echo wp_get_attachment_url(); ?>" title="<?php echo esc_attr( strip_tags( get_the_title() ) ); ?>" rel="attachment"><?php echo wp_basename( wp_get_attachment_url() ); ?></a>
+						<?php } ?>
 					<?php } ?>
 				</div><!-- .entry-attachment -->
 				<div class="entry-caption"><?php if ( !empty( $post->post_content ) ) the_content(); ?></div>

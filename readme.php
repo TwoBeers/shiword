@@ -1,7 +1,7 @@
 <h3>Shiword - WordPress theme</h3>
 <p>
 	<ul>
-		<li>version: 2.06</li>
+		<li>version: 2.07</li>
 	</ul>
 </p>
 <h3>Project page:</h3>
@@ -100,6 +100,9 @@
 				<li>Secondary menu, above the footer widget area</li>
 				<li>Mobile dedicated style (touchscreen friendly)</li>
 				<li>Custom template "One column, no sidebar"</li>
+				<li>Comments and pings/trackbacks listed separately</li>
+				<li>Custom background support</li>
+				<li>Child themes friendly</li>
 			</ul>
 		</li>
 		<li>Fixes:
@@ -110,6 +113,8 @@
 				<li>Increased compatibility with WP admin bar</li>
 				<li>Strange behaviour of post excerpts in quickbar</li>
 				<li>Theme functions, variables, options, etc. prefixed with theme-slug (WP require)</li>
+				<li>Javascript issues in "Custom Colors" page (IE)</li>
+				<li>Style issues in "Custom Colors" page (IE)</li>
 			</ul>
 		</li>
 	</ul>
@@ -153,9 +158,6 @@
 
 <h3>CREDITS:</h3>
 <p>
-	<ul>
-		<li>Dewplayer flash audio player by <a href="http://www.alsacreations.fr/dewplayer-en" title="AlsaCreations" target="_blank" >AlsaCreations</a></li>
-	</ul>
 	<ul>
 		<li>BeckMInt from <a href="http://beckmint.com/" target="_blank">BeckMInt</a> for the Chinese translation</li>
 		<li>Jirka from <a href="http://www.meizu-m9.cz/" target="_blank">Meizu M9</a> for the Czech translation</li>

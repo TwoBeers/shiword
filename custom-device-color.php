@@ -108,46 +108,61 @@ class Custom_device_color {
 		}
 		echo '<div class="clear"></div></div>';
 	}
-	
+	function build_style() {
+		global $shiword_colors;
+		$device_rgba = shiword_hex2rgba( $shiword_colors['device_color'], $shiword_colors['device_opacity']);
+?>
+<style type="text/css">
+	#headimage {
+		background: <?php echo $device_rgba; ?> url('<?php echo $shiword_colors['device_image']; ?>') left top repeat;
+	}
+	#headimg_overlay a, #desc {
+		color:<?php echo $shiword_colors['device_textcolor']; ?>;
+	}
+	#preview-button {
+		border-color:<?php echo $shiword_colors['device_button']; ?>;
+	}
+	#preview-body .preview-link, #preview-footer .preview-link, #preview-meta .preview-link {
+		color:<?php echo $shiword_colors['main3']; ?>;
+	}
+	#preview-body .preview-linkhi, #preview-footer .preview-linkhi, #preview-meta .preview-linkhi {
+		color:<?php echo $shiword_colors['main4']; ?>;
+	}
+	#preview-pages, #preview-menu {
+		background-color:<?php echo $shiword_colors['menu1']; ?>;
+		border-color:<?php echo $shiword_colors['menu2']; ?>;
+	}
+	#preview-menu span {
+		border-color:<?php echo $shiword_colors['menu6']; ?>;
+	}
+	#preview-pages .preview-text, #preview-menu .preview-text {
+		color:<?php echo $shiword_colors['menu3']; ?>;
+	}
+	#preview-pages .preview-link, #preview-menu .preview-link {
+		color:<?php echo $shiword_colors['menu4']; ?>;
+	}
+	#preview-pages .preview-linkhi, #preview-menu .preview-linkhi {
+		color:<?php echo $shiword_colors['menu5']; ?>;
+	}
+</style>
+<!-- InternetExplorer really sucks! -->
+<!--[if lte IE 8]>
+<style type="text/css">
+	#headimage {
+		background: <?php echo $shiword_colors['device_color']; ?> url('<?php echo $shiword_colors['device_image']; ?>') left top repeat;
+	}
+</style>
+<![endif]-->
+<?php
+	}
+
 	// display the preview div
 	function show_preview() {
 			global $shiword_colors;
 			$device_rgba = shiword_hex2rgba( $shiword_colors['device_color'], $shiword_colors['device_opacity']);
+			$this->build_style();
 ?>
 					<div id="headimg-bg">
-						<style type="text/css">
-#headimage {
-	background: <?php echo $device_rgba; ?> url('<?php echo $shiword_colors['device_image']; ?>') left top repeat;
-}
-#headimg_overlay a, #desc {
-	color:<?php echo $shiword_colors['device_textcolor']; ?>;
-}
-#preview-button {
-	border-color:<?php echo $shiword_colors['device_button']; ?>;
-}
-#preview-body .preview-link, #preview-footer .preview-link, #preview-meta .preview-link {
-	color:<?php echo $shiword_colors['main3']; ?>;
-}
-#preview-body .preview-linkhi, #preview-footer .preview-linkhi, #preview-meta .preview-linkhi {
-	color:<?php echo $shiword_colors['main4']; ?>;
-}
-#preview-pages, #preview-menu {
-	background-color:<?php echo $shiword_colors['menu1']; ?>;
-	border-color:<?php echo $shiword_colors['menu2']; ?>;
-}
-#preview-menu span {
-	border-color:<?php echo $shiword_colors['menu6']; ?>;
-}
-#preview-pages .preview-text, #preview-menu .preview-text {
-	color:<?php echo $shiword_colors['menu3']; ?>;
-}
-#preview-pages .preview-link, #preview-menu .preview-link {
-	color:<?php echo $shiword_colors['menu4']; ?>;
-}
-#preview-pages .preview-linkhi, #preview-menu .preview-linkhi {
-	color:<?php echo $shiword_colors['menu5']; ?>;
-}
-						</style>
 						<div id="headimage">
 							<div id="headimg_overlay">
 								<h1><a id="name" onclick="return false;" href=""><?php bloginfo( 'name' ); ?></a></h1>
@@ -155,7 +170,8 @@ class Custom_device_color {
 								
 							
 								<div id="preview-main">
-									<div id="preview-button"></div>
+									<div id="preview-button" class="sw-variant-<?php echo $shiword_colors['device_button_style']; ?>"></div>
+									<div id="preview-navi" class="sw-variant-<?php echo $shiword_colors['device_button_style']; ?>"></div>
 									<div id="preview-pages">
 										<span class="preview-text"><?php _e( 'Text', 'shiword' ); ?> </span><span class="preview-link"><?php _e( 'Links', 'shiword' ); ?> </span><span class="preview-linkhi"><?php _e( 'Highlighted Links' , 'shiword' ); ?></span>
 									</div>
@@ -271,14 +287,14 @@ class Custom_device_color {
 							<a href="#" onclick="pickColor('1','<?php echo $this->default_device_bg['device_color']; ?>'); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
 						</span>
 						<br />
-						<span class="opaopt" style="margin-left: 40px;"><?php _e( 'Opacity', 'shiword' ); ?> [0-100] <input type="text" name="deviceopacity" id="shi_input_1a" value="<?php echo $shiword_colors['device_opacity']; ?>" maxlength="3" size="3" /> %</span>
+						<span class="opaopt" style="margin-left: 40px;"><?php _e( 'Opacity', 'shiword' ); ?> [0-100] <!--[if lte IE 8]><span style="color:#ff0000;">Not supported in Internet Explorer 7 and below </span><![endif]--><input type="text" name="deviceopacity" id="shi_input_1a" value="<?php echo $shiword_colors['device_opacity']; ?>" maxlength="3" size="3" /> %</span>
 						<div id="alpha_slider" class="slider hide-if-no-js">
 							<div id="alpha_bar"></div>
 							<div class="handle"></div>
 						</div>
 					</td>
 				</tr>
-				<tr valign="top" id="text-color-row">
+				<tr valign="top">
 					<td style="width:200px;"><?php _e( 'Text Color', 'shiword' ); ?></td>
 					<td>
 						<input style="background-color:<?php echo $shiword_colors['device_textcolor']; ?>;" class="color_preview_box" type="text" id="shi_box_2" value="" readonly="readonly" />
@@ -291,7 +307,7 @@ class Custom_device_color {
 						</span>
 					</td>
 				</tr>
-				<tr valign="top" id="text-color-row">
+				<tr valign="top">
 					<td style="width:200px;"><?php _e( 'Hightlighted Buttons Border' , 'shiword' ); ?></td>
 					<td>
 						<input style="background-color:<?php echo $shiword_colors['device_button']; ?>;" class="color_preview_box" type="text" id="shi_box_3" value="" readonly="readonly" />
@@ -304,15 +320,24 @@ class Custom_device_color {
 						</span>
 					</td>
 				</tr>
+				<tr valign="top">
+					<td style="width:200px;"><?php _e( 'Buttons Style' , 'shiword' ); ?></td>
+					<td>
+						<select id="shi_select_1" name="devicebuttonstyle">
+							<option value="light" <?php selected( $shiword_colors['device_button_style'], 'light' ); ?>><?php _e( 'light', 'shiword' ); ?></option>
+							<option value="dark" <?php selected( $shiword_colors['device_button_style'], 'dark' ); ?>><?php _e( 'dark', 'shiword' ); ?></option>
+						</select>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 		
-		<div id="" style="position: relative">
+		<div style="position: relative">
 			<h3 class="h3_field"><?php _e( 'Interior Colors' , 'shiword' ) ?> <a class="hide-if-no-js" href="#" onclick="secOpen('.shi_cc'); return false;">&raquo;</a></h3>
 			<table class="form-table shi_cc">
 			<?php foreach ( $this->default_device_colors as $key => $val ) { ?>
 				<?php 
-					if ( $key == 'main3' ) echo '<tr><td style="font-weight:bold; colspan="2">' . __( 'Main Content', 'shiword' ) . '</td></tr>';
+					if ( $key == 'main3' ) echo '<tr><td style="font-weight:bold;" colspan="2">' . __( 'Main Content', 'shiword' ) . '</td></tr>';
 					elseif ( $key == 'menu1' ) echo '<tr><td style="font-weight:bold; border-top:1px solid #CCCCCC;" colspan="2">' . __( 'Pages Menu and Floating Menu', 'shiword' ) . '</td></tr>';
 				?>
 				<tr>
@@ -441,7 +466,10 @@ class Custom_device_color {
 					$shiword_colors['device_button'] = '#' . $color;
 			}
 		}
-
+		$shiword_colors['device_button_style'] = $this->default_device_bg['device_button_style'];
+		if ( isset( $_POST['devicebuttonstyle'] ) ) {
+			$shiword_colors['device_button_style'] = ( in_array( $_POST['devicebuttonstyle'], array( 'light', 'dark' ) ) ) ? $_POST['devicebuttonstyle'] : 'light';
+		}
 		if ( isset($_POST['default-device-image']) ) {
 			$this->process_default_device_images();
 			if ( isset($this->default_device_images[$_POST['default-device-image']]) )
@@ -475,6 +503,7 @@ class Custom_device_color {
 		global $shiword_colors;
 		$shiword_colors = shiword_get_colors();
 		$this->updated = true;
+		$this->init();
 		$this->step_1();
 	}
 

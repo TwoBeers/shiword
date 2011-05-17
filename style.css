@@ -2,8 +2,8 @@
 Theme Name: Shiword
 Theme URI: http://www.twobeers.net/annunci/shiword
 Description: Simple dark theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, a post slideshow, the custom header, the print preview and many other. Shiword is fully customizable (there's also a skin builder!), with one or two columns, up to 6 widgets areas, six custom widgets ( "Social links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories", "Latest comment authors" and "Recent Posts in Category" ) and two menu. It supports custom menus, posts thumbnail and post formats.
-Version: 2.06
-Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, right-sidebar, custom-colors
+Version: 2.07
+Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, stickypost, right-sidebar, custom-colors, custom-background, editor-style, rtl-language-support
 Author: TwoBeers Crew
 Author URI: http://www.twobeers.net/
 
@@ -55,14 +55,8 @@ p {
 }
 ul,
 ol {
-	margin: 0 0 0 18px;
+	margin: 0 0 0 20px;
 	padding: 0;
-}
-ul ul,
-ul ol,
-ol ol,
-ol ul {
-	margin-left: 10px;
 }
 ul {
 	list-style: disc outside url('images/litem.png');
@@ -114,19 +108,20 @@ pre {
 }
 /* table elements
 ----------------------------------------------------------*/
-.storycontent table {
+.storycontent table,
+.comment-body table {
 	background-color: #262626;
 	border-collapse: collapse;
 	border: 1px solid #404040;
 }
-.storycontent th {
+.storycontent th,
+.comment-body th {
 	border-bottom: 1px solid #aaa;
-}
-.storycontent td {
-	border-bottom: 1px solid #404040;
+	padding: 3px 6px;
 }
 .storycontent td,
-.storycontent th {
+.comment-body td {
+	border-bottom: 1px solid #404040;
 	padding: 3px 6px;
 }
 input {
@@ -369,7 +364,6 @@ input[type=password]:focus {
 	height: 50px;
 	width: 50px;
 	background-repeat: no-repeat;
-	background-image: url('images/qbar.png');
 	background-color: transparent;
 	border: 2px solid transparent;
 	-moz-border-radius: 5px;
@@ -541,7 +535,6 @@ input[type=password]:focus {
 	height: 24px;
 	width: 24px;
 	background-color: transparent;
-	background-image: url('images/minibuttons.png');
 	background-repeat: no-repeat;
 	border: 2px solid transparent;
 	cursor: pointer;
@@ -955,6 +948,10 @@ h2.storytitle {
 .h2-ext-link:hover {
     background-color: #ff8d39;
 }
+.img-navi {
+	text-align: center;
+	margin: 0 0 10px;
+}
 .img-navi img {
     vertical-align: middle;
 }
@@ -980,6 +977,42 @@ h2.storytitle {
 .status-image {
 	float: left;
 }
+.single-format-audio h2.storytitle,
+.sw-use-format-style.format-audio.sw-pthumb-0 h2.storytitle,
+.sw-use-format-style.category-audio.sw-pthumb-0 h2.storytitle {
+	background: url('images/iconsweets2/audio.png') no-repeat scroll left center transparent;
+    padding-left: 24px;
+}
+.single-format-video h2.storytitle,
+.sw-use-format-style.format-video.sw-pthumb-0 h2.storytitle,
+.sw-use-format-style.category-video.sw-pthumb-0 h2.storytitle {
+	background: url('images/iconsweets2/video.png') no-repeat scroll left center transparent;
+    padding-left: 24px;
+}
+.single-format-gallery h2.storytitle,
+.sw-use-format-style.format-gallery.sw-pthumb-0 h2.storytitle,
+.sw-use-format-style.category-gallery.sw-pthumb-0 h2.storytitle {
+	background: url('images/iconsweets2/gallery.png') no-repeat scroll left center transparent;
+    padding-left: 24px;
+}
+.single-format-image h2.storytitle,
+.sw-use-format-style.format-image.sw-pthumb-0 h2.storytitle,
+.sw-use-format-style.category-image.sw-pthumb-0 h2.storytitle {
+	background: url('images/iconsweets2/image.png') no-repeat scroll left center transparent;
+    padding-left: 24px;
+}
+.single-format-link h2.storytitle,
+.sw-use-format-style.format-link.sw-pthumb-0 h2.storytitle,
+.sw-use-format-style.category-link.sw-pthumb-0 h2.storytitle {
+	background: url('images/iconsweets2/link.png') no-repeat scroll left center transparent;
+    padding-left: 24px;
+}
+.single-format-quote h2.storytitle,
+.sw-use-format-style.format-quote.sw-pthumb-0 h2.storytitle,
+.sw-use-format-style.category-quote.sw-pthumb-0 h2.storytitle {
+	background: url('images/iconsweets2/quote.png') no-repeat scroll left center transparent;
+    padding-left: 24px;
+}
 /* comments 
 ----------------------------------------------------------*/
 .comment,
@@ -999,6 +1032,10 @@ h2.storytitle {
 	font-size: 12px;
 	margin: 2px 0;
 	padding: 3px 40px 16px 3px;
+}
+.trackback .comment-body,
+.pingback .comment-body {
+	padding: 3px;
 }
 .bypostauthor > .comment-body {
 	background-color: #262626;
@@ -1058,6 +1095,10 @@ li.pingback {
 	list-style: none outside none;
 	margin: 0;
 	padding: 0 0 0 10px;
+}
+.commentlist.pings {
+	border-top: 1px solid #404040;
+	margin-top: 20px;
 }
 #reply-title {
 	background: #262626;

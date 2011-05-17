@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Shiword 2.06\n"
+"Project-Id-Version: Shiword 2.07\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
@@ -14,22 +14,22 @@ msgstr ""
 
 #. Text in function
 #: mobile/comments.php:12
-#: functions.php:590
-#: functions.php:624
+#: functions.php:617
+#: functions.php:651
 #: comments.php:12
 msgid "% Comments"
 msgstr "% Commenti"
 
 #. Text in echo
+#: loop/post-protected.php:6
 #: mobile/single.php:40
 #: mobile/index.php:53
-#: functions.php:1669
-#: functions.php:1047
-#: functions.php:1088
-#: functions.php:1141
-#: loop/loop-audio.php:16
-#: loop/loop-protected.php:6
-#: loop/loop-standard.php:15
+#: functions.php:1757
+#: functions.php:1094
+#: functions.php:1135
+#: functions.php:1188
+#: loop/post-audio.php:16
+#: loop/post-standard.php:15
 msgid "(no title)"
 msgstr "(nessun titolo)"
 
@@ -170,7 +170,7 @@ msgid "A list of popular categories"
 msgstr "Una lista delle categorie pi&ugrave; popolari"
 
 #. Text in echo
-#: functions.php:863
+#: functions.php:910
 msgid "About"
 msgstr "Info"
 
@@ -193,12 +193,12 @@ msgid "Archives"
 msgstr "Archivi"
 
 #. Text in function
-#: custom-device-color.php:179
+#: custom-device-color.php:198
 msgid "Background"
 msgstr "Sfondo"
 
 #. Text in echo
-#: custom-device-color.php:258
+#: custom-device-color.php:277
 msgid "Background Color"
 msgstr "Colore di Sfondo"
 
@@ -208,7 +208,7 @@ msgid "Blogroll"
 msgstr "Link"
 
 #. Text in function
-#: custom-device-color.php:179
+#: custom-device-color.php:198
 msgid "Borders"
 msgstr "Bordi"
 
@@ -218,12 +218,17 @@ msgstr "Bordi"
 msgid "Bottom of page"
 msgstr "Fondo pagina"
 
+#. Text in echo
+#: custom-device-color.php:324
+msgid "Buttons Style"
+msgstr "Stile dei Pulsanti"
+
 #. Text in function
 #: mobile/single.php:54
 #: allcat.php:9
-#: functions.php:565
-#: functions.php:626
-#: functions.php:1042
+#: functions.php:592
+#: functions.php:653
+#: functions.php:1089
 #: footer.php:50
 #: sidebar.php:17
 msgid "Categories"
@@ -237,26 +242,27 @@ msgstr "Categoria"
 
 #. Text in echo
 #: mobile/single.php:83
-#: functions.php:520
+#: functions.php:547
 msgid "Child pages: "
 msgstr "Pagina discendente: "
 
 #. Text in echo
-#: custom-device-color.php:223
+#: custom-device-color.php:242
 msgid "Choose an image from your computer:"
 msgstr "Seleziona un'immagine dal tuo computer:"
 
 #. Text in echo
 #: attachment.php:12
-#: functions.php:1663
-#: single.php:15
+#: single/post-audio.php:5
+#: functions.php:1751
 #: page.php:15
 #: one-column-page.php:19
+#: single/post.php:5
 msgid "Close"
 msgstr "Chiudi"
 
 #. Text in function
-#: custom-device-color.php:208
+#: custom-device-color.php:227
 msgid "Colors updated. <a href=\"%s\">Visit your site</a> to see how it looks."
 msgstr "Colori aggiornati. <a href=\"%s\">Guarda il tuo sito</a> per vederne l'aspetto"
 
@@ -267,8 +273,8 @@ msgstr "Per poter utilizzare questo widget, gli autori dei commenti <strong>devo
 
 #. Text in echo
 #: widgets.php:394
-#: functions.php:589
-#: functions.php:624
+#: functions.php:616
+#: functions.php:651
 #: footer.php:104
 msgid "Comments"
 msgstr "Commenti"
@@ -279,41 +285,41 @@ msgid "Compact view (only avatars)"
 msgstr "Visualizzazione compatta (solo avatar)"
 
 #. Text in function
-#: custom-device-color.php:1
-#: custom-device-color.php:204
+#: custom-device-color.php:156
+#: custom-device-color.php:223
 msgid "Custom Colors"
 msgstr "Colori Personalizzati"
 
 #. Text in echo
-#: functions.php:1084
+#: functions.php:1131
 msgid "Date"
 msgstr "Data"
 
 #. Text in echo
-#: custom-device-color.php:268
 #: custom-device-color.php:287
-#: custom-device-color.php:300
-#: custom-device-color.php:324
+#: custom-device-color.php:306
+#: custom-device-color.php:319
+#: custom-device-color.php:352
 msgid "Default"
 msgstr "Predefinito"
 
 #. Text in echo
-#: custom-device-color.php:240
+#: custom-device-color.php:259
 msgid "Default Images"
 msgstr "Immagine Predefinita"
 
 #. Text in function
+#: loop/post-aside.php:19
 #: mobile/single.php:56
-#: loop/loop-aside.php:19
-#: functions.php:616
-#: functions.php:627
-#: loop/loop-status.php:10
+#: functions.php:643
+#: functions.php:654
+#: loop/post-status.php:10
 msgid "Edit"
 msgstr "Modifica"
 
 #. Text in function
 #: mobile/comments.php:25
-#: comments.php:30
+#: comments.php:28
 msgid "Email"
 msgstr "Email"
 
@@ -329,7 +335,7 @@ msgid "Enter your password to view comments."
 msgstr "Digita la password per vedere i commenti."
 
 #. Text in echo
-#: custom-device-color.php:213
+#: custom-device-color.php:232
 msgid "Exterior Colors"
 msgstr "Colori Esterni"
 
@@ -364,13 +370,13 @@ msgid "Header height"
 msgstr "Altezza dell'immagine di testata"
 
 #. Text in echo
-#: custom-device-color.php:169
-#: custom-device-color.php:179
+#: custom-device-color.php:188
+#: custom-device-color.php:198
 msgid "Highlighted Links"
 msgstr "Link Evidenziati"
 
 #. Text in echo
-#: custom-device-color.php:292
+#: custom-device-color.php:311
 msgid "Hightlighted Buttons Border"
 msgstr "Bordi dei Link Evidenziati"
 
@@ -380,27 +386,27 @@ msgid "Home"
 msgstr "Home"
 
 #. Text in echo
-#: custom-device-color.php:242
+#: custom-device-color.php:261
 msgid "If you don&lsquo;t want to upload your own image, you can choose from one of the following."
 msgstr "Potete usare una di queste immagini o potete caricare la vostra immagine personalizzata"
 
 #. Text in echo
-#: functions.php:929
+#: functions.php:976
 msgid "If you like/dislike this theme, or if you encounter any issues, please let us know it."
 msgstr "Se hai riscontrato dei problemi o se semplicemente ti piace/non ti piace questo tema , per favore faccelo sapere."
 
 #. Text in function
-#: custom-device-color.php:340
+#: custom-device-color.php:368
 msgid "Image Upload Error"
 msgstr "Errore Durante il Caricamento dell'Immagine"
 
 #. Text in function
-#: custom-device-color.php:179
+#: custom-device-color.php:198
 msgid "Inner borders"
 msgstr "Bordi interni"
 
 #. Text in echo
-#: custom-device-color.php:308
+#: custom-device-color.php:336
 msgid "Interior Colors"
 msgstr "Colori Interni"
 
@@ -427,19 +433,19 @@ msgid "Leave a comment"
 msgstr "Lascia un commento"
 
 #. Text in echo
-#: functions.php:930
+#: functions.php:977
 msgid "Leave a feedback"
 msgstr "Lascia un feedback"
 
 #. Text in echo
-#: custom-device-color.php:169
-#: custom-device-color.php:179
+#: custom-device-color.php:188
+#: custom-device-color.php:198
 msgid "Links"
 msgstr "Link"
 
 #. Text in echo
-#: functions.php:1657
-#: functions.php:1660
+#: functions.php:1745
+#: functions.php:1748
 msgid "Log in"
 msgstr "Collegati"
 
@@ -455,17 +461,17 @@ msgstr "Autenticato come %s"
 
 #. Text in function
 #: mobile/comments.php:36
-#: comments.php:40
+#: comments.php:38
 msgid "Logged in as <a href=\"%1$s\">%2$s</a>."
 msgstr "Autenticato come <a href=\"%1$s\">%2$s</a>."
 
 #. Text in function
-#: custom-device-color.php:311
+#: custom-device-color.php:339
 msgid "Main Content"
 msgstr "Contenuti Principali"
 
 #. Text in function
-#: functions.php:1177
+#: functions.php:1224
 msgid "Main Navigation Menu"
 msgstr "Men&ugrave; Principale"
 
@@ -481,14 +487,12 @@ msgstr "Continua..."
 
 #. Text in function
 #: mobile/comments.php:25
-#: comments.php:30
+#: comments.php:28
 msgid "Name"
 msgstr "Nome"
 
 #. Text in function
-#: index.php:43
 #: footer.php:236
-#: author.php:38
 msgid "Newer Posts"
 msgstr "Articoli pi&ugrave; Recenti"
 
@@ -505,31 +509,31 @@ msgstr "Pagina Successiva"
 
 #. Text in function
 #: mobile/comments.php:12
-#: functions.php:590
-#: functions.php:624
+#: functions.php:617
+#: functions.php:651
 #: comments.php:12
 msgid "No Comments"
 msgstr "Nessun Commento"
 
 #. Text in echo
 #: mobile/single.php:55
-#: functions.php:578
-#: functions.php:625
+#: functions.php:605
+#: functions.php:652
 msgid "No Tags"
 msgstr "Nessun Tag"
 
 #. Text in function
-#: functions.php:1669
+#: functions.php:1757
 msgid "No comments yet."
 msgstr "Ancora nessun commento"
 
 #. Text in function
-#: functions.php:1669
+#: functions.php:1757
 msgid "No preview: this is a comment of a protected post"
 msgstr "Impossibile visualizzare i commenti: articolo protetto."
 
 #. Text in function
-#: functions.php:1669
+#: functions.php:1757
 msgid "No preview: this is a protected post"
 msgstr "Nessun riassunto: articolo protetto."
 
@@ -539,7 +543,7 @@ msgid "Not logged in"
 msgstr "Non collegato"
 
 #. Text in echo
-#: functions.php:335
+#: functions.php:362
 msgid "Nothing to quote. You must select some text..."
 msgstr "Nulla da citare. Seleziona un testo prima..."
 
@@ -560,20 +564,18 @@ msgid "Number of users to show:"
 msgstr "Numero di utenti da visualizzare:"
 
 #. Text in function
-#: index.php:43
 #: footer.php:233
-#: author.php:38
 msgid "Older Posts"
 msgstr "Articoli pi&ugrave; vecchi"
 
 #. Text in echo
-#: custom-device-color.php:271
+#: custom-device-color.php:290
 msgid "Opacity"
 msgstr "Opacit&agrave;"
 
 #. Text in function
-#: functions.php:851
-#: functions.php:1669
+#: functions.php:898
+#: functions.php:1757
 msgid "Options saved."
 msgstr "Opzioni salvate."
 
@@ -585,29 +587,35 @@ msgstr "Pagina non trovata"
 #. Text in echo
 #: mobile/single.php:113
 #: mobile/index.php:87
-#: functions.php:1024
+#: functions.php:1071
 #: sidebar.php:15
 msgid "Pages"
 msgstr "Pagine"
 
 #. Text in function
-#: custom-device-color.php:311
+#: custom-device-color.php:339
 msgid "Pages Menu and Floating Menu"
 msgstr "Men&ugrave; pagine e Men&ugrave; Fluttuanti"
 
 #. Text in function
-#: attachment.php:57
-#: single.php:28
+#: attachment.php:59
+#: single/post-audio.php:19
 #: page.php:28
 #: one-column-page.php:32
+#: single/post.php:18
 msgid "Pages:"
 msgstr "Pagine:"
 
 #. Text in echo
 #: mobile/single.php:95
-#: functions.php:520
+#: functions.php:547
 msgid "Parent page: "
 msgstr "Pagina genitore: "
+
+#. Text in echo
+#: 404.php:14
+msgid "Perhaps using the search form will help..."
+msgstr "Forse il modulo di ricerca ti potrebbe aiutare..."
 
 #. Text in function
 #: widgets.php:757
@@ -626,7 +634,7 @@ msgstr "Categorie pi&ugrave; popolari"
 
 #. Text in echo
 #: mobile/index.php:47
-#: functions.php:1021
+#: functions.php:1068
 msgid "Posts"
 msgstr "Articoli"
 
@@ -654,26 +662,27 @@ msgstr "Pagina precedente"
 
 #. Text in echo
 #: attachment.php:13
-#: single.php:16
+#: single/post-audio.php:6
 #: page.php:16
 #: one-column-page.php:20
 #: footer.php:142
+#: single/post.php:6
 msgid "Print"
 msgstr "Stampa"
 
 #. Text in function
 #: mobile/single.php:53
-#: functions.php:623
+#: functions.php:650
 msgid "Published on: %1$s"
 msgstr "Pubblicato il: %1$s"
 
 #. Text in function
-#: functions.php:601
+#: functions.php:628
 msgid "Published on: <b>%1$s</b>"
 msgstr "Pubblicato il: <b>%1$s</b>"
 
 #. Text in echo
-#: functions.php:313
+#: functions.php:340
 msgid "Quote"
 msgstr "Cita"
 
@@ -684,7 +693,7 @@ msgid "Recent Comments"
 msgstr "Commenti Recenti"
 
 #. Text in function
-#: functions.php:1669
+#: functions.php:1757
 #: footer.php:37
 msgid "Recent Posts"
 msgstr "Articoli Recenti"
@@ -700,13 +709,13 @@ msgid "Recent Posts in Category"
 msgstr "Articoli Recenti nella Categoria"
 
 #. Text in echo
-#: functions.php:1029
+#: functions.php:1076
 msgid "Remember to click the Save Changes button at the bottom of the screen for new settings to take effect."
 msgstr "Per rendere effettivi i cambiamenti, clicca sul pulsante Salva le modifiche in fondo alla schermata."
 
 #. Text in echo
-#: custom-device-color.php:250
-#: custom-device-color.php:253
+#: custom-device-color.php:269
+#: custom-device-color.php:272
 msgid "Remove Image"
 msgstr "Rimuovi Immagine"
 
@@ -717,19 +726,19 @@ msgid "Return to %s"
 msgstr "Ritorna a %s"
 
 #. Text in echo
-#: functions.php:1029
+#: functions.php:1076
 msgid "Save"
 msgstr "Salva"
 
 #. Text in echo
-#: functions.php:1113
-#: custom-device-color.php:335
+#: functions.php:1160
+#: custom-device-color.php:363
 msgid "Save Changes"
 msgstr "Salva Cambiamenti"
 
 #. Text in function
 #: mobile/comments.php:36
-#: comments.php:40
+#: comments.php:38
 msgid "Say It!"
 msgstr "Dillo!"
 
@@ -748,20 +757,20 @@ msgid "Search results for &#8220;%s&#8221;"
 msgstr "Risultati della ricerca per &#8220;%s&#8221;"
 
 #. Text in function
-#: functions.php:1177
+#: functions.php:1224
 msgid "Secondary Navigation Menu"
 msgstr "Men&ugrave; Secondario"
 
 #. Text in echo
-#: custom-device-color.php:264
-#: custom-device-color.php:285
-#: custom-device-color.php:298
-#: custom-device-color.php:322
+#: custom-device-color.php:283
+#: custom-device-color.php:304
+#: custom-device-color.php:317
+#: custom-device-color.php:350
 msgid "Select a Color"
 msgstr "Selezionare un Colore"
 
 #. Text in echo
-#: functions.php:1012
+#: functions.php:1059
 msgid "Select posts or pages to be displaied in the index-page slideshow box.<br />Items will be ordered as display here."
 msgstr "Selezionare gli articoli o le pagine da visualizzare nello slideshow.<br />Gli elementi saranno ordinati come visualizato qui sotto."
 
@@ -771,7 +780,7 @@ msgid "Select your icon size"
 msgstr "Seleziona la dimensione delle icone"
 
 #. Text in echo
-#: custom-device-color.php:266
+#: custom-device-color.php:285
 msgid "Set to \"transparent\""
 msgstr "Imposta a \"trasparente\""
 
@@ -796,8 +805,8 @@ msgid "Sidebar Widget Area"
 msgstr "Area Widget della Sidebar"
 
 #. Text in function
-#: functions.php:724
-#: functions.php:1010
+#: functions.php:761
+#: functions.php:1057
 msgid "Slideshow"
 msgstr "Slideshow"
 
@@ -808,10 +817,10 @@ msgstr "Alcuni link utili per l'utente"
 
 #. Text in echo
 #: mobile/single.php:102
-#: attachment.php:68
+#: attachment.php:70
 #: mobile/index.php:76
 #: index.php:52
-#: single.php:45
+#: single.php:31
 #: page.php:45
 #: one-column-page.php:49
 #: author.php:47
@@ -836,19 +845,19 @@ msgstr "Tag"
 
 #. Text in function
 #: mobile/single.php:55
-#: functions.php:577
-#: functions.php:625
+#: functions.php:604
+#: functions.php:652
 msgid "Tags:"
 msgstr "Tag:"
 
 #. Text in echo
-#: custom-device-color.php:169
-#: custom-device-color.php:179
+#: custom-device-color.php:188
+#: custom-device-color.php:198
 msgid "Text"
 msgstr "Testo"
 
 #. Text in echo
-#: custom-device-color.php:279
+#: custom-device-color.php:298
 msgid "Text Color"
 msgstr "Colore del Testo"
 
@@ -873,13 +882,13 @@ msgid "The most recent posts in a single category"
 msgstr "Le gli articoli pi&ugrave; recenti in una singola categoria"
 
 #. Text in function
-#: functions.php:724
-#: functions.php:850
+#: functions.php:761
+#: functions.php:897
 msgid "Theme Options"
 msgstr "Opzioni Tema"
 
 #. Text in function
-#: functions.php:520
+#: functions.php:547
 msgid "This page has hierarchy"
 msgstr "Pagina con dipendenze"
 
@@ -889,7 +898,7 @@ msgid "This widget lets visitors of your blog subscribe to it and follow you on 
 msgstr "Questo widget permette ai visitatori del tuo blog di registrarsi e di seguirti nei social network pi&ugrave; popolari (Twitter, FaceBook etc.)"
 
 #. Text in echo
-#: custom-device-color.php:252
+#: custom-device-color.php:271
 msgid "This will remove the background image."
 msgstr "Questa azione eliminer&agrave; l'immagine di fondo"
 
@@ -899,7 +908,7 @@ msgid "Tips: Don&apos;t drag too much widgets here. Use small &quot;graphical&qu
 msgstr "Suggerimento: Non trascinare qui troppi widget. Usa preferibilmente widget &quot;grafici&quot; (es. icone, pulsanti, il campo di ricerca, etc.)"
 
 #. Text in echo
-#: functions.php:1083
+#: functions.php:1130
 msgid "Title"
 msgstr "Titolo"
 
@@ -923,23 +932,23 @@ msgid "Trackback URL"
 msgstr "Trackback URL"
 
 #. Text in echo
-#: functions.php:918
-#: functions.php:1114
+#: functions.php:965
+#: functions.php:1161
 msgid "Undo Changes"
 msgstr "Annulla Modifiche"
 
 #. Text in echo
-#: functions.php:917
+#: functions.php:964
 msgid "Update Options"
 msgstr "Aggiorna Opzioni"
 
 #. Text in echo
-#: custom-device-color.php:227
+#: custom-device-color.php:246
 msgid "Upload"
 msgstr "Carica"
 
 #. Text in echo
-#: custom-device-color.php:217
+#: custom-device-color.php:236
 msgid "Upload Image"
 msgstr "Carica Immagine"
 
@@ -965,7 +974,7 @@ msgid "View all categories"
 msgstr "Tutte le categorie"
 
 #. Text in function
-#: functions.php:1669
+#: functions.php:1757
 msgid "View all posts in %s"
 msgstr "Visualizza tutti gli articoli in %s"
 
@@ -975,13 +984,13 @@ msgid "View full size"
 msgstr "Dimensione originale"
 
 #. Text in function
-#: loop/loop-gallery.php:54
+#: loop/post-gallery.php:54
 msgid "View gallery"
 msgstr "Guarda la galleria"
 
 #. Text in function
 #: mobile/comments.php:25
-#: comments.php:30
+#: comments.php:28
 msgid "Website"
 msgstr "Sito Web"
 
@@ -992,27 +1001,22 @@ msgid "Welcome %s"
 msgstr "Benvenuto %s"
 
 #. Text in echo
-#: 404.php:14
-msgid "You can try the following:"
-msgstr "Vuoi un consiglio? Prova a..."
-
-#. Text in echo
-#: custom-device-color.php:219
+#: custom-device-color.php:238
 msgid "You can upload a custom background image."
 msgstr "Qui &egrave; possibile caricare una nuova immagine di fondo."
 
 #. Text in function
-#: custom-device-color.php:340
+#: custom-device-color.php:368
 msgid "You do not have permission to customize headers."
 msgstr "Spiacente, non disponi dei permessi necessari per personalizzare la testata."
 
 #. Text in function
-#: functions.php:724
+#: functions.php:761
 msgid "You do not have sufficient permissions to access this page."
 msgstr "Spiacente, non disponi dei permessi necessari per accedere a questa pagina."
 
 #. Text in function
-#: comments.php:40
+#: comments.php:38
 msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
 msgstr "È possibile utilizzare questi tag ed attributi <abbr title=\"HyperText Markup Language\">HTML</abbr>: %s"
 
@@ -1042,17 +1046,17 @@ msgstr "[predefinito = abilitato]"
 msgid "a small login form in the user panel [default = disabled]"
 msgstr "un piccolo modulo di login all'interno del pannello utente [predefinito = disabilitato]"
 
-#. Text in echo
-#: 404.php:18
-msgid "browse the site throught the navigation bar below"
-msgstr "navigare nel sito tramite la barra qui sotto"
+#. Text in function
+#: functions.php:1
+msgid "add style to the editor in order to write the post exactly how it will appear on the site [default = enabled]"
+msgstr "applica lo stile all'editor per scrivere gli articoli esattamente come appariranno nel sito [predefinito = abilitato]"
 
 #. Text in function
 #: mobile/single.php:52
-#: functions.php:1669
-#: functions.php:557
-#: functions.php:622
-#: functions.php:1153
+#: functions.php:1757
+#: functions.php:584
+#: functions.php:649
+#: functions.php:1200
 msgid "by %s"
 msgstr "di %s"
 
@@ -1062,7 +1066,7 @@ msgid "classic navigation links"
 msgstr "links di navigazione classici"
 
 #. Text in echo
-#: functions.php:877
+#: functions.php:924
 msgid "content"
 msgstr "contenuto"
 
@@ -1072,12 +1076,17 @@ msgid "content summary"
 msgstr "riassunto"
 
 #. Text in echo
+#: custom-device-color.php:328
+msgid "dark"
+msgstr "scuro"
+
+#. Text in echo
 #: widgets.php:418
 msgid "default: \"Welcome %s\" , where %s is the user name"
 msgstr "predefinito: \"Benvenuto %s\" , dove %s &egrave; il nome dell'utente"
 
 #. Text in echo
-#: functions.php:884
+#: functions.php:931
 msgid "description"
 msgstr "descrizione"
 
@@ -1132,25 +1141,30 @@ msgstr "animazioni javascript"
 msgid "l"
 msgstr "l"
 
+#. Text in echo
+#: custom-device-color.php:327
+msgid "light"
+msgstr "chiaro"
+
 #. Text in function
 #: functions.php:1
 msgid "mobile support"
 msgstr "supporto mobile"
 
 #. Text in echo
-#: functions.php:882
+#: functions.php:929
 msgid "name"
 msgstr "nome"
 
 #. Text in function
-#: functions.php:1669
+#: functions.php:1757
 msgid "on"
 msgstr "su"
 
 #. Text in echo
-#: functions.php:873
+#: functions.php:920
 msgid "other"
-msgstr "atro"
+msgstr "altro"
 
 #. Text in function
 #: mobile/index.php:69
@@ -1164,8 +1178,13 @@ msgstr "pagina %1$s di %2$s"
 msgid "please, don't hide theme credits [default = enabled]<br />TwoBeers.net's authors reserve themselfs to give support only to those who recognize TwoBeers work, keeping TwoBeers.net credits visible on their site."
 msgstr "Per favore, non nascondere i crediti del tema [predefinito = abilitato]<br />Gli autori di TwoBeers.net si riservano, inoltre, la facolt&agrave; di fornire assistenza solo a coloro che riconoscono il loro lavoro mantenendo visibili sul proprio sito i crediti a TwoBeers.net."
 
+#. Text in function
+#: functions.php:1
+msgid "post editor style"
+msgstr "stile dell'editor"
+
 #. Text in echo
-#: functions.php:876
+#: functions.php:923
 msgid "post formats"
 msgstr "formati degli articoli"
 
@@ -1185,7 +1204,7 @@ msgid "posts thumbnail"
 msgstr "miniature articoli"
 
 #. Text in echo
-#: functions.php:878
+#: functions.php:925
 msgid "quickbar"
 msgstr "quickbar"
 
@@ -1195,12 +1214,12 @@ msgid "quote link"
 msgstr "link per la citazione"
 
 #. Text in function
-#: functions.php:1433
+#: functions.php:1757
 msgid "quoted on"
 msgstr "citato in"
 
 #. Text in echo
-#: functions.php:885
+#: functions.php:932
 msgid "require"
 msgstr "richiede"
 
@@ -1209,18 +1228,8 @@ msgstr "richiede"
 msgid "right sidebar"
 msgstr "sidebar destra"
 
-#. Text in echo
-#: 404.php:16
-msgid "search the site using the searchbox in the upper-right"
-msgstr "usare lo strumento di ricerca in alto a destra"
-
-#. Text in echo
-#: 404.php:17
-msgid "see the suggested pages in the above menu"
-msgstr "vedere le pagine proposte nel menu qui sopra"
-
 #. Text in function
-#: functions.php:1433
+#: functions.php:1757
 msgid "shiword Default Gravatar"
 msgstr "gravatar predefinito di Shiword"
 
@@ -1280,13 +1289,13 @@ msgid "show the classic navigation links (paged posts navigation, next/prev post
 msgstr "visualizza i classici link di navigazione (navigazione tra le pagine degli articoli, articolo precedente/successivo, etc). Nota: gli stessi link sono presenti nella barra di navigazione veloce [predefinito = disabilitato]"
 
 #. Text in echo
-#: functions.php:875
+#: functions.php:922
 msgid "sidebar"
 msgstr "sidebar"
 
 #. Text in function
 #: functions.php:1
-#: functions.php:874
+#: functions.php:921
 msgid "slideshow"
 msgstr "slideshow"
 
@@ -1301,12 +1310,12 @@ msgid "sliding menu"
 msgstr "menu a scorrimento"
 
 #. Text in function
-#: functions.php:1669
+#: functions.php:1757
 msgid "someone"
 msgstr "un tizio"
 
 #. Text in echo
-#: functions.php:883
+#: functions.php:930
 msgid "status"
 msgstr "stato"
 
@@ -1316,7 +1325,7 @@ msgid "theme credits"
 msgstr "crediti del tema"
 
 #. Text in echo
-#: functions.php:860
+#: functions.php:907
 msgid "theme features"
 msgstr "funzionalit&agrave; del tema"
 
@@ -1345,8 +1354,3 @@ msgid_plural "This gallery contains <a %1$s><strong>%2$s</strong> images</a>"
 msgstr[0] "Questa galleria contiene <a %1$s><strong>%2$s</strong> immagine</a>"
 msgstr[1] "Questa galleria contiene <a %1$s><strong>%2$s</strong> immagini</a>"
 
-#~ msgid "by"
-#~ msgstr "di"
-
-#~ msgid "Welcome"
-#~ msgstr "Benvenuto"

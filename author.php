@@ -31,16 +31,16 @@
 			$sw_use_format = ( function_exists( 'get_post_format' ) && isset( $shiword_opt['shiword_postformat_' . get_post_format( $post->ID ) ] ) && $shiword_opt['shiword_postformat_' . get_post_format( $post->ID ) ] == 1 ) ? get_post_format( $post->ID ) : 'standard' ;
 		} ?>
 		
-		<?php get_template_part( 'loop/loop', $sw_use_format ); ?>
+		<?php get_template_part( 'loop/post', $sw_use_format ); ?>
 		
 	<?php } ?>
-	<div class="w_title" style="border-bottom:none;">
+	<div class="w_title navigate_comments" style="border-bottom:none;">
 		<?php //num of pages
 			global $paged;
 			if ( !$paged ) { $paged = 1; }
-			if ( $shiword_opt['shiword_navlinks'] == 1 ) { previous_posts_link( '&laquo; '. __( 'Newer Posts', 'shiword' ) . ' - ' ); }
-			printf( __( 'page %1$s of %2$s', 'shiword' ), $paged, $wp_query->max_num_pages );
-			if ( $shiword_opt['shiword_navlinks'] == 1 ) { next_posts_link( ' - ' . __( 'Older Posts', 'shiword' ) . ' &raquo;'); }
+			if ( $shiword_opt['shiword_navlinks'] == 1 ) { previous_posts_link( '&laquo;' ); }
+			printf( '<span>' . __( 'page %1$s of %2$s', 'shiword' ) . '</span>', $paged, $wp_query->max_num_pages );
+			if ( $shiword_opt['shiword_navlinks'] == 1 ) { next_posts_link( '&raquo;'); }
 		?>
 	</div>
 <?php } else { ?>
