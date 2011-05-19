@@ -1,5 +1,6 @@
 <?php get_header(); //shows "all categories" page ?>
 <?php
+	global $shiword_opt;
 	$sw_use_side = ( $shiword_opt['shiword_rsideb'] == 0 ) ? false : true; 
 	$sw_postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
 ?>
@@ -8,7 +9,7 @@
 
 		<h2 class="storytitle"><?php _e( 'Categories', 'shiword' ); ?></h2>
 
-		<div style="position: relative; margin-right: 12px;">
+		<div class="meta_container">
 			<div class="comment_tools top_meta">
 				<?php _e( 'All Categories', 'shiword' ); ?>
 			</div>

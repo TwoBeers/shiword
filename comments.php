@@ -18,9 +18,12 @@
 			<?php paginate_comments_links(); ?>
 		</div>
 	<?php } ?>
-	<ol class="commentlist pings">
-		<?php wp_list_comments( 'type=pings' ); ?>
-	</ol>
+	<?php $comments_by_type = &separate_comments(get_comments('status=approve&post_id=' . $id)); ?>
+	<?php if ( ! empty($comments_by_type['pings']) ) { ?>
+		<ol class="commentlist pings">
+			<?php wp_list_comments( 'type=pings' ); ?>
+		</ol>
+	<?php } ?>
 <?php } ?>
 	
 <?php if ( comments_open() ) { ?>

@@ -47,7 +47,8 @@ pre {
 #sidebardx,
 #quickbar,
 #edit_link,
-#fixedfoot_cont {
+#fixedfoot_cont,
+.sw-menu {
 	display: none;
 }
 .metafield_content {

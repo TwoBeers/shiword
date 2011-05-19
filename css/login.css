@@ -7,7 +7,7 @@
 	width:32px;
 }
 body { 
-	background:url("../images/bg.jpg") repeat-x fixed left bottom #B6B6B6; !important; 
+	background:url("../images/custombg.jpg") repeat-x fixed left bottom #B6B6B6 !important; 
 	padding-bottom: 300px;
 	overflow: hidden;
 }

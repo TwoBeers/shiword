@@ -21,7 +21,7 @@
 			if ( $sw_first_img ) {
 				$sw_first_img = array_merge( $sw_def_vals, $sw_first_img );
 				if ( $sw_first_img['title'] != '' )
-					$sw_post_title = $first_img['title'];
+					$sw_post_title = $sw_first_img['title'];
 		?>
 			<h2 class="storytitle"><a href="<?php the_permalink() ?>" rel="bookmark"><?php echo $sw_post_title; ?></a></h2>
 			<?php if ( $sw_show_xinfo ) { shiword_extrainfo( true, true, true, true, true ); } ?>
