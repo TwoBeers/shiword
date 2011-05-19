@@ -1199,6 +1199,9 @@ li.pingback {
 	border-radius: 5px;
 	color: #fff;
 }
+.gallery-caption {
+	/*custom gallery callback*/
+}
 
 /* Simple spinner 
 ----------------------------------------------------------*/
