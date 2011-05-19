@@ -26,7 +26,7 @@
 					<?php if ( wp_attachment_is_image() ) { //from twentyten WP theme
 						$sw_attachments = array_values( get_children( array( 'post_parent' => $post->post_parent, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID' ) ) );
 						foreach ( $sw_attachments as $sw_k => $sw_attachment ) {
-							if ( $sw_attachment->ID == $sw_post->ID )
+							if ( $sw_attachment->ID == $post->ID )
 								break;
 						}
 						$sw_nextk = $sw_k + 1;
