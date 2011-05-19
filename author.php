@@ -1,22 +1,22 @@
 <?php get_header(); ?>
 <?php global $shiword_opt, $query_string; ?>
-<?php $author = get_queried_object(); ?>
+<?php $sw_author = get_queried_object(); ?>
 <?php
 	$sw_use_side = ( $shiword_opt['shiword_rsideb'] == 0 ) ? false : true; 
-	$postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
+	$sw_postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
 ?>
-<div class="<?php echo $postswidth; ?> letsstick">
+<div class="<?php echo $sw_postswidth; ?> letsstick">
 
 	<div class="meta">
 		<p style="text-align: center;"><?php printf( __( 'Posts by %s', 'shiword'), '<strong style="font-size: 15px; color: #fff;">' . wp_title( '',false ) . '</strong>'); ?></p>
-		<?php if ( $author->description ) { // If a user has filled out their description, show a bio on their entries ?>
+		<?php if ( $sw_author->description ) { // If a user has filled out their description, show a bio on their entries ?>
 			<div id="entry-author-info">
-				<?php echo get_avatar( $author->user_email, 32, $default= get_template_directory_uri() . '/images/user.png','user-avatar' ); ?>
+				<?php echo get_avatar( $sw_author->user_email, 32, $default= get_template_directory_uri() . '/images/user.png','user-avatar' ); ?>
 				<?php
-					if ( $author->twitter ) echo '<a title="' . sprintf( __('follow %s on Twitter', 'shiword'), $author->display_name ) . '" href="'.$author->twitter.'"><img alt="twitter" class="avatar" width=32 height=32 src="' . get_template_directory_uri() . '/images/follow/Twitter.png" /></a>';
-					if ( $author->facebook ) echo '<a title="' . sprintf( __('follow %s on Facebook', 'shiword'), $author->display_name ) . '" href="'.$author->facebook.'"><img alt="facebook" class="avatar" width=32 height=32 src="' . get_template_directory_uri() . '/images/follow/Facebook.png" /></a>';
+					if ( $sw_author->twitter ) echo '<a title="' . sprintf( __('follow %s on Twitter', 'shiword'), $sw_author->display_name ) . '" href="' . $sw_author->twitter . '"><img alt="twitter" class="avatar" width=32 height=32 src="' . get_template_directory_uri() . '/images/follow/Twitter.png" /></a>';
+					if ( $sw_author->facebook ) echo '<a title="' . sprintf( __('follow %s on Facebook', 'shiword'), $sw_author->display_name ) . '" href="' . $sw_author->facebook . '"><img alt="facebook" class="avatar" width=32 height=32 src="' . get_template_directory_uri() . '/images/follow/Facebook.png" /></a>';
 				?>
-				<?php echo $author->description; ?>
+				<?php echo $sw_author->description; ?>
 				<div class="fixfloat" ></div>
 			</div><!-- #entry-author-info -->
 		<?php } ?>

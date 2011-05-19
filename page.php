@@ -2,9 +2,9 @@
 <?php global $shiword_is_printpreview; ?>
 <?php
 	$sw_use_side = ( ( $shiword_opt['shiword_rsideb'] == 0 ) || ( ( $shiword_opt['shiword_rsideb'] == 1 ) && ( $shiword_opt['shiword_rsidebpages'] == 0 ) ) ) ? false : true; 
-	$postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
+	$sw_postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
 ?>
-<div class="<?php echo $postswidth; ?> letsstick">
+<div class="<?php echo $sw_postswidth; ?> letsstick">
 
 <?php if ( have_posts() ) {
 	while ( have_posts() ) {
@@ -28,7 +28,7 @@
 				<?php wp_link_pages( 'before=<div class="meta comment_tools" style="text-align: right;">' . __( 'Pages:', 'shiword' ) . '&after=</div><div class="fixfloat"></div>' ); ?>
 			</div>
 			<div class="fixfloat"> </div>
-			<?php $tmptrackback = get_trackback_url(); ?>
+			<?php $sw_tmptrackback = get_trackback_url(); ?>
 		</div>	
 		<?php comments_template(); // Get wp-comments.php template ?>
 		

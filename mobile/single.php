@@ -38,11 +38,11 @@
 					</div>
 					<div <?php post_class( 'sw-post' ) ?> id="post-<?php the_ID(); ?>">
 						<h2><?php 
-							$post_title = the_title( '','',false );
-							if ( !$post_title ) {
+							$sw_post_title = the_title( '','',false );
+							if ( !$sw_post_title ) {
 								_e( '(no title)', 'shiword' );
 							} else {
-								echo $post_title;
+								echo $sw_post_title;
 							}
 							?>
 						</h2>
@@ -67,34 +67,34 @@
 							<div class="fixfloat"> </div>
 					</div>
 					<?php if (is_page()) {
-						$args = array(
+						$sw_args = array(
 							'post_type' => 'page',
 							'post_parent' => $post->ID,
 							'order' => 'ASC',
 							'orderby' => 'menu_order',
 							'numberposts' => 0
 							);
-						$sub_pages = get_posts( $args ); // retrieve the child pages
+						$sw_sub_pages = get_posts( $sw_args ); // retrieve the child pages
 					} else {
-						$sub_pages = '';
+						$sw_sub_pages = '';
 					}
 
-					if (!empty($sub_pages)) { ?>
+					if ( !empty( $sw_sub_pages ) ) { ?>
 						<h2 class="sw-seztit"><span><?php _e( 'Child pages: ', 'shiword' ); ?></span></h2>
 						<ul class="sw-group">
 							<?php 
-							foreach ( $sub_pages as $children ) {
-								echo '<li><a href="' . get_permalink( $children ) . '" title="' . esc_attr( strip_tags( get_the_title( $children ) ) ) . '">' . get_the_title( $children ) . '</a></li>';
+							foreach ( $sw_sub_pages as $sw_children ) {
+								echo '<li><a href="' . get_permalink( $sw_children ) . '" title="' . esc_attr( strip_tags( get_the_title( $sw_children ) ) ) . '">' . get_the_title( $sw_children ) . '</a></li>';
 							}
 							?>
 						</ul>
 						
 					<?php } ?>
-					<?php $the_parent_page = $post->post_parent; // retrieve the parent page
-					if ( $the_parent_page ) {?>
+					<?php $sw_the_parent_page = $post->post_parent; // retrieve the parent page
+					if ( $sw_the_parent_page ) {?>
 						<h2 class="sw-seztit"><span><?php _e( 'Parent page: ', 'shiword' ); ?></span></h2>
 						<ul class="sw-group">
-								<li><a href="<?php echo get_permalink( $the_parent_page ); ?>" title="<?php echo esc_attr( strip_tags( get_the_title( $the_parent_page ) ) ); ?>"><?php echo get_the_title( $the_parent_page ); ?></a></li>
+								<li><a href="<?php echo get_permalink( $sw_the_parent_page ); ?>" title="<?php echo esc_attr( strip_tags( get_the_title( $sw_the_parent_page ) ) ); ?>"><?php echo get_the_title( $the_parent_page ); ?></a></li>
 						</ul>
 					<?php } ?>
 				<?php } ?>

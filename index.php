@@ -3,19 +3,19 @@
 
 <?php
 	$sw_use_side = ( ( $shiword_opt['shiword_rsideb'] == 0 ) || ( is_single() && ( $shiword_opt['shiword_rsideb'] == 1 ) && ( $shiword_opt['shiword_rsidebposts'] == 0 ) ) ) ? false : true; 
-	$postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
+	$sw_postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
 ?>
-<div class="<?php echo $postswidth; ?> letsstick">
+<div class="<?php echo $sw_postswidth; ?> letsstick">
 
 <?php if ( is_archive() ) { // archive reminder ?>
 	<div class="meta">
 		<p style="text-align: center;">
 		<?php 
-			if ( is_category() )	{ $strtype = __( 'Category', 'shiword' ) . ' : %s'; }
-			elseif ( is_tag() )		{ $strtype = __( 'Tag', 'shiword' ) . ' : %s'; }
-			elseif ( is_date() )	{ $strtype = __( 'Archives', 'shiword' ) . ' : %s'; }
+			if ( is_category() )	{ $sw_strtype = __( 'Category', 'shiword' ) . ' : %s'; }
+			elseif ( is_tag() )		{ $sw_strtype = __( 'Tag', 'shiword' ) . ' : %s'; }
+			elseif ( is_date() )	{ $sw_strtype = __( 'Archives', 'shiword' ) . ' : %s'; }
 		?>
-		<?php printf( $strtype, '<strong style="font-size: 15px; color: #fff;">' . wp_title( '',false ) . '</strong>'); ?>
+		<?php printf( $sw_strtype, '<strong style="font-size: 15px; color: #fff;">' . wp_title( '',false ) . '</strong>'); ?>
 		</p>
 	</div>
 <?php } elseif ( is_search() ) { // search reminder ?>

@@ -26,7 +26,7 @@
 <?php if ( comments_open() ) { ?>
 
 <?php
-$fields =  array(
+$sw_fields =  array(
 	'author' => '<p class="comment-form-author">' . '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" aria-required="true" />' .
 	            '<label for="author">' . __( 'Name', 'shiword' ) . '</label> ' . ( $req ? '<span class="required">*</span>' : '' ) .'</p>',
 	'email'  => '<p class="comment-form-email">' . '<input id="email" name="email" type="text" value="' . sanitize_email(  $commenter['comment_author_email'] ) . '" size="30" aria-required="true" />' .
@@ -35,14 +35,14 @@ $fields =  array(
 	            '<label for="url">' . __( 'Website', 'shiword' ) . '</label>' .'</p>',
 ); ?>
 
-	<?php $custom_args = array(
-		'fields'               => apply_filters( 'comment_form_default_fields', $fields ),
+	<?php $sw_custom_args = array(
+		'fields'               => apply_filters( 'comment_form_default_fields', $sw_fields ),
 		'comment_field'        => '<p class="comment-form-comment" style="text-align: center;"><textarea id="comment" name="comment" cols="45" rows="7" style="width: 95%;" aria-required="true"></textarea></p>',
 		'comment_notes_after'  => '<p class="form-allowed-tags" style="color: #999999; text-align: center;"><small>' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'shiword' ), allowed_tags() ) . '</small></p>',
 		'label_submit'         => __( 'Say It!', 'shiword' ),
 		'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>.', 'shiword' ), admin_url( 'profile.php' ), $user_identity ) . '</p>',
 
 	);
-	comment_form( $custom_args ); ?>
+	comment_form( $sw_custom_args ); ?>
 <?php } ?>
 <!-- end comments -->

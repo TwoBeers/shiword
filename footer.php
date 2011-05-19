@@ -1,8 +1,8 @@
 <?php global $shiword_opt, $shiword_is_allcat_page; ?>
 
 <!-- begin footer -->
-		<?php $headmenu = wp_nav_menu( array( 'echo' => 0, 'menu_id' => 'bottommenu', 'fallback_cb' => false, 'theme_location' => 'secondary', 'depth' => 1 ) ); ?>
-		<?php if ( $headmenu ) echo '<div class="sw-menu">'.$headmenu.'<div class="fixfloat"></div></div>' ?>
+		<?php $sw_headmenu = wp_nav_menu( array( 'echo' => 0, 'menu_id' => 'bottommenu', 'fallback_cb' => false, 'theme_location' => 'secondary', 'depth' => 1 ) ); ?>
+		<?php if ( $sw_headmenu ) echo '<div class="sw-menu">' . $sw_headmenu . '<div class="fixfloat"></div></div>' ?>
 		<div id="footer">
 			<?php get_sidebar( 'footer' ); // show footer widgets areas ?>
 			<div id="themecredits">
@@ -80,8 +80,8 @@
 													<?php
 													if ( is_user_logged_in() ) { //fix for notice when user not log-in
 														get_currentuserinfo();
-														$email = $current_user->user_email;
-														echo get_avatar( sanitize_email( $email ), 50, $default= get_template_directory_uri() . '/images/user.png','user-avatar' );
+														$sw_email = $current_user->user_email;
+														echo get_avatar( sanitize_email( $sw_email ), 50, $default= get_template_directory_uri() . '/images/user.png','user-avatar' );
 														printf( __( 'Logged in as %s', 'shiword' ), '<strong>' . $current_user->display_name . '</strong>' );
 													} else {
 														echo get_avatar( 'dummyemail', 50, $default= get_template_directory_uri() . '/images/user.png','user-avatar' );
@@ -97,11 +97,11 @@
 															<li><a title="<?php _e( 'Add New Post', 'shiword' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post', 'shiword' ); ?></a></li>
 														<?php } ?>
 														<?php if ( current_user_can( 'moderate_comments' ) ) {
-															$awaiting_mod = wp_count_comments();
-															$awaiting_mod = $awaiting_mod->moderated;
-															$awaiting_mod = $awaiting_mod ? ' (' . number_format_i18n( $awaiting_mod ) . ')' : '';
+															$sw_awaiting_mod = wp_count_comments();
+															$sw_awaiting_mod = $sw_awaiting_mod->moderated;
+															$sw_awaiting_mod = $sw_awaiting_mod ? ' (' . number_format_i18n( $sw_awaiting_mod ) . ')' : '';
 														?>
-															<li><a title="<?php _e( 'Comments', 'shiword' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'shiword' ); ?></a><?php echo $awaiting_mod; ?></li>
+															<li><a title="<?php _e( 'Comments', 'shiword' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'shiword' ); ?></a><?php echo $sw_awaiting_mod; ?></li>
 														<?php } ?>
 													<?php } ?>
 													<li><a title="<?php _e( 'Log out', 'shiword' ); ?>" href="<?php echo esc_url( wp_logout_url() ); ?>"><?php _e( 'Log out', 'shiword' ); ?></a></li>
@@ -162,7 +162,7 @@
 								<?php if ( pings_open() ) { ?>
 
 									<div class="minibutton">
-										<a href="<?php global $tmptrackback; echo $tmptrackback; ?>" rel="trackback" title="Trackback URL">
+										<a href="<?php global $sw_tmptrackback; echo $sw_tmptrackback; ?>" rel="trackback" title="Trackback URL">
 											<span class="minib_img" style="background-position: 0px -72px;">&nbsp;</span>
 											<span class="nb_tooltip"><?php _e( 'Trackback URL', 'shiword' ); ?></span>
 										</a>
@@ -181,20 +181,20 @@
 							</div>
 
 							<?php if ( is_page() ) { 
-								$page_nav_links = shiword_page_navi($post->ID); // get the menu-ordered prev/next pages links
-								if ( isset ( $page_nav_links['prev'] ) ) { // prev page link ?>
+								$sw_page_nav_links = shiword_page_navi($post->ID); // get the menu-ordered prev/next pages links
+								if ( isset ( $sw_page_nav_links['prev'] ) ) { // prev page link ?>
 									<div class="minibutton">
-										<a href="<?php echo $page_nav_links['prev']['link']; ?>" title="<?php echo $page_nav_links['prev']['title']; ?>">
+										<a href="<?php echo $sw_page_nav_links['prev']['link']; ?>" title="<?php echo $sw_page_nav_links['prev']['title']; ?>">
 											<span class="minib_img" style="background-position: center -120px;">&nbsp;</span>
-											<span class="nb_tooltip"><?php echo __( 'Previous page', 'shiword' ) . ': ' . $page_nav_links['prev']['title']; ?></span>
+											<span class="nb_tooltip"><?php echo __( 'Previous page', 'shiword' ) . ': ' . $sw_page_nav_links['prev']['title']; ?></span>
 										</a>
 									</div>
 								<?php }
-								if ( isset ( $page_nav_links['next'] ) ) { // next page link ?>
+								if ( isset ( $sw_page_nav_links['next'] ) ) { // next page link ?>
 									<div class="minibutton">
-										<a href="<?php echo $page_nav_links['next']['link']; ?>" title="<?php echo $page_nav_links['next']['title']; ?>">
+										<a href="<?php echo $sw_page_nav_links['next']['link']; ?>" title="<?php echo $sw_page_nav_links['next']['title']; ?>">
 											<span class="minib_img" style="background-position: center -144px;">&nbsp;</span>
-											<span class="nb_tooltip"><?php echo __( 'Next page', 'shiword' ) . ': ' . $page_nav_links['next']['title']; ?></span>
+											<span class="nb_tooltip"><?php echo __( 'Next page', 'shiword' ) . ': ' . $sw_page_nav_links['next']['title']; ?></span>
 										</a>
 									</div>
 								<?php } ?>

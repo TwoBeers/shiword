@@ -24,28 +24,28 @@
 				<div class="entry-attachment" style="text-align: center;">
 
 					<?php if ( wp_attachment_is_image() ) { //from twentyten WP theme
-						$attachments = array_values( get_children( array( 'post_parent' => $post->post_parent, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID' ) ) );
-						foreach ( $attachments as $k => $attachment ) {
-							if ( $attachment->ID == $post->ID )
+						$sw_attachments = array_values( get_children( array( 'post_parent' => $post->post_parent, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID' ) ) );
+						foreach ( $sw_attachments as $sw_k => $sw_attachment ) {
+							if ( $sw_attachment->ID == $sw_post->ID )
 								break;
 						}
-						$nextk = $k + 1;
-						$prevk = $k - 1;
+						$sw_nextk = $sw_k + 1;
+						$sw_prevk = $sw_k - 1;
 						?>
 						<div class="img-navi" style="text-align: center;">
 			
-						<?php if ( isset( $attachments[ $prevk ] ) ) { ?>
-								<a class="size-thumbnail" title="" href="<?php echo get_attachment_link( $attachments[ $prevk ]->ID ); ?>">&laquo; <?php echo wp_get_attachment_image( $attachments[ $prevk ]->ID, array( 50, 50 ) ); ?></a>
+						<?php if ( isset( $sw_attachments[ $sw_prevk ] ) ) { ?>
+								<a class="size-thumbnail" title="" href="<?php echo get_attachment_link( $sw_attachments[ $sw_prevk ]->ID ); ?>">&laquo; <?php echo wp_get_attachment_image( $sw_attachments[ $sw_prevk ]->ID, array( 50, 50 ) ); ?></a>
 						<?php } ?>
 						<span class="img-navi-curimg"><?php echo wp_get_attachment_image( $post->ID, array( 50, 50 ) ); ?></span>
-						<?php if ( isset( $attachments[ $nextk ] ) ) { ?>
-								<a class="size-thumbnail" title="" href="<?php echo get_attachment_link( $attachments[ $nextk ]->ID ); ?>"><?php echo wp_get_attachment_image( $attachments[ $nextk ]->ID, array( 50, 50 ) ); ?> &raquo;</a>
+						<?php if ( isset( $sw_attachments[ $sw_nextk ] ) ) { ?>
+								<a class="size-thumbnail" title="" href="<?php echo get_attachment_link( $sw_attachments[ $sw_nextk ]->ID ); ?>"><?php echo wp_get_attachment_image( $sw_attachments[ $sw_nextk ]->ID, array( 50, 50 ) ); ?> &raquo;</a>
 						<?php } ?>
 						</div>
 						<p class="attachment"><a href="<?php echo wp_get_attachment_url(); ?>" title="<?php _e( 'View full size','shiword' ) ;  // link to Full size image ?>" rel="attachment"><?php
-							$attachment_width  = apply_filters( 'shiword_attachment_size', 1000 );
-							$attachment_height = apply_filters( 'shiword_attachment_height', 1000 );
-							echo wp_get_attachment_image( $post->ID, array( $attachment_width, $attachment_height ) ); // filterable image width with, essentially, no limit for image height.
+							$sw_attachment_width  = apply_filters( 'shiword_attachment_size', 1000 );
+							$sw_attachment_height = apply_filters( 'shiword_attachment_height', 1000 );
+							echo wp_get_attachment_image( $post->ID, array( $sw_attachment_width, $sw_attachment_height ) ); // filterable image width with, essentially, no limit for image height.
 						?></a></p>
 					<?php } else { ?>
 						<?php if ( ! shiword_add_audio_player( '<a href="' . wp_get_attachment_url() . '">link</a>' ) ) { ?>
@@ -59,7 +59,7 @@
 					<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages:', 'shiword' ) . '&after=</div><div class="fixfloat"></div>' ); ?>
 			</div>
 			<div class="fixfloat"> </div>
-			<?php $tmptrackback = get_trackback_url(); ?>
+			<?php $sw_tmptrackback = get_trackback_url(); ?>
 		</div>
 
 		<?php comments_template(); // Get wp-comments.php template ?>

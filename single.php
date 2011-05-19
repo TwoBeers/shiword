@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 <?php
 	$sw_use_side = ( ( $shiword_opt['shiword_rsideb'] == 0 ) || ( ( $shiword_opt['shiword_rsideb'] == 1 ) && ( $shiword_opt['shiword_rsidebposts'] == 0 ) ) ) ? false : true; 
-	$postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
+	$sw_postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
 ?>
-<div class="<?php echo $postswidth; ?> letsstick">
+<div class="<?php echo $sw_postswidth; ?> letsstick">
 
 <?php if ( have_posts() ) {
 	while ( have_posts() ) {
@@ -25,7 +25,7 @@
 				<?php previous_post_link('%link &raquo;'); ?>
 			</div>
 		<?php } ?>
-		<?php $tmptrackback = get_trackback_url(); ?>
+		<?php $sw_tmptrackback = get_trackback_url(); ?>
 	<?php }
 } else { ?>
 	<p><?php _e( 'Sorry, no posts matched your criteria.', 'shiword' );?></p>

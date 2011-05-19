@@ -6,9 +6,9 @@
 		<?php
 			// Post thumbnail
 			if( $shiword_opt['shiword_pthumb'] ==1 ) {
-				$thumbed_link = shiword_get_the_thumb( $post->ID, 50, 50, '' );
+				$sw_thumbed_link = shiword_get_the_thumb( $post->ID, 50, 50, '' );
 		?>
-		<a href="<?php the_permalink() ?>" rel="bookmark"><?php echo $thumbed_link; ?></a>
+		<a href="<?php the_permalink() ?>" rel="bookmark"><?php echo $sw_thumbed_link; ?></a>
 		<?php
 			}
 		?>

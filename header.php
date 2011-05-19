@@ -50,8 +50,8 @@
 		<div id="headerimg">
 			<?php get_sidebar( 'header' ); // show header widgets areas ?>
 		</div>
-		<?php $headmenu = wp_nav_menu( array( 'echo' => 0, 'menu_id' => 'mainmenu', 'fallback_cb' => 'shiword_pages_menu', 'theme_location' => 'primary' ) ); //main menu ?>
-		<?php if ( $headmenu ) echo '<div class="sw-menu">'.$headmenu.'<div style="height:4px;" class="fixfloat"> </div></div>' ?>
+		<?php $sw_headmenu = wp_nav_menu( array( 'echo' => 0, 'menu_id' => 'mainmenu', 'fallback_cb' => 'shiword_pages_menu', 'theme_location' => 'primary' ) ); //main menu ?>
+		<?php if ( $sw_headmenu ) echo '<div class="sw-menu">'.$sw_headmenu.'<div style="height:4px;" class="fixfloat"> </div></div>' ?>
 		<?php  // the sticky slider 
 			if ( $shiword_opt['shiword_sticky'] == 1 && !is_404() && !$shiword_is_printpreview ) {
 				if (

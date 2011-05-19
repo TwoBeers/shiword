@@ -31,12 +31,12 @@
 			if ( is_archive() ) { ?>
 				<div class="sw-padded">
 					<?php 
-						if ( is_category() )	{ $strtype = __( 'Category', 'shiword' ) . ' : %s'; }
-						elseif ( is_tag() )		{ $strtype = __( 'Tag', 'shiword' ) . ' : %s'; }
-						elseif ( is_date() )	{ $strtype = __( 'Archives', 'shiword' ) . ' : %s'; }
-						elseif (is_author()) 	{ $strtype = __( 'Posts by %s', 'shiword') ; }
+						if ( is_category() )	{ $sw_strtype = __( 'Category', 'shiword' ) . ' : %s'; }
+						elseif ( is_tag() )		{ $sw_strtype = __( 'Tag', 'shiword' ) . ' : %s'; }
+						elseif ( is_date() )	{ $sw_strtype = __( 'Archives', 'shiword' ) . ' : %s'; }
+						elseif (is_author()) 	{ $sw_strtype = __( 'Posts by %s', 'shiword') ; }
 					?>
-					<?php printf( $strtype, '<strong>' . wp_title( '',false ) . '</strong>'); ?>
+					<?php printf( $sw_strtype, '<strong>' . wp_title( '',false ) . '</strong>'); ?>
 				</div>
 			<?php } elseif ( is_search() ) { ?>
 				<div class="sw-padded">
@@ -51,11 +51,11 @@
 					<?php $sw_alter_style = ( !isset($sw_alter_style) || $sw_alter_style == 'sw-odd' ) ? 'sw-even' : 'sw-odd'; ?>
 					<li class="<?php echo $sw_alter_style; ?>">
 						<a href="<?php the_permalink() ?>" rel="bookmark"><?php 
-							$post_title = the_title( '','',false );
-							if ( !$post_title ) {
+							$sw_post_title = the_title( '','',false );
+							if ( !$sw_post_title ) {
 								_e( '(no title)', 'shiword' );
 							} else {
-								echo $post_title;
+								echo $sw_post_title;
 							}
 							?><br /><span class="sw-details"><?php the_author(); ?> - <?php the_time( get_option( 'date_format' ) ); ?> - <?php comments_number('(0)', '(1)','(%)'); ?></span>
 						</a>

@@ -4,11 +4,11 @@
 	<?php if( $shiword_opt['shiword_pthumb'] ==1 ) {?><img class="alignleft wp-post-image" alt="thumb" src="<?php echo get_template_directory_uri(); ?>/images/thumbs/lock.png" /><?php } ?>
 	<div class="post-body">
 		<h2 class="storytitle"><a href="<?php the_permalink() ?>" rel="bookmark"><?php 
-			$post_title = the_title( '','',false );
-			if ( !$post_title ) {
+			$sw_post_title = the_title( '','',false );
+			if ( !$sw_post_title ) {
 				_e( '(no title)', 'shiword' );
 			} else {
-				echo $post_title;
+				echo $sw_post_title;
 			}
 			?></a>
 		</h2>

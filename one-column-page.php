@@ -32,7 +32,7 @@
 				<?php wp_link_pages( 'before=<div class="meta comment_tools" style="text-align: right;">' . __( 'Pages:', 'shiword' ) . '&after=</div><div class="fixfloat"></div>' ); ?>
 			</div>
 			<div class="fixfloat"> </div>
-			<?php $tmptrackback = get_trackback_url(); ?>
+			<?php $sw_tmptrackback = get_trackback_url(); ?>
 		</div>	
 		<?php comments_template(); // Get wp-comments.php template ?>
 		
