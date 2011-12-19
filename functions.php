@@ -9,9 +9,9 @@ add_action( 'admin_init', 'shiword_default_options' );
 // Register sidebars by running shiword_widgets_init() on the widgets_init hook
 add_action( 'widgets_init', 'shiword_widgets_init' );
 // Add stylesheets
-add_action( 'wp_print_styles', 'shiword_stylesheet' );
+add_action( 'wp_enqueue_scripts', 'shiword_stylesheet' );
 // Add js animations
-add_action( 'wp_print_scripts', 'shiword_scripts' );
+add_action( 'wp_enqueue_scripts', 'shiword_scripts' );
 // Add custom category page
 add_action( 'template_redirect', 'shiword_allcat' );
 // mobile support

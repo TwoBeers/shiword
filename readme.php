@@ -1,7 +1,7 @@
 <h3>Shiword - WordPress theme</h3>
 <p>
 	<ul>
-		<li>version: 2.08</li>
+		<li>version: 2.09</li>
 	</ul>
 </p>
 <h3>Project page:</h3>
@@ -79,6 +79,16 @@
 		<li>status: nothing special to do here</li>
 	</ul>
 	Remember to set the desired format to each post in edit page.
+</p>
+<h3>CHANGE LOG (FROM VERSION 2.08):</h3>
+<p>
+	<ul>
+		<li>Fixes:
+			<ul>
+				<li>WP 3.3 dashboard incompatibility</li>
+			</ul>
+		</li>
+	</ul>
 </p>
 <h3>CHANGE LOG (FROM VERSION 1.15):</h3>
 <p>
