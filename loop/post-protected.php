@@ -1,17 +1,9 @@
 <?php global $shiword_opt; ?>
 
-<div <?php post_class( 'sw-pthumb-'.$shiword_opt['shiword_pthumb'] ) ?> id="post-<?php the_ID(); ?>">
+<div <?php post_class( 'sw-entry-standard' ) ?> id="post-<?php the_ID(); ?>">
 	<?php if( $shiword_opt['shiword_pthumb'] ==1 ) {?><img class="alignleft wp-post-image" alt="thumb" src="<?php echo get_template_directory_uri(); ?>/images/thumbs/lock.png" /><?php } ?>
 	<div class="post-body">
-		<h2 class="storytitle"><a href="<?php the_permalink() ?>" rel="bookmark"><?php 
-			$sw_post_title = the_title( '','',false );
-			if ( !$sw_post_title ) {
-				_e( '(no title)', 'shiword' );
-			} else {
-				echo $sw_post_title;
-			}
-			?></a>
-		</h2>
+		<?php shiword_post_title( array( 'fallback' => get_the_time( get_option( 'date_format' ) ) ) ); ?>
 		<div class="storycontent">
 			<?php the_content(); ?>
 		</div>

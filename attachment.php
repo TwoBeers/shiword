@@ -1,22 +1,20 @@
 <?php get_header(); ?>
 
-<div class="posts_wide letsstick">
+<?php
+	$sw_use_side = ( ( $shiword_opt['shiword_rsideb'] == 0 ) || ( ( $shiword_opt['shiword_rsideb'] == 1 ) && ( $shiword_opt['shiword_rsidebattachment'] == 0 ) ) ) ? false : true; 
+	$sw_postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
+?>
+<div class="<?php echo $sw_postswidth; ?>">
 
 <?php if ( have_posts() ) {
+	global $shiword_opt;
 	while ( have_posts() ) {
 		the_post(); ?>
 
-		<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
-
-			<div id="close_preview">
-				<a href="<?php the_permalink() ?>" rel="bookmark"><?php _e( 'Close', 'shiword' ); ?></a>
-				<a href="javascript:window.print()" id="print_button"><?php _e( 'Print', 'shiword' ); ?></a>
-				<script type="text/javascript" defer="defer">
-					document.getElementById("print_button").style.display = 'block'; // print button (available only with js active)
-				</script>
-			</div>
+		<div <?php post_class( 'sw-entry-standard' ) ?> id="post-<?php the_ID(); ?>">
 
 			<h2 class="storytitle"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h2>
+			<?php shiword_I_like_it(); ?>
 			<?php shiword_extrainfo( true, true, true, false, false ); ?>
 
 			<div class="storycontent">
@@ -55,12 +53,10 @@
 				</div><!-- .entry-attachment -->
 				<div class="entry-caption"><?php if ( !empty( $post->post_content ) ) the_content(); ?></div>
 			</div>
-			<div class="fixfloat">
-					<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages:', 'shiword' ) . '&after=</div><div class="fixfloat"></div>' ); ?>
-			</div>
 			<div class="fixfloat"> </div>
-			<?php $sw_tmptrackback = get_trackback_url(); ?>
 		</div>
+
+		<?php get_sidebar( 'single' ); // show single widget area ?>
 
 		<?php comments_template(); // Get wp-comments.php template ?>
 
@@ -71,5 +67,7 @@
 
 	<?php } ?>
 </div>
+
+<?php if ( $sw_use_side ) get_sidebar(); // show sidebar ?>
 
 <?php get_footer(); ?>

@@ -1,5 +1,8 @@
 ﻿/* Shiword v0.8 - stylesheet for custom colors */
 
+#sw-icon {
+	background: url('../images/logo-34.png') no-repeat scroll center transparent;
+}
 #headimg-bg {
 	border: 1px solid #777 !important;
 	background: #F2F2F2 url('../images/custombg.png') left top repeat-x;
@@ -89,17 +92,17 @@ input[type="submit"] {
 	width:50px;
 	background-color: transparent;
 	background-repeat: no-repeat;
-	background-position: -140px top;
+	background-position: left -240px;
 }
 #preview-navi {
 	display:block;
-	height:240px;
+	height:216px;
 	right:-49px;
 	position:absolute;
 	width:24px;
 	background-color: transparent;
 	background-repeat: no-repeat;
-	background-position: center top;
+	background-position: left top;
 	bottom:5px;
 }
 #preview-navi.sw-variant-light {
@@ -109,10 +112,10 @@ input[type="submit"] {
 	background-image: url('../images/minibuttons-dark.png');
 }
 #preview-button.sw-variant-light {
-	background-image: url('../images/qbar-light.png');
+	background-image: url('../images/minibuttons-light.png');
 }
 #preview-button.sw-variant-dark {
-	background-image: url('../images/qbar-dark.png');
+	background-image: url('../images/minibuttons-dark.png');
 }
 
 #preview-pages {

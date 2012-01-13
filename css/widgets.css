@@ -18,32 +18,11 @@
 	background: url("../images/widgets/widget_h1.png") no-repeat center 10px transparent;
 	padding-top: 80px;
 }
-
-div[id*=shi-recent-comments] .widget-title {
-	background: url("../images/tb_micrologo.png") no-repeat left center transparent;
-	padding-left: 42px;
+#single-widget-area {
+	background: url("../images/widgets/widget_p1.png") no-repeat center 10px transparent;
+	padding-top: 80px;
 }
-div[id*=shi-social] .widget-title {
-	background: url("../images/tb_micrologo.png") no-repeat left center transparent;
-	padding-left: 42px;
-}
-div[id*=shi-categories] .widget-title {
-	background: url("../images/tb_micrologo.png") no-repeat left center transparent;
-	padding-left: 42px;
-}
-div[id*=shi-user-quick-links] .widget-title {
-	background: url("../images/tb_micrologo.png") no-repeat left center transparent;
-	padding-left: 42px;
-}
-div[id*=shi-recent-commentators] .widget-title {
-	background: url("../images/tb_micrologo.png") no-repeat left center transparent;
-	padding-left: 42px;
-}
-div[id*=shi-popular-posts] .widget-title {
-	background: url("../images/tb_micrologo.png") no-repeat left center transparent;
-	padding-left: 42px;
-}
-div[id*=shi-recent-posts] .widget-title {
-	background: url("../images/tb_micrologo.png") no-repeat left center transparent;
-	padding-left: 42px;
+div[id*=_shi-] .widget-title {
+	background: url("../images/logo-17.png") no-repeat 5px center transparent;
+	padding-left: 24px;
 }

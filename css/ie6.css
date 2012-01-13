@@ -1,0 +1,102 @@
+﻿html body {
+	background: #e1e1e1 url('../images/custombg.png') bottom left repeat-x fixed;
+}
+#sw_background,
+#statusbar,
+#quickbar,
+.metafield_trigger,
+.comment-body .avatar {
+	display: none;
+}
+ul {
+    list-style: disc outside none;
+}
+ul.children, ul.sub-menu {
+	display: none;
+}
+.sw-menu li {
+	display: inline;
+    padding: 0 10px;
+	line-height: 2em;
+}
+#rss_imglink {
+    left: 10px;
+    top: 13px;
+}
+#maincontent {
+	width: 880px;
+    padding: 0;
+}
+#main #head,
+#main #head_overlay,
+#main #head_cont {
+	background: transparent;
+	border: none;
+	margin: 0;
+}
+#main {
+    background: #111111;
+}
+.letsstick .sticky,
+.type-post, .type-page {
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	border: 1px solid #777;
+	padding: 5px;
+	margin: 0 0 20px;
+}
+.metafield_content {
+	display: block;
+    padding: 0;
+	height: auto !important;
+    padding: 0 !important;
+	background: #262626;
+	width: 100%;
+}
+.meta_container {
+	clear: both;
+}
+.top_meta {
+	position: relative;
+}
+#main .post-body {
+	clear: both;
+	margin: 0;
+}
+#navbuttons {
+    margin: 0;
+    position: static;
+	padding: 10px 5px 100px;
+}
+.minibutton .nb_tooltip {
+	width: auto !important;
+	display: inline;
+	text-align: left;
+    left: 30px;
+    right: auto;
+	background: transparent;
+	border: none;
+	margin: 0;
+}
+#fixedfoot_overlay {
+	background: #111;
+}
+#fixedfoot {
+	border: none;
+}
+#fixedfoot_cont {
+    margin: 0;
+    padding: 0;
+	background: transparent;
+}
+#fixedfoot {
+	background: transparent;
+}
+.comment-reply-link {
+    background: transparent;
+    color: #CCCCCC;
+    font-size: 10px;
+    padding: 0;
+    position: static;
+}

@@ -1,7 +1,5 @@
 <!-- begin comments -->
 <?php
-	if ( isset( $_SERVER['SCRIPT_FILENAME'] ) && 'comments.php' == basename( $_SERVER['SCRIPT_FILENAME'] ) ) die ('Please do not load this page directly. Thanks!');
-
 	if ( post_password_required() ) { ?>
 		<div class="meta" id="comments" style="text-align: right;"><?php _e( 'Enter your password to view comments.', 'shiword' ); ?></div>
 		<?php return;
@@ -10,9 +8,11 @@
 
 <?php if ( have_comments() ) { ?>
 	<div class="meta" id="comments" style="text-align: right;"><?php comments_number( __( 'No Comments', 'shiword' ), __( '1 Comment', 'shiword' ), __( '% Comments', 'shiword' ) ); ?></div>
+	<?php shiword_hook_before_comments(); ?>
 	<ol class="commentlist">
 		<?php wp_list_comments( 'type=comment' ); ?>
 	</ol>
+	<?php shiword_hook_after_comments(); ?>
 	<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) { ?>
 		<div class="navigate_comments">
 			<?php paginate_comments_links(); ?>

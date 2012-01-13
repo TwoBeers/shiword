@@ -1,5 +1,6 @@
 <!-- begin sidebar -->
 <div id="sidebardx">
+		<?php shiword_hook_before_right_sidebar_content(); ?>
 		<div id="sidebarbody">
 				<?php if ( !dynamic_sidebar( 'primary-widget-area' ) ) { ?>
 					<div id="sw-search">
@@ -22,6 +23,6 @@
 					</div>
 				<?php } ?>
 		 </div>
-
+		<?php shiword_hook_after_right_sidebar_content(); ?>
 </div>
 <!-- end sidebar -->

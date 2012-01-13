@@ -3,7 +3,7 @@
 	$sw_use_side = ( ( $shiword_opt['shiword_rsideb'] == 0 ) || ( ( $shiword_opt['shiword_rsideb'] == 1 ) && ( $shiword_opt['shiword_rsidebposts'] == 0 ) ) ) ? false : true; 
 	$sw_postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
 ?>
-<div class="<?php echo $sw_postswidth; ?> letsstick">
+<div class="<?php echo $sw_postswidth; ?>">
 
 <?php if ( have_posts() ) {
 	while ( have_posts() ) {
@@ -14,18 +14,18 @@
 		} else {
 			$sw_use_format = ( function_exists( 'get_post_format' ) && isset( $shiword_opt['shiword_postformat_' . get_post_format( $post->ID ) ] ) && $shiword_opt['shiword_postformat_' . get_post_format( $post->ID ) ] == 1 ) ? get_post_format( $post->ID ) : 'standard' ;
 		} ?>
-		<?php get_template_part( 'single/post', $sw_use_format ); ?>
+		<?php shiword_navlinks(); ?>
 		
+		<?php shiword_hook_before_post(); ?>
+		<?php get_template_part( 'single/post', $sw_use_format ); ?>
+		<?php shiword_hook_after_post(); ?>
+		
+		<?php get_sidebar( 'single' ); // show single widget area ?>
+				
 		<?php comments_template(); // Get wp-comments.php template ?>
 		
-		<?php if ( $shiword_opt['shiword_navlinks'] == 1 ) { ?>
-			<div class="w_title" style="border-bottom: none; border-top: 1px solid #404040;">
-				<?php next_post_link('&laquo; %link'); ?>
-				<span> - </span>
-				<?php previous_post_link('%link &raquo;'); ?>
-			</div>
-		<?php } ?>
-		<?php $sw_tmptrackback = get_trackback_url(); ?>
+		<?php shiword_navlinks( 'bottom' ); ?>
+		
 	<?php }
 } else { ?>
 	<p><?php _e( 'Sorry, no posts matched your criteria.', 'shiword' );?></p>

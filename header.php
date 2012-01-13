@@ -3,6 +3,7 @@
 
 <head profile="http://gmpg.org/xfn/11">
 	<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
+	<meta name = "viewport" content = "width = device-width" />
 
 		<title><?php
 			if ( is_front_page() ) {
@@ -24,7 +25,7 @@
 	
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class( array( 'sw-no-js', 'body-' . $shiword_opt['shiword_frame_width'] ) ); ?>>
 	<div id="sw_background">
 		<div id="sw_body" class="pad_bg">
 			<div id="sw_body_overlay">
@@ -36,8 +37,8 @@
 		<div id="head_cont">
 			<div id="head" class="pad_bg">
 				<div id="head_overlay">
-					<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
-					<div class="description"><?php bloginfo( 'description' ); ?></div>
+					<?php if ( $shiword_opt['shiword_site_title'] ) { ?><h1><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1><?php } ?>
+					<?php if ( $shiword_opt['shiword_site_description'] ) { ?><div class="description"><?php bloginfo( 'description' ); ?></div><?php } ?>
 					<div id="rss_imglink" class="minibutton">
 						<a href="<?php bloginfo( 'rss2_url' ); ?>" title="<?php _e( 'Syndicate this site using RSS 2.0', 'shiword' ); ?>">
 							<span class="minib_img" style="background-position: 0px -216px;">&nbsp;</span>
@@ -46,19 +47,21 @@
 				</div>
 			</div>
 		</div>
-	<div id="maincontent">
-		<div id="headerimg">
-			<?php get_sidebar( 'header' ); // show header widgets areas ?>
-		</div>
-		<?php $sw_headmenu = wp_nav_menu( array( 'echo' => 0, 'menu_id' => 'mainmenu', 'fallback_cb' => 'shiword_pages_menu', 'theme_location' => 'primary' ) ); //main menu ?>
-		<?php if ( $sw_headmenu ) echo '<div class="sw-menu">'.$sw_headmenu.'<div style="height:4px;" class="fixfloat"> </div></div>' ?>
-		<?php  // the sticky slider 
-			if ( $shiword_opt['shiword_sticky'] == 1 && !is_404() && !$shiword_is_printpreview ) {
-				if (
-					( is_page() && ( $shiword_opt['shiword_sticky_pages'] == 1 ) ) ||
-					( is_single() && ( $shiword_opt['shiword_sticky_posts'] == 1 ) ) ||
-					( is_front_page() && ( $shiword_opt['shiword_sticky_front'] == 1 ) ) ||
-					( ( is_archive() || is_search() ) && ( $shiword_opt['shiword_sticky_over'] == 1 ) )
-				) shiword_sticky_slider(); 
-			}
-		?>
+		<div id="maincontent">
+			<?php shiword_hook_before_header(); ?>
+			<div id="headerimg">
+				<?php get_sidebar( 'header' ); // show header widget area ?>
+			</div>
+			<?php shiword_hook_after_header(); ?>
+			<?php $sw_headmenu = wp_nav_menu( array( 'echo' => 0, 'menu_id' => 'mainmenu', 'fallback_cb' => 'shiword_pages_menu', 'theme_location' => 'primary' ) ); //main menu ?>
+			<?php if ( $sw_headmenu ) echo '<div class="sw-menu">'.$sw_headmenu.'<div style="height:4px;" class="fixfloat"> </div></div>' ?>
+			<?php  // the sticky slider 
+				if ( $shiword_opt['shiword_sticky'] == 1 && !is_404() && !$shiword_is_printpreview ) {
+					if (
+						( is_page() && ( $shiword_opt['shiword_sticky_pages'] == 1 ) ) ||
+						( is_single() && ( $shiword_opt['shiword_sticky_posts'] == 1 ) ) ||
+						( is_front_page() && ( $shiword_opt['shiword_sticky_front'] == 1 ) ) ||
+						( ( is_archive() || is_search() ) && ( $shiword_opt['shiword_sticky_over'] == 1 ) )
+					) shiword_sticky_slider(); 
+				}
+			?>

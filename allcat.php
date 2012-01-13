@@ -4,7 +4,7 @@
 	$sw_use_side = ( $shiword_opt['shiword_rsideb'] == 0 ) ? false : true; 
 	$sw_postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
 ?>
-<div class="<?php echo $sw_postswidth; ?> letsstick">
+<div class="<?php echo $sw_postswidth; ?>">
 	<div class="post">
 
 		<h2 class="storytitle"><?php _e( 'Categories', 'shiword' ); ?></h2>

@@ -1,15 +1,14 @@
 <?php global $shiword_opt; ?>
-<?php $sw_use_format_style = ( isset( $shiword_opt['shiword_postformat_status'] ) && $shiword_opt['shiword_postformat_status'] == 1 ) ? ' sw-use-format-style' : '' ; ?>
 
-<div <?php post_class( 'sw-pthumb-'.$shiword_opt['shiword_pthumb'] . $sw_use_format_style ) ?> id="post-<?php the_ID(); ?>">
-	<div class="status-image">
-		<?php echo get_avatar( $post->post_author, 50, $default=get_option('avatar_default'), get_the_author() ); ?>
+<div <?php post_class( 'sw-entry' ) ?> id="post-<?php the_ID(); ?>">
+	<div class="sw-status-image">
+		<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php echo get_avatar( $post->post_author, 50, $default=get_option('avatar_default'), get_the_author() ); ?></a>
 	</div>
 	<div class="post-body">
 		<div class="storycontent">
-			<span style="font-size: 11px; font-weight: bold; color: #404040;"><?php printf( '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( 'View all posts by %s', esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' ); ?><?php edit_post_link( __( 'Edit', 'shiword' ),' - ' ); ?></span>
+			<div class="sw-status-author"><?php printf( '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( 'View all posts by %s', esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' ); ?><?php edit_post_link( __( 'Edit', 'shiword' ),' - ' ); ?></div>
 			<?php the_content(); ?>
-			<span style="font-size: 11px; color: #404040;"><?php echo human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago'; ?> </span>
+			<div class="fixfloat sw-status-date"><?php echo shiword_friendly_date(); ?> </div>
 		</div>
 	</div>
 	<div class="fixfloat"> </div>

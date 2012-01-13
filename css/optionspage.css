@@ -1,0 +1,161 @@
+﻿/* Shiword - stylesheet for theme options */
+
+.wrap {
+}
+#sw-icon {
+	background: url('../images/logo-34.png') no-repeat scroll center transparent;
+}
+#stylediv h3 {
+	color:#fff;
+}
+#shiword-infos ul {
+	list-style: disc outside;
+	margin-left: 30px;
+}
+#shiword-options p,
+#shiword-infos p {
+	display: block;
+	margin: 15px 0 3px;
+	padding: 3px;
+}
+#shiword-options h3,
+#shiword-infos h3 {
+	background-color: #ccc;
+	font-weight: bold;
+	border-radius: 5px;
+	padding: 3px;
+}
+#shiword-options,
+#shiword-infos {
+	background: #fff;
+	box-shadow: 0px 2px 8px #404040;
+	margin: 40px 0 20px;
+	padding: 10px;
+	position: relative;
+}
+#selector {
+	list-style: none;
+}
+#selector a {
+	font-weight: bold;
+	text-decoration: none;
+}
+#selector li {
+	float: left;
+	min-width: 150px;
+	margin: 0;
+	padding: 5px;
+	white-space: nowrap;
+	border-left: 1px solid #999;
+	border-right: 1px solid #999;
+	border-bottom: 2px groove #ccc;
+	border-radius: 0 0 5px 5px;
+}
+#selector li span.wp-menu-image {
+	float: left;
+	height: 16px;
+	width: 28px;
+}
+#shiword-options-li span.wp-menu-image {
+	background: url('') no-repeat scroll -244px -39px transparent;
+}
+#shiword-options-li a:hover span.wp-menu-image,
+#shiword-options-li.tab-selected span.wp-menu-image {
+	background: url('') no-repeat scroll -244px -7px transparent;
+}
+#shiword-infos-li span.wp-menu-image {
+	background: url('') no-repeat scroll -34px -39px transparent;
+}
+#shiword-infos-li a:hover span.wp-menu-image,
+#shiword-infos-li.tab-selected span.wp-menu-image {
+	background: url('') no-repeat scroll -34px -7px transparent;
+}
+#selector li.tab-selected {
+	background-color: #404040;
+}
+#tabs-container {
+	border-radius: 5px;
+	box-shadow: 0px 0px 8px #000;
+	background:#aaa;
+	border:1px solid #fff;
+	margin:20px 0 10px;
+	padding:0 20px 20px;	
+}
+#sw-tabselector,
+#selector {
+	margin: 0;
+}
+
+.tab-hidden {
+	display: none;
+}
+.tab-selected a,
+.tab-selected a:hover,
+.tab-selected a:focus {
+	color: #fff;
+	text-shadow: 1px 1px 2px #000;
+}
+#sw-tabselector {
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: -30px;
+}
+#sw-tabselector a {
+	text-decoration: none;
+}
+#sw-tabselector li {
+	border-radius: 5px 5px 0 0;
+	background:#ccc;
+	float: right;
+	font-weight: bold;
+	height: 30px;
+	line-height: 30px;
+	margin-right: 5px;
+	min-width: 60px;
+	padding: 0 5px;
+}
+#sw-tabselector li.sel-active {
+	background:#fff;
+}
+#sw-tabselector li.sel-active a {
+	color:#333;
+}
+#sw-submit {
+	margin-top: 20px;
+}
+.column-nam {
+	font-weight: bold;
+	font-size: 1.1em;
+}
+.sw-sub-opt-nam {
+	font-weight: bold;
+}
+.column-des {
+	border-top: 1px solid #eee;
+	font-size: 11px;
+	margin-top: 10px;
+}
+.column-req {
+	color: #999;
+	float: right;
+}
+.sw-tab-opt {
+	padding: 20px 10px;
+	border-bottom: 2px groove #fff;
+}
+.sw-sub-opt {
+	margin-top: 10px;
+	font-size: 11px;
+}
+.sw-colorpicker {
+    background: #eee;
+    border: 1px solid #ccc;
+    position: absolute;
+    z-index: 100;
+}
+.sw-color {
+	background-image: url(../images/color_wheel.png);
+	background-position: right center;
+	background-repeat: no-repeat;
+}

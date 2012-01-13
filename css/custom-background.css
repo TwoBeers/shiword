@@ -1,3 +1,6 @@
+#sw-icon {
+	background: url('../images/logo-34.png') no-repeat scroll center transparent;
+}
 #custom-background > table tr {
 	display: none;
 }
@@ -10,6 +13,36 @@
 div#custom-background-image {
 	height: 400px;
 	background-image: url('../images/custombg.png');
-	background-position: 30px left;
+	background-position: left bottom;
 	background-repeat: repeat-x;
+}
+.appearance_page_custom-background #available-bg .default-bg {
+    background: #fff;
+    border: 1px solid #ccc;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+    float: left;
+    height: 170px;
+    margin: 0 20px 20px 0;
+    overflow: hidden;
+    padding: 10px;
+}
+.appearance_page_custom-background #available-bg label input {
+    margin-right: 10px;
+}
+.appearance_page_custom-background #available-bg label img {
+    vertical-align: middle;
+    border: 3px solid #fff;
+	-moz-box-shadow: 0px 0px 3px #555;
+	-webkit-box-shadow: 0px 0px 3px #555;
+	box-shadow: 0px 0px 3px #555;
+}
+#custom-background div#custom-background-image {
+    min-height: 600px;
+}
+.default-bg h3 {
+	margin: 10px 0;
+	text-align: center;
 }
