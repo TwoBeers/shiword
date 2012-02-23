@@ -510,39 +510,40 @@ class shiword_Widget_social extends WP_Widget {
 
 		$this->WP_Widget("shi-social", __("Follow Me", "shiword"), $widget_ops, $control_ops);
         $this->follow_urls = array(
-			'Blogger',
-			'Delicious',
-			'Deviantart',
-			'Digg',
-			'Dropbox',
-			'Facebook',
-			'Flickr',
-			'Github',
-			'GooglePlus',
-			'Hi5',
-			'LinkedIn',
-			'Myspace',
-			'Odnoklassniki',
-			'Orkut',
-			'Qzone',
-			'Reddit',
-			'StumbleUpon',
-			'Technorati',
-			'Tencent',
-			'Twitter',
-			'Vimeo',
-			'VKontakte',
-			'Weibo',
-			'WindowsLive',
-			'Youtube',
-			'RSS');
+			'Blogger' => 'Blogger',
+			'Delicious' => 'Delicious',
+			'Deviantart' => 'deviantART',
+			'Digg' => 'Digg',
+			'Dropbox' => 'Dropbox',
+			'Facebook' => 'Facebook',
+			'Flickr' => 'Flickr',
+			'Github' => 'GitHub',
+			'GooglePlus' => 'Google+',
+			'Hi5' => 'Hi5',
+			'LinkedIn' => 'LinkedIn',
+			'Myspace' => 'Myspace',
+			'Odnoklassniki' => 'Odnoklassniki',
+			'Orkut' => 'Orkut',
+			'Picasa' => 'Picasa',
+			'Qzone' => 'Qzone',
+			'Reddit' => 'Reddit',
+			'StumbleUpon' => 'StumbleUpon',
+			'Technorati' => 'Technorati',
+			'Tencent' => 'Tencent',
+			'Twitter' => 'Twitter',
+			'Vimeo' => 'Vimeo',
+			'VKontakte' => 'VKontakte',
+			'Weibo' => 'Weibo',
+			'WindowsLive' => 'Windows Live',
+			'Youtube' => 'Youtube',
+			'RSS' => 'RSS');
 	}
 
     function form($instance) {
         $defaults = array("title" => __("Follow Me", "shiword"),
             "icon_size" => '48px',
         );
-        foreach ($this->follow_urls as $follow_service ) {
+        foreach ($this->follow_urls as $follow_service => $service_name ) {
             $defaults[$follow_service."_icon"] = $follow_service;
             $defaults["show_".$follow_service] = false;
         }
@@ -551,13 +552,13 @@ class shiword_Widget_social extends WP_Widget {
     <div>
 	<p><?php echo __('NOTE: Enter the <strong>full</strong> addresses ( with <em>http://</em> )', 'shiword'); ?></p>
 <?php
-        foreach($this->follow_urls as $follow_service ) {
+        foreach($this->follow_urls as $follow_service => $service_name ) {
 ?> 
         <div style="float: left; width: 40%; margin: 0pt 5%;">
 			<h2>
 				<input id="<?php echo $this->get_field_id('show_'.$follow_service); ?>" name="<?php echo $this->get_field_name('show_'.$follow_service); ?>" type="checkbox" <?php checked( $instance['show_'.$follow_service], 'on'); ?>  class="checkbox" />
-				<img style="vertical-align:middle; width:40px; height:40px;" src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service; ?>.png" alt="<?php echo $follow_service; ?>" />
-				<?php echo $follow_service; ?>
+				<img style="vertical-align:middle; width:40px; height:40px;" src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service ); ?>.png" alt="<?php echo $follow_service; ?>" />
+				<?php echo $service_name; ?>
 			</h2>
 <?php
             if ($follow_service != 'RSS') {
@@ -566,7 +567,7 @@ class shiword_Widget_social extends WP_Widget {
         <p>
             <label for="<?php echo $this->get_field_id($follow_service.'_account'); ?>">
 <?php
-				printf(__('Enter %1$s account link:', 'shiword'), $follow_service);
+				printf(__('Enter %1$s account link:', 'shiword'), $service_name);
 ?>
             </label>
             <input id="<?php echo $this->get_field_id($follow_service.'_account'); ?>" name="<?php echo $this->get_field_name($follow_service.'_account'); ?>" value="<?php if (isset($instance[$follow_service.'_account'])) echo $instance[$follow_service.'_account']; ?>" class="widefat" />
@@ -622,7 +623,7 @@ class shiword_Widget_social extends WP_Widget {
 ?>
     <div class="fix" style="text-align: center;">
 <?php
-        foreach ($this->follow_urls as $follow_service ) {
+        foreach ($this->follow_urls as $follow_service => $service_name ) {
 		
 			$show = ( isset($instance['show_'.$follow_service]) ) ? $instance['show_'.$follow_service] : false;
 			$account = ( isset($instance[$follow_service.'_account']) ) ? $instance[$follow_service.'_account'] : '';
@@ -631,8 +632,8 @@ class shiword_Widget_social extends WP_Widget {
             }
             if ($show && !empty($account)) {
 ?>
-        <a href="<?php echo $account; ?>" target="_blank" class="shi-social-icon" title="<?php echo $follow_service;?>">
-            <img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service;?>.png" alt="<?php echo $follow_service;?>" style='width: <?php echo $icon_size;?>; height: <?php echo $icon_size;?>;' />
+        <a href="<?php echo $account; ?>" target="_blank" class="shi-social-icon" title="<?php echo $service_name;?>">
+            <img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service );?>.png" alt="<?php echo $follow_service;?>" style='width: <?php echo $icon_size;?>; height: <?php echo $icon_size;?>;' />
         </a>
 <?php
             }
@@ -898,7 +899,7 @@ class shiword_Widget_share_this extends WP_Widget {
 		$outer = '';
 		foreach( $services as $key => $service ) {
 			$href = sprintf( $service[1], $pName, $pHref, $pPict );
-			if ( $instance[$key] ) $outer .= '<a class="share-item" rel="nofollow" target="_blank" id="sw-' . $key . '" href="' . $href . '"><img src="' . get_template_directory_uri() . '/images/follow/' . $key . '.png" width="' . $icon_size . '" height="' . $icon_size . '" alt="' . $service[0] . ' Button"  title="' . sprintf( __( 'Share with %s','shiword' ), $service[0] ) . '" /></a>';
+			if ( $instance[$key] ) $outer .= '<a class="share-item" rel="nofollow" target="_blank" id="sw-' . $key . '" href="' . $href . '"><img src="' . get_template_directory_uri() . '/images/follow/' . strtolower( $key ) . '.png" width="' . $icon_size . '" height="' . $icon_size . '" alt="' . $service[0] . ' Button"  title="' . sprintf( __( 'Share with %s','shiword' ), $service[0] ) . '" /></a>';
 		}
 ?>
 		<?php echo $before_widget; ?>

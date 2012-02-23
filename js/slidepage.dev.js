@@ -7,18 +7,18 @@ jQuery(document).ready(function($){
 	if ( pages > 1 ) {
 		for (i = 1; i <= pages; i++)
 			{
-			links += '<a href="#" onclick="pagedRowView.set(' + i + ',' + n + ')">' + i + '</a>';
+			links += '<a href="#" onclick="shiwordPagedRowView.set(' + i + ',' + n + ')">' + i + '</a>';
 			}
-		links += '<a href="#" onclick="pagedRowView.all()">all</a>';
+		links += '<a href="#" onclick="shiwordPagedRowView.all()">all</a>';
 		$('#shiwordSlide-posts').prepend('<div id="sw-paged">' + links + '</div>');
-		pagedRowView.set(1);
+		shiwordPagedRowView.set(1);
 	}
-	document.getElementById('shiwordSlide-pages').className = 'tab-hidden';
-	document.getElementById('shiwordSlide-posts-li').className = 'tab-selected';
 
+	shiwordSlideSwitchClass('shiwordSlide-posts')
+	
 });
 
-pagedRowView = {
+shiwordPagedRowView = {
 	set : function (thisset,maxnum) { //show only a set of rows
 		jQuery('.sw_post_row').css({ 'display' : 'none' });
 		jQuery('.sw_post_row').slice(((thisset-1)*shiword_rpp) , ((thisset-1)*shiword_rpp)+shiword_rpp).css({ 'display' : ''});
@@ -29,18 +29,10 @@ pagedRowView = {
 }
 
 function shiwordSlideSwitchClass(a) { // simple animation for option tabs
-	switch(a) {
-		case 'shiwordSlide-posts':
-			document.getElementById('shiwordSlide-pages').className = 'tab-hidden';
-			document.getElementById('shiwordSlide-posts').className = '';
-			document.getElementById('shiwordSlide-pages-li').className = '';
-			document.getElementById('shiwordSlide-posts-li').className = 'tab-selected';
-		break;
-		case 'shiwordSlide-pages':
-			document.getElementById('shiwordSlide-pages').className = '';
-			document.getElementById('shiwordSlide-posts').className = 'tab-hidden';
-			document.getElementById('shiwordSlide-pages-li').className = 'tab-selected';
-			document.getElementById('shiwordSlide-posts-li').className = '';
-		break;
-	}
+	tab = '#' + a;
+	tabli = tab + '-li';
+	jQuery('.sw-slidepage-type').addClass('tab-hidden');
+	jQuery('.sw-slidepage-type-list li').removeClass('tab-selected');
+	jQuery(tab).removeClass('tab-hidden');
+	jQuery(tabli).addClass('tab-selected');
 }

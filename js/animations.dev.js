@@ -137,7 +137,7 @@
 	});
 	bot_but.click(function() {
 		$("html, body").animate({
-			scrollTop: $('#footer').offset().top - $('#head_cont').offset().top - 80
+			scrollTop: $('#footer').offset().top - 80
 		}, {
 			duration: 400
 		});

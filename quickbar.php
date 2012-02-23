@@ -336,7 +336,7 @@ if ( !function_exists( 'shiword_get_recentcomments' ) ) {
 					$post_title_short = __( '(no title)', 'shiword' );
 				} else {
 					//shrink the post title if > 35 chars
-					$post_title_short = mb_strimwidth( esc_html( $post->post_title ), 0, 35, '&hellip;' );
+					$post_title_short = mb_strimwidth( get_the_title( $post->ID ), 0, 35, '&hellip;' );
 				}
 				if ( post_password_required( $post ) ) {
 					//hide comment author in protected posts
@@ -368,7 +368,7 @@ if ( !function_exists( 'shiword_get_recententries' ) ) {
 				$r->the_post();
 
 				$post_title = get_the_title();
-				$post_title_short = get_the_title() ? mb_strimwidth( esc_html( $post_title ), 0, 35, '&hellip;' ) : __( '(no title)', 'shiword' );
+				$post_title_short = get_the_title() ? mb_strimwidth( get_the_title(), 0, 35, '&hellip;' ) : __( '(no title)', 'shiword' );
 				$post_auth = mb_strimwidth( get_the_author(), 0, 20, '&hellip;' );
 
 				echo '<li><a href="' . get_permalink() . '" title="' . the_title_attribute( array( 'echo' => 0 ) ) . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '<div class="preview">';
@@ -407,16 +407,16 @@ if ( !function_exists( 'shiword_get_categories_wpr' ) ) {
 			$lastcatposts = get_posts( $post_search_args ); //get the post list for each category
 			foreach( $lastcatposts as $post ) {
 				setup_postdata( $post );
-				$post_title = esc_html( $post->post_title );
+				$post_title = get_the_title( $post->ID );
 				if ( $post->post_title == "" ) {
 					$post_title_short = __( '(no title)', 'shiword' );
 				} else {
 					//shrink the post title if > 35 chars
-					$post_title_short = mb_strimwidth( esc_html( $post->post_title ), 0, 35, '&hellip;' );
+					$post_title_short = mb_strimwidth( $post_title, 0, 35, '&hellip;' );
 				}
 				//shrink the post author if > 20 chars
 				$post_auth = mb_strimwidth( get_the_author(), 0, 20, '&hellip;' );
-				echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . $post_title . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '</li>';
+				echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . esc_html( $post_title ) . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '</li>';
 			}
 			echo '</ul></div></li>';
 		}

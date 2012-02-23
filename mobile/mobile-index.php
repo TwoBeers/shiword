@@ -86,12 +86,18 @@
 			</div>
 			<h2 class="sw-seztit"><span><?php _e( 'Pages', 'shiword' ); ?></span></h2>
 			<?php wp_nav_menu( array( 'menu_class' => 'sw-group', 'menu_id' => 'mainmenu', 'fallback_cb' => 'shiword_pages_menu_mobile', 'theme_location' => 'primary', 'depth' => 1 ) ); //main menu ?>
+			<?php if ( $shiword_opt['shiword_qbar_reccom'] == 1 ) { // recent comments menu ?>
+				<h2 class="sw-seztit"><span><?php _e( 'Recent Comments', 'shiword' ); ?></span></h2>
+				<ul id="sw-reccom">
+					<?php shiword_get_recentcomments(); ?>
+				</ul>
+			<?php } ?>
 			<h2 class="sw-seztit"><span>&copy; <?php echo date( 'Y' ); ?> <?php bloginfo( 'name' ); ?></span></h2>
 			<p id="themecredits">
 				<?php if ( $shiword_opt['shiword_tbcred'] == 1 ) { ?>
 					Powered by <a href="http://wordpress.org"><strong>WordPress</strong></a> and <a href="http://www.twobeers.net/"><strong>Shiword</strong></a>. 
 				<?php } ?>
-				<?php wp_loginout(); wp_register(' | ', ''); ?>
+				<?php wp_loginout(); wp_register(' | ', ''); ?><?php if ( ( !isset( $shiword_opt['shiword_mobile_css'] ) || ( $shiword_opt['shiword_mobile_css'] == 1) ) ) echo ' | <a href="' . home_url() . '?mobile_override=desktop">'. __('Switch to Desktop View','shiword') .'</a>'; ?>
 			</p>
 		</div>
 		<?php wp_footer(); ?>

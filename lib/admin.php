@@ -14,9 +14,9 @@ add_action( 'admin_menu', 'shiword_create_menu' );
 // create custom theme settings menu
 if ( !function_exists( 'shiword_create_menu' ) ) {
 	function shiword_create_menu() {
-		//create new top-level menu - Theme Options
+		//create sub menu page to the Appearance menu - Theme Options
 		$optionspage = add_theme_page( __( 'Theme Options', 'shiword' ), __( 'Theme Options', 'shiword' ), 'edit_theme_options', 'tb_shiword_functions', 'shiword_edit_options' );
-		//create new top-level menu - Slideshow
+		//create sub menu page to the Appearance menu - Slideshow
 		$slidepage = add_theme_page( __( 'Slideshow', 'shiword' ), __( 'Slideshow', 'shiword' ), 'edit_theme_options', 'tb_shiword_slideshow', 'shiword_edit_slideshow' );
 		//call register settings function
 		add_action( 'admin_init', 'shiword_register_settings' );
@@ -328,7 +328,7 @@ if ( !function_exists( 'shiword_edit_slideshow' ) ) {
 					<?php settings_fields( 'shiw_slideshow_group' ); ?>
 
 					<div id="tabs-container">
-						<ul id="selector">
+						<ul id="selector" class="sw-slidepage-type-list">
 							<li id="shiwordSlide-posts-li">
 								<a href="#shiwordSlide-posts" onClick="shiwordSlideSwitchClass('shiwordSlide-posts'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'Posts', 'shiword' ); ?></a>
 							</li>
@@ -340,7 +340,7 @@ if ( !function_exists( 'shiword_edit_slideshow' ) ) {
 
 						<?php $lastposts = get_posts( 'post_type=post&numberposts=-1&orderby=date' ); ?>
 
-						<div id="shiwordSlide-posts">
+						<div id="shiwordSlide-posts" class="sw-slidepage-type">
 							<table cellspacing="0" class="widefat post fixed">
 								<thead>
 									<tr>
@@ -382,7 +382,7 @@ if ( !function_exists( 'shiword_edit_slideshow' ) ) {
 
 						<?php $lastpages = get_posts( 'post_type=page&numberposts=-1&orderby=menu_order' ); ?>
 
-						<div id="shiwordSlide-pages">
+						<div id="shiwordSlide-pages" class="sw-slidepage-type">
 							<table cellspacing="0" class="widefat post fixed">
 								<thead>
 									<tr>

@@ -23,7 +23,7 @@
 			$sw_use_format = shiword_is_post_format_available( $post->ID ) ? get_post_format( $post->ID ) : '' ;
 		} ?>
 		<?php shiword_hook_before_post(); ?>
-		<?php get_template_part( 'loop/post', $sw_use_format ); ?>
+		<?php locate_template( array( 'loop/post-' . $sw_use_format . '.php', 'loop/post.php' ), true, false ); ?>
 		<?php shiword_hook_after_post(); ?>
 		
 	<?php } ?>

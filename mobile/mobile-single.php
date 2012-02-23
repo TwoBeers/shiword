@@ -123,7 +123,7 @@
 				<?php if ( $shiword_opt['shiword_tbcred'] == 1 ) { ?>
 					Powered by <a href="http://wordpress.org"><strong>WordPress</strong></a> and <a href="http://www.twobeers.net/"><strong>Shiword</strong></a>. 
 				<?php } ?>
-				<?php wp_loginout(); wp_register(' | ', ''); ?>
+				<?php wp_loginout(); wp_register(' | ', ''); ?><?php if ( ( !isset( $shiword_opt['shiword_mobile_css'] ) || ( $shiword_opt['shiword_mobile_css'] == 1) ) ) echo ' | <a href="' . home_url() . '?mobile_override=desktop">'. __('Switch to Desktop View','shiword') .'</a>'; ?>
 			</p>
 		</div>
 		<?php wp_footer(); ?>

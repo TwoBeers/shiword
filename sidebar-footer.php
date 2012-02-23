@@ -7,24 +7,19 @@
 ?>
 
 <div id="footer-widget-area">
-	<?php shiword_hook_before_footer_sidebar_content(); ?>
-	<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) { ?>
-		<div id="first_fwa" class="widget-area">
-			<?php dynamic_sidebar( 'first-footer-widget-area' ); ?>
-		</div><!-- #first .widget-area -->
-	<?php } ?>
+	<div class="fixfloat"><?php shiword_hook_before_footer_sidebar_content(); ?></div>
 
-	<?php if ( is_active_sidebar( 'second-footer-widget-area' ) ) { ?>
-		<div id="second_fwa" class="widget-area">
-			<?php dynamic_sidebar( 'second-footer-widget-area' ); ?>
-		</div><!-- #second .widget-area -->
-	<?php } ?>
+	<div id="first_fwa" class="widget-area">
+			<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) dynamic_sidebar( 'first-footer-widget-area' ); ?>
+	</div><!-- #first .widget-area -->
 
-	<?php if ( is_active_sidebar( 'third-footer-widget-area' ) ) { ?>
-		<div id="third_fwa" class="widget-area">
-			<?php dynamic_sidebar( 'third-footer-widget-area' ); ?>
-		</div><!-- #third .widget-area -->
-	<?php } ?>
-	<div class="fixfloat"></div> 
-	<?php shiword_hook_after_footer_sidebar_content(); ?>
+	<div id="second_fwa" class="widget-area">
+			<?php if ( is_active_sidebar( 'second-footer-widget-area' ) ) dynamic_sidebar( 'second-footer-widget-area' ); ?>
+	</div><!-- #second .widget-area -->
+
+	<div id="third_fwa" class="widget-area">
+			<?php if ( is_active_sidebar( 'third-footer-widget-area' ) ) dynamic_sidebar( 'third-footer-widget-area' ); ?>
+	</div><!-- #third .widget-area -->
+
+	<div class="fixfloat"><?php shiword_hook_after_footer_sidebar_content(); ?></div>
 </div><!-- #footer-widget-area -->

@@ -178,7 +178,7 @@ function shiword_get_coa( $option = false ) {
 							'description' => __( 'content summary', 'shiword' ),
 							'info' => __( 'use the summary instead of content in main index', 'shiword' ),
 							'req' => '',
-							'sub' => array( 'shiword_pthumb' )
+							'sub' => array( 'shiword_pthumb', 'shiword_pthumb_size' )
 						),
 		'shiword_pthumb' =>
 						array(
@@ -188,6 +188,18 @@ function shiword_get_coa( $option = false ) {
 							'description' => __( 'posts thumbnail', 'shiword' ),
 							'info' => '',
 							'req' => 'shiword_xcont',
+							'sub' => false
+						),
+		'shiword_pthumb_size' =>
+						array(
+							'group' => 'content',
+							'type' => 'sel',
+							'default' => 120,
+							'options' => array( 64, 96, 120 ),
+							'options_readable' => array( '64px', '96px', '120px' ),
+							'description' => __( 'thumbnail size', 'shiword' ),
+							'info' => '',
+							'req' => '',
 							'sub' => false
 						),
 		'shiword_xinfos_global' =>
@@ -475,7 +487,7 @@ function shiword_get_coa( $option = false ) {
 							'description' => __( 'slideshow', 'shiword' ),
 							'info' => sprintf( __( 'slideshow for your most important posts/pages. Select them <a href="%s">here</a>', 'shiword' ), get_admin_url() . 'themes.php?page=tb_shiword_slideshow' ),
 							'req' => 'shiword_jsani',
-							'sub' => array( 'shiword_sticky_front', 'shiword_sticky_pages', 'shiword_sticky_posts', 'shiword_sticky_over' )
+							'sub' => array( 'shiword_sticky_front', 'shiword_sticky_pages', 'shiword_sticky_posts', 'shiword_sticky_over', 'shiword_sticky_height' )
 						),
 		'shiword_sticky_front' =>
 						array(
@@ -514,6 +526,18 @@ function shiword_get_coa( $option = false ) {
 							'default' => 1,
 							'description' => __( 'in posts overview', 'shiword' ),
 							'info' => __( 'display slideshow in posts overview (posts page, search results, archives, categories, etc.)', 'shiword' ),
+							'req' => 'shiword_sticky',
+							'sub' => false
+						),
+		'shiword_sticky_height' =>
+						array(
+							'group' => 'slideshow',
+							'type' => 'sel',
+							'default' => '160px',
+							'options' => array( '160px', '200px', '240px', '280px', '320px', '360px', '400px' ),
+							'options_readable' => array( '160px', '200px', '240px', '280px', '320px', '360px', '400px' ),
+							'description' => __( 'height', 'shiword' ),
+							'info' => '',
 							'req' => 'shiword_sticky',
 							'sub' => false
 						),
@@ -675,6 +699,15 @@ function shiword_get_coa( $option = false ) {
 							'default' => 1,
 							'description' => __( 'mobile support', 'shiword' ),
 							'info' => __( "detect mobile devices and use a dedicated style. Disable it if you don't like it or you're already using a plugin for mobile support", 'shiword' ),
+							'req' => ''
+						),
+		'shiword_custom_login' =>
+						array(
+							'group' => 'other',
+							'type' => 'chk',
+							'default' => 1,
+							'description' => __( 'custom login page', 'shiword' ),
+							'info' => __( "enhanced style for the login/register page", 'shiword' ),
 							'req' => ''
 						),
 		'shiword_I_like_it' =>

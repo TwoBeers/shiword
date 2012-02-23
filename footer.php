@@ -12,6 +12,7 @@
 			<div id="themecredits">
 				&copy; <?php echo date( 'Y' ); ?>
 				<strong><?php bloginfo( 'name' ); ?></strong>
+				<?php if ( ( !isset( $shiword_opt['shiword_mobile_css'] ) || ( $shiword_opt['shiword_mobile_css'] == 1) ) ) echo '<span class="hide_if_print"> - <a href="' . home_url() . '?mobile_override=mobile">'. __('Switch to Mobile View','shiword') .'</a></span>'; ?>
 				<?php if ( $shiword_opt['shiword_tbcred'] == 1 ) { ?>
 					<a href="http://www.twobeers.net/" title="Shiword theme<?php global $shiword_version; if( !empty( $shiword_version ) ) { echo ' v' . $shiword_version; } ?> by TwoBeers Crew">
 						<img alt="twobeers.net" src="<?php echo esc_url( get_template_directory_uri() . '/images/tb_micrologo.png' ); ?>" />

@@ -17,7 +17,7 @@
 		<?php shiword_navlinks(); ?>
 		
 		<?php shiword_hook_before_post(); ?>
-		<?php get_template_part( 'single/post', $sw_use_format ); ?>
+		<?php locate_template( array( 'single/post-' . $sw_use_format . '.php', 'single/post.php' ), true, false ); ?>
 		<?php shiword_hook_after_post(); ?>
 		
 		<?php get_sidebar( 'single' ); // show single widget area ?>

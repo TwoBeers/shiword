@@ -38,6 +38,7 @@ add_filter( 'avatar_defaults', 'shiword_addgravatar' );
 add_filter( 'wp_nav_menu_items', 'shiword_new_nav_menu_items' );
 add_filter( 'wp_list_pages', 'shiword_new_nav_menu_items' );
 add_filter('get_comments_number', 'shiword_comment_count', 0);
+add_filter( 'the_title', 'shiword_title_tags_filter', 1 );
 // custom gallery shortcode function
 remove_shortcode( 'gallery', 'gallery_shortcode' );
 add_shortcode( 'gallery', 'shiword_gallery_shortcode' );
@@ -58,16 +59,44 @@ if ( $shiword_opt['shiword_custom_widgets'] == 1 ) require_once('lib/widgets.php
 
 
 /**** begin theme checks ****/
-$shiword_is_mobile_browser = shiword_mobile_device_detect(); // check if is mobile browser
-function shiword_mobile_device_detect() {
-	global $shiword_opt;
-	$user_agent = $_SERVER['HTTP_USER_AGENT'];
-    if ( ( !isset( $shiword_opt['shiword_mobile_css'] ) || ( $shiword_opt['shiword_mobile_css'] == 1) ) && preg_match( '/(ipad|ipod|iphone|android|opera mini|blackberry|palm|symbian|palm os|palm|hiptop|avantgo|plucker|xiino|blazer|elaine|iris|3g_t|windows ce|opera mobi|windows ce; smartphone;|windows ce; iemobile|mini 9.5|vx1000|lge |m800|e860|u940|ux840|compal|wireless| mobi|ahong|lg380|lgku|lgu900|lg210|lg47|lg920|lg840|lg370|sam-r|mg50|s55|g83|t66|vx400|mk99|d615|d763|el370|sl900|mp500|samu3|samu4|vx10|xda_|samu5|samu6|samu7|samu9|a615|b832|m881|s920|n210|s700|c-810|_h797|mob-x|sk16d|848b|mowser|s580|r800|471x|v120|rim8|c500foma:|160x|x160|480x|x640|t503|w839|i250|sprint|w398samr810|m5252|c7100|mt126|x225|s5330|s820|htil-g1|fly v71|s302|-x113|novarra|k610i|-three|8325rc|8352rc|sanyo|vx54|c888|nx250|n120|mtk |c5588|s710|t880|c5005|i;458x|p404i|s210|c5100|teleca|s940|c500|s590|foma|samsu|vx8|vx9|a1000|_mms|myx|a700|gu1100|bc831|e300|ems100|me701|me702m-three|sd588|s800|8325rc|ac831|mw200|brew |d88|htc\/|htc_touch|355x|m50|km100|d736|p-9521|telco|sl74|ktouch|m4u\/|me702|8325rc|kddi|phone|lg |sonyericsson|samsung|240x|x320|vx10|nokia|sony cmd|motorola|up.browser|up.link|mmp|symbian|smartphone|midp|wap|vodafone|o2|pocket|kindle|mobile|psp|treo)/i' , $user_agent ) ) { // there were other words for mobile detecting but this is enought ;-)
-		return true;
-	} else {
-		return false;
+if ( !function_exists( 'shiword_mobile_device_detect' ) ) {
+	function shiword_mobile_device_detect() {
+		global $shiword_opt;
+		
+		// #1 check: mobile support is off (via options)
+		if ( ( isset( $shiword_opt['shiword_mobile_css'] ) && ( $shiword_opt['shiword_mobile_css'] == 0) ) ) return false;
+		
+		// #2 check: mobile override, the user clicked the "switch to desktop/mobile" link. a cookie will be set
+		if ( isset( $_GET['mobile_override'] ) ) {
+			if ( md5( $_GET['mobile_override'] ) == '532c28d5412dd75bf975fb951c740a30' ) { // 'mobile'
+				setcookie( "mobile_override", "mobile", time()+(60*60*24*30*12) );
+				return true;
+			} else {
+				setcookie( "mobile_override", "desktop", time()+(60*60*24*30*12) );
+				return false;
+			}
+		}
+		
+		// #3 check: the cookie is already set
+		if (isset($_COOKIE["mobile_override"])) {
+			if ( md5( $_COOKIE["mobile_override"] ) == '532c28d5412dd75bf975fb951c740a30' ) { // 'mobile'
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		// #4 check: search for a mobile user agent
+		if ( !isset($_SERVER['HTTP_USER_AGENT']) ) return false;
+		$user_agent = $_SERVER['HTTP_USER_AGENT'];
+		if ( ( !isset( $shiword_opt['shiword_mobile_css'] ) || ( $shiword_opt['shiword_mobile_css'] == 1) ) && preg_match( '/(ipad|ipod|iphone|android|opera mini|blackberry|palm|symbian|palm os|palm|hiptop|avantgo|plucker|xiino|blazer|elaine|iris|3g_t|windows ce|opera mobi|windows ce; smartphone;|windows ce; iemobile|mini 9.5|vx1000|lge |m800|e860|u940|ux840|compal|wireless| mobi|ahong|lg380|lgku|lgu900|lg210|lg47|lg920|lg840|lg370|sam-r|mg50|s55|g83|t66|vx400|mk99|d615|d763|el370|sl900|mp500|samu3|samu4|vx10|xda_|samu5|samu6|samu7|samu9|a615|b832|m881|s920|n210|s700|c-810|_h797|mob-x|sk16d|848b|mowser|s580|r800|471x|v120|rim8|c500foma:|160x|x160|480x|x640|t503|w839|i250|sprint|w398samr810|m5252|c7100|mt126|x225|s5330|s820|htil-g1|fly v71|s302|-x113|novarra|k610i|-three|8325rc|8352rc|sanyo|vx54|c888|nx250|n120|mtk |c5588|s710|t880|c5005|i;458x|p404i|s210|c5100|teleca|s940|c500|s590|foma|samsu|vx8|vx9|a1000|_mms|myx|a700|gu1100|bc831|e300|ems100|me701|me702m-three|sd588|s800|8325rc|ac831|mw200|brew |d88|htc\/|htc_touch|355x|m50|km100|d736|p-9521|telco|sl74|ktouch|m4u\/|me702|8325rc|kddi|phone|lg |sonyericsson|samsung|240x|x320|vx10|nokia|sony cmd|motorola|up.browser|up.link|mmp|symbian|smartphone|midp|wap|vodafone|o2|pocket|kindle|mobile|psp|treo)/i' , $user_agent ) ) { // there were other words for mobile detecting but this is enought ;-)
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
+$shiword_is_mobile_browser = shiword_mobile_device_detect(); // check if is mobile browser
 
 $shiword_is_printpreview = false; // check if in preview mode or not
 if ( isset( $_GET['style'] ) && md5( $_GET['style'] ) == '8e77921d24c6f82c4bd783895e9d9cf1' ) { //print preview
@@ -223,7 +252,7 @@ if ( !function_exists( 'shiword_scripts' ) ) {
 		if ( is_admin() ) return;
 		if ( $shiword_is_mobile_browser || is_admin() || $shiword_is_printpreview ) return;
 		if ($shiword_opt['shiword_jsani'] == 1) {
-			wp_enqueue_script( 'sw-animations', get_template_directory_uri().'/js/animations.min.js',array('jquery'),$shiword_version, true ); //shiword js
+			wp_enqueue_script( 'sw-animations', get_template_directory_uri().'/js/animations.dev.js',array('jquery'),$shiword_version, true ); //shiword js
 			if ( $shiword_opt['shiword_sticky'] == 1 ) wp_enqueue_script( 'sw-sticky-slider', get_template_directory_uri().'/js/slider.min.js',array('jquery'),$shiword_version , false );
 		}
 		wp_enqueue_script( 'sw-audio-player', get_template_directory_uri().'/resources/audio-player/audio-player-noswfobject.js',array('swfobject'),$shiword_version, false ); //audio player
@@ -254,7 +283,7 @@ if ( !function_exists( 'shiword_allcat' ) ) {
 	function shiword_allcat () {
 		global $shiword_is_allcat_page;
 		if ( $shiword_is_allcat_page ) {
-			get_template_part( 'allcat' );
+			locate_template( array( 'allcat.php' ), true, false );
 			exit;
 		}
 	}
@@ -266,9 +295,9 @@ if ( !function_exists( 'shiword_mobile' ) ) {
 		global $shiword_is_mobile_browser;
 		if ( $shiword_is_mobile_browser ) {
 			if ( is_singular() ) { 
-				get_template_part( 'mobile/mobile-single' ); 
+				locate_template( array( 'mobile/mobile-single.php' ), true, false );
 			} else {
-				get_template_part( 'mobile/mobile-index' );
+				locate_template( array( 'mobile/mobile-index.php' ), true, false );
 			}
 			exit;
 		}
@@ -851,7 +880,7 @@ if ( !function_exists( 'shiword_sticky_slider' ) ) {
 			<div id="sw_sticky_slider">
 				<?php foreach( $ss_posts as $post ) {
 					setup_postdata( $post );
-					$post_title = esc_html( $post->post_title );
+					$post_title = get_the_title( $post->ID );
 					if ( $post_title == "" ) {
 						$post_title = __( '(no title)', 'shiword' );
 					} ?>
@@ -1193,7 +1222,13 @@ if ( !function_exists( 'shiword_header_style' ) ) {
 		}
 		#TB_secondLine {
 			color: <?php echo shiword_rgblight($shiword_opt['shiword_thickbox_bg']) < 125 ? '#c0c0c0' : '#404040'; ?>;
-		}	
+		}
+		.sw-has-thumb .post-body {
+			margin-left: <?php echo $shiword_opt['shiword_pthumb_size'] + 10; ?>px;
+		}
+		#sw_slider-wrap {
+			height: <?php echo $shiword_opt['shiword_sticky_height']; ?>;
+		}
 	</style>
 	<!-- InternetExplorer really sucks! -->
 	<!--[if lte IE 8]>
@@ -1268,7 +1303,8 @@ if ( !function_exists( 'shiword_excerpt_length' ) ) {
 //styles the login page
 if ( !function_exists( 'shiword_custom_login_css' ) ) {
 	function shiword_custom_login_css() {
-	    echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/login.css" />' . "\n";
+		global $shiword_opt;
+	    if ( $shiword_opt['shiword_custom_login'] == 1 ) echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/login.css" />' . "\n";
 	}
 }
 
@@ -1495,6 +1531,11 @@ function shiword_gallery_shortcode($attr) {
 		</div>\n";
 
 	return $output;
+}
+
+// strip tags from titles
+function shiword_title_tags_filter($content) {
+	return strip_tags( $content, '<abbr><acronym><b><em><i><del><ins><bdo><strong>' );
 }
 
 // display a simple login form in quickbar
