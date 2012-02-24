@@ -252,7 +252,7 @@ if ( !function_exists( 'shiword_scripts' ) ) {
 		if ( is_admin() ) return;
 		if ( $shiword_is_mobile_browser || is_admin() || $shiword_is_printpreview ) return;
 		if ($shiword_opt['shiword_jsani'] == 1) {
-			wp_enqueue_script( 'sw-animations', get_template_directory_uri().'/js/animations.dev.js',array('jquery'),$shiword_version, true ); //shiword js
+			wp_enqueue_script( 'sw-animations', get_template_directory_uri().'/js/animations.min.js',array('jquery'),$shiword_version, true ); //shiword js
 			if ( $shiword_opt['shiword_sticky'] == 1 ) wp_enqueue_script( 'sw-sticky-slider', get_template_directory_uri().'/js/slider.min.js',array('jquery'),$shiword_version , false );
 		}
 		wp_enqueue_script( 'sw-audio-player', get_template_directory_uri().'/resources/audio-player/audio-player-noswfobject.js',array('swfobject'),$shiword_version, false ); //audio player
