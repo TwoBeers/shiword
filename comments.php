@@ -1,13 +1,13 @@
 <!-- begin comments -->
 <?php
 	if ( post_password_required() ) { ?>
-		<div class="meta" id="comments" style="text-align: right;"><?php _e( 'Enter your password to view comments.', 'shiword' ); ?></div>
+		<div class="meta" id="comments"><?php _e( 'Enter your password to view comments.', 'shiword' ); ?></div>
 		<?php return;
 	} 
 ?>
 
 <?php if ( have_comments() ) { ?>
-	<div class="meta" id="comments" style="text-align: right;"><?php comments_number( __( 'No Comments', 'shiword' ), __( '1 Comment', 'shiword' ), __( '% Comments', 'shiword' ) ); ?></div>
+	<div class="meta" id="comments"><?php comments_number( __( 'No Comments', 'shiword' ), __( '1 Comment', 'shiword' ), __( '% Comments', 'shiword' ) ); ?></div>
 	<?php shiword_hook_before_comments(); ?>
 	<ol class="commentlist">
 		<?php wp_list_comments( 'type=comment' ); ?>
@@ -40,8 +40,8 @@ $sw_fields =  array(
 
 	<?php $sw_custom_args = array(
 		'fields'               => apply_filters( 'comment_form_default_fields', $sw_fields ),
-		'comment_field'        => '<p class="comment-form-comment" style="text-align: center;"><textarea id="comment" name="comment" cols="45" rows="7" style="width: 95%;" aria-required="true"></textarea></p>',
-		'comment_notes_after'  => '<p class="form-allowed-tags" style="color: #999999; text-align: center;"><small>' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'shiword' ), allowed_tags() ) . '</small></p>',
+		'comment_field'        => '<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="7" style="width: 95%;" aria-required="true"></textarea></p>',
+		'comment_notes_after'  => '<p class="form-allowed-tags"><small>' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'shiword' ), allowed_tags() ) . '</small></p>',
 		'label_submit'         => __( 'Say It!', 'shiword' ),
 		'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>.', 'shiword' ), admin_url( 'profile.php' ), $user_identity ) . '</p>',
 

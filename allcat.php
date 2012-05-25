@@ -10,7 +10,7 @@
 		<h2 class="storytitle"><?php _e( 'Categories', 'shiword' ); ?></h2>
 
 		<div class="meta_container">
-			<div class="comment_tools top_meta">
+			<div class="meta top_meta">
 				<?php _e( 'All Categories', 'shiword' ); ?>
 			</div>
 		</div>
@@ -24,6 +24,6 @@
 	</div>
 </div>
 
-<?php if ( $sw_use_side ) get_sidebar(); // show sidebar ?>
+<?php if ( $sw_use_side ) shiword_get_sidebar(); // show sidebar ?>
 
 <?php get_footer(); ?>

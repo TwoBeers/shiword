@@ -4,7 +4,7 @@
 	<div class="post-body">
 		<div class="storycontent">
 			<?php the_content(); ?>
-			<div class="fixfloat sw-aside-info" style="font-size: 11px; font-style: italic; color: #404040;"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_time( get_option( 'date_format' ) ); ?></a> - <?php comments_popup_link('(0)', '(1)','(%)'); ?><?php edit_post_link( __( 'Edit', 'shiword' ),' - ' ); ?></div>
+			<div class="fixfloat sw-aside-info"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_time( get_option( 'date_format' ) ); ?></a> - <?php comments_popup_link('(0)', '(1)','(%)'); ?><?php edit_post_link( __( 'Edit', 'shiword' ),' - ' ); ?></div>
 		</div>
 	</div>
 	<div class="fixfloat"> </div>

@@ -29,6 +29,7 @@ if ( !function_exists( 'shiword_fixed_footer' ) ) {
 			</div>
 		</div>
 	</div>
+	<div id="fixedfoot_reflect"></div>
 </div>
 
 <!-- end fixed footer -->
@@ -204,7 +205,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 				?>">
 				<span class="minib_img minib_print">&nbsp;</span>
 			</a>
-			<span class="nb_tooltip"><?php _e( 'Print preview','shiword' ); ?></span>
+			<span class="nb_tooltip"><?php _e( 'print preview','shiword' ); ?></span>
 		</div>
 	<?php } ?>
 
@@ -325,19 +326,16 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 
 // Get Recent Comments
 if ( !function_exists( 'shiword_get_recentcomments' ) ) {
-	function shiword_get_recentcomments() {
+	function shiword_get_recentcomments( $echo = 1 ) {
 		$comments = get_comments( 'status=approve&number=10&type=comment' ); // valid type values (not documented) : 'pingback','trackback','comment'
+		$output = '';
 		if ( $comments ) {
 			foreach ( $comments as $comment ) {
 				//if ( post_password_required( get_post( $comment->comment_post_ID ) ) ) { continue; } // uncomment to skip comments on protected posts. Hi Emma ;)
 				$post = get_post( $comment->comment_post_ID );
 				setup_postdata( $post );
-				if ( $post->post_title == "" ) {
-					$post_title_short = __( '(no title)', 'shiword' );
-				} else {
-					//shrink the post title if > 35 chars
-					$post_title_short = mb_strimwidth( get_the_title( $post->ID ), 0, 35, '&hellip;' );
-				}
+				//shrink the post title if > 35 chars
+				$post_title_short = mb_strimwidth( get_the_title( $post->ID ), 0, 35, '&hellip;' );
 				if ( post_password_required( $post ) ) {
 					//hide comment author in protected posts
 					$com_auth = __( 'someone','shiword' );
@@ -345,17 +343,21 @@ if ( !function_exists( 'shiword_get_recentcomments' ) ) {
 					//shrink the comment author if > 20 chars
 					$com_auth = mb_strimwidth( $comment->comment_author, 0, 20, '&hellip;' );
 				}
-			    echo '<li>'. $com_auth . ' ' . __( 'on', 'shiword' ) . ' <a href="' . get_permalink( $post->ID ) . '#comment-' . $comment->comment_ID . '">' . $post_title_short . '</a><div class="preview">';
+				$output .= '<li>'. $com_auth . ' ' . __( 'on', 'shiword' ) . ' <a href="' . get_permalink( $post->ID ) . '#comment-' . $comment->comment_ID . '">' . $post_title_short . '</a><div class="preview">';
 			if ( post_password_required( $post ) ) {
-				echo '[' . __( 'No preview: this is a comment of a protected post', 'shiword' ) . ']';
+				$output .= '[' . __( 'No preview: this is a comment of a protected post', 'shiword' ) . ']';
 			} else {
-				comment_excerpt( $comment->comment_ID );
+				$output .= get_comment_excerpt( $comment->comment_ID );
 			}
-				echo '</div></li>';
+				$output .= '</div></li>';
 			}
 		} else {
-			echo '<li>' . __( 'No comments yet.', 'shiword' ) . '</li>';
+			$output .= '<li>' . __( 'No comments yet.', 'shiword' ) . '</li>';
 		}
+		if ( $echo )
+			echo $output;
+		else
+			return $output;
 	}
 }
 
@@ -368,7 +370,9 @@ if ( !function_exists( 'shiword_get_recententries' ) ) {
 				$r->the_post();
 
 				$post_title = get_the_title();
-				$post_title_short = get_the_title() ? mb_strimwidth( get_the_title(), 0, 35, '&hellip;' ) : __( '(no title)', 'shiword' );
+				//shrink the post title if > 35 chars
+				$post_title_short = mb_strimwidth( $post_title, 0, 35, '&hellip;' );
+				
 				$post_auth = mb_strimwidth( get_the_author(), 0, 20, '&hellip;' );
 
 				echo '<li><a href="' . get_permalink() . '" title="' . the_title_attribute( array( 'echo' => 0 ) ) . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '<div class="preview">';
@@ -408,12 +412,8 @@ if ( !function_exists( 'shiword_get_categories_wpr' ) ) {
 			foreach( $lastcatposts as $post ) {
 				setup_postdata( $post );
 				$post_title = get_the_title( $post->ID );
-				if ( $post->post_title == "" ) {
-					$post_title_short = __( '(no title)', 'shiword' );
-				} else {
-					//shrink the post title if > 35 chars
-					$post_title_short = mb_strimwidth( $post_title, 0, 35, '&hellip;' );
-				}
+				//shrink the post title if > 35 chars
+				$post_title_short = mb_strimwidth( $post_title, 0, 35, '&hellip;' );
 				//shrink the post author if > 20 chars
 				$post_auth = mb_strimwidth( get_the_author(), 0, 20, '&hellip;' );
 				echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . esc_html( $post_title ) . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '</li>';

@@ -46,6 +46,6 @@
 </div>
 <?php shiword_hook_after_posts(); ?>
 
-<?php if ( $sw_use_side ) get_sidebar(); // show sidebar ?>
+<?php if ( $sw_use_side ) shiword_get_sidebar(); // show sidebar ?>
 
 <?php get_footer(); ?>

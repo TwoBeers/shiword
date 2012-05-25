@@ -15,11 +15,11 @@
 
 			<h2 class="storytitle"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 			<?php shiword_I_like_it(); ?>
-			<?php shiword_extrainfo( true, true, true, false, false ); ?>
+			<?php shiword_extrainfo( array( 'hiera' => 0, 'tags' => 0, 'cats' => 0 ) ); ?>
 
 			<div class="storycontent">
 
-				<div class="entry-attachment" style="text-align: center;">
+				<div class="entry-attachment">
 
 					<?php if ( wp_attachment_is_image() ) { //from twentyten WP theme
 						$sw_attachments = array_values( get_children( array( 'post_parent' => $post->post_parent, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID' ) ) );
@@ -30,7 +30,7 @@
 						$sw_nextk = $sw_k + 1;
 						$sw_prevk = $sw_k - 1;
 						?>
-						<div class="img-navi" style="text-align: center;">
+						<div class="img-navi">
 			
 						<?php if ( isset( $sw_attachments[ $sw_prevk ] ) ) { ?>
 								<a class="size-thumbnail" title="" href="<?php echo get_attachment_link( $sw_attachments[ $sw_prevk ]->ID ); ?>">&laquo; <?php echo wp_get_attachment_image( $sw_attachments[ $sw_prevk ]->ID, array( 50, 50 ) ); ?></a>
@@ -41,8 +41,8 @@
 						<?php } ?>
 						</div>
 						<p class="attachment"><a href="<?php echo wp_get_attachment_url(); ?>" title="<?php _e( 'View full size','shiword' ) ;  // link to Full size image ?>" rel="attachment"><?php
-							$sw_attachment_width  = apply_filters( 'shiword_attachment_size', 1000 );
-							$sw_attachment_height = apply_filters( 'shiword_attachment_height', 1000 );
+							$sw_attachment_width  = apply_filters( 'shiword_attachment_size', 9999 );
+							$sw_attachment_height = apply_filters( 'shiword_attachment_height', 9999 );
 							echo wp_get_attachment_image( $post->ID, array( $sw_attachment_width, $sw_attachment_height ) ); // filterable image width with, essentially, no limit for image height.
 						?></a></p>
 					<?php } else { ?>
@@ -56,7 +56,7 @@
 			<div class="fixfloat"> </div>
 		</div>
 
-		<?php get_sidebar( 'single' ); // show single widget area ?>
+		<?php shiword_get_sidebar( 'single' ); // show single widget area ?>
 
 		<?php comments_template(); // Get wp-comments.php template ?>
 
@@ -68,6 +68,6 @@
 	<?php } ?>
 </div>
 
-<?php if ( $sw_use_side ) get_sidebar(); // show sidebar ?>
+<?php if ( $sw_use_side ) shiword_get_sidebar(); // show sidebar ?>
 
 <?php get_footer(); ?>

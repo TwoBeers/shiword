@@ -73,8 +73,9 @@ class Custom_Background {
 	 *
 	 */
 	function admin_load() {
-		wp_enqueue_script( 'sw-custom-bg-script', get_template_directory_uri() . '/js/my-custom-background.dev.js', array( 'jquery', 'farbtastic' ), '', true  );
-		wp_enqueue_style('farbtastic');
+		global $shiword_version;
+		wp_enqueue_script( 'sw-custom-bg-script', get_template_directory_uri() . '/js/admin-custom_background.dev.js', array( 'jquery', 'farbtastic' ), $shiword_version, true  );
+		wp_enqueue_style( 'sw-custom-bg-style', get_template_directory_uri() . '/css/admin-custom_background.css', array( 'farbtastic' ), false, 'screen' );
 	}
 
 	/**
@@ -261,7 +262,7 @@ if ( get_background_image() ) {
 <?php $show_clear = get_background_color() ? '' : ' style="display:none"'; ?>
 <input type="text" name="background-color" id="background-color" value="#<?php echo esc_attr(get_background_color()) ?>" />
 <a class="hide-if-no-js" href="#" id="pickcolor"><?php _e('Select a Color', 'shiword'); ?></a> <span <?php echo $show_clear; ?>class="hide-if-no-js" id="clearcolor"> (<a href="#"><?php _e( 'Clear', 'shiword' ); ?></a>)</span>
-<div id="colorPickerDiv" style="z-index: 100; background:#eee; border:1px solid #ccc; position:absolute; display:none;"></div>
+<div class="shi_cp" id="colorPickerDiv" style="z-index: 100; background:#eee; border:1px solid #ccc; position:absolute; display:none;"></div>
 </fieldset></td>
 </tr>
 </tbody>

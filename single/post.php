@@ -4,11 +4,10 @@
 	<?php shiword_hook_after_post_title(); ?>
 	<?php shiword_I_like_it(); ?>
 	<?php shiword_extrainfo(); ?>
-	<div class="storycontent">
+	<div class="storycontent entry-content">
 		<?php the_content(); ?>
 	</div>
 	<div class="fixfloat">
-		<?php wp_link_pages( 'before=<div class="meta comment_tools" style="text-align: right;">' . __( 'Pages:', 'shiword' ) . '&after=</div><div class="fixfloat"></div>' ); ?>
+		<?php wp_link_pages( 'before=<div class="meta sw-paginated-entry">' . __( 'Pages', 'shiword' ) . ':&after=</div>' ); ?>
 	</div>
-	<div class="fixfloat"> </div>
 </div>

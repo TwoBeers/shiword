@@ -1,1403 +1,1880 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Shiword 3.02\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: TwoBeers Crew <light@twobeers.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #. Text in function
-#: functions.php:582
-#: functions.php:617
-#: mobile/mobile-comments.php:12
+#: lib/options.php:1
+msgid "\"more\" tag string"
+msgstr "testo dela tag \"more\""
+
+# @ shiword
+#. Text in function
 #: comments.php:10
+#: functions.php:531
+#: functions.php:566
 msgid "% Comments"
 msgstr "% Commenti"
 
+# @ shiword
 #. Text in function
-#: functions.php:1565
+#: functions.php:1605
 msgid "%s ago"
 msgstr "%s fa"
 
+# @ shiword
 #. Text in function
-#: functions.php:1565
+#: lib/media.php:1
+msgid "%s images"
+msgstr "%s immagini"
+
+# @ shiword
+#. Text in function
+#: functions.php:1605
 msgid "%s months ago"
 msgstr "%s mesi fa"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:785
+#: lib/widgets.php:786
 msgid "%s seconds"
 msgstr "%s secondi"
 
+# @ shiword
 #. Text in function
-#: lib/admin.php:354
-#: lib/admin.php:395
-#: quickbar.php:321
-#: functions.php:881
-#: mobile/mobile-index.php:53
-#: mobile/mobile-single.php:40
+#: lib/options.php:1
+msgid "(more...)"
+msgstr "(continua...)"
+
+# @ shiword
+#. Text in function
+#: quickbar.php:322
+#: lib/options.php:1
+#: functions.php:1605
+#: lib/slider.php:53
+#: lib/slider.php:164
+#: lib/slider.php:214
 msgid "(no title)"
 msgstr "(nessun titolo)"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "-- mini login"
 msgstr "-- mini login"
 
+# @ shiword
 #. Text in function
-#: functions.php:617
-#: mobile/mobile-comments.php:12
 #: comments.php:10
+#: functions.php:566
 msgid "1 Comment"
 msgstr "1 Commento"
 
 #. Text in function
-#: lib/admin.php:427
+#: lib/options.php:1
+msgid "<em>excerpt more</em> linked"
+msgstr "<em>excerpt more</em> collegato"
+
+#. Text in function
+#: lib/options.php:1
+msgid "<em>excerpt more</em> string"
+msgstr "testo di <em>excerpt more</em>"
+
+# @ shiword
+#. Text in function
+#: lib/options.php:1
+msgid "<strong>For advanced users only</strong>: paste here your custom css code. it will be added after the defatult style"
+msgstr "<strong>Solo per utenti esperti</strong>: incolla qui il tuo codice css personalizzato. verrà aggiunto dopo lo stile di predefinito"
+
+# @ shiword
+#. Text in function
+#: lib/slider.php:89
 msgid "<strong>The slideshow is disabled!</strong> Enable it in theme options"
 msgstr "<strong>La slideshow &egrave; disabilitata!</strong> Attivala nelle opzioni del tema"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "A list of popular categories"
 msgstr "Una lista delle categorie pi&ugrave; popolari"
 
+# @ shiword
+#. Text in function
+#: lib/gallery.php:86
+msgid "Add Image"
+msgstr "Aggiungi Immagine"
+
+# @ shiword
 #. Text in echo
-#: quickbar.php:119
-#: lib/widgets.php:388
+#: quickbar.php:120
+#: lib/widgets.php:387
 msgid "Add New Post"
 msgstr "Nuovo Articolo"
 
+# @ shiword
 #. Text in echo
 #: allcat.php:14
 msgid "All Categories"
 msgstr "Tutte le categorie"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:785
+#: lib/widgets.php:786
 msgid "Aperture"
 msgstr "Apertura"
 
+# @ shiword
 #. Text in function
-#: mobile/mobile-index.php:33
+#: mobile/loop-index-mobile.php:2
 #: sidebar.php:19
+#: lib/widgets.php:1247
 msgid "Archives"
 msgstr "Archivi"
 
+# @ shiword
 #. Text in function
-#: functions.php:1565
-#: lib/widgets.php:1024
+#: lib/admin.php:1
+msgid "Are you really sure you want to set all the options to their default values?"
+msgstr "Sei veramente sicuro di voler riportare tutte le opzioni ai loro valori predefiniti?"
+
+# @ shiword
+#. Text in echo
+#: lib/widgets.php:1025
+#: functions.php:1605
 msgid "Author"
 msgstr "Autore"
 
+# @ shiword
+#. Text in echo
+#: lib/admin.php:281
+msgid "Back to defaults"
+msgstr "Ripristina predefiniti"
+
+# @ shiword
 #. Text in function
-#: lib/my-custom-background.php:275
-#: lib/custom-device-color.php:200
+#: lib/my-custom-background.php:276
+#: lib/custom-device-color.php:198
 msgid "Background"
 msgstr "Sfondo"
 
+# @ shiword
 #. Text in echo
-#: lib/my-custom-background.php:260
-#: lib/custom-device-color.php:279
+#: lib/my-custom-background.php:261
+#: lib/custom-device-color.php:282
 msgid "Background Color"
 msgstr "Colore di Sfondo"
 
+# @ shiword
 #. Text in echo
-#: lib/my-custom-background.php:198
+#: lib/my-custom-background.php:199
 msgid "Background Image"
 msgstr "Sfondo"
 
+# @ shiword
 #. Text in function
-#: lib/my-custom-background.php:190
+#: lib/my-custom-background.php:191
 msgid "Background updated. <a href=\"%s\">Visit your site</a> to see how it looks."
-msgstr "Sfondo aggiornato. <a href=\"%s\">Guarda il tuo sito</a> per vederne l'aspetto"
+msgstr "Sfondo aggiornato. <a href=\"%s\">Guarda il tuo sito</a> per vederne l&#39;aspetto"
 
+# @ shiword
 #. Text in function
-#: lib/my-custom-background.php:275
+#: lib/my-custom-background.php:276
 msgid "Bamboo"
 msgstr "Bamboo"
 
+# @ shiword
 #. Text in echo
 #: sidebar.php:17
 msgid "Blogroll"
 msgstr "Link"
 
+# @ shiword
 #. Text in function
-#: lib/custom-device-color.php:200
+#: lib/custom-device-color.php:198
 msgid "Borders"
 msgstr "Bordi"
 
+# @ shiword
 #. Text in echo
-#: quickbar.php:315
+#: quickbar.php:316
 msgid "Bottom of page"
 msgstr "Fondo pagina"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:326
+#: lib/custom-device-color.php:328
 msgid "Buttons Style"
 msgstr "Stile dei Pulsanti"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:785
+#: lib/widgets.php:786
 msgid "Camera"
 msgstr "Camera"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:785
+#: lib/widgets.php:786
 msgid "Caption"
 msgstr "Caption"
 
+# @ shiword
 #. Text in echo
-#: allcat.php:10
-#: lib/admin.php:349
-#: quickbar.php:72
-#: functions.php:554
-#: functions.php:619
-#: functions.php:863
-#: lib/widgets.php:1049
-#: mobile/mobile-single.php:54
 #: sidebar.php:18
+#: quickbar.php:73
+#: lib/widgets.php:1050
+#: allcat.php:10
+#: functions.php:503
+#: functions.php:568
+#: functions.php:816
+#: lib/slider.php:194
+#: mobile/core-mobile.php:155
 msgid "Categories"
 msgstr "Categorie"
 
+# @ shiword
 #. Text in function
-#: functions.php:1565
-#: mobile/mobile-index.php:33
-#: lib/widgets.php:740
+#: mobile/loop-index-mobile.php:2
+#: lib/widgets.php:741
+#: functions.php:1605
 msgid "Category"
 msgstr "Categoria"
 
+# @ shiword
 #. Text in function
-#: functions.php:437
-#: mobile/mobile-single.php:83
-msgid "Child pages: "
-msgstr "Pagina discendente: "
+#: mobile/loop-page-mobile.php:22
+msgid "Child pages"
+msgstr "Pagina discendente"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:244
+#: lib/custom-device-color.php:245
 msgid "Choose an image from your computer:"
-msgstr "Seleziona un'immagine dal tuo computer:"
+msgstr "Seleziona un&#39;immagine dal tuo computer:"
 
+# @ shiword
+#. Text in function
+#: lib/widgets.php:1247
+msgid "Clean Archives"
+msgstr "Archivi Semplici"
+
+# @ shiword
 #. Text in echo
-#: lib/my-custom-background.php:263
+#: lib/my-custom-background.php:264
 msgid "Clear"
 msgstr "Cancella"
 
+#. Text in function
+#: lib/gallery.php:86
+msgid "Click an image to select"
+msgstr "Clicca sulle immagini per selezionarle"
+
+# @ shiword
 #. Text in echo
-#: functions.php:1559
-#: footer.php:34
+#: footer.php:40
+#: functions.php:1599
 msgid "Close"
 msgstr "Chiudi"
 
+# @ shiword
 #. Text in function
-#: lib/my-custom-background.php:170
-#: lib/my-custom-background.php:259
+#: lib/my-custom-background.php:171
+#: lib/my-custom-background.php:260
 msgid "Color"
 msgstr "Colore"
 
+# @ shiword
 #. Text in function
-#: lib/custom-device-color.php:229
+#: lib/custom-device-color.php:227
 msgid "Colors updated. <a href=\"%s\">Visit your site</a> to see how it looks."
-msgstr "Colori aggiornati. <a href=\"%s\">Guarda il tuo sito</a> per vederne l'aspetto"
+msgstr "Colori aggiornati. <a href=\"%s\">Guarda il tuo sito</a> per vederne l&#39;aspetto"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "Comment authors <strong>must</strong> use a name and a valid e-mail in order to use this widget. Check the <a href=\"%1$s\">Discussion settings</a>"
 msgstr "Per poter utilizzare questo widget, gli autori dei commenti <strong>devono</strong> impostare un nome e una e-mail valida. Controlla le <a href=\"%1$s\">Impostazioni di discussione</a>"
 
+# @ shiword
 #. Text in echo
-#: quickbar.php:126
-#: functions.php:581
-#: functions.php:617
-#: lib/widgets.php:395
+#: quickbar.php:127
+#: lib/widgets.php:394
+#: functions.php:530
+#: functions.php:566
 msgid "Comments"
 msgstr "Commenti"
 
+# @ shiword
 #. Text in echo
-#: lib/widgets.php:343
+#: lib/widgets.php:342
 msgid "Compact view (only avatars)"
 msgstr "Visualizzazione compatta (solo avatar)"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:785
+#: lib/widgets.php:786
 msgid "Copyright"
 msgstr "Copyright"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:785
+#: lib/widgets.php:786
 msgid "Credit"
 msgstr "Crediti"
 
+# @ shiword
 #. Text in echo
-#: lib/my-custom-background.php:187
+#: lib/my-custom-background.php:188
 msgid "Custom Background"
 msgstr "Sfondo Personalizzato"
 
+# @ shiword
 #. Text in function
-#: lib/custom-device-color.php:158
-#: lib/custom-device-color.php:225
+#: lib/custom-device-color.php:156
+#: lib/custom-device-color.php:223
 msgid "Custom Colors"
 msgstr "Colori Personalizzati"
 
+# @ shiword
 #. Text in echo
-#: lib/admin.php:391
-#: functions.php:1565
-#: lib/widgets.php:1041
+#: lib/widgets.php:1042
+#: functions.php:1605
+#: lib/slider.php:236
 msgid "Date"
 msgstr "Data"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:785
+#: lib/widgets.php:786
 msgid "Date Taken"
 msgstr "Data acquisizione"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:289
-#: lib/custom-device-color.php:308
-#: lib/custom-device-color.php:321
-#: lib/custom-device-color.php:354
+#: lib/custom-device-color.php:292
+#: lib/custom-device-color.php:310
+#: lib/custom-device-color.php:323
+#: lib/custom-device-color.php:358
 msgid "Default"
 msgstr "Predefinito"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:261
+#: lib/custom-device-color.php:264
 msgid "Default Images"
 msgstr "Immagine Predefinita"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "Default is <u>normal</u>. If you modify the width of the main frame, your site may be displayed incorrectly for some of your readers. <u>Don't change this setting unless you're sure of what you're doing!</u>"
 msgstr "Il valore predefinito &egrave; <u>normale</u>. Se modifiche la larghezza del corpo principale, alcuni dei tuoi visitatori potrebbero avere delle difficoltà a visualizzare correttamente il tuo sito. <u>Non cambiare questo valore a meno che tu non sappia esattamente cosa stai facendo</u>"
 
+# @ shiword
+#. Text in function
+#: lib/admin.php:181
+msgid "Defaults values loaded."
+msgstr "Valori predefiniti ripristinati"
+
+# @ shiword
+#. Text in function
+#: mobile/footer-mobile.php:16
+msgid "Desktop View"
+msgstr "Modalità Desktop"
+
+# @ shiword
 #. Text in echo
-#: lib/my-custom-background.php:255
+#: lib/my-custom-background.php:256
 msgid "Display Options"
 msgstr "Visualizza Opzioni"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "Display image details. It's visible ONLY in single attachments"
-msgstr "Visualizza i dettagli dell'immagine. E' visibile SOLAMENTE nei singoli allegati"
+msgstr "Visualizza i dettagli dell&#39;immagine. E&#39; visibile SOLAMENTE nei singoli allegati"
 
+# @ shiword
 #. Text in function
-#: loop/post-aside.php:7
-#: functions.php:609
-#: functions.php:620
 #: loop/post-status.php:9
-#: mobile/mobile-single.php:56
+#: loop/post-aside.php:7
+#: functions.php:558
+#: functions.php:569
 msgid "Edit"
 msgstr "Modifica"
 
+# @ shiword
 #. Text in function
-#: mobile/mobile-comments.php:25
 #: comments.php:31
 msgid "Email"
 msgstr "Email"
 
+# @ shiword
 #. Text in function
-#: functions.php:516
+#: functions.php:463
 msgid "Enrich the page 404 with some useful widgets"
 msgstr "Arricchisci la pagina 404 con alcuni widget utili"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "Enter %1$s account link:"
 msgstr "Inserisci il link per %1$s:"
 
+# @ shiword
 #. Text in echo
-#: mobile/mobile-comments.php:6
 #: comments.php:4
 msgid "Enter your password to view comments."
 msgstr "Digita la password per vedere i commenti."
 
+# @ shiword
 #. Text in function
-#: lib/my-custom-background.php:275
+#: lib/my-custom-background.php:276
 msgid "Equalizer"
 msgstr "Equalizer"
 
+# @ shiword
 #. Text in echo
 #: lib/custom-device-color.php:234
 msgid "Exterior Colors"
 msgstr "Colori Esterni"
 
+# @ shiword
 #. Text in function
-#: lib/my-custom-background.php:275
+#: lib/my-custom-background.php:276
 msgid "Flowers"
 msgstr "Fiori"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:785
+#: lib/widgets.php:786
 msgid "Focal Length"
 msgstr "Lunghezza focale"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "Follow Me"
 msgstr "Seguimi"
 
+# @ shiword
 #. Text in function
-#: functions.php:516
+#: functions.php:463
 msgid "Footer Widget Area #1"
 msgstr "Area Widget di Fondo Pagina #1"
 
+# @ shiword
 #. Text in function
-#: functions.php:516
+#: functions.php:463
 msgid "Footer Widget Area #2"
 msgstr "Area Widget di Fondo Pagina #2"
 
+# @ shiword
 #. Text in function
-#: functions.php:516
+#: functions.php:463
 msgid "Footer Widget Area #3"
 msgstr "Area Widget di Fondo Pagina #3"
 
 #. Text in function
-#: lib/options.php:1
-msgid "Frame width"
-msgstr "Larghezza cornice"
+#: lib/gallery.php:1
+#: lib/gallery.php:70
+msgid "Gallery Editor"
+msgstr "Editor delle Gallerie"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "Google web font"
 msgstr "Google web font"
 
+# @ shiword
 #. Text in function
-#: functions.php:516
+#: functions.php:463
 msgid "Header Widget Area"
 msgstr "Area Widget di Testata"
 
+# @ shiword
 #. Text in function
-#: lib/options.php:1
-msgid "Header height"
-msgstr "Altezza dell'immagine di testata"
-
-#. Text in function
-#: lib/widgets.php:785
+#: lib/widgets.php:786
 msgid "Height"
 msgstr "Altezza"
 
+# @ shiword
 #. Text in echo
 #: 404.php:14
 msgid "Here is something that might help:"
 msgstr "Ecco qualcosa che ti potrebbe essere utile:"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:190
-#: lib/custom-device-color.php:200
+#: lib/custom-device-color.php:188
+#: lib/custom-device-color.php:198
 msgid "Highlighted Links"
 msgstr "Link Evidenziati"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:313
+#: lib/custom-device-color.php:315
 msgid "Hightlighted Buttons Border"
 msgstr "Bordi dei Link Evidenziati"
 
+# @ shiword
 #. Text in echo
-#: quickbar.php:247
+#: quickbar.php:248
 msgid "Home"
 msgstr "Home"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "I like it"
 msgstr "Mi piace"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:785
+#: lib/widgets.php:786
 msgid "ISO"
 msgstr "ISO"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:263
+#: lib/custom-device-color.php:266
 msgid "If you don&lsquo;t want to upload your own image, you can choose from one of the following."
 msgstr "Potete usare una di queste immagini o potete caricare la vostra immagine personalizzata"
 
+# @ shiword
 #. Text in echo
-#: lib/admin.php:279
+#: lib/admin.php:293
 msgid "If you like/dislike this theme, or if you encounter any issues, please let us know it."
 msgstr "Se hai riscontrato dei problemi o se semplicemente ti piace/non ti piace questo tema , per favore faccelo sapere."
 
+# @ shiword
 #. Text in function
-#: lib/custom-device-color.php:370
+#: lib/custom-device-color.php:375
 msgid "Image Upload Error"
-msgstr "Errore Durante il Caricamento dell'Immagine"
+msgstr "Errore Durante il Caricamento dell&#39;Immagine"
+
+# @ shiword
+#. Text in function
+#: lib/widgets.php:1247
+msgid "Image details"
+msgstr "Dettagli dell&#39;immagine"
 
 #. Text in function
-#: lib/widgets.php:1051
-msgid "Image details"
-msgstr "Dettagli dell'immagine"
+#: lib/media.php:1
+#: lib/media.php:78
+msgid "Images Library"
+msgstr "Libreria Immagini"
 
+# @ shiword
 #. Text in echo
 #: lib/admin.php:197
-#: lib/admin.php:272
+#: lib/admin.php:286
 msgid "Info"
 msgstr "Info"
 
+# @ shiword
 #. Text in function
-#: lib/custom-device-color.php:200
+#: lib/custom-device-color.php:198
 msgid "Inner borders"
 msgstr "Bordi interni"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:338
+#: lib/custom-device-color.php:341
 msgid "Interior Colors"
 msgstr "Colori Interni"
 
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/gallery.php:71
+msgid "Javascript must be enabled in order to use this feature"
+msgstr "Per poter utilizzare questa funzionalità, Javascript deve essere abilitato"
+
+# @ shiword
+#. Text in function
+#: lib/widgets.php:1247
 msgid "Latest activity"
 msgstr "Attività recente"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "Latest comment authors"
 msgstr "Autori dei commenti recenti"
 
-#. Text in function
-#: mobile/mobile-comments.php:36
-msgid "Leave a Reply to %s"
-msgstr "Replica al commento di %s"
-
+# @ shiword
 #. Text in echo
-#: quickbar.php:217
-#: mobile/mobile-comments.php:36
+#: quickbar.php:218
 msgid "Leave a comment"
 msgstr "Lascia un commento"
 
+# @ shiword
 #. Text in echo
-#: lib/admin.php:280
+#: lib/admin.php:294
 msgid "Leave a feedback"
 msgstr "Lascia un feedback"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:190
-#: lib/custom-device-color.php:200
+#: lib/custom-device-color.php:188
+#: lib/custom-device-color.php:198
 msgid "Links"
 msgstr "Link"
 
+# @ shiword
 #. Text in function
-#: functions.php:516
+#: functions.php:463
 msgid "Located after the post/page content, it is the ideal place for your widgets related to individual entries"
 msgstr "Situato dopo il contenuto degli articoli/pagine, &egrave; il posto ideale per gli widget che si riferiscono a singoli articoli"
 
+# @ shiword
 #. Text in echo
-#: functions.php:1553
-#: functions.php:1556
+#: functions.php:1593
+#: functions.php:1596
 msgid "Log in"
 msgstr "Collegati"
 
+# @ shiword
 #. Text in echo
-#: quickbar.php:129
+#: quickbar.php:130
 msgid "Log out"
 msgstr "Esci da questo account"
 
+# @ shiword
 #. Text in function
-#: quickbar.php:102
+#: quickbar.php:103
 msgid "Logged in as %s"
 msgstr "Autenticato come %s"
 
+# @ shiword
 #. Text in function
-#: mobile/mobile-comments.php:36
 #: comments.php:41
 msgid "Logged in as <a href=\"%1$s\">%2$s</a>."
 msgstr "Autenticato come <a href=\"%1$s\">%2$s</a>."
 
+# @ shiword
 #. Text in function
-#: lib/custom-device-color.php:341
+#: lib/custom-device-color.php:345
 msgid "Main Content"
 msgstr "Contenuti Principali"
 
+# @ shiword
 #. Text in function
-#: functions.php:917
+#: functions.php:1605
 msgid "Main Navigation Menu"
 msgstr "Men&ugrave; Principale"
 
+#. Text in function
+#: mobile/footer-mobile.php:5
+msgid "Menu"
+msgstr "Menu"
+
+# @ shiword
 #. Text in echo
 #: sidebar.php:9
 msgid "Meta"
 msgstr "Meta"
 
+# @ shiword
+#. Text in function
+#: footer.php:16
+msgid "Mobile View"
+msgstr "Modalità Mobile"
+
+# @ shiword
+#. Text in function
+#: mobile/core-mobile.php:1
+msgid "Mobile Widget Area"
+msgstr "Area Widget Mobile"
+
+# @ shiword
 #. Text in echo
-#: quickbar.php:75
+#: quickbar.php:76
 msgid "More..."
 msgstr "Continua..."
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:553
+#: lib/widgets.php:555
 msgid "NOTE: Enter the <strong>full</strong> addresses ( with <em>http://</em> )"
-msgstr "NOTA: Inserisci l'indirizzo <strong>completo</strong> ( con <em>http://</em> )"
+msgstr "NOTA: Inserisci l&#39;indirizzo <strong>completo</strong> ( con <em>http://</em> )"
 
+# @ shiword
 #. Text in function
-#: mobile/mobile-comments.php:25
 #: comments.php:31
 msgid "Name"
 msgstr "Nome"
 
 #. Text in function
-#: lib/my-custom-background.php:275
+#: mobile/core-mobile.php:160
+msgid "Navigation Menu for mobiles<br><small>only supports the first level of hierarchy</small>"
+msgstr "Menu di Navigazione per mobile<br><small>supporta solamente il primo livello</small>"
+
+# @ shiword
+#. Text in function
+#: lib/my-custom-background.php:276
 msgid "Negative"
 msgstr "Negativo"
 
+# @ shiword
 #. Text in function
-#: quickbar.php:287
+#: quickbar.php:288
 msgid "Newer Posts"
 msgstr "Articoli pi&ugrave; Recenti"
 
+# @ shiword
 #. Text in function
-#: quickbar.php:269
+#: quickbar.php:270
 msgid "Next Post"
 msgstr "Articolo Successivo"
 
+# @ shiword
 #. Text in function
-#: mobile/mobile-index.php:72
+#: mobile/loop-index-mobile.php:37
 msgid "Next page"
 msgstr "Pagina Successiva"
 
+# @ shiword
 #. Text in function
-#: functions.php:582
-#: functions.php:617
-#: mobile/mobile-comments.php:12
 #: comments.php:10
+#: functions.php:531
+#: functions.php:566
 msgid "No Comments"
 msgstr "Nessun Commento"
 
+# @ shiword
 #. Text in echo
-#: functions.php:568
-#: functions.php:618
-#: functions.php:864
-#: mobile/mobile-single.php:55
+#: functions.php:517
+#: functions.php:567
+#: functions.php:817
+#: mobile/core-mobile.php:156
 msgid "No Tags"
 msgstr "Nessun Tag"
 
+# @ shiword
 #. Text in function
-#: quickbar.php:321
+#: quickbar.php:322
 msgid "No comments yet."
 msgstr "Ancora nessun commento"
 
+# @ shiword
 #. Text in function
-#: quickbar.php:321
+#: quickbar.php:322
 msgid "No preview: this is a comment of a protected post"
 msgstr "Impossibile visualizzare i commenti: articolo protetto."
 
+# @ shiword
 #. Text in function
-#: quickbar.php:321
+#: quickbar.php:322
 msgid "No preview: this is a protected post"
 msgstr "Nessun riassunto: articolo protetto."
 
+# @ shiword
 #. Text in function
-#: quickbar.php:102
+#: quickbar.php:103
 msgid "Not logged in"
 msgstr "Non collegato"
 
+# @ shiword
 #. Text in echo
-#: functions.php:364
+#: functions.php:325
 msgid "Nothing to quote. You must select some text..."
 msgstr "Nulla da citare. Seleziona un testo prima..."
 
+# @ shiword
 #. Text in echo
-#: lib/widgets.php:489
-msgid "Number of categories to show:"
-msgstr "Numero di categorie da visualizzare:"
+#: lib/widgets.php:490
+msgid "Number of categories to show"
+msgstr "Numero di categorie da visualizzare"
 
+# @ shiword
 #. Text in echo
-#: lib/widgets.php:218
-#: lib/widgets.php:757
-msgid "Number of posts to show:"
-msgstr "Numero di articoli da visualizzare:"
+#: lib/widgets.php:1161
+msgid "Number of comments to show"
+msgstr "Numero di commenti da visualizzare"
 
+# @ shiword
 #. Text in echo
-#: lib/widgets.php:338
-msgid "Number of users to show:"
-msgstr "Numero di utenti da visualizzare:"
+#: lib/widgets.php:217
+#: lib/widgets.php:758
+msgid "Number of posts to show"
+msgstr "Numero di articoli da visualizzare"
 
+# @ shiword
+#. Text in echo
+#: lib/widgets.php:337
+msgid "Number of users to show"
+msgstr "Numero di utenti da visualizzare"
+
+# @ shiword
 #. Text in function
-#: quickbar.php:295
+#: quickbar.php:296
 msgid "Older Posts"
 msgstr "Articoli pi&ugrave; vecchi"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:292
+#: lib/custom-device-color.php:296
 msgid "Opacity"
 msgstr "Opacit&agrave;"
 
+# @ shiword
 #. Text in echo
-#: lib/admin.php:213
+#: lib/admin.php:214
 msgid "Options"
 msgstr "Opzioni"
 
+# @ shiword
 #. Text in function
-#: lib/admin.php:185
-#: lib/admin.php:427
+#: lib/admin.php:181
+#: lib/slider.php:89
 msgid "Options saved."
 msgstr "Opzioni salvate."
 
+# @ shiword
 #. Text in function
-#: functions.php:516
+#: functions.php:463
 msgid "Page 404"
 msgstr "Pagina 404"
 
+# @ shiword
 #. Text in echo
 #: 404.php:11
 msgid "Page not found"
 msgstr "Pagina non trovata"
 
-#. Text in echo
-#: lib/admin.php:336
-#: mobile/mobile-index.php:87
-#: mobile/mobile-single.php:113
+# @ shiword
+#. Text in function
+#: mobile/loop-page-mobile.php:8
+#: mobile/loop-front-page-mobile.php:7
 #: sidebar.php:16
+#: lib/slider.php:145
+#: lib/slider.php:204
+#: mobile/loop-single-mobile.php:20
 msgid "Pages"
 msgstr "Pagine"
 
+# @ shiword
 #. Text in function
-#: lib/custom-device-color.php:341
+#: lib/custom-device-color.php:345
 msgid "Pages Menu and Floating Menu"
 msgstr "Men&ugrave; pagine e Men&ugrave; Fluttuanti"
 
+# @ shiword
 #. Text in function
-#: single/post-audio.php:12
 #: page.php:22
-#: one-column-page.php:25
+#: one-column-page.php:26
 #: single/post.php:11
+#: single/post-audio.php:12
 msgid "Pages:"
 msgstr "Pagine:"
 
+# @ shiword
 #. Text in function
-#: functions.php:437
-#: mobile/mobile-single.php:95
-msgid "Parent page: "
-msgstr "Pagina genitore: "
+#: mobile/loop-page-mobile.php:34
+msgid "Parent page"
+msgstr "Pagina genitore"
 
+# @ shiword
 #. Text in echo
 #: 404.php:20
 msgid "Perhaps using the search form will help too..."
 msgstr "Forse il modulo di ricerca ti potrebbe aiutare..."
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "Popular Categories"
 msgstr "Categorie pi&ugrave; popolari"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "Popular Posts"
 msgstr "Articoli pi&ugrave; popolari"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
-msgid "Popular categories"
-msgstr "Categorie pi&ugrave; popolari"
-
-#. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "Post details"
 msgstr "Dettagli articolo"
 
-#. Text in echo
-#: lib/admin.php:333
-#: mobile/mobile-index.php:47
+# @ shiword
+#. Text in function
+#: mobile/loop-index-mobile.php:2
+#: lib/slider.php:142
+#: lib/slider.php:153
 msgid "Posts"
 msgstr "Articoli"
 
+# @ shiword
 #. Text in function
-#: mobile/mobile-index.php:33
+#: mobile/loop-index-mobile.php:2
 msgid "Posts by %s"
 msgstr "Articoli di %s"
 
+# @ shiword
 #. Text in echo
-#: footer.php:20
+#: footer.php:21
 msgid "Powered by WordPress"
 msgstr "Powered by WordPress"
 
+# @ shiword
 #. Text in echo
-#: lib/my-custom-background.php:243
+#: lib/my-custom-background.php:244
 msgid "Predefined themes"
 msgstr "Temi predefiniti"
 
+# @ shiword
 #. Text in echo
-#: lib/my-custom-background.php:202
+#: lib/my-custom-background.php:203
 msgid "Preview"
 msgstr "Anteprima"
 
+# @ shiword
 #. Text in function
-#: quickbar.php:279
+#: quickbar.php:280
 msgid "Previous Post"
 msgstr "Articolo Precedente"
 
+# @ shiword
 #. Text in function
-#: mobile/mobile-index.php:71
+#: mobile/loop-index-mobile.php:36
 msgid "Previous page"
 msgstr "Pagina precedente"
 
+# @ shiword
 #. Text in echo
-#: footer.php:35
+#: footer.php:41
 msgid "Print"
 msgstr "Stampa"
 
+# @ shiword
 #. Text in echo
-#: quickbar.php:207
+#: quickbar.php:208
 msgid "Print preview"
 msgstr "Anteprima di stampa"
 
+# @ shiword
 #. Text in function
-#: functions.php:594
-#: functions.php:616
-#: functions.php:865
-#: mobile/mobile-single.php:53
+#: functions.php:543
+#: functions.php:565
+#: functions.php:818
 msgid "Published on: %1$s"
 msgstr "Pubblicato il: %1$s"
 
+# @ shiword
 #. Text in echo
-#: functions.php:342
+#: functions.php:303
 msgid "Quote"
 msgstr "Cita"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "RSS feed"
 msgstr "RSS feed"
 
+# @ shiword
 #. Text in echo
-#: quickbar.php:86
-#: mobile/mobile-index.php:90
-#: mobile/mobile-single.php:116
+#: quickbar.php:87
+#: lib/widgets.php:1247
 msgid "Recent Comments"
 msgstr "Commenti Recenti"
 
+# @ shiword
+#. Text in function
+#: lib/widgets.php:1247
+msgid "Recent Comments (Enhanced)"
+msgstr "Commenti Recenti (potenziato)"
+
+# @ shiword
 #. Text in echo
-#: quickbar.php:59
-#: quickbar.php:321
+#: quickbar.php:60
+#: quickbar.php:322
 msgid "Recent Posts"
 msgstr "Articoli Recenti"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "Recent Posts in %s"
 msgstr "Articoli Recenti in %s"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "Recent Posts in Category"
 msgstr "Articoli Recenti nella Categoria"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:271
 #: lib/custom-device-color.php:274
+#: lib/custom-device-color.php:277
 msgid "Remove Image"
 msgstr "Rimuovi Immagine"
 
+# @ shiword
 #. Text in echo
-#: lib/my-custom-background.php:225
-#: lib/my-custom-background.php:229
+#: lib/my-custom-background.php:226
+#: lib/my-custom-background.php:230
 msgid "Restore Original Image"
-msgstr "Ripristina l'immagine originale"
+msgstr "Ripristina l&#39;immagine originale"
 
+# @ shiword
 #. Text in function
-#: quickbar.php:258
+#: quickbar.php:259
 msgid "Return to %s"
 msgstr "Ritorna a %s"
 
+# @ shiword
 #. Text in echo
-#: lib/admin.php:420
-#: lib/custom-device-color.php:365
+#: lib/custom-device-color.php:370
+#: lib/slider.php:246
 msgid "Save Changes"
 msgstr "Salva Cambiamenti"
 
+# @ shiword
 #. Text in function
-#: mobile/mobile-comments.php:36
 #: comments.php:41
 msgid "Say It!"
 msgstr "Dillo!"
 
-#. Text in echo
-#: searchform.php:3
-#: searchform.php:5
-#: mobile/mobile-index.php:78
-#: mobile/mobile-single.php:104
-msgid "Search"
-msgstr "Cerca"
-
+# @ shiword
 #. Text in function
-#: functions.php:1565
-#: mobile/mobile-index.php:43
+#: mobile/loop-index-mobile.php:2
+#: functions.php:1605
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "Risultati della ricerca per &#8220;%s&#8221;"
 
 #. Text in function
-#: functions.php:917
-msgid "Secondary Navigation Menu"
-msgstr "Men&ugrave; Secondario"
+#: functions.php:1605
+msgid "Secondary Navigation Menu<br><small>only supports the first level of hierarchy</small>"
+msgstr "Menu di Navigazione Secondario<br><small>supporta solamente il primo livello</small>"
 
+#. Text in function
+#: lib/gallery.php:145
+msgid "Select \"none\" if you want the images to be ordered as above"
+msgstr "Seleziona \"nessuno\" se preferisci che le immagini siano ordinate come le vedi sopra"
+
+# @ shiword
 #. Text in echo
-#: lib/my-custom-background.php:263
-#: lib/custom-device-color.php:285
-#: lib/custom-device-color.php:306
-#: lib/custom-device-color.php:319
-#: lib/custom-device-color.php:352
+#: lib/my-custom-background.php:264
+#: lib/custom-device-color.php:288
+#: lib/custom-device-color.php:308
+#: lib/custom-device-color.php:321
+#: lib/custom-device-color.php:356
 msgid "Select a Color"
 msgstr "Selezionare un Colore"
 
+# @ shiword
 #. Text in echo
-#: lib/widgets.php:1027
+#: lib/widgets.php:1028
 msgid "Select avatar size"
-msgstr "Seleziona la dimensione dell'avatar"
+msgstr "Seleziona la dimensione dell&#39;avatar"
 
+# @ shiword
 #. Text in echo
-#: lib/widgets.php:948
+#: lib/widgets.php:949
 msgid "Select icon size"
 msgstr "Seleziona la dimensione delle icone"
 
+# @ shiword
 #. Text in echo
-#: lib/admin.php:324
+#: lib/widgets.php:1241
+msgid "Select month style"
+msgstr "Seleziona lo stile de mesi"
+
+# @ shiword
+#. Text in echo
+#: lib/slider.php:133
 msgid "Select posts or pages to be added to the slideshow box.<br />Items will be ordered as displayed here."
 msgstr "Selezionare gli articoli o le pagine da visualizzare nello slideshow.<br />Gli elementi saranno ordinati come visualizato qui sotto."
 
+# @ shiword
 #. Text in echo
-#: lib/widgets.php:584
+#: lib/widgets.php:586
 msgid "Select your icon size"
 msgstr "Seleziona la dimensione delle icone"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:287
+#: lib/custom-device-color.php:290
 msgid "Set to \"transparent\""
 msgstr "Imposta a \"trasparente\""
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "Share this"
 msgstr "Condividi questo"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "Share with %s"
 msgstr "Condividi con %s"
 
+# @ shiword
 #. Text in function
 #: lib/admin.php:1
 msgid "Shiword theme says: \"Don't forget to set <a href=\"%s\">my options</a> and the header image!\" "
-msgstr "Shiword dice: \"Non dimenticarti di impostare le <a href=\"%s\">mie opzioni</a> e l'immagine di testata!\""
+msgstr "Shiword dice: \"Non dimenticarti di impostare le <a href=\"%s\">mie opzioni</a> e l&#39;immagine di testata!\""
+
+#. Text in function
+#: lib/widgets.php:1247
+msgid "Show archives in a cleaner way"
+msgstr "Visualizza gli archivi in modo semplice e chiaro"
 
 #. Text in echo
-#: lib/widgets.php:762
+#: lib/widgets.php:1165
+msgid "Show excerpt"
+msgstr "Visualizza il riassunto"
+
+# @ shiword
+#. Text in echo
+#: lib/widgets.php:763
 msgid "Show post thumbnails"
 msgstr "Visualizza miniature articoli"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "Show some details and links related to the current post. It's visible ONLY in single posts"
-msgstr "Visualizza alcuni dettagli ed alcuni link relativi all'articolo corrente. E' visibile SOLAMENTE nei singoli articoli"
+msgstr "Visualizza alcuni dettagli ed alcuni link relativi all&#39;articolo corrente. E&#39; visibile SOLAMENTE nei singoli articoli"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments"
-msgstr "Visualizza i collegamenti ad alcuni popolari servizi di condivisione. E' visibile SOLAMENTE nei singoli articoli"
+msgstr "Visualizza i collegamenti ad alcuni popolari servizi di condivisione. E&#39; visibile SOLAMENTE nei singoli articoli"
 
+# @ shiword
 #. Text in echo
-#: lib/widgets.php:424
+#: lib/widgets.php:423
 msgid "Show user gravatar"
-msgstr "Visualizza l'avatar dell'utente"
+msgstr "Visualizza l&#39;avatar dell&#39;utente"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:785
+#: lib/widgets.php:786
 msgid "Shutter Speed"
 msgstr "Velocit&agrave; otturatore"
 
+# @ shiword
 #. Text in function
-#: functions.php:516
+#: functions.php:463
 msgid "Sidebar Widget Area"
 msgstr "Area Widget della Sidebar"
 
+# @ shiword
 #. Text in function
-#: functions.php:516
+#: functions.php:463
 msgid "Single Widget Area"
 msgstr "Area Widget degli articoli"
 
+# @ shiword
 #. Text in function
-#: lib/admin.php:1
-#: lib/admin.php:322
-#: functions.php:1565
+#: functions.php:1605
+#: lib/slider.php:1
+#: lib/slider.php:131
 msgid "Slideshow"
 msgstr "Slideshow"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "Some useful links for users"
-msgstr "Alcuni link utili per l'utente"
+msgstr "Alcuni link utili per l&#39;utente"
 
+# @ shiword
 #. Text in echo
 #: attachment.php:66
-#: index.php:44
+#: mobile/loop-page-mobile.php:41
+#: mobile/loop-index-mobile.php:43
+#: mobile/loop-front-page-mobile.php:11
 #: single.php:31
+#: index.php:44
 #: page.php:34
-#: mobile/mobile-index.php:76
-#: one-column-page.php:34
-#: mobile/mobile-single.php:102
+#: one-column-page.php:38
+#: mobile/loop-single-mobile.php:30
 msgid "Sorry, no posts matched your criteria."
 msgstr "Spiacente, nessun articolo corrispondente ai criteri di ricerca"
 
+# @ shiword
 #. Text in echo
 #: 404.php:12
 msgid "Sorry, you're looking for something that isn't here"
 msgstr "Spiacente, stai cercando qualcosa che non esiste"
 
-#. Text in function
-#: mobile/mobile-index.php:100
-#: mobile/mobile-single.php:126
-msgid "Switch to Desktop View"
-msgstr "Passa a modalità Desktop"
-
-#. Text in function
-#: footer.php:15
-msgid "Switch to Mobile View"
-msgstr "Passa a modalità Mobile"
-
+# @ shiword
 #. Text in echo
 #: header.php:43
 msgid "Syndicate this site using RSS 2.0"
 msgstr "Abbonati a questo sito usando RSS 2.0"
 
+# @ shiword
 #. Text in function
-#: functions.php:1565
-#: mobile/mobile-index.php:33
+#: mobile/loop-index-mobile.php:2
+#: functions.php:1605
 msgid "Tag"
 msgstr "Tag"
 
-#. Text in function
+# @ shiword
+#. Text in echo
+#: lib/widgets.php:1046
+#: functions.php:516
 #: functions.php:567
-#: functions.php:618
-#: functions.php:864
-#: lib/widgets.php:1045
+#: functions.php:817
+#: mobile/core-mobile.php:156
 msgid "Tags"
 msgstr "Tag"
 
+# @ shiword
 #. Text in function
-#: mobile/mobile-single.php:55
-msgid "Tags:"
-msgstr "Tag:"
-
-#. Text in function
-#: functions.php:1565
+#: functions.php:1605
 msgid "Taxonomy"
 msgstr "Taxonomy"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:190
-#: lib/custom-device-color.php:200
+#: lib/custom-device-color.php:188
+#: lib/custom-device-color.php:198
 msgid "Text"
 msgstr "Testo"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:300
+#: lib/custom-device-color.php:302
 msgid "Text Color"
 msgstr "Colore del Testo"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "The latest comment authors"
 msgstr "Gli ultimi autori dei commenti"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "The latest commented posts/pages of your site"
 msgstr "Le ultime pagine/articoli commentati del tuo sito"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "The most commented posts on your site"
 msgstr "Le gli articoli pi&ugrave; commentati del tuo sito"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
+msgid "The most recent comments"
+msgstr "I commenti più recenti"
+
+# @ shiword
+#. Text in function
+#: lib/widgets.php:1247
 msgid "The most recent posts in a single category"
 msgstr "Le gli articoli pi&ugrave; recenti in una singola categoria"
 
+# @ shiword
 #. Text in function
 #: lib/admin.php:1
-#: lib/admin.php:184
+#: lib/admin.php:180
 msgid "Theme Options"
 msgstr "Opzioni Tema"
 
+# @ shiword
 #. Text in echo
 #: lib/admin.php:194
 msgid "Theme features"
 msgstr "Funzionalit&agrave; del tema"
 
+# @ shiword
 #. Text in echo
 #: 404.php:19
 msgid "There are several links scattered around the page, maybe they can help you on finding what you're looking for."
 msgstr "Ci sono parecchi link spari per la pagina, forse potrebbero aiutarti a trovare quello che cerchi."
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "This widget lets visitors of your blog subscribe to it and follow you on popular social networks like Twitter, FaceBook etc."
 msgstr "Questo widget permette ai visitatori del tuo blog di registrarsi e di seguirti nei social network pi&ugrave; popolari (Twitter, FaceBook etc.)"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:273
+#: lib/custom-device-color.php:276
 msgid "This will remove the background image."
-msgstr "Questa azione eliminer&agrave; l'immagine di fondo"
+msgstr "Questa azione eliminer&agrave; l&#39;immagine di fondo"
 
+# @ shiword
 #. Text in echo
-#: lib/my-custom-background.php:230
+#: lib/my-custom-background.php:231
 msgid "This will restore the original background image."
-msgstr "Questa azione ripristiner&agrave; l'immagine di fondo originale"
+msgstr "Questa azione ripristiner&agrave; l&#39;immagine di fondo originale"
 
+# @ shiword
 #. Text in echo
-#: lib/widgets.php:1020
+#: lib/widgets.php:1021
 msgid "Thumbnail"
 msgstr "Miniature"
 
+# @ shiword
 #. Text in function
-#: functions.php:516
+#: functions.php:463
 msgid "Tips: Don&apos;t drag too much widgets here. Use small &quot;graphical&quot; widgets (eg icons, buttons, the search form, etc.)"
 msgstr "Suggerimento: Non trascinare qui troppi widget. Usa preferibilmente widget &quot;grafici&quot; (es. icone, pulsanti, il campo di ricerca, etc.)"
 
+# @ shiword
 #. Text in echo
-#: lib/admin.php:390
-#: lib/widgets.php:419
-#: lib/widgets.php:484
-#: lib/widgets.php:735
-#: lib/widgets.php:785
-#: lib/widgets.php:1015
+#: lib/widgets.php:418
+#: lib/widgets.php:485
+#: lib/widgets.php:736
+#: lib/widgets.php:786
+#: lib/widgets.php:1016
+#: lib/widgets.php:1158
+#: lib/widgets.php:1237
+#: lib/slider.php:235
 msgid "Title"
 msgstr "Titolo"
 
+# @ shiword
 #. Text in echo
-#: lib/widgets.php:333
-msgid "Title:"
-msgstr "Titolo:"
-
-#. Text in echo
-#: quickbar.php:305
+#: quickbar.php:306
 msgid "Top of page"
 msgstr "Inizo pagina"
 
+# @ shiword
 #. Text in echo
-#: quickbar.php:237
+#: quickbar.php:238
 msgid "Trackback URL"
 msgstr "Trackback URL"
 
+# @ shiword
 #. Text in echo
-#: lib/admin.php:267
-#: lib/admin.php:421
+#: lib/admin.php:279
+#: lib/slider.php:247
 msgid "Undo Changes"
 msgstr "Annulla Modifiche"
 
+# @ shiword
 #. Text in echo
-#: lib/admin.php:266
+#: lib/admin.php:278
 msgid "Update Options"
 msgstr "Aggiorna Opzioni"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:248
+#: lib/custom-device-color.php:249
 msgid "Upload"
 msgstr "Carica"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:238
+#: lib/custom-device-color.php:239
 msgid "Upload Image"
 msgstr "Carica Immagine"
 
+# @ shiword
 #. Text in echo
-#: quickbar.php:99
+#: quickbar.php:100
 msgid "User"
 msgstr "Utente"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:1051
+#: lib/widgets.php:1247
 msgid "User quick links"
-msgstr "Link rapidi per l'utente"
+msgstr "Link rapidi per l&#39;utente"
 
+# @ shiword
 #. Text in echo
-#: lib/widgets.php:462
+#: lib/widgets.php:463
 msgid "View all"
 msgstr "Guarda tutti"
 
+# @ shiword
 #. Text in echo
-#: quickbar.php:75
-#: lib/widgets.php:462
+#: quickbar.php:76
+#: lib/widgets.php:463
 msgid "View all categories"
 msgstr "Tutte le categorie"
 
+# @ shiword
 #. Text in function
-#: functions.php:544
+#: functions.php:493
 msgid "View all posts by %s"
 msgstr "Visualizza tutti gli articoli di %s"
 
+# @ shiword
 #. Text in function
-#: quickbar.php:321
+#: quickbar.php:322
 msgid "View all posts in %s"
 msgstr "Visualizza tutti gli articoli in %s"
 
+# @ shiword
 #. Text in echo
 #: attachment.php:43
 msgid "View full size"
 msgstr "Dimensione originale"
 
+# @ shiword
 #. Text in function
 #: loop/post-gallery.php:46
 msgid "View gallery"
 msgstr "Guarda la galleria"
 
+# @ shiword
 #. Text in function
-#: mobile/mobile-comments.php:25
 #: comments.php:31
 msgid "Website"
 msgstr "Sito Web"
 
+# @ shiword
 #. Text in function
-#: quickbar.php:160
-#: lib/widgets.php:1051
+#: quickbar.php:161
+#: lib/widgets.php:1247
 msgid "Welcome %s"
 msgstr "Benvenuto %s"
 
+# @ shiword
 #. Text in function
-#: lib/widgets.php:785
+#: lib/widgets.php:786
 msgid "Width"
 msgstr "Larghezza"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:240
+#: lib/custom-device-color.php:241
 msgid "You can upload a custom background image."
 msgstr "Qui &egrave; possibile caricare una nuova immagine di fondo."
 
+# @ shiword
 #. Text in function
-#: lib/custom-device-color.php:370
+#: lib/custom-device-color.php:375
 msgid "You do not have permission to customize headers."
 msgstr "Spiacente, non disponi dei permessi necessari per personalizzare la testata."
 
+# @ shiword
 #. Text in function
 #: lib/admin.php:1
 msgid "You do not have sufficient permissions to access this page."
 msgstr "Spiacente, non disponi dei permessi necessari per accedere a questa pagina."
 
+# @ shiword
 #. Text in function
 #: comments.php:41
 msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
 msgstr "È possibile utilizzare questi tag ed attributi <abbr title=\"HyperText Markup Language\">HTML</abbr>: %s"
 
+# @ shiword
 #. Text in echo
-#: quickbar.php:117
-#: lib/widgets.php:386
+#: quickbar.php:118
+#: lib/widgets.php:385
 msgid "Your Profile"
 msgstr "Il tuo profilo"
 
+# @ shiword
 #. Text in function
-#: functions.php:1565
+#: functions.php:1605
 msgid "a month ago"
 msgstr "un mese fa"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "a small login form in the user panel"
-msgstr "un piccolo modulo di login all'interno del pannello utente"
+msgstr "un piccolo modulo di login all&#39;interno del pannello utente"
 
+#. Text in echo
+#: lib/widgets.php:1244
+msgid "acronym"
+msgstr "acronimo"
+
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "add a lot of new usefull widgets"
 msgstr "aggiungi un sacco di nuovi e utili widget"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "add style to the editor in order to write the post exactly how it will appear on the site"
-msgstr "applica lo stile all'editor per scrivere gli articoli esattamente come appariranno nel sito"
+msgstr "applica lo stile all&#39;editor per scrivere gli articoli esattamente come appariranno nel sito"
 
+#. Text in function
+#: lib/options.php:1
+msgid "animation speed"
+msgstr "velocità animazione"
+
+#. Text in function
+#: lib/widgets.php:1199
+msgid "apr"
+msgstr "apr"
+
+#. Text in function
+#: lib/gallery.php:154
+msgid "ascending"
+msgstr "ascendente"
+
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "aside"
 msgstr "digressioni"
 
+# @ shiword
+#. Text in function
+#: lib/gallery.php:126
+msgid "attachment"
+msgstr "allegato"
+
+# @ shiword
+#. Text in function
+#: lib/gallery.php:77
+msgid "attachments"
+msgstr "allegati"
+
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "audio"
 msgstr "audio"
 
+# @ shiword
+#. Text in function
+#: lib/widgets.php:1199
+msgid "aug"
+msgstr "ago"
+
+# @ shiword
+#. Text in function
+#: lib/gallery.php:140
+msgid "author"
+msgstr "autore"
+
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "background color"
 msgstr "colore di sfondo"
 
+# @ shiword
 #. Text in function
-#: quickbar.php:321
-#: functions.php:545
-#: functions.php:615
-#: functions.php:893
-#: mobile/mobile-single.php:52
+#: lib/options.php:1
+msgid "blank titles"
+msgstr "titoli vuoti"
+
+# @ shiword
+#. Text in function
+#: quickbar.php:322
+#: functions.php:494
+#: functions.php:564
+#: lib/slider.php:65
 msgid "by %s"
 msgstr "di %s"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "categories"
 msgstr "categorie"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "category description"
 msgstr "descrizione della categoria"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "chat"
 msgstr "chat"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "classic navigation links"
 msgstr "links di navigazione classici"
 
+# @ shiword
+#. Text in function
+#: lib/options.php:1
+msgid "colors"
+msgstr "colori"
+
+#. Text in function
+#: lib/gallery.php:91
+msgid "columns"
+msgstr "colonne"
+
+# @ shiword
+#. Text in function
+#: lib/gallery.php:142
+msgid "comment count"
+msgstr "numero commenti"
+
+# @ shiword
 #. Text in echo
-#: lib/admin.php:210
+#: lib/admin.php:211
 msgid "content"
 msgstr "contenuto"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "content summary"
 msgstr "riassunto"
 
+# @ shiword
+#. Text in function
+#: lib/options.php:1
+msgid "custom CSS code"
+msgstr "codice CSS personalizzato"
+
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "custom background"
 msgstr "sfondo personalizzato"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "custom login page"
 msgstr "pagina di login personalizzata"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "custom widgets"
 msgstr "widget personalizzati"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:330
+#: lib/custom-device-color.php:332
 msgid "dark"
 msgstr "scuro"
 
+# @ shiword
+#. Text in function
+#: lib/gallery.php:141
+msgid "date"
+msgstr "data"
+
+#. Text in function
+#: lib/widgets.php:1199
+msgid "dec"
+msgstr "dic"
+
+# @ shiword
+#. Text in function
+#: lib/gallery.php:138
+msgid "default"
+msgstr "predefinito"
+
+#. Text in function
+#: lib/options.php:1
+msgid "default <code>2000</code>"
+msgstr "predefinito <code>2000</code>"
+
+#. Text in function
+#: lib/options.php:1
+msgid "default <code>2500</code>"
+msgstr "predefinito <code>2500</code>"
+
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "default = "
 msgstr "predefinito = "
 
+# @ shiword
 #. Text in echo
-#: lib/widgets.php:419
+#: lib/widgets.php:418
 msgid "default: \"Welcome %s\" , where %s is the user name"
-msgstr "predefinito: \"Benvenuto %s\" , dove %s &egrave; il nome dell'utente"
+msgstr "predefinito: \"Benvenuto %s\" , dove %s &egrave; il nome dell&#39;utente"
 
+#. Text in function
+#: lib/gallery.php:155
+msgid "descending"
+msgstr "discendente"
+
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "description"
 msgstr "descrizione"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "detect mobile devices and use a dedicated style. Disable it if you don't like it or you're already using a plugin for mobile support"
 msgstr "rileva i dispositivi mobili e applica uno stile apposito"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "display slideshow in home/front page"
 msgstr "visualizza la slideshow nella pagina principale"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "display slideshow in pages"
 msgstr "visualizza la slideshow nelle pagine"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "display slideshow in posts"
 msgstr "visualizza la slideshow negli articoli"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "display slideshow in posts overview (posts page, search results, archives, categories, etc.)"
 msgstr "visualizza la slideshow nella panoramica degli articoli (pagina degli articoli, risulati della ricerca, archivi, categorie, etc.)"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "display the site title on the top left of the main frame"
-msgstr "Visualizza il titolo del sito nell'angolo superiore sinistro della cornice"
+msgstr "Visualizza il titolo del sito nell&#39;angolo superiore sinistro della cornice"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "enhanced post title"
-msgstr "titolo dell'articolo avanzato"
+msgstr "titolo dell&#39;articolo avanzato"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "enhanced style for the login/register page"
 msgstr "stile migliorato per la pagina di collegamento/registrazione"
 
+# @ shiword
+#. Text in function
+#: lib/options.php:1
+msgid "excerpt lenght"
+msgstr "lunghezza riassunto"
+
+#. Text in function
+#: lib/widgets.php:1199
+msgid "feb"
+msgstr "feb"
+
+# @ shiword
 #. Text in echo
-#: quickbar.php:227
+#: quickbar.php:228
 msgid "feed for comments on this post"
 msgstr "feed dei commenti per questo post"
 
-#. Text in echo
-#: lib/admin.php:211
-msgid "fixedbars"
-msgstr "barre fisse"
-
+# @ shiword
 #. Text in function
-#: functions.php:858
+#: lib/gallery.php:125
+msgid "file"
+msgstr "file"
+
+# @ shiword
+#. Text in function
+#: functions.php:811
+#: mobile/core-mobile.php:149
 msgid "follow %s on Facebook"
 msgstr "segui %s su Facebook"
 
+# @ shiword
 #. Text in function
-#: functions.php:857
+#: functions.php:810
+#: mobile/core-mobile.php:148
 msgid "follow %s on Twitter"
 msgstr "segui %s su Twitter"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "font family"
 msgstr "font family"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "font size"
 msgstr "dimensione dei caratteri"
 
+# @ shiword
 #. Text in echo
-#: lib/admin.php:209
+#: lib/admin.php:210
 msgid "fonts"
 msgstr "caratteri"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "for posts/pages content"
 msgstr "per il contenuto degli articoli/pagine"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "for posts/pages title"
 msgstr "per il titolo degli articoli/pagine"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "for whole page"
-msgstr "per l'intera pagina"
+msgstr "per l&#39;intera pagina"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "force galleries to use links to image instead of links to attachment"
 msgstr "forza le gallerie ad utilizza i link alle immagini anzich&egrave; agli allegati"
 
+# @ shiword
+#. Text in function
+#: lib/options.php:1
+msgid "frame width"
+msgstr "larghezza della cornice"
+
+#. Text in function
+#: lib/gallery.php:115
+msgid "full"
+msgstr "originale"
+
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "gallery"
 msgstr "galleria"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "gallery links"
 msgstr "link della galleria"
 
+# @ shiword
+#. Text in function
+#: lib/options.php:1
+msgid "header height"
+msgstr "altezza della testata"
+
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "height"
@@ -1405,275 +1882,457 @@ msgstr "altezza"
 
 #. Text in function
 #: lib/options.php:1
+msgid "hide primary menu"
+msgstr "nascondi il menu principale"
+
+# @ shiword
+#. Text in function
+#: lib/options.php:1
 msgid "home"
 msgstr "home"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "image"
 msgstr "immagine"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "in home/front page"
 msgstr "nella pagina principale"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "in pages"
 msgstr "nelle pagine"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "in posts"
 msgstr "negli articoli"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "in posts overview"
 msgstr "nella panoramica degli articoli"
 
 #. Text in function
+#: lib/widgets.php:1199
+msgid "jan"
+msgstr "gen"
+
+# @ shiword
+#. Text in function
 #: lib/options.php:1
 msgid "javascript animations"
 msgstr "animazioni javascript"
 
 #. Text in function
-#: quickbar.php:160
+#: lib/widgets.php:1199
+msgid "jul"
+msgstr "lug"
+
+#. Text in function
+#: lib/widgets.php:1199
+msgid "jun"
+msgstr "giu"
+
+# @ shiword
+#. Text in function
+#: quickbar.php:161
 msgid "l"
 msgstr "l"
 
+# @ shiword
+#. Text in function
+#: lib/options.php:1
+msgid "language code"
+msgstr "codice lingua"
+
+# @ shiword
+#. Text in function
+#: lib/gallery.php:114
+msgid "large"
+msgstr "larga"
+
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "leave a comment"
 msgstr "lascia un commento"
 
+# @ shiword
 #. Text in echo
-#: lib/custom-device-color.php:329
+#: lib/custom-device-color.php:331
 msgid "light"
 msgstr "chiaro"
 
+# @ shiword
 #. Text in function
+#: lib/gallery.php:121
 #: lib/options.php:1
 msgid "link"
 msgstr "link"
 
 #. Text in function
+#: lib/widgets.php:1199
+msgid "mar"
+msgstr "mar"
+
+#. Text in function
+#: lib/widgets.php:1199
+msgid "may"
+msgstr "mag"
+
+#. Text in function
+#: lib/gallery.php:113
+msgid "medium"
+msgstr "media"
+
+# @ shiword
+#. Text in echo
+#: lib/admin.php:206
+msgid "mobile"
+msgstr "mobile"
+
+# @ shiword
+#. Text in function
 #: lib/options.php:1
 msgid "mobile support"
 msgstr "supporto mobile"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "narrow"
 msgstr "stretto"
 
+# @ shiword
+#. Text in echo
+#: lib/admin.php:212
+msgid "navigation"
+msgstr "navigazione"
+
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "navigation buttons"
 msgstr "pulsanti di navigazione"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "newer/older posts"
 msgstr "articoli pi&ugrave; recenti/vecchi"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "next/previous post"
 msgstr "articolo precedente/successivo"
 
+# @ shiword
+#. Text in function
+#: lib/gallery.php:127
+#: lib/gallery.php:137
+msgid "none"
+msgstr "nessuno"
+
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "normal"
 msgstr "normale"
 
 #. Text in function
-#: quickbar.php:321
+#: lib/widgets.php:1199
+msgid "nov"
+msgstr "nov"
+
+# @ shiword
+#. Text in echo
+#: lib/widgets.php:1243
+msgid "number"
+msgstr "numero"
+
+#. Text in function
+#: lib/widgets.php:1199
+msgid "oct"
+msgstr "ott"
+
+# @ shiword
+#. Text in function
+#: lib/media.php:1
+msgid "of %s"
+msgstr "di %s"
+
+# @ shiword
+#. Text in function
+#: quickbar.php:322
 msgid "on"
 msgstr "su"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "on attachments"
 msgstr "negli allegati"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "on pages"
 msgstr "nelle pagine"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "on posts"
 msgstr "negli articoli"
 
+#. Text in function
+#: lib/options.php:1
+msgid "only plain text. use <code>%t</code> as placeholder for the post title"
+msgstr "solo testo semplice. puoi usare <code>%t</code> per inserire il titolo dell&#39;articolo"
+
+# @ shiword
+#. Text in function
+#: lib/gallery.php:150
+msgid "order"
+msgstr "ordinamento"
+
+# @ shiword
+#. Text in function
+#: lib/gallery.php:133
+msgid "order by"
+msgstr "ordina per"
+
+# @ shiword
 #. Text in echo
 #: lib/admin.php:205
 msgid "other"
 msgstr "altro"
 
+# @ shiword
 #. Text in function
-#: functions.php:1565
+#: functions.php:1605
 msgid "over a year ago"
 msgstr "oltre un anno fa"
 
+# @ shiword
 #. Text in function
+#: mobile/loop-index-mobile.php:31
 #: index.php:34
-#: mobile/mobile-index.php:69
 msgid "page %1$s of %2$s"
 msgstr "pagina %1$s di %2$s"
 
 #. Text in function
 #: lib/options.php:1
+msgid "pause duration"
+msgstr "durata pausa"
+
+# @ shiword
+#. Text in function
+#: lib/options.php:1
 msgid "please, don't hide theme credits. TwoBeers.net's authors reserve themselfs to give support only to those who recognize TwoBeers work, keeping TwoBeers.net credits visible on their site."
 msgstr "Per favore, non nascondere i crediti del tema. Gli autori di TwoBeers.net si riservano, inoltre, la facolt&agrave; di fornire assistenza solo a coloro che riconoscono il loro lavoro mantenendo visibili sul proprio sito i crediti a TwoBeers.net."
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "post author"
-msgstr "autore dell'articolo"
+msgstr "autore dell&#39;articolo"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "post categories"
-msgstr "categorie dell'articolo"
+msgstr "categorie dell&#39;articolo"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "post comments"
-msgstr "commenti all'articolo"
+msgstr "commenti all&#39;articolo"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "post date"
 msgstr "data di pubblicazione"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "post editor style"
-msgstr "stile dell'editor"
+msgstr "stile dell&#39;editor"
 
+# @ shiword
 #. Text in echo
-#: lib/admin.php:208
+#: lib/admin.php:209
 msgid "post formats"
 msgstr "formati degli articoli"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "post formats support"
 msgstr "supporto per i formati degli articoli"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "post tags"
-msgstr "tag dell'articolo"
+msgstr "tag dell&#39;articolo"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "posts extra info"
-msgstr "informazioni extra dell'articolo"
+msgstr "informazioni extra dell&#39;articolo"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "posts thumbnail"
 msgstr "miniature articoli"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "print preview"
 msgstr "anteprima di stampa"
 
+# @ shiword
 #. Text in function
-#: functions.php:1565
+#: functions.php:1605
 msgid "quite a long while ago..."
 msgstr "parecchio tempo fa..."
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "quote"
 msgstr "citazione"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "quote link"
 msgstr "link per la citazione"
 
+# @ shiword
 #. Text in function
-#: functions.php:1565
+#: functions.php:1605
 msgid "quoted on"
 msgstr "citato in"
 
+#. Text in function
+#: lib/gallery.php:143
+#: lib/gallery.php:156
+msgid "random"
+msgstr "random"
+
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "recent comments"
 msgstr "commenti recenti"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "recent posts"
 msgstr "articoli recenti"
 
+# @ shiword
 #. Text in function
-#: lib/admin.php:233
+#: lib/admin.php:240
 msgid "requires"
 msgstr "richiede"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "right sidebar"
 msgstr "sidebar destra"
 
 #. Text in function
-#: lib/admin.php:427
+#: lib/widgets.php:1199
+msgid "sep"
+msgstr "set"
+
+#. Text in function
+#: lib/options.php:1
+msgid "set the standard text for blank titles. you may use these codes:<br /><code>%d</code> for post date<br /><code>%f</code> for post format (if any)"
+msgstr "imposta il testo standard per i titoli vuoti. puoi usare i seguenti codici:<br /><code>%d</code> per la data dell&#39;articolo<br /><code>%f</code> per il formato dell&#39;articolo (se presente)"
+
+# @ shiword
+#. Text in function
+#: lib/admin.php:301
 msgid "shiword Default Gravatar"
 msgstr "gravatar predefinito di Shiword"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "show \"like\" badges beside the post content"
 msgstr "visualizza i badge \"mi piace\" per i singoli articoli"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "show a link for easily add the selected text as a quote inside the comment form"
-msgstr "visualizza un link per aggiungere facilmente un testo, selezionato all'interno della pagina, sottoforma di citazione nel del modulo di risposta"
+msgstr "visualizza un link per aggiungere facilmente un testo, selezionato all&#39;interno della pagina, sottoforma di citazione nel del modulo di risposta"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "show author on posts info"
-msgstr "visualizza l'autore dell'articolo nelle informazioni"
+msgstr "visualizza l&#39;autore dell&#39;articolo nelle informazioni"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "show categories on posts info"
-msgstr "visualizza le categorie dell'articolo nelle informazioni"
+msgstr "visualizza le categorie dell&#39;articolo nelle informazioni"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "show comments on posts/pages info"
-msgstr "visualizza i commenti all'articolo/pagina nelle informazioni"
+msgstr "visualizza i commenti all&#39;articolo/pagina nelle informazioni"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "show date on posts info"
-msgstr "visualizza la data di pubblicazione dell'articolo nelle informazioni"
+msgstr "visualizza la data di pubblicazione dell&#39;articolo nelle informazioni"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "show extra info (author, date, tags, etc)"
 msgstr "visualizza informazioni aggiuntive (autore, data, tag, etc.) nella panoramica degli articoli"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "show extra info as a static list (not dropdown animated)"
 msgstr "visualizza le informazioni come una lista statica (non animata)"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "show extra info in posts overview"
 msgstr "visualizza le informazioni aggiuntive nella panoramica degli articoli"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "show right sidebar on attachments"
@@ -1681,29 +2340,34 @@ msgstr "visualizza la sidebar destra negli allegati"
 
 #. Text in function
 #: lib/options.php:1
-msgid "show right sidebar on pages"
-msgstr "visualizza la sidebar destra nelle pagine"
+msgid "show right sidebar on pages. If you prefer to hide the sidebar just for a single page, you can use the <a href=\"http://codex.wordpress.org/Pages#Page_Templates\" target=\"_blank\">page template</a> named \"%s\""
+msgstr "visualizza la sidebar destra nelle pagine. Se preferite nasconderla solamente per alcune pagine, potete usare la <a href=\"http://codex.wordpress.org/Pages#Page_Templates\" target=\"_blank\">pagina di template</a> \"%s\""
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "show right sidebar on posts"
 msgstr "visualizza la sidebar destra negli articoli"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "show tags on posts info"
-msgstr "visualizza i tag dell'articolo nelle informazioni"
+msgstr "visualizza i tag dell&#39;articolo nelle informazioni"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "show the \"welcome\" message and the date reminder in the bottom right"
 msgstr "visualizza il messaggio di \"Benvenuto\" e la data attuale in basso a destra della cornice"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "show the category description in search-per-category"
 msgstr "visualizza la descrizione della categoria (se presente) nelle ricerche-per-categoria"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "show the classic navigation links (paged posts navigation, next/prev post, etc). Note: the same links are already located in the easy-navigation bar"
@@ -1711,130 +2375,194 @@ msgstr "visualizza i classici link di navigazione (navigazione tra le pagine deg
 
 #. Text in function
 #: lib/options.php:1
-msgid "show the post title with the featured image"
-msgstr "visualizza il titolo dell'articolo utilizzando l'immagine in evidenza"
+msgid "show the post title using the featured image as background (the image must be at least 700x200px)"
+msgstr "visualizza il titolo degli articoli usando l&#39;immagine in evidenza come sfondo (l&#39;immagine deve avere una dimensione di almeno 700x200px)"
 
+# @ shiword
 #. Text in echo
-#: lib/admin.php:207
+#: lib/admin.php:208
 msgid "sidebar"
-msgstr "sidebar"
+msgstr "barra laterale"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "site title"
 msgstr "titolo del sito"
 
+# @ shiword
 #. Text in function
+#: lib/gallery.php:108
+msgid "size"
+msgstr "dimensione"
+
+# @ shiword
+#. Text in echo
+#: lib/admin.php:207
 #: lib/options.php:1
-#: lib/admin.php:206
 msgid "slideshow"
 msgstr "slideshow"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "slideshow for your most important posts/pages. Select them <a href=\"%s\">here</a>"
 msgstr "uno slider per i vostri articoli importanti. Selezionali <a href=\"%s\">qui</a>"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "sliding menu"
 msgstr "menu a scorrimento"
 
+# @ shiword
 #. Text in function
-#: quickbar.php:321
+#: quickbar.php:322
 msgid "someone"
 msgstr "un tizio"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "static info"
 msgstr "informazioni statiche"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "status"
 msgstr "stato"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "the fixed navigation bar on the right. Note: Is strongly recommended to keep it enabled"
-msgstr "la barra di navigazione fissa nella destra. Nota: E' fortemente consigliato mantenerla abilitata"
+msgstr "la barra di navigazione fissa nella destra. Nota: E&#39; fortemente consigliato mantenerla abilitata"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "theme credits"
 msgstr "crediti del tema"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "thickbox"
 msgstr "thickbox"
 
+# @ shiword
+#. Text in function
+#: lib/gallery.php:112
+msgid "thumbnail"
+msgstr "miniature"
+
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "thumbnail size"
 msgstr "dimensione miniature"
 
+# @ shiword
 #. Text in function
-#: quickbar.php:160
+#: quickbar.php:161
 msgid "today is %1$s, %2$s"
 msgstr "oggi &egrave; %1$s, %2$s"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "top/bottom"
 msgstr "alto/basso"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "trackback"
 msgstr "trackback"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "try disable animations if you encountered problems with javascript"
 msgstr "prova a disabilitare le animazioni se ci sono problemi con i javascript"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "use the <a href=\"http://codex.wordpress.org/Post_Formats\" target=\"_blank\">Post Formats</a> new feature"
 msgstr "usa la nuova funzione <a href=\"http://codex.wordpress.org/Post_Formats\" target=\"_blank\">Formato</a>"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "use the enhanced custom background page instead of the standard one. Disable it if the <a href=\"%s\">custom background page</a> works weird"
 msgstr "utilizza la pagina avanzata per lo sfondo personalizzato, anzich&egrave; quella normale. Disabilitala se lo <a href=\"%s\">sfondo personalizzato</a> si comporta stranamente"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "use the summary instead of content in main index"
-msgstr "usa il riassunto al posto del contenuto nell'indice principale degli articoli"
+msgstr "usa il riassunto al posto del contenuto nell&#39;indice principale degli articoli"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "use thickbox for showing images and galleries"
 msgstr "utilizza la presentazione thickbox per le immagini singole e le gallerie"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "user"
 msgstr "utente"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "video"
 msgstr "video"
 
+# @ shiword
+#. Text in function
+#: lib/options.php:1
+msgid "visible ONLY in attachments"
+msgstr "visibile SOLAMENTE negli allegati (immagini)"
+
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "welcome message"
 msgstr "messaggio di benvenuto"
 
+# @ shiword
 #. Text in function
 #: lib/options.php:1
 msgid "wide"
 msgstr "largo"
 
+# @ shiword
+#. Text in function
+#: lib/options.php:1
+msgid "use the <em>excerpt more</em> string as a link to the full post"
+msgstr "utilizza il testo di <em>excerpt more</em> come link all&#39;articolo completo"
+
+# @ shiword
+#. Text in function
+#: lib/options.php:1
+msgid "Copy and paste <a href=\"http://www.google.com/webfonts\" target=\"_blank\"><strong>Google web font</strong></a> name here. Example: <code>Architects Daughter</code>"
+msgstr "Copia e incolla qui il nome della <a href=\"http://www.google.com/webfonts\" target=\"_blank\"><strong>Google web font</strong></a>. Esempio: <code>Architects Daughter</code>"
+
+# @ shiword
+#. Text in function
+#: lib/options.php:1
+msgid "post"
+msgstr "articolo"
+
+# @ shiword
+#. Text in function
+#: loop/post-gallery.php:23
+#: loop/post-gallery.php:46
 msgid "This gallery contains <a %1$s><strong>%2$s</strong> image</a>"
 msgid_plural "This gallery contains <a %1$s><strong>%2$s</strong> images</a>"
 msgstr[0] "Questa galleria contiene <a %1$s><strong>%2$s</strong> immagine</a>"

@@ -16,68 +16,45 @@ if ( !function_exists( 'shiword_create_menu' ) ) {
 	function shiword_create_menu() {
 		//create sub menu page to the Appearance menu - Theme Options
 		$optionspage = add_theme_page( __( 'Theme Options', 'shiword' ), __( 'Theme Options', 'shiword' ), 'edit_theme_options', 'tb_shiword_functions', 'shiword_edit_options' );
-		//create sub menu page to the Appearance menu - Slideshow
-		$slidepage = add_theme_page( __( 'Slideshow', 'shiword' ), __( 'Slideshow', 'shiword' ), 'edit_theme_options', 'tb_shiword_slideshow', 'shiword_edit_slideshow' );
 		//call register settings function
 		add_action( 'admin_init', 'shiword_register_settings' );
 		//call custom stylesheet function
 		add_action( 'admin_print_styles-widgets.php', 'shiword_widgets_style' );
 		add_action( 'admin_print_scripts-widgets.php', 'shiword_widgets_scripts' );
-		add_action( 'admin_print_styles-appearance_page_custom-background', 'shiword_custom_background_style' );
 		add_action( 'admin_print_styles-' . $optionspage, 'shiword_optionspage_style' );
 		add_action( 'admin_print_scripts-' . $optionspage, 'shiword_optionspage_script' );
-		add_action( 'admin_print_styles-' . $slidepage, 'shiword_slidepage_style' );
-		add_action( 'admin_print_scripts-' . $slidepage, 'shiword_slidepage_script' );
-	}
-}
-
-if ( !function_exists( 'shiword_custom_background_style' ) ) {
-	function shiword_custom_background_style() {
-		//add custom stylesheet
-		echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/custom-background.css" />';
 	}
 }
 
 if ( !function_exists( 'shiword_widgets_style' ) ) {
 	function shiword_widgets_style() {
 		//add custom stylesheet
-		echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/widgets.css" />' . "\n";
+		wp_enqueue_style( 'sw-widgets-style', get_template_directory_uri() . '/css/admin-widgets.css', '', false, 'screen' );
 	}
 }
 
 if ( !function_exists( 'shiword_optionspage_style' ) ) {
 	function shiword_optionspage_style() {
-		wp_enqueue_style( 'farbtastic' );
 		//add custom stylesheet
-		echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/optionspage.css" />' . "\n";
-	}
-}
-
-if ( !function_exists( 'shiword_slidepage_style' ) ) {
-	function shiword_slidepage_style() {
-		//add custom stylesheet
-		echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/slidepage.css" />' . "\n";
+		wp_enqueue_style( 'sw-options-style', get_template_directory_uri() . '/css/admin-options.css', array( 'farbtastic' ), false, 'screen' );
 	}
 }
 
 if ( !function_exists( 'shiword_widgets_scripts' ) ) {
 	function shiword_widgets_scripts() {
 		global $shiword_version;
-		wp_enqueue_script( 'sw-widgets-scripts', get_template_directory_uri() . '/js/widgetspage.dev.js', array('jquery'), $shiword_version, true );
-	}
-}
-
-if ( !function_exists( 'shiword_slidepage_script' ) ) {
-	function shiword_slidepage_script() {
-		global $shiword_version;
-		wp_enqueue_script( 'sw_otp_script', get_template_directory_uri() . '/js/slidepage.dev.js', array( 'jquery' ), $shiword_version, true ); //shiword js
+		wp_enqueue_script( 'sw-widgets-script', get_template_directory_uri() . '/js/admin-widgets.dev.js', array('jquery'), $shiword_version, true );
 	}
 }
 
 if ( !function_exists( 'shiword_optionspage_script' ) ) {
 	function shiword_optionspage_script() {
 		global $shiword_version;
-		wp_enqueue_script( 'sw_otp_tabs_script', get_template_directory_uri() . '/js/optionspage.dev.js', array( 'jquery', 'farbtastic' ), $shiword_version, true ); //shiword js
+		wp_enqueue_script( 'sw-options-script', get_template_directory_uri() . '/js/admin-options.dev.js', array( 'jquery', 'farbtastic' ), $shiword_version, true ); //shiword js
+		$data = array(
+			'confirm_to_defaults' => __( 'Are you really sure you want to set all the options to their default values?', 'shiword' )
+		);
+		wp_localize_script( 'sw-options-script', 'sw_l10n', $data );
 	}
 }
 
@@ -96,8 +73,6 @@ if ( !function_exists( 'shiword_register_settings' ) ) {
 	function shiword_register_settings() {
 		//register general settings
 		register_setting( 'shiw_settings_group', 'shiword_options', 'shiword_sanitize_options' );
-		//register slideshow settings
-		register_setting( 'shiw_slideshow_group', 'shiword_slideshow', 'shiword_sanitize_slideshow'  );
 		//register colors settings
 		register_setting( 'shiw_colors_group', 'shiword_colors'  );
 	}
@@ -143,11 +118,25 @@ if ( !function_exists( 'shiword_sanitize_options' ) ) {
 				}
 			} elseif( $shiword_coa[$key]['type'] == 'sel' ) {
 				if ( !in_array( $input[$key], $shiword_coa[$key]['options'] ) ) $input[$key] = $shiword_coa[$key]['default'];
+			} elseif( $shiword_coa[$key]['type'] == 'opt' ) {
+				if ( !in_array( $input[$key], $shiword_coa[$key]['options'] ) ) $input[$key] = $shiword_coa[$key]['default'];
 			} elseif( $shiword_coa[$key]['type'] == 'txt' ) {
 				if( !isset( $input[$key] ) ) {
 					$input[$key] = '';
 				} else {
 					$input[$key] = trim( strip_tags( $input[$key] ) );
+				}
+			} elseif( $shiword_coa[$key]['type'] == 'txtarea' ) {
+				if( !isset( $input[$key] ) ) {
+					$input[$key] = '';
+				} else {
+					$input[$key] = trim( strip_tags( $input[$key] ) );
+				}
+			} elseif( $shiword_coa[$key]['type'] == 'int' ) {
+				if( !isset( $input[$key] ) ) {
+					$input[$key] = $shiword_coa[$key]['default'];
+				} else {
+					$input[$key] = (int) $input[$key] ;
 				}
 			} elseif( $shiword_coa[$key]['type'] == 'col' ) {
 				$color = str_replace( '#' , '' , $input[$key] );
@@ -167,10 +156,17 @@ if ( !function_exists( 'shiword_sanitize_options' ) ) {
 // the option page
 if ( !function_exists( 'shiword_edit_options' ) ) {
 	function shiword_edit_options() {
-	  if ( !current_user_can( 'edit_theme_options' ) ) {
-	    wp_die( __( 'You do not have sufficient permissions to access this page.', 'shiword' ) );
-	  }
+		if ( !current_user_can( 'edit_theme_options' ) ) {
+		wp_die( __( 'You do not have sufficient permissions to access this page.', 'shiword' ) );
+		}
 		global $shiword_opt, $shiword_current_theme;
+		
+		if ( isset( $_GET['erase'] ) && ! isset( $_REQUEST['settings-updated'] ) ) {
+			delete_option( 'shiword_options' );
+			shiword_default_options();
+			$shiword_opt = get_option( 'shiword_options' );
+		}
+
 		$shiword_coa = shiword_get_coa();
 		
 		// update version value when admin visit options page
@@ -187,14 +183,18 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 				if ( isset( $_REQUEST['settings-updated'] ) ) {
 					echo '<div id="message" class="updated fade"><p><strong>' . __( 'Options saved.', 'shiword' ) . '</strong></p></div>';
 				}
+				// return options save message
+				if ( isset( $_GET['erase'] ) && ! isset( $_REQUEST['settings-updated'] ) ) {
+					echo '<div id="message" class="updated fade"><p><strong>' . __( 'Defaults values loaded.', 'shiword' ) . '</strong></p></div>';
+				}
 			?>
 			<div id="tabs-container">
 				<ul id="selector">
 					<li id="shiword-options-li">
-						<a href="#shiword-options" onClick="shiwordSwitchClass('shiword-options'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'Theme features' , 'shiword' ); ?></a>
+						<a href="#shiword-options" onClick="shiwordOptions.switchSection(); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'Theme features' , 'shiword' ); ?></a>
 					</li>
 					<li id="shiword-infos-li">
-						<a href="#shiword-infos" onClick="shiwordSwitchClass('shiword-infos'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'Info', 'shiword' ); ?></a>
+						<a href="#shiword-infos" onClick="shiwordOptions.switchSection(); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'Info', 'shiword' ); ?></a>
 					</li>
 				</ul>
 				<div class="clear"></div>
@@ -202,13 +202,14 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 					<form method="post" action="options.php">
 						<?php settings_fields( 'shiw_settings_group' ); ?>
 						<ul id="sw-tabselector" class="hide-if-no-js">
-							<li class="sw-selgroup-other"><a href="#" onClick="shiwordSwitchTab.set('other'); return false;"><?php _e( 'other' , 'shiword' ); ?></a></li>
-							<li class="sw-selgroup-slideshow"><a href="#" onClick="shiwordSwitchTab.set('slideshow'); return false;"><?php _e( 'slideshow' , 'shiword' ); ?></a></li>
-							<li class="sw-selgroup-sidebar"><a href="#" onClick="shiwordSwitchTab.set('sidebar'); return false;"><?php _e( 'sidebar' , 'shiword' ); ?></a></li>
-							<li class="sw-selgroup-postformats"><a href="#" onClick="shiwordSwitchTab.set('postformats'); return false;"><?php _e( 'post formats' , 'shiword' ); ?></a></li>
-							<li class="sw-selgroup-fonts"><a href="#" onClick="shiwordSwitchTab.set('fonts'); return false;"><?php _e( 'fonts' , 'shiword' ); ?></a></li>
-							<li class="sw-selgroup-content"><a href="#" onClick="shiwordSwitchTab.set('content'); return false;"><?php _e( 'content' , 'shiword' ); ?></a></li>
-							<li class="sw-selgroup-fixedbars"><a href="#" onClick="shiwordSwitchTab.set('fixedbars'); return false;"><?php _e( 'fixedbars' , 'shiword' ); ?></a></li>
+							<li class="sw-selgroup-other"><a href="#" onClick="shiwordOptions.switchTab('other'); return false;"><?php _e( 'other' , 'shiword' ); ?></a></li>
+							<li class="sw-selgroup-mobile"><a href="#" onClick="shiwordOptions.switchTab('mobile'); return false;"><?php _e( 'mobile' , 'shiword' ); ?></a></li>
+							<li class="sw-selgroup-slideshow"><a href="#" onClick="shiwordOptions.switchTab('slideshow'); return false;"><?php _e( 'slideshow' , 'shiword' ); ?></a></li>
+							<li class="sw-selgroup-sidebar"><a href="#" onClick="shiwordOptions.switchTab('sidebar'); return false;"><?php _e( 'sidebar' , 'shiword' ); ?></a></li>
+							<li class="sw-selgroup-postformats"><a href="#" onClick="shiwordOptions.switchTab('postformats'); return false;"><?php _e( 'post formats' , 'shiword' ); ?></a></li>
+							<li class="sw-selgroup-fonts"><a href="#" onClick="shiwordOptions.switchTab('fonts'); return false;"><?php _e( 'fonts' , 'shiword' ); ?></a></li>
+							<li class="sw-selgroup-content"><a href="#" onClick="shiwordOptions.switchTab('content'); return false;"><?php _e( 'content' , 'shiword' ); ?></a></li>
+							<li class="sw-selgroup-navigation"><a href="#" onClick="shiwordOptions.switchTab('navigation'); return false;"><?php _e( 'navigation' , 'shiword' ); ?></a></li>
 						</ul>
 						<h2 class="hide-if-js" style="text-align: center;"><?php _e( 'Options','shiword' ); ?></h2>
 						<?php foreach ( $shiword_coa as $key => $val ) { ?>
@@ -218,16 +219,22 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 							<?php if ( !isset ( $shiword_opt[$key] ) ) $shiword_opt[$key] = $shiword_coa[$key]['default']; ?>
 							<?php if ( $shiword_coa[$key]['type'] == 'chk' ) { ?>
 								<input name="shiword_options[<?php echo $key; ?>]" value="1" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 1 , $shiword_opt[$key] ); ?> />
-							<?php } elseif ( $shiword_coa[$key]['type'] == 'txt' ) { ?>
+							<?php } elseif ( ( $shiword_coa[$key]['type'] == 'txt' ) || ( $shiword_coa[$key]['type'] == 'int' ) ) { ?>
 								<input name="shiword_options[<?php echo $key; ?>]" value="<?php echo $shiword_opt[$key]; ?>" type="text" />
+							<?php } elseif ( $shiword_coa[$key]['type'] == 'txtarea' ) { ?>
+								<textarea name="shiword_options[<?php echo $key; ?>]"><?php echo $shiword_opt[$key]; ?></textarea>
 							<?php } elseif ( $shiword_coa[$key]['type'] == 'sel' ) { ?>
 								<select name="shiword_options[<?php echo $key; ?>]">
 								<?php foreach( $shiword_coa[$key]['options'] as $optionkey => $option ) { ?>
 									<option value="<?php echo $option; ?>" <?php selected( $shiword_opt[$key], $option ); ?>><?php echo $shiword_coa[$key]['options_readable'][$optionkey]; ?></option>
 								<?php } ?>
 								</select>
+							<?php } elseif ( $shiword_coa[$key]['type'] == 'opt' ) { ?>
+								<?php foreach( $shiword_coa[$key]['options'] as $optionkey => $option ) { ?>
+									<label title="<?php echo esc_attr($option); ?>"><input type="radio" <?php checked( $shiword_opt[$key], $option ); ?> value="<?php echo $option; ?>" name="shiword_options[<?php echo $key; ?>]"> <span><?php echo $shiword_coa[$key]['options_readable'][$optionkey]; ?></span></label>
+								<?php } ?>
 							<?php } elseif ( $shiword_coa[$key]['type'] == 'col' ) { ?>
-								<input class="sw-color" style="background-color:<?php echo $shiword_opt[$key]; ?>;" onclick="shiwordShowMeColorPicker('<?php echo $key; ?>');" id="sw-color-<?php echo $key; ?>" type="text" name="shiword_options[<?php echo $key; ?>]" value="<?php echo $shiword_opt[$key]; ?>" />
+								<input class="sw-color" style="background-color:<?php echo $shiword_opt[$key]; ?>;" onclick="shiwordOptions.showColorPicker('<?php echo $key; ?>');" id="sw-color-<?php echo $key; ?>" type="text" name="shiword_options[<?php echo $key; ?>]" value="<?php echo $shiword_opt[$key]; ?>" />
 								<div class="sw-colorpicker" id="sw-colorpicker-<?php echo $key; ?>"></div>
 							<?php }	?>
 								<?php if ( $shiword_coa[$key]['req'] != '' ) { ?><div class="column-req"><?php echo '<u>' . __('requires','shiword') . '</u>: ' . $shiword_coa[$shiword_coa[$key]['req']]['description']; ?></div><?php } ?>
@@ -239,9 +246,9 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 									<?php if ( $shiword_coa[$subval]['type'] == 'chk' ) { ?>
 										<input name="shiword_options[<?php echo $subval; ?>]" value="1" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 1 , $shiword_opt[$subval] ); ?> />
 										<span class="sw-sub-opt-nam"><?php echo $shiword_coa[$subval]['description']; ?></span>
-									<?php } elseif ( $shiword_coa[$subval]['type'] == 'txt' ) { ?>
-										<input name="shiword_options[<?php echo $subval; ?>]" value="" type="text" />
-										<span class="sw-sub-opt-nam"><?php echo $shiword_coa[$subval]['description']; ?></span>
+									<?php } elseif ( ( $shiword_coa[$subval]['type'] == 'txt' ) || ( $shiword_coa[$subval]['type'] == 'int' ) ) { ?>
+										<span class="sw-sub-opt-nam"><?php echo $shiword_coa[$subval]['description']; ?></span> :
+										<input name="shiword_options[<?php echo $subval; ?>]" value="<?php echo $shiword_opt[$subval]; ?>" type="text" />
 									<?php } elseif ( $shiword_coa[$subval]['type'] == 'sel' ) { ?>
 										<span class="sw-sub-opt-nam"><?php echo $shiword_coa[$subval]['description']; ?></span> :
 										<select name="shiword_options[<?php echo $subval; ?>]">
@@ -249,9 +256,14 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 											<option value="<?php echo $option; ?>" <?php selected( $shiword_opt[$subval], $option ); ?>><?php echo $shiword_coa[$subval]['options_readable'][$optionkey]; ?></option>
 										<?php } ?>
 										</select>
+									<?php } elseif ( $shiword_coa[$subval]['type'] == 'opt' ) { ?>
+										<span class="sw-sub-opt-nam"><?php echo $shiword_coa[$subval]['description']; ?></span> :
+										<?php foreach( $shiword_coa[$subval]['options'] as $optionkey => $option ) { ?>
+											<label title="<?php echo esc_attr($option); ?>"><input type="radio" <?php checked( $shiword_opt[$subval], $option ); ?> value="<?php echo $option; ?>" name="shiword_options[<?php echo $subval; ?>]"> <span><?php echo $shiword_coa[$subval]['options_readable'][$optionkey]; ?></span></label>
+										<?php } ?>
 									<?php } elseif ( $shiword_coa[$subval]['type'] == 'col' ) { ?>
 										<span class="sw-sub-opt-nam"><?php echo $shiword_coa[$subval]['description']; ?></span> :
-										<input class="sw-color" style="background-color:<?php echo $shiword_opt[$subval]; ?>;" onclick="shiwordShowMeColorPicker('<?php echo $subval; ?>');" id="sw-color-<?php echo $subval; ?>" type="text" name="shiword_options[<?php echo $subval; ?>]" value="<?php echo $shiword_opt[$subval]; ?>" />
+										<input class="sw-color" style="background-color:<?php echo $shiword_opt[$subval]; ?>;" onclick="shiwordOptions.showColorPicker('<?php echo $subval; ?>');" id="sw-color-<?php echo $subval; ?>" type="text" name="shiword_options[<?php echo $subval; ?>]" value="<?php echo $shiword_opt[$subval]; ?>" />
 										<div class="sw-colorpicker" id="sw-colorpicker-<?php echo $subval; ?>"></div>
 									<?php }	?>
 									<?php if ( $shiword_coa[$subval]['info'] != '' ) { ?> - <span class="sw-sub-opt-des"><?php echo $shiword_coa[$subval]['info']; ?></span><?php } ?>
@@ -264,7 +276,9 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 						<div id="sw-submit">
 							<input type="hidden" name="shiword_options[hidden_opt]" value="default" />
 							<input class="button-primary" type="submit" name="Submit" value="<?php _e( 'Update Options' , 'shiword' ); ?>" />
-							<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="themes.php?page=functions" target="_self"><?php _e( 'Undo Changes' , 'shiword' ); ?></a>
+							<a href="themes.php?page=tb_shiword_functions" target="_self"><?php _e( 'Undo Changes' , 'shiword' ); ?></a>
+							|
+							<a id="to-defaults" href="themes.php?page=tb_shiword_functions&erase=1" target="_self"><?php _e( 'Back to defaults' , 'shiword' ); ?></a>
 						</div>
 					</form>
 				</div>
@@ -284,146 +298,6 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 				<small>Support the theme in your language, provide a <a href="<?php echo esc_url( 'http://www.twobeers.net/temi-wp/wordpress-themes-translations' ); ?>" title="Themes translation" target="_blank">translation</a>.</small>
 			</div>
 		</div>
-		<?php
-	}
-}
-
-if ( !function_exists( 'shiword_sanitize_slideshow' ) ) {
-	function shiword_sanitize_slideshow( $input ){
-		if ( !empty($input) ) {
-			//check for numeric value
-			foreach ( $input as $key => $val ) {
-				if ( is_numeric( $val ) ) {
-					$input[$key] = $val;
-				} else {
-					 unset( $input[$key] );
-				}
-			}
-		}
-		return $input;
-	}
-}
-
-// the slideshow admin panel - here you can select posts to be included in slideshow
-if ( !function_exists( 'shiword_edit_slideshow' ) ) {
-	function shiword_edit_slideshow() {
-		global $shiword_opt;
-		$shiword_options = get_option( 'shiword_slideshow' );
-		//return options save message
-		if ( !$shiword_opt['shiword_sticky'] ) {
-			echo '<div id="message" class="updated"><p>'. __( '<strong>The slideshow is disabled!</strong> Enable it in theme options', 'shiword' ) . '</p></div>';
-		}
-		if ( isset( $_REQUEST['settings-updated'] ) ) {
-			echo '<div id="message" class="updated"><p><strong>' . __( 'Options saved.', 'shiword' ) . '</strong></p></div>';
-		}
-		?>
-		<div class="wrap">
-			<div class="icon32" id="sw-icon"><br></div>
-			<h2><?php echo get_current_theme() . ' - ' . __( 'Slideshow', 'shiword' ); ?></h2>
-			<div style="margin-top: 20px;">
-				<?php _e( 'Select posts or pages to be added to the slideshow box.<br />Items will be ordered as displayed here.', 'shiword' ); ?>
-			</div>
-			<div>
-				<form method="post" action="options.php">
-					<?php settings_fields( 'shiw_slideshow_group' ); ?>
-
-					<div id="tabs-container">
-						<ul id="selector" class="sw-slidepage-type-list">
-							<li id="shiwordSlide-posts-li">
-								<a href="#shiwordSlide-posts" onClick="shiwordSlideSwitchClass('shiwordSlide-posts'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'Posts', 'shiword' ); ?></a>
-							</li>
-							<li id="shiwordSlide-pages-li">
-								<a href="#shiwordSlide-pages" onClick="shiwordSlideSwitchClass('shiwordSlide-pages'); return false;"><span class="wp-menu-image" style="background-image: url('<?php echo get_admin_url() . 'images/menu.png' ?>')"> </span><?php _e( 'Pages', 'shiword' ); ?></a>
-							</li>
-						</ul>
-						<div class="clear"></div>
-
-						<?php $lastposts = get_posts( 'post_type=post&numberposts=-1&orderby=date' ); ?>
-
-						<div id="shiwordSlide-posts" class="sw-slidepage-type">
-							<table cellspacing="0" class="widefat post fixed">
-								<thead>
-									<tr>
-										<th style="" class="manage-column column-cb check-column" id="cb" scope="col"><input type="checkbox"></th>
-										<th style="" class="manage-column column-title" id="title" scope="col"><?php _e( 'Title', 'shiword' ); ?></th>
-										<th style="" class="manage-column column-categories" id="categories" scope="col"><?php _e( 'Categories', 'shiword' ); ?></th>
-										<th style="" class="manage-column column-date" id="date" scope="col"><?php _e( 'Date', 'shiword' ); ?></th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach( $lastposts as $post ) {
-										$post_title = esc_html( $post->post_title );
-										if ( $post_title == "" ) {
-											$post_title = __( '(no title)', 'shiword' );
-										}
-										if ( !isset( $shiword_options[$post->ID] ) ) $shiword_options[$post->ID] = 0;
-										?>
-										<tr class="sw_post_row">
-											<th class="check-column" scope="row">
-												<input name="shiword_slideshow[<?php echo $post->ID; ?>]" value="<?php echo $post->ID; ?>" type="checkbox" class="" <?php checked( $post->ID , $shiword_options[$post->ID] ); ?> />
-											</th>
-											<td class="post-title column-title">
-												<?php echo shiword_get_the_thumb( $post->ID, 40, 40, 'slide-thumb' ); ?>
-												<a class="row-title" href="<?php echo get_permalink( $post->ID ); ?>" title="<?php echo $post_title; ?>"><?php echo $post_title; ?></a>
-											</td>
-											<td class="categories column-categories">
-												<?php
-												foreach( ( get_the_category( $post->ID ) ) as $post_cat ) {
-													echo $post_cat->name . ', ';
-												}
-												?>
-											</td>
-											<td class="date column-date"><?php echo date_i18n( get_option( 'date_format' ), strtotime( $post->post_date_gmt ) );  ?></td>
-										</tr>
-									<?php } ?>
-								</tbody>
-							</table>
-						</div>
-
-						<?php $lastpages = get_posts( 'post_type=page&numberposts=-1&orderby=menu_order' ); ?>
-
-						<div id="shiwordSlide-pages" class="sw-slidepage-type">
-							<table cellspacing="0" class="widefat post fixed">
-								<thead>
-									<tr>
-										<th style="" class="manage-column column-cb check-column" id="cb" scope="col"><input type="checkbox"></th>
-										<th style="" class="manage-column column-title" id="title" scope="col"><?php _e( 'Title', 'shiword' ); ?></th>
-										<th style="" class="manage-column column-date" id="date" scope="col"><?php _e( 'Date', 'shiword' ); ?></th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach( $lastpages as $page ) {
-										$page_title = esc_html( $page->post_title );
-										if ( $page_title == "" ) {
-											$page_title = __( '(no title)', 'shiword' );
-										}
-										if ( !isset( $shiword_options[$page->ID] ) ) $shiword_options[$page->ID] = 0;
-										?>
-										<tr>
-											<th class="check-column" scope="row">
-												<input name="shiword_slideshow[<?php echo $page->ID; ?>]" value="<?php echo $page->ID; ?>" type="checkbox" class="" <?php checked( $page->ID , $shiword_options[$page->ID] ); ?> />
-											</th>
-											<td class="post-title column-title">
-												<a class="row-title" href="<?php echo get_permalink( $page->ID ); ?>" title="<?php echo $page_title; ?>"><?php echo $page_title; ?></a>
-											</td>
-											<td class="date column-date"><?php echo date_i18n( get_option( 'date_format' ), strtotime( $page->post_date_gmt ) );  ?></td>
-										</tr>
-									<?php } ?>
-								</tbody>
-							</table>
-						</div>
-
-						<div class="clear"></div>
-					</div>
-					<div id="shiwordSlide-bottom_ref" style="clear: both; height: 1px;"> </div>
-					<p style="float:left; clear: both;">
-						<input class="button-primary" type="submit" name="Submit" value="<?php _e( 'Save Changes', 'shiword' ); ?>" />
-						<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="<?php echo get_admin_url() . 'themes.php?page=tb_shiword_slideshow'; ?>" target="_self"><?php _e( 'Undo Changes' , 'shiword' ); ?></a>
-					</p>
-				</form>
-			</div>
-		</div>
-
 		<?php
 	}
 }
@@ -475,11 +349,9 @@ function shiword_get_colors() {
 // Styles the header image displayed on the Appearance > Header admin panel.
 if ( !function_exists( 'shiword_admin_header_style' ) ) {
 	function shiword_admin_header_style() {
-		echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/custom-header.css" />' . "\n";
+		echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/admin-custom_header.css" />' . "\n";
 	}
 }
-
-
 
 // Register a selection of default images to be displayed as device backgrounds by the custom device color admin UI. based on WP theme.php -> register_default_headers()
 if ( !function_exists( 'shiword_register_default_device_images' ) ) {

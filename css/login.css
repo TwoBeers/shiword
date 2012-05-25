@@ -12,7 +12,6 @@ body {
 	background:url("../images/custombg.png") repeat-x fixed left bottom #B6B6B6 !important; 
 	padding-top: 50px;
 	padding-bottom: 300px;
-	overflow: hidden;
 }
 #login {
 	border-radius: 5px;
@@ -44,4 +43,15 @@ body {
 #user_login:focus,
 #user_email:focus {
 	border-color :#FF8D39;
+}
+@media (max-width: 480px) {
+	body { 
+		background: #262626 !important; 
+		padding: 0;
+	}
+	#login {
+		border: none;
+		box-shadow: none;
+		padding:0;
+	}
 }

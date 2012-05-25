@@ -1,0 +1,45 @@
+#primary-widget-area {
+	background: url("../images/widgets/widget_s1.png") no-repeat center 10px transparent;
+	padding-top: 80px;
+}
+#first-footer-widget-area {
+	background: url("../images/widgets/widget_f1.png") no-repeat center 10px transparent;
+	padding-top: 80px;
+}
+#second-footer-widget-area {
+	background: url("../images/widgets/widget_f2.png") no-repeat center 10px transparent;
+	padding-top: 80px;
+}
+#third-footer-widget-area {
+	background: url("../images/widgets/widget_f3.png") no-repeat center 10px transparent;
+	padding-top: 80px;
+}
+#header-widget-area {
+	background: url("../images/widgets/widget_h1.png") no-repeat center 10px transparent;
+	padding-top: 80px;
+}
+#single-widget-area {
+	background: url("../images/widgets/widget_p1.png") no-repeat center 10px transparent;
+	padding-top: 80px;
+}
+#tbm-widget-area {
+	background: url("../images/widgets/mobwig.png") no-repeat center 10px transparent;
+	padding-top: 80px;
+}
+div[id*=_shi-] .widget-title {
+	background: url("../images/logo-17.png") no-repeat 5px center transparent;
+	padding-left: 24px;
+}
+.sw-service-input {
+	float: left; 
+	width: 40%; 
+	margin: 0pt 5%;
+}
+.sw-service-input img {
+	vertical-align:middle; 
+	width:40px; 
+	height:40px;
+}
+.sw-service-input input[type="checkbox"] {
+	vertical-align:middle; 
+}

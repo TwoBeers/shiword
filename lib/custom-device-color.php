@@ -54,14 +54,12 @@ class Custom_device_color {
 	/* Set up the enqueue for the JavaScript files. */
 	function js_includes() {
 		global $shiword_version;
-		wp_enqueue_script('farbtastic');
-		wp_enqueue_script( 'sw-custom-colors', get_template_directory_uri() . '/js/custom-colors.dev.js', array('jquery','scriptaculous-slider'), $shiword_version, true ); //shiword js
+		wp_enqueue_script( 'sw-custom-colors-script', get_template_directory_uri() . '/js/admin-custom_colors.dev.js', array('farbtastic','jquery','jquery-ui-slider','jquery-ui-draggable'), $shiword_version, true ); //shiword js
 	}
 
 	/* Set up the enqueue for the CSS files */
 	function css_includes() {
-		wp_enqueue_style( 'farbtastic' );
-		wp_enqueue_style( 'shi_cdcpanel_style', get_template_directory_uri() . '/css/custom-device-color.css', false, '', 'screen' );
+		wp_enqueue_style( 'sw-custom-colors-style', get_template_directory_uri() . '/css/admin-custom_colors.css', array( 'farbtastic' ), false, 'screen' );
 		$color = get_background_color();
 		if ( ! $color ) $color = 'b6b6b6';
 		echo '<style type="text/css">#headimg-bg { background-color: #' . $color . ' !important; }</style>';
@@ -103,10 +101,10 @@ class Custom_device_color {
 		foreach ( $this->default_device_images as $header_key => $header ) {
 			$header_url = $header['url'];
 			$header_desc = $header['description'];
-			echo '<div class="default-device-image">';
+			echo '<label class="default-device-image">';
 			echo '<input class="default-device-input" name="default-device-image" type="radio" value="' . esc_attr($header_key) . '" ' . checked($header_url, $shiword_colors['device_image'], false) . ' />';
 			echo '<img src="' . $header_url . '" alt="' . esc_attr($header_desc) .'" title="' . esc_attr($header_desc) .'" />';
-			echo '</div>';
+			echo '</label>';
 		}
 		echo '<div class="clear"></div></div>';
 	}
@@ -230,141 +228,148 @@ class Custom_device_color {
 		</div>
 	<?php } ?>
 
-					<?php $this->show_preview(); ?>
-	<h3 class="h3_field"><?php _e( 'Exterior Colors' , 'shiword' ) ?> <a class="hide-if-no-js" href="#" onclick="secOpen('.shi_bgc'); return false;">&raquo;</a></h3>
-	<table class="form-table shi_bgc">
-		<tbody>
-			<tr valign="top">
-				<td style="width:200px;"><?php _e( 'Upload Image', 'shiword' ); ?></td>
-				<td>
-					<?php _e( 'You can upload a custom background image.' , 'shiword' ); ?>
-					<br />
-					<form enctype="multipart/form-data" id="upload-form" method="post" action="<?php echo esc_attr( add_query_arg( 'step' , 2 ) ) ?>">
-						<p>
-							<label for="upload"><?php _e( 'Choose an image from your computer:', 'shiword' ); ?></label><br />
-							<input type="file" id="upload" name="import" />
-							<input type="hidden" name="action" value="save" />
-							<?php wp_nonce_field( 'load-custom-image' , 'nonce-load-custom-image' ) ?>
-							<input type="submit" class="button" value="<?php esc_attr_e( 'Upload', 'shiword' ); ?>" />
-						</p>
-					</form>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-
-	<form method="post" action="<?php echo esc_attr( add_query_arg( 'step' , 3 ) ) ?>">
-		<table class="form-table shi_bgc">
-			<tbody>
-				<?php if ( ! empty( $this->default_device_images ) ) { ?>
+	<?php $this->show_preview(); ?>
+	
+	<div class="fields_wrap">
+		<h3 class="h3_field"><?php _e( 'Exterior Colors' , 'shiword' ) ?> <a class="hide-if-no-js" href="#" onclick="shiwordCustomColors.secOpen('.shi_bgc'); return false;">&raquo;</a></h3>
+		<div class="shi_bgc">
+			<table class="form-table">
+				<tbody>
 					<tr valign="top">
-						<td style="width:200px;"><?php _e( 'Default Images', 'shiword' ); ?></td>
+						<td style="width:200px;"><?php _e( 'Upload Image', 'shiword' ); ?></td>
 						<td>
-							<?php _e( 'If you don&lsquo;t want to upload your own image, you can choose from one of the following.' , 'shiword' ) ?>
-							<?php $this->show_default_header_selector(); ?>
+							<?php _e( 'You can upload a custom background image.' , 'shiword' ); ?>
+							<br />
+							<form enctype="multipart/form-data" id="upload-form" method="post" action="<?php echo esc_attr( add_query_arg( 'step' , 2 ) ) ?>">
+								<p>
+									<label for="upload"><?php _e( 'Choose an image from your computer:', 'shiword' ); ?></label><br />
+									<input type="file" id="upload" name="import" />
+									<input type="hidden" name="action" value="save" />
+									<?php wp_nonce_field( 'load-custom-image' , 'nonce-load-custom-image' ) ?>
+									<input type="submit" class="button" value="<?php esc_attr_e( 'Upload', 'shiword' ); ?>" />
+								</p>
+							</form>
 						</td>
 					</tr>
-				<?php }
-
-				if ( $shiword_colors['device_image'] != '' ) { ?>
-					<tr valign="top">
-						<td style="width:200px;"><?php _e( 'Remove Image', 'shiword' ); ?></td>
-						<td>
-							<?php _e( 'This will remove the background image.' , 'shiword' ) ?>
-							<input type="submit" class="button" name="removedeviceimage" value="<?php esc_attr_e( 'Remove Image', 'shiword' ); ?>" />
-						</td>
-					</tr>
-				<?php } ?>
-				<tr valign="top">
-					<td style="width:200px;"><?php _e( 'Background Color', 'shiword' ) ?></td>
-					<td>
-						<input style="background-color:<?php echo $shiword_colors['device_color']; ?>;" class="color_preview_box" type="text" id="shi_box_1" value="" readonly="readonly" />
-						<input type="text" name="devicecolor" id="shi_input_1" value="<?php echo $shiword_colors['device_color']; ?>" />
-						<div class="shi_cp" id="shi_colorpicker_1" style="z-index: 100; background:#eee; border:1px solid #ccc; position:absolute; display:none;"></div>
-						<span class="hide-if-no-js">
-							<a href="#" onclick="showMeColorPicker('1');return false;"><?php _e( 'Select a Color', 'shiword' ); ?></a>
-							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('1','transparent'); return false;"><?php _e( "Set to \"transparent\"" , 'shiword' ); ?></a>
-							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('1','<?php echo $this->default_device_bg['device_color']; ?>'); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
-						</span>
-						<br />
-						<span class="opaopt" style="margin-left: 40px;"><?php _e( 'Opacity', 'shiword' ); ?> [0-100] <!--[if lte IE 8]><span style="color:#ff0000;">Not supported in Internet Explorer 7 and below </span><![endif]--><input type="text" name="deviceopacity" id="shi_input_1a" value="<?php echo $shiword_colors['device_opacity']; ?>" maxlength="3" size="3" /> %</span>
-						<div id="alpha_slider" class="slider hide-if-no-js">
-							<div id="alpha_bar"></div>
-							<div class="handle"></div>
-						</div>
-					</td>
-				</tr>
-				<tr valign="top">
-					<td style="width:200px;"><?php _e( 'Text Color', 'shiword' ); ?></td>
-					<td>
-						<input style="background-color:<?php echo $shiword_colors['device_textcolor']; ?>;" class="color_preview_box" type="text" id="shi_box_2" value="" readonly="readonly" />
-						<input type="text" name="devicetextcolor" id="shi_input_2" value="<?php echo $shiword_colors['device_textcolor']; ?>" />
-						<div class="shi_cp" id="shi_colorpicker_2" style="z-index: 100; background:#eee; border:1px solid #ccc; position:absolute; display:none;"></div>
-						<span class="hide-if-no-js">
-							<a href="#" onclick="showMeColorPicker('2');return false;"><?php _e( 'Select a Color', 'shiword' ); ?></a>
-							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('2','<?php echo $this->default_device_bg['device_textcolor']; ?>'); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
-						</span>
-					</td>
-				</tr>
-				<tr valign="top">
-					<td style="width:200px;"><?php _e( 'Hightlighted Buttons Border' , 'shiword' ); ?></td>
-					<td>
-						<input style="background-color:<?php echo $shiword_colors['device_button']; ?>;" class="color_preview_box" type="text" id="shi_box_3" value="" readonly="readonly" />
-						<input type="text" name="devicebuttonborder" id="shi_input_3" value="<?php echo $shiword_colors['device_button']; ?>" />
-						<div class="shi_cp" id="shi_colorpicker_3" style="z-index: 100; background:#eee; border:1px solid #ccc; position:absolute; display:none;"></div>
-						<span class="hide-if-no-js">
-							<a href="#" onclick="showMeColorPicker('3');return false;"><?php _e( 'Select a Color', 'shiword' ); ?></a>
-							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('3','<?php echo $this->default_device_bg['device_button']; ?>'); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
-						</span>
-					</td>
-				</tr>
-				<tr valign="top">
-					<td style="width:200px;"><?php _e( 'Buttons Style' , 'shiword' ); ?></td>
-					<td>
-						<select id="shi_select_1" name="devicebuttonstyle">
-							<option value="light" <?php selected( $shiword_colors['device_button_style'], 'light' ); ?>><?php _e( 'light', 'shiword' ); ?></option>
-							<option value="dark" <?php selected( $shiword_colors['device_button_style'], 'dark' ); ?>><?php _e( 'dark', 'shiword' ); ?></option>
-						</select>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		
-		<div style="position: relative">
-			<h3 class="h3_field"><?php _e( 'Interior Colors' , 'shiword' ) ?> <a class="hide-if-no-js" href="#" onclick="secOpen('.shi_cc'); return false;">&raquo;</a></h3>
-			<table class="form-table shi_cc">
-			<?php foreach ( $this->default_device_colors as $key => $val ) { ?>
-				<?php 
-					if ( $key == 'main3' ) echo '<tr><td style="font-weight:bold;" colspan="2">' . __( 'Main Content', 'shiword' ) . '</td></tr>';
-					elseif ( $key == 'menu1' ) echo '<tr><td style="font-weight:bold; border-top:1px solid #CCCCCC;" colspan="2">' . __( 'Pages Menu and Floating Menu', 'shiword' ) . '</td></tr>';
-				?>
-				<tr>
-					<td style="width:200px;"><?php echo $default_device_colors_descr[$key]; ?></td>
-					<td>
-						<input style="background-color:<?php echo $shiword_colors[$key]; ?>;" class="color_preview_box" type="text" id="shi_box_<?php echo $key; ?>" value="" readonly="readonly" />
-						<input id="shi_input_<?php echo $key; ?>" name="<?php echo $key; ?>" value="<?php echo $shiword_colors[$key]; ?>" type="text" class="shi_input" />
-						<div class="shi_cp" id="shi_colorpicker_<?php echo $key; ?>" style="z-index: 100; background:#eee; border:1px solid #ccc; position:absolute; display:none;"></div>
-						<span class="hide-if-no-js">
-							<a href="#" onclick="showMeColorPicker('<?php echo $key; ?>');return false;"><?php _e( 'Select a Color', 'shiword' ); ?></a>
-							&nbsp;-&nbsp;
-							<a href="#" onclick="pickColor('<?php echo $key; ?>', '<?php echo $val; ?>' ); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
-						</span>
-					</td>
-				</tr>
-			<?php }	?>
+				</tbody>
 			</table>
 		</div>
 
-		
-		<?php
-		wp_nonce_field( 'set-custom-colors' , 'nonce-set-custom-colors' ); ?>
-		<p class="submit"><input type="submit" class="button-primary" name="save-device-options" value="<?php esc_attr_e( 'Save Changes', 'shiword' ); ?>" /></p>
-	</form>
+		<form method="post" action="<?php echo esc_attr( add_query_arg( 'step' , 3 ) ) ?>">
+			<div class="shi_bgc">
+				<table class="form-table">
+					<tbody>
+						<?php if ( ! empty( $this->default_device_images ) ) { ?>
+							<tr valign="top">
+								<td style="width:200px;"><?php _e( 'Default Images', 'shiword' ); ?></td>
+								<td>
+									<?php _e( 'If you don&lsquo;t want to upload your own image, you can choose from one of the following.' , 'shiword' ) ?>
+									<?php $this->show_default_header_selector(); ?>
+								</td>
+							</tr>
+						<?php }
 
+						if ( $shiword_colors['device_image'] != '' ) { ?>
+							<tr valign="top">
+								<td style="width:200px;"><?php _e( 'Remove Image', 'shiword' ); ?></td>
+								<td>
+									<?php _e( 'This will remove the background image.' , 'shiword' ) ?>
+									<input type="submit" class="button" name="removedeviceimage" value="<?php esc_attr_e( 'Remove Image', 'shiword' ); ?>" />
+								</td>
+							</tr>
+						<?php } ?>
+						<tr valign="top">
+							<td style="width:200px;"><?php _e( 'Background Color', 'shiword' ) ?></td>
+							<td>
+								<input style="background-color:<?php echo $shiword_colors['device_color']; ?>;" class="color_preview_box" type="text" id="shi_box_1" value="" readonly="readonly" />
+								<input type="text" name="devicecolor" id="shi_input_1" value="<?php echo $shiword_colors['device_color']; ?>" />
+								<div class="shi_cp" id="shi_colorpicker_1"></div>
+								<span class="hide-if-no-js">
+									<a href="#" onclick="shiwordCustomColors.colorPicker('1');return false;"><?php _e( 'Select a Color', 'shiword' ); ?></a>
+									&nbsp;-&nbsp;
+									<a href="#" onclick="shiwordCustomColors.pickColor('1','transparent'); return false;"><?php _e( "Set to \"transparent\"" , 'shiword' ); ?></a>
+									&nbsp;-&nbsp;
+									<a href="#" onclick="shiwordCustomColors.pickColor('1','<?php echo $this->default_device_bg['device_color']; ?>'); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
+								</span>
+								<br />
+								<div style="padding-top:5px;">
+									<span class="opaopt" style="margin-left: 40px;"><?php _e( 'Opacity', 'shiword' ); ?> [0-100] <!--[if lte IE 8]><span style="color:#ff0000;">Not supported in Internet Explorer 8 and below </span><![endif]--><input type="text" name="deviceopacity" id="shi_input_1a" value="<?php echo $shiword_colors['device_opacity']; ?>" maxlength="3" size="3" /> %</span>
+									<div id="alpha_slider" class="slider hide-if-no-js"></div>
+								</div>
+							</td>
+						</tr>
+						<tr valign="top">
+							<td style="width:200px;"><?php _e( 'Text Color', 'shiword' ); ?></td>
+							<td>
+								<input style="background-color:<?php echo $shiword_colors['device_textcolor']; ?>;" class="color_preview_box" type="text" id="shi_box_2" value="" readonly="readonly" />
+								<input type="text" name="devicetextcolor" id="shi_input_2" value="<?php echo $shiword_colors['device_textcolor']; ?>" />
+								<div class="shi_cp" id="shi_colorpicker_2"></div>
+								<span class="hide-if-no-js">
+									<a href="#" onclick="shiwordCustomColors.colorPicker('2');return false;"><?php _e( 'Select a Color', 'shiword' ); ?></a>
+									&nbsp;-&nbsp;
+									<a href="#" onclick="shiwordCustomColors.pickColor('2','<?php echo $this->default_device_bg['device_textcolor']; ?>'); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
+								</span>
+							</td>
+						</tr>
+						<tr valign="top">
+							<td style="width:200px;"><?php _e( 'Hightlighted Buttons Border' , 'shiword' ); ?></td>
+							<td>
+								<input style="background-color:<?php echo $shiword_colors['device_button']; ?>;" class="color_preview_box" type="text" id="shi_box_3" value="" readonly="readonly" />
+								<input type="text" name="devicebuttonborder" id="shi_input_3" value="<?php echo $shiword_colors['device_button']; ?>" />
+								<div class="shi_cp" id="shi_colorpicker_3"></div>
+								<span class="hide-if-no-js">
+									<a href="#" onclick="shiwordCustomColors.colorPicker('3');return false;"><?php _e( 'Select a Color', 'shiword' ); ?></a>
+									&nbsp;-&nbsp;
+									<a href="#" onclick="shiwordCustomColors.pickColor('3','<?php echo $this->default_device_bg['device_button']; ?>'); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
+								</span>
+							</td>
+						</tr>
+						<tr valign="top">
+							<td style="width:200px;"><?php _e( 'Buttons Style' , 'shiword' ); ?></td>
+							<td>
+								<select id="shi_select_1" name="devicebuttonstyle">
+									<option value="light" <?php selected( $shiword_colors['device_button_style'], 'light' ); ?>><?php _e( 'light', 'shiword' ); ?></option>
+									<option value="dark" <?php selected( $shiword_colors['device_button_style'], 'dark' ); ?>><?php _e( 'dark', 'shiword' ); ?></option>
+								</select>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		
+			<div style="position: relative">
+				<h3 class="h3_field"><?php _e( 'Interior Colors' , 'shiword' ) ?> <a class="hide-if-no-js" href="#" onclick="shiwordCustomColors.secOpen('.shi_cc'); return false;">&raquo;</a></h3>
+				<div class="shi_cc">
+					<table class="form-table">
+						<?php foreach ( $this->default_device_colors as $key => $val ) { ?>
+							<?php 
+								if ( $key == 'main3' ) echo '<tr><td style="font-weight:bold;" colspan="2">' . __( 'Main Content', 'shiword' ) . '</td></tr>';
+								elseif ( $key == 'menu1' ) echo '<tr><td style="font-weight:bold; border-top:1px solid #CCCCCC;" colspan="2">' . __( 'Pages Menu and Floating Menu', 'shiword' ) . '</td></tr>';
+							?>
+							<tr>
+								<td style="width:200px;"><?php echo $default_device_colors_descr[$key]; ?></td>
+								<td>
+									<input style="background-color:<?php echo $shiword_colors[$key]; ?>;" class="color_preview_box" type="text" id="shi_box_<?php echo $key; ?>" value="" readonly="readonly" />
+									<input id="shi_input_<?php echo $key; ?>" name="<?php echo $key; ?>" value="<?php echo $shiword_colors[$key]; ?>" type="text" class="shi_input" />
+									<div class="shi_cp" id="shi_colorpicker_<?php echo $key; ?>"></div>
+									<span class="hide-if-no-js">
+										<a href="#" onclick="shiwordCustomColors.colorPicker('<?php echo $key; ?>');return false;"><?php _e( 'Select a Color', 'shiword' ); ?></a>
+										&nbsp;-&nbsp;
+										<a href="#" onclick="shiwordCustomColors.pickColor('<?php echo $key; ?>', '<?php echo $val; ?>' ); return false;"><?php _e( 'Default' , 'shiword' ); ?></a>
+									</span>
+								</td>
+							</tr>
+						<?php }	?>
+					</table>
+				</div>
+			</div>
+
+			
+			<?php
+			wp_nonce_field( 'set-custom-colors' , 'nonce-set-custom-colors' ); ?>
+			<p class="submit"><input type="submit" class="button-primary" name="save-device-options" value="<?php esc_attr_e( 'Save Changes', 'shiword' ); ?>" /></p>
+		</form>
+	</div>
 </div>
 
 <?php }

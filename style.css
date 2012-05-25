@@ -2,7 +2,7 @@
 Theme Name: Shiword
 Theme URI: http://www.twobeers.net/annunci/shiword
 Description: Simple dark theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, a post slideshow, the custom header, the print preview and many other. Shiword is fully customizable (there's also a skin builder!), with one or two columns, up to 6 widgets areas, six custom widgets ( "Social links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories", "Latest comment authors" and "Recent Posts in Category" ) and two menu. It supports custom menus, posts thumbnail and post formats.
-Version: 3.02
+Version: 3.03
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, right-sidebar, custom-colors, custom-background, editor-style, rtl-language-support, post-formats
 Author: TwoBeers Crew
 Author URI: http://www.twobeers.net/
@@ -130,7 +130,7 @@ input {
 }
 select {
 	background-color: #262626;
-	border: 1px solid #777;
+	border: 1px solid #555;
 	color: #aaa;
 	max-width: 100%;
 }
@@ -147,7 +147,7 @@ input[type=button],
 input[type=submit],
 input[type=reset] {
 	border-radius: 5px;
-	background-color: #111111;
+	background-color: #111;
 	border: 2px solid #fff;
 	color: #ccc;
 	font-weight: bold;
@@ -156,7 +156,7 @@ input[type=reset] {
 input[type=button]:hover,
 input[type=submit]:hover,
 input[type=reset]:hover {
-	border: 2px solid Chocolate;
+	border: 2px solid #ff8d39;
 	cursor: pointer;
 }
 textarea:hover,
@@ -165,7 +165,7 @@ input[type=password]:hover,
 textarea:focus,
 input[type=text]:focus,
 input[type=password]:focus {
-	border: 1px solid Chocolate;
+	border: 1px solid #ff8d39;
 }
 
 /* Utils
@@ -188,7 +188,7 @@ input[type=password]:focus {
 	margin: 0 auto;
 }
 #maincontent {
-    background-color: #111111;
+    background-color: #111;
 	padding-top: 79px;
 	width: 850px;
 	padding-bottom: 50px;
@@ -208,7 +208,21 @@ input[type=password]:focus {
 }
 #fixedfoot_bg {
 	padding-bottom: 10px;
-	background: transparent url('images/reflect.png') center bottom no-repeat;
+}
+#fixedfoot_reflect {
+	background: transparent url('images/reflect.png') left top repeat-x;
+	background-image: -moz-linear-gradient(top,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 40%); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.65)), color-stop(40%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 40%); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 40%); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 40%); /* IE10+ */
+	background-image: linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 40%); /* W3C */
+    border-radius: 30px 30px 0 0;
+    bottom: -20px;
+    height: 30px;
+    left: 0;
+    position: absolute;
+    width: 100%;	
 }
 #fixedfoot {
 	width: 972px;
@@ -221,6 +235,12 @@ input[type=password]:focus {
 	background: transparent url('images/pad_overlay.png') left bottom repeat-x;
 	border-radius: 0 0 30px 30px;
 	padding: 0 61px;
+	background-image: -moz-linear-gradient(top,  rgba(0,0,0,0) 30%, rgba(0,0,0,0.4) 100%); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(30%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.4))); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top,  rgba(0,0,0,0) 30%,rgba(0,0,0,0.4) 100%); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top,  rgba(0,0,0,0) 30%,rgba(0,0,0,0.4) 100%); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(top,  rgba(0,0,0,0) 30%,rgba(0,0,0,0.4) 100%); /* IE10+ */
+	background-image: linear-gradient(top,  rgba(0,0,0,0) 30%,rgba(0,0,0,0.4) 100%); /* W3C */
 }
 #quickbar {
 	bottom: 50px;
@@ -263,7 +283,7 @@ input[type=password]:focus {
 	height:4000px;
 }
 #sw_body_inner {
-    background-color: #111111;
+    background-color: #111;
 	border-left: 1px solid #000;
 	border-right: 1px solid #777;
     height: 4000px;
@@ -300,6 +320,12 @@ input[type=password]:focus {
 #head_overlay {
 	border-radius: 30px 30px 0 0;
 	background: url('images/pad_overlay.png') repeat-x scroll left top transparent;
+	background-image: -moz-linear-gradient(top,  rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 51%); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.04)), color-stop(50%,rgba(255,255,255,0.25)), color-stop(51%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top,  rgba(255,255,255,0.04) 0%,rgba(255,255,255,0.25) 50%,rgba(255,255,255,0) 51%); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top,  rgba(255,255,255,0.04) 0%,rgba(255,255,255,0.25) 50%,rgba(255,255,255,0) 51%); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(top,  rgba(255,255,255,0.04) 0%,rgba(255,255,255,0.25) 50%,rgba(255,255,255,0) 51%); /* IE10+ */
+	background-image: linear-gradient(top,  rgba(255,255,255,0.04) 0%,rgba(255,255,255,0.25) 50%,rgba(255,255,255,0) 51%); /* W3C */
 	color: #fff;
 	font-size: 1.5em;
 	font-style: italic;
@@ -471,12 +497,12 @@ input[type=password]:focus {
 	margin: 0;
 	padding: 0 20px 0 0;
 }
-.preview .wp-post-image {
+#quickbar .preview .wp-post-image {
 	margin: 0 5px 0 0;
 }
 #logged .avatar {
 	border-radius: 5px;
-	border: 2px solid #777;
+	border: 2px solid #555;
 	display: inline-block;
 	width: 50px;
 	height: 50px;
@@ -504,6 +530,10 @@ input[type=password]:focus {
 }
 #sw_minilogin input.input {
 	width: 200px;
+}
+#closeminilogin {
+	display: none; 
+	margin-left:10px;
 }
 .sw-link-to-allcat {
 	text-align: right;
@@ -604,6 +634,7 @@ input[type=password]:focus {
 	margin: 0;
 	padding: 0;
 	display: block;
+	overflow: hidden;
 }
 #bottommenu {
 	text-align: center;
@@ -673,6 +704,9 @@ input[type=password]:focus {
 	right:17px;
 	top:18px;
 }
+#rss_imglink span {
+	background-position: 0px -216px;
+}
 .mentit {
 	color: #ccc;
 	font-weight: bold;
@@ -699,15 +733,7 @@ input[type=password]:focus {
 	border-radius: 5px;
 	margin: 0 0 10px;
 	padding: 5px;
-}
-.comment_tools {
-	background-color: #262626;
-	min-height: 12px;
-	position: relative;
-	border-radius: 5px;
 	border: 1px solid transparent;
-	margin: 0 0 10px;
-	padding: 5px;
 }
 .meta_shadowed {
 	box-shadow: 2px 2px 2px #000;
@@ -758,26 +784,25 @@ input[type=password]:focus {
 .mft_tag,
 .mft_comm,
 .mft_hier {
-	background-image: url('images/meta_icons.png');
 	background-repeat: no-repeat;
 	background-color: transparent;
 	opacity: 0.4;
 	filter: alpha(opacity=40);
 }
 .mft_date {
-	background-position: 0 0;
+	background-position: 0 -442px;
 }
 .mft_comm {
-	background-position: -16px 0;
+	background-position: -16px -442px;
 }
 .mft_tag {
-	background-position: -32px 0;
+	background-position: -32px -442px;
 }
 .mft_cat {
-	background-position: -48px 0;
+	background-position: -48px -442px;
 }
 .mft_hier {
-	background-position: -64px 0;
+	background-position: -64px -442px;
 }
 .metafield:hover .mft_date,
 .metafield:hover .mft_cat,
@@ -795,7 +820,9 @@ input[type=password]:focus {
 	color: #fff;
 	font-weight: bold;
 }
-
+.sw-paginated-entry {
+	text-align: right;
+}
 /* widgets (sidebar & footer)
 ----------------------------------------------------------*/
 .widget {
@@ -803,8 +830,8 @@ input[type=password]:focus {
 	padding: 0 0 10px;
 }
 #footer-widget-area {
-	border-top: 1px solid #777;
-	border-bottom: 1px solid #777;
+	border-top: 1px solid #555;
+	border-bottom: 1px solid #555;
 	background-color: #262626;
 	padding: 5px 0;
 }
@@ -821,6 +848,11 @@ input[type=password]:focus {
 	width: 260px;
 	margin-right: 20px;
 }
+.posts_wide #error404-widget-area .widget,
+.posts_wide #single-widget-area .widget {
+	width: 328px;
+}
+
 #error404-widget-area .widget:nth-child(odd),
 #single-widget-area .widget:nth-child(odd) {
 	clear: left;
@@ -836,7 +868,7 @@ input[type=password]:focus {
 }
 .search-form {
 	border-radius: 5px;
-	background: url('images/meta_icons.png') no-repeat scroll 5px -36px #262626;
+	background: url('') no-repeat scroll 5px -478px #262626;
 	padding: 4px 4px 4px 15%;
 }
 .search-form > form {
@@ -857,7 +889,7 @@ input[type=password]:focus {
 .shi_widget_latest_commented_posts img {
 	border: 1px solid #404040;
 	border-radius: 5px;
-	background: #111111;
+	background: #111;
 }
 .shi_widget_latest_commentators img {
 	padding: 3px;
@@ -887,6 +919,13 @@ span.lc-user-name {
 }
 .sw-post-details-thumb {
 	margin: 0 0 5px;
+}
+.sw-clean-archives a {
+	margin-right: .5em;
+}
+.sw-year-link {
+	font-size: 1.2em;
+	font-weight: bold;
 }
 
 /* posts & pages
@@ -949,13 +988,16 @@ span.lc-user-name {
 }
 .sticky {
 	box-shadow: 0 0 8px steelblue;
-	border: 1px solid #777;
+	border: 1px solid #555;
 	margin: 0 -5px 40px;
 	padding: 5px 5px 10px;
 }
 .img-navi {
 	text-align: center;
 	margin: 0 0 10px;
+}
+.entry-attachment {
+	text-align: center;
 }
 .img-navi img {
     vertical-align: middle;
@@ -1053,7 +1095,8 @@ span.lc-user-name {
 	margin-bottom: 20px;
 }
 .sd-post-title .storytitle {
-	background: url("images/device/black.png") repeat left top transparent;
+	background: rgba(0,0,0,0.7);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e000000', endColorstr='#b3000000',GradientType=0 ); /* IE6-9 */
 	left: 0;
 	margin: 0;
 	padding: 15px 0;
@@ -1065,6 +1108,7 @@ span.lc-user-name {
 .sd-post-title a {
 	padding: 0 15px;
 	color: #fff;
+	display: block;
 }
 .h2-ext-link {
     background-color: #21759b;
@@ -1109,7 +1153,7 @@ span.lc-user-name {
 	margin-bottom: .5em;
 }
 .comment-reply-link {
-	background: url('images/meta_icons.png') no-repeat scroll 0 -16px transparent;
+	background: url('') no-repeat scroll 0 -458px transparent;
 	color: #ccc;
 	position: absolute;
 	right: 2px;
@@ -1218,6 +1262,19 @@ li.pingback {
 .navigate_comments a, .navigate_comments span {
     margin-right: 0.5em;
 }
+#comments {
+	text-align: right;
+}
+.comment-form-comment {
+	text-align: center;
+}
+.form-allowed-tags {
+	color: #999; 
+	text-align: center;
+}
+.sw-quotedon {
+	font-weight: normal;
+}
 /* calendar 
 ----------------------------------------------------------*/
 #wp-calendar {
@@ -1246,15 +1303,63 @@ li.pingback {
 }
 .gallery .gallery-item {
 	float: left;
-	margin: 0 6px 12px;
+	margin: 0 6px 12px 0;
 	border: 1px solid #404040;
 	padding: 5px;
 	text-align: center;
 	border-radius: 5px;
 	color: #fff;
 }
+.body-626 .gallery .gallery-item {
+	margin: 0 3px 6px;
+}
 .gallery-caption {
 	/*custom gallery callback*/
+}
+.gallery-columns-1 .gallery-item {
+	width: 97%;
+	max-width: 97%;
+}
+.gallery-columns-2 .gallery-item {
+	width: 47.2%;
+}
+.gallery-columns-3 .gallery-item {
+	width: 30.5%;
+}
+.gallery-columns-4 .gallery-item {
+	width: 22.3%;
+}
+.gallery-columns-5 .gallery-item {
+	width: 17.3%;
+}
+.gallery-columns-6 .gallery-item {
+	width: 13.8%;
+}
+.gallery-columns-7 .gallery-item {
+	width: 11.6%;
+}
+
+.posts_narrow .gallery-columns-1 .gallery-item {
+	width: 97%;
+	max-width: 97%;
+}
+.posts_narrow .gallery-columns-2 .gallery-item {
+	width: 46.5%;
+}
+.posts_narrow .gallery-columns-3 .gallery-item {
+	width: 30%;
+}
+.posts_narrow .gallery-columns-4 .gallery-item {
+	width: 21.5%;
+}
+.posts_narrow .gallery-columns-5 .gallery-item {
+	width: 16.5%;
+}
+.posts_narrow .gallery-columns-6 .gallery-item {
+	width: 13.2%;
+}
+.posts_narrow .gallery-columns-7 .gallery-item {
+	width: 11%;
 }
 
 /* Simple spinner 
@@ -1264,7 +1369,14 @@ li.pingback {
 	width: 850px;
 	height: 160px;
 	border-bottom: 1px #404040 solid;
-	background: url('images/meta_overlay.png') repeat-x scroll left top #070707;
+	background: #070707;
+	background-image: -ms-linear-gradient(top,#262626,#070707) !important;
+	background-image: -moz-linear-gradient(top,#262626,#070707) !important;
+	background-image: -o-linear-gradient(top,#262626,#070707) !important;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#262626),to(#070707)) !important;
+	background-image: -webkit-linear-gradient(top,#262626,#070707) !important;
+	background-image: linear-gradient(top,#262626,#070707) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#262626', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 	overflow: hidden;
 	position: relative;
 }
@@ -1274,7 +1386,6 @@ li.pingback {
 #sw_sticky_slider .sss_item {
 	display: block;
 	float: left;
-	text-align: justify;
 	width: 850px;
 	height: 160px;
 	overflow: hidden;
@@ -1297,6 +1408,35 @@ li.pingback {
 	font-size: 18px;
 	margin: 5px 0 10px;
 }
+.sw_slider-skip {
+	display:none;
+	position:absolute;
+	width:55px;
+	height:100%;
+	top:0;
+	background-color:#000;
+	background-image:url(images/arrows.png);
+	background-repeat:no-repeat;
+	opacity: 0.05;
+	filter: alpha(opacity=5);
+}
+#sw_slider-wrap:hover .sw_slider-skip {
+	display:block;
+}
+.sw_slider-skip:hover {
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+	cursor: pointer;
+}
+.sw_slider-skip.toleft {
+	left:0;
+	background-position:-20px center;
+}
+.sw_slider-skip.toright {
+	right:0;
+	background-position:-125px center;
+}
+
 /* Captions
 ----------------------------------------------------------*/
 .img-caption {
@@ -1322,7 +1462,8 @@ li.pingback {
 	margin: 0;
 	width: 100%;
 	padding: 0 0 5px;
-	background: url('images/device/black.png') repeat left top transparent;
+	background: rgba(0,0,0,0.7);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3000000', endColorstr='#b3000000',GradientType=0 ); /* IE6-9 */
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -1452,13 +1593,16 @@ img.aligncenter {
 }
 .sw-I-like-it {
 	background: #262626;
-	border-radius: 5px 5px 0 0;
-	margin-bottom: -5px;
-	overflow: hidden;
-	padding: 5px 10px 10px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	padding: 10px 10px 5px;
 }
-.sw-I-like-it .fixfloat {
-	border-bottom: 1px solid #404040;
+.sw-I-like-it + .meta_container {
+	margin-top: -25px;
+}
+.sw-I-like-it + .meta_container .meta {
+	border-radius: 0 0 5px 5px;
+	border-top-color: #404040;
 }
 
 /* Frame widths 
@@ -1523,8 +1667,99 @@ img.aligncenter {
 	max-width: 422px;
 }
 
+@media screen and (min-width: 1024px) and (max-width: 1280px) {
+	.body-1106 #sw_body {
+		width: 972px;
+	}
+	.body-1106 #sw_body_inner {
+		width: 850px;
+	}
+	.body-1106 #main {
+		width: 972px;
+	}
+	.body-1106 #head {
+		width: 972px;
+	}
+	.body-1106 #maincontent {
+		width: 850px;
+	}
+	.body-1106 #fixedfoot {
+		width: 972px;
+	}
+	.body-1106 .posts_narrow {
+		width: 560px;
+	}
+	.body-1106 .posts_wide {
+		width: 689px;
+	}
+	.body-1106 #sw_slider-wrap {
+		width: 850px;
+	}
+	.body-1106 iframe {
+		max-width: 100%;
+		height: auto;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.body-850 #sw_body,
+	.body-1106 #sw_body {
+		width: 748px;
+	}
+	.body-850 #sw_body_inner,
+	.body-1106 #sw_body_inner {
+		width: 626px;
+	}
+	.body-850 #main,
+	.body-1106 #main {
+		width: 748px;
+	}
+	.body-850 #head,
+	.body-1106 #head {
+		width: 748px;
+	}
+	.body-850 #maincontent,
+	.body-1106 #maincontent {
+		width: 626px;
+	}
+	.body-850 #fixedfoot,
+	.body-1106 #fixedfoot {
+		width: 748px;
+	}
+	.body-850 .posts_narrow,
+	.body-1106 .posts_narrow {
+		width: 336px;
+	}
+	.body-850 .posts_wide,
+	.body-1106 .posts_wide {
+		width: 522px;
+		padding: 10px 52px;
+	}
+	.body-850 #sw_slider-wrap,
+	.body-1106 #sw_slider-wrap {
+		width: 626px;
+	}
+	.body-850 .menuback,
+	.body-1106 .menuback {
+		max-width: 422px;
+	}
+	.body-850 .gallery .gallery-item,
+	.body-1106 .gallery .gallery-item {
+		margin: 0 3px 6px;
+	}
+	.body-850 iframe,
+	.body-1106 iframe {
+		max-width: 100%;
+		height: auto;
+	}
+
+}
+
 /* Other 
 ----------------------------------------------------------*/
+.sw-searchinput {
+	width: 95%;
+}
 img.wp-post-image {
 	margin: 0;
 }

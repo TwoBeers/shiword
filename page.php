@@ -19,13 +19,13 @@
 				<?php the_content();	?>
 			</div>
 			<div class="fixfloat">
-				<?php wp_link_pages( 'before=<div class="meta comment_tools" style="text-align: right;">' . __( 'Pages:', 'shiword' ) . '&after=</div><div class="fixfloat"></div>' ); ?>
+				<?php wp_link_pages( 'before=<div class="meta sw-paginated-entry">' . __( 'Pages', 'shiword' ) . ':&after=</div>' ); ?>
 			</div>
 			<div class="fixfloat"> </div>
 		</div>	
 		<?php shiword_hook_after_post(); ?>
 		
-		<?php get_sidebar( 'single' ); // show single widget area ?>
+		<?php shiword_get_sidebar( 'single' ); // show single widget area ?>
 		
 		<?php comments_template(); // Get wp-comments.php template ?>
 		
@@ -35,6 +35,6 @@
 <?php } ?>
 </div>
 
-<?php if ( $sw_use_side ) get_sidebar(); // show sidebar ?>
+<?php if ( $sw_use_side ) shiword_get_sidebar(); // show sidebar ?>
 
 <?php get_footer(); ?>

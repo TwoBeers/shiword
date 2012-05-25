@@ -13,7 +13,7 @@ function shiword_get_coa( $option = false ) {
 	$shiword_coa = array(
 		'shiword_qbar' => 
 						array(
-							'group' => 'fixedbars',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'sliding menu', 'shiword' ),
@@ -23,7 +23,7 @@ function shiword_get_coa( $option = false ) {
 						),
 		'shiword_qbar_user' =>
 						array(
-							'group' => 'fixedbars',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'user', 'shiword' ),
@@ -33,7 +33,7 @@ function shiword_get_coa( $option = false ) {
 						),
 		'shiword_qbar_minilogin' =>
 						array(
-							'group' => 'fixedbars',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 0,
 							'description' => __( '-- mini login', 'shiword' ),
@@ -43,7 +43,7 @@ function shiword_get_coa( $option = false ) {
 						),
 		'shiword_qbar_reccom' =>
 						array(
-							'group' => 'fixedbars',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'recent comments', 'shiword' ),
@@ -53,7 +53,7 @@ function shiword_get_coa( $option = false ) {
 						),
 		'shiword_qbar_cat' =>
 						array(
-							'group' => 'fixedbars',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'categories', 'shiword' ),
@@ -63,7 +63,7 @@ function shiword_get_coa( $option = false ) {
 						),
 		'shiword_qbar_recpost' =>
 						array(
-							'group' => 'fixedbars',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'recent posts', 'shiword' ),
@@ -73,7 +73,7 @@ function shiword_get_coa( $option = false ) {
 						),
 		'shiword_navbuttons' =>
 						array(
-							'group' => 'fixedbars',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'navigation buttons', 'shiword' ),
@@ -83,7 +83,7 @@ function shiword_get_coa( $option = false ) {
 		),
 		'shiword_navbuttons_print' =>
 						array(
-							'group' => 'fixedbars',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'print preview', 'shiword' ),
@@ -93,7 +93,7 @@ function shiword_get_coa( $option = false ) {
 		),
 		'shiword_navbuttons_comment' =>
 						array(
-							'group' => 'fixedbars',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'leave a comment', 'shiword' ),
@@ -103,7 +103,7 @@ function shiword_get_coa( $option = false ) {
 		),
 		'shiword_navbuttons_feed' =>
 						array(
-							'group' => 'fixedbars',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'RSS feed', 'shiword' ),
@@ -113,7 +113,7 @@ function shiword_get_coa( $option = false ) {
 		),
 		'shiword_navbuttons_trackback' =>
 						array(
-							'group' => 'fixedbars',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'trackback', 'shiword' ),
@@ -123,7 +123,7 @@ function shiword_get_coa( $option = false ) {
 		),
 		'shiword_navbuttons_home' =>
 						array(
-							'group' => 'fixedbars',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'home', 'shiword' ),
@@ -133,7 +133,7 @@ function shiword_get_coa( $option = false ) {
 		),
 		'shiword_navbuttons_nextprev' =>
 						array(
-							'group' => 'fixedbars',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'next/previous post', 'shiword' ),
@@ -143,7 +143,7 @@ function shiword_get_coa( $option = false ) {
 		),
 		'shiword_navbuttons_newold' =>
 						array(
-							'group' => 'fixedbars',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'newer/older posts', 'shiword' ),
@@ -153,7 +153,7 @@ function shiword_get_coa( $option = false ) {
 		),
 		'shiword_navbuttons_topbottom' =>
 						array(
-							'group' => 'fixedbars',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'top/bottom', 'shiword' ),
@@ -167,7 +167,16 @@ function shiword_get_coa( $option = false ) {
 							'type' => 'chk',
 							'default' => 0,
 							'description' => __( 'enhanced post title', 'shiword' ),
-							'info' => __( 'show the post title with the featured image', 'shiword' ),
+							'info' => __( 'show the post title using the featured image as background (the image must be at least 700x200px)', 'shiword' ),
+							'req' => ''
+						),
+		'shiword_blank_title' =>
+						array(
+							'group' => 'content',
+							'type' => 'txt',
+							'default' => __( '(no title)', 'shiword' ),
+							'description' => __( 'blank titles', 'shiword' ),
+							'info' => __( 'set the standard text for blank titles. you may use these codes:<br /><code>%d</code> for post date<br /><code>%f</code> for post format (if any)', 'shiword' ),
 							'req' => ''
 						),
 		'shiword_xcont' =>
@@ -176,10 +185,40 @@ function shiword_get_coa( $option = false ) {
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'content summary', 'shiword' ),
-							'info' => __( 'use the summary instead of content in main index', 'shiword' ),
+							'info' => __( 'use the summary instead of content in main index', 'shiword' ) . ' (<a href="http://codex.wordpress.org/Template_Tags/the_excerpt" target="_blank">Codex</a>)',
 							'req' => '',
-							'sub' => array( 'shiword_pthumb', 'shiword_pthumb_size' )
+							'sub' => array( 'shiword_xcont_lenght', 'shiword_xcont_more_txt', 'shiword_xcont_more_link' )
 						),
+		'shiword_xcont_lenght' =>
+						array(
+							'group' => 'content',
+							'type' => 'int',
+							'default' => 55,
+							'description' => __( 'excerpt lenght', 'shiword' ),
+							'info' => '',
+							'req' => '',
+							'sub' => false
+						),
+		'shiword_xcont_more_txt' =>
+						array(
+							'group' => 'content',
+							'type' => 'txt',
+							'default' => '[...]',
+							'description' => __( '<em>excerpt more</em> string', 'shiword' ),
+							'info' => '',
+							'req' => '',
+							'sub' => false
+						),
+		'shiword_xcont_more_link' =>
+						array(
+							'group' => 'content',
+							'type' => 'chk',
+							'default' => 0,
+							'description' => __( '<em>excerpt more</em> linked', 'shiword' ),
+							'info' => __( 'use the <em>excerpt more</em> string as a link to the full post', 'shiword' ),
+							'req' => '',
+							'sub' => false
+		),
 		'shiword_pthumb' =>
 						array(
 							'group' => 'content',
@@ -188,7 +227,7 @@ function shiword_get_coa( $option = false ) {
 							'description' => __( 'posts thumbnail', 'shiword' ),
 							'info' => '',
 							'req' => 'shiword_xcont',
-							'sub' => false
+							'sub' => array( 'shiword_pthumb_size' )
 						),
 		'shiword_pthumb_size' =>
 						array(
@@ -289,6 +328,15 @@ function shiword_get_coa( $option = false ) {
 							'default' => 0,
 							'description' => __( 'category description', 'shiword' ),
 							'info' => __( 'show the category description in search-per-category', 'shiword' ),
+							'req' => ''
+						),
+		'shiword_more_tag' =>
+						array(
+							'group' => 'content',
+							'type' => 'txt',
+							'default' => __( '(more...)', 'shiword' ),
+							'description' => __( '"more" tag string', 'shiword' ),
+							'info' => __( 'only plain text. use <code>%t</code> as placeholder for the post title', 'shiword' ) . ' (<a href="http://codex.wordpress.org/Customizing_the_Read_More" target="_blank">Codex</a>)',
 							'req' => ''
 						),
 		'shiword_postformats' =>
@@ -416,7 +464,7 @@ function shiword_get_coa( $option = false ) {
 							'type' => 'chk',
 							'default' => 0,
 							'description' => __( 'on pages', 'shiword' ),
-							'info' => __( 'show right sidebar on pages', 'shiword' ),
+							'info' => sprintf( __( 'show right sidebar on pages. If you prefer to hide the sidebar just for a single page, you can use the <a href="http://codex.wordpress.org/Pages#Page_Templates" target="_blank">page template</a> named "%s"', 'shiword' ),'One column, no sidebar'),
 							'req' => 'shiword_rsideb',
 							'sub' => false
 						),
@@ -465,7 +513,7 @@ function shiword_get_coa( $option = false ) {
 							'type' => 'col',
 							'default' => '#000000',
 							'description' => __( 'background color', 'shiword' ),
-							'info' => __('default = ','shiword' ) . '#000000',
+							'info' => __('default','shiword' ) . ' = #000000',
 							'req' => '',
 							'sub' => false
 						),
@@ -484,10 +532,10 @@ function shiword_get_coa( $option = false ) {
 							'group' => 'slideshow',
 							'type' => 'chk',
 							'default' => 0,
-							'description' => __( 'slideshow', 'shiword' ),
+							'description' => __( 'Slideshow', 'shiword' ),
 							'info' => sprintf( __( 'slideshow for your most important posts/pages. Select them <a href="%s">here</a>', 'shiword' ), get_admin_url() . 'themes.php?page=tb_shiword_slideshow' ),
 							'req' => 'shiword_jsani',
-							'sub' => array( 'shiword_sticky_front', 'shiword_sticky_pages', 'shiword_sticky_posts', 'shiword_sticky_over', 'shiword_sticky_height' )
+							'sub' => array( 'shiword_sticky_front', 'shiword_sticky_pages', 'shiword_sticky_posts', 'shiword_sticky_over', 'shiword_sticky_height', 'shiword_sticky_author', 'shiword_sticky_speed', 'shiword_sticky_pause' )
 						),
 		'shiword_sticky_front' =>
 						array(
@@ -538,16 +586,55 @@ function shiword_get_coa( $option = false ) {
 							'options_readable' => array( '160px', '200px', '240px', '280px', '320px', '360px', '400px' ),
 							'description' => __( 'height', 'shiword' ),
 							'info' => '',
+							'req' => '',
+							'sub' => false
+						),
+		'shiword_sticky_author' =>
+						array(
+							'group' => 'slideshow',
+							'type' => 'chk',
+							'default' => 1,
+							'description' => __( 'post author', 'shiword' ),
+							'info' => '',
 							'req' => 'shiword_sticky',
+							'sub' => false
+						),
+		'shiword_sticky_speed' =>
+						array(
+							'group' => 'slideshow',
+							'type' => 'int',
+							'default' => 2500,
+							'description' => __( 'animation speed', 'shiword' ) . ' (ms)',
+							'info' => __( 'default <code>2500</code>', 'shiword' ),
+							'req' => '',
+							'sub' => false
+						),
+		'shiword_sticky_pause' =>
+						array(
+							'group' => 'slideshow',
+							'type' => 'int',
+							'default' => 2000,
+							'description' => __( 'pause duration', 'shiword' ) . ' (ms)',
+							'info' => __( 'default <code>2000</code>', 'shiword' ),
+							'req' => '',
 							'sub' => false
 						),
 		'shiword_navlinks' =>
 						array(
-							'group' => 'other',
+							'group' => 'navigation',
 							'type' => 'chk',
 							'default' => 0,
 							'description' => __( 'classic navigation links', 'shiword' ),
 							'info' => __( "show the classic navigation links (paged posts navigation, next/prev post, etc). Note: the same links are already located in the easy-navigation bar", 'shiword' ),
+							'req' => ''
+						),
+		'shiword_hide_primary_menu' =>
+						array(
+							'group' => 'navigation',
+							'type' => 'chk',
+							'default' => 0,
+							'description' => __( 'hide primary menu', 'shiword' ),
+							'info' => '',
 							'req' => ''
 						),
 		'shiword_site_title' =>
@@ -586,7 +673,7 @@ function shiword_get_coa( $option = false ) {
 							'default' => '100px',
 							'options' => array( '0px', '100px', '150px', '200px', '250px', '300px' ),
 							'options_readable' => array( '0px', '100px', '150px', '200px', '250px', '300px' ),
-							'description' => __( 'Header height', 'shiword' ),
+							'description' => __( 'header height', 'shiword' ),
 							'info' => '',
 							'req' => ''
 						),
@@ -597,7 +684,7 @@ function shiword_get_coa( $option = false ) {
 							'default' => 850,
 							'options' => array( 626, 850, 1106 ),
 							'options_readable' => array( __( 'narrow', 'shiword' ), __( 'normal', 'shiword' ), __( 'wide', 'shiword' ) ),
-							'description' => __( 'Frame width', 'shiword' ),
+							'description' => __( 'frame width', 'shiword' ),
 							'info' => __( "Default is <u>normal</u>. If you modify the width of the main frame, your site may be displayed incorrectly for some of your readers. <u>Don't change this setting unless you're sure of what you're doing!</u>", 'shiword' ),
 							'req' => ''
 						),
@@ -618,8 +705,8 @@ function shiword_get_coa( $option = false ) {
 							'group' => 'fonts',
 							'type' => 'sel',
 							'default' => '11px',
-							'options' => array('10px','11px','12px','13px'),
-							'options_readable' => array('10px','11px','12px','13px'),
+							'options' => array('9px','10px','11px','12px','13px','14px','15px','16px'),
+							'options_readable' => array('9px','10px','11px','12px','13px','14px','15px','16px'),
 							'description' => __( 'font size','shiword' ),
 							'info' => '',
 							'req' => '',
@@ -631,7 +718,7 @@ function shiword_get_coa( $option = false ) {
 							'type' => 'txt',
 							'default' => '',
 							'description' => __( 'Google web font', 'shiword' ),
-							'info' => 'Copy and paste <a href="http://www.google.com/webfonts" target="_blank"><strong>Google web font</strong></a> name here. Example: <code>Architects Daughter</code>',
+							'info' => __( 'Copy and paste <a href="http://www.google.com/webfonts" target="_blank"><strong>Google web font</strong></a> name here. Example: <code>Architects Daughter</code>', 'shiword' ),
 							'req' => '',
 							'sub' => array( 'shiword_google_font_body', 'shiword_google_font_post_title', 'shiword_google_font_post_content' )
 						),
@@ -694,12 +781,25 @@ function shiword_get_coa( $option = false ) {
 						),
 		'shiword_mobile_css' =>
 						array(
-							'group' => 'other',
+							'group' => 'mobile',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'mobile support', 'shiword' ),
 							'info' => __( "detect mobile devices and use a dedicated style. Disable it if you don't like it or you're already using a plugin for mobile support", 'shiword' ),
-							'req' => ''
+							'req' => '',
+							'sub' => array('shiword_mobile_css_color')
+						),
+		'shiword_mobile_css_color' =>
+						array(
+							'group' => 'mobile',
+							'type' => 'opt',
+							'default' => 'dark',
+							'options' => array('light','dark'),
+							'options_readable' => array('<img src="' . get_template_directory_uri() . '/images/mobile-light.png" alt="light" />','<img src="' . get_template_directory_uri() . '/images/mobile-dark.png" alt="dark" />'),
+							'description' => __( 'colors', 'shiword' ),
+							'info' => __( "", 'shiword' ),
+							'req' => '',
+							'sub' => false
 						),
 		'shiword_custom_login' =>
 						array(
@@ -718,7 +818,7 @@ function shiword_get_coa( $option = false ) {
 							'description' => __( 'I like it','shiword' ),
 							'info' => __( 'show "like" badges beside the post content','shiword' ),
 							'req' => '',
-							'sub' => array('shiword_I_like_it_plus1','shiword_I_like_it_twitter','shiword_I_like_it_facebook','shiword_I_like_it_linkedin','shiword_I_like_it_stumbleupon')
+							'sub' => array('shiword_I_like_it_plus1','shiword_I_like_it_twitter','shiword_I_like_it_facebook','shiword_I_like_it_linkedin','shiword_I_like_it_stumbleupon','shiword_I_like_it_pinterest')
 		),
 		'shiword_I_like_it_plus1' =>
 						array(
@@ -769,6 +869,34 @@ function shiword_get_coa( $option = false ) {
 							'info' => '',
 							'req' => 'shiword_I_like_it',
 							'sub' => false
+		),
+		'shiword_I_like_it_pinterest' =>
+						array(
+							'group' => 'other',
+							'type' => 'chk',
+							'default' => 0,
+							'description' => 'Pinterest',
+							'info' => __( 'visible ONLY in attachments', 'shiword' ),
+							'req' => 'shiword_I_like_it',
+							'sub' => false
+		),
+		'shiword_lang_code' =>
+						array(
+							'group' => 'other',
+							'type' => 'txt',
+							'default' => WPLANG,
+							'description' => __( 'language code', 'shiword' ),
+							'info' => 'this will override the language settings of the front side of your site',
+							'req' => ''
+		),
+		'shiword_custom_css' =>
+						array(
+							'group' => 'other',
+							'type' => 'txtarea',
+							'default' => '',
+							'description' => __( 'custom CSS code', 'shiword' ),
+							'info' => __( '<strong>For advanced users only</strong>: paste here your custom css code. it will be added after the defatult style', 'shiword' ) . ' (<a href="'. get_stylesheet_uri() .'" target="_blank">style.css</a>)',
+							'req' => ''
 		),
 		'shiword_tbcred' =>
 						array(
