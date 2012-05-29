@@ -1,4 +1,4 @@
-﻿/* standard tags 
+﻿/* standard tags
 ----------------------------------------------------------*/
 ul,
 ol {
@@ -32,7 +32,7 @@ blockquote {
 /* table elements
 ----------------------------------------------------------*/
 
-/* containers 
+/* containers
 ----------------------------------------------------------*/
 
 #sidebardx {
@@ -84,7 +84,7 @@ blockquote {
 	border-left: 1px solid #777;
 }
 
-/* header 
+/* header
 ----------------------------------------------------------*/
 #head_cont {
 	right: 0;
@@ -105,7 +105,7 @@ blockquote {
 	float: left;
 }
 
-/* footer 
+/* footer
 ----------------------------------------------------------*/
 #footer {
 	text-align: left;
@@ -164,7 +164,7 @@ blockquote {
 	margin: 0 0 0 5px;
 }
 
-/* navigation buttons 
+/* navigation buttons
 ----------------------------------------------------------*/
 #navbuttons {
 	margin-left: 18px;
@@ -181,7 +181,7 @@ blockquote {
 	right: auto;
 }
 
-/* main menu 
+/* main menu
 ----------------------------------------------------------*/
 
 #mainmenu > li.page_item,
@@ -199,7 +199,7 @@ blockquote {
 	right: auto;
 }
 
-/* meta 
+/* meta
 ----------------------------------------------------------*/
 
 .top_meta {
@@ -267,7 +267,7 @@ div.sw-pthumb-0 .post-body {
 .status-image {
     float: right;
 }
-/* comments 
+/* comments
 ----------------------------------------------------------*/
 
 .comment-body {
@@ -329,10 +329,10 @@ li.pingback {
 	margin-right: auto;
 }
 
-/* calendar 
+/* calendar
 ----------------------------------------------------------*/
 
-/* Gallery listing 
+/* Gallery listing
 ----------------------------------------------------------*/
 .format-gallery .gallery-thumb, .category-gallery .gallery-thumb,
 .format-image .gallery-thumb, .category-image .gallery-thumb {
@@ -345,7 +345,7 @@ li.pingback {
 	float: right;
 }
 
-/* Simple spinner 
+/* Simple spinner
 ----------------------------------------------------------*/
 #sw_slider-wrap {
 	background: url('images/meta_overlay.png') repeat-x scroll right -20px #262626;
@@ -374,7 +374,7 @@ li.pingback {
 	left: auto;
 }
 
-/* Aligment 
+/* Aligment
 ----------------------------------------------------------*/
 .aligncenter,
 div.aligncenter,
@@ -397,7 +397,7 @@ img.alignright,
 	margin-left: auto;
 }
 
-/* Other 
+/* Other
 ----------------------------------------------------------*/
 
 #entry-author-info {

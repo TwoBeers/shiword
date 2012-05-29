@@ -13,17 +13,17 @@
 class shiword_Widget_popular_posts extends WP_Widget {
 
 	function shiword_Widget_popular_posts() {
-		$widget_ops = array('classname' => 'sw-widget-popular-posts', 'description' => __( 'The most commented posts on your site','shiword') );
-		$this->WP_Widget('shi-popular-posts', __('Popular Posts','shiword'), $widget_ops);
+		$widget_ops = array( 'classname' => 'sw-widget-popular-posts', 'description' => __( 'The most commented posts on your site', 'shiword' ) );
+		$this->WP_Widget( 'shi-popular-posts', __( 'Popular Posts', 'shiword' ), $widget_ops);
 		$this->alt_option_name = 'sw-widget-popular-posts';
 
-		add_action( 'save_post', array(&$this, 'flush_widget_cache') );
-		add_action( 'deleted_post', array(&$this, 'flush_widget_cache') );
-		add_action( 'switch_theme', array(&$this, 'flush_widget_cache') );
+		add_action( 'save_post', array(&$this, 'flush_widget_cache' ) );
+		add_action( 'deleted_post', array(&$this, 'flush_widget_cache' ) );
+		add_action( 'switch_theme', array(&$this, 'flush_widget_cache' ) );
 	}
 
 	function widget($args, $instance) {
-		$cache = wp_cache_get('sw-widget-popular-posts', 'widget');
+		$cache = wp_cache_get( 'sw-widget-popular-posts', 'widget' );
 
 		if ( !is_array($cache) )
 			$cache = array();
@@ -36,7 +36,7 @@ class shiword_Widget_popular_posts extends WP_Widget {
 		ob_start();
 		extract($args);
 
-		$title = apply_filters('widget_title', empty($instance['title']) ? __('Popular Posts','shiword') : $instance['title'], $instance, $this->id_base);
+		$title = apply_filters( 'widget_title', empty($instance['title']) ? __( 'Popular Posts', 'shiword' ) : $instance['title'], $instance, $this->id_base);
 		if ( !$number = (int) $instance['number'] )
 			$number = 10;
 		else if ( $number < 1 )
@@ -45,7 +45,7 @@ class shiword_Widget_popular_posts extends WP_Widget {
 			$number = 15;
 		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
 		
-		$r = new WP_Query(array('showposts' => $number, 'nopaging' => 0, 'post_status' => 'publish', 'ignore_sticky_posts' => 1, 'orderby' => 'comment_count'));
+		$r = new WP_Query(array( 'showposts' => $number, 'nopaging' => 0, 'post_status' => 'publish', 'ignore_sticky_posts' => 1, 'orderby' => 'comment_count' ));
 		if ($r->have_posts()) :
 ?>
 		<?php echo $before_widget; ?>
@@ -65,7 +65,7 @@ class shiword_Widget_popular_posts extends WP_Widget {
 		endif;
 
 		$cache[$args['widget_id']] = ob_get_flush();
-		wp_cache_set('sw-widget-popular-posts', $cache, 'widget');
+		wp_cache_set( 'sw-widget-popular-posts', $cache, 'widget' );
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -77,13 +77,13 @@ class shiword_Widget_popular_posts extends WP_Widget {
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
 		if ( isset($alloptions['sw-widget-popular-posts']) )
-			delete_option('sw-widget-popular-posts');
+			delete_option( 'sw-widget-popular-posts' );
 
 		return $instance;
 	}
 
 	function flush_widget_cache() {
-		wp_cache_delete('sw-widget-popular-posts', 'widget');
+		wp_cache_delete( 'sw-widget-popular-posts', 'widget' );
 	}
 
 	function form( $instance ) {
@@ -95,18 +95,18 @@ class shiword_Widget_popular_posts extends WP_Widget {
 			$thumb = 0;
 ?>
 		<p>
-			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title','shiword'); ?>:</label>
-			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?>:</label>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of posts to show','shiword'); ?>:</label>
-			<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" />
+			<label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of posts to show', 'shiword' ); ?>:</label>
+			<input id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>" size="3" />
 		</p>
 
 		<p>
-			<input id="<?php echo $this->get_field_id('thumb'); ?>" name="<?php echo $this->get_field_name('thumb'); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
-			<label for="<?php echo $this->get_field_id('thumb'); ?>"><?php _e('Show post thumbnails','shiword'); ?></label>
+			<input id="<?php echo $this->get_field_id( 'thumb' ); ?>" name="<?php echo $this->get_field_name( 'thumb' ); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
+			<label for="<?php echo $this->get_field_id( 'thumb' ); ?>"><?php _e( 'Show post thumbnails', 'shiword' ); ?></label>
 		</p>	
 <?php
 	}
@@ -119,22 +119,22 @@ class shiword_Widget_popular_posts extends WP_Widget {
 class shiword_Widget_latest_commented_posts extends WP_Widget {
 
 	function shiword_Widget_latest_commented_posts() {
-		$widget_ops = array('classname' => 'sw-widget-latest-commented-posts', 'description' => __( 'The latest commented posts/pages of your site','shiword' ) );
-		$this->WP_Widget('shi-recent-comments', __('Latest activity','shiword'), $widget_ops);
+		$widget_ops = array( 'classname' => 'sw-widget-latest-commented-posts', 'description' => __( 'The latest commented posts/pages of your site', 'shiword' ) );
+		$this->WP_Widget( 'shi-recent-comments', __( 'Latest activity', 'shiword' ), $widget_ops);
 		$this->alt_option_name = 'sw-widget-latest-commented-posts';
 
-		add_action( 'comment_post', array(&$this, 'flush_widget_cache') );
-		add_action( 'transition_comment_status', array(&$this, 'flush_widget_cache') );
+		add_action( 'comment_post', array(&$this, 'flush_widget_cache' ) );
+		add_action( 'transition_comment_status', array(&$this, 'flush_widget_cache' ) );
 	}
 
 	function flush_widget_cache() {
-		wp_cache_delete('sw-widget-latest-commented-posts', 'widget');
+		wp_cache_delete( 'sw-widget-latest-commented-posts', 'widget' );
 	}
 
 	function widget( $args, $instance ) {
 		global $comments, $comment;
 
-		$cache = wp_cache_get('sw-widget-latest-commented-posts', 'widget');
+		$cache = wp_cache_get( 'sw-widget-latest-commented-posts', 'widget' );
 
 		if ( ! is_array( $cache ) )
 			$cache = array();
@@ -146,7 +146,7 @@ class shiword_Widget_latest_commented_posts extends WP_Widget {
 
  		extract($args, EXTR_SKIP);
  		$output = '';
- 		$title = apply_filters('widget_title', empty($instance['title']) ? __('Latest activity','shiword') : $instance['title']);
+ 		$title = apply_filters( 'widget_title', empty($instance['title']) ? __( 'Latest activity', 'shiword' ) : $instance['title']);
 
 		if ( ! $number = (int) $instance['number'] )
  			$number = 5;
@@ -184,7 +184,7 @@ class shiword_Widget_latest_commented_posts extends WP_Widget {
 
 		echo $output;
 		$cache[$args['widget_id']] = $output;
-		wp_cache_set('sw-widget-latest-commented-posts', $cache, 'widget');
+		wp_cache_set( 'sw-widget-latest-commented-posts', $cache, 'widget' );
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -196,7 +196,7 @@ class shiword_Widget_latest_commented_posts extends WP_Widget {
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
 		if ( isset($alloptions['sw-widget-latest-commented-posts']) )
-			delete_option('sw-widget-latest-commented-posts');
+			delete_option( 'sw-widget-latest-commented-posts' );
 
 		return $instance;
 	}
@@ -209,18 +209,18 @@ class shiword_Widget_latest_commented_posts extends WP_Widget {
 			$thumb = 0;
 ?>
 		<p>
-			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title','shiword'); ?>:</label>
-			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?>:</label>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of posts to show','shiword'); ?>:</label>
-			<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" />
+			<label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of posts to show', 'shiword' ); ?>:</label>
+			<input id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>" size="3" />
 		</p>
 
 		<p>
-			<input id="<?php echo $this->get_field_id('thumb'); ?>" name="<?php echo $this->get_field_name('thumb'); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
-			<label for="<?php echo $this->get_field_id('thumb'); ?>"><?php _e('Show post thumbnails','shiword'); ?></label>
+			<input id="<?php echo $this->get_field_id( 'thumb' ); ?>" name="<?php echo $this->get_field_name( 'thumb' ); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
+			<label for="<?php echo $this->get_field_id( 'thumb' ); ?>"><?php _e( 'Show post thumbnails', 'shiword' ); ?></label>
 		</p>
 <?php
 	}
@@ -234,24 +234,24 @@ class shiword_Widget_latest_commented_posts extends WP_Widget {
 class shiword_Widget_latest_commentators extends WP_Widget {
 
 	function shiword_Widget_latest_commentators() {
-		$widget_ops = array('classname' => 'sw-widget-latest-commentators', 'description' => __( 'The latest comment authors','shiword' ) );
-		$this->WP_Widget('shi-recent-commentators', __('Latest comment authors','shiword'), $widget_ops);
+		$widget_ops = array( 'classname' => 'sw-widget-latest-commentators', 'description' => __( 'The latest comment authors', 'shiword' ) );
+		$this->WP_Widget( 'shi-recent-commentators', __( 'Latest comment authors', 'shiword' ), $widget_ops);
 		$this->alt_option_name = 'sw-widget-latest-commentators';
 
-		add_action( 'comment_post', array(&$this, 'flush_widget_cache') );
-		add_action( 'transition_comment_status', array(&$this, 'flush_widget_cache') );
+		add_action( 'comment_post', array(&$this, 'flush_widget_cache' ) );
+		add_action( 'transition_comment_status', array(&$this, 'flush_widget_cache' ) );
 	}
 
 	function flush_widget_cache() {
-		wp_cache_delete('sw-widget-latest-commentators', 'widget');
+		wp_cache_delete( 'sw-widget-latest-commentators', 'widget' );
 	}
 
 	function widget( $args, $instance ) {
 		global $comments, $comment;
 
-		if ( get_option('require_name_email') != '1' ) return; //commentors must be identifiable
+		if ( get_option( 'require_name_email' ) != '1' ) return; //commentors must be identifiable
 		
-		$cache = wp_cache_get('sw-widget-latest-commentators', 'widget');
+		$cache = wp_cache_get( 'sw-widget-latest-commentators', 'widget' );
 
 		if ( ! is_array( $cache ) )
 			$cache = array();
@@ -263,7 +263,7 @@ class shiword_Widget_latest_commentators extends WP_Widget {
 
  		extract($args, EXTR_SKIP);
  		$output = '';
- 		$title = apply_filters('widget_title', empty($instance['title']) ? __('Latest comment authors','shiword') : $instance['title']);
+ 		$title = apply_filters( 'widget_title', empty($instance['title']) ? __( 'Latest comment authors', 'shiword' ) : $instance['title']);
 
 		if ( ! $number = (int) $instance['number'] )
  			$number = 4;
@@ -285,9 +285,9 @@ class shiword_Widget_latest_commentators extends WP_Widget {
 			foreach ( (array) $comments as $comment) {
 				if ( !in_array( $comment->comment_author_email, $post_array ) ) {
 					if ( $comment->comment_author_url == '' ) {
-						$output .=  '<li title="' .  $comment->comment_author . '">' . get_avatar( $comment, $grav_dim, $default=get_option('avatar_default'), $comment->comment_author ) . '<span class="lc-user-name">' . $comment->comment_author . '</span></li>';
+						$output .=  '<li title="' .  $comment->comment_author . '">' . get_avatar( $comment, $grav_dim, $default=get_option( 'avatar_default' ), $comment->comment_author ) . '<span class="lc-user-name">' . $comment->comment_author . '</span></li>';
 					} else {
-						$output .=  '<li><a target="_blank" href="' . $comment->comment_author_url . '" title="' .  $comment->comment_author . '">' . get_avatar( $comment, $grav_dim, $default=get_option('avatar_default'), $comment->comment_author ) . '<span class="lc-user-name">' . $comment->comment_author . '</span></a></li>';
+						$output .=  '<li><a target="_blank" href="' . $comment->comment_author_url . '" title="' .  $comment->comment_author . '">' . get_avatar( $comment, $grav_dim, $default=get_option( 'avatar_default' ), $comment->comment_author ) . '<span class="lc-user-name">' . $comment->comment_author . '</span></a></li>';
 					}
 					$post_array[] = $comment->comment_author_email;
 					if ( ++$counter >= $number ) break;
@@ -299,7 +299,7 @@ class shiword_Widget_latest_commentators extends WP_Widget {
 
 		echo $output;
 		$cache[$args['widget_id']] = $output;
-		wp_cache_set('sw-widget-latest-commentators', $cache, 'widget');
+		wp_cache_set( 'sw-widget-latest-commentators', $cache, 'widget' );
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -311,7 +311,7 @@ class shiword_Widget_latest_commentators extends WP_Widget {
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
 		if ( isset($alloptions['sw-widget-latest-commentators']) )
-			delete_option('sw-widget-latest-commentators');
+			delete_option( 'sw-widget-latest-commentators' );
 
 		return $instance;
 	}
@@ -323,23 +323,23 @@ class shiword_Widget_latest_commentators extends WP_Widget {
 		if ( isset($instance['thumb']) && !$thumb = (int) $instance['thumb'] )
 			$thumb = 0;
 
-		if ( get_option('require_name_email') != '1' ) {
-			printf ( __( 'Comment authors <strong>must</strong> use a name and a valid e-mail in order to use this widget. Check the <a href="%1$s">Discussion settings</a>','shiword' ), esc_url( admin_url( 'options-discussion.php' ) ) );
+		if ( get_option( 'require_name_email' ) != '1' ) {
+			printf ( __( 'Comment authors <strong>must</strong> use a name and a valid e-mail in order to use this widget. Check the <a href="%1$s">Discussion settings</a>', 'shiword' ), esc_url( admin_url( 'options-discussion.php' ) ) );
 			return;
 		}
 ?>
 		<p>
-			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title','shiword'); ?>:</label>
-			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?>:</label>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of users to show','shiword'); ?>:</label>
-			<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" />
+			<label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of users to show', 'shiword' ); ?>:</label>
+			<input id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>" size="3" />
 		</p>
 		<p>
-			<input id="<?php echo $this->get_field_id('thumb'); ?>" name="<?php echo $this->get_field_name('thumb'); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
-			<label for="<?php echo $this->get_field_id('thumb'); ?>"><?php _e('Compact view (only avatars)','shiword'); ?></label>
+			<input id="<?php echo $this->get_field_id( 'thumb' ); ?>" name="<?php echo $this->get_field_name( 'thumb' ); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
+			<label for="<?php echo $this->get_field_id( 'thumb' ); ?>"><?php _e( 'Compact view (only avatars)', 'shiword' ); ?></label>
 		</p>
 <?php
 	}
@@ -352,8 +352,8 @@ class shiword_Widget_latest_commentators extends WP_Widget {
 class shiword_Widget_user_quick_links extends WP_Widget {
 
 	function shiword_Widget_user_quick_links() {
-		$widget_ops = array('classname' => 'sw-widget-user-quick-links', 'description' => __( 'Some useful links for users','shiword' ) );
-		$this->WP_Widget('shi-user-quick-links', __('User quick links','shiword'), $widget_ops);
+		$widget_ops = array( 'classname' => 'sw-widget-user-quick-links', 'description' => __( 'Some useful links for users', 'shiword' ) );
+		$this->WP_Widget( 'shi-user-quick-links', __( 'User quick links', 'shiword' ), $widget_ops);
 		$this->alt_option_name = 'sw-widget-user-quick-links';
 	}
 
@@ -362,16 +362,16 @@ class shiword_Widget_user_quick_links extends WP_Widget {
 		
 		extract($args, EXTR_SKIP);
 		
-		$title = apply_filters('widget_title', empty($instance['title']) ? __('Welcome %s','shiword') : $instance['title'], $instance, $this->id_base);
+		$title = apply_filters( 'widget_title', empty($instance['title']) ? __( 'Welcome %s', 'shiword' ) : $instance['title'], $instance, $this->id_base);
 		$title = sprintf ( $title, $current_user->display_name );
 		
 		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
 		if ( $use_thumbs ) {
 			if ( is_user_logged_in() ) { //fix for notice when user not log-in
 				$email = $current_user->user_email;
-				$title = get_avatar( $email, 32, $default = get_template_directory_uri() . '/images/user.png','user-avatar' ) . ' ' . $title;
+				$title = get_avatar( $email, 32, $default = get_template_directory_uri() . '/images/user.png', 'user-avatar' ) . ' ' . $title;
 			} else {
-				$title = get_avatar( 'dummyemail', 32, $default = get_template_directory_uri() . '/images/user.png','user-avatar' ) . ' ' . $title;
+				$title = get_avatar( 'dummyemail', 32, $default = get_template_directory_uri() . '/images/user.png', 'user-avatar' ) . ' ' . $title;
 			}
 		}
 		
@@ -389,7 +389,7 @@ class shiword_Widget_user_quick_links extends WP_Widget {
 					<?php if ( current_user_can( 'moderate_comments' ) ) {
 						$awaiting_mod = wp_count_comments();
 						$awaiting_mod = $awaiting_mod->moderated;
-						$awaiting_mod = $awaiting_mod ? ' (' . number_format_i18n( $awaiting_mod ) . ')' : '';
+						$awaiting_mod = $awaiting_mod ? ' ( ' . number_format_i18n( $awaiting_mod ) . ' )' : '';
 					?>
 						<li><a title="<?php _e( 'Comments', 'shiword' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'shiword' ); ?></a><span class="hide-if-mobile"><?php echo $awaiting_mod; ?></span></li>
 					<?php } ?>
@@ -415,12 +415,12 @@ class shiword_Widget_user_quick_links extends WP_Widget {
 			$thumb = 0;
 ?>
 		<p>
-			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title','shiword'); ?>:<br /><?php _e('default: "Welcome %s" , where %s is the user name','shiword');?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?>:<br /><?php _e( 'default: "Welcome %s" , where %s is the user name', 'shiword' );?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 		<p>
-			<input id="<?php echo $this->get_field_id('thumb'); ?>" name="<?php echo $this->get_field_name('thumb'); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
-			<label for="<?php echo $this->get_field_id('thumb'); ?>"><?php _e('Show user gravatar','shiword'); ?></label>
+			<input id="<?php echo $this->get_field_id( 'thumb' ); ?>" name="<?php echo $this->get_field_name( 'thumb' ); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
+			<label for="<?php echo $this->get_field_id( 'thumb' ); ?>"><?php _e( 'Show user gravatar', 'shiword' ); ?></label>
 		</p>
 
 <?php
@@ -435,13 +435,13 @@ class shiword_Widget_pop_categories extends WP_Widget {
 
 	function shiword_Widget_pop_categories() {
 		$widget_ops = array( 'classname' => 'sw-widget-categories', 'description' => __( 'A list of popular categories', 'shiword' ) );
-		$this->WP_Widget('shi-categories', __('Popular Categories', 'shiword'), $widget_ops);
+		$this->WP_Widget( 'shi-categories', __( 'Popular Categories', 'shiword' ), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {
 		extract( $args );
 
-		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Popular Categories', 'shiword' ) : $instance['title'], $instance, $this->id_base);
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Popular Categories', 'shiword' ) : $instance['title'], $instance, $this->id_base);
 		if ( !$number = (int) $instance['number'] )
 			$number = 10;
 		else if ( $number < 1 )
@@ -457,10 +457,10 @@ class shiword_Widget_pop_categories extends WP_Widget {
 <?php
 		$cat_args = array( 'orderby' => 'count', 'show_count' => 1, 'hierarchical' => 0, 'order' => 'DESC', 'title_li' => '', 'number' => $number );
 
-		wp_list_categories(apply_filters('sw_widget_pop_categories_args', $cat_args));
+		wp_list_categories(apply_filters( 'sw_widget_pop_categories_args', $cat_args));
 
 ?>
-			<li class="sw-allcat" style="text-align: right;margin-top:12px;"><a title="<?php _e('View all categories', 'shiword'); ?>" href="<?php  echo home_url(); ?>/?allcat=y"><?php _e('View all', 'shiword'); ?></a></li>
+			<li class="sw-allcat" style="text-align: right;margin-top:12px;"><a title="<?php _e( 'View all categories', 'shiword' ); ?>" href="<?php  echo home_url(); ?>/?allcat=y"><?php _e( 'View all', 'shiword' ); ?></a></li>
 		</ul>
 <?php
 		echo $after_widget;
@@ -476,19 +476,19 @@ class shiword_Widget_pop_categories extends WP_Widget {
 
 	function form( $instance ) {
 		//Defaults
-		$instance = wp_parse_args( (array) $instance, array( 'title' => '') );
+		$instance = wp_parse_args( (array) $instance, array( 'title' => '' ) );
 		$title = esc_attr( $instance['title'] );
 		if ( !isset($instance['number']) || !$number = (int) $instance['number'] )
 			$number = 5;
 ?>
 		<p>
-			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title','shiword'); ?>:</label>
-			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?>:</label>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of categories to show','shiword'); ?>:</label>
-			<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" />
+			<label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of categories to show', 'shiword' ); ?>:</label>
+			<input id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>" size="3" />
 		</p>
 <?php
 	}
@@ -507,7 +507,7 @@ class shiword_Widget_social extends WP_Widget {
 		$widget_ops = array(
             'classname' => 'sw-widget-social',
             'description' => __("This widget lets visitors of your blog subscribe to it and follow you on popular social networks like Twitter, FaceBook etc.", "shiword"));
-		$control_ops = array('width' => 650);
+		$control_ops = array( 'width' => 650);
 
 		$this->WP_Widget("shi-social", __("Follow Me", "shiword"), $widget_ops, $control_ops);
         $this->follow_urls = array(
@@ -538,7 +538,7 @@ class shiword_Widget_social extends WP_Widget {
 			'Weibo' => 'Weibo',
 			'WindowsLive' => 'Windows Live',
 			'Youtube' => 'Youtube',
-			'RSS' => 'RSS');
+			'RSS' => 'RSS' );
 	}
 
     function form($instance) {
@@ -552,27 +552,27 @@ class shiword_Widget_social extends WP_Widget {
         $instance = wp_parse_args((array)$instance, $defaults);
 ?>
     <div>
-	<p><?php echo __('NOTE: Enter the <strong>full</strong> addresses ( with <em>http://</em> )', 'shiword'); ?></p>
+	<p><?php echo __( 'NOTE: Enter the <strong>full</strong> addresses ( with <em>http://</em> )', 'shiword' ); ?></p>
 <?php
         foreach($this->follow_urls as $follow_service => $service_name ) {
 ?> 
         <div class="sw-service-input">
 			<h2>
-				<input id="<?php echo $this->get_field_id('show_'.$follow_service); ?>" name="<?php echo $this->get_field_name('show_'.$follow_service); ?>" type="checkbox" <?php checked( $instance['show_'.$follow_service], 'on'); ?>  class="checkbox" />
+				<input id="<?php echo $this->get_field_id( 'show_'.$follow_service); ?>" name="<?php echo $this->get_field_name( 'show_'.$follow_service); ?>" type="checkbox" <?php checked( $instance['show_'.$follow_service], 'on' ); ?>  class="checkbox" />
 				<img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service ); ?>.png" alt="<?php echo $follow_service; ?>" />
 				<?php echo $service_name; ?>
 			</h2>
 <?php
-            if ($follow_service != 'RSS') {
+            if ($follow_service != 'RSS' ) {
                 $url_or_account = $follow_service;
 ?>
         <p>
-            <label for="<?php echo $this->get_field_id($follow_service.'_account'); ?>">
+            <label for="<?php echo $this->get_field_id($follow_service.'_account' ); ?>">
 <?php
-				printf(__('Enter %1$s account link:', 'shiword'), $service_name);
+				printf(__( 'Enter %1$s account link:', 'shiword' ), $service_name);
 ?>
             </label>
-            <input id="<?php echo $this->get_field_id($follow_service.'_account'); ?>" name="<?php echo $this->get_field_name($follow_service.'_account'); ?>" value="<?php if (isset($instance[$follow_service.'_account'])) echo $instance[$follow_service.'_account']; ?>" class="widefat" />
+            <input id="<?php echo $this->get_field_id($follow_service.'_account' ); ?>" name="<?php echo $this->get_field_name($follow_service.'_account' ); ?>" value="<?php if (isset($instance[$follow_service.'_account'])) echo $instance[$follow_service.'_account']; ?>" class="widefat" />
         </p>
 
 <?php
@@ -583,10 +583,10 @@ class shiword_Widget_social extends WP_Widget {
         }
 ?>
         <div class="clear" style="padding: 10px 0; border-top: 1px solid #DFDFDF; text-align: right;">
-            <label for="<?php echo $this->get_field_id('icon_size'); ?>"><?php _e('Select your icon size', 'shiword'); ?></label><br />
-            <select name="<?php echo $this->get_field_name('icon_size'); ?>" id="<?php echo $this->get_field_id('icon_size'); ?>" >
+            <label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select your icon size', 'shiword' ); ?></label><br />
+            <select name="<?php echo $this->get_field_name( 'icon_size' ); ?>" id="<?php echo $this->get_field_id( 'icon_size' ); ?>" >
 <?php
-            $size_array = array ('16px', '24px', '32px', '40px', '50px', '60px');
+            $size_array = array ( '16px', '24px', '32px', '40px', '50px', '60px' );
             foreach($size_array as $size) {
 ?>
                 <option value="<?php echo $size; ?>" <?php if ($instance['icon_size'] == $size) { echo " selected "; } ?>><?php echo $size; ?></option>
@@ -614,7 +614,7 @@ class shiword_Widget_social extends WP_Widget {
 
 	function widget( $args, $instance ) {
 		extract($args);
-        $title = apply_filters('widget_title', empty($instance['title']) ? '' : $instance['title']);
+        $title = apply_filters( 'widget_title', empty($instance['title']) ? '' : $instance['title']);
 		$icon_size = ( isset($instance['icon_size']) ) ? $instance['icon_size'] : '48px';
         echo $before_widget;
         if (!empty($title)) {
@@ -629,7 +629,7 @@ class shiword_Widget_social extends WP_Widget {
 		
 			$show = ( isset($instance['show_'.$follow_service]) ) ? $instance['show_'.$follow_service] : false;
 			$account = ( isset($instance[$follow_service.'_account']) ) ? $instance[$follow_service.'_account'] : '';
-            if ($follow_service == 'RSS') {
+            if ($follow_service == 'RSS' ) {
                 $account = get_bloginfo( 'rss2_url' );
             }
             if ($show && !empty($account)) {
@@ -654,17 +654,17 @@ class shiword_Widget_social extends WP_Widget {
 class shiword_Widget_recent_posts extends WP_Widget {
 
 	function shiword_Widget_recent_posts() {
-		$widget_ops = array('classname' => 'sw-widget-recent-entries', 'description' => __( "The most recent posts in a single category", 'shiword' ) );
-		$this->WP_Widget('shi-recent-posts', __('Recent Posts in Category', 'shiword' ), $widget_ops);
+		$widget_ops = array( 'classname' => 'sw-widget-recent-entries', 'description' => __( "The most recent posts in a single category", 'shiword' ) );
+		$this->WP_Widget( 'shi-recent-posts', __( 'Recent Posts in Category', 'shiword' ), $widget_ops);
 		$this->alt_option_name = 'sw-widget-recent-entries';
 
-		add_action( 'save_post', array(&$this, 'flush_widget_cache') );
-		add_action( 'deleted_post', array(&$this, 'flush_widget_cache') );
-		add_action( 'switch_theme', array(&$this, 'flush_widget_cache') );
+		add_action( 'save_post', array(&$this, 'flush_widget_cache' ) );
+		add_action( 'deleted_post', array(&$this, 'flush_widget_cache' ) );
+		add_action( 'switch_theme', array(&$this, 'flush_widget_cache' ) );
 	}
 
 	function widget($args, $instance) {
-		$cache = wp_cache_get('sw-widget_recent_posts', 'widget');
+		$cache = wp_cache_get( 'sw-widget_recent_posts', 'widget' );
 
 		if ( !is_array($cache) )
 			$cache = array();
@@ -679,7 +679,7 @@ class shiword_Widget_recent_posts extends WP_Widget {
 
 		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
 		$category = isset( $instance['category']) ? absint($instance['category'] ) : '';
-		$title = apply_filters('widget_title', empty($instance['title']) ? __('Recent Posts in %s', 'shiword' ) : $instance['title'], $instance, $this->id_base);
+		$title = apply_filters( 'widget_title', empty($instance['title']) ? __( 'Recent Posts in %s', 'shiword' ) : $instance['title'], $instance, $this->id_base);
 		$title = sprintf( $title, '<a href="' . get_category_link( $category ) . '">' . get_cat_name( $category ) . '</a>' );
 		if ( ! $number = absint( $instance['number'] ) )
  			$number = 10;
@@ -704,7 +704,7 @@ class shiword_Widget_recent_posts extends WP_Widget {
 		endif;
 
 		$cache[$args['widget_id']] = ob_get_flush();
-		wp_cache_set('sw-widget_recent_posts', $cache, 'widget');
+		wp_cache_set( 'sw-widget_recent_posts', $cache, 'widget' );
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -717,13 +717,13 @@ class shiword_Widget_recent_posts extends WP_Widget {
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
 		if ( isset($alloptions['sw-widget-recent-entries']) )
-			delete_option('sw-widget-recent-entries');
+			delete_option( 'sw-widget-recent-entries' );
 
 		return $instance;
 	}
 
 	function flush_widget_cache() {
-		wp_cache_delete('sw-widget_recent_posts', 'widget');
+		wp_cache_delete( 'sw-widget_recent_posts', 'widget' );
 	}
 
 	function form( $instance ) {
@@ -733,12 +733,12 @@ class shiword_Widget_recent_posts extends WP_Widget {
 		$thumb = isset($instance['thumb']) ? absint($instance['thumb']) : 1;
 ?>
 		<p>
-			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title', 'shiword' ); ?>:</label>
-			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?>:</label>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('category'); ?>"><?php _e('Category', 'shiword' ); ?>:</label>
+			<label for="<?php echo $this->get_field_id( 'category' ); ?>"><?php _e( 'Category', 'shiword' ); ?>:</label>
 			<?php wp_dropdown_categories( Array(
 						'orderby'            => 'ID', 
 						'order'              => 'ASC',
@@ -748,19 +748,19 @@ class shiword_Widget_recent_posts extends WP_Widget {
 						'echo'               => 1,
 						'selected'           => $category,
 						'hierarchical'       => 1, 
-						'name'               => $this->get_field_name('category'),
-						'id'                 => $this->get_field_id('category'),
+						'name'               => $this->get_field_name( 'category' ),
+						'id'                 => $this->get_field_id( 'category' ),
 						'class'              => 'widefat',
 						'taxonomy'           => 'category',
 					) ); ?>
 		</p>
 
-		<p><label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of posts to show', 'shiword' ); ?>:</label>
-		<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" /></p>
+		<p><label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of posts to show', 'shiword' ); ?>:</label>
+		<input id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>" size="3" /></p>
 
 		<p>
-			<input id="<?php echo $this->get_field_id('thumb'); ?>" name="<?php echo $this->get_field_name('thumb'); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
-			<label for="<?php echo $this->get_field_id('thumb'); ?>"><?php _e('Show post thumbnails','shiword'); ?></label>
+			<input id="<?php echo $this->get_field_id( 'thumb' ); ?>" name="<?php echo $this->get_field_name( 'thumb' ); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
+			<label for="<?php echo $this->get_field_id( 'thumb' ); ?>"><?php _e( 'Show post thumbnails', 'shiword' ); ?></label>
 		</p>	
 
 <?php
@@ -773,8 +773,8 @@ class shiword_Widget_recent_posts extends WP_Widget {
 class shiword_Widget_image_details extends WP_Widget {
 
 	function shiword_Widget_image_details() {
-		$widget_ops = array( 'classname' => 'sw-widget-image-details', 'description' => __( "Display image details. It's visible ONLY in single attachments",'shiword' ) );
-		$this->WP_Widget( 'shi-image-details', __( 'Image details','shiword' ), $widget_ops );
+		$widget_ops = array( 'classname' => 'sw-widget-image-details', 'description' => __( "Display image details. It's visible ONLY in single attachments", 'shiword' ) );
+		$this->WP_Widget( 'shi-image-details', __( 'Image details', 'shiword' ), $widget_ops );
 		$this->alt_option_name = 'sw-widget-image-details';
 
 	}
@@ -839,10 +839,10 @@ class shiword_Widget_image_details extends WP_Widget {
 	}
 
 	function form( $instance ) {
-		$title = isset($instance['title']) ? esc_attr($instance['title']) : __( 'Image details','shiword' );
+		$title = isset($instance['title']) ? esc_attr($instance['title']) : __( 'Image details', 'shiword' );
 ?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title','shiword' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 
@@ -874,8 +874,8 @@ class shiword_Widget_share_this extends WP_Widget {
 	var $default_icon_size = array ( '16', '24', '32', '48', '64' );
 	
 	function shiword_Widget_share_this() {
-		$widget_ops = array( 'classname' => 'sw-widget-share-this', 'description' => __( "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments",'shiword' ) );
-		$this->WP_Widget( 'shi-share-this', __( 'Share this','shiword' ), $widget_ops );
+		$widget_ops = array( 'classname' => 'sw-widget-share-this', 'description' => __( "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments", 'shiword' ) );
+		$this->WP_Widget( 'shi-share-this', __( 'Share this', 'shiword' ), $widget_ops );
 		$this->alt_option_name = 'sw-widget-share-this';
 
 	}
@@ -900,7 +900,7 @@ class shiword_Widget_share_this extends WP_Widget {
 		$outer = '';
 		foreach( $services as $key => $service ) {
 			$href = sprintf( $service[1], $pName, $pHref, $pPict );
-			if ( $instance[$key] ) $outer .= '<a class="share-item" rel="nofollow" target="_blank" id="sw-' . $key . '" href="' . $href . '"><img src="' . get_template_directory_uri() . '/images/follow/' . strtolower( $key ) . '.png" width="' . $icon_size . '" height="' . $icon_size . '" alt="' . $service[0] . ' Button"  title="' . sprintf( __( 'Share with %s','shiword' ), $service[0] ) . '" /></a>';
+			if ( $instance[$key] ) $outer .= '<a class="share-item" rel="nofollow" target="_blank" id="sw-' . $key . '" href="' . $href . '"><img src="' . get_template_directory_uri() . '/images/follow/' . strtolower( $key ) . '.png" width="' . $icon_size . '" height="' . $icon_size . '" alt="' . $service[0] . ' Button"  title="' . sprintf( __( 'Share with %s', 'shiword' ), $service[0] ) . '" /></a>';
 		}
 ?>
 		<?php echo $before_widget; ?>
@@ -930,7 +930,7 @@ class shiword_Widget_share_this extends WP_Widget {
 		foreach( $services as $key => $service ) {
 			$def_instance[$key] = 1;
 		}
-		$def_instance['title'] = __( 'Share this','shiword' );
+		$def_instance['title'] = __( 'Share this', 'shiword' );
 		$def_instance['icon_size'] = '24';
 		
 		//Defaults
@@ -942,7 +942,7 @@ class shiword_Widget_share_this extends WP_Widget {
 		
 ?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title','shiword' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 		<p>
@@ -970,8 +970,8 @@ class shiword_Widget_share_this extends WP_Widget {
 class shiword_Widget_post_details extends WP_Widget {
 
 	function shiword_Widget_post_details() {
-		$widget_ops = array( 'classname' => 'sw-widget-post-details', 'description' => __( "Show some details and links related to the current post. It's visible ONLY in single posts",'shiword' ) );
-		$this->WP_Widget( 'shi-post-details', __( 'Post details','shiword' ), $widget_ops );
+		$widget_ops = array( 'classname' => 'sw-widget-post-details', 'description' => __( "Show some details and links related to the current post. It's visible ONLY in single posts", 'shiword' ) );
+		$this->WP_Widget( 'shi-post-details', __( 'Post details', 'shiword' ), $widget_ops );
 		$this->alt_option_name = 'sw-widget-post-details';
 
 	}
@@ -994,7 +994,7 @@ class shiword_Widget_post_details extends WP_Widget {
 		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['featured'] = (int) $new_instance['featured'] ? 1 : 0;
 		$instance['author'] = (int) $new_instance['author'] ? 1 : 0;
-        $instance['avatar_size'] = in_array( $new_instance['avatar_size'], array ('32', '48', '64', '96', '128') ) ? $new_instance['avatar_size'] : '48' ;
+        $instance['avatar_size'] = in_array( $new_instance['avatar_size'], array ( '32', '48', '64', '96', '128' ) ) ? $new_instance['avatar_size'] : '48' ;
 		$instance['date'] = (int) $new_instance['date'] ? 1 : 0;
 		$instance['tags'] = (int) $new_instance['tags'] ? 1 : 0;
 		$instance['categories'] = (int) $new_instance['categories'] ? 1 : 0;
@@ -1003,7 +1003,7 @@ class shiword_Widget_post_details extends WP_Widget {
 	}
 
 	function form( $instance ) {
-		$instance = wp_parse_args( (array) $instance, array( 'title' => __( 'Post details','shiword' ), 'featured' => 0, 'author' => 1, 'avatar_size' => '48', 'date' => 1, 'tags' => 1, 'categories' => 1 ) );
+		$instance = wp_parse_args( (array) $instance, array( 'title' => __( 'Post details', 'shiword' ), 'featured' => 0, 'author' => 1, 'avatar_size' => '48', 'date' => 1, 'tags' => 1, 'categories' => 1 ) );
 		$title = esc_attr( $instance['title'] );
 		$featured = absint( $instance['featured'] );
 		$author = absint( $instance['author'] );
@@ -1013,16 +1013,16 @@ class shiword_Widget_post_details extends WP_Widget {
 		$categories = absint( $instance['categories'] );
 ?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title','shiword' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 		<p>
 			<input id="<?php echo $this->get_field_id( 'featured' ); ?>" name="<?php echo $this->get_field_name( 'featured' ); ?>" value="1" type="checkbox" <?php checked( 1 , $featured ); ?> />
-			<label for="<?php echo $this->get_field_id( 'featured' ); ?>"><?php _e( 'Thumbnail','shiword' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'featured' ); ?>"><?php _e( 'Thumbnail', 'shiword' ); ?></label>
 		</p>
 		<p>
-			<input id="<?php echo $this->get_field_id( 'author' ); ?>" name="<?php echo $this->get_field_name('author'); ?>" value="1" type="checkbox" <?php checked( 1 , $author ); ?> />
-			<label for="<?php echo $this->get_field_id( 'author' ); ?>"><?php _e( 'Author','shiword' ); ?></label>
+			<input id="<?php echo $this->get_field_id( 'author' ); ?>" name="<?php echo $this->get_field_name( 'author' ); ?>" value="1" type="checkbox" <?php checked( 1 , $author ); ?> />
+			<label for="<?php echo $this->get_field_id( 'author' ); ?>"><?php _e( 'Author', 'shiword' ); ?></label>
 		</p>
 		<p>
             <label for="<?php echo $this->get_field_id( 'avatar_size' ); ?>"><?php _e( 'Select avatar size', 'shiword' ); ?></label>
@@ -1039,15 +1039,15 @@ class shiword_Widget_post_details extends WP_Widget {
 		</p>
 		<p>
 			<input id="<?php echo $this->get_field_id( 'date' ); ?>" name="<?php echo $this->get_field_name( 'date' ); ?>" value="1" type="checkbox" <?php checked( 1 , $date ); ?> />
-			<label for="<?php echo $this->get_field_id( 'date' ); ?>"><?php _e( 'Date','shiword' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'date' ); ?>"><?php _e( 'Date', 'shiword' ); ?></label>
 		</p>
 		<p>
 			<input id="<?php echo $this->get_field_id( 'tags' ); ?>" name="<?php echo $this->get_field_name( 'tags' ); ?>" value="1" type="checkbox" <?php checked( 1 , $tags ); ?> />
-			<label for="<?php echo $this->get_field_id( 'tags' ); ?>"><?php _e( 'Tags','shiword' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'tags' ); ?>"><?php _e( 'Tags', 'shiword' ); ?></label>
 		</p>
 		<p>
 			<input id="<?php echo $this->get_field_id( 'categories' ); ?>" name="<?php echo $this->get_field_name( 'categories' ); ?>" value="1" type="checkbox" <?php checked( 1 , $categories ); ?> />
-			<label for="<?php echo $this->get_field_id( 'categories' ); ?>"><?php _e( 'Categories','shiword' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'categories' ); ?>"><?php _e( 'Categories', 'shiword' ); ?></label>
 		</p>
 <?php
 	}
@@ -1062,15 +1062,15 @@ class shiword_Widget_post_details extends WP_Widget {
 class shiword_Widget_Recent_Comments extends WP_Widget {
 
 	function __construct() {
-		$widget_ops = array('classname' => 'widget_recent_comments', 'description' => __( 'The most recent comments','shiword' ) );
-		parent::__construct('recent-comments', __('Recent Comments (Enhanced)','shiword'), $widget_ops);
+		$widget_ops = array( 'classname' => 'widget_recent_comments', 'description' => __( 'The most recent comments', 'shiword' ) );
+		parent::__construct( 'recent-comments', __( 'Recent Comments (Enhanced)', 'shiword' ), $widget_ops);
 		$this->alt_option_name = 'widget_recent_comments';
 
 		if ( is_active_widget(false, false, $this->id_base) )
-			add_action( 'wp_head', array(&$this, 'recent_comments_style') );
+			add_action( 'wp_head', array(&$this, 'recent_comments_style' ) );
 
-		add_action( 'comment_post', array(&$this, 'flush_widget_cache') );
-		add_action( 'transition_comment_status', array(&$this, 'flush_widget_cache') );
+		add_action( 'comment_post', array(&$this, 'flush_widget_cache' ) );
+		add_action( 'transition_comment_status', array(&$this, 'flush_widget_cache' ) );
 	}
 
 	function recent_comments_style() {
@@ -1083,13 +1083,13 @@ class shiword_Widget_Recent_Comments extends WP_Widget {
 	}
 
 	function flush_widget_cache() {
-		wp_cache_delete('widget_recent_comments', 'widget');
+		wp_cache_delete( 'widget_recent_comments', 'widget' );
 	}
 
 	function widget( $args, $instance ) {
 		global $comments, $comment;
 
-		$cache = wp_cache_get('widget_recent_comments', 'widget');
+		$cache = wp_cache_get( 'widget_recent_comments', 'widget' );
 
 		if ( ! is_array( $cache ) )
 			$cache = array();
@@ -1104,7 +1104,7 @@ class shiword_Widget_Recent_Comments extends WP_Widget {
 
  		extract($args, EXTR_SKIP);
  		$output = '';
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Recent Comments','shiword' ) : $instance['title'], $instance, $this->id_base );
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Recent Comments', 'shiword' ) : $instance['title'], $instance, $this->id_base );
 
 		if ( empty( $instance['number'] ) || ! $number = absint( $instance['number'] ) )
  			$number = 5;
@@ -1123,7 +1123,7 @@ class shiword_Widget_Recent_Comments extends WP_Widget {
 				$the_excerpt = $excerpt ? '<div class="rc-preview">' . get_comment_excerpt( $comment->comment_ID ) . '</div>' : '';
 				$the_class = $excerpt ? ' class="small"' : '';
 				$output .=  '<li class="recentcomments">
-					<span' . $the_class . '>' . /* translators: comments widget: 1: comment author, 2: post link */ sprintf(_x('%1$s on %2$s', 'widgets','shiword'), get_comment_author_link(), '<a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '">' . get_the_title($comment->comment_post_ID) . '</a>') . '</span>
+					<span' . $the_class . '>' . /* translators: comments widget: 1: comment author, 2: post link */ sprintf(_x( '%1$s on %2$s', 'widgets', 'shiword' ), get_comment_author_link(), '<a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '">' . get_the_title($comment->comment_post_ID) . '</a>' ) . '</span>
 					' . $the_excerpt . '
 					</li>';
 			}
@@ -1133,7 +1133,7 @@ class shiword_Widget_Recent_Comments extends WP_Widget {
 
 		echo $output;
 		$cache[$args['widget_id']] = $output;
-		wp_cache_set('widget_recent_comments', $cache, 'widget');
+		wp_cache_set( 'widget_recent_comments', $cache, 'widget' );
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -1145,7 +1145,7 @@ class shiword_Widget_Recent_Comments extends WP_Widget {
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
 		if ( isset($alloptions['widget_recent_comments']) )
-			delete_option('widget_recent_comments');
+			delete_option( 'widget_recent_comments' );
 
 		return $instance;
 	}
@@ -1155,14 +1155,14 @@ class shiword_Widget_Recent_Comments extends WP_Widget {
 		$number = isset($instance['number']) ? absint($instance['number']) : 5;
 		$excerpt = isset($instance['excerpt']) ? absint($instance['excerpt']) : 0;
 ?>
-		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title','shiword'); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
+		<p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?></label>
+		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" /></p>
 
-		<p><label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of comments to show','shiword'); ?></label>
-		<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" /></p>
+		<p><label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of comments to show', 'shiword' ); ?></label>
+		<input id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>" size="3" /></p>
 
-		<p><input type="checkbox" value="1" class="checkbox" id="<?php echo $this->get_field_id('excerpt'); ?>" name="<?php echo $this->get_field_name('excerpt'); ?>"<?php checked( $excerpt ); ?> />
-		<label for="<?php echo $this->get_field_id('excerpt'); ?>"><?php _e( 'Show excerpt','shiword' ); ?></label></p>
+		<p><input type="checkbox" value="1" class="checkbox" id="<?php echo $this->get_field_id( 'excerpt' ); ?>" name="<?php echo $this->get_field_name( 'excerpt' ); ?>"<?php checked( $excerpt ); ?> />
+		<label for="<?php echo $this->get_field_id( 'excerpt' ); ?>"><?php _e( 'Show excerpt', 'shiword' ); ?></label></p>
 		
 <?php
 	}
@@ -1174,8 +1174,8 @@ class shiword_Widget_Recent_Comments extends WP_Widget {
 class shiword_Widget_clean_archives extends WP_Widget {
 
 	function shiword_Widget_clean_archives() {
-		$widget_ops = array('classname' => 'sw-Widget_clean_archives', 'description' => __( "Show archives in a cleaner way",'shiword') );
-		$this->WP_Widget('shi-clean-archives', __('Clean Archives','shiword'), $widget_ops);
+		$widget_ops = array( 'classname' => 'sw-Widget_clean_archives', 'description' => __( "Show archives in a cleaner way", 'shiword' ) );
+		$this->WP_Widget( 'shi-clean-archives', __( 'Clean Archives', 'shiword' ), $widget_ops);
 		$this->alt_option_name = 'sw-Widget_clean_archives';
 
 	}
@@ -1191,14 +1191,14 @@ class shiword_Widget_clean_archives extends WP_Widget {
 			return; // empty archive
 		}
 		
-		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
-		$month_style = ( isset($instance['month_style']) && in_array( $instance['month_style'], array ('number', 'acronym') ) ) ? $instance['month_style'] : 'number';
+		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base);
+		$month_style = ( isset($instance['month_style']) && in_array( $instance['month_style'], array ( 'number', 'acronym' ) ) ) ? $instance['month_style'] : 'number';
 ?>
 		<?php echo $before_widget; ?>
 		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
 		<?php
 			if ( $month_style == 'acronym' )
-				$months_short = array( '', __('jan','shiword'), __('feb','shiword'), __('mar','shiword'), __('apr','shiword'), __('may','shiword'), __('jun','shiword'), __('jul','shiword'), __('aug','shiword'), __('sep','shiword'), __('oct','shiword'), __('nov','shiword'), __('dec','shiword') );
+				$months_short = array( '', __( 'jan', 'shiword' ), __( 'feb', 'shiword' ), __( 'mar', 'shiword' ), __( 'apr', 'shiword' ), __( 'may', 'shiword' ), __( 'jun', 'shiword' ), __( 'jul', 'shiword' ), __( 'aug', 'shiword' ), __( 'sep', 'shiword' ), __( 'oct', 'shiword' ), __( 'nov', 'shiword' ), __( 'dec', 'shiword' ) );
 			else
 				$months_short = array( '', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12' );
 			
@@ -1224,24 +1224,24 @@ class shiword_Widget_clean_archives extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
-        $instance["month_style"] = in_array( $new_instance["month_style"], array ('number', 'acronym') ) ? $new_instance["month_style"] : 'number' ;
+        $instance["month_style"] = in_array( $new_instance["month_style"], array ( 'number', 'acronym' ) ) ? $new_instance["month_style"] : 'number' ;
 
 		return $instance;
 	}
 
 	function form( $instance ) {
-		$title = isset($instance['title']) ? esc_attr($instance['title']) : __('Archives','shiword');
+		$title = isset($instance['title']) ? esc_attr($instance['title']) : __( 'Archives', 'shiword' );
 		$month_style = isset($instance['month_style']) ? esc_attr($instance['month_style']) : 'number';
 ?>
 		<p>
-			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title','shiword'); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 		<p>
-            <label for="<?php echo $this->get_field_id('month_style'); ?>"><?php _e('Select month style', 'shiword'); ?></label>
-            <select name="<?php echo $this->get_field_name('month_style'); ?>" id="<?php echo $this->get_field_id('month_style'); ?>" >
-                <option value="number" <?php selected( $month_style, 'number' ); ?>><?php _e('number','shiword'); ?></option>
-                <option value="acronym" <?php selected( $month_style, 'acronym' ); ?>><?php _e('acronym','shiword'); ?></option>
+            <label for="<?php echo $this->get_field_id( 'month_style' ); ?>"><?php _e( 'Select month style', 'shiword' ); ?></label>
+            <select name="<?php echo $this->get_field_name( 'month_style' ); ?>" id="<?php echo $this->get_field_id( 'month_style' ); ?>" >
+                <option value="number" <?php selected( $month_style, 'number' ); ?>><?php _e( 'number', 'shiword' ); ?></option>
+                <option value="acronym" <?php selected( $month_style, 'acronym' ); ?>><?php _e( 'acronym', 'shiword' ); ?></option>
             </select>
 		</p>
 <?php
@@ -1250,36 +1250,37 @@ class shiword_Widget_clean_archives extends WP_Widget {
 
 
 /**
- * Register all of the default WordPress widgets on startup.
+ * Register the widgets on startup.
+ * 
+ * Widgets list is filterable.
  */
 function shiword_register_widgets() {
 	if ( !is_blog_installed() )
 		return;
 
-	register_widget('shiword_Widget_popular_posts');
-
-	register_widget('shiword_Widget_latest_commented_posts');
-	
-	register_widget('shiword_Widget_latest_commentators');
-	
-	register_widget('shiword_Widget_user_quick_links');
-
-	register_widget('shiword_Widget_pop_categories');
-	
-	register_widget('shiword_Widget_social');
-
-	register_widget('shiword_Widget_recent_posts');
-	
-	register_widget( 'shiword_Widget_image_details' );
-
-	register_widget( 'shiword_Widget_share_this' );
-
-	register_widget( 'shiword_Widget_post_details' );
-	
 	unregister_widget( 'WP_Widget_Recent_Comments' );
-	register_widget( 'shiword_Widget_Recent_Comments' );
-	
-	register_widget( 'shiword_Widget_clean_archives' );
+
+	$value = array(
+		'shiword_Widget_popular_posts' => 1,
+		'shiword_Widget_latest_commented_posts' => 1,
+		'shiword_Widget_latest_commentators' => 1,
+		'shiword_Widget_user_quick_links' => 1,
+		'shiword_Widget_pop_categories' => 1,
+		'shiword_Widget_social' => 1,
+		'shiword_Widget_recent_posts' => 1,
+		'shiword_Widget_image_details' => 1,
+		'shiword_Widget_share_this' => 1,
+		'shiword_Widget_post_details' => 1,
+		'shiword_Widget_Recent_Comments' => 1,
+		'shiword_Widget_clean_archives'  => 1
+	);
+
+	$widgets = apply_filters( 'shiword_filter_widgets', $value );	
+
+	foreach( $widgets as $widget => $is_on ) {
+		if ( $is_on )
+			register_widget( $widget );
+	}
 
 }
 

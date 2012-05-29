@@ -23,6 +23,7 @@ if ( !function_exists( 'shiword_create_menu' ) ) {
 		add_action( 'admin_print_scripts-widgets.php', 'shiword_widgets_scripts' );
 		add_action( 'admin_print_styles-' . $optionspage, 'shiword_optionspage_style' );
 		add_action( 'admin_print_scripts-' . $optionspage, 'shiword_optionspage_script' );
+		add_action( 'admin_print_scripts', 'shiword_movegallerypage_script' );
 	}
 }
 
@@ -44,6 +45,13 @@ if ( !function_exists( 'shiword_widgets_scripts' ) ) {
 	function shiword_widgets_scripts() {
 		global $shiword_version;
 		wp_enqueue_script( 'sw-widgets-script', get_template_directory_uri() . '/js/admin-widgets.dev.js', array('jquery'), $shiword_version, true );
+	}
+}
+
+if ( !function_exists( 'shiword_movegallerypage_script' ) ) {
+	function shiword_movegallerypage_script() {
+		global $shiword_version;
+		wp_enqueue_script( 'sw-movegallerypage-script', get_template_directory_uri() . '/js/admin-movegallerypage.dev.js', array('jquery'), $shiword_version, true );
 	}
 }
 

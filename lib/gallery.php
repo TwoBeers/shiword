@@ -35,7 +35,7 @@ add_action( 'admin_menu', 'shiword_add_gallery_menu' );
 // create custom theme settings menu
 if ( !function_exists( 'shiword_add_gallery_menu' ) ) {
 	function shiword_add_gallery_menu() {
-		$gallerypage = add_media_page( __( 'Gallery Editor', 'shiword' ), __( 'Gallery Editor', 'shiword' ), 'edit_posts', 'tb_shiword_gallery_editor', 'shiword_edit_gallery' );
+		$gallerypage = add_theme_page( __( 'Gallery Editor', 'shiword' ), __( 'Gallery Editor', 'shiword' ), 'edit_posts', 'tb_shiword_gallery_editor', 'shiword_edit_gallery' );
 		//call custom stylesheet function
 		add_action( 'admin_print_styles-' . $gallerypage, 'shiword_gallerypage_style' );
 		add_action( 'admin_print_scripts-' . $gallerypage, 'shiword_gallerypage_script' );
