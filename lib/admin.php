@@ -392,8 +392,6 @@ if ( !function_exists( 'shiword_add_custom_background' ) ) {
 
 		add_action( 'wp_head', $header_callback );
 
-		add_theme_support( 'custom-background', array( 'callback' => $header_callback ) );
-
 		if ( ! is_admin() )
 			return;
 		require_once( 'my-custom-background.php' );
