@@ -7,7 +7,122 @@
  *Based on WP wp-admin/custom-header.php
  */
 
- 
+add_action( 'after_setup_theme', 'shiword_custom_device_colors_init' );
+
+//load custom colors
+$shiword_colors = shiword_get_colors();
+
+// set up custom colors and header image
+if ( !function_exists( 'shiword_custom_device_colors_init' ) ) {
+	function shiword_custom_device_colors_init() {
+
+		shiword_register_default_device_images( array(
+			'green' => array(
+				'url' => '%s/images/device/white.png',
+				'description' => 'white'
+			),
+			'black' => array(
+				'url' => '%s/images/device/black.png',
+				'description' => 'black'
+			),
+			'pink' => array(
+				'url' => '%s/images/device/pink.png',
+				'description' => 'pink'
+			),
+			'blue' => array(
+				'url' => '%s/images/device/blue.png',
+				'description' => 'blue'
+			),
+			'vector' => array(
+				'url' => '%s/images/device/vector.png',
+				'description' => 'vector'
+			),
+			'ice' => array(
+				'url' => '%s/images/device/ice.png',
+				'description' => 'ice'
+			),
+			'metal' => array(
+				'url' => '%s/images/device/metal.png',
+				'description' => 'metal'
+			),
+			'stripe' => array(
+				'url' => '%s/images/device/stripe.png',
+				'description' => 'stripe'
+			),
+			'flower' => array(
+				'url' => '%s/images/device/flower.png',
+				'description' => 'flower'
+			),
+			'wood' => array(
+				'url' => '%s/images/device/wood.jpg',
+				'description' => 'wood'
+			)
+		) );
+
+		shiword_add_custom_device_colors();
+	}
+}
+function shiword_get_default_colors($type) {
+	// Holds default outside colors
+	$shiword_default_device_bg = array(
+		'device_image' => '',
+		'device_color' => '#000000',
+		'device_opacity' => '100',
+		'device_textcolor' => '#ffffff',
+		'device_button' => '#ff8d39',
+		'device_button_style' => 'light'
+	);
+	// Holds default inside colors
+	$shiword_default_device_colors = array(
+		'main3' => '#21759b',
+		'main4' => '#ff8d39',
+		'menu1' => '#21759b',
+		'menu2' => '#cccccc',
+		'menu3' => '#262626',
+		'menu4' => '#ffffff',
+		'menu5' => '#ff8d39',
+		'menu6' => '#cccccc',
+	);
+	if ( $type == 'out') { return $shiword_default_device_bg; }
+	elseif ( $type == 'in') { return $shiword_default_device_colors; }
+	else { return array_merge( $shiword_default_device_bg , $shiword_default_device_colors ); }
+}
+
+//get the theme color values. uses default values if options are empty or unset
+function shiword_get_colors() {
+
+	/* Holds default colors. */
+	$default_device_colors = shiword_get_default_colors('all');
+
+	$shiword_colors = get_option( 'shiword_colors' );
+	foreach ( $default_device_colors as $key => $val ) {
+		if ( ( !isset( $shiword_colors[$key] ) ) || empty( $shiword_colors[$key] ) ) {
+			$shiword_colors[$key] = $default_device_colors[$key];
+		}
+	}
+	return $shiword_colors;
+}
+
+// Register a selection of default images to be displayed as device backgrounds by the custom device color admin UI. based on WP theme.php -> register_default_headers()
+if ( !function_exists( 'shiword_register_default_device_images' ) ) {
+	function shiword_register_default_device_images( $headers ) {
+		global $shiword_default_device_images;
+
+		$shiword_default_device_images = array_merge( (array) $shiword_default_device_images , (array) $headers );
+	}
+}
+
+// Add callbacks for device color display. based on WP theme.php -> add_custom_image_header()
+if ( !function_exists( 'shiword_add_custom_device_colors' ) ) {
+	function shiword_add_custom_device_colors() {
+		if ( ! is_admin() )
+			return;
+
+		$GLOBALS['custom_device_color'] =& new Custom_device_color();
+		add_action( 'admin_menu' , array(&$GLOBALS['custom_device_color'] , 'init' ));
+	}
+}
+
 class Custom_device_color {
 
 	/* Holds default outside colors. */
@@ -201,7 +316,7 @@ class Custom_device_color {
 	/* Display main custom colors page. */
 	function step_1() {
 		
-		global $shiword_colors;
+		global $shiword_colors, $shiword_current_theme;
 		
 		/* Holds the inside colors descriptions */
 		$default_device_colors_descr = array(
@@ -220,7 +335,7 @@ class Custom_device_color {
 
 <div class="wrap">
 	<div class="icon32" id="sw-icon"><br></div>
-	<h2><?php echo get_current_theme() . ' - ' . __( 'Custom Colors', 'shiword' ); ?></h2>
+	<h2><?php echo $shiword_current_theme . ' - ' . __( 'Custom Colors', 'shiword' ); ?></h2>
 
 	<?php if ( ! empty( $this->updated ) ) { ?>
 		<div id="message" class="updated">

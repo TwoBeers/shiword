@@ -6,7 +6,7 @@
  * @since Shiword 3.0
  */
 
-global $shiword_opt, $shiword_current_theme;
+global $shiword_opt;
 
 // media select
 add_action( 'template_redirect', 'shiword_media' );
@@ -64,10 +64,11 @@ if ( !function_exists( 'shiword_gallerypage_script' ) ) {
 // the slideshow admin panel - here you can select posts to be included in slideshow
 if ( !function_exists( 'shiword_edit_gallery' ) ) {
 	function shiword_edit_gallery() {
+		global $shiword_current_theme;
 		?>
 	<div class="wrap">
 			<div class="icon32" id="galed-icon"><br></div>
-			<h2><?php echo get_current_theme() . ' - ' . __( 'Gallery Editor', 'shiword' ); ?></h2>
+			<h2><?php echo $shiword_current_theme . ' - ' . __( 'Gallery Editor', 'shiword' ); ?></h2>
 			<div class="hide-if-js error"><p><?php echo __( 'Javascript must be enabled in order to use this feature', 'shiword' ); ?></p></div>
 			<div>
 				<table class="form-table">

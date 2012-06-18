@@ -1,15 +1,65 @@
 <?php
 /**
- * The custom background page
+ * The custom background stuff
  *
  * @package Shiword
  * @since Shiword 3.0
  *
- * based on WP wp-admin/custom-background.php
+ * Shiword_Custom_Background class based on WP wp-admin/custom-background.php
  *
  */
 
-class Custom_Background {
+add_action( 'after_setup_theme', 'shiword_custom_background_init' );
+
+// set up custom colors and header image
+if ( !function_exists( 'shiword_custom_background_init' ) ) {
+	function shiword_custom_background_init() {
+		global $shiword_opt;
+
+		if ( isset( $shiword_opt['shiword_custom_bg'] ) && $shiword_opt['shiword_custom_bg'] == 1 ) {
+			// the enhanced 'custom background' support
+			shiword_add_custom_background( 'shiword_custom_bg' , 'shiword_admin_custom_bg_style' , '' );
+		} else {
+			// the standard 'custom background' support
+			$args = array(
+				'default-color'          => '',
+				'default-image'          => '',
+				'wp-head-callback'       => 'shiword_custom_bg',
+				'admin-head-callback'    => '',
+				'admin-preview-callback' => ''
+			);
+			if ( function_exists( 'get_custom_header' ) ) {
+				add_theme_support( 'custom-background', $args );
+			} else {
+				// Compat: Versions of WordPress prior to 3.4.
+				define( 'BACKGROUND_COLOR', $args['default-color'] );
+				add_custom_background( $args['wp-head-callback'] , '' , '' );
+			}
+		}
+
+	}
+}
+
+//Add callbacks for background image display. based on WP theme.php -> add_custom_background()
+if ( !function_exists( 'shiword_add_custom_background' ) ) {
+	function shiword_add_custom_background( $header_callback = '', $admin_header_callback = '', $admin_image_div_callback = '' ) {
+		if ( isset( $GLOBALS['custom_background'] ) )
+			return;
+
+		if ( empty( $header_callback ) )
+			$header_callback = '_custom_background_cb';
+
+		add_action( 'wp_head', $header_callback );
+
+		if ( ! is_admin() )
+			return;
+
+		$GLOBALS['custom_background'] =& new Shiword_Custom_Background( $admin_header_callback, $admin_image_div_callback );
+		add_action( 'admin_menu', array( &$GLOBALS['custom_background'], 'init' ) );
+	}
+}
+
+class Shiword_Custom_Background {
 
 
 	/* Holds default background images. */

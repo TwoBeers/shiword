@@ -115,7 +115,7 @@ if ( !function_exists( 'shiword_slider_sanitize' ) ) {
 // the slideshow admin panel - here you can select posts to be included in slideshow
 if ( !function_exists( 'shiword_slider_edit' ) ) {
 	function shiword_slider_edit() {
-		global $shiword_opt;
+		global $shiword_opt, $shiword_current_theme;
 		$shiword_options = get_option( 'shiword_slideshow' );
 		//return options save message
 		if ( !$shiword_opt['shiword_sticky'] ) {
@@ -127,7 +127,7 @@ if ( !function_exists( 'shiword_slider_edit' ) ) {
 		?>
 		<div class="wrap">
 			<div class="icon32" id="sw-icon"><br></div>
-			<h2><?php echo get_current_theme() . ' - ' . __( 'Slideshow', 'shiword' ); ?></h2>
+			<h2><?php echo $shiword_current_theme . ' - ' . __( 'Slideshow', 'shiword' ); ?></h2>
 			<div style="margin-top: 20px;">
 				<?php _e( 'Select posts or pages to be added to the slideshow box.<br />Items will be ordered as displayed here.', 'shiword' ); ?>
 			</div>

@@ -6,7 +6,7 @@
  * @since Shiword 3.0
  */
 
-global $shiword_opt, $shiword_current_theme;
+global $shiword_opt, $shiword_version;
 
 // Add custom menus
 add_action( 'admin_menu', 'shiword_create_menu' );
@@ -73,7 +73,7 @@ if ( !function_exists( 'shiword_setopt_admin_notice' ) ) {
 	}
 }
 
-if ( current_user_can( 'manage_options' ) && $shiword_opt['version'] < $shiword_current_theme['Version'] ) {
+if ( current_user_can( 'manage_options' ) && $shiword_opt['version'] < $shiword_version ) {
 	add_action( 'admin_notices', 'shiword_setopt_admin_notice' );
 }
 
@@ -89,7 +89,7 @@ if ( !function_exists( 'shiword_register_settings' ) ) {
 
 // check and set default options 
 function shiword_default_options() {
-		global $shiword_current_theme;
+		global $shiword_version;
 		$shiword_opt = get_option( 'shiword_options' );
 		$shiword_coa = shiword_get_coa();
 
@@ -100,7 +100,7 @@ function shiword_default_options() {
 			}
 			$shiword_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
 			update_option( 'shiword_options' , $shiword_opt );
-		} else if ( !isset( $shiword_opt['version'] ) || $shiword_opt['version'] < $shiword_current_theme['Version'] ) {
+		} else if ( !isset( $shiword_opt['version'] ) || $shiword_opt['version'] < $shiword_version ) {
 			// check for unset values and set them to default value -> when updated to new version
 			foreach ( $shiword_coa as $key => $val ) {
 				if ( !isset( $shiword_opt[$key] ) ) $shiword_opt[$key] = $shiword_coa[$key]['default'];
@@ -113,7 +113,7 @@ function shiword_default_options() {
 // sanitize options value
 if ( !function_exists( 'shiword_sanitize_options' ) ) {
 	function shiword_sanitize_options( $input ){
-		global $shiword_current_theme;
+		global $shiword_version;
 		$shiword_coa = shiword_get_coa();
 		// check for updated values and return 0 for disabled ones <- index notice prevention
 		foreach ( $shiword_coa as $key => $val ) {
@@ -156,7 +156,7 @@ if ( !function_exists( 'shiword_sanitize_options' ) ) {
 		foreach ( $shiword_coa as $key => $val ) {
 			if ( $shiword_coa[$key]['req'] != '' ) { if ( $input[$shiword_coa[$key]['req']] == 0 ) $input[$key] = 0; }
 		}
-		$input['version'] = $shiword_current_theme['Version']; // keep version number
+		$input['version'] = $shiword_version; // keep version number
 		return $input;
 	}
 }
@@ -167,7 +167,7 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 		if ( !current_user_can( 'edit_theme_options' ) ) {
 		wp_die( __( 'You do not have sufficient permissions to access this page.', 'shiword' ) );
 		}
-		global $shiword_opt, $shiword_current_theme;
+		global $shiword_opt, $shiword_version, $shiword_current_theme;
 		
 		if ( isset( $_GET['erase'] ) && ! isset( $_REQUEST['settings-updated'] ) ) {
 			delete_option( 'shiword_options' );
@@ -178,14 +178,15 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 		$shiword_coa = shiword_get_coa();
 		
 		// update version value when admin visit options page
-		if ( $shiword_opt['version'] < $shiword_current_theme['Version'] ) {
-			$shiword_opt['version'] = $shiword_current_theme['Version'];
+		if ( $shiword_opt['version'] < $shiword_version ) {
+			$shiword_opt['version'] = $shiword_version;
 			update_option( 'shiword_options' , $shiword_opt );
 		}
+
 	?>
 		<div class="wrap">
 			<div class="icon32" id="sw-icon"><br></div>
-			<h2><?php echo get_current_theme() . ' - ' . __( 'Theme Options', 'shiword' ); ?></h2>
+			<h2><?php echo $shiword_current_theme . ' - ' . __( 'Theme Options', 'shiword' ); ?></h2>
 			<?php
 				// return options save message
 				if ( isset( $_REQUEST['settings-updated'] ) ) {
@@ -310,93 +311,10 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 	}
 }
 
-//load custom colors
-$shiword_colors = shiword_get_colors();
-
-function shiword_get_default_colors($type) {
-	// Holds default outside colors
-	$shiword_default_device_bg = array(
-		'device_image' => '',
-		'device_color' => '#000000',
-		'device_opacity' => '100',
-		'device_textcolor' => '#ffffff',
-		'device_button' => '#ff8d39',
-		'device_button_style' => 'light'
-	);
-	// Holds default inside colors
-	$shiword_default_device_colors = array(
-		'main3' => '#21759b',
-		'main4' => '#ff8d39',
-		'menu1' => '#21759b',
-		'menu2' => '#cccccc',
-		'menu3' => '#262626',
-		'menu4' => '#ffffff',
-		'menu5' => '#ff8d39',
-		'menu6' => '#cccccc',
-	);
-	if ( $type == 'out') { return $shiword_default_device_bg; }
-	elseif ( $type == 'in') { return $shiword_default_device_colors; }
-	else { return array_merge( $shiword_default_device_bg , $shiword_default_device_colors ); }
-}
-
-//get the theme color values. uses default values if options are empty or unset
-function shiword_get_colors() {
-
-	/* Holds default colors. */
-	$default_device_colors = shiword_get_default_colors('all');
-
-	$shiword_colors = get_option( 'shiword_colors' );
-	foreach ( $default_device_colors as $key => $val ) {
-		if ( ( !isset( $shiword_colors[$key] ) ) || empty( $shiword_colors[$key] ) ) {
-			$shiword_colors[$key] = $default_device_colors[$key];
-		}
-	}
-	return $shiword_colors;
-}
-
 // Styles the header image displayed on the Appearance > Header admin panel.
 if ( !function_exists( 'shiword_admin_header_style' ) ) {
 	function shiword_admin_header_style() {
 		echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/admin-custom_header.css" />' . "\n";
-	}
-}
-
-// Register a selection of default images to be displayed as device backgrounds by the custom device color admin UI. based on WP theme.php -> register_default_headers()
-if ( !function_exists( 'shiword_register_default_device_images' ) ) {
-	function shiword_register_default_device_images( $headers ) {
-		global $shiword_default_device_images;
-
-		$shiword_default_device_images = array_merge( (array) $shiword_default_device_images , (array) $headers );
-	}
-}
-
-// Add callbacks for device color display. based on WP theme.php -> add_custom_image_header()
-if ( !function_exists( 'shiword_add_custom_device_image' ) ) {
-	function shiword_add_custom_device_image() {
-		if ( ! is_admin() )
-			return;
-		require_once( 'custom-device-color.php' );
-		$GLOBALS['custom_device_color'] =& new Custom_device_color();
-		add_action( 'admin_menu' , array(&$GLOBALS['custom_device_color'] , 'init' ));
-	}
-}
-
-//Add callbacks for background image display. based on WP theme.php -> add_custom_background()
-if ( !function_exists( 'shiword_add_custom_background' ) ) {
-	function shiword_add_custom_background( $header_callback = '', $admin_header_callback = '', $admin_image_div_callback = '' ) {
-		if ( isset( $GLOBALS['custom_background'] ) )
-			return;
-
-		if ( empty( $header_callback ) )
-			$header_callback = '_custom_background_cb';
-
-		add_action( 'wp_head', $header_callback );
-
-		if ( ! is_admin() )
-			return;
-		require_once( 'my-custom-background.php' );
-		$GLOBALS['custom_background'] =& new Custom_Background( $admin_header_callback, $admin_image_div_callback );
-		add_action( 'admin_menu', array( &$GLOBALS['custom_background'], 'init' ) );
 	}
 }
 

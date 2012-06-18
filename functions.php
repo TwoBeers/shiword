@@ -52,13 +52,15 @@ $shiword_is_mobile_browser = false;
 
 // load modules (accordingly to http://justintadlock.com/archives/2010/11/17/how-to-load-files-within-wordpress-themes)
 require_once('mobile/core-mobile.php'); // load mobile functions
+require_once('lib/custom-device-color.php'); // load custom colors module
+require_once('lib/my-custom-background.php'); // load custom background module
 require_once('lib/options.php'); // load theme default options
 require_once('lib/admin.php'); // load admin stuff
 require_once('lib/slider.php'); // load slider stuff
 require_once('lib/hooks.php'); // load custom hooks
 require_once('quickbar.php'); // load quickbar functions
 if ( $shiword_opt['shiword_custom_widgets'] == 1 ) require_once('lib/widgets.php'); // load custom widgets module
-require_once('lib/gallery.php'); // GALLERY SHORTCODE EDITOR ---->
+require_once('lib/gallery.php'); // gallery shortcode editor
 
 /**** begin theme checks ****/
 
@@ -86,10 +88,14 @@ if ( ! isset( $content_width ) ) {
 }
 
 // get theme version
-if ( get_theme( 'Shiword' ) ) {
-	$shiword_current_theme = get_theme( 'Shiword' );
-	$shiword_version = $shiword_current_theme['Version'];
+if ( function_exists( 'wp_get_theme' ) ) {
+	$shiword_theme = wp_get_theme( 'shiword' );
+	$shiword_current_theme = wp_get_theme();
+} else { // Compatibility with versions of WordPress prior to 3.4.
+	$shiword_theme = get_theme( 'Shiword' );
+	$shiword_current_theme = get_current_theme();
 }
+$shiword_version = $shiword_theme? $shiword_theme['Version'] : '';
 
 
 if ( !function_exists( 'shiword_widgets_init' ) ) {
@@ -848,81 +854,9 @@ if ( !function_exists( 'shiword_setup' ) ) {
 		// Theme uses wp_nav_menu() in two locations
 		register_nav_menus( array( 'primary' => __( 'Main Navigation Menu', 'shiword' ), 'secondary' => __( 'Secondary Navigation Menu<br><small>only supports the first level of hierarchy</small>', 'shiword' ) ) );
 
-		// This theme allows users to set the device appearance
-		shiword_add_custom_device_image();
-
-		// Your changeable header business starts here
-		define( 'HEADER_TEXTCOLOR', '404040' );
-		// No CSS, just IMG call. The %s is a placeholder for the theme template directory URI.
-		define( 'HEADER_IMAGE', '%s/images/headers/green.jpg' );
-
-		// The height and width of your custom header. You can hook into the theme's own filters to change these values.
-		// Add a filter to shiword_header_image_width and shiword_header_image_height to change these values.
-		define( 'HEADER_IMAGE_WIDTH', $shiword_opt['shiword_frame_width'] );
-
 		$head_h = ( isset( $shiword_opt['shiword_head_h'] ) ? str_replace( 'px', '', $shiword_opt['shiword_head_h']) : 100 );
-
-		define( 'HEADER_IMAGE_HEIGHT', $head_h );
-
-		// Don't support text inside the header image.
-		define( 'NO_HEADER_TEXT', true );
-
-		// Add a way for the custom header to be styled in the admin panel that controls
-		// custom headers. See shiword_admin_header_style(), below.
-		add_custom_image_header( 'shiword_header_style', 'shiword_admin_header_style' );
-		
-/* 		
-		* Note: as of WordPress 3.4, add_custom_image_header() is
-		* deprecated, in favor of
-		* add_theme_support( 'custom-header' ). Child Themes
-		* can remove support for this feature via
-		* remove_theme_support( 'custom-header' ).
-*/
-/* 		add_theme_support( 'custom-header', array(
-			// Header image default
-			'default-image' => get_template_directory_uri() . '/images/headers/green.jpg',
-			// Header text display default
-			'header-text' => false,
-			// Header text color default
-			'default-text-color' => '404040',
-			// Header image width (in pixels)
-			'width' => $shiword_opt['shiword_frame_width'],
-			// Header image height (in pixels)
-			'height' => $head_h,
-			// Header image random rotation default
-			'random-default' => false,
-			// Template header style callback
-			'wp-head-callback' => 'shiword_header_style',
-			// Admin header style callback
-			'admin-head-callback' => 'shiword_admin_header_style'
-		) );		
-*/
-		// Add a way for the custom background to be styled in the admin panel that controls
-		if ( isset( $shiword_opt['shiword_custom_bg'] ) && $shiword_opt['shiword_custom_bg'] == 1 ) {
-			shiword_add_custom_background( 'shiword_custom_bg_plus' , '' , '' );
-		} else {
-			set_theme_mod('background_image', '');
-			set_theme_mod('background_image_thumb', '');
-			add_custom_background( 'shiword_custom_bg' , '' , '' );
-
-/* 			* Note: as of WordPress 3.4, add_custom_background() is
-			* deprecated, in favor of
-			* add_theme_support( 'custom-background' ). Child Themes
-			* can remove support for this feature via
-			* remove_theme_support( 'custom-background' ).			
-*/
-/* 			$defaults = array(
-				'default-color'          => '',
-				'default-image'          => '',
-				'wp-head-callback'       => 'shiword_custom_bg',
-				'admin-head-callback'    => '',
-				'admin-preview-callback' => ''
-			);
-			add_theme_support( 'custom-background', $defaults );
-*/
-		}
-
-		// ... and thus ends the changeable header business.
+		$head_w = ( isset( $shiword_opt['shiword_frame_width'] ) ? $shiword_opt['shiword_frame_width'] : 850 );
+		shiword_setup_custom_header( $head_w, $head_h );
 
 		// Default custom headers packaged with the theme. %s is a placeholder for the theme template directory URI.
 		register_default_headers( array(
@@ -952,51 +886,38 @@ if ( !function_exists( 'shiword_setup' ) ) {
 				'description' => 'butterflies'
 			)
 		) );
-		shiword_register_default_device_images( array(
-			'green' => array(
-				'url' => '%s/images/device/white.png',
-				'description' => 'white'
-			),
-			'black' => array(
-				'url' => '%s/images/device/black.png',
-				'description' => 'black'
-			),
-			'pink' => array(
-				'url' => '%s/images/device/pink.png',
-				'description' => 'pink'
-			),
-			'blue' => array(
-				'url' => '%s/images/device/blue.png',
-				'description' => 'blue'
-			),
-			'vector' => array(
-				'url' => '%s/images/device/vector.png',
-				'description' => 'vector'
-			),
-			'ice' => array(
-				'url' => '%s/images/device/ice.png',
-				'description' => 'ice'
-			),
-			'metal' => array(
-				'url' => '%s/images/device/metal.png',
-				'description' => 'metal'
-			),
-			'stripe' => array(
-				'url' => '%s/images/device/stripe.png',
-				'description' => 'stripe'
-			),
-			'flower' => array(
-				'url' => '%s/images/device/flower.png',
-				'description' => 'flower'
-			),
-			'wood' => array(
-				'url' => '%s/images/device/wood.jpg',
-				'description' => 'wood'
-			)
-		) );
 	}
 }
 
+//the custom header support
+if ( !function_exists( 'shiword_setup_custom_header' ) ) {
+	function shiword_setup_custom_header( $head_w, $head_h ) {
+		$args = array(
+			'width'					=> $head_w, // Header image width (in pixels)
+			'height'				=> $head_h, // Header image height (in pixels)
+			'default-image'			=> get_template_directory_uri() . '/images/headers/green.jpg', // Header image default
+			'header-text'			=> false, // Header text display default
+			'default-text-color'	=> '404040', // Header text color default
+			'wp-head-callback'		=> 'shiword_header_style',
+			'admin-head-callback'	=> 'shiword_admin_header_style',
+			'flex-height'			=> true
+		);
+	 
+		$args = apply_filters( 'shiword_custom_header_args', $args );
+	 
+		if ( function_exists( 'get_custom_header' ) ) {
+			add_theme_support( 'custom-header', $args );
+		} else {
+			// Compatibility with versions of WordPress prior to 3.4.
+			define( 'HEADER_TEXTCOLOR',		$args['default-text-color'] );
+			define( 'NO_HEADER_TEXT',		$args['header-text'] );
+			define( 'HEADER_IMAGE',			$args['default-image'] );
+			define( 'HEADER_IMAGE_WIDTH',	$args['width'] );
+			define( 'HEADER_IMAGE_HEIGHT',	$args['height'] );
+			add_custom_image_header( $args['wp-head-callback'], $args['admin-head-callback'] );
+		}
+	}
+}
 
 // convert hex color value to rgba
 if ( !function_exists( 'shiword_hex2rgba' ) ) {
@@ -1034,6 +955,7 @@ if ( !function_exists( 'shiword_header_style' ) ) {
 		global $shiword_colors, $shiword_is_mobile_browser, $shiword_opt;
 		if ( $shiword_is_mobile_browser ) return;
 		$device_rgba = shiword_hex2rgba( $shiword_colors['device_color'], $shiword_colors['device_opacity']);
+		$head_h = function_exists( 'get_custom_header' ) ? get_custom_header()->height : HEADER_IMAGE_HEIGHT;
 	    ?>
 	<style type="text/css">
 		body {
@@ -1055,9 +977,8 @@ if ( !function_exists( 'shiword_header_style' ) ) {
 		}
 		<?php } ?>
 		#headerimg {
-			background: transparent url('<?php esc_url ( header_image() ); ?>') right bottom repeat-y;
-			<?php //if ( get_theme_mod( 'header_image' , HEADER_IMAGE ) == '' ) echo 'display: none;'; ?>
-			min-height: <?php echo HEADER_IMAGE_HEIGHT; ?>px;
+			background: transparent url('<?php header_image(); ?>') right bottom repeat-y;
+			min-height: <?php echo $head_h ?>px;
 		}
 		#sw_body,
 		#fixedfoot {
