@@ -251,6 +251,7 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 							<?php if ( isset( $shiword_coa[$key]['sub'] ) ) { ?>
 									<div class="sw-sub-opt">
 								<?php foreach ( $shiword_coa[$key]['sub'] as $subkey => $subval ) { ?>
+									<?php if ( $subval == '' ) { echo '<br>'; continue; } ?>
 									<?php if ( !isset ($shiword_opt[$subval]) ) $shiword_opt[$subval] = $shiword_coa[$subval]['default']; ?>
 									<?php if ( $shiword_coa[$subval]['type'] == 'chk' ) { ?>
 										<input name="shiword_options[<?php echo $subval; ?>]" value="1" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 1 , $shiword_opt[$subval] ); ?> />

@@ -1,4 +1,71 @@
-var swAudioPlayer = function () {
+var shiwordAudioPlayer;
+
+(function($) {
+
+shiwordAudioPlayer = {
+
+	//initialize
+	init : function() {
+
+		sw_AudioPlayer.setup( sw_SWFPlayer, {
+			width: 415,
+			loop: "yes",
+			transparentpagebg: "yes",
+			leftbg: "262626",
+			lefticon: "aaaaaa",
+			rightbg: "262626",
+			righticon: sw_righticon,
+			righticonhover: sw_righticonhover,
+			animation: "no"
+		});
+		shiwordAudioPlayer.start();
+	},
+
+    start : function() {
+
+		var the_id = 0;
+		return $('audio').each(function() {
+			the_id++;
+			$(this).attr('id', 'sw-player-id' + the_id );
+			var the_source = $(this).children('source:first-child');
+			if ( the_source.size() !== 0 ) {
+				the_href = the_source.attr('src');
+				var the_type = the_href.substr( the_href.length - 4, 4 )
+				switch (the_type)
+				{
+				case '.ogg':
+					if ( !document.createElement("audio").canPlayType ) {
+						$(this).parent().html('<span class="sw-player-notice">' + sw_unknown_media_format + ' (ogg)</span>');
+					}
+					break;
+				case '.mp3':
+					if ( !document.createElement("audio").canPlayType || (document.createElement("audio").canPlayType && !document.createElement("audio").canPlayType('audio/mpeg')) ) {
+						sw_AudioPlayer.embed(this.id, {  
+							soundFile: the_href
+						});  
+					}
+					break;
+				case '.m4a':
+					if ( !document.createElement("audio").canPlayType || (document.createElement("audio").canPlayType && !document.createElement("audio").canPlayType('audio/x-m4a')) ) {
+						$(this).parent().html('<span class="sw-player-notice">' + sw_unknown_media_format + ' (m4a)</span>');
+					}
+					break;
+				default:
+					$(this).parent().html('<span class="sw-player-notice">' + sw_unknown_media_format + '</span>');
+				}				
+			}
+			
+        });
+        
+    }
+
+};
+
+$(document).ready(function($){ shiwordAudioPlayer.init(); });
+
+})(jQuery);
+
+var sw_AudioPlayer = function () {
 	var instances = [];
 	var activePlayerID;
 	var playerURL = "";

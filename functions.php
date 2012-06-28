@@ -18,8 +18,6 @@ add_action( 'wp_footer', 'shiword_quote_scripts' );
 add_action( 'wp_footer', 'shiword_detect_js' );
 // load "like" badges js
 add_action( 'wp_footer', 'shiword_I_like_it_js' );
-// setup for audio player
-add_action( 'wp_head', 'shiword_setup_player' );
 // stylesheet for ie6
 add_action( 'wp_head', 'shiword_ie6_style' );
 // deregister styles
@@ -61,6 +59,7 @@ require_once('lib/hooks.php'); // load custom hooks
 require_once('quickbar.php'); // load quickbar functions
 if ( $shiword_opt['shiword_custom_widgets'] == 1 ) require_once('lib/widgets.php'); // load custom widgets module
 require_once('lib/gallery.php'); // gallery shortcode editor
+if ( isset( $shiword_opt['shiword_audio_player'] ) && ($shiword_opt['shiword_audio_player'] == 1 ) ) require_once( 'lib/audio-player.php' ); // load the audio player module
 
 /**** begin theme checks ****/
 
@@ -237,7 +236,6 @@ if ( !function_exists( 'shiword_scripts' ) ) {
 		if ($shiword_opt['shiword_jsani'] == 1) {
 			wp_enqueue_script( 'sw-animations', get_template_directory_uri().'/js/animations.min.js',array('jquery'),$shiword_version, false ); //shiword js
 		}
-		wp_enqueue_script( 'sw-audio-player', get_template_directory_uri().'/resources/audio-player/audio-player-noswfobject.js',array('swfobject'),$shiword_version, false ); //audio player
 		//thickbox script
 		if ( ( $shiword_opt['shiword_thickbox'] == 1 ) ) wp_enqueue_script( 'thickbox' );
 	}
@@ -268,31 +266,6 @@ if ( !function_exists( 'shiword_allcat' ) ) {
 			locate_template( array( 'allcat.php' ), true, false );
 			exit;
 		}
-	}
-}
-
-// setup for audio player
-if ( !function_exists( 'shiword_setup_player' ) ) {
-	function shiword_setup_player(){
-		global $shiword_is_printpreview, $shiword_colors, $shiword_is_mobile_browser;
-		if ( $shiword_is_mobile_browser || is_admin() || $shiword_is_printpreview ) return;
-		?>
-<script type="text/javascript">
-	/* <![CDATA[ */
-	swAudioPlayer.setup("<?php echo get_template_directory_uri().'/resources/audio-player/player.swf'; ?>", {  
-		width: 415,
-		loop: "yes",
-		transparentpagebg: "yes",
-		leftbg: "262626",
-		lefticon: "aaaaaa",
-		rightbg: "262626",
-		righticon: "<?php echo str_replace("#", "", $shiword_colors['main3']); ?>",
-		righticonhover: "<?php echo str_replace("#", "", $shiword_colors['main4']); ?>",
-		animation: "no"
-	});  
-	/* ]]> */
-</script>
-		<?php
 	}
 }
 
@@ -708,31 +681,6 @@ if ( !function_exists( 'shiword_get_blockquote' ) ) {
 	}
 }
 
-// search for linked mp3's and add an audio player
-if ( !function_exists( 'shiword_add_audio_player' ) ) {
-	function shiword_add_audio_player( $text = '' ) {
-		global $post;
-		$pattern = "/<a ([^=]+=['\"][^\"']+['\"] )*href=['\"](([^\"']+\.mp3))['\"]( [^=]+=['\"][^\"']+['\"])*>([^<]+)<\/a>/i";
-		if ( $text == '')
-			preg_match_all( $pattern, $post->post_content, $result );
-		else
-			preg_match_all( $pattern, $text, $result );
-		$data = $result[3];
-		if ( $data ) { ?>
-			<div class="swf-audio-player"><div id="swf-audio-player-<?php the_ID(); ?>"></div><small>Audio clip: Adobe Flash Player (version 9 or above) is required to play this audio clip. Download the latest version <a href="http://get.adobe.com/flashplayer/" title="Download Adobe Flash Player">here</a>. You also need to have JavaScript enabled in your browser.</small></div>
-			<script type="text/javascript">  
-				/* <![CDATA[ */
-				swAudioPlayer.embed("swf-audio-player-<?php the_ID(); ?>", {  
-					soundFile: "<?php echo implode( "," , $data ); ?>"
-				});  
-				/* ]]> */
-			</script>  			
-			<?php return true;
-		}
-		return false;
-	}
-}
-
 // get the post thumbnail or (if not set) the format related icon
 if ( !function_exists( 'shiword_get_the_thumb' ) ) {
 	function shiword_get_the_thumb( $id, $size_w, $size_h, $class, $default = '', $linked = false ) {
@@ -1045,7 +993,7 @@ if ( !function_exists( 'shiword_header_style' ) ) {
 		.menuback .mentit {
 			color: <?php echo $shiword_colors['menu3']; ?>;
 		}
-		.letsstick .sticky {
+		.sticky {
 			-moz-box-shadow: 0 0 8px <?php echo $shiword_colors['main3']; ?>;
 			box-shadow: 0 0 8px <?php echo $shiword_colors['main3']; ?>;
 			-webkit-box-shadow: 0 0 8px <?php echo $shiword_colors['main3']; ?>;
@@ -1124,49 +1072,6 @@ if ( !function_exists( 'shiword_header_style' ) ) {
 	  <?php
 	}
 }
-
-// custom background style (enhanced) - gets included in the site header
-if ( !function_exists( 'shiword_custom_bg_plus' ) ) {
-	function shiword_custom_bg_plus() {
-		global $shiword_is_printpreview, $shiword_is_mobile_browser;
-		if ( $shiword_is_printpreview || $shiword_is_mobile_browser ) return;
-
-		$background = get_background_image();
-		$color = get_background_color();
-		if ( ! $background && ! $color ) return;
-	
-		$style = $color ? "background-color: #$color;" : '';
-	
-		if ( $background ) {
-			$style .= " background-image: url('$background');";
-		}
-		?>
-		<style type="text/css"> 
-			body { <?php echo trim( $style ); ?> }
-			#fixedfoot_cont { <?php echo trim( $style ); ?> }
-			#head_cont { background-color: #<?php echo trim( $color ); ?>; }
-		</style>
-		<?php
-	}
-}
-
-// custom background style - gets included in the site header
-if ( !function_exists( 'shiword_custom_bg' ) ) {
-	function shiword_custom_bg() {
-		global $shiword_is_printpreview, $shiword_is_mobile_browser;
-		if ( $shiword_is_printpreview || $shiword_is_mobile_browser ) return;
-
-		$color = get_background_color();
-		if ( ! $color ) return;
-		?>
-		<style type="text/css"> 
-			body { background-color: #<?php echo trim( $color ); ?>; }
-			#head_cont { background-color: #<?php echo trim( $color ); ?>; }
-		</style>
-		<?php
-	}
-}
-
 
 //set the excerpt lenght
 if ( !function_exists( 'shiword_excerpt_length' ) ) {

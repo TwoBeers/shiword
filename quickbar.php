@@ -52,6 +52,46 @@ if ( !function_exists( 'shiword_qbar' ) ) {
 
 <!-- begin quickbar -->
 <div id="quickbar">
+
+<?php
+
+/* custom elements can be easily added to quickbar using filters. eg:
+
+	add_filter( 'shiword_qbar_elements', 'shiword_add_my_element' );
+
+	function shiword_add_my_element( $elements ) {
+		$elements['my-first-element'] = array(
+			'title' => 'my title',
+			'image' => 'http://www.my-site.net/wp-content/uploads/2012/06/my-50x50-image.jpg',
+			'content' => 'this is the content of my custom element. Hurray!'
+		);
+		return $elements;
+	}
+
+*/
+	$elements = array();
+	
+	$elements = apply_filters('shiword_qbar_elements', $elements);
+	
+	foreach ( $elements as $key => $element ) {
+?>
+
+		<div class="menuitem <?php echo $key; ?>">
+			<div class="menuitem_img" style="background-image:url(<?php echo $element['image'] ?>)"></div>
+			<div class="menuback custom-element">
+				<div class="menu_sx">
+					<div class="mentit"><?php echo $element['title'] ?></div>
+					<div>
+						<?php echo $element['content'] ?>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<?php
+	}
+?>
+
 	<?php if ( $shiword_opt['shiword_qbar_recpost'] == 1 ) { // recent posts menu ?>
 		<div class="menuitem">
 			<div class="menuitem_img mii_rpost"></div>

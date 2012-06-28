@@ -18,7 +18,7 @@ if ( !function_exists( 'shiword_custom_background_init' ) ) {
 
 		if ( isset( $shiword_opt['shiword_custom_bg'] ) && $shiword_opt['shiword_custom_bg'] == 1 ) {
 			// the enhanced 'custom background' support
-			shiword_add_custom_background( 'shiword_custom_bg' , 'shiword_admin_custom_bg_style' , '' );
+			shiword_add_custom_background( 'shiword_custom_bg_plus' , 'shiword_admin_custom_bg_style' , '' );
 		} else {
 			// the standard 'custom background' support
 			$args = array(
@@ -56,6 +56,48 @@ if ( !function_exists( 'shiword_add_custom_background' ) ) {
 
 		$GLOBALS['custom_background'] =& new Shiword_Custom_Background( $admin_header_callback, $admin_image_div_callback );
 		add_action( 'admin_menu', array( &$GLOBALS['custom_background'], 'init' ) );
+	}
+}
+
+// custom background style (enhanced) - gets included in the site header
+if ( !function_exists( 'shiword_custom_bg_plus' ) ) {
+	function shiword_custom_bg_plus() {
+		global $shiword_is_printpreview, $shiword_is_mobile_browser;
+		if ( $shiword_is_printpreview || $shiword_is_mobile_browser ) return;
+
+		$background = get_background_image();
+		$color = get_background_color();
+		if ( ! $background && ! $color ) return;
+	
+		$style = $color ? "background-color: #$color;" : '';
+	
+		if ( $background ) {
+			$style .= " background-image: url('$background');";
+		}
+		?>
+		<style type="text/css"> 
+			body { <?php echo trim( $style ); ?> }
+			#fixedfoot_cont { <?php echo trim( $style ); ?> }
+			#head_cont { background-color: #<?php echo trim( $color ); ?>; }
+		</style>
+		<?php
+	}
+}
+
+// custom background style - gets included in the site header
+if ( !function_exists( 'shiword_custom_bg' ) ) {
+	function shiword_custom_bg() {
+		global $shiword_is_printpreview, $shiword_is_mobile_browser;
+		if ( $shiword_is_printpreview || $shiword_is_mobile_browser ) return;
+
+		$color = get_background_color();
+		if ( ! $color ) return;
+		?>
+		<style type="text/css"> 
+			body { background-color: #<?php echo trim( $color ); ?>; }
+			#head_cont { background-color: #<?php echo trim( $color ); ?>; }
+		</style>
+		<?php
 	}
 }
 
@@ -157,7 +199,7 @@ class Shiword_Custom_Background {
 		if ( isset($_POST['default-bg']) ) {
 			check_admin_referer('custom-background');
 			$this->process_default_bg_images();
-			if ( in_array($_POST['default-bg'], array('bamboo','flowers','equalizer','negative')) ) {
+			if ( in_array($_POST['default-bg'], array('bamboo','flowers','equalizer','negative','city')) ) {
 				set_theme_mod('background_image', esc_url($this->default_bg_images[$_POST['default-bg']]['url']));
 				set_theme_mod('background_image_thumb', esc_url($this->default_bg_images[$_POST['default-bg']]['thumbnail_url']) );
 			}
@@ -193,6 +235,12 @@ class Shiword_Custom_Background {
 				'thumbnail_url' => '%s/images/backgrounds/negative-thumbnail.jpg',
 				'description' => __( 'Negative', 'shiword' ),
 				'color' => '#ffc07d'
+			),
+			'city' => array(
+				'url' => '%s/images/backgrounds/city.png',
+				'thumbnail_url' => '%s/images/backgrounds/city-thumbnail.jpg',
+				'description' => __( 'City', 'shiword' ),
+				'color' => '#e2f1f8'
 			)
 		);
 

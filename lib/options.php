@@ -19,7 +19,7 @@ function shiword_get_coa( $option = false ) {
 							'description' => __( 'sliding menu', 'shiword' ),
 							'info' => '',
 							'req' => '',
-							'sub' => array( 'shiword_qbar_recpost', 'shiword_qbar_cat', 'shiword_qbar_reccom', 'shiword_qbar_user', 'shiword_qbar_minilogin' )
+							'sub' => array( 'shiword_qbar_recpost', 'shiword_qbar_cat', 'shiword_qbar_reccom', 'shiword_qbar_user', '', 'shiword_qbar_minilogin' )
 						),
 		'shiword_qbar_user' =>
 						array(
@@ -249,7 +249,7 @@ function shiword_get_coa( $option = false ) {
 							'description' => __( 'posts extra info', 'shiword' ),
 							'info' => __( 'show extra info (author, date, tags, etc)', 'shiword' ),
 							'req' => '',
-							'sub' => array( 'shiword_byauth', 'shiword_xinfos_date', 'shiword_xinfos_comm', 'shiword_xinfos_tag', 'shiword_xinfos_cat', 'shiword_xinfos', 'shiword_xinfos_static' )
+							'sub' => array( 'shiword_byauth', 'shiword_xinfos_date', 'shiword_xinfos_comm', 'shiword_xinfos_tag', 'shiword_xinfos_cat', 'shiword_xinfos', '', 'shiword_xinfos_static' )
 						),
 		'shiword_xinfos' =>
 						array(
@@ -535,7 +535,7 @@ function shiword_get_coa( $option = false ) {
 							'description' => __( 'Slideshow', 'shiword' ),
 							'info' => sprintf( __( 'slideshow for your most important posts/pages. Select them <a href="%s">here</a>', 'shiword' ), get_admin_url() . 'themes.php?page=tb_shiword_slideshow' ),
 							'req' => 'shiword_jsani',
-							'sub' => array( 'shiword_sticky_front', 'shiword_sticky_pages', 'shiword_sticky_posts', 'shiword_sticky_over', 'shiword_sticky_height', 'shiword_sticky_author', 'shiword_sticky_speed', 'shiword_sticky_pause' )
+							'sub' => array( 'shiword_sticky_front', 'shiword_sticky_pages', 'shiword_sticky_posts', 'shiword_sticky_over', '', 'shiword_sticky_height', '', 'shiword_sticky_author', '', 'shiword_sticky_speed', 'shiword_sticky_pause' )
 						),
 		'shiword_sticky_front' =>
 						array(
@@ -880,6 +880,15 @@ function shiword_get_coa( $option = false ) {
 							'req' => 'shiword_I_like_it',
 							'sub' => false
 		),
+		'shiword_audio_player' =>
+						array(
+							'group' => 'other',
+							'type' => 'chk',
+							'default' => 1,
+							'description' => __( 'swf audio player', 'shiword' ),
+							'info' => __( 'embed an audio player before the post content for linked mp3 files', 'shiword' ),
+							'req' => ''
+						),
 		'shiword_lang_code' =>
 						array(
 							'group' => 'other',
@@ -906,7 +915,7 @@ function shiword_get_coa( $option = false ) {
 							'description' => __( 'theme credits', 'shiword' ),
 							'info' => __( "please, don't hide theme credits. TwoBeers.net's authors reserve themselfs to give support only to those who recognize TwoBeers work, keeping TwoBeers.net credits visible on their site.", 'shiword' ),
 							'req' => ''
-						)
+		)
 	);
 
 	if ( $option )

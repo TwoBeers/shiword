@@ -41,20 +41,20 @@
 						<?php } ?>
 						</div>
 						<p class="attachment"><a href="<?php echo wp_get_attachment_url(); ?>" title="<?php _e( 'View full size','shiword' ) ;  // link to Full size image ?>" rel="attachment"><?php
-							$sw_attachment_width  = apply_filters( 'shiword_attachment_size', 9999 );
-							$sw_attachment_height = apply_filters( 'shiword_attachment_height', 9999 );
-							echo wp_get_attachment_image( $post->ID, array( $sw_attachment_width, $sw_attachment_height ) ); // filterable image width with, essentially, no limit for image height.
+							echo wp_get_attachment_image( $post->ID, 'full' );
 						?></a></p>
+						<?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?>
+						<?php if ( !empty( $post->post_content ) ) the_content(); ?>
 					<?php } else { ?>
-						<?php if ( ! shiword_add_audio_player( '<a href="' . wp_get_attachment_url() . '">link</a>' ) ) { ?>
-							<a href="<?php echo wp_get_attachment_url(); ?>" title="<?php echo esc_attr( strip_tags( get_the_title() ) ); ?>" rel="attachment"><?php echo wp_basename( wp_get_attachment_url() ); ?></a>
-						<?php } ?>
+						<?php echo wp_get_attachment_link( $post->ID, 'thumbnail', 0, 1 ); ?> 
+						<div class="entry-caption"><?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?></div>
 					<?php } ?>
 				</div><!-- .entry-attachment -->
-				<div class="entry-caption"><?php if ( !empty( $post->post_content ) ) the_content(); ?></div>
 			</div>
 			<div class="fixfloat"> </div>
 		</div>
+
+		<?php shiword_hook_after_post(); ?>
 
 		<?php shiword_get_sidebar( 'single' ); // show single widget area ?>
 

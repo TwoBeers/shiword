@@ -107,15 +107,15 @@ jQuery(document).ready(function($){
 		$(window).scroll(function () {
 			// check for top action
 			if ($(this).scrollTop() > 100) {
-				top_but.fadeIn();
+				top_but.slideDown();
 			} else {
-				top_but.fadeOut();
+				top_but.slideUp();
 			}
 			// check for bottom action
 			if ( $('body').height()-$(window).scrollTop()-$(window).height() < 100) {
-				bot_but.fadeOut();
+				bot_but.slideUp();
 			} else {
-				bot_but.fadeIn();
+				bot_but.slideDown();
 			}
 
 		});

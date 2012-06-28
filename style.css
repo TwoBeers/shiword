@@ -2,7 +2,7 @@
 Theme Name: Shiword
 Theme URI: http://www.twobeers.net/annunci/shiword
 Description: Simple dark theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, a post slideshow, the custom header, the print preview and many other. Shiword is fully customizable (there's also a skin builder!), with one or two columns, up to 6 widgets areas, six custom widgets ( "Social links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories", "Latest comment authors" and "Recent Posts in Category" ) and two menu. It supports custom menus, posts thumbnail and post formats. WP3.4 compatible.
-Version: 3.03.2
+Version: 3.04
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, right-sidebar, custom-colors, custom-background, editor-style, rtl-language-support, post-formats
 Author: TwoBeers Crew
 Author URI: http://www.twobeers.net/
@@ -430,6 +430,11 @@ input[type=password]:focus {
 	border: 5px solid #ccc;
 	padding: 0;
 }
+.menuback.custom-element {
+	height: auto;
+	bottom: auto;
+	margin-top: -54px;
+}
 .mi_shadowed {
 	-moz-box-shadow: 1px 1px 4px #000;
 	-webkit-box-shadow: 1px 1px 4px #000;
@@ -446,9 +451,7 @@ input[type=password]:focus {
 .menu_sx {
 	height: 200px;
 	width: 423px;
-	position: absolute;
-	top: 0;
-	left: 0;
+	position: relative;
 	padding: 0;
 }
 .menu_sx > ul {
@@ -1008,13 +1011,6 @@ span.lc-user-name {
 	border-radius: 5px;
 	margin: 0 10px;
 }
-.swf-audio-player{
-	border-radius: 5px;
-	border: 1px solid #404040;
-	margin: 5px 0;
-	padding: 5px;
-	text-align: center;
-}
 .sw-status-image {
 	float: left;
 }
@@ -1116,6 +1112,38 @@ span.lc-user-name {
 }
 .h2-ext-link:hover {
     background-color: #ff8d39;
+}
+/* Audio player
+----------------------------------------------------------*/
+.sw-player-container {
+	margin-bottom: 20px;
+	width: 300px;
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid #404040;
+}
+.single-attachment .sw-player-container {
+	margin: 20px auto;
+}
+.sw-player-container:hover {
+	border: 1px solid #777;
+}
+.sw-player-content {
+	margin-top: 10px;
+}
+.sw-player-notice {
+    background: #262626;
+    border-radius: 4px;
+    color: #eee;
+    display: block;
+    line-height: 25px;
+    text-align: center;
+}
+.sw-media-player video {
+	padding: 15px;
+	margin: 10px;
+	border: 1px solid #ccc;
+	background: #eee;
 }
 /* comments 
 ----------------------------------------------------------*/

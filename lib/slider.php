@@ -42,7 +42,10 @@ if ( !function_exists( 'shiword_slider_page_style' ) ) {
 // display a slideshow for the selected posts
 if ( !function_exists( 'shiword_slider' ) ) {
 	function shiword_slider() {
-		global $post, $shiword_opt;
+		global $post, $shiword_opt, $shiword_is_printpreview;
+		
+		if ( $shiword_is_printpreview ) return; // no slider in print preview
+		
 		$posts_list = get_option( 'shiword_slideshow' ); //get the selected posts list
 		if ( !isset( $posts_list ) || empty( $posts_list ) ) return; // if no post is selected, exit
 		$posts_string = 'include=' . implode( "," , $posts_list ) . '&post_type=any'; // generate the 'include' string for posts
