@@ -1,8 +1,8 @@
 ﻿/*
 Theme Name: Shiword
 Theme URI: http://www.twobeers.net/annunci/shiword
-Description: Simple dark theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, a post slideshow, the custom header, the print preview and many other. Shiword is fully customizable (there's also a skin builder!), with one or two columns, up to 6 widgets areas, six custom widgets ( "Social links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories", "Latest comment authors" and "Recent Posts in Category" ) and two menu. It supports custom menus, posts thumbnail and post formats. WP3.4 compatible.
-Version: 3.04
+Description: Simple dark theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, a post slideshow, the custom header, the print preview and many other. Shiword is fully customizable (there's also a skin builder!), with one or two columns, up to 6 widgets areas, six custom widgets ( "Social links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories", "Latest comment authors" and "Recent Posts in Category" ) and two menu. It supports custom menus, posts thumbnail and post formats.
+Version: 4.00
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, right-sidebar, custom-colors, custom-background, editor-style, rtl-language-support, post-formats
 Author: TwoBeers Crew
 Author URI: http://www.twobeers.net/
@@ -1046,42 +1046,6 @@ span.lc-user-name {
 	font-size: 1.8em;
 	margin-top: 0;
 }
-.sw-icon-aside {
-	background: url('images/iconsweets2/formats.png') no-repeat scroll 0px 0px transparent;
-    padding-left: 24px;
-}
-.sw-icon-audio {
-	background: url('images/iconsweets2/formats.png') no-repeat scroll 0px -100px transparent;
-    padding-left: 24px;
-}
-.sw-icon-gallery {
-	background: url('images/iconsweets2/formats.png') no-repeat scroll 0px -200px transparent;
-    padding-left: 24px;
-}
-.sw-icon-image {
-	background: url('images/iconsweets2/formats.png') no-repeat scroll 0px -300px transparent;
-    padding-left: 24px;
-}
-.sw-icon-link {
-	background: url('images/iconsweets2/formats.png') no-repeat scroll 0px -400px transparent;
-    padding-left: 24px;
-}
-.sw-icon-quote {
-	background: url('images/iconsweets2/formats.png') no-repeat scroll 0px -500px transparent;
-    padding-left: 24px;
-}
-.sw-icon-status {
-	background: url('images/iconsweets2/formats.png') no-repeat scroll 0px -600px transparent;
-    padding-left: 24px;
-}
-.sw-icon-video {
-	background: url('images/iconsweets2/formats.png') no-repeat scroll 0px -700px transparent;
-    padding-left: 24px;
-}
-.attachment .storytitle {
-	background: url('images/iconsweets2/formats.png') no-repeat scroll 0px -800px transparent;
-    padding-left: 24px;
-}
 .sw-has-thumb .storytitle {
 	background: transparent;
     padding-left: 0;
@@ -1108,7 +1072,7 @@ span.lc-user-name {
 }
 .h2-ext-link {
     background-color: #21759b;
-    vertical-align: text-bottom;
+    vertical-align: middle;
 }
 .h2-ext-link:hover {
     background-color: #ff8d39;
@@ -1147,6 +1111,9 @@ span.lc-user-name {
 }
 /* comments 
 ----------------------------------------------------------*/
+#comment {
+	width: 95%
+}
 .comment,
 .trackback,
 .pingback {
@@ -1806,3 +1773,40 @@ img.wp-post-image {
 #entry-author-info span {
 	color:#404040;
 }
+body .gcard {
+	z-index: 301;
+}
+
+/* Jetpack Infinite Scroll 
+----------------------------------------------------------*/
+#infinite-handle {
+	text-align: center;
+}
+.infinite-loader {
+	color: #CCCCCC;
+}
+.infinite-loader .spinner {
+	left: 260px !important;
+}
+.page-reminder {
+	text-align: center;
+	margin-bottom: 40px;
+}
+.page-reminder span {
+	background: none repeat scroll 0 0 #333333;
+	border: 1px solid #303030;
+	border-radius: 2px 2px 2px 2px;
+	color: #CCCCCC;
+	font-size: 1.2em;
+	font-weight: 400;
+	padding: 6px 26px;
+}
+.infinite-wrap:nth-last-child(2) .page-reminder span.next {
+	display: none;
+}
+
+
+
+
+
+

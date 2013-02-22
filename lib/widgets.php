@@ -869,6 +869,7 @@ class shiword_Widget_share_this extends WP_Widget {
 		'Orkut' => array( 'Orkut', 'http://promote.orkut.com/preview?nt=orkut.com&tt=%1$s&du=%2$s&tn=%3$s' ),
 		'Bookmarks' => array( 'Bookmarks', 'https://www.google.com/bookmarks/mark?op=edit&bkmk=%2$s&title=%1$s' ),
 		'Blogger' => array( 'Blogger', 'http://www.blogger.com/blog_this.pyra?t&u=%2$s&n=%1$s&pli=1' ),
+		'Delicious' => array( 'Delicious', 'http://delicious.com/save?v=5&noui&jump=close&url=%2$s&title=%1$s' ),
 	);
 	
 	var $default_icon_size = array ( '16', '24', '32', '48', '64' );

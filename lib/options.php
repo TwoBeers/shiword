@@ -10,6 +10,19 @@
 //complete options array, with type, defaults values, description, infos and required option
 function shiword_get_coa( $option = false ) {
 
+	$shiword_groups = array(
+							'other' => __( 'other' , 'shiword' ),
+							'mobile' => __( 'mobile' , 'shiword' ),
+							'slideshow' => __( 'slideshow' , 'shiword' ),
+							'sidebar' => __( 'sidebar' , 'shiword' ),
+							'postformats' => __( 'post formats' , 'shiword' ),
+							'fonts' => __( 'fonts' , 'shiword' ),
+							'content' => __( 'content' , 'shiword' ),
+							'navigation' => __( 'navigation' , 'shiword' )
+	);
+
+	$shiword_groups = apply_filters( 'shiword_options_groups', $shiword_groups );
+
 	$shiword_coa = array(
 		'shiword_qbar' => 
 						array(
@@ -170,14 +183,25 @@ function shiword_get_coa( $option = false ) {
 							'info' => __( 'show the post title using the featured image as background (the image must be at least 700x200px)', 'shiword' ),
 							'req' => ''
 						),
+		'shiword_manage_blank_titles' =>
+						array(
+							'group' => 'content',
+							'type' => 'chk',
+							'default' => 1,
+							'description' => __( 'blank titles', 'shiword' ),
+							'info' => __( 'set a standard text for blank titles', 'shiword' ),
+							'req' => '',
+							'sub' => array('shiword_blank_title')
+						),
 		'shiword_blank_title' =>
 						array(
 							'group' => 'content',
 							'type' => 'txt',
 							'default' => __( '(no title)', 'shiword' ),
-							'description' => __( 'blank titles', 'shiword' ),
-							'info' => __( 'set the standard text for blank titles. you may use these codes:<br /><code>%d</code> for post date<br /><code>%f</code> for post format (if any)', 'shiword' ),
-							'req' => ''
+							'description' => __( 'format', 'shiword' ),
+							'info' => __( 'you may use these codes: <code>%d</code> date, <code>%f</code> format (if any), <code>%n</code> ID', 'shiword' ),
+							'req' => '',
+							'sub' => false
 						),
 		'shiword_xcont' =>
 						array(
@@ -533,7 +557,7 @@ function shiword_get_coa( $option = false ) {
 							'type' => 'chk',
 							'default' => 0,
 							'description' => __( 'Slideshow', 'shiword' ),
-							'info' => sprintf( __( 'slideshow for your most important posts/pages. Select them <a href="%s">here</a>', 'shiword' ), get_admin_url() . 'themes.php?page=tb_shiword_slideshow' ),
+							'info' => sprintf( __( 'a slideshow for your most important posts/pages. Select them in <a href="%s">posts</a> list or in <a href="%s">pages</a> list by clicking "Add to Slideshow" link for each post/page you wanto to add. A small icon %s will appear beside the title. Click "Remove from Slideshow" to remove', 'shiword' ), admin_url( 'edit.php' ), admin_url( 'edit.php?post_type=page' ), '<img src="' . get_template_directory_uri().'/images/inslider.png" alt="in slider" />' ),
 							'req' => 'shiword_jsani',
 							'sub' => array( 'shiword_sticky_front', 'shiword_sticky_pages', 'shiword_sticky_posts', 'shiword_sticky_over', '', 'shiword_sticky_height', '', 'shiword_sticky_author', '', 'shiword_sticky_speed', 'shiword_sticky_pause' )
 						),
@@ -801,15 +825,6 @@ function shiword_get_coa( $option = false ) {
 							'req' => '',
 							'sub' => false
 						),
-		'shiword_custom_login' =>
-						array(
-							'group' => 'other',
-							'type' => 'chk',
-							'default' => 1,
-							'description' => __( 'custom login page', 'shiword' ),
-							'info' => __( "enhanced style for the login/register page", 'shiword' ),
-							'req' => ''
-						),
 		'shiword_I_like_it' =>
 						array(
 							'group' => 'other',
@@ -895,7 +910,7 @@ function shiword_get_coa( $option = false ) {
 							'type' => 'txt',
 							'default' => WPLANG,
 							'description' => __( 'language code', 'shiword' ),
-							'info' => 'this will override the language settings of the front side of your site',
+							'info' => __( 'this will override the language settings of the front side of your site', 'shiword' ),
 							'req' => ''
 		),
 		'shiword_custom_css' =>
@@ -918,11 +933,32 @@ function shiword_get_coa( $option = false ) {
 		)
 	);
 
-	if ( $option )
+	$shiword_coa = apply_filters( 'shiword_options_array', $shiword_coa );
+
+	if ( $option == 'groups' )
+		return $shiword_groups;
+	elseif ( $option )
 		return $shiword_coa[$option];
 	else
 		return $shiword_coa;
 
 }
 
-?>
+// retrive the required option. I the option ain't set, the default value is returned
+if ( !function_exists( 'shiword_get_opt' ) ) {
+	function shiword_get_opt( $opt ) {
+		global $shiword_opt;
+
+		if ( isset( $shiword_opt[$opt] ) ) return $shiword_opt[$opt];
+
+		$defopt = shiword_get_coa( $opt );
+
+		if ( ! $defopt ) return null;
+
+		if ( ( $defopt['req'] == '' ) || ( shiword_get_opt( $defopt['req'] ) ) )
+			return $defopt['default'];
+		else
+			return null;
+
+	}
+}

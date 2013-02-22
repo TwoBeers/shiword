@@ -5,12 +5,10 @@ add_action( 'template_redirect', 'shiword_init_audio_player' );
 // setup for audio player
 if ( !function_exists( 'shiword_init_audio_player' ) ) {
 	function shiword_init_audio_player(){
-		global $shiword_is_printpreview, $shiword_is_mobile_browser;
 
-		if ( is_admin() || $shiword_is_mobile_browser || $shiword_is_printpreview || !is_singular() ) return;
+		if ( is_admin() || shiword_is_mobile() || shiword_is_printpreview() ) return;
 
-		add_action( 'wp_head', 'shiword_localize_audio_player' );
-		add_action( 'shiword_hook_after_post', 'shiword_add_audio_player' );
+		add_action( 'shiword_hook_entry_bottom', 'shiword_add_audio_player' );
 
 	}
 }
@@ -18,30 +16,16 @@ if ( !function_exists( 'shiword_init_audio_player' ) ) {
 // add scripts
 if ( !function_exists( 'shiword_audioplayer_scripts' ) ) {
 	function shiword_audioplayer_scripts(){
-		global $shiword_version;
+		global $shiword_version, $shiword_colors;
 
-		wp_enqueue_script( 'sw-audioplayer', get_template_directory_uri() . '/js/audio-player.min.js', array( 'jquery', 'swfobject' ), $shiword_version, true  );
-
-	}
-}
-
-// initialize scripts
-if ( !function_exists( 'shiword_localize_audio_player' ) ) {
-	function shiword_localize_audio_player(){
-		global $shiword_colors;
-
-?>
-
-<script type="text/javascript">
-	/* <![CDATA[ */
-		sw_unknown_media_format = "<?php _e( 'unknown media format', 'shiword' ); ?>";
-		sw_SWFPlayer = "<?php echo get_template_directory_uri().'/resources/audio-player/player.swf'; ?>";
-		sw_righticon = "<?php echo str_replace("#", "", $shiword_colors['main3']); ?>";
-		sw_righticonhover = "<?php echo str_replace("#", "", $shiword_colors['main4']); ?>";
-	/* ]]> */
-</script>
-
-<?php
+		wp_enqueue_script( 'shiword-audioplayer-script', get_template_directory_uri() . '/js/audio-player.dev.js', array( 'jquery', 'swfobject' ), $shiword_version, true  );
+		$data = array(
+			'unknown_media' => __( 'unknown media format', 'shiword' ),
+			'player_path' => get_template_directory_uri().'/resources/audio-player/player.swf',
+			'icon_color' => str_replace("#", "", $shiword_colors['main3']),
+			'icon_hover_color' => str_replace("#", "", $shiword_colors['main4']),
+		);
+		wp_localize_script( 'shiword-audioplayer-script', 'shiwordAudioPlayer_l10n', $data );
 
 	}
 }

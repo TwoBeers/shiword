@@ -58,7 +58,7 @@ shiwordOptions = {
 	//show only a set of rows
 	switchTab : function (thisset) {
 		thisclass = '.sw-tabgroup-' + thisset;
-		thissel = '.sw-selgroup-' + thisset;
+		thissel = '#selgroup-' + thisset;
 		$('.sw-tab-opt').css({ 'display' : 'none' });
 		$(thisclass).css({ 'display' : '' });
 		$('#sw-tabselector li').removeClass("sel-active");

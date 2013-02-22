@@ -11,8 +11,8 @@
 			<?php echo shiword_mobile_seztitle( 'before' ) . '&copy; ' . date( 'Y' ) . ' - ' . get_bloginfo( 'name' ) . shiword_mobile_seztitle( 'after' ); ?>
 			<p id="themecredits">
 				Powered by <a href="http://wordpress.org"><strong>WordPress</strong></a> and <a href="http://www.twobeers.net/"><strong>Shiword</strong></a>
-				<br/>
-				<br/>
+				<br>
+				<br>
 				<?php wp_loginout(); wp_register(' | ', ''); ?><?php echo ' | <a href="' . home_url() . '?mobile_override=desktop">'. __('Desktop View','shiword') .'</a>'; ?>
 			</p>
 		</div>

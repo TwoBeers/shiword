@@ -3,38 +3,45 @@
 .wrap {
 }
 #sw-icon {
-    background: url("../images/logo-34.png") no-repeat scroll center center transparent;
+	background: url("../images/logo-34.png") no-repeat scroll center center transparent;
 }
-#stylediv h3 {
-    color: #FFFFFF;
+.stylediv {
+	border-top: 1px solid #DFDFDF;
+	clear: both;
+	margin-top: 20px;
+	padding-top: 10px;
+	text-align: center;
 }
 #shiword-infos ul {
-    list-style: disc outside none;
-    margin-left: 30px;
+	list-style: disc outside none;
+	margin-left: 30px;
 }
-#shiword-options p, #shiword-infos p {
-    display: block;
-    margin: 15px 0 3px;
-    padding: 3px;
+#shiword-options p,
+#shiword-infos p {
+	display: block;
+	margin: 15px 0 3px;
+	padding: 3px;
 }
-#shiword-options h3, #shiword-infos h3 {
-    background-color: #E9E9E9;
-    border: 1px solid #DFDFDF;
-    border-radius: 5px 5px 5px 5px;
-    box-shadow: 1px 1px 0 #FFFFFF;
-    font-weight: bold;
-    padding: 3px;
+#shiword-options h3,
+#shiword-infos h3 {
+	background-color: #E9E9E9;
+	border: 1px solid #DFDFDF;
+	border-radius: 5px 5px 5px 5px;
+	box-shadow: 1px 1px 0 #FFFFFF;
+	font-weight: bold;
+	padding: 3px;
 }
-#shiword-options, #shiword-infos {
-    background: none repeat scroll 0 0 #F8F8F8;
-    border-top: 1px solid #FFFFFF;
-    margin: 40px 0 0;
-    padding: 10px 0 0;
-    position: relative;
+#shiword-options,
+#shiword-infos {
+	background: none repeat scroll 0 0 #fcfcfc;
+	border-top: 1px solid #FFFFFF;
+	margin: 40px 0 0;
+	padding: 10px 0 0;
+	position: relative;
 	box-shadow: 0 -1px 0 #DFDFDF;
 }
 #shiword-infos {
-    padding: 20px;
+	padding: 20px;
 }
 
 #selector {
@@ -44,103 +51,108 @@
 	background-image: -webkit-gradient(linear,left top,left bottom,from(#F9F9F9),to(#E9E9E9)) !important;
 	background-image: -webkit-linear-gradient(top,#F9F9F9,#E9E9E9) !important;
 	background-image: linear-gradient(top,#F9F9F9,#E9E9E9) !important;
-    font-family: georgia;
-    font-size: 15px;
-    font-weight: normal;
-    list-style: none outside none;
-    overflow: hidden;
-    padding: 0 10px 1px;
-    text-shadow: 0 1px 0 #FFFFFF;
-    border-radius: 5px 5px 0 0;
+	font-family: georgia;
+	font-size: 15px;
+	font-weight: normal;
+	list-style: none outside none;
+	overflow: hidden;
+	padding: 0 10px 1px;
+	text-shadow: 0 1px 0 #FFFFFF;
+	border-radius: 5px 5px 0 0;
 }
 #selector a {
-    display: block;
-    min-width: 150px;
-    padding: 5px;
-    text-decoration: none;
+	display: block;
+	min-width: 150px;
+	padding: 5px;
+	text-decoration: none;
 }
 #selector li {
-    border-radius: 0 0 5px 5px;
-    border: 1px solid #DFDFDF;
+	border-radius: 0 0 5px 5px;
+	border: 1px solid #DFDFDF;
 	border-top: none;
-    box-shadow: 1px 1px 0 #FFFFFF;
-    float: left;
-    margin: 0 5px 0 0;
-    white-space: nowrap;
+	box-shadow: 1px 1px 0 #FFFFFF;
+	float: left;
+	margin: 0 5px 0 0;
+	white-space: nowrap;
 }
 .js #selector li {
-    opacity: 0.5;
+	opacity: 0.5;
 	filter: alpha(opacity=50);
 }
 
 #selector li span.wp-menu-image {
-    float: left;
-    height: 16px;
-    width: 28px;
+	float: left;
+	height: 16px;
+	width: 28px;
 }
 #shiword-options-li span.wp-menu-image {
-    background: url("") no-repeat scroll -244px -39px transparent;
+	background: url("") no-repeat scroll -244px -39px transparent;
 }
-#shiword-options-li a:hover span.wp-menu-image, #shiword-options-li.tab-selected span.wp-menu-image {
-    background: url("") no-repeat scroll -244px -7px transparent;
+#shiword-options-li a:hover span.wp-menu-image,
+#shiword-options-li.tab-selected span.wp-menu-image {
+	background: url("") no-repeat scroll -244px -7px transparent;
 }
 #shiword-infos-li span.wp-menu-image {
-    background: url("") no-repeat scroll -34px -39px transparent;
+	background: url("") no-repeat scroll -34px -39px transparent;
 }
-#shiword-infos-li a:hover span.wp-menu-image, #shiword-infos-li.tab-selected span.wp-menu-image {
-    background: url("") no-repeat scroll -34px -7px transparent;
+#shiword-infos-li a:hover span.wp-menu-image,
+#shiword-infos-li.tab-selected span.wp-menu-image {
+	background: url("") no-repeat scroll -34px -7px transparent;
 }
 #selector li.tab-selected {
-    opacity: 1;
+	opacity: 1;
 	filter: alpha(opacity=100);
 	background: #E9E9E9;
 }
 #tabs-container {
-    background: none repeat scroll 0 0 #E9E9E9;
-    border: 1px solid #DFDFDF;
-    border-radius: 5px 5px 0 0;
-    margin: 20px 0 10px;
+	background: none repeat scroll 0 0 #E9E9E9;
+	border: 1px solid #DFDFDF;
+	border-radius: 5px 5px 0 0;
+	margin: 20px 0 10px;
 }
-#sw-tabselector, #selector {
-    margin: 0;
+#sw-tabselector,
+#selector {
+	margin: 0;
 }
 .tab-hidden {
-    display: none;
+	display: none;
 }
-.tab-selected a, .tab-selected a:hover, .tab-selected a:focus {
-    color: #464646;
+.tab-selected a,
+.tab-selected a:hover,
+.tab-selected a:focus {
+	color: #464646;
 }
 #sw-tabselector {
-    position: absolute;
-    right: 0;
-    text-align: center;
-    top: -32px;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: -32px;
 }
 #sw-tabselector a {
-    text-decoration: none;
+	text-decoration: none;
 }
 #sw-tabselector li {
-    border-radius: 5px 5px 0 0;
-    float: right;
-    font-weight: bold;
-    height: 30px;
-    line-height: 30px;
-    margin-right: 5px;
-    min-width: 60px;
-    padding: 0 5px;
+	border-radius: 5px 5px 0 0;
+	float: right;
+	font-weight: bold;
+	height: 30px;
+	line-height: 30px;
+	margin-right: 5px;
+	min-width: 60px;
+	padding: 0 5px;
 	text-shadow: 1px 1px 0 #FFFFFF;
 }
 #sw-tabselector li.sel-active {
-    background: #F8F8F8;
+	background: #fcfcfc;
 	border: 1px solid #DFDFDF;
-	border-bottom-color: #F8F8F8;
+	border-bottom-color: #fcfcfc;
 	
 }
 #sw-tabselector li.sel-active a {
-    color: #333333;
+	color: #333333;
 }
 #sw-submit {
-    padding: 20px;
+	padding: 20px;
 	background: #E9E9E9;
 }
 #sw-submit a {
@@ -150,42 +162,42 @@
 }
 
 .column-nam {
-    font-size: 1.1em;
-    font-weight: bold;
+	font-size: 1.1em;
+	font-weight: bold;
 }
 .sw-sub-opt-nam {
-    font-weight: bold;
+	font-weight: bold;
 }
 .column-des {
-    border-top: 1px solid #EEEEEE;
-    font-size: 11px;
-    margin-top: 10px;
+	border-top: 1px solid #EEEEEE;
+	font-size: 11px;
+	margin-top: 10px;
 }
 .column-req {
-    color: #999999;
-    float: right;
+	color: #999999;
+	float: right;
 }
 .sw-tab-opt {
-    border-bottom: 1px solid #DFDFDF;
-    padding: 20px;
+	border-bottom: 1px solid #DFDFDF;
+	padding: 20px;
 }
 .sw-tab-opt:hover {
-    background: #EEEEEE;
+	background: #f5f5f5;
 }
 .sw-sub-opt {
-    font-size: 11px;
-    margin-top: 10px;
+	font-size: 11px;
+	margin-top: 10px;
 }
 .sw-colorpicker {
-    background: none repeat scroll 0 0 #EEEEEE;
-    border: 1px solid #CCCCCC;
-    position: absolute;
-    z-index: 100;
+	background: none repeat scroll 0 0 #f5f5f5;
+	border: 1px solid #CCCCCC;
+	position: absolute;
+	z-index: 100;
 }
 .sw-color {
-    background-image: url("../images/color_wheel.png");
-    background-position: right center;
-    background-repeat: no-repeat;
+	background-image: url("../images/color_wheel.png");
+	background-position: right center;
+	background-repeat: no-repeat;
 }
 .sw-tab-opt textarea {
 	vertical-align: middle;
@@ -193,7 +205,7 @@
 	width: 50%;
 }
 #shiword-options code {
-    background: #ddd;
+	background: #ddd;
 }
 label img {
 	vertical-align: middle;

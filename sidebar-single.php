@@ -1,3 +1,15 @@
+<?php
+/**
+ * sidebar-single.php
+ *
+ * Template part file that contains the widget area for
+ * single posts/pages
+ *
+ * @package shiword
+ * @since shiword 3.00
+ */
+?>
+
 <!-- here should be the Single widget area -->
 <?php
 	/* The Single widget area is triggered if any of the areas have widgets. */
@@ -7,8 +19,13 @@
 ?>
 
 <div id="single-widget-area">
-	<?php if ( is_active_sidebar( 'single-widget-area' ) ) { ?>
-		<?php dynamic_sidebar( 'single-widget-area' ); ?>
-	<?php } ?>
-	<div class="fixfloat"></div> 
-</div><!-- #single-widget-area -->
+
+	<div class="fixfloat"><?php shiword_hook_sidebar_top(); ?></div> 
+
+	<div><?php dynamic_sidebar( 'single-widget-area' ); ?></div>
+
+	<div class="fixfloat"><?php shiword_hook_sidebar_bottom(); ?></div> 
+
+</div>
+
+<!-- end Single widget area -->

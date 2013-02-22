@@ -1,0 +1,9 @@
+span.slideshow a.remove {
+	color: #D98500;
+}
+span.slideshow a.add {
+	color: #006505;
+}
+span.slideshow a:hover {
+	color: #D54E21
+}

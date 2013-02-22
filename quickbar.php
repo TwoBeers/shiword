@@ -2,6 +2,12 @@
 /**
  * The fixed footer
  *
+ * This file contains the code for every element in
+ * the fixed footer:
+ * - quickbar
+ * - statusbar
+ * - navigation buttons
+ *
  * @package Shiword
  * @since Shiword 3.0
  */
@@ -13,12 +19,12 @@
  */
 if ( !function_exists( 'shiword_fixed_footer' ) ) {
 	function shiword_fixed_footer() {
-		global $shiword_is_printpreview;
 		
-		if ( $shiword_is_printpreview ) return; // useless in print preview
+		if ( shiword_is_printpreview() ) return; // useless in print preview
 ?>
 
 <!-- begin fixed footer -->
+
 <div id="fixedfoot_cont">
 	<div id="fixedfoot_bg">
 		<div id="fixedfoot" class="pad_bg">
@@ -33,6 +39,7 @@ if ( !function_exists( 'shiword_fixed_footer' ) ) {
 </div>
 
 <!-- end fixed footer -->
+
 <?php
 	}
 }
@@ -51,6 +58,7 @@ if ( !function_exists( 'shiword_qbar' ) ) {
 ?>
 
 <!-- begin quickbar -->
+
 <div id="quickbar">
 
 <?php
@@ -178,6 +186,7 @@ if ( !function_exists( 'shiword_qbar' ) ) {
 		</div>
 	<?php } ?>
 </div>
+
 <!-- end quickbar -->
 
 <?php
@@ -196,12 +205,14 @@ if ( !function_exists( 'shiword_statusbar' ) ) {
 ?>
 
 <!-- begin statusbar -->
+
 <div id="statusbar">
 	<?php if ( $shiword_opt['shiword_welcome'] == 1 ) { ?>
 		<?php printf( __( 'Welcome %s', 'shiword' ), ( is_user_logged_in() ) ? $current_user->display_name : '' ); ?>, <?php printf( __('today is %1$s, %2$s','shiword'), date_i18n( __( 'l','shiword' ) ), date_i18n( get_option( 'date_format' ) ) ); ?>
 	<?php } ?>
 	<?php shiword_hook_statusbar(); ?>
 </div>
+
 <!-- end statusbar -->
 
 <?php	
@@ -215,16 +226,16 @@ if ( !function_exists( 'shiword_statusbar' ) ) {
  */
 if ( !function_exists( 'shiword_navbuttons' ) ) {
 	function shiword_navbuttons( $print = 1, $comment = 1, $feed = 1, $trackback = 1, $home = 1, $next_prev = 1, $up_down = 1 ) {
-		global $post, $shiword_opt, $shiword_is_allcat_page;
+		global $post, $shiword_opt;
 
 		if ( $shiword_opt['shiword_navbuttons'] == 0 ) return;
 
 		wp_reset_postdata();
 		
-		$is_post = is_single() && !is_attachment() && !$shiword_is_allcat_page;
-		$is_image = is_attachment() && !$shiword_is_allcat_page;
-		$is_page = is_singular() && !is_single() && !is_attachment() && !$shiword_is_allcat_page;
-		$is_singular = is_singular() && !$shiword_is_allcat_page;
+		$is_post = is_single() && !is_attachment() && !shiword_is_allcat();
+		$is_image = is_attachment() && !shiword_is_allcat();
+		$is_page = is_singular() && !is_single() && !is_attachment() && !shiword_is_allcat();
+		$is_singular = is_singular() && !shiword_is_allcat();
 
 ?>
 
@@ -322,7 +333,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php } ?>
 
 	<?php // ------- Newer Posts -------
-		if ( $shiword_opt['shiword_navbuttons_newold'] && $next_prev && !$is_singular && !$shiword_is_allcat_page && get_previous_posts_link() ) { ?>
+		if ( $shiword_opt['shiword_navbuttons_newold'] && $next_prev && !$is_singular && !shiword_is_allcat() && get_previous_posts_link() ) { ?>
 		<div class="minibutton">
 			<?php previous_posts_link( '<span class="minib_img minib_ppages">&nbsp;</span>' ); ?>
 			<span class="nb_tooltip"><?php echo __( 'Newer Posts', 'shiword' ); ?></span>
@@ -330,7 +341,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php } ?>
 
 	<?php // ------- Older Posts -------
-		if ( $shiword_opt['shiword_navbuttons_newold'] && $next_prev && !$is_singular && !$shiword_is_allcat_page && get_next_posts_link() ) { ?>
+		if ( $shiword_opt['shiword_navbuttons_newold'] && $next_prev && !$is_singular && !shiword_is_allcat() && get_next_posts_link() ) { ?>
 		<div class="minibutton">
 			<?php next_posts_link( '<span class="minib_img minib_npages">&nbsp;</span>' ); ?>
 			<span class="nb_tooltip"><?php echo __( 'Older Posts', 'shiword' ); ?></span>

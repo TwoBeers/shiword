@@ -1,10 +1,21 @@
-<?php get_header(); //shows "all categories" page ?>
 <?php
-	global $shiword_opt;
-	$sw_use_side = ( $shiword_opt['shiword_rsideb'] == 0 ) ? false : true; 
-	$sw_postswidth = ( $sw_use_side ) ? 'posts_narrow' : 'posts_wide';
+/**
+ * allcat.php
+ *
+ * The template file used to display the whole category list 
+ * as a page.
+ *
+ * @package shiword
+ * @since shiword 1.00
+ */
 ?>
-<div class="<?php echo $sw_postswidth; ?>">
+
+<?php get_header(); ?>
+
+<?php shiword_get_layout(); ?>
+
+<div class="<?php shiword_content_class(); ?>">
+
 	<div class="post">
 
 		<h2 class="storytitle"><?php _e( 'Categories', 'shiword' ); ?></h2>
@@ -22,8 +33,9 @@
 		</div>
 
 	</div>
+
 </div>
 
-<?php if ( $sw_use_side ) shiword_get_sidebar(); // show sidebar ?>
+<?php shiword_get_sidebar(); // show sidebar ?>
 
 <?php get_footer(); ?>

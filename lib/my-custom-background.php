@@ -62,8 +62,7 @@ if ( !function_exists( 'shiword_add_custom_background' ) ) {
 // custom background style (enhanced) - gets included in the site header
 if ( !function_exists( 'shiword_custom_bg_plus' ) ) {
 	function shiword_custom_bg_plus() {
-		global $shiword_is_printpreview, $shiword_is_mobile_browser;
-		if ( $shiword_is_printpreview || $shiword_is_mobile_browser ) return;
+		if ( shiword_is_printpreview() || shiword_is_mobile() ) return;
 
 		$background = get_background_image();
 		$color = get_background_color();
@@ -87,8 +86,7 @@ if ( !function_exists( 'shiword_custom_bg_plus' ) ) {
 // custom background style - gets included in the site header
 if ( !function_exists( 'shiword_custom_bg' ) ) {
 	function shiword_custom_bg() {
-		global $shiword_is_printpreview, $shiword_is_mobile_browser;
-		if ( $shiword_is_printpreview || $shiword_is_mobile_browser ) return;
+		if ( shiword_is_printpreview() || shiword_is_mobile() ) return;
 
 		$color = get_background_color();
 		if ( ! $color ) return;
@@ -325,7 +323,7 @@ if ( get_background_image() ) {
 <td>
 <form method="post" action="">
 <?php wp_nonce_field('custom-background-remove', '_wpnonce-custom-background-remove'); ?>
-<?php submit_button( __( 'Restore Original Image', 'shiword' ), 'button', 'remove-background', false ); ?><br/>
+<?php submit_button( __( 'Restore Original Image', 'shiword' ), 'button', 'remove-background', false ); ?><br>
 <?php _e('This will restore the original background image.', 'shiword') ?>
 </form>
 </td>

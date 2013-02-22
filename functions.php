@@ -1,101 +1,156 @@
 <?php
-/**** begin theme hooks ****/
-// Tell WordPress to run shiword_setup() when the 'after_setup_theme' hook is run.
-add_action( 'after_setup_theme', 'shiword_setup' );
-// Tell WordPress to run shiword_default_options()
-add_action( 'admin_init', 'shiword_default_options' );
-// Register sidebars by running shiword_widgets_init() on the widgets_init hook
-add_action( 'widgets_init', 'shiword_widgets_init' );
-// Add stylesheets
-add_action( 'wp_enqueue_scripts', 'shiword_stylesheet' );
-// Add js animations
-add_action( 'wp_enqueue_scripts', 'shiword_scripts' );
-// Add custom category page
-add_action( 'template_redirect', 'shiword_allcat' );
-// Add the "quote" link
-add_action( 'wp_footer', 'shiword_quote_scripts' );
-// Add the "quote" link
-add_action( 'wp_footer', 'shiword_detect_js' );
-// load "like" badges js
-add_action( 'wp_footer', 'shiword_I_like_it_js' );
-// stylesheet for ie6
-add_action( 'wp_head', 'shiword_ie6_style' );
-// deregister styles
-add_action( 'wp_print_styles', 'shiword_deregister_styles', 100 );
-// add links to admin bar
-add_action('admin_bar_menu', 'shiword_admin_bar_plus', 999);  
-// Custom filters
+/* theme hooks */
+
+add_action( 'after_setup_theme', 'shiword_setup' ); // Tell WordPress to run shiword_setup() when the 'after_setup_theme' hook is run.
+
+add_action( 'admin_init', 'shiword_default_options' ); // Tell WordPress to run shiword_default_options()
+
+add_action( 'widgets_init', 'shiword_widgets_init' ); // Register sidebars by running shiword_widgets_init() on the widgets_init hook
+
+add_action( 'wp_enqueue_scripts', 'shiword_stylesheet' ); // Add stylesheets
+
+add_action( 'wp_enqueue_scripts', 'shiword_scripts' ); // Add js animations
+
+add_action( 'template_redirect', 'shiword_allcat' ); // Add custom category page
+
+add_action( 'wp_footer', 'shiword_detect_js' ); // Add the "quote" link
+
+add_action( 'wp_footer', 'shiword_I_like_it_js' ); // load "like" badges js
+
+add_action( 'wp_head', 'shiword_ie6_style' ); // stylesheet for ie6
+
+add_action( 'wp_print_styles', 'shiword_deregister_styles', 100 ); // deregister styles
+
+add_action( 'admin_bar_menu', 'shiword_admin_bar_plus', 999 ); // add links to admin bar
+
+add_action( 'init', 'shiword_infinite_scroll_init' ); // Jetpack Infinite Scroll
+
+add_action( 'infinite_scroll_render', 'shiword_infinite_scroll_pageinfo' ); // Jetpack Infinite Scroll
+
+add_action( 'comment_form_before', 'shiword_enqueue_comments_reply' );
+
+add_action( 'wp_head', 'shiword_microdata' ); // site microdata
+
+add_action( 'shiword_hook_header_after', 'shiword_main_menu', 11 ); // the main menu
+
+add_action( 'shiword_hook_comments_list_before', 'shiword_navigate_comments' ); // comments navigation
+
+add_action( 'shiword_hook_comments_list_after', 'shiword_navigate_comments' ); // comments navigation
+
+add_action( 'shiword_hook_comments_list_after', 'shiword_list_pings' ); // list pings
+
+add_action( 'shiword_hook_attachment_before', 'shiword_navigate_images' ); // attachments (images) navigation
+
+
+/* Custom filters */
+
 add_filter( 'locale', 'shiword_theme_localized' );
+
 add_filter( 'embed_oembed_html', 'shiword_wmode_transparent', 10, 3);
+
 add_filter( 'excerpt_length', 'shiword_excerpt_length' );
+
+add_filter( 'excerpt_mblength' , 'shiword_excerpt_length' ); //WP Multibyte Patch support - thanks to gdgd_hirahira (http://www.gdgd.ebiplan.com/)
+
 add_filter( 'get_comment_author_link', 'shiword_add_quoted_on' );
+
 add_filter( 'user_contactmethods','shiword_new_contactmethods',10,1 );
+
 add_filter( 'img_caption_shortcode', 'shiword_img_caption_shortcode', 10, 3 );
+
 add_filter( 'avatar_defaults', 'shiword_addgravatar' );
+
 add_filter( 'get_comments_number', 'shiword_comment_count', 0);
+
 add_filter( 'the_title', 'shiword_title_tags_filter', 10, 2 );
+
 add_filter( 'excerpt_more', 'shiword_new_excerpt_more' );
+
 add_filter( 'the_content_more_link', 'shiword_more_link', 10, 2 );
+
 add_filter( 'get_search_form', 'shiword_search_form' );
-// custom gallery shortcode function
-remove_shortcode( 'gallery', 'gallery_shortcode' );
-add_shortcode( 'gallery', 'shiword_gallery_shortcode' );
-// Add custom login
-add_action( 'login_head', 'shiword_custom_login_css' );
-/**** end theme hooks ****/
 
-//load options
+add_filter( 'post_gallery', 'shiword_gallery_shortcode', 10, 2 );
+
+add_filter( 'posts_orderby', 'shiword_sort_query_by_post_in', 10, 2 );
+
+add_filter( 'wp_title', 'shiword_filter_wp_title', 10, 2 );
+
+add_filter( 'body_class' , 'shiword_filter_body_class' );
+
+add_filter( 'comment_form_default_fields', 'shiword_comments_form_fields');
+
+add_filter( 'comment_form_defaults', 'shiword_comment_form_defaults' );
+
+
+/* load options */
+
 $shiword_opt = get_option( 'shiword_options' );
-$shiword_is_mobile_browser = false;
 
-// load modules (accordingly to http://justintadlock.com/archives/2010/11/17/how-to-load-files-within-wordpress-themes)
+
+/* theme infos */
+
+$shiword_theme = wp_get_theme( 'shiword' );
+$shiword_current_theme = wp_get_theme();
+$shiword_version = $shiword_theme? $shiword_theme['Version'] : '';
+
+
+/* load modules (accordingly to http://justintadlock.com/archives/2010/11/17/how-to-load-files-within-wordpress-themes) */
+
+$shiword_is_mobile = false;
 require_once('mobile/core-mobile.php'); // load mobile functions
+
 require_once('lib/custom-device-color.php'); // load custom colors module
+
 require_once('lib/my-custom-background.php'); // load custom background module
+
 require_once('lib/options.php'); // load theme default options
+
 require_once('lib/admin.php'); // load admin stuff
+
 require_once('lib/slider.php'); // load slider stuff
+
 require_once('lib/hooks.php'); // load custom hooks
+
 require_once('quickbar.php'); // load quickbar functions
+
 if ( $shiword_opt['shiword_custom_widgets'] == 1 ) require_once('lib/widgets.php'); // load custom widgets module
-require_once('lib/gallery.php'); // gallery shortcode editor
+
 if ( isset( $shiword_opt['shiword_audio_player'] ) && ($shiword_opt['shiword_audio_player'] == 1 ) ) require_once( 'lib/audio-player.php' ); // load the audio player module
 
-/**** begin theme checks ****/
 
-// check if in preview mode or not
-$shiword_is_printpreview = false; 
-if ( isset( $_GET['style'] ) && md5( $_GET['style'] ) == '8e77921d24c6f82c4bd783895e9d9cf1' ) { //print preview
-	$shiword_is_printpreview = true;
+/* conditional tags */
+
+function shiword_is_mobile() { // mobile
+	global $shiword_is_mobile;
+	return $shiword_is_mobile;
 }
 
-// check if is "all category" page
-$shiword_is_allcat_page = false; 
-if ( isset( $_GET['allcat'] ) && ( md5( $_GET['allcat'] ) == '415290769594460e2e485922904f345d' ) ) {
-	$shiword_is_allcat_page = true;
+function shiword_is_printpreview() { //print preview
+	static $is_printpreview;
+	if ( !isset( $is_printpreview ) ) {
+		$is_printpreview = isset( $_GET['style'] ) && md5( $_GET['style'] ) == '8e77921d24c6f82c4bd783895e9d9cf1' ? true : false;
+	}
+	return $is_printpreview;
 }
-/**** end theme checks ****/
+
+function shiword_is_allcat() { //is "all category" page
+	static $is_allcat;
+	if ( !isset( $is_allcat ) ) {
+		$is_allcat = isset( $_GET['allcat'] ) && md5( $_GET['allcat'] ) == '415290769594460e2e485922904f345d' ? true : false;
+	}
+	return $is_allcat;
+}
 
 
 // Set the content width based on the theme's design
 if ( ! isset( $content_width ) ) {
-	if ( ! $shiword_is_mobile_browser ) {
+	if ( ! shiword_is_mobile() ) {
 		$content_width = $shiword_opt['shiword_frame_width'] - 290;
 	} else {
 		$content_width = 300;
 	}
 }
-
-// get theme version
-if ( function_exists( 'wp_get_theme' ) ) {
-	$shiword_theme = wp_get_theme( 'shiword' );
-	$shiword_current_theme = wp_get_theme();
-} else { // Compatibility with versions of WordPress prior to 3.4.
-	$shiword_theme = get_theme( 'Shiword' );
-	$shiword_current_theme = get_current_theme();
-}
-$shiword_version = $shiword_theme? $shiword_theme['Version'] : '';
-
 
 if ( !function_exists( 'shiword_widgets_init' ) ) {
 	function shiword_widgets_init() {
@@ -183,24 +238,30 @@ if ( !function_exists( 'shiword_widgets_init' ) ) {
 // skip every sidebar if in print preview
 if ( !function_exists( 'shiword_get_sidebar' ) ) {
 	function shiword_get_sidebar( $name = '' ) {
-		global $shiword_is_printpreview;
-		
-		if ( $shiword_is_printpreview ) return;
-		
+
+		if ( shiword_is_printpreview() ) return;
+
+		if ( $name == '' && shiword_get_layout() == 'wide' ) return;
+
+		shiword_hook_sidebars_before();
+
 		get_sidebar( $name );
-		
+
+		shiword_hook_sidebars_after();
+
 	}
 }
 
 // Add stylesheets to page
 if ( !function_exists( 'shiword_stylesheet' ) ) {
 	function shiword_stylesheet(){
-		global $shiword_version, $shiword_is_printpreview, $shiword_is_mobile_browser, $shiword_opt;
+		global $shiword_version, $shiword_opt;
+
 		if ( is_admin() ) return;
-		if ( $shiword_is_mobile_browser ) return;
+		if ( shiword_is_mobile() ) return;
 		
 		//shows print preview / normal view
-		if ( $shiword_is_printpreview ) { //print preview
+		if ( shiword_is_printpreview() ) { //print preview
 			wp_enqueue_style( 'sw-print-style-preview', get_template_directory_uri() . '/css/print.css', false, $shiword_version, 'screen' );
 			wp_enqueue_style( 'sw-general-style-preview', get_template_directory_uri() . '/css/print_preview.css', false, $shiword_version, 'screen' );
 		} else { //normal view
@@ -209,42 +270,84 @@ if ( !function_exists( 'shiword_stylesheet' ) ) {
 			wp_enqueue_style( 'sw-general-style', get_stylesheet_uri(), false, $shiword_version, 'screen' );
 		}
 		//google font
-		if ( $shiword_opt['shiword_google_font_family'] ) wp_enqueue_style( 'sw-google-fonts', 'http://fonts.googleapis.com/css?family=' . str_replace( ' ', '+' , $shiword_opt['shiword_google_font_family'] ) );
+		if ( $shiword_opt['shiword_google_font_family'] ) wp_enqueue_style( 'sw-google-fonts', 'http://fonts.googleapis.com/css?family=' . urlencode( $shiword_opt['shiword_google_font_family'] ) );
 		//print style
 		wp_enqueue_style( 'sw-print-style', get_template_directory_uri() . '/css/print.css', false, $shiword_version, 'print' );
+
 	}
 }
 
 if ( !function_exists( 'shiword_ie6_style' ) ) {
 	function shiword_ie6_style() {
+
 		?>
 			<!--[if lte IE 6]><link media="screen" rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/ie6.css" type="text/css" /><![endif]-->
 		<?php
+
 	}
 }
 
 // deregister style for WP-Pagenavi plugin (if installed)
 function shiword_deregister_styles() {
+
 	wp_deregister_style( 'wp-pagenavi' );
+
+}
+
+// get js modules
+if ( !function_exists( 'shiword_get_js_modules' ) ) {
+	function shiword_get_js_modules() {
+		global $shiword_opt;
+
+		$modules = array(
+			'main_menu',
+			'navigation_buttons',
+			'quickbar_panels',
+			'entry_meta',
+			'widgets_style',
+		);
+		
+		//if ( $shiword_opt['shiword_post_expand'] )				$modules[] = 'post_expander';
+		if ( $shiword_opt['shiword_thickbox'] )						$modules[] = 'thickbox';
+		if ( $shiword_opt['shiword_quotethis'] && is_singular() )	$modules[] = 'quote_this';
+
+		$modules = implode(',', $modules);
+
+		return $modules;
+
+	}
 }
 
 // add scripts
 if ( !function_exists( 'shiword_scripts' ) ) {
 	function shiword_scripts(){
-		global $shiword_opt, $shiword_is_printpreview, $shiword_version, $shiword_is_mobile_browser;
-		if ( $shiword_is_mobile_browser || is_admin() || $shiword_is_printpreview ) return;
+		global $shiword_opt, $shiword_version;
+
+		if ( shiword_is_mobile() || is_admin() || shiword_is_printpreview() ) return;
+
 		if ($shiword_opt['shiword_jsani'] == 1) {
-			wp_enqueue_script( 'sw-animations', get_template_directory_uri().'/js/animations.min.js',array('jquery'),$shiword_version, false ); //shiword js
+			wp_enqueue_script( 'shiword-script', get_template_directory_uri().'/js/animations.dev.js',array('jquery'),$shiword_version, false ); //shiword js
+			$data = array(
+				'script_modules' => shiword_get_js_modules(),
+				'post_expander_wait' => __( 'Post loading, please wait...', 'shiword' ),
+				'quote_link_text' => __( 'Quote', 'shiword' ),
+				'quote_link_info' => esc_attr( __( 'Add selected text as a quote', 'shiword' ) ),
+				'quote_link_alert' => __( 'Nothing to quote. First of all you should select some text...', 'shiword' )
+			);
+			wp_localize_script( 'shiword-script', 'shiword_l10n', $data );
 		}
+
 		//thickbox script
 		if ( ( $shiword_opt['shiword_thickbox'] == 1 ) ) wp_enqueue_script( 'thickbox' );
+
 	}
 }
 
 // detect js
 if ( !function_exists( 'shiword_detect_js' ) ) {
 	function shiword_detect_js(){
-		?>
+
+?>
 <script type="text/javascript">
 	/* <![CDATA[ */
 	(function(){
@@ -254,85 +357,152 @@ if ( !function_exists( 'shiword_detect_js' ) ) {
 	})();
 	/* ]]> */
 </script>
-		<?php
+<?php
+
 	}
+}
+
+//enqueue the 'comment-reply' script when needed
+function shiword_enqueue_comments_reply() {
+
+	if( get_option( 'thread_comments' ) )
+		wp_enqueue_script( 'comment-reply' );
+
 }
 
 // show all categories list (redirect to allcat.php if allcat=y)
 if ( !function_exists( 'shiword_allcat' ) ) {
 	function shiword_allcat () {
-		global $shiword_is_allcat_page;
-		if ( $shiword_is_allcat_page ) {
+
+		if ( shiword_is_allcat() ) {
 			locate_template( array( 'allcat.php' ), true, false );
 			exit;
 		}
-	}
-}
 
-// add "quote" link
-if ( !function_exists( 'shiword_quote_scripts' ) ) {
-	function shiword_quote_scripts(){
-		global $shiword_opt, $shiword_is_mobile_browser;
-		if ( !is_admin() && ( $shiword_opt['shiword_quotethis'] == 1 ) && !$shiword_is_mobile_browser && is_singular() ) {
-		?>
-			<script type="text/javascript">
-				/* <![CDATA[ */
-				if ( document.getElementById('reply-title') && document.getElementById("comment") ) {
-					sw_qdiv = document.createElement('small');
-					sw_qdiv.innerHTML = ' - <a href="#" onclick="sw_quotethis(); return false" title="Add selected text as quote" ><?php _e( 'Quote', 'shiword' ); ?></a>';
-					sw_replink = document.getElementById('reply-title');
-					sw_replink.appendChild(sw_qdiv);
-				}
-				function sw_quotethis() {
-					var posttext = '';
-					if (window.getSelection){
-						posttext = window.getSelection();
-					}
-					else if (document.getSelection){
-						posttext = document.getSelection();
-					}
-					else if (document.selection){
-						posttext = document.selection.createRange().text;
-					}
-					else {
-						return true;
-					}
-					posttext = posttext.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-					if ( posttext.length !== 0 ) {
-						document.getElementById("comment").value = document.getElementById("comment").value + '<blockquote>' + posttext + '</blockquote>';
-					} else {
-						alert("<?php _e( 'Nothing to quote. You must select some text...', 'shiword' ) ?>");
-					}
-				}
-				/* ]]> */
-			</script>
-		<?php
-		}
 	}
 }
 
 // Pages Menu
 if ( !function_exists( 'shiword_pages_menu' ) ) {
 	function shiword_pages_menu() {
+
 		echo '<div id="sw-pri-menu" class="sw-menu"><ul id="mainmenu">';
 		wp_list_pages( 'sort_column=menu_order&title_li=' ); // menu-order sorted
 		echo '</ul></div>';
+
 	}
 }
 
+// print the next/prev post links
 if ( !function_exists( 'shiword_navlinks' ) ) {
 	function shiword_navlinks( $position = 'top' ) {
-		global $shiword_opt, $shiword_is_printpreview;
-		if ( !$shiword_opt['shiword_navlinks'] || $shiword_is_printpreview ) return;
+		global $shiword_opt;
+
+		if ( ! $shiword_opt['shiword_navlinks'] || shiword_is_printpreview() ) return;
+
 		$sep = ( get_next_post() && get_previous_post() ) ? ' - ' : '';
+
 		?>
 			<div class="sw-navlinks-<?php echo $position; ?>">
 				<?php previous_post_link('<span class="prev">&laquo; %link</span>'); ?>
 				<?php echo $sep; ?>
 				<?php next_post_link('<span class="next">%link &raquo;</span>'); ?>
-			<div class="fixfloat"> </div>
+				<div class="fixfloat"> </div>
 			</div>
 		<?php
+
+	}
+}
+
+// print the next/prev posts page links
+if ( !function_exists( 'shiword_paged_navi' ) ) {
+	function shiword_paged_navi() {
+		global $shiword_opt, $paged, $wp_query;
+
+		if ( ! $shiword_opt['shiword_navlinks'] || shiword_is_printpreview() ) return;
+
+		$has_infinite_scroll = class_exists( 'The_Neverending_Home_Page' ) ? ' hide-if-js ' : '';
+
+		if ( !$paged )
+			$paged = 1;
+
+		if ( function_exists( 'wp_pagenavi' ) ) {
+			$links = wp_pagenavi( 'echo=false' ); 
+		} else {
+			$links = sprintf( '<span>' . __( 'page %1$s of %2$s', 'shiword' ) . '</span>', $paged, $wp_query->max_num_pages );
+			if ( $shiword_opt['shiword_navlinks'] == 1 )
+				get_previous_posts_link( '&laquo;' ) . $links . get_next_posts_link( '&raquo;' );
+		} 
+
+		?>
+			<div class="navigate_comments<?php echo $has_infinite_scroll; ?>">
+				<?php echo apply_filters( 'shiword_filter_paged_navi', $links ); ?>
+			</div>
+		<?php 
+
+	}
+}
+
+// comments navigation links
+if ( !function_exists( 'shiword_navigate_comments' ) ) {
+	function shiword_navigate_comments() {
+
+		if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) { ?>
+
+			<div class="navigate_comments">
+				<?php paginate_comments_links(); ?>
+			</div>
+
+		<?php }
+	}
+}
+
+// images navigation links
+if ( !function_exists( 'shiword_navigate_images' ) ) {
+	function shiword_navigate_images() {
+		global $post;
+
+		$attachments = array_values( get_children( array( 'post_parent' => $post->post_parent, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID' ) ) );
+
+		foreach ( $attachments as $key => $attachment ) {
+			if ( $attachment->ID == $post->ID )
+				break;
+		}
+
+		$prev_k = $key - 1;
+		$next_k = $key + 1;
+
+		$prev_image = ( isset( $attachments[ $prev_k ] ) ) ? '<a class="size-thumbnail" href="' . get_attachment_link( $attachments[ $prev_k ]->ID ) . '">&laquo; ' . wp_get_attachment_image( $attachments[ $prev_k ]->ID, array( 50, 50 ) ) . '</a>' : '';
+
+		$next_image = ( isset( $attachments[ $next_k ] ) ) ? '<a class="size-thumbnail" href="' . get_attachment_link( $attachments[ $next_k ]->ID ) . '">' . wp_get_attachment_image( $attachments[ $next_k ]->ID, array( 50, 50 ) ) . ' &raquo;</a>' : '';
+
+		?>
+			<div class="img-navi">
+
+				<?php echo $prev_image; ?>
+				<span class="img-navi-curimg"><?php echo wp_get_attachment_image( $post->ID, array( 50, 50 ) ); ?></span>
+				<?php echo $next_image; ?>
+
+			</div>
+		<?php
+	}
+}
+
+// pings list
+if ( !function_exists( 'shiword_list_pings' ) ) {
+	function shiword_list_pings() {
+	global $post;
+
+	$comments_by_type = &separate_comments( get_comments( 'status=approve&post_id=' . $post->ID ) );
+
+	if ( ! empty( $comments_by_type['pings'] ) ) { ?>
+
+		<ol class="commentlist pings">
+			<?php wp_list_comments( 'type=pings' ); ?>
+		</ol>
+
+	<?php }
+
 	}
 }
 
@@ -340,6 +510,7 @@ if ( !function_exists( 'shiword_navlinks' ) ) {
 if ( !function_exists( 'shiword_multipages' ) ) {
 	function shiword_multipages( $r_pos ){
 		global $post;
+
 		$args = array(
 			'post_type' => 'page',
 			'post_parent' => $post->ID,
@@ -376,34 +547,45 @@ if ( !function_exists( 'shiword_multipages' ) ) {
 			$has_herarchy = true;
 		}
 		return $has_herarchy;
+
 	}
 }
 
 //add "like" badges to post/page
 if ( !function_exists( 'shiword_I_like_it' ) ) {
 	function shiword_I_like_it(){
-		global $shiword_opt, $post, $shiword_is_printpreview;
-		if ( $shiword_is_printpreview ) return;
+		global $shiword_opt, $post;
+
+		if ( shiword_is_printpreview() ) return;
 		if ( $shiword_opt['shiword_I_like_it'] == 0 ) return;
-		if ( ( $shiword_opt['shiword_I_like_it_plus1'] == 0 ) && ( $shiword_opt['shiword_I_like_it_twitter'] == 0 ) && ( $shiword_opt['shiword_I_like_it_facebook'] == 0 ) && ( $shiword_opt['shiword_I_like_it_linkedin'] == 0 ) && ( $shiword_opt['shiword_I_like_it_stumbleupon'] == 0 ) && ( ( $shiword_opt['shiword_I_like_it_pinterest']	== 0 ) || ( ( $shiword_opt['shiword_I_like_it_pinterest']	== 1 ) && !is_attachment() ) ) ) return;
-		?>
-		<div class="sw-I-like-it">
-			<?php if ( $shiword_opt['shiword_I_like_it_plus1']		== 1 ) { ?><div class="sw-I-like-it-button"><div class="g-plusone" data-size="medium" data-href="<?php the_permalink(); ?>"></div></div><?php } ?>
-			<?php if ( $shiword_opt['shiword_I_like_it_twitter']		== 1 ) { ?><div class="sw-I-like-it-button"><div class="t-twits"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php the_permalink(); ?>" data-text="<?php echo get_the_title() . ': ' . home_url() . '/?p=' . get_the_ID(); ?>" data-count="horizontal"></a></div></div><?php } ?>
-			<?php if ( $shiword_opt['shiword_I_like_it_facebook']		== 1 ) { ?><div class="sw-I-like-it-button"><div class="fb-like" data-href="<?php the_permalink(); ?>" data-send="false" data-layout="button_count" data-show-faces="false"></div></div><?php } ?>
-			<?php if ( $shiword_opt['shiword_I_like_it_linkedin']		== 1 ) { ?><div class="sw-I-like-it-button"><script type="IN/Share" data-url="<?php the_permalink(); ?>" data-counter="right"></script></div><?php } ?>
-			<?php if ( $shiword_opt['shiword_I_like_it_stumbleupon']	== 1 ) { ?><div class="sw-I-like-it-button"><script src="http://www.stumbleupon.com/hostedbadge.php?s=1&r=<?php the_permalink(); ?>"></script></div><?php } ?>
-			<?php if ( ( $shiword_opt['shiword_I_like_it_pinterest']	== 1 ) && is_attachment() && ( wp_attachment_is_image() ) ) { ?><div class="sw-I-like-it-button"><a href="http://pinterest.com/pin/create/button/?url=<?php echo urlencode( get_permalink() ); ?>&media=<?php echo urlencode( wp_get_attachment_url() ); ?>&description=<?php echo urlencode( $post->post_excerpt ); ?>" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a></div><?php } ?>
-			<div class="fixfloat"> </div>
-		</div>
-		<?php
+
+		$text = '';
+
+		if ( $shiword_opt['shiword_I_like_it_plus1'] == 1 )
+			$text .='<div class="sw-I-like-it-button"><div class="g-plusone" data-size="medium" data-href="' . urlencode( get_permalink() ) . '"></div></div>';
+		if ( $shiword_opt['shiword_I_like_it_twitter'] == 1 )
+			$text .='<div class="sw-I-like-it-button"><div class="t-twits"><a href="https://twitter.com/share" class="twitter-share-button" data-url="' . urlencode( get_permalink() ) . '" data-text="' . urlencode( get_the_title() . ': ' . home_url() . '/?p=' . get_the_ID() ) . '" data-count="horizontal"></a></div></div>';
+		if ( $shiword_opt['shiword_I_like_it_facebook'] == 1 )
+			$text .='<div class="sw-I-like-it-button"><div class="fb-like" data-href="' . urlencode( get_permalink() ) . '" data-send="false" data-layout="button_count" data-show-faces="false"></div></div>';
+		if ( $shiword_opt['shiword_I_like_it_linkedin'] == 1 )
+			$text .='<div class="sw-I-like-it-button"><script type="IN/Share" data-url="' . urlencode( get_permalink() ) . '" data-counter="right"></script></div>';
+		if ( $shiword_opt['shiword_I_like_it_stumbleupon'] == 1 )
+			$text .='<div class="sw-I-like-it-button"><script src="http://www.stumbleupon.com/hostedbadge.php?s=1&r=' . urlencode( get_permalink() ) . '"></script></div>';
+		if ( ( $shiword_opt['shiword_I_like_it_pinterest'] == 1 ) && is_attachment() && ( wp_attachment_is_image() ) )
+			$text .='<div class="sw-I-like-it-button"><a href="http://pinterest.com/pin/create/button/?url=' . urlencode( get_permalink() ) . '&media=' . urlencode( wp_get_attachment_url() ) . '&description=' . urlencode( $post->post_excerpt ) . '" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a></div>';
+
+		if ( $text )
+			echo '<div class="sw-I-like-it">' . apply_filters( 'shiword_filter_like_it', $text ) . '<div class="fixfloat"> </div></div>';
+
 	}
 }
 
 if ( !function_exists( 'shiword_I_like_it_js' ) ) {
 	function shiword_I_like_it_js(){
 		global $shiword_opt;
+
 ?>
+
 <?php if ( $shiword_opt['shiword_I_like_it_plus1'] == 1 ) { ?>
 	<script type="text/javascript">
 		(function() {
@@ -440,6 +622,7 @@ if ( !function_exists( 'shiword_I_like_it_js' ) ) {
 <?php } ?>
 
 <?php
+
 	}
 }
 
@@ -448,11 +631,9 @@ if ( !function_exists( 'shiword_extrainfo' ) ) {
 	function shiword_extrainfo( $args = '' ) {
 		global $shiword_opt;
 
-		
 		$defaults = array( 'auth' => 1, 'date' => 1, 'comms' => 1, 'tags' => 1, 'cats' => 1, 'hiera' => 1, 'in_index' => 1 );
 		$args = wp_parse_args( $args, $defaults );
 
-		
 		//xinfos disabled when...
 		if ( ! $shiword_opt['shiword_xinfos_global'] ) return; //xinfos globally disabled
 		if ( is_front_page() && ( get_option( 'show_on_front' ) == 'page') ) return; // is front page
@@ -460,7 +641,7 @@ if ( !function_exists( 'shiword_extrainfo' ) ) {
 		if ( ! is_singular() && ! $args['in_index'] ) return; // !'in_index' + is index
 
 		$r_pos = 10;
-		
+
 		// animated xinfos
 		if ( $shiword_opt['shiword_xinfos_static'] == 0 ) {
 		?>
@@ -549,6 +730,7 @@ if ( !function_exists( 'shiword_extrainfo' ) ) {
 			</div>
 		<?php
 		}
+
 	}
 }
 
@@ -556,21 +738,22 @@ if ( !function_exists( 'shiword_extrainfo' ) ) {
 if ( !function_exists( 'shiword_search_reminder' ) ) {
 	function shiword_search_reminder() {
 		global $shiword_opt;
+
 		$type = '';
 		if ( is_archive() ) {
-		
+
 			if ( is_category() )	$type = __( 'Category', 'shiword' );
 			elseif ( is_tag() )		$type = __( 'Tag', 'shiword' );
 			elseif ( is_date() )	$type = __( 'Date', 'shiword' );
 			elseif ( is_author() )	$type = __( 'Author', 'shiword' );
 			elseif ( is_tax() )		$type = __( 'Taxonomy', 'shiword' );
-			
+
 			if ( $type ) $type = sprintf( 'Archive for %1$s : %2$s', $type, '<span class="sw-search-term">' . wp_title( '',false ) . '</span>');
-			
+
 		} elseif ( is_search() ) {
-		
+
 			$type = sprintf( __( 'Search results for &#8220;%s&#8221;', 'shiword' ), '<span class="sw-search-term">' . esc_html( get_search_query() ) . '</span>' );
-			
+
 		}
 		if ( $type ) { 
 			?>
@@ -579,7 +762,7 @@ if ( !function_exists( 'shiword_search_reminder' ) ) {
 			</div>
 			<?php
 		}
-		
+
 		if ( ( $shiword_opt['shiword_cat_description'] == 1 ) && is_category() && category_description() ) { 
 			?>
 			<div class="meta">
@@ -587,7 +770,7 @@ if ( !function_exists( 'shiword_search_reminder' ) ) {
 			</div>
 			<?php
 		}
-		
+
 		if ( is_author() ) shiword_post_details( array( 'date' => 0, 'tags' => 0, 'categories' => 0 ) );
 
 	}
@@ -596,6 +779,7 @@ if ( !function_exists( 'shiword_search_reminder' ) ) {
 // add a fix for embed videos
 if ( !function_exists( 'shiword_wmode_transparent' ) ) {
 	function shiword_wmode_transparent($html, $url, $attr) {
+
 		if ( strpos( $html, '<embed ' ) !== false ) {
 			$html = str_replace('</param><embed', '</param><param name="wmode" value="transparent"></param><embed', $html);
 			$html = str_replace('<embed ', '<embed wmode="transparent" ', $html);
@@ -604,6 +788,7 @@ if ( !function_exists( 'shiword_wmode_transparent' ) ) {
 			return str_replace( 'feature=oembed', 'feature=oembed&wmode=transparent', $html );
 		else
 			return $html;
+
 	}
 }
 
@@ -611,6 +796,7 @@ if ( !function_exists( 'shiword_wmode_transparent' ) ) {
 if ( !function_exists( 'shiword_get_first_image' ) ) {
 	function shiword_get_first_image() {
 		global $post, $posts;
+
 		$first_info = array( 'img' => '', 'title' => '', 'src' => '',);
 		//search the images in post content
 		preg_match_all( '/<img[^>]+>/i',$post->post_content, $result );
@@ -632,6 +818,7 @@ if ( !function_exists( 'shiword_get_first_image' ) ) {
 		} else {
 			return false;
 		}
+
 	}
 }
 
@@ -639,6 +826,7 @@ if ( !function_exists( 'shiword_get_first_image' ) ) {
 if ( !function_exists( 'shiword_get_first_link' ) ) {
 	function shiword_get_first_link() {
 		global $post, $posts;
+
 		$first_info = array( 'anchor' => '', 'title' => '', 'href' => '', 'text' => '' );
 		//search the link in post content
 		preg_match_all( "/<a\b[^>]*>(.*?)<\/a>/i",$post->post_content, $result );
@@ -656,6 +844,7 @@ if ( !function_exists( 'shiword_get_first_link' ) ) {
 		} else {
 			return false;
 		}
+
 	}
 }
 
@@ -663,6 +852,7 @@ if ( !function_exists( 'shiword_get_first_link' ) ) {
 if ( !function_exists( 'shiword_get_blockquote' ) ) {
 	function shiword_get_blockquote() {
 		global $post, $posts;
+
 		$first_quote = array( 'quote' => '', 'cite' => '' );
 		//search the blockquote in post content
 		preg_match_all( '/<blockquote>([\w\W]*?)<\/blockquote>/',$post->post_content, $blockquote );
@@ -678,13 +868,15 @@ if ( !function_exists( 'shiword_get_blockquote' ) ) {
 		} else {
 			return false;
 		}
+
 	}
 }
 
 // get the post thumbnail or (if not set) the format related icon
 if ( !function_exists( 'shiword_get_the_thumb' ) ) {
-	function shiword_get_the_thumb( $id, $size_w, $size_h, $class, $default = '', $linked = false ) {
-		if ( has_post_thumbnail( $id ) ) {
+	function shiword_get_the_thumb( $id, $size_w, $size_h, $class, $default = '', $linked = false, $onlytype = false ) {
+
+		if ( has_post_thumbnail( $id ) && ! $onlytype ) {
 			$output = get_the_post_thumbnail( $id, array( $size_w,$size_h ), array( 'class' => $class ) );
 		} else {
 			if ( shiword_is_post_format_available( $id ) ) {
@@ -698,6 +890,7 @@ if ( !function_exists( 'shiword_get_the_thumb' ) ) {
 			return '<a href="' . get_permalink( $id ) . '" rel="bookmark">' . $output . '</a>';
 		else
 			return $output;
+
 	}
 }
 
@@ -711,15 +904,20 @@ if ( !function_exists( 'shiword_post_title' ) ) {
 
 		$post_title = $args['alternative'] ? $args['alternative'] : get_the_title();
 		$post_title = $post_title ? $post_title : $args['fallback'];
-		
+
 		$link_target = $args['target'] ? ' target="'.$args['target'].'"' : '';
-		
+
 		$has_format = shiword_is_post_format_available( $post->ID );
 		$has_featured_image = $args['featured'] && ( $shiword_opt['shiword_supadupa_title'] == 1 ) && has_post_thumbnail( $post->ID ) && ( $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), array( 700, 700 ) ) ) && ( $image[1] >= 700 ) && ( $image[2] >= 200 );
-		
-		$title_class = ( $has_format && !$has_featured_image ) ? ' sw-icon-' . get_post_format( $post->ID ) : '' ;
 
-		if ( $post_title ) $post_title = '<h2 class="storytitle entry-title' . $title_class . '">' . $args['extra'] . '<a title="' . $args['title'] . '" href="' . $args['href'] . '"' . $link_target . ' rel="bookmark">' . $post_title . '</a></h2>';
+		if ( ! $has_format || is_singular() || ( $shiword_opt['shiword_pthumb'] == 1 && ! has_post_thumbnail( $post->ID ) ) )
+			$miniicon = '';
+		else
+			$miniicon = shiword_get_the_thumb( $post->ID, 32, 32, 'alignleft','', true, true );
+
+		if ( $post_title ) $post_title = '<h2 class="storytitle entry-title">' . $miniicon . $args['extra'] . '<a title="' . $args['title'] . '" href="' . $args['href'] . '"' . $link_target . ' rel="bookmark">' . $post_title . '</a></h2>';
+
+		shiword_hook_post_title_before();
 
 		if ( $has_featured_image ) {
 			?>
@@ -731,6 +929,9 @@ if ( !function_exists( 'shiword_post_title' ) ) {
 		} else {
 			echo $post_title;
 		}
+
+		shiword_hook_post_title_after();
+
 	}
 }
 
@@ -767,11 +968,152 @@ if ( !function_exists( 'shiword_post_details' ) ) {
 			<?php } ?>
 			</div>
 		<?php } ?>
-		<?php if ( $args['categories'] ) { echo __( 'Categories', 'shiword' ) . ': '; the_category( ', ' ); echo '<br/>'; } ?>
-		<?php if ( $args['tags'] ) { echo __( 'Tags', 'shiword' ) . ': '; if ( !get_the_tags() ) { _e( 'No Tags', 'shiword' ); } else { the_tags('', ', ', ''); } echo '<br/>'; } ?>
+		<?php if ( $args['categories'] ) { echo __( 'Categories', 'shiword' ) . ': '; the_category( ', ' ); echo '<br>'; } ?>
+		<?php if ( $args['tags'] ) { echo __( 'Tags', 'shiword' ) . ': '; if ( !get_the_tags() ) { _e( 'No Tags', 'shiword' ); } else { the_tags('', ', ', ''); } echo '<br>'; } ?>
 		<?php if ( $args['date'] ) { printf( __( 'Published on: %1$s', 'shiword' ), get_the_time( get_option( 'date_format' ) ) ); } ?>
 		<?php
+
 	}
+}
+
+// theme credits
+if ( !function_exists( 'shiword_theme_credits' ) ) {
+	function shiword_theme_credits() {
+		global $shiword_opt, $shiword_version;
+
+	?>
+		&copy; <?php echo date( 'Y' ); ?> <strong><?php bloginfo( 'name' ); ?></strong>
+
+		<?php shiword_hook_change_view(); ?>
+
+		<?php if ( $shiword_opt['shiword_tbcred'] == 1 ) { ?>
+			<a href="http://www.twobeers.net/" title="Shiword theme<?php echo ' ' . $shiword_version; ?> by TwoBeers Crew">
+				<img alt="twobeers.net" src="<?php echo esc_url( get_template_directory_uri() . '/images/tb_micrologo.png' ); ?>" />
+			</a>
+			<a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress', 'shiword' ); ?>">
+				<img alt="WordPress" src="<?php echo esc_url( get_template_directory_uri() . '/images/wp_micrologo.png' ); ?>" />
+			</a>
+		<?php } ?>
+ <?php
+	
+	}
+}
+
+// return the classes of main content
+if ( !function_exists( 'shiword_content_class' ) ) {
+	function shiword_content_class( $class = array() ) {
+		global $shiword_opt;
+
+		if ( ! empty( $class ) ) {
+			if ( !is_array( $class ) )
+				$class = preg_split( '#[\s,]+#', $class );
+		}
+
+		if ( ( is_home() || is_search() || ( is_front_page() && get_option( 'show_on_front' )== 'posts' ) ) && $shiword_opt['shiword_pthumb'] == 1 )
+			$class[] = 'sw-has-thumb';
+
+		$class[] = 'posts_' . shiword_get_layout();
+
+		$class = array_map( 'esc_attr', $class );
+
+		$class = apply_filters( 'shiword_content_class', $class );
+
+		echo join( ' ', $class );
+
+	}
+}
+
+// return the current layout (wide/narrow)
+if ( !function_exists( 'shiword_get_layout' ) ) {
+	function shiword_get_layout( $page = '' ) {
+		global $shiword_opt;
+
+		static $layout;
+
+		if ( isset( $layout ) ) return apply_filters( 'shiword_get_layout', $layout );
+
+		$layout = 'narrow';
+
+		if (
+			( $shiword_opt['shiword_rsideb'] == 0 ) ||
+			( $shiword_opt['shiword_rsidebpages'] == 0 && $page == 'page' ) ||
+			( $shiword_opt['shiword_rsidebattachment'] == 0 && $page == 'attachment' ) ||
+			( $shiword_opt['shiword_rsidebposts'] == 0 && $page == 'post' ) ||
+			( $page == 'one-column' )
+		)
+			$layout = 'wide';
+
+		return apply_filters( 'shiword_get_layout', $layout );
+
+	}
+}
+
+// return the current post format
+if ( !function_exists( 'shiword_get_format' ) ) {
+	function shiword_get_format( $id = null ) {
+		global $post, $shiword_opt;
+
+		if ( $id == null ) $id = $post->ID;
+
+		if ( post_password_required( $id ) )
+			return 'protected';
+
+		$format = get_post_format( $id );
+
+		if ( ! $format )
+			return 'standard';
+
+		$format = ( isset( $shiword_opt['shiword_postformat_' . $format ] ) && $shiword_opt['shiword_postformat_' . $format ] == 1 ) ? $format : 'standard' ;
+
+		return $format;
+
+	}
+}
+
+// return the current post format
+if ( !function_exists( 'shiword_site_title' ) ) {
+	function shiword_site_title() {
+		global $shiword_opt;
+
+		if ( $shiword_opt['shiword_site_title'] )
+			echo '<h1><a href="' . home_url() . '/">' . get_bloginfo( 'name' ) . '</a></h1>';
+
+		if ( $shiword_opt['shiword_site_description'] )
+			echo '<div class="description">' . get_bloginfo( 'description' ) . '</div>';
+
+		?>
+			<div id="rss_imglink" class="minibutton">
+				<a href="<?php echo apply_filters( 'shiword_filter_rss_service', get_bloginfo( 'rss2_url' ) ); ?>" title="<?php _e( 'Syndicate this site using RSS 2.0', 'shiword' ); ?>">
+					<span class="minib_img">&nbsp;</span>
+				</a>
+			</div>
+		<?php
+
+	}
+}
+
+//print some microdata tags
+function shiword_microdata() {
+
+	if ( is_singular() ) { ?>
+		<meta itemprop="name" content="<?php the_title(); ?>">
+		<?php if( has_post_thumbnail() ) { $image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id() ); ?><meta itemprop="image" content="<?php echo $image_attributes[0]; ?>"><?php } ?>
+	<?php }
+
+}
+
+//the main menu
+function shiword_main_menu() {
+	global $shiword_opt;
+
+	if ( ! $shiword_opt['shiword_hide_primary_menu'] ) {
+
+		wp_nav_menu( array( 'container_class' => 'sw-menu', 'menu_id' => 'mainmenu', 'fallback_cb' => 'shiword_pages_menu', 'theme_location' => 'primary' ) );
+
+		shiword_hook_menu_after();
+
+	}
+
 }
 
 if ( !function_exists( 'shiword_setup' ) ) {
@@ -779,12 +1121,12 @@ if ( !function_exists( 'shiword_setup' ) ) {
 
 		global $shiword_opt;
 		// Make theme available for translation
-		
+
 		load_theme_textdomain( 'shiword', get_template_directory() . '/languages' );
 
 		// This theme uses post thumbnails
 		add_theme_support( 'post-thumbnails' );
-		
+
 		// Used for featured posts if a large-feature doesn't exist.
 		add_image_size( 'large-feature', 700, 300 );
 
@@ -834,12 +1176,14 @@ if ( !function_exists( 'shiword_setup' ) ) {
 				'description' => 'butterflies'
 			)
 		) );
+
 	}
 }
 
 //the custom header support
 if ( !function_exists( 'shiword_setup_custom_header' ) ) {
 	function shiword_setup_custom_header( $head_w, $head_h ) {
+
 		$args = array(
 			'width'					=> $head_w, // Header image width (in pixels)
 			'height'				=> $head_h, // Header image height (in pixels)
@@ -850,26 +1194,18 @@ if ( !function_exists( 'shiword_setup_custom_header' ) ) {
 			'admin-head-callback'	=> 'shiword_admin_header_style',
 			'flex-height'			=> true
 		);
-	 
+
 		$args = apply_filters( 'shiword_custom_header_args', $args );
-	 
-		if ( function_exists( 'get_custom_header' ) ) {
-			add_theme_support( 'custom-header', $args );
-		} else {
-			// Compatibility with versions of WordPress prior to 3.4.
-			define( 'HEADER_TEXTCOLOR',		$args['default-text-color'] );
-			define( 'NO_HEADER_TEXT',		$args['header-text'] );
-			define( 'HEADER_IMAGE',			$args['default-image'] );
-			define( 'HEADER_IMAGE_WIDTH',	$args['width'] );
-			define( 'HEADER_IMAGE_HEIGHT',	$args['height'] );
-			add_custom_image_header( $args['wp-head-callback'], $args['admin-head-callback'] );
-		}
+
+		add_theme_support( 'custom-header', $args );
+
 	}
 }
 
 // convert hex color value to rgba
 if ( !function_exists( 'shiword_hex2rgba' ) ) {
 	function shiword_hex2rgba($hex,$alpha) {
+
 		$color = str_replace('#','',$hex);
 		if ( $color == 'transparent' ) {
 			return 'transparent';
@@ -877,12 +1213,14 @@ if ( !function_exists( 'shiword_hex2rgba' ) ) {
 			$rgba = 'rgba(' . hexdec(substr($color,0,2)) . ',' . hexdec(substr($color,2,2)) . ',' . hexdec(substr($color,4,2)) . ',' . round(intval($alpha) / 100, 3) . ')';
 			return $rgba;
 		}
+
 	}
 }
 
 // get lightness of from rgb color
 if ( !function_exists( 'shiword_rgblight' ) ) {
 	function shiword_rgblight($hex) {
+
 		$color = str_replace('#','',$hex);
 		$rgba['r'] = hexdec(substr($color,0,2));
 		$rgba['g'] = hexdec(substr($color,2,2));
@@ -892,16 +1230,18 @@ if ( !function_exists( 'shiword_rgblight' ) ) {
 		$var_max = max( $rgba['r'], $rgba['g'], $rgba['b'] );	//max. value of rgb
 
 		$lightness = ( $var_max + $var_min ) / 2;
-		
+
 		return $lightness;
+
 	}
 }
 
 // custom header image style - gets included in the site header
 if ( !function_exists( 'shiword_header_style' ) ) {
 	function shiword_header_style() {
-		global $shiword_colors, $shiword_is_mobile_browser, $shiword_opt;
-		if ( $shiword_is_mobile_browser ) return;
+		global $shiword_colors, $shiword_opt;
+
+		if ( shiword_is_mobile() ) return;
 		$device_rgba = shiword_hex2rgba( $shiword_colors['device_color'], $shiword_colors['device_opacity']);
 		$head_h = function_exists( 'get_custom_header' ) ? get_custom_header()->height : HEADER_IMAGE_HEIGHT;
 	    ?>
@@ -1069,31 +1409,18 @@ if ( !function_exists( 'shiword_header_style' ) ) {
 		}
 	</style>
 	<![endif]-->
-	  <?php
+	<?php
+
 	}
 }
 
 //set the excerpt lenght
 if ( !function_exists( 'shiword_excerpt_length' ) ) {
 	function shiword_excerpt_length( $length ) {
+
 		global $shiword_opt;
 		return (int) $shiword_opt['shiword_xcont_lenght'];
-	}
-}
 
-//styles the login page
-if ( !function_exists( 'shiword_custom_login_css' ) ) {
-	function shiword_custom_login_css() {
-		global $shiword_opt, $shiword_is_mobile_browser;
-		
-		if ( $shiword_is_mobile_browser ) 
-			$css_file = '/mobile/login-mobile.css';
-		else
-			$css_file = '/css/login.css';
-			
-	    if ( ( $shiword_opt['shiword_custom_login'] == 1 ) || $shiword_is_mobile_browser ) echo '
-			<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . $css_file . '" />
-			<meta content="width = device-width" name="viewport">';
 	}
 }
 
@@ -1101,21 +1428,12 @@ if ( !function_exists( 'shiword_custom_login_css' ) ) {
 if ( !function_exists( 'shiword_admin_bar_plus' ) ) {
 	function shiword_admin_bar_plus() {
 		global $wp_admin_bar, $shiword_opt;
+
 		if ( !current_user_can( 'edit_theme_options' ) || !is_admin_bar_showing() )
 			return;
 		$add_menu_meta = array(
 			'target'    => '_blank'
 		);
-		// slideshow
-		if ( $shiword_opt['shiword_sticky'] == 1 ) {
-			$wp_admin_bar->add_menu(array(
-				'id'        => 'sw_slideshow',
-				'parent'    => 'appearance',
-				'title'     => __('Slideshow','shiword'),
-				'href'      => get_admin_url() . 'themes.php?page=tb_shiword_slideshow',
-				'meta'      => $add_menu_meta
-			));
-		}
 		$wp_admin_bar->add_menu(array(
 			'id'        => 'sw_theme_options',
 			'parent'    => 'appearance',
@@ -1123,6 +1441,7 @@ if ( !function_exists( 'shiword_admin_bar_plus' ) ) {
 			'href'      => get_admin_url() . 'themes.php?page=tb_shiword_functions',
 			'meta'      => $add_menu_meta
 		));
+
 	}
 }
 
@@ -1130,17 +1449,20 @@ if ( !function_exists( 'shiword_admin_bar_plus' ) ) {
 if ( !function_exists( 'shiword_add_quoted_on' ) ) {
 	function shiword_add_quoted_on( $return ) {
 		global $comment;
+
 		$text = '';
 		if ( get_comment_type() != 'comment' ) {
 			$text = '<span class="sw-quotedon">' . __( 'quoted on', 'shiword' ) . ' </span>';
 		}
 		return $text . $return;
+
 	}
 }
 
 // the real comment count
 if ( !function_exists( 'shiword_comment_count' ) ) {
 	function shiword_comment_count( $count ) {
+
 		if ( ! is_admin() ) {
 			global $id;
 			$comments_by_type = &separate_comments(get_comments('status=approve&post_id=' . $id));
@@ -1148,6 +1470,7 @@ if ( !function_exists( 'shiword_comment_count' ) ) {
 		} else {
 			return $count;
 		}
+
 	} 
 }
 
@@ -1155,8 +1478,10 @@ if ( !function_exists( 'shiword_comment_count' ) ) {
 if ( !function_exists( 'shiword_is_post_format_available' ) ) {
 	function shiword_is_post_format_available( $id ) {
 		global $shiword_opt;
+
 		$is_available = function_exists( 'get_post_format' ) && get_post_format( $id ) && isset( $shiword_opt['shiword_postformat_' . get_post_format( $id ) ] ) && $shiword_opt['shiword_postformat_' . get_post_format( $id ) ] == 1;
 		return $is_available;
+
 	}
 }
 
@@ -1164,11 +1489,11 @@ if ( !function_exists( 'shiword_is_post_format_available' ) ) {
 //Based on Plugin: Date in a nice tone (http://wordpress.org/extend/plugins/date-in-a-nice-tone/)
 if ( !function_exists( 'shiword_friendly_date' ) ) {
 	function shiword_friendly_date() {
-			
+
 		$posttime = get_the_time('U');
 		$currenttime = time();
 		$timedifference = $currenttime - $posttime;
-		
+
 		$mininsecs = 60;
 		$hourinsecs = 3600;
 		$dayinsecs = 86400;
@@ -1187,20 +1512,30 @@ if ( !function_exists( 'shiword_friendly_date' ) ) {
 		} else if ($timedifference > ($monthinsecs * 2)) {
 			$num = round($timedifference / $monthinsecs);
 			$datewithnicetone = sprintf(__('%s months ago', 'shiword' ),$num);
-		
-		//if over a month	
+
+		//if over a month
 		} else if ($timedifference > $monthinsecs) {
 			$datewithnicetone = __( 'a month ago', 'shiword' );
-				   
+
 		//if more than 2 days ago
 		} else {
 			$htd = human_time_diff( get_the_time('U'), current_time('timestamp') );
 			$datewithnicetone = sprintf(__('%s ago', 'shiword' ), $htd );
-		} 
-		
+		}
+
 		echo $datewithnicetone;
-			
+
 	}
+}
+
+//post__in ordering, based on "Sort Query by Post In" plugin (http://10up.com/plugins/sort-query-by-post-in-wordpress/)
+function shiword_sort_query_by_post_in( $sortby, $thequery ) {
+
+	if ( !empty($thequery->query_vars['post__in']) && isset($thequery->query_vars['orderby']) && $thequery->query_vars['orderby'] == 'post__in' )
+	$sortby = "find_in_set(ID, '" . implode( ',', $thequery->query_vars['post__in'] ) . "')";
+
+	return $sortby;
+
 }
 
 // custom image caption
@@ -1221,20 +1556,16 @@ if ( !function_exists( 'shiword_img_caption_shortcode' ) ) {
 
 		return '<div ' . $id . 'class="img-caption ' . esc_attr($align) . '" style="width: ' . $width . 'px"><div class="img-caption-inside">'
 		. do_shortcode( $content ) . '<div class="img-caption-text">' . $caption . '</div></div></div>';
+
 	}
 }
 
-// custom gallery shortcode function
-function shiword_gallery_shortcode($attr) {
+// custom gallery shortcode function. supports 'ids' attribute (WP3.5)
+function shiword_gallery_shortcode( $output, $attr ) {
 	global $post, $wp_locale, $shiword_opt;
 
 	static $instance = 0;
 	$instance++;
-
-	// Allow plugins/themes to override the default gallery template.
-	$output = apply_filters('post_gallery', '', $attr);
-	if ( $output != '' )
-		return $output;
 
 	// We're trusting author input, so let's at least make sure it looks like a valid orderby statement
 	if ( isset( $attr['orderby'] ) ) {
@@ -1252,6 +1583,7 @@ function shiword_gallery_shortcode($attr) {
 		'captiontag' => 'dd',
 		'columns'    => 3,
 		'size'       => 'thumbnail',
+		'ids'        => '',
 		'include'    => '',
 		'exclude'    => ''
 	), $attr));
@@ -1262,6 +1594,16 @@ function shiword_gallery_shortcode($attr) {
 	if ( 'RAND' == $order )
 		$orderby = 'none';
 
+	if ( !empty( $ids ) ) {
+		// what's the difference between 'ids' and 'include'? 'ids' attribute is almost useless
+		$include = $ids;
+	}
+
+	if ( !empty( $include ) ) {
+		// 'include' is explicitly ordered
+		$orderby = 'post__in';
+	}
+
 	if ( !empty($include) ) {
 		$include = preg_replace( '/[^0-9,]+/', '', $include );
 		$_attachments = get_posts( array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
@@ -1270,18 +1612,6 @@ function shiword_gallery_shortcode($attr) {
 		foreach ( $_attachments as $key => $val ) {
 			$attachments[$val->ID] = $_attachments[$key];
 		}
-		
-		if ( ( $orderby == 'none' ) && ( $order != 'RAND' ) && !is_feed() ) {
-			unset( $_attachments );
-			$_include = split( ',', $include );
-			foreach ( $_include as $key => $val ) {
-				if ( isset( $attachments[$val] ) )
-					$_attachments[] = $attachments[$val];
-			}
-			$attachments = $_attachments;
-		}
-			
-		
 	} elseif ( !empty($exclude) ) {
 		$exclude = preg_replace( '/[^0-9,]+/', '', $exclude );
 		$attachments = get_children( array('post_parent' => $id, 'exclude' => $exclude, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
@@ -1344,35 +1674,42 @@ function shiword_gallery_shortcode($attr) {
 }
 
 // strip tags from titles and apply title format for blank ones
-function shiword_title_tags_filter($title,$id) {
+function shiword_title_tags_filter( $title, $id = 0 ) {
 	global $shiword_opt;
-	
+
 	if ( is_admin() ) return $title;
-	
-	$title = strip_tags( $title, '<abbr><acronym><b><em><i><del><ins><bdo><strong>' );
-	
+
+	$title = strip_tags( $title, '<abbr><acronym><b><em><i><del><ins><bdo><strong><img><sub><sup>' );
+
+	if ( !isset( $shiword_opt['shiword_manage_blank_titles'] ) || ! $shiword_opt['shiword_manage_blank_titles'] ) return $title;
+
+	if ( $id == 0 ) return $title;
+
 	if ( empty( $title ) ) {
-		if ( !isset( $shiword_opt['shiword_blank_title'] ) || empty( $shiword_opt['shiword_blank_title'] ) ) return __( '(no title)', 'shiword' );
-		$postdata = array( get_post_format( $id )? __(get_post_format( $id ), 'shiword'): __('post', 'shiword'), get_the_time( get_option( 'date_format' ), $id ) );
-		$codes = array( '%f', '%d' );
+		if ( empty( $shiword_opt['shiword_blank_title'] ) ) return '';
+		$postdata = array( get_post_format( $id )? get_post_format_string( get_post_format( $id ) ): __( 'post', 'shiword' ), get_the_time( get_option( 'date_format' ), $id ), $id );
+		$codes = array( '%f', '%d', '%n' );
 		return str_replace( $codes, $postdata, $shiword_opt['shiword_blank_title'] );
 	} else
 		return $title;
+
 }
 
 // overwrite the lang settings for the front-side
 function shiword_theme_localized($locale) {
 	global $shiword_opt;
-	
+
 	if ( isset( $shiword_opt['shiword_lang_code'] ) && !is_admin() ) {
 		return $shiword_opt['shiword_lang_code'];
 	}
 	return $locale;
-}		
+
+}
 
 // use the "excerpt more" string as a link to the post
 function shiword_new_excerpt_more( $more ) {
 	global $shiword_opt, $post;
+
 	if ( is_admin() ) return $more;
 	if ( isset( $shiword_opt['shiword_xcont_more_txt'] ) && isset( $shiword_opt['shiword_xcont_more_link'] ) ) {
 		if ( $shiword_opt['shiword_xcont_more_link'] ) {
@@ -1382,23 +1719,91 @@ function shiword_new_excerpt_more( $more ) {
 		}
 	}
 	return $more;
+
 }
 
 // custom text for the "more" tag
 function shiword_more_link( $more_link, $more_link_text ) {
 	global $shiword_opt;
-	
+
 	if ( isset( $shiword_opt['shiword_more_tag'] ) && !is_admin() ) {
 		$text = str_replace ( '%t', get_the_title(), $shiword_opt['shiword_more_tag'] );
 		return str_replace( $more_link_text, $text, $more_link );
 	}
 	return $more_link;
+
+}
+
+/**
+ * Filter 'wp_title'
+ */
+function shiword_filter_wp_title( $title, $sep ) {
+	global $paged, $page;
+
+	if ( is_feed() )
+		return $title;
+
+	// Add the site name.
+	$title .= get_bloginfo( 'name' );
+
+	// Add the site description for the home/front page.
+	$site_description = get_bloginfo( 'description', 'display' );
+	if ( $site_description && ( is_home() || is_front_page() ) )
+		$title = "$title $sep $site_description";
+
+	// Add a page number if necessary.
+	if ( $paged >= 2 || $page >= 2 )
+		$title = "$title $sep " . sprintf( __( 'Page %s', 'shiword' ), max( $paged, $page ) );
+
+	return $title;
+}
+
+/**
+ * Filter 'body_class'
+ */
+function shiword_filter_body_class( $classes ) {
+	global $shiword_opt;
+
+	$classes[] = 'sw-no-js';
+	$classes[] = 'body-' . $shiword_opt['shiword_frame_width'];
+
+	return $classes;
+
+}
+
+// Custom form fields for the comment form
+function shiword_comments_form_fields( $fields ) {
+	$commenter	=	wp_get_current_commenter();
+	$req		=	get_option( 'require_name_email' );
+	$aria_req	=	( $req ? " aria-required='true'" : '' );
+
+	$custom_fields =  array(
+		'author' => '<p class="comment-form-author">' . '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" aria-required="true" />' .
+					'<label for="author">' . __( 'Name', 'shiword' ) . '</label> ' . ( $req ? '<span class="required">*</span>' : '' ) .'</p>',
+		'email'  => '<p class="comment-form-email">' . '<input id="email" name="email" type="text" value="' . sanitize_email(  $commenter['comment_author_email'] ) . '" size="30" aria-required="true" />' .
+					'<label for="email">' . __( 'Email', 'shiword' ) . '</label> ' . ( $req ? '<span class="required">*</span>' : '' ) .'</p>',
+		'url'    => '<p class="comment-form-url">' . '<input id="url" name="url" type="text" value="' . esc_url( $commenter['comment_author_url'] ) . '" size="30" />' .
+					'<label for="url">' . __( 'Website', 'shiword' ) . '</label>' .'</p>',
+	);
+	return $custom_fields;
+}
+
+// filters comments_form() default arguments
+function shiword_comment_form_defaults( $defaults ) {
+	global $user_identity;
+
+	$defaults['label_submit']	= __( 'Say It!','shiword' );
+	$defaults['comment_field']	= '<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="7" aria-required="true"></textarea></p>';
+	$defaults['logged_in_as']	= '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>.', 'shiword' ), admin_url( 'profile.php' ), $user_identity ) . '</p>';
+
+	return $defaults;
+
 }
 
 // the search form
 function shiword_search_form( $form ) {
-	global $shiword_is_mobile_browser;
-	if ( ! $shiword_is_mobile_browser ) $form = '
+
+	if ( ! shiword_is_mobile() ) $form = '
 					<div class="search-form">
 						<form action="' . esc_url( home_url( '/' ) ) . '" class="sw-searchform" method="get">
 							<input type="text" onfocus="if (this.value == \'' . esc_attr__( 'Search', 'shiword' ) . '...\')
@@ -1408,12 +1813,14 @@ function shiword_search_form( $form ) {
 						</form>
 					</div>';
 	return $form;
+
 }
 
 // display a simple login form in quickbar
 if ( !function_exists( 'shiword_mini_login' ) ) {
 	function shiword_mini_login() {
 		global $shiword_opt;
+
 		$args = array(
 			'redirect' => home_url(),
 			'form_id' => 'sw-loginform',
@@ -1434,21 +1841,47 @@ if ( !function_exists( 'shiword_mini_login' ) ) {
 				</div>
 			<?php } ?>
 		</li>
-
 		<?php
+
 	}
 }
+
+/* Jetpack Infinite Scroll support */
+
+//Add theme support for infinity scroll
+function shiword_infinite_scroll_init() {
+	add_theme_support( 'infinite-scroll', array(
+		'type'      => 'click',
+		'container' => 'posts-container',
+		'render'    => 'shiword_infinite_scroll_render',
+	) );
+}
+
+//print page number reminder
+function shiword_infinite_scroll_pageinfo() {
+
+	$page = (int) $_GET['page'] + 1;
+	echo '<div class="page-reminder"><span>' . $page . '</span></div>';
+
+}
+
+//Set the code to be rendered on for calling posts,
+function shiword_infinite_scroll_render() {
+	get_template_part( 'loop' );
+}
+
 
 //non multibyte fix
 if ( !function_exists( 'mb_strimwidth' ) ) {
 	function mb_strimwidth( $string, $start, $length, $wrap = '&hellip;' ) {
+
 		if ( strlen( $string ) > $length ) {
 			$ret_string = substr( $string, $start, $length ) . $wrap;
 		} else {
 			$ret_string = $string;
 		}
 		return $ret_string;
+
 	}
 }
 
-?>

@@ -17,7 +17,7 @@ if ( !function_exists( 'shiword_mobile_device_detect' ) ) {
 	function shiword_mobile_device_detect() {
 		global $shiword_opt;
 
-		if ( is_admin() ) return false;
+		if ( is_admin() || is_feed() ) return false;
 		
 		// #1 check: mobile support is off (via options)
 		if ( ( isset( $shiword_opt['shiword_mobile_css'] ) && ( $shiword_opt['shiword_mobile_css'] == 0) ) ) return false;
@@ -54,16 +54,17 @@ if ( !function_exists( 'shiword_mobile_device_detect' ) ) {
 		}
 	}
 }
-$shiword_is_mobile_browser = shiword_mobile_device_detect(); // check if is mobile browser
+$shiword_is_mobile = shiword_mobile_device_detect(); // check if is mobile browser
 
 // show mobile version
 if ( !function_exists( 'shiword_mobile' ) ) {
 	function shiword_mobile () {
-		global $shiword_is_mobile_browser;
-		if ( $shiword_is_mobile_browser ) {
+		global $shiword_is_mobile;
+		if ( $shiword_is_mobile ) {
 
 			// Add stylesheets
 			add_action( 'wp_enqueue_scripts', 'shiword_mobile_stylesheet' );
+			add_action( 'login_head', 'shiword_mobile_login_css' );
 			// Custom filters
 			add_filter( 'user_contactmethods','shiword_mobile_new_contactmethods',10,1 );
 			add_filter( 'widget_tag_cloud_args', 'shiword_mobile_tag_cloud_filter', 90 );
@@ -114,6 +115,20 @@ if ( !function_exists( 'shiword_mobile_stylesheet' ) ) {
 	}
 }
 
+//styles the login page
+if ( !function_exists( 'shiword_mobile_login_css' ) ) {
+	function shiword_custom_login_css() {
+		global $shiword_opt;
+
+		$css_file = '/mobile/login-mobile.css';
+
+		if ( ( $shiword_opt['shiword_custom_login'] == 1 ) ) echo '
+			<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . $css_file . '" />
+			<meta content="width = device-width" name="viewport">';
+
+	}
+}
+
 if ( !function_exists( 'shiword_mobile_seztitle' ) ) {
 	function shiword_mobile_seztitle( $a ){
 		if ( $a == 'before' ) 
@@ -152,8 +167,8 @@ if ( !function_exists( 'shiword_mobile_post_details' ) ) {
 				</div>
 			<?php } ?>
 			<div class="tbm-post-details">
-				<?php if ( $cats ) { echo '<span class="tbm-post-details-cats">' . __( 'Categories', 'shiword' ) . ': ' . '</span>'; the_category( ' ' ); echo '<br/>'; } ?>
-				<?php if ( $tags ) { echo '<span class="tbm-post-details-tags">' . __( 'Tags', 'shiword' ) . ': '; if ( !get_the_tags() ) { echo __( 'No Tags', 'shiword' ) . '</span>'; } else { the_tags('</span>', '', ''); } echo '<br/>'; } ?>
+				<?php if ( $cats ) { echo '<span class="tbm-post-details-cats">' . __( 'Categories', 'shiword' ) . ': ' . '</span>'; the_category( ' ' ); echo '<br>'; } ?>
+				<?php if ( $tags ) { echo '<span class="tbm-post-details-tags">' . __( 'Tags', 'shiword' ) . ': '; if ( !get_the_tags() ) { echo __( 'No Tags', 'shiword' ) . '</span>'; } else { the_tags('</span>', '', ''); } echo '<br>'; } ?>
 				<?php if ( $date ) { echo '<span class="tbm-post-details-date">' . sprintf( __( 'Published on: %1$s', 'shiword' ), '<b>' . get_the_time( get_option( 'date_format' ) ) . '</b>' ) . '</span>'; } ?>
 				<div class="fixfloat"> </div>
 			</div>
