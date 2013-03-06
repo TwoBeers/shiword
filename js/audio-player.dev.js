@@ -1,70 +1,3 @@
-var shiwordAudioPlayer;
-
-(function($) {
-
-shiwordAudioPlayer = {
-
-	//initialize
-	init : function() {
-
-		shiword_AudioPlayer.setup( shiwordAudioPlayer_l10n.player_path, {
-			width: 415,
-			loop: "yes",
-			transparentpagebg: "yes",
-			leftbg: "262626",
-			lefticon: "aaaaaa",
-			rightbg: "262626",
-			righticon: shiwordAudioPlayer_l10n.icon_color,
-			righticonhover: shiwordAudioPlayer_l10n.icon_hover_color,
-			animation: "no"
-		});
-		shiwordAudioPlayer.start();
-	},
-
-	start : function() {
-
-		var the_id = 0;
-		return $('audio').each(function() {
-			the_id++;
-			$(this).attr('id', 'sw-player-id' + the_id );
-			var the_source = $(this).children('source:first-child');
-			if ( the_source.size() !== 0 ) {
-				the_href = the_source.attr('src');
-				var the_type = the_href.substr( the_href.length - 4, 4 )
-				switch (the_type)
-				{
-				case '.ogg':
-					if ( !document.createElement("audio").canPlayType ) {
-						$(this).parent().html('<span class="sw-player-notice">' + shiwordAudioPlayer_l10n.unknown_media + ' (ogg)</span>');
-					}
-					break;
-				case '.mp3':
-					if ( !document.createElement("audio").canPlayType || (document.createElement("audio").canPlayType && !document.createElement("audio").canPlayType('audio/mpeg')) ) {
-						shiword_AudioPlayer.embed(this.id, {  
-							soundFile: the_href
-						});  
-					}
-					break;
-				case '.m4a':
-					if ( !document.createElement("audio").canPlayType || (document.createElement("audio").canPlayType && !document.createElement("audio").canPlayType('audio/x-m4a')) ) {
-						$(this).parent().html('<span class="sw-player-notice">' + shiwordAudioPlayer_l10n.unknown_media + ' (m4a)</span>');
-					}
-					break;
-				default:
-					$(this).parent().html('<span class="sw-player-notice">' + shiwordAudioPlayer_l10n.unknown_media + '</span>');
-				}				
-			}
-			
-        });
-        
-    }
-
-};
-
-$(document).ready(function($){ shiwordAudioPlayer.init(); });
-
-})(jQuery);
-
 var shiword_AudioPlayer = function () {
 	var instances = [];
 	var activePlayerID;
@@ -194,3 +127,72 @@ var shiword_AudioPlayer = function () {
 	}
 	
 }();
+
+
+var shiwordAudioPlayer;
+
+(function($) {
+
+shiwordAudioPlayer = {
+
+	//initialize
+	init : function() {
+
+		shiword_AudioPlayer.setup( shiwordAudioPlayer_l10n.player_path, {
+			width: 415,
+			loop: "yes",
+			transparentpagebg: "yes",
+			leftbg: "262626",
+			lefticon: "aaaaaa",
+			rightbg: "262626",
+			righticon: shiwordAudioPlayer_l10n.icon_color,
+			righticonhover: shiwordAudioPlayer_l10n.icon_hover_color,
+			animation: "no"
+		});
+		$('body').on('post-load', function(event){ //Jetpack Infinite Scroll trigger
+			shiwordAudioPlayer.start();
+		});
+		shiwordAudioPlayer.start();
+	},
+
+	start : function() {
+
+		return $('audio').each(function() {
+			$this = $(this);
+			var the_source = $this.children('source:first-child');
+			if ( the_source.size() !== 0 ) {
+				the_href = the_source.attr('src');
+				var the_type = the_href.substr( the_href.length - 4, 4 )
+				switch (the_type)
+				{
+				case '.ogg':
+					if ( !document.createElement("audio").canPlayType ) {
+						$this.parent().html('<span class="sw-player-notice">' + shiwordAudioPlayer_l10n.unknown_media + ' (ogg)</span>');
+					}
+					break;
+				case '.mp3':
+					if ( !document.createElement("audio").canPlayType || (document.createElement("audio").canPlayType && !document.createElement("audio").canPlayType('audio/mpeg')) ) {
+						shiword_AudioPlayer.embed(this.id, {  
+							soundFile: the_href
+						});  
+					}
+					break;
+				case '.m4a':
+					if ( !document.createElement("audio").canPlayType || (document.createElement("audio").canPlayType && !document.createElement("audio").canPlayType('audio/x-m4a')) ) {
+						$this.parent().html('<span class="sw-player-notice">' + shiwordAudioPlayer_l10n.unknown_media + ' (m4a)</span>');
+					}
+					break;
+				default:
+					$this.parent().html('<span class="sw-player-notice">' + shiwordAudioPlayer_l10n.unknown_media + '</span>');
+				}				
+			}
+			
+        });
+        
+    }
+
+};
+
+$(document).ready(function($){ shiwordAudioPlayer.init(); });
+
+})(jQuery);

@@ -1,9 +1,11 @@
 <?php
 /**
- * The posts slider
+ * slider.php
  *
- * @package shiword
- * @since shiword 3.01
+ * The posts slider stuff
+ *
+ * @package Shiword
+ * @since 3.01
  */
 
 
@@ -120,14 +122,13 @@ if ( !function_exists( 'shiword_slider_sanitize' ) ) {
 
 // the slider init
 function shiword_slider_init(){
-	global $shiword_opt;
 
-	if ( $shiword_opt['shiword_sticky'] == 1 && !is_404() ) {
+	if ( shiword_get_opt( 'shiword_sticky' ) && !is_404() ) {
 		if (
-			( is_page() && ( $shiword_opt['shiword_sticky_pages'] == 1 ) ) ||
-			( is_single() && ( $shiword_opt['shiword_sticky_posts'] == 1 ) ) ||
-			( is_front_page() && ( $shiword_opt['shiword_sticky_front'] == 1 ) ) ||
-			( ( is_archive() || is_search() ) && ( $shiword_opt['shiword_sticky_over'] == 1 ) )
+			( is_page() && shiword_get_opt( 'shiword_sticky_pages' ) ) ||
+			( is_single() && shiword_get_opt( 'shiword_sticky_posts' ) ) ||
+			( is_front_page() && shiword_get_opt( 'shiword_sticky_front' ) ) ||
+			( ( is_archive() || is_search() ) && shiword_get_opt( 'shiword_sticky_over' ) )
 		) shiword_slider(); 
 	}
 
@@ -136,7 +137,7 @@ function shiword_slider_init(){
 // display a slideshow for the selected posts
 if ( !function_exists( 'shiword_slider' ) ) {
 	function shiword_slider() {
-		global $post, $shiword_opt;
+		global $post;
 
 		if ( shiword_is_printpreview() ) return; // no slider in print preview
 
@@ -161,12 +162,12 @@ if ( !function_exists( 'shiword_slider' ) ) {
 				while ($r->have_posts()) {
 					$r->the_post();
 					$post_title = get_the_title();
-					$post_author = isset( $shiword_opt['shiword_sticky_author'] ) && $shiword_opt['shiword_sticky_author'] == 0? '' : '<span class="sw-slider-auth">' . sprintf( __( 'by %s', 'shiword' ), get_the_author() ) . '</span>';
+					$post_author = ! shiword_get_opt( 'shiword_sticky_author' ) ? '' : '<span class="sw-slider-auth">' . sprintf( __( 'by %s', 'shiword' ), get_the_author() ) . '</span>';
 ?>
 						<div class="sss_item">
 							<div class="sss_inner_item">
 								<a href="<?php echo get_permalink(); ?>" title="<?php echo $post_title; ?>">
-									<?php echo shiword_get_the_thumb( get_the_ID(), 120, 120, 'alignleft' ); ?>
+									<?php echo shiword_get_the_thumb( array( 'width' => 120, 'height' => 120, 'class' => 'alignleft' ) ); ?>
 								</a>
 								<div style="padding-left: 130px;">
 									<h2 class="storytitle"><a href="<?php echo get_permalink( $post->ID ); ?>" title="<?php echo $post_title; ?>"><?php echo $post_title; ?></a></h2> <?php echo $post_author; ?>
@@ -189,8 +190,8 @@ if ( !function_exists( 'shiword_slider' ) ) {
 			// <![CDATA[
 			jQuery(document).ready(function($){
 				$('#sw_sticky_slider').sw_sticky_slider({
-					speed : <?php echo isset( $shiword_opt['shiword_sticky_speed'] )? $shiword_opt['shiword_sticky_speed'] : '2500';?>,
-					pause : <?php echo isset( $shiword_opt['shiword_sticky_pause'] )? $shiword_opt['shiword_sticky_pause'] : '2000';?>
+					speed : <?php echo shiword_get_opt( 'shiword_sticky_speed' ) ? shiword_get_opt( 'shiword_sticky_speed' ) : '2500';?>,
+					pause : <?php echo shiword_get_opt( 'shiword_sticky_pause' ) ? shiword_get_opt( 'shiword_sticky_pause' ) : '2000';?>
 				})
 			})
 			// ]]>

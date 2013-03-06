@@ -4,8 +4,8 @@
  *
  * Template for attachment pages
  *
- * @package shiword
- * @since shiword 1.00
+ * @package Shiword
+ * @since 1.00
  */
 ?>
 
@@ -29,7 +29,7 @@
 
 			<h2 class="storytitle"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 
-			<?php shiword_I_like_it(); ?>
+			<?php shiword_hook_like_it(); ?>
 
 			<?php shiword_extrainfo( array( 'hiera' => 0, 'tags' => 0, 'cats' => 0 ) ); ?>
 

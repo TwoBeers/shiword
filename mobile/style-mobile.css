@@ -2,7 +2,7 @@
 	background: #111;
 	color: #fff;
 	font-family: arial,sans-serif;
-	font-size: 14px;
+	font-size: 18px;
 	margin: 0;
 }
 a img {
@@ -81,7 +81,7 @@ pre {
 }
 .tbm-group > li {
 	margin:0;
-	background: #1a1a1a url("images/dark/arr_r.png") right center no-repeat;
+	background: #222 url("images/dark/arr_r.png") right center no-repeat;
 }
 .tbm-group > li a {
 	display: block;
@@ -93,27 +93,27 @@ pre {
 }
 .tbm-group > li,
 .outset {
-	border-top: 1px solid #333;
+	border-top: 1px solid #444;
 	border-bottom: 1px solid #000;
 }
 .tbm-group > li:hover,
 .outset:hover {
-	background-color: #222;
+	background-color: #333;
 }
 .tbm-format {
-    background:url("images/dark/formats.png") no-repeat scroll center -224px transparent;
-    float:left;
-    height:32px;
-    width:32px;
+	background:url("images/dark/formats.png") no-repeat scroll center -224px transparent;
+	float:left;
+	height:32px;
+	width:32px;
 	margin: 5px 5px 5px 0;
-	border: 1px solid #333;
+	border: 1px solid #444;
 }
 .halfsep {
 }
 .tbm-halfspan {
 	width: 49%;
 	display: block;
-	background-color: #1a1a1a;
+	background-color: #222;
 	line-height: 2.5em;
 }
 .tbm-halfspan a {
@@ -158,12 +158,12 @@ pre {
 .tbm-index-navi a {
 	padding: 4px;
 	margin: 0 4px 4px 0;
-	border: 3px solid #333;
+	border: 3px solid #444;
 	border-radius: 8px;
 }
 .tbm-index-navi a:hover {
 	border: 3px solid #ff8d39;
-	background-color: #222;
+	background-color: #333;
 }
 .wp-pagenavi a,
 .wp-pagenavi span {
@@ -218,13 +218,13 @@ pre {
 	margin: 20px 0;
 }
 .tbm-pc-navi a {
-    padding: 0.3em 0.5em;
-	border: 3px solid #333;
+	padding: 0.3em 0.5em;
+	border: 3px solid #444;
 	border-radius: 8px;
 }
 .tbm-pc-navi a:hover {
 	border: 3px solid #ff8d39;
-	background-color: #222;
+	background-color: #333;
 }
 .commentlist {
 	padding: 0;
@@ -236,16 +236,15 @@ pre {
 	list-style: none outside none;
 }
 .commentlist .comment-body {
-	border-bottom: 1px solid #222;
+	border-bottom: 1px solid #333;
 	padding: 0 10px 10px;
 	margin-bottom: 20px;
 }
 .commentmetadata {
-	font-size: 11px;
+	font-size: .7em;
 	color: #555;
 }
 .comment-author {
-	font-size: 13px;
 	color: #555;
 }
 .comment-author cite {
@@ -257,16 +256,16 @@ pre {
 	margin-top: 10px;
 }
 .comment-reply-link {
-    background: transparent url("images/dark/reply.png") 5px center no-repeat;
-    font-size: 10px;
-    padding: 5px 5px 5px 30px;
-	border: 3px solid #333;
+	background: transparent url("images/dark/reply.png") 5px center no-repeat;
+	font-size: 10px;
+	padding: 5px 5px 5px 30px;
+	border: 3px solid #444;
 	border-radius: 8px;
 
 }
 .comment-reply-link:hover {
 	border: 3px solid #ff8d39;
-	background-color: #222;
+	background-color: #333;
 }
 .trackback .comment-reply-link,
 .pingback .comment-reply-link,
@@ -281,9 +280,9 @@ pre {
 .category-gallery .gallery-thumb,
 .format-image .gallery-thumb,
 .category-image .gallery-thumb {
-    float: left;
-    margin-right: 5px;
-    margin-bottom: 5px;
+	float: left;
+	margin-right: 5px;
+	margin-bottom: 5px;
 	border-radius: 5px;
 	border: 1px solid #404040;
 	padding: 5px;
@@ -304,8 +303,8 @@ pre {
 	height: 132px;
 }
 .gallery img {
-	border: 1px solid #333;
-    padding: 5px;
+	border: 1px solid #444;
+	padding: 5px;
 	max-width: 80%;
 }
 .gallery img:hover {
@@ -384,39 +383,39 @@ img.aligncenter {
 }
 /* author bio*/
 .tbm-author-bio {
-	background-color: #222;
-	border: 1px solid #333;
+	background-color: #333;
+	border: 1px solid #444;
 	padding: 5px;
 	margin: 5px 0;
 }
 .tbm-author-bio li {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 .tbm-author-bio ul {
 	list-style: none outside none;
 	margin-left: 15px;
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 .tbm-author-bio .author-avatar img {
-    border-radius: 5px;
-    margin-right: 10px;
+	border-radius: 5px;
+	margin-right: 10px;
 }
 .tbm-author-bio .author-avatar {
-    display: inline-block;
-    float: left;
+	display: inline-block;
+	float: left;
 }
 .tbm-author-bio .author-name {
-    font-size: 1.5em;
-    margin-bottom: 10px;
+	font-size: 1.5em;
+	margin-bottom: 10px;
 }
 .tbm-author-bio .author-description {
-    font-size: .9em;
+	font-size: .9em;
 }
 .tbm-author-bio .author-social {
-	border-top:1px solid #333;
+	border-top:1px solid #444;
 	margin-top:5px;
 	padding-top:5px;
 	text-align:center;
@@ -492,7 +491,7 @@ img.aligncenter {
 	float: left;
 	margin: 0 4px 4px 0;
 	padding: 0 4px;
-	border: 3px solid #333;
+	border: 3px solid #444;
 	border-radius: 8px;
 }
 .widget_archive .widget-body li a,
@@ -505,18 +504,18 @@ img.aligncenter {
 .sw-widget-latest-commented-posts li a {
 	display: block;
 	line-height: 2.5em;
-	border-top: 1px solid #333;
+	border-top: 1px solid #444;
 	border-bottom: 1px solid #000;
 	margin: 0;
 	padding: 0 4px;
-	background: #1a1a1a url("images/dark/arr_r.png") right center no-repeat;
+	background: #222 url("images/dark/arr_r.png") right center no-repeat;
 }
 .widget_tag_cloud .widget-body a:hover,
 .widget_categories .widget-body li a:hover,
 .sw-widget-categories .widget-body li a:hover,
 .tbm-post-details a:hover {
 	border: 3px solid #ff8d39;
-	background-color: #222;
+	background-color: #333;
 }
 .widget_archive .widget-body li a:hover,
 .widget_meta .widget-body li a:hover,
@@ -526,7 +525,7 @@ img.aligncenter {
 .sw-widget-popular-posts li a:hover,
 .sw-widget-recent-entries li a:hover,
 .sw-widget-latest-commented-posts li a:hover {
-	background-color: #222;
+	background-color: #333;
 }
 .widget_archive .widget-body li:first-child a,
 .widget_meta .widget-body li:first-child a,
@@ -572,7 +571,7 @@ img.aligncenter {
 	padding: 10px;
 }
 #wp-calendar #today {
-	background: #222;
+	background: #333;
 }
 .widget_recent_comments ul {
 	padding: 0;
@@ -584,7 +583,7 @@ img.aligncenter {
 	margin: 0;
 }
 .widget_recent_comments li {
-	border-bottom: 1px solid #222;
+	border-bottom: 1px solid #333;
 	padding: 0 8px 10px;
 	margin-bottom: 10px;
 }
@@ -625,9 +624,9 @@ span.lc-user-name {
 	vertical-align: middle;
 }
 .sw-post-details-thumb img {
-    border: 1px solid #222;
-    margin-bottom: 10px;
-    padding: 5px;
+	border: 1px solid #333;
+	margin-bottom: 10px;
+	padding: 5px;
 }
 .details {
 	color: #404040;
@@ -641,8 +640,8 @@ span.lc-user-name {
 
 /* light variant */
 body.light {
-	background: #ddd;
-	color: #333;
+	background: #ccc;
+	color: #444;
 }
 .light blockquote {
 	border-left: 3px solid #555;
@@ -668,8 +667,8 @@ body.light {
 	background-color: #fff;
 }
 .light .tbm-format {
-    background-image:url("images/light/formats.png");
-	border: 1px solid #ddd;
+	background-image:url("images/light/formats.png");
+	border: 1px solid #ccc;
 }
 .light .tbm-halfspan {
 	background-color: #f1f1f1;
@@ -696,11 +695,11 @@ body.light {
 .light .tbm-seztit span,
 .light #reply-title span,
 .light #cancel-comment-reply-link {
-	background-color: #ddd;
+	background-color: #ccc;
 }
 .light .tbm-seztit > a {
 	background-image: url("images/light/arrows-dark.png");
-	background-color: #ddd;
+	background-color: #ccc;
 }
 .light .tbm-seztit > a:hover {
 	background-image: url("images/light/arrows.png");
@@ -722,7 +721,7 @@ body.light {
 	color: #555;
 }
 .light .comment-reply-link {
-    background: transparent url("images/light/reply.png") 5px center no-repeat;
+	background: transparent url("images/light/reply.png") 5px center no-repeat;
 	border: 3px solid #aaa;
 
 }
@@ -750,7 +749,7 @@ body.light {
 	border: 2px groove #fff;
 }
 .light .tbm-author-bio .author-social {
-	border-top:1px solid #ddd;
+	border-top:1px solid #ccc;
 }
 .light .widget_tag_cloud .widget-body a,
 .light .widget_categories .widget-body li a,
@@ -793,7 +792,7 @@ body.light {
 	border-bottom: 1px solid #ccc;
 }
 .light .sw-post-details-thumb img {
-    border: 1px solid #fff;
+	border: 1px solid #fff;
 }
 .light .details {
 	color: #404040;

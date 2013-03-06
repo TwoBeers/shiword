@@ -1,10 +1,12 @@
 <?php
 /**
+ * widgets.php
+ *
  * The widgets
+ * Based on WordPress default widgets (wp-includes/default-widgets.php)
  *
  * @package Shiword
- *
- * based on WordPress default widgets (wp-includes/default-widgets.php)
+ * @since 3.01
  */
 
 /**
@@ -53,7 +55,7 @@ class shiword_Widget_popular_posts extends WP_Widget {
 		<ul<?php if ( $use_thumbs ) echo ' class="with-thumbs"'; ?>>
 		<?php  while ($r->have_posts()) : $r->the_post(); ?>
 			<li>
-				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_ID()); ?>"><?php if ( $use_thumbs ) echo shiword_get_the_thumb( get_the_ID(), 50, 50, '' ); ?> <?php if ( get_the_title() ) the_title(); else the_ID(); ?> <span class="details">(<?php echo get_comments_number(); ?>)</span></a>
+				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_ID()); ?>"><?php if ( $use_thumbs ) echo shiword_get_the_thumb( array( 'id' => get_the_ID(), 'width' => 50, 'height' => 50 ) ); ?> <?php if ( get_the_title() ) the_title(); else the_ID(); ?> <span class="details">(<?php echo get_comments_number(); ?>)</span></a>
 			</li>
 		<?php endwhile; ?>
 		</ul>
@@ -169,7 +171,7 @@ class shiword_Widget_latest_commented_posts extends WP_Widget {
 					$post = get_post( $comment->comment_post_ID );
 					setup_postdata( $post );
 					if ( $use_thumbs ) {
-						$the_thumb = shiword_get_the_thumb( $post->ID, 50, 50, '' );
+						$the_thumb = shiword_get_the_thumb( array( 'width' => 50, 'height' => 50 ) );
 					} else {
 						$the_thumb = '';
 					}
@@ -692,7 +694,7 @@ class shiword_Widget_recent_posts extends WP_Widget {
 		<ul<?php if ( $use_thumbs ) echo ' class="with-thumbs"'; ?>>
 		<?php  while ($r->have_posts()) : $r->the_post(); ?>
 			<li>
-				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_date()); ?>"><?php if ( $use_thumbs ) echo shiword_get_the_thumb( get_the_ID(), 50, 50, '' ); ?><?php if ( get_the_title() ) the_title(); else echo get_the_date(); ?></a>
+				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_date()); ?>"><?php if ( $use_thumbs ) echo shiword_get_the_thumb( array( 'id' => get_the_ID(), 'width' => 50, 'height' => 50 ) ); ?><?php if ( get_the_title() ) the_title(); else echo get_the_date(); ?></a>
 			</li>
 		<?php endwhile; ?>
 		</ul>

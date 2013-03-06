@@ -1,21 +1,46 @@
-<?php global $shiword_opt; ?>
+<?php
+/**
+ * post-link.php
+ *
+ * Template part file that contains the Link Format entry
+ * 
+ * @package Shiword
+ * @since 2.07
+ */
+?>
 
 <?php
-	$sw_first_link = shiword_get_first_link();
+	$shiword_first_link = shiword_get_first_link();
 ?>
 
 <div <?php post_class( 'sw-entry' ) ?> id="post-<?php the_ID(); ?>">
-	<?php if( $shiword_opt['shiword_pthumb'] ==1 ) echo shiword_get_the_thumb( $post->ID, $shiword_opt['shiword_pthumb_size'], $shiword_opt['shiword_pthumb_size'], 'alignleft','', true ); // Post thumbnail ?>
+
+	<?php shiword_thumb(); ?>
+
 	<div class="post-body">
+
 		<?php shiword_hook_entry_top(); ?>
-		
-		<?php shiword_post_title( $sw_first_link ? array( 'alternative' => $sw_first_link['text'] , 'title' => $sw_first_link['text'], 'extra' => '<a href="' . $sw_first_link['href'] . '" rel="bookmark"><img class="h2-ext-link" alt="link" src="' . get_template_directory_uri() . '/images/link.png" /></a> - ' ) : array( 'fallback' => get_the_time( get_option( 'date_format' ) ) ) ) ; ?>
-		
+
+		<?php shiword_post_title( $shiword_first_link ? array( 'alternative' => $shiword_first_link['text'] , 'title' => $shiword_first_link['text'], 'href' => $shiword_first_link['href'], 'target' => '_blank' ) : '' ) ; ?>
+
+		<?php shiword_hook_like_it(); ?>
+
 		<?php shiword_extrainfo( array( 'auth' => 0 ) ); ?>
+
 		<div class="storycontent">
-			<?php the_excerpt(); ?>
+
+			<?php if ( ( shiword_get_opt( 'shiword_xcont' ) == 1 ) || is_archive() || is_search() ) // compact view 
+				the_excerpt();
+			else // normal view
+				the_content();
+			?>
+
 		</div>
+
 		<?php shiword_hook_entry_bottom(); ?>
+
 	</div>
+
 	<div class="fixfloat"> </div>
+
 </div>

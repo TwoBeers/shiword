@@ -1,12 +1,12 @@
 <?php
 /**
+ * my-custom-background.php
+ *
  * The custom background stuff
- *
- * @package Shiword
- * @since Shiword 3.0
- *
  * Shiword_Custom_Background class based on WP wp-admin/custom-background.php
  *
+ * @package Shiword
+ * @since 3.0
  */
 
 add_action( 'after_setup_theme', 'shiword_custom_background_init' );
@@ -14,9 +14,8 @@ add_action( 'after_setup_theme', 'shiword_custom_background_init' );
 // set up custom colors and header image
 if ( !function_exists( 'shiword_custom_background_init' ) ) {
 	function shiword_custom_background_init() {
-		global $shiword_opt;
 
-		if ( isset( $shiword_opt['shiword_custom_bg'] ) && $shiword_opt['shiword_custom_bg'] == 1 ) {
+		if ( shiword_get_opt( 'shiword_custom_bg' ) ) {
 			// the enhanced 'custom background' support
 			shiword_add_custom_background( 'shiword_custom_bg_plus' , 'shiword_admin_custom_bg_style' , '' );
 		} else {
@@ -163,9 +162,10 @@ class Shiword_Custom_Background {
 	 *
 	 */
 	function admin_load() {
-		global $shiword_version;
-		wp_enqueue_script( 'sw-custom-bg-script', get_template_directory_uri() . '/js/admin-custom_background.dev.js', array( 'jquery', 'farbtastic' ), $shiword_version, true  );
+
+		wp_enqueue_script( 'sw-custom-bg-script', get_template_directory_uri() . '/js/admin-custom_background.dev.js', array( 'jquery', 'farbtastic' ), shiword_get_info( 'version' ), true  );
 		wp_enqueue_style( 'sw-custom-bg-style', get_template_directory_uri() . '/css/admin-custom_background.css', array( 'farbtastic' ), false, 'screen' );
+
 	}
 
 	/**

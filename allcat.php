@@ -5,8 +5,8 @@
  * The template file used to display the whole category list 
  * as a page.
  *
- * @package shiword
- * @since shiword 1.00
+ * @package Shiword
+ * @since 1.00
  */
 ?>
 

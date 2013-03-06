@@ -1,10 +1,12 @@
 <?php
 /**
+ * custom-device-color.php
+ *
  * The custom colors page
+ * Based on WP wp-admin/custom-header.php
  *
  * @package Shiword
- *
- *Based on WP wp-admin/custom-header.php
+ * @since 3.0
  */
 
 add_action( 'after_setup_theme', 'shiword_custom_device_colors_init' );
@@ -168,8 +170,9 @@ class Custom_device_color {
 
 	/* Set up the enqueue for the JavaScript files. */
 	function js_includes() {
-		global $shiword_version;
-		wp_enqueue_script( 'sw-custom-colors-script', get_template_directory_uri() . '/js/admin-custom_colors.dev.js', array('farbtastic','jquery','jquery-ui-slider','jquery-ui-draggable'), $shiword_version, true ); //shiword js
+
+		wp_enqueue_script( 'sw-custom-colors-script', get_template_directory_uri() . '/js/admin-custom_colors.dev.js', array('farbtastic','jquery','jquery-ui-slider','jquery-ui-draggable'), shiword_get_info( 'version' ), true ); //shiword js
+
 	}
 
 	/* Set up the enqueue for the CSS files */
@@ -316,7 +319,7 @@ class Custom_device_color {
 	/* Display main custom colors page. */
 	function step_1() {
 		
-		global $shiword_colors, $shiword_current_theme;
+		global $shiword_colors;
 		
 		/* Holds the inside colors descriptions */
 		$default_device_colors_descr = array(
@@ -335,7 +338,7 @@ class Custom_device_color {
 
 <div class="wrap">
 	<div class="icon32" id="sw-icon"><br></div>
-	<h2><?php echo $shiword_current_theme . ' - ' . __( 'Custom Colors', 'shiword' ); ?></h2>
+	<h2><?php echo shiword_get_info( 'current_theme' ) . ' - ' . __( 'Custom Colors', 'shiword' ); ?></h2>
 
 	<?php if ( ! empty( $this->updated ) ) { ?>
 		<div id="message" class="updated">

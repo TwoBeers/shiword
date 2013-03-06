@@ -5,8 +5,8 @@
  * This file is the Error 404 Page template file, which is output whenever
  * the server encounters a "404 - file not found" error.
  *
- * @package shiword
- * @since shiword 1.00
+ * @package Shiword
+ * @since 1.00
  */
 ?>
 

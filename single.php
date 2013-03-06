@@ -4,8 +4,8 @@
  *
  * The single blog post template file, used to display single blog posts.
  *
- * @package shiword
- * @since shiword 1.00
+ * @package Shiword
+ * @since 1.00
  */
 ?>
 

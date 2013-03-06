@@ -30,12 +30,11 @@
 	<ul>
 		<li>Fixed  width: Your blog will look the same for everyone regardless of screen  resolution</li>
 		<li>One/Two columns: as your wish!</li>
-		<li>Widgets Support: there's a lot of space for your favorite widgets</li>
+		<li>Widgets areas: there's a lot of space for your favorite widgets</li>
 		<li>Translation ready: Shiword is ready to be translated in your language</li>
-		<li>Up to 5 sidebars: 5 widgets areas??? yep!</li>
 		<li>Two menus: one below the header and one above the footer</li>
 		<li>Standard WordPress: fully compliant with the standards required by WordPress</li>
-		<li>WP 3.1  features: Shiword supports the new features introduced by WordPress 3.1</li>
+		<li>Featured images</li>
 		<li>Gravatars Support: your gravatar follows you everywhere</li>
 		<li>Quickbar  navigation: all the most useful links always at your disposal</li>
 		<li>Post/Pages slideshow: make your most interesting post/pages more visible</li>
@@ -65,12 +64,14 @@
 </p>
 <h3>POST FORMATS:</h3>
 <p>
-	Shiword support post formats, the new feature introduced by WP3.1. In order to correctly use post formats, you must follow these guidelines
+	Shiword support post formats, the new feature introduced by WP3.1. The theme uses a special style for every format in index view, while, 
+	in single view, it will always display the whole content.
+	In order to correctly use post formats, you must follow these guidelines
 	<ul>
 		<li>aside: nothing special to do here</li>
-		<li>gallery: the code will search for the first gallery shortcode inside the post content. Make sure there's one, at least</li>
+		<li>gallery: the code will search for the first gallery shortcode inside the post content. Otherwise it will search every image attached to post.</li>
 		<li>audio: the code will search for all the linked mp3's inside the post content. Make sure there's one, at least</li>
-		<li>quote: the code will search for the first &lt;blockquote&gt; tag inside the post content. Make sure there's one, at least</li>
+		<li>quote: the code will search for the first &lt;blockquote&gt; tag inside the post content. Otherwise, the whole content will be wrapped inside a blockquote tag</li>
 		<li>image: the code will search for the first &lt;img&gt; tag inside the post content. Make sure there's one, at least</li>
 		<li>video: nothing special to do here</li>
 		<li>link: the code will search for the first &lt;a&gt; tag (anchor) inside the post content. Make sure there's one, at least</li>
@@ -84,14 +85,25 @@
 Adds:
 	<ul>
 		<li>filter for adding/customizing theme options</li>
+		<li>filter for overriding saved theme options</li>
+		<li><a target="_blank" href="http://wordpress.org/extend/plugins/jetpack/">Jetpack</a> features support (Infinite Scroll, Carousel, Likes)</li>
+		<li>empty titles handling</li>
+		<li><a href="https://github.com/zamoose/themehookalliance">The Hook Alliance</a> support</li>
 	</ul>
 Fixes:
 	<ul>
 		<li>empty titles handling</li>
-		<li>code cleaned</li>
+		<li>mobile readability</li>
+		<li>fixed audio player bug</li>
+		<li>Slideshow (admin panel), memory error</li>
+		<li>Feed in mobile</li>
 	</ul>
 Notes:
 	<ul>
+		<li>code cleaned</li>
+		<li>Theme hooks added / renamed / deleted</li>
+		<li>audio player updated</li>
+		<li>brand new icons (original creations)</li>
 		<li>removed compatibility with versions of WordPress prior to 3.4</li>
 		<li>removed gallery editor. WP3.5 has quite the same built-in feature.</li>
 		<li>removed "custom login page" option</li>
@@ -160,7 +172,7 @@ Adds:
 		<li>Weibo (aka Sina Weibo), Tencent, Odnoklassniki, Blogger, Google+1, Google Bookmarks, Picasa and VKontakte services added to "Social Links" widget</li>
 		<li>Buzz service removed from "Social Links" widget</li>
 		<li>"enhanced post title" option. Shows the post title with the featured image</li>
-		<li>native support for WP-pagenavi plugin</li>
+		<li>native support for <a href="http://wordpress.org/extend/plugins/wp-pagenavi/">WP-pagenavi</a> plugin</li>
 		<li>Google fonts</li>
 		<li>new widgets: "Image details", "Share this", "Post details"</li>
 		<li>widget area for page404</li>

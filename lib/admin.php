@@ -1,12 +1,12 @@
 <?php
 /**
+ * admin.php
+ *
  * The admin stuff
  *
  * @package Shiword
- * @since Shiword 3.0
+ * @since 3.0
  */
-
-global $shiword_opt, $shiword_version;
 
 // Add custom menus
 add_action( 'admin_menu', 'shiword_create_menu' );
@@ -26,7 +26,7 @@ if ( !function_exists( 'shiword_create_menu' ) ) {
 		add_action( 'admin_print_scripts-widgets.php', 'shiword_widgets_scripts' );
 		add_action( 'admin_print_styles-' . $optionspage, 'shiword_optionspage_style' );
 		add_action( 'admin_print_scripts-' . $optionspage, 'shiword_optionspage_script' );
-		add_action( 'admin_print_scripts', 'shiword_movegallerypage_script' );
+		add_action( 'admin_notices', 'shiword_setopt_admin_notice' );
 
 	}
 }
@@ -51,18 +51,16 @@ if ( !function_exists( 'shiword_optionspage_style' ) ) {
 
 if ( !function_exists( 'shiword_widgets_scripts' ) ) {
 	function shiword_widgets_scripts() {
-		global $shiword_version;
 
-		wp_enqueue_script( 'sw-widgets-script', get_template_directory_uri() . '/js/admin-widgets.dev.js', array('jquery'), $shiword_version, true );
+		wp_enqueue_script( 'sw-widgets-script', get_template_directory_uri() . '/js/admin-widgets.dev.js', array('jquery'), shiword_get_info( 'version' ), true );
 
 	}
 }
 
 if ( !function_exists( 'shiword_optionspage_script' ) ) {
 	function shiword_optionspage_script() {
-		global $shiword_version;
 
-		wp_enqueue_script( 'sw-options-script', get_template_directory_uri() . '/js/admin-options.dev.js', array( 'jquery', 'farbtastic' ), $shiword_version, true ); //shiword js
+		wp_enqueue_script( 'sw-options-script', get_template_directory_uri() . '/js/admin-options.dev.js', array( 'jquery', 'farbtastic' ), shiword_get_info( 'version' ), true ); //shiword js
 		$data = array(
 			'confirm_to_defaults' => __( 'Are you really sure you want to set all the options to their default values?', 'shiword' )
 		);
@@ -75,14 +73,13 @@ if ( !function_exists( 'shiword_optionspage_script' ) ) {
 if ( !function_exists( 'shiword_setopt_admin_notice' ) ) {
 	function shiword_setopt_admin_notice() {
 
-		echo '<div class="updated"><p><strong>' . sprintf( __( "Shiword theme says: \"Don't forget to set <a href=\"%s\">my options</a> and the header image!\" ", 'shiword' ), get_admin_url() . 'themes.php?page=tb_shiword_functions' ) . '</strong></p></div>';
+		if ( current_user_can( 'manage_options' ) && shiword_get_opt( 'version' ) < shiword_get_info( 'version' ) ) {
+			echo '<div class="updated"><p><strong>' . sprintf( __( "Shiword theme says: \"Don't forget to set <a href=\"%s\">my options</a> and the header image!\" ", 'shiword' ), get_admin_url() . 'themes.php?page=tb_shiword_functions' ) . '</strong></p></div>';
+		}
 
 	}
 }
 
-if ( current_user_can( 'manage_options' ) && $shiword_opt['version'] < $shiword_version ) {
-	add_action( 'admin_notices', 'shiword_setopt_admin_notice' );
-}
 
 if ( !function_exists( 'shiword_register_settings' ) ) {
 	function shiword_register_settings() {
@@ -97,7 +94,6 @@ if ( !function_exists( 'shiword_register_settings' ) ) {
 
 // check and set default options 
 function shiword_default_options() {
-		global $shiword_version;
 
 		$the_opt = get_option( 'shiword_options' );
 		$the_coa = shiword_get_coa();
@@ -109,7 +105,7 @@ function shiword_default_options() {
 			}
 			$the_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
 			update_option( 'shiword_options' , $the_opt );
-		} else if ( !isset( $the_opt['version'] ) || $the_opt['version'] < $shiword_version ) {
+		} else if ( !isset( $the_opt['version'] ) || $the_opt['version'] < shiword_get_info( 'version' ) ) {
 			// check for unset values and set them to default value -> when updated to new version
 			foreach ( $the_coa as $key => $val ) {
 				if ( !isset( $the_opt[$key] ) ) $the_opt[$key] = $the_coa[$key]['default'];
@@ -123,7 +119,6 @@ function shiword_default_options() {
 // sanitize options value
 if ( !function_exists( 'shiword_sanitize_options' ) ) {
 	function shiword_sanitize_options( $input ){
-		global $shiword_version;
 
 		$the_coa = shiword_get_coa();
 
@@ -185,7 +180,7 @@ if ( !function_exists( 'shiword_sanitize_options' ) ) {
 		foreach ( $the_coa as $key => $val ) {
 			if ( $the_coa[$key]['req'] != '' ) { if ( $input[$the_coa[$key]['req']] == 0 ) $input[$key] = 0; }
 		}
-		$input['version'] = $shiword_version; // keep version number
+		$input['version'] = shiword_get_info( 'version' ); // keep version number
 		return $input;
 
 	}
@@ -194,7 +189,7 @@ if ( !function_exists( 'shiword_sanitize_options' ) ) {
 // the option page
 if ( !function_exists( 'shiword_edit_options' ) ) {
 	function shiword_edit_options() {
-		global $shiword_opt, $shiword_version, $shiword_current_theme;
+		global $shiword_opt;
 
 		if ( !current_user_can( 'edit_theme_options' ) ) {
 			wp_die( __( 'You do not have sufficient permissions to access this page.', 'shiword' ) );
@@ -212,8 +207,8 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 		}
 
 		// update version value when admin visit options page
-		if ( $shiword_opt['version'] < $shiword_version ) {
-			$shiword_opt['version'] = $shiword_version;
+		if ( $shiword_opt['version'] < shiword_get_info( 'version' ) ) {
+			$shiword_opt['version'] = shiword_get_info( 'version' );
 			update_option( $the_option_name , $shiword_opt );
 		}
 
@@ -222,7 +217,7 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 	?>
 		<div class="wrap">
 			<div class="icon32" id="sw-icon"><br></div>
-			<h2><?php echo $shiword_current_theme . ' - ' . __( 'Theme Options', 'shiword' ); ?></h2>
+			<h2><?php echo shiword_get_info( 'current_theme' ) . ' - ' . __( 'Theme Options', 'shiword' ); ?></h2>
 			<?php
 				// options have been updated
 				if ( isset( $_REQUEST['settings-updated'] ) ) {
@@ -357,13 +352,13 @@ if ( !function_exists( 'shiword_admin_header_style' ) ) {
 
 //Add new contact methods to author panel
 if ( !function_exists( 'shiword_new_contactmethods' ) ) {
-	function shiword_new_contactmethods( $contactmethods ) {
+	function shiword_new_contactmethods( $contactmethods = array() ) {
 
 		$contactmethods['twitter'] = 'Twitter'; //add Twitter
 
 		$contactmethods['facebook'] = 'Facebook'; //add Facebook
 
-		$contactmethods['google'] = 'Google+'; //add Google+
+		$contactmethods['googleplus'] = 'Google+'; //add Google+
 
 		return $contactmethods;
 

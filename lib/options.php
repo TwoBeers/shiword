@@ -1,9 +1,11 @@
 <?php 
 /**
+ * options.php
+ *
  * The options array
  *
  * @package Shiword
- * @since Shiword 3.0
+ * @since 3.0
  */
 
 
@@ -568,7 +570,7 @@ function shiword_get_coa( $option = false ) {
 							'default' => 1,
 							'description' => __( 'in home/front page', 'shiword' ),
 							'info' => __( 'display slideshow in home/front page', 'shiword' ),
-							'req' => 'shiword_sticky',
+							'req' => '',
 							'sub' => false
 						),
 		'shiword_sticky_pages' =>
@@ -578,7 +580,7 @@ function shiword_get_coa( $option = false ) {
 							'default' => 0,
 							'description' => __( 'in pages', 'shiword' ),
 							'info' => __( 'display slideshow in pages', 'shiword' ),
-							'req' => 'shiword_sticky',
+							'req' => '',
 							'sub' => false
 						),
 		'shiword_sticky_posts' =>
@@ -588,7 +590,7 @@ function shiword_get_coa( $option = false ) {
 							'default' => 0,
 							'description' => __( 'in posts', 'shiword' ),
 							'info' => __( 'display slideshow in posts', 'shiword' ),
-							'req' => 'shiword_sticky',
+							'req' => '',
 							'sub' => false
 						),
 		'shiword_sticky_over' =>
@@ -598,7 +600,7 @@ function shiword_get_coa( $option = false ) {
 							'default' => 1,
 							'description' => __( 'in posts overview', 'shiword' ),
 							'info' => __( 'display slideshow in posts overview (posts page, search results, archives, categories, etc.)', 'shiword' ),
-							'req' => 'shiword_sticky',
+							'req' => '',
 							'sub' => false
 						),
 		'shiword_sticky_height' =>
@@ -620,7 +622,7 @@ function shiword_get_coa( $option = false ) {
 							'default' => 1,
 							'description' => __( 'post author', 'shiword' ),
 							'info' => '',
-							'req' => 'shiword_sticky',
+							'req' => '',
 							'sub' => false
 						),
 		'shiword_sticky_speed' =>
@@ -944,12 +946,12 @@ function shiword_get_coa( $option = false ) {
 
 }
 
-// retrive the required option. I the option ain't set, the default value is returned
+// retrive the required option. If the option ain't set, the default value is returned
 if ( !function_exists( 'shiword_get_opt' ) ) {
 	function shiword_get_opt( $opt ) {
 		global $shiword_opt;
 
-		if ( isset( $shiword_opt[$opt] ) ) return $shiword_opt[$opt];
+		if ( isset( $shiword_opt[$opt] ) ) return apply_filters( 'shiword_option_override', $shiword_opt[$opt], $opt );
 
 		$defopt = shiword_get_coa( $opt );
 

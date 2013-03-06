@@ -4,8 +4,8 @@
  *
  * This file is the master/default template file, used for Index/Archive/Search
  *
- * @package shiword
- * @since shiword 1.00
+ * @package Shiword
+ * @since 1.00
  */
 ?>
 

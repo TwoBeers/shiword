@@ -5,8 +5,8 @@
  * Template part file that contains the site footer and
  * closing HTML body elements
  *
- * @package shiword
- * @since shiword 1.00
+ * @package Shiword
+ * @since 1.00
  */
 ?>
 

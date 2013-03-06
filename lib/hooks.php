@@ -2,12 +2,11 @@
 /**
  * hooks.php
  *
- * defines every wrapping function for the theme hooks
- *
+ * Defines every wrapping function for the theme hooks
  * Includes The Hook Alliance support file (https://github.com/zamoose/themehookalliance)
  *
- * @package shiword
- * @since shiword 3.0
+ * @package Shiword
+ * @since 3.0
  */
 
 
@@ -202,3 +201,6 @@ function shiword_hook_attachment_after() {
 	do_action('shiword_hook_attachment_after');
 }
 
+function shiword_hook_like_it() {
+	do_action('shiword_hook_like_it');
+}

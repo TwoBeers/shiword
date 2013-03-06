@@ -1,4 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php
+/**
+ * header.php
+ *
+ * Template part file that contains the HTML document head and 
+ * opening HTML body elements, as well as the site header
+ *
+ * @package Shiword
+ * @since 1.00
+ */
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?> itemscope itemtype="http://schema.org/Blog">
 
 <head profile="http://gmpg.org/xfn/11">
@@ -10,8 +20,6 @@
 	<meta name = "viewport" content = "width = device-width" />
 
 	<title><?php wp_title( '&laquo;', true, 'right' ); ?></title>
-
-	<?php global $shiword_opt; ?>
 
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 

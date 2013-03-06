@@ -245,8 +245,8 @@ shiwordAnimations = {
 	},
 
 	quote_this : function () {
-		htmltext = '<a id="tb-quotethis" href="#" onclick="shiwordAnimations.add_quote(); return false" title="' + shiword_l10n.quote_link_info + '" >' + shiword_l10n.quote_link_text + '</a>'
-		$(htmltext).insertBefore('#comment');
+		htmltext = '<span> - </span><a id="tb-quotethis" href="#" onclick="shiwordAnimations.add_quote(); return false" title="' + shiword_l10n.quote_link_info + '" >' + shiword_l10n.quote_link_text + '</a>'
+		$(htmltext).appendTo('#reply-title');
 	},
 
 	add_quote : function() {

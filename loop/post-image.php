@@ -1,35 +1,60 @@
-<?php global $shiword_opt; ?>
+<?php
+/**
+ * post-image.php
+ *
+ * Template part file that contains the Image Format entry
+ * 
+ * @package Shiword
+ * @since 2.07
+ */
+?>
 
 <?php
-	$sw_first_img = shiword_get_first_image();
+	$shiword_first_img = shiword_get_first_image();
 ?>
 
 <div <?php post_class( 'sw-entry' ) ?> id="post-<?php the_ID(); ?>">
-	<?php if( $shiword_opt['shiword_pthumb'] ==1 ) echo shiword_get_the_thumb( $post->ID, $shiword_opt['shiword_pthumb_size'], $shiword_opt['shiword_pthumb_size'], 'alignleft','', true ); // Post thumbnail ?>
+
+	<?php shiword_thumb(); ?>
+
 	<div class="post-body">
+
 		<?php shiword_hook_entry_top(); ?>
-		
-		<?php shiword_post_title( array( 'alternative' => $sw_first_img ? $sw_first_img['title'] : '', 'fallback' => get_the_time( get_option( 'date_format' ) ) ) ); ?>
-		
+
+		<?php shiword_post_title( array( 'alternative' => $shiword_first_img ? $shiword_first_img['title'] : '' ) ); ?>
+
+		<?php shiword_hook_like_it(); ?>
+
 		<?php shiword_extrainfo(); ?>
+
 		<div class="storycontent">
-		
-		<?php if ( ( $shiword_opt['shiword_xcont'] == 1 ) || is_archive() || is_search() ) { ?>
-			<?php if ( $sw_first_img ) { ?>
-				<a href="<?php echo $sw_first_img['src']; ?>" title="<?php echo $sw_first_img['title']; ?>"><img style="max-height: <?php echo get_option('medium_size_w'); ?>px; max-width: <?php echo get_option('medium_size_h'); ?>px;" title="<?php echo $sw_first_img['title']; ?>" src="<?php echo $sw_first_img['src']; ?>" /></a>
-			<?php } else { ?>
-				<?php the_excerpt(); ?>
-			<?php } ?>
-		<?php } else { ?>
-			<?php if ( $sw_first_img ) { ?>
-				<a href="<?php echo $sw_first_img['src']; ?>" title="<?php echo $sw_first_img['title']; ?>"><?php echo $sw_first_img['img']; ?></a>
-			<?php } else { ?>
-				<?php the_content(); ?>
-			<?php } ?>
-		<?php } ?>
-		
+
+			<?php
+
+				if ( ( shiword_get_opt( 'shiword_xcont' ) == 1 ) || is_archive() || is_search() ) { // compact view
+
+					if ( $shiword_first_img )
+						echo '<a href="' . esc_url( $shiword_first_img['src'] ) . '" target="_blank" title="' . esc_attr( $shiword_first_img['title'] ) . '"><img style="max-height: ' . get_option('medium_size_w') . 'px; max-width: ' . get_option('medium_size_h') . 'px;" title="' . esc_attr( $shiword_first_img['title'] ) . '" src="' . esc_url( $shiword_first_img['src'] ) . '" /></a>';
+					else
+						the_excerpt();
+
+				} else { // normal view
+
+					if ( $shiword_first_img )
+						echo '<a href="' . esc_url( $shiword_first_img['src'] ) . '" target="_blank" title="' . esc_attr( $shiword_first_img['title'] ) . '">' . $shiword_first_img['img'] . '</a>';
+					else
+						the_content();
+
+				}
+
+			?>
+
 		</div>
+
 		<?php shiword_hook_entry_bottom(); ?>
+
 	</div>
+
 	<div class="fixfloat"> </div>
+
 </div>

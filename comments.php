@@ -5,8 +5,8 @@
  * This template file includes both the comments list and
  * the comment form
  *
- * @package shiword
- * @since shiword 1.00
+ * @package Shiword
+ * @since 1.00
  */
 ?>
 

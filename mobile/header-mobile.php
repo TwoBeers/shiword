@@ -18,8 +18,7 @@
 		<?php wp_head(); ?>
 	</head>
 
-	<?php global $shiword_opt; ?>
-	<?php $variant = isset( $shiword_opt['shiword_mobile_css_color'] )? $shiword_opt['shiword_mobile_css_color']: 'dark'; ?>
+	<?php $variant = shiword_get_opt( 'shiword_mobile_css_color' ); ?>
 
 	<body <?php body_class( $variant ); ?>>
 		<div id="main">

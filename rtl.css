@@ -1,4 +1,8 @@
-﻿/* standard tags
+﻿/*
+Description: Adds support for languages written in a Right To Left (RTL) direction.
+*/
+
+/* standard tags
 ----------------------------------------------------------*/
 ul,
 ol {

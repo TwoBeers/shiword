@@ -4,7 +4,7 @@
  *
  *
  * @package Shiword
- * @since Shiword 3.05
+ * @since 3.05
  */
 ?>
 

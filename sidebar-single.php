@@ -5,8 +5,8 @@
  * Template part file that contains the widget area for
  * single posts/pages
  *
- * @package shiword
- * @since shiword 3.00
+ * @package Shiword
+ * @since 3.00
  */
 ?>
 

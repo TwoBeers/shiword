@@ -9,7 +9,7 @@
  * - navigation buttons
  *
  * @package Shiword
- * @since Shiword 3.0
+ * @since 3.0
  */
 
 
@@ -51,9 +51,9 @@ if ( !function_exists( 'shiword_fixed_footer' ) ) {
  */
 if ( !function_exists( 'shiword_qbar' ) ) {
 	function shiword_qbar(){
-		global $shiword_opt, $current_user;
+		global $current_user;
 		
-		if ( $shiword_opt['shiword_qbar'] == 0 ) return;
+		if ( ! shiword_get_opt( 'shiword_qbar' ) ) return;
 
 ?>
 
@@ -100,7 +100,7 @@ if ( !function_exists( 'shiword_qbar' ) ) {
 	}
 ?>
 
-	<?php if ( $shiword_opt['shiword_qbar_recpost'] == 1 ) { // recent posts menu ?>
+	<?php if ( shiword_get_opt( 'shiword_qbar_recpost' ) ) { // recent posts menu ?>
 		<div class="menuitem">
 			<div class="menuitem_img mii_rpost"></div>
 			<div class="menuback">
@@ -113,7 +113,7 @@ if ( !function_exists( 'shiword_qbar' ) ) {
 			</div>
 		</div>
 	<?php } ?>
-	<?php if ( $shiword_opt['shiword_qbar_cat'] == 1 ) { // popular categories menu ?>
+	<?php if ( shiword_get_opt( 'shiword_qbar_cat' ) ) { // popular categories menu ?>
 		<div class="menuitem">
 			<div  class="menuitem_img mii_pcats"></div>
 			<div class="menuback">
@@ -127,7 +127,7 @@ if ( !function_exists( 'shiword_qbar' ) ) {
 			</div>
 		</div>
 	<?php } ?>
-	<?php if ( $shiword_opt['shiword_qbar_reccom'] == 1 ) { // recent comments menu ?>
+	<?php if ( shiword_get_opt( 'shiword_qbar_reccom' ) ) { // recent comments menu ?>
 		<div class="menuitem">
 			<div  class="menuitem_img mii_rcomm"></div>
 			<div class="menuback">
@@ -140,7 +140,7 @@ if ( !function_exists( 'shiword_qbar' ) ) {
 			</div>
 		</div>
 	<?php } ?>
-	<?php if ( $shiword_opt['shiword_qbar_user'] == 1 ) { // user links menu ?>
+	<?php if ( shiword_get_opt( 'shiword_qbar_user' ) ) { // user links menu ?>
 		<div class="menuitem" id="user_menuback">
 			<div  class="menuitem_img mii_cuser"></div>
 			<div class="menuback">
@@ -201,13 +201,13 @@ if ( !function_exists( 'shiword_qbar' ) ) {
  */
 if ( !function_exists( 'shiword_statusbar' ) ) {
 	function shiword_statusbar(){
-		global $shiword_opt, $current_user;
+		global $current_user;
 ?>
 
 <!-- begin statusbar -->
 
 <div id="statusbar">
-	<?php if ( $shiword_opt['shiword_welcome'] == 1 ) { ?>
+	<?php if ( shiword_get_opt( 'shiword_welcome' ) ) { ?>
 		<?php printf( __( 'Welcome %s', 'shiword' ), ( is_user_logged_in() ) ? $current_user->display_name : '' ); ?>, <?php printf( __('today is %1$s, %2$s','shiword'), date_i18n( __( 'l','shiword' ) ), date_i18n( get_option( 'date_format' ) ) ); ?>
 	<?php } ?>
 	<?php shiword_hook_statusbar(); ?>
@@ -226,9 +226,9 @@ if ( !function_exists( 'shiword_statusbar' ) ) {
  */
 if ( !function_exists( 'shiword_navbuttons' ) ) {
 	function shiword_navbuttons( $print = 1, $comment = 1, $feed = 1, $trackback = 1, $home = 1, $next_prev = 1, $up_down = 1 ) {
-		global $post, $shiword_opt;
+		global $post;
 
-		if ( $shiword_opt['shiword_navbuttons'] == 0 ) return;
+		if ( ! shiword_get_opt( 'shiword_navbuttons' ) ) return;
 
 		wp_reset_postdata();
 		
@@ -242,7 +242,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 <div id="navbuttons">
 
 	<?php // ------- Print -------
-		if ( $shiword_opt['shiword_navbuttons_print'] && $print && $is_singular ) { ?>
+		if ( shiword_get_opt( 'shiword_navbuttons_print' ) && $print && $is_singular ) { ?>
 		<div class="minibutton">
 			<a rel="nofollow" href="<?php
 				$query_vars['style'] = 'printme';
@@ -261,7 +261,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php } ?>
 
 	<?php // ------- Leave a comment -------
-		if ( $shiword_opt['shiword_navbuttons_comment'] && $comment && $is_singular && comments_open( $post->ID ) && !post_password_required() ) { ?>
+		if ( shiword_get_opt( 'shiword_navbuttons_comment' ) && $comment && $is_singular && comments_open( $post->ID ) && !post_password_required() ) { ?>
 		<div class="minibutton">
 			<a href="#respond">
 				<span class="minib_img minib_comment">&nbsp;</span>
@@ -271,7 +271,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php } ?>
 
 	<?php // ------- RSS feed -------
-		if ( $shiword_opt['shiword_navbuttons_feed'] && $feed && $is_singular && comments_open( $post->ID ) && !post_password_required() ) { ?>
+		if ( shiword_get_opt( 'shiword_navbuttons_feed' ) && $feed && $is_singular && comments_open( $post->ID ) && !post_password_required() ) { ?>
 		<div class="minibutton">
 			<a href="<?php echo get_post_comments_feed_link( $post->ID, 'rss2' ); ?> ">
 				<span class="minib_img minib_rss">&nbsp;</span>
@@ -281,7 +281,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php } ?>
 
 	<?php // ------- Trackback -------
-		if ( $shiword_opt['shiword_navbuttons_trackback'] && $trackback && $is_singular && pings_open() ) { ?>
+		if ( shiword_get_opt( 'shiword_navbuttons_trackback' ) && $trackback && $is_singular && pings_open() ) { ?>
 		<div class="minibutton">
 			<a href="<?php echo get_trackback_url(); ?>" rel="trackback">
 				<span class="minib_img minib_track">&nbsp;</span>
@@ -291,7 +291,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php } ?>
 
 	<?php // ------- Home -------
-		if ( $shiword_opt['shiword_navbuttons_home'] && $home ) { ?>
+		if ( shiword_get_opt( 'shiword_navbuttons_home' ) && $home ) { ?>
 		<div class="minibutton">
 			<a href="<?php echo home_url(); ?>">
 				<span class="minib_img minib_home">&nbsp;</span>
@@ -313,7 +313,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php } ?>
 
 	<?php // ------- Next post -------
-		if ( $shiword_opt['shiword_navbuttons_nextprev'] && $next_prev && $is_post && get_next_post() ) { ?>
+		if ( shiword_get_opt( 'shiword_navbuttons_nextprev' ) && $next_prev && $is_post && get_next_post() ) { ?>
 		<div class="minibutton">
 			<a href="<?php echo get_permalink( get_next_post() ); ?>">
 				<span class="minib_img minib_npage">&nbsp;</span>
@@ -323,7 +323,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php } ?>
 
 	<?php // ------- Previous post -------
-		if ( $shiword_opt['shiword_navbuttons_nextprev'] && $next_prev && $is_post && get_previous_post() ) { ?>
+		if ( shiword_get_opt( 'shiword_navbuttons_nextprev' ) && $next_prev && $is_post && get_previous_post() ) { ?>
 		<div class="minibutton">
 			<a href="<?php echo get_permalink( get_previous_post() ); ?>">
 				<span class="minib_img minib_ppage">&nbsp;</span>
@@ -333,7 +333,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php } ?>
 
 	<?php // ------- Newer Posts -------
-		if ( $shiword_opt['shiword_navbuttons_newold'] && $next_prev && !$is_singular && !shiword_is_allcat() && get_previous_posts_link() ) { ?>
+		if ( shiword_get_opt( 'shiword_navbuttons_newold' ) && $next_prev && !$is_singular && !shiword_is_allcat() && get_previous_posts_link() ) { ?>
 		<div class="minibutton">
 			<?php previous_posts_link( '<span class="minib_img minib_ppages">&nbsp;</span>' ); ?>
 			<span class="nb_tooltip"><?php echo __( 'Newer Posts', 'shiword' ); ?></span>
@@ -341,7 +341,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php } ?>
 
 	<?php // ------- Older Posts -------
-		if ( $shiword_opt['shiword_navbuttons_newold'] && $next_prev && !$is_singular && !shiword_is_allcat() && get_next_posts_link() ) { ?>
+		if ( shiword_get_opt( 'shiword_navbuttons_newold' ) && $next_prev && !$is_singular && !shiword_is_allcat() && get_next_posts_link() ) { ?>
 		<div class="minibutton">
 			<?php next_posts_link( '<span class="minib_img minib_npages">&nbsp;</span>' ); ?>
 			<span class="nb_tooltip"><?php echo __( 'Older Posts', 'shiword' ); ?></span>
@@ -349,7 +349,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php } ?>
 
 	<?php // ------- Top -------
-		if ( $shiword_opt['shiword_navbuttons_topbottom'] && $up_down ) { ?>
+		if ( shiword_get_opt( 'shiword_navbuttons_topbottom' ) && $up_down ) { ?>
 		<div class="minibutton">
 			<a href="#">
 				<span class="minib_img minib_top">&nbsp;</span>
@@ -359,7 +359,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php } ?>
 
 	<?php // ------- Bottom -------
-		if ( $shiword_opt['shiword_navbuttons_topbottom'] && $up_down ) { ?>
+		if ( shiword_get_opt( 'shiword_navbuttons_topbottom' ) && $up_down ) { ?>
 		<div class="minibutton">
 			<a href="#footer">
 				<span class="minib_img minib_bottom">&nbsp;</span>
@@ -431,7 +431,7 @@ if ( !function_exists( 'shiword_get_recententries' ) ) {
 					echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . get_template_directory_uri() . '/images/thumb.png" alt="thumb" title="' . $post_title_short . '" />';
 					echo '[' . __('No preview: this is a protected post', 'shiword' ) . ']';
 				} else {
-					echo shiword_get_the_thumb( get_the_ID(), 50, 50, 'alignleft' );
+					echo shiword_get_the_thumb( array( 'id' => get_the_ID(), 'width' => 50, 'height' => 50, 'class' => 'alignleft' ) );
 					the_excerpt();
 				}
 				echo '</div></li>';

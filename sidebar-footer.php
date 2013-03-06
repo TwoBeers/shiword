@@ -4,8 +4,8 @@
  *
  * Template part file that contains the footer widget area
  *
- * @package shiword
- * @since shiword 1.00
+ * @package Shiword
+ * @since 1.00
  */
 ?>
 
