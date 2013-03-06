@@ -287,9 +287,9 @@ class shiword_Widget_latest_commentators extends WP_Widget {
 			foreach ( (array) $comments as $comment) {
 				if ( !in_array( $comment->comment_author_email, $post_array ) ) {
 					if ( $comment->comment_author_url == '' ) {
-						$output .=  '<li title="' .  $comment->comment_author . '">' . get_avatar( $comment, $grav_dim, $default=get_option( 'avatar_default' ), $comment->comment_author ) . '<span class="lc-user-name">' . $comment->comment_author . '</span></li>';
+						$output .=  '<li title="' .  esc_attr( $comment->comment_author ) . '">' . get_avatar( $comment, $grav_dim, $default=get_option( 'avatar_default' ), $comment->comment_author ) . '<span class="lc-user-name">' . $comment->comment_author . '</span></li>';
 					} else {
-						$output .=  '<li><a target="_blank" href="' . $comment->comment_author_url . '" title="' .  $comment->comment_author . '">' . get_avatar( $comment, $grav_dim, $default=get_option( 'avatar_default' ), $comment->comment_author ) . '<span class="lc-user-name">' . $comment->comment_author . '</span></a></li>';
+						$output .=  '<li><a target="_blank" href="' . esc_url( $comment->comment_author_url ) . '" title="' .  esc_attr( $comment->comment_author ) . '">' . get_avatar( $comment, $grav_dim, $default=get_option( 'avatar_default' ), $comment->comment_author ) . '<span class="lc-user-name">' . $comment->comment_author . '</span></a></li>';
 					}
 					$post_array[] = $comment->comment_author_email;
 					if ( ++$counter >= $number ) break;
@@ -386,14 +386,14 @@ class shiword_Widget_user_quick_links extends WP_Widget {
 				<?php if ( current_user_can( 'read' ) ) { ?>
 					<li><a href="<?php echo esc_url( admin_url( 'profile.php' ) ); ?>"><?php _e( 'Your Profile', 'shiword' ); ?></a></li>
 					<?php if ( current_user_can( 'publish_posts' ) ) { ?>
-						<li><a title="<?php _e( 'Add New Post', 'shiword' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post', 'shiword' ); ?></a></li>
+						<li><a title="<?php esc_attr_e( 'Add New Post', 'shiword' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post', 'shiword' ); ?></a></li>
 					<?php } ?>
 					<?php if ( current_user_can( 'moderate_comments' ) ) {
 						$awaiting_mod = wp_count_comments();
 						$awaiting_mod = $awaiting_mod->moderated;
 						$awaiting_mod = $awaiting_mod ? ' ( ' . number_format_i18n( $awaiting_mod ) . ' )' : '';
 					?>
-						<li><a title="<?php _e( 'Comments', 'shiword' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'shiword' ); ?></a><span class="hide-if-mobile"><?php echo $awaiting_mod; ?></span></li>
+						<li><a title="<?php esc_attr_e( 'Comments', 'shiword' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'shiword' ); ?></a><span class="hide-if-mobile"><?php echo $awaiting_mod; ?></span></li>
 					<?php } ?>
 				<?php } ?>
 			<?php } ?>
@@ -462,7 +462,7 @@ class shiword_Widget_pop_categories extends WP_Widget {
 		wp_list_categories(apply_filters( 'sw_widget_pop_categories_args', $cat_args));
 
 ?>
-			<li class="sw-allcat" style="text-align: right;margin-top:12px;"><a title="<?php _e( 'View all categories', 'shiword' ); ?>" href="<?php  echo home_url(); ?>/?allcat=y"><?php _e( 'View all', 'shiword' ); ?></a></li>
+			<li class="sw-allcat" style="text-align: right;margin-top:12px;"><a title="<?php esc_attr_e( 'View all categories', 'shiword' ); ?>" href="<?php  echo home_url(); ?>/?allcat=y"><?php _e( 'View all', 'shiword' ); ?></a></li>
 		</ul>
 <?php
 		echo $after_widget;
@@ -507,13 +507,14 @@ class shiword_Widget_pop_categories extends WP_Widget {
 class shiword_Widget_social extends WP_Widget {
 	function shiword_Widget_social() {
 		$widget_ops = array(
-            'classname' => 'sw-widget-social',
-            'description' => __("This widget lets visitors of your blog subscribe to it and follow you on popular social networks like Twitter, FaceBook etc.", "shiword"));
+			'classname' => 'sw-widget-social',
+			'description' => __("This widget lets visitors of your blog subscribe to it and follow you on popular social networks like Twitter, FaceBook etc.", "shiword"));
 		$control_ops = array( 'width' => 650);
 
 		$this->WP_Widget("shi-social", __("Follow Me", "shiword"), $widget_ops, $control_ops);
-        $this->follow_urls = array(
+		$this->follow_urls = array(
 			'Blogger' => 'Blogger',
+			'blurb' => 'Blurb',
 			'Delicious' => 'Delicious',
 			'Deviantart' => 'deviantART',
 			'Digg' => 'Digg',
@@ -531,122 +532,129 @@ class shiword_Widget_social extends WP_Widget {
 			'pinterest' => 'Pinterest',
 			'Qzone' => 'Qzone',
 			'Reddit' => 'Reddit',
+			'scribd' => 'Scribd',
+			'slideshare' => 'SlideShare',
 			'StumbleUpon' => 'StumbleUpon',
+			'soundcloud' => 'SoundCloud',
 			'Technorati' => 'Technorati',
 			'Tencent' => 'Tencent',
 			'Twitter' => 'Twitter',
+			'tumblr' => 'Tumblr',
+			'ubuntuone' => 'Ubuntu One',
 			'Vimeo' => 'Vimeo',
 			'VKontakte' => 'VKontakte',
 			'Weibo' => 'Weibo',
 			'WindowsLive' => 'Windows Live',
+			'xing' => 'Xing',
+			'yfrog' => 'YFrog',
 			'Youtube' => 'Youtube',
 			'RSS' => 'RSS' );
-	}
+		}
 
-    function form($instance) {
-        $defaults = array("title" => __("Follow Me", "shiword"),
-            "icon_size" => '48px',
-        );
-        foreach ($this->follow_urls as $follow_service => $service_name ) {
-            $defaults[$follow_service."_icon"] = $follow_service;
-            $defaults["show_".$follow_service] = false;
-        }
-        $instance = wp_parse_args((array)$instance, $defaults);
+	function form($instance) {
+		$defaults = array("title" => __("Follow Me", "shiword"),
+			"icon_size" => '48px',
+		);
+		foreach ($this->follow_urls as $follow_service => $service_name ) {
+			$defaults[$follow_service."_icon"] = $follow_service;
+			$defaults["show_".$follow_service] = false;
+		}
+		$instance = wp_parse_args((array)$instance, $defaults);
 ?>
-    <div>
+	<div>
 	<p><?php echo __( 'NOTE: Enter the <strong>full</strong> addresses ( with <em>http://</em> )', 'shiword' ); ?></p>
 <?php
-        foreach($this->follow_urls as $follow_service => $service_name ) {
+		foreach($this->follow_urls as $follow_service => $service_name ) {
 ?> 
-        <div class="sw-service-input">
+		<div class="sw-service-input">
 			<h2>
 				<input id="<?php echo $this->get_field_id( 'show_'.$follow_service); ?>" name="<?php echo $this->get_field_name( 'show_'.$follow_service); ?>" type="checkbox" <?php checked( $instance['show_'.$follow_service], 'on' ); ?>  class="checkbox" />
-				<img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service ); ?>.png" alt="<?php echo $follow_service; ?>" />
+				<img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service ); ?>.png" alt="<?php echo esc_attr( $follow_service ); ?>" />
 				<?php echo $service_name; ?>
 			</h2>
 <?php
-            if ($follow_service != 'RSS' ) {
-                $url_or_account = $follow_service;
+			if ($follow_service != 'RSS' ) {
+				$url_or_account = $follow_service;
 ?>
-        <p>
-            <label for="<?php echo $this->get_field_id($follow_service.'_account' ); ?>">
+		<p>
+			<label for="<?php echo $this->get_field_id($follow_service.'_account' ); ?>">
 <?php
 				printf(__( 'Enter %1$s account link:', 'shiword' ), $service_name);
 ?>
-            </label>
-            <input id="<?php echo $this->get_field_id($follow_service.'_account' ); ?>" name="<?php echo $this->get_field_name($follow_service.'_account' ); ?>" value="<?php if (isset($instance[$follow_service.'_account'])) echo $instance[$follow_service.'_account']; ?>" class="widefat" />
-        </p>
+			</label>
+			<input id="<?php echo $this->get_field_id($follow_service.'_account' ); ?>" name="<?php echo $this->get_field_name($follow_service.'_account' ); ?>" value="<?php if (isset($instance[$follow_service.'_account'])) echo $instance[$follow_service.'_account']; ?>" class="widefat" />
+		</p>
 
 <?php
-            }
+			}
 ?>
-        </div>
+		</div>
 <?php
-        }
+		}
 ?>
-        <div class="clear" style="padding: 10px 0; border-top: 1px solid #DFDFDF; text-align: right;">
-            <label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select your icon size', 'shiword' ); ?></label><br />
-            <select name="<?php echo $this->get_field_name( 'icon_size' ); ?>" id="<?php echo $this->get_field_id( 'icon_size' ); ?>" >
+		<div class="clear" style="padding: 10px 0; border-top: 1px solid #DFDFDF; text-align: right;">
+			<label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select your icon size', 'shiword' ); ?></label><br />
+			<select name="<?php echo $this->get_field_name( 'icon_size' ); ?>" id="<?php echo $this->get_field_id( 'icon_size' ); ?>" >
 <?php
-            $size_array = array ( '16px', '24px', '32px', '40px', '50px', '60px' );
-            foreach($size_array as $size) {
+			$size_array = array ( '16px', '24px', '32px', '40px', '50px', '60px' );
+			foreach($size_array as $size) {
 ?>
-                <option value="<?php echo $size; ?>" <?php if ($instance['icon_size'] == $size) { echo " selected "; } ?>><?php echo $size; ?></option>
+				<option value="<?php echo $size; ?>" <?php if ($instance['icon_size'] == $size) { echo " selected "; } ?>><?php echo $size; ?></option>
 <?php
-            }
+			}
 ?>
-            </select>
-        </div>
-    </div>
+			</select>
+		</div>
+	</div>
 <?php
-    }
+	}
 
-    function update($new_instance, $old_instance) {
-        $instance = $old_instance;
-        $instance["title"] = strip_tags($new_instance["title"]);
-        $instance["icon_size"] = $new_instance["icon_size"];
+	function update($new_instance, $old_instance) {
+		$instance = $old_instance;
+		$instance["title"] = strip_tags($new_instance["title"]);
+		$instance["icon_size"] = $new_instance["icon_size"];
 
-        foreach ($this->follow_urls as $follow_service => $service_name ) {
-            $instance['show_'.$follow_service] = $new_instance['show_'.$follow_service];
-            $instance[$follow_service.'_account'] = $new_instance[$follow_service.'_account'];
-        }
+		foreach ($this->follow_urls as $follow_service => $service_name ) {
+			$instance['show_'.$follow_service] = $new_instance['show_'.$follow_service];
+			$instance[$follow_service.'_account'] = $new_instance[$follow_service.'_account'];
+		}
 
-        return $instance;
-    }
+		return $instance;
+	}
 
 	function widget( $args, $instance ) {
 		extract($args);
-        $title = apply_filters( 'widget_title', empty($instance['title']) ? '' : $instance['title']);
+		$title = apply_filters( 'widget_title', empty($instance['title']) ? '' : $instance['title']);
 		$icon_size = ( isset($instance['icon_size']) ) ? $instance['icon_size'] : '48px';
-        echo $before_widget;
-        if (!empty($title)) {
-            echo $before_title;
-            echo $title;
-            echo $after_title;
-        }
+		echo $before_widget;
+		if (!empty($title)) {
+			echo $before_title;
+			echo $title;
+			echo $after_title;
+		}
 ?>
-    <div class="fix" style="text-align: center;">
+	<div class="fix" style="text-align: center;">
 <?php
-        foreach ($this->follow_urls as $follow_service => $service_name ) {
+		foreach ($this->follow_urls as $follow_service => $service_name ) {
 		
 			$show = ( isset($instance['show_'.$follow_service]) ) ? $instance['show_'.$follow_service] : false;
 			$account = ( isset($instance[$follow_service.'_account']) ) ? $instance[$follow_service.'_account'] : '';
-            if ($follow_service == 'RSS' ) {
-                $account = get_bloginfo( 'rss2_url' );
-            }
-            if ($show && !empty($account)) {
+			if ($follow_service == 'RSS' ) {
+				$account = get_bloginfo( 'rss2_url' );
+			}
+			if ($show && !empty($account)) {
 ?>
-        <a href="<?php echo $account; ?>" target="_blank" class="shi-social-icon" title="<?php echo $service_name;?>">
-            <img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service );?>.png" alt="<?php echo $follow_service;?>" style='width: <?php echo $icon_size;?>; height: <?php echo $icon_size;?>;' />
-        </a>
+		<a href="<?php echo esc_url( $account ); ?>" target="_blank" class="shi-social-icon" title="<?php echo esc_attr( $service_name );?>">
+			<img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service );?>.png" alt="<?php echo esc_attr( $follow_service );?>" style='width: <?php echo $icon_size;?>; height: <?php echo $icon_size;?>;' />
+		</a>
 <?php
-            }
-        }
+			}
+		}
 ?>
-    </div>
+	</div>
 <?php
-        echo $after_widget;
-    }
+		echo $after_widget;
+	}
 }
 
 /**
@@ -742,18 +750,18 @@ class shiword_Widget_recent_posts extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'category' ); ?>"><?php _e( 'Category', 'shiword' ); ?>:</label>
 			<?php wp_dropdown_categories( Array(
-						'orderby'            => 'ID', 
-						'order'              => 'ASC',
-						'show_count'         => 1,
-						'hide_empty'         => 0,
-						'hide_if_empty'      => false,
-						'echo'               => 1,
-						'selected'           => $category,
-						'hierarchical'       => 1, 
-						'name'               => $this->get_field_name( 'category' ),
-						'id'                 => $this->get_field_id( 'category' ),
-						'class'              => 'widefat',
-						'taxonomy'           => 'category',
+						'orderby'			=> 'ID', 
+						'order'			  => 'ASC',
+						'show_count'		 => 1,
+						'hide_empty'		 => 0,
+						'hide_if_empty'	  => false,
+						'echo'			   => 1,
+						'selected'		   => $category,
+						'hierarchical'	   => 1, 
+						'name'			   => $this->get_field_name( 'category' ),
+						'id'				 => $this->get_field_id( 'category' ),
+						'class'			  => 'widefat',
+						'taxonomy'		   => 'category',
 					) ); ?>
 		</p>
 
@@ -903,7 +911,7 @@ class shiword_Widget_share_this extends WP_Widget {
 		$outer = '';
 		foreach( $services as $key => $service ) {
 			$href = sprintf( $service[1], $pName, $pHref, $pPict );
-			if ( $instance[$key] ) $outer .= '<a class="share-item" rel="nofollow" target="_blank" id="sw-' . $key . '" href="' . $href . '"><img src="' . get_template_directory_uri() . '/images/follow/' . strtolower( $key ) . '.png" width="' . $icon_size . '" height="' . $icon_size . '" alt="' . $service[0] . ' Button"  title="' . sprintf( __( 'Share with %s', 'shiword' ), $service[0] ) . '" /></a>';
+			if ( $instance[$key] ) $outer .= '<a class="share-item" rel="nofollow" target="_blank" id="sw-' . $key . '" href="' . $href . '"><img src="' . get_template_directory_uri() . '/images/follow/' . strtolower( $key ) . '.png" width="' . $icon_size . '" height="' . $icon_size . '" alt="' . esc_attr( $service[0] ) . ' Button"  title="' . esc_attr( sprintf( __( 'Share with %s', 'shiword' ), $service[0] ) ) . '" /></a>';
 		}
 ?>
 		<?php echo $before_widget; ?>
@@ -916,7 +924,7 @@ class shiword_Widget_share_this extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags( $new_instance['title'] );
-        $instance["icon_size"] = in_array( $new_instance["icon_size"], $this->default_icon_size ) ? $new_instance["icon_size"] : '16' ;
+		$instance["icon_size"] = in_array( $new_instance["icon_size"], $this->default_icon_size ) ? $new_instance["icon_size"] : '16' ;
 	
 		$services = $this->default_services;
 		foreach( $services as $key => $service ) {
@@ -949,12 +957,12 @@ class shiword_Widget_share_this extends WP_Widget {
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 		<p>
-            <label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select icon size', 'shiword' ); ?></label>
-            <select name="<?php echo $this->get_field_name( 'icon_size' ); ?>" id="<?php echo $this->get_field_id( 'icon_size' ); ?>" >
+			<label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select icon size', 'shiword' ); ?></label>
+			<select name="<?php echo $this->get_field_name( 'icon_size' ); ?>" id="<?php echo $this->get_field_id( 'icon_size' ); ?>" >
 			<?php foreach($size_array as $size) { ?>
-                <option value="<?php echo $size; ?>" <?php selected( $icon_size, $size ); ?>><?php echo $size; ?>px</option>
+				<option value="<?php echo $size; ?>" <?php selected( $icon_size, $size ); ?>><?php echo $size; ?>px</option>
 			<?php } ?>
-            </select>
+			</select>
 		</p>
 		<p>
 		<?php foreach( $services as $key => $service ) { ?>
@@ -997,7 +1005,7 @@ class shiword_Widget_post_details extends WP_Widget {
 		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['featured'] = (int) $new_instance['featured'] ? 1 : 0;
 		$instance['author'] = (int) $new_instance['author'] ? 1 : 0;
-        $instance['avatar_size'] = in_array( $new_instance['avatar_size'], array ( '32', '48', '64', '96', '128' ) ) ? $new_instance['avatar_size'] : '48' ;
+		$instance['avatar_size'] = in_array( $new_instance['avatar_size'], array ( '32', '48', '64', '96', '128' ) ) ? $new_instance['avatar_size'] : '48' ;
 		$instance['date'] = (int) $new_instance['date'] ? 1 : 0;
 		$instance['tags'] = (int) $new_instance['tags'] ? 1 : 0;
 		$instance['categories'] = (int) $new_instance['categories'] ? 1 : 0;
@@ -1028,17 +1036,17 @@ class shiword_Widget_post_details extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'author' ); ?>"><?php _e( 'Author', 'shiword' ); ?></label>
 		</p>
 		<p>
-            <label for="<?php echo $this->get_field_id( 'avatar_size' ); ?>"><?php _e( 'Select avatar size', 'shiword' ); ?></label>
-            <select name="<?php echo $this->get_field_name( 'avatar_size' ); ?>" id="<?php echo $this->get_field_id( 'avatar_size' ); ?>" >
+			<label for="<?php echo $this->get_field_id( 'avatar_size' ); ?>"><?php _e( 'Select avatar size', 'shiword' ); ?></label>
+			<select name="<?php echo $this->get_field_name( 'avatar_size' ); ?>" id="<?php echo $this->get_field_id( 'avatar_size' ); ?>" >
 <?php
-            $size_array = array ( '32', '48', '64', '96', '128' );
-            foreach( $size_array as $size ) {
+			$size_array = array ( '32', '48', '64', '96', '128' );
+			foreach( $size_array as $size ) {
 ?>
-                <option value="<?php echo $size; ?>" <?php selected( $avatar_size, $size ); ?>><?php echo $size; ?>px</option>
+				<option value="<?php echo $size; ?>" <?php selected( $avatar_size, $size ); ?>><?php echo $size; ?>px</option>
 <?php
-            }
+			}
 ?>
-            </select>
+			</select>
 		</p>
 		<p>
 			<input id="<?php echo $this->get_field_id( 'date' ); ?>" name="<?php echo $this->get_field_name( 'date' ); ?>" value="1" type="checkbox" <?php checked( 1 , $date ); ?> />
@@ -1227,7 +1235,7 @@ class shiword_Widget_clean_archives extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
-        $instance["month_style"] = in_array( $new_instance["month_style"], array ( 'number', 'acronym' ) ) ? $new_instance["month_style"] : 'number' ;
+		$instance["month_style"] = in_array( $new_instance["month_style"], array ( 'number', 'acronym' ) ) ? $new_instance["month_style"] : 'number' ;
 
 		return $instance;
 	}
@@ -1241,11 +1249,11 @@ class shiword_Widget_clean_archives extends WP_Widget {
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 		<p>
-            <label for="<?php echo $this->get_field_id( 'month_style' ); ?>"><?php _e( 'Select month style', 'shiword' ); ?></label>
-            <select name="<?php echo $this->get_field_name( 'month_style' ); ?>" id="<?php echo $this->get_field_id( 'month_style' ); ?>" >
-                <option value="number" <?php selected( $month_style, 'number' ); ?>><?php _e( 'number', 'shiword' ); ?></option>
-                <option value="acronym" <?php selected( $month_style, 'acronym' ); ?>><?php _e( 'acronym', 'shiword' ); ?></option>
-            </select>
+			<label for="<?php echo $this->get_field_id( 'month_style' ); ?>"><?php _e( 'Select month style', 'shiword' ); ?></label>
+			<select name="<?php echo $this->get_field_name( 'month_style' ); ?>" id="<?php echo $this->get_field_id( 'month_style' ); ?>" >
+				<option value="number" <?php selected( $month_style, 'number' ); ?>><?php _e( 'number', 'shiword' ); ?></option>
+				<option value="acronym" <?php selected( $month_style, 'acronym' ); ?>><?php _e( 'acronym', 'shiword' ); ?></option>
+			</select>
 		</p>
 <?php
 	}
