@@ -64,7 +64,7 @@ if ( !function_exists( 'shiword_add_audio_player' ) ) {
 <div class="sw-player-container">
 	<small><?php echo $result[0][$key];?></small>
 	<div class="sw-player-content">
-		<audio controls="" id="sw-player-<?php echo $instance . '-' . $post->ID; ?>">
+		<audio controls="" id="sw-player-<?php echo $instance . '-' . $post->ID; ?>" class="no-player">
 			<source src="<?php echo $result[3][$key];?>" />
 			<span class="sw-player-notice"><?php _e( 'this audio type is not supported by your browser','shiword' ); ?></span>
 		</audio>

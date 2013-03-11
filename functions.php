@@ -45,8 +45,6 @@ add_action( 'wp_print_styles', 'shiword_deregister_styles', 100 ); // deregister
 
 add_action( 'admin_bar_menu', 'shiword_admin_bar_plus', 999 ); // add links to admin bar
 
-add_action( 'infinite_scroll_render', 'shiword_infinite_scroll_pageinfo' ); // Jetpack Infinite Scroll
-
 add_action( 'comment_form_before', 'shiword_enqueue_comments_reply' );
 
 add_action( 'wp_head', 'shiword_microdata' ); // site microdata
@@ -60,8 +58,6 @@ add_action( 'shiword_hook_comments_list_after', 'shiword_navigate_comments' ); /
 add_action( 'shiword_hook_comments_list_after', 'shiword_list_pings' ); // list pings
 
 add_action( 'shiword_hook_attachment_before', 'shiword_navigate_images' ); // attachments (images) navigation
-
-add_action( 'init', 'shiword_for_jetpack_init' ); //Jetpack support
 
 
 /* Custom filters */
@@ -146,6 +142,8 @@ require_once( 'lib/slider.php' ); // load slider stuff
 require_once( 'lib/hooks.php' ); // load custom hooks
 
 require_once( 'quickbar.php' ); // load quickbar functions
+
+require_once( 'lib/jetpack.php' ); // Jetpack support
 
 if ( shiword_get_opt( 'shiword_custom_widgets' ) == 1 ) require_once( 'lib/widgets.php' ); // load custom widgets module
 
@@ -448,8 +446,6 @@ if ( !function_exists( 'shiword_paged_navi' ) ) {
 
 		if ( ! shiword_get_opt( 'shiword_navlinks' ) || shiword_is_printpreview() ) return;
 
-		if ( class_exists( 'The_Neverending_Home_Page' ) ) return;
-
 		if ( !$paged )
 			$paged = 1;
 
@@ -462,7 +458,7 @@ if ( !function_exists( 'shiword_paged_navi' ) ) {
 		} 
 
 		?>
-			<div class="navigate_comments">
+			<div class="<?php echo join( ' ', apply_filters( 'shiword_filter_navi_classes', array( 'navigate_comments' ) ) ); ?>">
 				<?php echo apply_filters( 'shiword_filter_paged_navi', $links ); ?>
 			</div>
 		<?php 
@@ -2051,64 +2047,3 @@ if ( !function_exists( 'mb_strimwidth' ) ) {
 	}
 }
 
-
-/* Jetpack support */
-function shiword_for_jetpack_init() {
-
-	//Infinite Scroll
-	add_theme_support( 'infinite-scroll', array(
-		'type'		=> 'click',
-		'container'	=> 'posts-container',
-		'render'	=> 'shiword_for_jetpack_infinite_scroll',
-	) );
-
-	//Sharedaddy
-	if ( function_exists( 'sharing_display' ) ) {
-		remove_filter( 'the_content', 'sharing_display', 19 );
-		remove_filter( 'the_excerpt', 'sharing_display', 19 );
-		remove_action( 'shiword_hook_like_it', 'shiword_like_it' );
-		add_action( 'shiword_hook_like_it', 'shiword_for_jetpack_sharedaddy' );
-	}
-
-	//Carousel
-	if ( class_exists( 'Jetpack_Carousel' ) ) {
-		remove_filter( 'post_gallery', 'shiword_gallery_shortcode', 10, 2 );
-		add_filter( 'shiword_filter_js_modules', 'shiword_for_jetpack_carousel' );
-	}
-
-	//Likes
-	if ( class_exists( 'Jetpack_Likes' ) ) {
-		add_filter( 'wpl_is_index_disabled', '__return_false' );
-	}
-
-}
-
-//Set the code to be rendered on for calling posts,
-function shiword_for_jetpack_infinite_scroll() {
-	get_template_part( 'loop' );
-}
-
-//print page number reminder
-function shiword_infinite_scroll_pageinfo() {
-
-	$page = (int) $_GET['page'] + 1;
-	echo '<div class="page-reminder"><span>' . $page . '</span></div>';
-
-}
-
-//print the sharedaddy buttons inside the "I-like-it" container instead of after post content
-function shiword_for_jetpack_sharedaddy() {
-
-	$text = sharing_display();
-	if ( $text )
-		echo '<div class="sw-I-like-it">' . $text . '<div class="fixfloat"> </div></div>';
-
-}
-
-//skip the thickbox js module
-function shiword_for_jetpack_carousel( $modules ) {
-
-	$modules = str_replace( 'thickbox', 'carousel', $modules );
-	return $modules;
-
-}

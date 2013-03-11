@@ -334,7 +334,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 
 	<?php // ------- Newer Posts -------
 		if ( shiword_get_opt( 'shiword_navbuttons_newold' ) && $next_prev && !$is_singular && !shiword_is_allcat() && get_previous_posts_link() ) { ?>
-		<div class="minibutton">
+		<div class="<?php echo join( ' ', apply_filters( 'shiword_filter_navi_classes', array( 'minibutton' ) ) ); ?>">
 			<?php previous_posts_link( '<span class="minib_img minib_ppages">&nbsp;</span>' ); ?>
 			<span class="nb_tooltip"><?php echo __( 'Newer Posts', 'shiword' ); ?></span>
 		</div>
@@ -342,7 +342,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 
 	<?php // ------- Older Posts -------
 		if ( shiword_get_opt( 'shiword_navbuttons_newold' ) && $next_prev && !$is_singular && !shiword_is_allcat() && get_next_posts_link() ) { ?>
-		<div class="minibutton">
+		<div class="<?php echo join( ' ', apply_filters( 'shiword_filter_navi_classes', array( 'minibutton' ) ) ); ?>">
 			<?php next_posts_link( '<span class="minib_img minib_npages">&nbsp;</span>' ); ?>
 			<span class="nb_tooltip"><?php echo __( 'Older Posts', 'shiword' ); ?></span>
 		</div>

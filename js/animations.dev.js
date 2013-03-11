@@ -203,7 +203,7 @@ shiwordAnimations = {
 	entry_meta_apply : function() {
 
 		//meta animation
-		$('.top_meta').removeClass('ani_meta').addClass('ani_meta_js').children('.metafield').each( function(){  //get every metafield item
+		$('.top_meta.ani_meta').removeClass('ani_meta').addClass('ani_meta_js').children('.metafield').each( function(){  //get every metafield item
 			var $this = $(this);
 			var list = $this.children('.metafield_content'); // get the sub list for each metafield item
 			var parent = $this.parent();
