@@ -15,9 +15,9 @@
 class shiword_Widget_popular_posts extends WP_Widget {
 
 	function shiword_Widget_popular_posts() {
-		$widget_ops = array( 'classname' => 'sw-widget-popular-posts', 'description' => __( 'The most commented posts on your site', 'shiword' ) );
+		$widget_ops = array( 'classname' => 'tb_popular_posts', 'description' => __( 'The most commented posts on your site', 'shiword' ) );
 		$this->WP_Widget( 'shi-popular-posts', __( 'Popular Posts', 'shiword' ), $widget_ops);
-		$this->alt_option_name = 'sw-widget-popular-posts';
+		$this->alt_option_name = 'tb_popular_posts';
 
 		add_action( 'save_post', array(&$this, 'flush_widget_cache' ) );
 		add_action( 'deleted_post', array(&$this, 'flush_widget_cache' ) );
@@ -121,9 +121,9 @@ class shiword_Widget_popular_posts extends WP_Widget {
 class shiword_Widget_latest_commented_posts extends WP_Widget {
 
 	function shiword_Widget_latest_commented_posts() {
-		$widget_ops = array( 'classname' => 'sw-widget-latest-commented-posts', 'description' => __( 'The latest commented posts/pages of your site', 'shiword' ) );
+		$widget_ops = array( 'classname' => 'tb_latest_commented_posts', 'description' => __( 'The latest commented posts/pages of your site', 'shiword' ) );
 		$this->WP_Widget( 'shi-recent-comments', __( 'Latest activity', 'shiword' ), $widget_ops);
-		$this->alt_option_name = 'sw-widget-latest-commented-posts';
+		$this->alt_option_name = 'tb_latest_commented_posts';
 
 		add_action( 'comment_post', array(&$this, 'flush_widget_cache' ) );
 		add_action( 'transition_comment_status', array(&$this, 'flush_widget_cache' ) );
@@ -171,7 +171,7 @@ class shiword_Widget_latest_commented_posts extends WP_Widget {
 					$post = get_post( $comment->comment_post_ID );
 					setup_postdata( $post );
 					if ( $use_thumbs ) {
-						$the_thumb = shiword_get_the_thumb( array( 'width' => 50, 'height' => 50 ) );
+						$the_thumb = shiword_get_the_thumb( array( 'id' => $post->ID, 'width' => 50, 'height' => 50 ) );
 					} else {
 						$the_thumb = '';
 					}
@@ -236,9 +236,9 @@ class shiword_Widget_latest_commented_posts extends WP_Widget {
 class shiword_Widget_latest_commentators extends WP_Widget {
 
 	function shiword_Widget_latest_commentators() {
-		$widget_ops = array( 'classname' => 'sw-widget-latest-commentators', 'description' => __( 'The latest comment authors', 'shiword' ) );
+		$widget_ops = array( 'classname' => 'tb_latest_commentators', 'description' => __( 'The latest comment authors', 'shiword' ) );
 		$this->WP_Widget( 'shi-recent-commentators', __( 'Latest comment authors', 'shiword' ), $widget_ops);
-		$this->alt_option_name = 'sw-widget-latest-commentators';
+		$this->alt_option_name = 'tb_latest_commentators';
 
 		add_action( 'comment_post', array(&$this, 'flush_widget_cache' ) );
 		add_action( 'transition_comment_status', array(&$this, 'flush_widget_cache' ) );
@@ -354,9 +354,9 @@ class shiword_Widget_latest_commentators extends WP_Widget {
 class shiword_Widget_user_quick_links extends WP_Widget {
 
 	function shiword_Widget_user_quick_links() {
-		$widget_ops = array( 'classname' => 'sw-widget-user-quick-links', 'description' => __( 'Some useful links for users', 'shiword' ) );
+		$widget_ops = array( 'classname' => 'tb_user_quick_links', 'description' => __( 'Some useful links for users', 'shiword' ) );
 		$this->WP_Widget( 'shi-user-quick-links', __( 'User quick links', 'shiword' ), $widget_ops);
-		$this->alt_option_name = 'sw-widget-user-quick-links';
+		$this->alt_option_name = 'tb_user_quick_links';
 	}
 
 	function widget( $args, $instance ) {
@@ -436,7 +436,7 @@ class shiword_Widget_user_quick_links extends WP_Widget {
 class shiword_Widget_pop_categories extends WP_Widget {
 
 	function shiword_Widget_pop_categories() {
-		$widget_ops = array( 'classname' => 'sw-widget-categories', 'description' => __( 'A list of popular categories', 'shiword' ) );
+		$widget_ops = array( 'classname' => 'tb_categories', 'description' => __( 'A list of popular categories', 'shiword' ) );
 		$this->WP_Widget( 'shi-categories', __( 'Popular Categories', 'shiword' ), $widget_ops);
 	}
 
@@ -459,10 +459,10 @@ class shiword_Widget_pop_categories extends WP_Widget {
 <?php
 		$cat_args = array( 'orderby' => 'count', 'show_count' => 1, 'hierarchical' => 0, 'order' => 'DESC', 'title_li' => '', 'number' => $number );
 
-		wp_list_categories(apply_filters( 'sw_widget_pop_categories_args', $cat_args));
+		wp_list_categories(apply_filters( 'shiword_widget_pop_categories_args', $cat_args));
 
 ?>
-			<li class="sw-allcat" style="text-align: right;margin-top:12px;"><a title="<?php esc_attr_e( 'View all categories', 'shiword' ); ?>" href="<?php  echo home_url(); ?>/?allcat=y"><?php _e( 'View all', 'shiword' ); ?></a></li>
+			<li class="tb_allcat" style="text-align: right;margin-top:12px;"><a title="<?php esc_attr_e( 'View all categories', 'shiword' ); ?>" href="<?php  echo home_url(); ?>/?allcat=y"><?php _e( 'View all', 'shiword' ); ?></a></li>
 		</ul>
 <?php
 		echo $after_widget;
@@ -507,7 +507,7 @@ class shiword_Widget_pop_categories extends WP_Widget {
 class shiword_Widget_social extends WP_Widget {
 	function shiword_Widget_social() {
 		$widget_ops = array(
-			'classname' => 'sw-widget-social',
+			'classname' => 'tb_social',
 			'description' => __("This widget lets visitors of your blog subscribe to it and follow you on popular social networks like Twitter, FaceBook etc.", "shiword"));
 		$control_ops = array( 'width' => 650);
 
@@ -562,6 +562,11 @@ class shiword_Widget_social extends WP_Widget {
 		$instance = wp_parse_args((array)$instance, $defaults);
 ?>
 	<div>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?>:</label>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $instance['title']; ?>" />
+		</p>
+
 	<p><?php echo __( 'NOTE: Enter the <strong>full</strong> addresses ( with <em>http://</em> )', 'shiword' ); ?></p>
 <?php
 		foreach($this->follow_urls as $follow_service => $service_name ) {
@@ -664,9 +669,9 @@ class shiword_Widget_social extends WP_Widget {
 class shiword_Widget_recent_posts extends WP_Widget {
 
 	function shiword_Widget_recent_posts() {
-		$widget_ops = array( 'classname' => 'sw-widget-recent-entries', 'description' => __( "The most recent posts in a single category", 'shiword' ) );
+		$widget_ops = array( 'classname' => 'tb_recent_entries', 'description' => __( "The most recent posts in a single category", 'shiword' ) );
 		$this->WP_Widget( 'shi-recent-posts', __( 'Recent Posts in Category', 'shiword' ), $widget_ops);
-		$this->alt_option_name = 'sw-widget-recent-entries';
+		$this->alt_option_name = 'tb_recent_entries';
 
 		add_action( 'save_post', array(&$this, 'flush_widget_cache' ) );
 		add_action( 'deleted_post', array(&$this, 'flush_widget_cache' ) );
@@ -783,9 +788,9 @@ class shiword_Widget_recent_posts extends WP_Widget {
 class shiword_Widget_image_details extends WP_Widget {
 
 	function shiword_Widget_image_details() {
-		$widget_ops = array( 'classname' => 'sw-widget-image-details', 'description' => __( "Display image details. It's visible ONLY in single attachments", 'shiword' ) );
+		$widget_ops = array( 'classname' => 'tb_image_details', 'description' => __( "Display image details. It's visible ONLY in single attachments", 'shiword' ) );
 		$this->WP_Widget( 'shi-image-details', __( 'Image details', 'shiword' ), $widget_ops );
-		$this->alt_option_name = 'sw-widget-image-details';
+		$this->alt_option_name = 'tb_image_details';
 
 	}
 
@@ -885,9 +890,9 @@ class shiword_Widget_share_this extends WP_Widget {
 	var $default_icon_size = array ( '16', '24', '32', '48', '64' );
 	
 	function shiword_Widget_share_this() {
-		$widget_ops = array( 'classname' => 'sw-widget-share-this', 'description' => __( "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments", 'shiword' ) );
+		$widget_ops = array( 'classname' => 'tb_share_this', 'description' => __( "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments", 'shiword' ) );
 		$this->WP_Widget( 'shi-share-this', __( 'Share this', 'shiword' ), $widget_ops );
-		$this->alt_option_name = 'sw-widget-share-this';
+		$this->alt_option_name = 'tb_share_this';
 
 	}
 
@@ -981,9 +986,9 @@ class shiword_Widget_share_this extends WP_Widget {
 class shiword_Widget_post_details extends WP_Widget {
 
 	function shiword_Widget_post_details() {
-		$widget_ops = array( 'classname' => 'sw-widget-post-details', 'description' => __( "Show some details and links related to the current post. It's visible ONLY in single posts", 'shiword' ) );
+		$widget_ops = array( 'classname' => 'tb_post_details', 'description' => __( "Show some details and links related to the current post. It's visible ONLY in single posts", 'shiword' ) );
 		$this->WP_Widget( 'shi-post-details', __( 'Post details', 'shiword' ), $widget_ops );
-		$this->alt_option_name = 'sw-widget-post-details';
+		$this->alt_option_name = 'tb_post_details';
 
 	}
 
@@ -1185,9 +1190,9 @@ class shiword_Widget_Recent_Comments extends WP_Widget {
 class shiword_Widget_clean_archives extends WP_Widget {
 
 	function shiword_Widget_clean_archives() {
-		$widget_ops = array( 'classname' => 'sw-Widget_clean_archives', 'description' => __( "Show archives in a cleaner way", 'shiword' ) );
+		$widget_ops = array( 'classname' => 'tb_clean_archives', 'description' => __( "Show archives in a cleaner way", 'shiword' ) );
 		$this->WP_Widget( 'shi-clean-archives', __( 'Clean Archives', 'shiword' ), $widget_ops);
-		$this->alt_option_name = 'sw-Widget_clean_archives';
+		$this->alt_option_name = 'tb_clean_archives';
 
 	}
 
@@ -1216,11 +1221,11 @@ class shiword_Widget_clean_archives extends WP_Widget {
 		?>
 		<ul class="sw-clean-archives">
 		<?php foreach ( $years as $year ) {
-			echo '<li><a class="sw-year-link" href="' . get_year_link( $year->year ) . '">' . $year->year . '</a>';
+			echo '<li><a class="year-link" href="' . get_year_link( $year->year ) . '">' . $year->year . '</a>';
 			
 			for ( $month = 1; $month <= 12; $month++ ) {
 				if ( (int) $wpdb->get_var( "SELECT COUNT(ID) FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' AND year(post_date) = '$year->year' AND month(post_date) = '$month'" ) > 0 ) {
-					echo '<a class="sw-month-link" href="' . get_month_link( $year->year, $month ) . '">' . $months_short[$month] . '</a>';
+					echo '<a class="month-link" href="' . get_month_link( $year->year, $month ) . '">' . $months_short[$month] . '</a>';
 				}
 			}
 			
@@ -1286,7 +1291,7 @@ function shiword_register_widgets() {
 		'shiword_Widget_clean_archives'  => 1
 	);
 
-	$widgets = apply_filters( 'shiword_filter_widgets', $value );	
+	$widgets = apply_filters( 'shiword_filter_widgets', $value );
 
 	foreach( $widgets as $widget => $is_on ) {
 		if ( $is_on )

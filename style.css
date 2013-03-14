@@ -67,7 +67,7 @@ ol {
 }
 ul li,
 ol li {
-	margin-top: 3px;
+	margin-top: 8px;
 }
 dt {
 	font-weight: bold;
@@ -626,7 +626,6 @@ input[type=password]:focus {
 .minib_backtopost{
 	background-position: 0 -144px;
 }
-
 /* main menu 
 ----------------------------------------------------------*/
 #mainmenu ul {
@@ -829,7 +828,7 @@ input[type=password]:focus {
 /* widgets (sidebar & footer)
 ----------------------------------------------------------*/
 .widget {
-	margin-bottom: 8px;
+	margin-bottom: 2em;
 	padding: 0 0 10px;
 }
 #footer-widget-area {
@@ -878,23 +877,29 @@ input[type=password]:focus {
 	margin: 0;
 	padding: 0;
 }
-.shi_widget_popular_posts img,
-.shi_widget_latest_commented_posts img,
-.shi_widget_latest_commentators img,
-.shi_widget_user_quick_links img,
-.shi_widget_recent_entries img,
-.shi_widget_categories img {
+.tb_popular_posts img,
+.tb_latest_commented_posts img,
+.tb_latest_commentators img,
+.tb_user_quick_links img,
+.tb_recent_entries img,
+.tb_categories img {
 	vertical-align: text-bottom;
 }
-.shi_widget_popular_posts img,
-.shi_widget_latest_commentators img,
-.shi_widget_recent_entries img,
-.shi_widget_latest_commented_posts img {
+.tb_popular_posts img,
+.tb_latest_commentators img,
+.tb_recent_entries img,
+.tb_latest_commented_posts img {
 	border: 1px solid #404040;
 	border-radius: 5px;
 	background: #111;
 }
-.shi_widget_latest_commentators img {
+.widget.tb_popular_posts img,
+.widget.tb_recent_entries img,
+.widget.tb_latest_commented_posts img {
+	margin-right: 8px;
+}
+
+.tb_latest_commentators img {
 	padding: 3px;
 }
 .social-like {
@@ -929,8 +934,6 @@ span.lc-user-name {
 .sw-year-link {
 	font-size: 1.2em;
 	font-weight: bold;
-}
-.shi-social-icon {
 }
 
 /* posts & pages
@@ -1796,6 +1799,9 @@ body .gcard {
 	padding: 6px 26px;
 }
 .infinite-wrap:nth-last-child(2) .page-reminder span.next {
+	display: none;
+}
+.infinite-scroll .hide-if-infinite {
 	display: none;
 }
 

@@ -458,7 +458,7 @@ if ( !function_exists( 'shiword_paged_navi' ) ) {
 		} 
 
 		?>
-			<div class="<?php echo join( ' ', apply_filters( 'shiword_filter_navi_classes', array( 'navigate_comments' ) ) ); ?>">
+			<div class="navigate_comments hide-if-infinite">
 				<?php echo apply_filters( 'shiword_filter_paged_navi', $links ); ?>
 			</div>
 		<?php 
@@ -1123,7 +1123,8 @@ if ( !function_exists( 'shiword_post_title' ) ) {
 	}
 }
 
-// display post details
+
+// print extra info for posts/pages
 if ( !function_exists( 'shiword_post_details' ) ) {
 	function shiword_post_details( $args = '' ) {
 		global $post;
@@ -1134,48 +1135,70 @@ if ( !function_exists( 'shiword_post_details' ) ) {
 			'tags' => 1,
 			'categories' => 1,
 			'avatar_size' => 48,
-			'featured' => 0
+			'featured' => 0,
+			'echo' => 1
 		);
 
 		$args = wp_parse_args( $args, $defaults );
 
-		?>
-		<?php if ( $args['featured'] &&  has_post_thumbnail( $post->ID ) ) { echo '<div class="sw-post-details-thumb">' . get_the_post_thumbnail( $post->ID, 'thumbnail' ) . '</div>'; } ?>
-		<?php if ( $args['author'] ) {
-			$author = $post->post_author;
+		$tax_separator = apply_filters( 'shiword_filter_taxomony_separator', ', ' );
 
-			$name = get_the_author_meta( 'nickname', $author );
-			$alt_name = get_the_author_meta( 'user_nicename', $author );
-			$avatar = get_avatar( $author, $args['avatar_size'], 'Gravatar Logo', $alt_name.'-photo' );
-			$description = get_the_author_meta( 'description', $author );
-			$author_link = get_author_posts_url( $author );
+		$output = '';
 
-			$author_network = '';
-			foreach( $contacts = shiword_new_contactmethods() as $key => $contact ) {
-				if ( get_the_author_meta( $key, $author ) )
-					$author_network .= '<a target="_blank" class="url" title="' . esc_attr( sprintf( __( 'follow %s on %s', 'shiword' ), $name, $contact ) ) . '" href="' . get_the_author_meta( $key, $author ) . '"><img alt="' . $key . '" width="24" height="24" src="' . get_template_directory_uri() . '/images/follow/' . $key . '.png" /></a>';
-			}
+		if ( $args['featured'] &&  has_post_thumbnail( $post->ID ) )
+			$output .= '<div class="tb-post-details post-details-thumb">' . get_the_post_thumbnail( $post->ID, 'thumbnail') . '</div>';
 
-			?>
-			<div class="sw-author-bio vcard">
-				<?php echo $avatar; ?>
-				<a class="fn author-name" href="<?php echo $author_link; ?>" ><?php echo $name; ?></a>
-				<?php if ( $description ) { ?><p class="author-description note"><?php echo $description; ?> </p><?php } ?>
-				<div class="fixfloat"></div>
-			<?php if ( $author_network ) { ?>
-				<p class="author-social">
-					<?php echo $author_network; ?>
-				</p>
-			<?php } ?>
-			</div>
-		<?php } ?>
-		<?php if ( $args['categories'] ) { echo __( 'Categories', 'shiword' ) . ': '; the_category( ', ' ); echo '<br>'; } ?>
-		<?php if ( $args['tags'] ) { echo __( 'Tags', 'shiword' ) . ': '; if ( !get_the_tags() ) { _e( 'No Tags', 'shiword' ); } else { the_tags( '', ', ', '' ); } echo '<br>'; } ?>
-		<?php if ( $args['date'] ) { printf( __( 'Published on: %1$s', 'shiword' ), get_the_time( get_option( 'date_format' ) ) ); } ?>
-		<?php
+		if ( $args['author'] )
+			$output .= shiword_author_badge( $post->post_author, $args['avatar_size'] );
+
+		if ( $args['categories'] )
+			$output .= '<div class="tb-post-details"><span class="post-details-cats">' . __( 'Categories', 'shiword' ) . ': </span>' . get_the_category_list( $tax_separator ) . '</div>';
+
+		if ( $args['tags'] )
+			$tags = get_the_tags() ? get_the_tag_list( '</span>', $tax_separator, '' ) : __( 'No Tags', 'shiword' ) . '</span>';
+			$output .= '<div class="tb-post-details"><span class="post-details-tags">' . __( 'Tags', 'shiword' ) . ': ' . $tags . '</div>';
+
+		if ( $args['date'] )
+			$output .= '<div class="tb-post-details"><span class="post-details-date">' . __( 'Published on', 'shiword' ) . ': </span><a href="' . get_day_link(get_the_time('Y'), get_the_time('m'), get_the_time('d')) . '">' . get_the_time( get_option( 'date_format' ) ) . '</a></div>';
+
+		if ( ! $args['echo'] )
+			return $output;
+
+		echo $output;
 
 	}
 }
+
+
+// get the author badge
+function shiword_author_badge( $author = '', $size ) {
+
+	if ( ! $author ) return;
+
+	$name = get_the_author_meta( 'nickname', $author ); // nickname
+
+	$avatar = get_avatar( $author, $size, 'Gravatar Logo', get_the_author_meta( 'user_nicename', $author ) . '-photo' ); // gravatar
+
+	$description = get_the_author_meta( 'description', $author ); // bio
+
+	$author_link = get_author_posts_url($author); // link to author posts
+
+	$author_net = ''; // author social networks
+	foreach ( array( 'twitter' => 'Twitter', 'facebook' => 'Facebook', 'googleplus' => 'Google+' ) as $s_key => $s_name ) {
+		if ( get_the_author_meta( $s_key, $author ) ) $author_net .= '<a target="_blank" class="url" title="' . esc_attr( sprintf( __('Follow %s on %s', 'shiword'), $name, $s_name ) ) . '" href="'.get_the_author_meta( $s_key, $author ).'"><img alt="' . $s_key . '" class="social-icon" width="24" height="24" src="' . get_template_directory_uri() . '/images/follow/' . $s_key . '.png" /></a>';
+	}
+
+	$output = '<li class="author-avatar">' . $avatar . '</li>';
+	$output .= '<li class="author-name"><a class="fn" href="' . $author_link . '" >' . $name . '</a></li>';
+	$output .= $description ? '<li class="author-description note">' . $description . '</li>' : '';
+	$output .= $author_net ? '<li class="author-social">' . $author_net . '</li>' : '';
+
+	$output = '<div class="tb-post-details tb-author-bio vcard"><ul>' . $output . '</ul></div>';
+
+	return apply_filters( 'shiword_filter_author_badge', $output );
+
+}
+
 
 // theme credits
 if ( !function_exists( 'shiword_theme_credits' ) ) {
