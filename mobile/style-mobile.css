@@ -68,7 +68,7 @@ pre {
 }
 #head a {
 	background: #222 url("images/dark/head.png") left bottom repeat-x;
-	padding: 10px 5px;
+	padding: 10px 5px 20px;
 	display: block;
 	text-shadow: -1px -1px 0 #000;
 }
@@ -275,6 +275,9 @@ a .tb-thumb-format {
 	padding: 0 10px;
 	text-align: center;
 }
+#respond {
+	clear: both;
+}
 .format-gallery .gallery-thumb,
 .category-gallery .gallery-thumb,
 .format-image .gallery-thumb,
@@ -421,6 +424,7 @@ img.aligncenter {
 	overflow: hidden;
 }
 .widget_tag_cloud ul,
+.widget_nav_menu ul,
 .widget_categories ul,
 .widget_meta ul,
 .widget_recent_entries ul,
@@ -456,6 +460,7 @@ img.aligncenter {
 	border-radius: 8px;
 }
 .widget_meta .widget-body li a,
+.widget_nav_menu .widget-body li a,
 .widget_recent_entries .widget-body li a,
 .widget_pages .widget-body li a,
 .tb_user_quick_links .widget-body li a,
@@ -482,6 +487,7 @@ img.aligncenter {
 	background-color: #333;
 }
 .widget_meta .widget-body li a:hover,
+.widget_nav_menu .widget-body li a:hover,
 .widget_recent_entries .widget-body li a:hover,
 .widget_pages .widget-body li a:hover,
 .tb_user_quick_links .widget-body li a:hover,
@@ -491,6 +497,7 @@ img.aligncenter {
 	background-color: #333;
 }
 .widget_meta .widget-body li:first-child a,
+.widget_nav_menu .widget-body ul.menu > li:first-child a,
 .widget_recent_entries .widget-body li:first-child a,
 .widget_pages .widget-body li:first-child a,
 .tb_user_quick_links .widget-body li:first-child a,
@@ -661,6 +668,10 @@ li.allcat {
 	border-radius: 8px;
 	padding: 5px;
 }
+.wentry-aside,
+.wentry-status  {
+	clear: both;
+}
 /* light variant */
 .light #main {
 	background: #eee url("images/light/bg.png") left top repeat;
@@ -779,6 +790,7 @@ li.allcat {
 	border: 3px solid #aaa;
 }
 .light .widget_meta .widget-body li a,
+.light .widget_nav_menu .widget-body li a,
 .light .widget_recent_entries .widget-body li a,
 .light .widget_pages .widget-body li a,
 .light .tb_user_quick_links .widget-body li a,
@@ -799,6 +811,7 @@ li.allcat {
 	background-color: #eee;
 }
 .light .widget_meta .widget-body li a:hover,
+.light .widget_nav_menu .widget-body li a:hover,
 .light .widget_recent_entries .widget-body li a:hover,
 .light .widget_pages .widget-body li a:hover,
 .light .tb_user_quick_links .widget-body li a:hover,
@@ -814,7 +827,7 @@ li.allcat {
 	border-bottom: 1px solid #ccc;
 }
 .light .details {
-	color: #404040;
+	color: #aaa;
 }
 .light #wp-calendar td a{
 	border: 3px solid #aaa;

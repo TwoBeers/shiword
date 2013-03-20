@@ -10,6 +10,7 @@
 
 // Add custom menus
 add_action( 'admin_menu', 'shiword_create_menu' );
+add_filter( 'user_contactmethods', 'shiword_new_contactmethods',10,1 );
 
 // create custom theme settings menu
 if ( !function_exists( 'shiword_create_menu' ) ) {

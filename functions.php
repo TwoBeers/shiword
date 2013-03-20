@@ -72,8 +72,6 @@ add_filter( 'excerpt_mblength' , 'shiword_excerpt_length' ); //WP Multibyte Patc
 
 add_filter( 'get_comment_author_link', 'shiword_add_quoted_on' );
 
-add_filter( 'user_contactmethods', 'shiword_new_contactmethods',10,1 );
-
 add_filter( 'img_caption_shortcode', 'shiword_img_caption_shortcode', 10, 3 );
 
 add_filter( 'avatar_defaults', 'shiword_addgravatar' );

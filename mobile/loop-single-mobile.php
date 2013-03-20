@@ -24,6 +24,8 @@ locate_template( array( 'mobile/header-mobile.php' ), true, false ); ?>
 			<?php wp_link_pages( 'before=<div class="tbm-pc-navi">' . __( 'Pages', 'shiword' ) . ':&after=</div>' ); ?>
 		</div>
 
+		<?php do_action( 'shiword_mobile_hook_entry_content_after' ); ?>
+
 		<?php comments_template( '/mobile/comments-mobile.php' ); ?>
 
 		<?php do_action( 'shiword_mobile_hook_entry_after' ); ?>

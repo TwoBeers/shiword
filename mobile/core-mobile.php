@@ -15,12 +15,14 @@ class Shiword_Mobile {
 	function __construct () {
 		global $shiword_is_mobile;
 
-		$shiword_is_mobile = $this->is_mobile = apply_filters( 'shiword_filter_is_mobile', $this->device_detect() ); // check if is mobile browser
+		if ( ! $this->get_option( 'shiword_mobile_css' ) ) return;
 
-		add_action( 'template_redirect',	array( $this, 'init' ) ); // mobile support
-		add_action( 'after_setup_theme',	array( $this, 'setup' ) ); // Tell WordPress to run setup() when the 'after_setup_theme' hook is run.
-		add_action( 'widgets_init',			array( $this, 'widget_area_init' ) ); // Register sidebars by running widget_area_init() on the widgets_init hook
-		add_action( 'comment_form_before',	array( $this, 'enqueue_comments_reply' ) ); // Enqueue comment-reply.js
+		$shiword_is_mobile = $this->is_mobile = apply_filters( 'shiword_filter_is_mobile', $this->device_detect() );
+
+		add_action( 'template_redirect',			array( $this, 'init' ) );
+		add_action( 'after_setup_theme',			array( $this, 'setup' ) );
+		add_action( 'widgets_init',					array( $this, 'widget_area_init' ) );
+		add_action( 'shiword_hook_change_view' ,	array( $this, 'change_view_link' ) );
 
 	}
 
@@ -79,26 +81,28 @@ class Shiword_Mobile {
 
 		if ( ! $this->is_mobile ) return;
 
-		add_action( 'wp_enqueue_scripts',					array( $this, 'stylesheet' ) );
-		add_action( 'shiword_mobile_hook_comments_before',	array( $this, 'comments_navigation' ) );
-		add_action( 'shiword_mobile_hook_comments_after',	array( $this, 'comments_navigation' ) );
-		add_action( 'shiword_mobile_hook_entry_before',		array( $this, 'posts_navigation' ) );
-		add_action( 'shiword_mobile_hook_entry_after',		array( $this, 'posts_navigation' ) );
-		add_action( 'shiword_mobile_hook_entry_after',		array( $this, 'page_hierarchy' ) );
-		add_action( 'shiword_mobile_hook_content_before',	array( $this, 'search_reminder' ) );
-		add_action( 'shiword_mobile_hook_content_after',	array( $this, 'indexes_navigation' ) );
-		add_filter( 'user_contactmethods',					array( $this, 'new_contactmethods' ),10,1 );
-		add_filter( 'widget_tag_cloud_args',				array( $this, 'tag_cloud_filter' ), 90 );
-		add_filter( 'widget_categories_args',				array( $this, 'widget_categories_filter' ), 90 );
-		add_filter( 'wp_list_categories',					array( $this, 'list_categories_filter' ), 90 );
-		add_filter( 'widget_archives_args',					array( $this, 'widget_archives_filter' ), 90 );
-		add_filter( 'widget_pages_args',					array( $this, 'widget_pages_filter' ), 90 );
-		add_filter( 'body_class' ,							array( $this, 'body_classes' ) );
-		add_filter( 'post_class' ,							array( $this, 'post_classes' ) );
-		add_filter( 'shiword_mobile_filter_seztitle' ,		array( $this, 'get_seztitle' ) );
-		add_filter( 'comment_form_default_fields' ,			array( $this, 'comments_form_fields' ), 90 );
-		add_filter( 'comment_form_defaults' ,				array( $this, 'comment_form_defaults' ), 90 );
-		add_filter( 'shiword_filter_taxomony_separator' ,	array( $this, 'taxomony_separator' ), 90 );
+		add_action( 'wp_enqueue_scripts',						array( $this, 'stylesheet' ) );
+		add_action( 'shiword_mobile_hook_comments_before',		array( $this, 'comments_navigation' ) );
+		add_action( 'shiword_mobile_hook_comments_after',		array( $this, 'comments_navigation' ) );
+		add_action( 'shiword_mobile_hook_entry_before',			array( $this, 'posts_navigation' ) );
+		add_action( 'shiword_mobile_hook_entry_after',			array( $this, 'posts_navigation' ) );
+		add_action( 'shiword_mobile_hook_entry_after',			array( $this, 'page_hierarchy' ) );
+		add_action( 'shiword_mobile_hook_content_before',		array( $this, 'search_reminder' ) );
+		add_action( 'shiword_mobile_hook_content_after',		array( $this, 'indexes_navigation' ) );
+		add_action( 'shiword_mobile_hook_entry_content_after',	array( $this, 'post_details' ) );
+		add_action( 'comment_form_before',						array( $this, 'enqueue_comments_reply' ) );
+		add_filter( 'user_contactmethods',						array( $this, 'new_contactmethods' ),10,1 );
+		add_filter( 'widget_tag_cloud_args',					array( $this, 'tag_cloud_filter' ), 90 );
+		add_filter( 'widget_categories_args',					array( $this, 'widget_categories_filter' ), 90 );
+		add_filter( 'wp_list_categories',						array( $this, 'list_categories_filter' ), 90 );
+		add_filter( 'widget_archives_args',						array( $this, 'widget_archives_filter' ), 90 );
+		add_filter( 'widget_pages_args',						array( $this, 'widget_pages_filter' ), 90 );
+		add_filter( 'body_class' ,								array( $this, 'body_classes' ) );
+		add_filter( 'post_class' ,								array( $this, 'post_classes' ) );
+		add_filter( 'shiword_mobile_filter_seztitle' ,			array( $this, 'get_seztitle' ) );
+		add_filter( 'comment_form_default_fields' ,				array( $this, 'comments_form_fields' ), 90 );
+		add_filter( 'comment_form_defaults' ,					array( $this, 'comment_form_defaults' ), 90 );
+		add_filter( 'shiword_filter_taxomony_separator' ,		array( $this, 'taxomony_separator' ) );
 
 		// Set the content width
 		$content_width = 300;
@@ -124,17 +128,26 @@ class Shiword_Mobile {
 	}
 
 
-	function widget_area_init() {
+	function default_widget_args() {
 
-		// Area 0, in the tbm sidebar.
-		register_sidebar( array(
-			'name'				=> __( 'Mobile Widget Area', 'shiword' ),
-			'id'				=> 'tbm-widget-area',
-			'description'		=> '',
+		return array(
 			'before_widget'		=> '<div id="%1$s" class="widget %2$s"><div class="widget-body">',
 			'after_widget'		=> '</div></div>',
 			'before_title'		=> '</div>' . $this->get_seztitle_elements( 'before' ),
 			'after_title'		=> $this->get_seztitle_elements( 'after' ) . '<div class="widget-body">',
+		);
+
+	}
+
+
+	function widget_area_init() {
+
+		// Area 0, in the tbm sidebar.
+		register_sidebar( array_merge( array(
+			'name'				=> __( 'Mobile Widget Area', 'shiword' ),
+			'id'				=> 'tbm-widget-area',
+			'description'		=> '',
+			), $this->default_widget_args()
 		) );
 
 	}
@@ -354,41 +367,78 @@ class Shiword_Mobile {
 	}
 
 
+	function change_view_link() {
+
+		echo '<span class="hide_if_print"> - <a href="' . add_query_arg( 'mobile_override', 'mobile' ) . '">'. __('Mobile View','shiword') .'</a></span>';
+
+	}
+
+
+	function post_details() {
+
+		if ( ! is_single() ) return;
+
+		$output = '<div class="widget tb_post_details">';
+		$output .= apply_filters( 'shiword_mobile_filter_seztitle', __( 'Post details', 'shiword' ) );
+		$output .= '<div class="widget-body">' . shiword_post_details( array( 'echo' => 0 ) ) . '</div></div>';
+
+		echo $output;
+
+	}
+
+
 	function taxomony_separator( $sep ) {
+
 		return ' ';
+
 	}
 
 
 	function tag_cloud_filter( $args = array() ) {
+
 		$args['smallest'] = 1;
 		$args['largest'] = 1;
 		$args['unit'] = 'em';
+
 		return $args;
+
 	}
 
 
 	function widget_categories_filter( $args = array() ) {
+
 		$args['hierarchical'] = 0;
+
 		return $args;
+
 	}
 
 
 	function list_categories_filter( $output ) {
+
 		$pattern = '/<\/a>\s(\(\d+\))/i';
 		$replacement = ' <span class="details">$1</span></a>';
+
 		return preg_replace( $pattern, $replacement, $output );
+
 	}
 
 
 	function widget_archives_filter( $args = array() ) {
+
 		$args['show_post_count'] = 0;
+
 		return $args;
+
 	}
 
 
 	function widget_pages_filter( $args = array() ) {
+
 		$args['depth'] = 1;
+
 		return $args;
+
 	}
 
 
