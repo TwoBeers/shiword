@@ -45,12 +45,6 @@
 }
 
 #selector {
-	background-image: -ms-linear-gradient(top,#F9F9F9,#E9E9E9) !important;
-	background-image: -moz-linear-gradient(top,#F9F9F9,#E9E9E9) !important;
-	background-image: -o-linear-gradient(top,#F9F9F9,#E9E9E9) !important;
-	background-image: -webkit-gradient(linear,left top,left bottom,from(#F9F9F9),to(#E9E9E9)) !important;
-	background-image: -webkit-linear-gradient(top,#F9F9F9,#E9E9E9) !important;
-	background-image: linear-gradient(top,#F9F9F9,#E9E9E9) !important;
 	font-family: georgia;
 	font-size: 15px;
 	font-weight: normal;
@@ -187,17 +181,6 @@
 .sw-sub-opt {
 	font-size: 11px;
 	margin-top: 10px;
-}
-.sw-colorpicker {
-	background: none repeat scroll 0 0 #f5f5f5;
-	border: 1px solid #CCCCCC;
-	position: absolute;
-	z-index: 100;
-}
-.sw-color {
-	background-image: url("../images/color_wheel.png");
-	background-position: right center;
-	background-repeat: no-repeat;
 }
 .sw-tab-opt textarea {
 	vertical-align: middle;

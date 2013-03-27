@@ -1,4 +1,3 @@
-var farbtastic;
 var shiwordOptions;
 
 (function($) {
@@ -10,15 +9,19 @@ shiwordOptions = {
 		shiwordOptions.switchTab('navigation');
 		$('#shiword-infos').addClass ('tab-hidden');
 		$('#shiword-options-li').addClass('tab-selected');
-		
-		$(document).mousedown(function(){
-			$('.sw-colorpicker').each( function() {
-				var display = $(this).css('display');
-				if (display == 'block')
-					$(this).fadeOut(2);
+
+		$('#shiword-options .color_picker').each(function() {
+			$this = $(this);
+			$this.wpColorPicker({
+				change: function( event, ui ) {
+					$this.val( $this.wpColorPicker('color') );
+				},
+				clear: function() {
+					$this.val( '' );
+				}
 			});
 		});
-		
+
 		$('#to-defaults').click (function () {
 			var answer = confirm(sw_l10n.confirm_to_defaults)
 			if (!answer){
@@ -26,28 +29,6 @@ shiwordOptions = {
 			}
 		});
 
-	},
-
-	//update inputs value
-	updateColor : function (domid,color,txtcolor) {
-		inputid = '#sw-color-' + domid;
-		$(inputid).css({
-			'background-color' : color,
-			'color' : txtcolor
-		});
-		$(inputid).val(color);
-	},
-
-	// display the color picker
-	showColorPicker : function (domid) {
-		placeholder = '#sw-colorpicker-' + domid;
-		$(placeholder).show();
-		farbtastic = $.farbtastic(placeholder, function(color) { 
-			lightness = farbtastic.RGBToHSL(farbtastic.unpack( color ))[2];
-			lightness > 0.5 ? txtcolor = '#000' : txtcolor = '#fff';
-			shiwordOptions.updateColor(domid,color,txtcolor);
-		});
-		farbtastic.setColor($('#sw-color-' + domid).val());
 	},
 
 	switchSection : function () {

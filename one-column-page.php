@@ -7,9 +7,9 @@
  * @package Shiword
  * @since 2.06
  */
-?>
 
-<?php get_header(); ?>
+
+get_header(); ?>
 
 <?php shiword_get_layout( 'one-column' ); ?>
 

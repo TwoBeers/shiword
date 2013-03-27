@@ -1,11 +1,11 @@
 <?php
 /**
- * sidebar.php
+ * sidebar-primary.php
  *
- * Template part file that contains the default sidebar content
+ * Template part file that contains the primary sidebar content
  *
  * @package Shiword
- * @since 1.00
+ * @since 4.00
  */
 ?>
 
@@ -14,7 +14,8 @@
 <div id="sidebardx">
 
 		<?php shiword_hook_sidebar_top(); ?>
-		<?php shiword_hook_sidebar_primary_top(); ?>
+
+		<?php shiword_hook_this_sidebar_top( 'primary' ); ?>
 
 		<div id="sidebarbody">
 			<?php if ( !dynamic_sidebar( 'primary-widget-area' ) ) { ?>
@@ -62,7 +63,8 @@
 			<?php } ?>
 		</div>
 
-		<?php shiword_hook_sidebar_primary_bottom(); ?>
+		<?php shiword_hook_this_sidebar_bottom( 'primary' ); ?>
+
 		<?php shiword_hook_sidebar_bottom(); ?>
 
 </div>

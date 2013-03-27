@@ -79,10 +79,6 @@ blockquote {
 	border-left: 1px solid #777;
 }
 
-#sw_body_overlay {
-	background: url('images/body.png') repeat right top transparent;
-}
-
 #sw_body_inner {
 	border-right: 1px solid #000;
 	border-left: 1px solid #777;

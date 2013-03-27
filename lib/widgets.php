@@ -9,6 +9,110 @@
  * @since 3.01
  */
 
+
+add_action( 'widgets_init'	, 'shiword_widget_areas_init' );
+add_action( 'widgets_init'	, 'shiword_register_widgets' );
+
+
+/**
+ * Define default Widget arguments
+ */
+function shiword_get_default_widget_args() {
+
+	$widget_args = array(
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget' => '</div>',
+		'before_title' => '<div class="w_title">',
+		'after_title' => '</div>',
+	);
+
+	return $widget_args;
+
+}
+
+
+/**
+ * Register all widget areas (sidebars)
+ */
+function shiword_widget_areas_init() {
+	
+	// Area 1, located at the top of the sidebar.
+	if ( shiword_get_opt( 'shiword_rsideb' ) ) {
+		register_sidebar( array_merge( 
+			array(
+				'name' => __( 'Sidebar Widget Area', 'shiword' ),
+				'id' => 'primary-widget-area',
+				'description' => '',
+				'before_widget' => '<div id="%1$s" class="widget %2$s">',
+				'after_widget' => '</div>',
+				'before_title' => '<div class="w_title">',
+				'after_title' => '</div>',
+			),
+			shiword_get_default_widget_args()
+		) );
+	};
+
+	// Area 2, located in the header. Empty by default.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Header Widget Area', 'shiword' ),
+			'id' => 'header-widget-area',
+			'description' => __( 'Tips: Don&apos;t drag too much widgets here. Use small &quot;graphical&quot; widgets (eg icons, buttons, the search form, etc.)', 'shiword' ),
+		),
+		shiword_get_default_widget_args()
+	) );
+
+	// Area 3, located in the footer. Empty by default.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Footer Widget Area #1', 'shiword' ),
+			'id' => 'first-footer-widget-area',
+			'description' => '',
+		),
+		shiword_get_default_widget_args()
+	) );
+
+	// Area 4, located in the footer. Empty by default.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Footer Widget Area #2', 'shiword' ),
+			'id' => 'second-footer-widget-area',
+			'description' => '',
+		),
+		shiword_get_default_widget_args()
+	) );
+
+	// Area 5, located in the footer. Empty by default.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Footer Widget Area #3', 'shiword' ),
+			'id' => 'third-footer-widget-area',
+			'description' => '',
+		),
+		shiword_get_default_widget_args()
+	) );
+	// Area 6, located just after post/page content. Empty by default.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Single Widget Area', 'shiword' ),
+			'id' => 'single-widget-area',
+			'description' => __( 'Located after the post/page content, it is the ideal place for your widgets related to individual entries', 'shiword' ),
+		),
+		shiword_get_default_widget_args()
+	) );
+	// Area 7, located in page 404.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Page 404', 'shiword' ),
+			'id' => '404-widgets-area',
+			'description' => __( 'Enrich the page 404 with some useful widgets', 'shiword' ),
+		),
+		shiword_get_default_widget_args()
+	) );
+
+}
+
+
 /**
  * Popular_Posts widget class
  */
@@ -513,42 +617,45 @@ class Shiword_Widget_Social extends WP_Widget {
 
 		$this->WP_Widget("shi-social", __("Follow Me", "shiword"), $widget_ops, $control_ops);
 		$this->follow_urls = array(
-			'Blogger' => 'Blogger',
-			'blurb' => 'Blurb',
-			'Delicious' => 'Delicious',
-			'Deviantart' => 'deviantART',
-			'Digg' => 'Digg',
-			'Dropbox' => 'Dropbox',
-			'Facebook' => 'Facebook',
-			'Flickr' => 'Flickr',
-			'Github' => 'GitHub',
-			'GooglePlus' => 'Google+',
-			'Hi5' => 'Hi5',
-			'LinkedIn' => 'LinkedIn',
-			'Myspace' => 'Myspace',
-			'Odnoklassniki' => 'Odnoklassniki',
-			'Orkut' => 'Orkut',
-			'Picasa' => 'Picasa',
-			'pinterest' => 'Pinterest',
-			'Qzone' => 'Qzone',
-			'Reddit' => 'Reddit',
-			'scribd' => 'Scribd',
-			'slideshare' => 'SlideShare',
-			'StumbleUpon' => 'StumbleUpon',
-			'soundcloud' => 'SoundCloud',
-			'Technorati' => 'Technorati',
-			'Tencent' => 'Tencent',
-			'Twitter' => 'Twitter',
-			'tumblr' => 'Tumblr',
-			'ubuntuone' => 'Ubuntu One',
-			'Vimeo' => 'Vimeo',
-			'VKontakte' => 'VKontakte',
-			'Weibo' => 'Weibo',
-			'WindowsLive' => 'Windows Live',
-			'xing' => 'Xing',
-			'yfrog' => 'YFrog',
-			'Youtube' => 'Youtube',
-			'RSS' => 'RSS' );
+			'Blogger'		=> 'Blogger',
+			'blurb'			=> 'Blurb',
+			'Delicious'		=> 'Delicious',
+			'Deviantart'	=> 'deviantART',
+			'Digg'			=> 'Digg',
+			'Dropbox'		=> 'Dropbox',
+			'Facebook'		=> 'Facebook',
+			'Flickr'		=> 'Flickr',
+			'Github'		=> 'GitHub',
+			'GooglePlus'	=> 'Google+',
+			'Hi5'			=> 'Hi5',
+			'LinkedIn'		=> 'LinkedIn',
+			'livejournal'	=> 'LiveJournal',
+			'Myspace'		=> 'Myspace',
+			'Odnoklassniki'	=> 'Odnoklassniki',
+			'Orkut'			=> 'Orkut',
+			'pengyou'		=> 'Pengyou',
+			'Picasa'		=> 'Picasa',
+			'pinterest'		=> 'Pinterest',
+			'Qzone'			=> 'Qzone',
+			'Reddit'		=> 'Reddit',
+			'renren'		=> 'Renren',
+			'scribd'		=> 'Scribd',
+			'slideshare'	=> 'SlideShare',
+			'StumbleUpon'	=> 'StumbleUpon',
+			'soundcloud'	=> 'SoundCloud',
+			'Technorati'	=> 'Technorati',
+			'Tencent'		=> 'Tencent',
+			'Twitter'		=> 'Twitter',
+			'tumblr'		=> 'Tumblr',
+			'ubuntuone'		=> 'Ubuntu One',
+			'Vimeo'			=> 'Vimeo',
+			'VKontakte'		=> 'VKontakte',
+			'Weibo'			=> 'Weibo',
+			'WindowsLive'	=> 'Windows Live',
+			'xing'			=> 'Xing',
+			'yfrog'			=> 'YFrog',
+			'Youtube'		=> 'Youtube',
+			'RSS'			=> 'RSS' );
 		}
 
 	function form($instance) {
@@ -649,7 +756,7 @@ class Shiword_Widget_Social extends WP_Widget {
 			}
 			if ($show && !empty($account)) {
 ?>
-		<a href="<?php echo esc_url( $account ); ?>" target="_blank" class="shi-social-icon" title="<?php echo esc_attr( $service_name );?>">
+		<a href="<?php echo esc_url( $account ); ?>" target="_blank" class="social-icon" title="<?php echo esc_attr( $service_name );?>">
 			<img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service );?>.png" alt="<?php echo esc_attr( $follow_service );?>" style='width: <?php echo $icon_size;?>; height: <?php echo $icon_size;?>;' />
 		</a>
 <?php
@@ -1271,6 +1378,7 @@ class Shiword_Widget_Clean_Archives extends WP_Widget {
  * Widgets list is filterable.
  */
 function shiword_register_widgets() {
+
 	if ( !is_blog_installed() )
 		return;
 
@@ -1299,5 +1407,3 @@ function shiword_register_widgets() {
 	}
 
 }
-
-add_action( 'widgets_init', 'shiword_register_widgets', 1 );

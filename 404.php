@@ -8,9 +8,9 @@
  * @package Shiword
  * @since 1.00
  */
-?>
 
-<?php get_header(); ?>
+
+get_header(); ?>
 
 <?php shiword_get_layout(); ?>
 
@@ -23,22 +23,33 @@
 		<p><?php _e( "Sorry, you're looking for something that isn't here" ,'shiword' ); ?>: <u><?php echo home_url() . esc_html( $_SERVER['REQUEST_URI'] ); ?></u></p>
 		<br>
 
-		<?php shiword_hook_sidebar_404_before(); ?>
+		<?php shiword_hook_this_sidebar_before( 'footer' ); ?>
 
 		<?php if ( is_active_sidebar( '404-widgets-area' ) ) { ?>
+
 			<p><?php _e( 'Here is something that might help:','shiword' ); ?></p>
+
 			<div id="error404-widget-area">
+
+				<?php shiword_hook_this_sidebar_top( 'footer' ); ?>
+
 				<?php dynamic_sidebar( '404-widgets-area' ); ?>
+
+				<?php shiword_hook_this_sidebar_bottom( 'footer' ); ?>
+
 			</div>
+
 		<?php } else { ?>
+
 			<p><?php _e( "There are several links scattered around the page, maybe they can help you on finding what you're looking for.", 'shiword' ); ?></p>
 			<p><?php _e( 'Perhaps using the search form will help too...', 'shiword' ); ?></p>
 			<?php get_search_form(); ?>
+
 		<?php } ?>
 
 		<div class="fixfloat"> </div>
 
-		<?php shiword_hook_sidebar_404_after(); ?>
+		<?php shiword_hook_this_sidebar_after( 'footer' ); ?>
 
 	</div>
 

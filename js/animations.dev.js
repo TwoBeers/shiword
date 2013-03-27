@@ -30,6 +30,10 @@ shiwordAnimations = {
 					this.quickbar_panels();
 					break;
 
+				case 'minilogin':
+					this.minilogin();
+					break;
+
 				case 'entry_meta':
 					this.entry_meta();
 					break;
@@ -50,6 +54,10 @@ shiwordAnimations = {
 					this.quote_this();
 					break;
 
+				case 'slider':
+					this.slider();
+					break;
+
 				default :
 					//no default action
 					break;
@@ -63,23 +71,20 @@ shiwordAnimations = {
 	main_menu : function() {
 
 		//main menu dropdown animation
-		$('#mainmenu').children('li').each(function(){ //get every main list item
+		$('#mainmenu').children('.menu-item-parent').each(function(){ //get every main list item
 			var $this = $(this);
 			var d = $this.children('ul'); //for each main item, get the sub list
-			if(d.size() !== 0){ //if the sub list exists...
-				$this.children('a').append('<span class="hiraquo"> »</span>'); //add a raquo to the main item
-				d.css({'opacity' : 0 , 'display' : 'block'});
-				var mysize = d.height(); //retrieve the height of the sub list
-				d.css({'opacity' : 1 , 'display' : '', 'height': 0});
-				$this.mouseenter(function(){ //when mouse enters, slide down the sub list
-					d.animate(
-						{ 'height' : mysize	},
-						200
-					);
-				}).mouseleave(function(){ //when mouse leaves, hide the sub list
-					d.stop().css({'display' : '', 'height': 0});
-				});
-			}
+			d.css({'opacity' : 0 , 'display' : 'block'});
+			var mysize = d.height(); //retrieve the height of the sub list
+			d.css({'opacity' : 1 , 'display' : '', 'height': 0});
+			$this.mouseenter(function(){ //when mouse enters, slide down the sub list
+				d.animate(
+					{ 'height' : mysize	},
+					200
+				);
+			}).mouseleave(function(){ //when mouse leaves, hide the sub list
+				d.stop().css({'display' : '', 'height': 0});
+			});
 		});
 
 	},
@@ -106,8 +111,8 @@ shiwordAnimations = {
 		});
 
 		// fade in/out on scroll
-		top_but = $('#navbuttons a[href="#"] span');
-		bot_but = $('#navbuttons a[href="#footer"] span');
+		top_but = $('#navbuttons').find('a[href="#"] span');
+		bot_but = $('#navbuttons').find('a[href="#footer"] span');
 		top_but.hide();
 		$(function () {
 			$(window).scroll(function () {
@@ -168,6 +173,10 @@ shiwordAnimations = {
 				list.removeClass('mi_shadowed').css({ 'display' : '', 'width' : 0 });
 			});	
 		});
+
+	},
+
+	minilogin : function() {
 
 		//add a "close" link after the submit button in minilogin form
 		$closeminilogin = $('#closeminilogin');
@@ -236,8 +245,8 @@ shiwordAnimations = {
 	thickbox : function() {
 
 		//thickbox init
-		$('.storycontent a img').parent('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]').addClass('thickbox');
-		$('.storycontent').find('.gallery').each(function() {
+		$('#posts-container').find('.storycontent a img').parent('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]').addClass('thickbox');
+		$('#posts-container').find('.storycontent .gallery').each(function() {
 			var $this = $(this);
 			$('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]',$this).attr('rel', $this.attr('id'));
 		});
@@ -275,22 +284,27 @@ shiwordAnimations = {
 
 	//show only a set of rows
 	post_expander : function () {
-        $('a.more-link').click(function() {
+		$('#posts-container').find('a.more-link').click(function() {
+			var link = $(this);
 
-				var link = $(this);
+			$.ajax({
+				type: 'POST',
+				url: link.attr("href"),
+				beforeSend: function(XMLHttpRequest) { link.html(shiword_l10n.post_expander_wait).addClass('ajaxed'); },
+				data: 'shiword_post_expander=1',
+				success: function(data) { link.parents(".storycontent").hide().html($(data)).fadeIn(600); }
+			});	
 
-				$.ajax({
-					type: 'POST',
-					url: link.attr("href"),
-					beforeSend: function(XMLHttpRequest) { link.html(shiword_l10n.post_expander_wait).addClass('ajaxed'); },
-					data: 'ff_post_expander=1',
-					success: function(data) { link.parents(".storycontent").hide().html($(data)).fadeIn(600); }
-				});	
+			return false;
 
-				return false;
+		});
+	},
 
-			});
-
+	slider : function () {
+		$('#sw_sticky_slider').sw_sticky_slider({
+			speed : parseInt(shiword_l10n.slider_speed),
+			pause : parseInt(shiword_l10n.slider_pause)
+		})
 	}
 
 };

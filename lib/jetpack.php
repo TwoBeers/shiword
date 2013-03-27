@@ -58,9 +58,6 @@ class Shiword_For_Jetpack {
 	//Set the code to be rendered on for calling posts,
 	function infinite_scroll_render() {
 
-		$page = (int) $_GET['page'] + 1;
-		echo '<div class="page-reminder"><span>' . $page . '</span></div>';
-
 		get_template_part( 'loop' );
 
 	}

@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Shiword v4.00\n"
+"Project-Id-Version: Shiword v4.01\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-03-20 01:31:58+0000\n"
+"PO-Revision-Date: 2013-03-27 12:07:04+0000\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,25 +25,25 @@ msgid "\"more\" tag string"
 msgstr ""
 
 #: comments.php:26
-#: functions.php:721
-#: functions.php:756
+#: functions.php:634
+#: functions.php:669
 #@ shiword
 msgid "% Comments"
 msgstr ""
 
-#: functions.php:1741
+#: functions.php:1681
 #, php-format
 #@ shiword
 msgid "%s ago"
 msgstr ""
 
-#: functions.php:1732
+#: functions.php:1672
 #, php-format
 #@ shiword
 msgid "%s months ago"
 msgstr ""
 
-#: lib/widgets.php:830
+#: lib/widgets.php:937
 #, php-format
 #@ shiword
 msgid "%s seconds"
@@ -65,8 +65,8 @@ msgid "-- mini login"
 msgstr ""
 
 #: comments.php:26
-#: functions.php:721
-#: functions.php:756
+#: functions.php:634
+#: functions.php:669
 #@ shiword
 msgid "1 Comment"
 msgstr ""
@@ -81,17 +81,17 @@ msgstr ""
 msgid "<em>excerpt more</em> string"
 msgstr ""
 
-#: lib/options.php:924
+#: lib/options.php:915
 #@ shiword
 msgid "<strong>For advanced users only</strong>: paste here your custom css code. it will be added after the defatult style"
 msgstr ""
 
-#: lib/widgets.php:439
+#: lib/widgets.php:543
 #@ shiword
 msgid "A list of popular categories"
 msgstr ""
 
-#: lib/widgets.php:389
+#: lib/widgets.php:493
 #: quickbar.php:168
 #@ shiword
 msgid "Add New Post"
@@ -102,42 +102,42 @@ msgstr ""
 msgid "All Categories"
 msgstr ""
 
-#: lib/widgets.php:828
+#: lib/widgets.php:935
 #@ shiword
 msgid "Aperture"
 msgstr ""
 
-#: lib/widgets.php:1249
-#: sidebar.php:57
+#: lib/widgets.php:1356
+#: sidebar-primary.php:58
 #@ shiword
 msgid "Archives"
 msgstr ""
 
-#: lib/admin.php:66
+#: lib/admin.php:105
 #@ shiword
 msgid "Are you really sure you want to set all the options to their default values?"
 msgstr ""
 
-#: functions.php:793
-#: lib/widgets.php:1041
+#: functions.php:706
+#: lib/widgets.php:1148
 #: mobile/core-mobile.php:315
 #@ shiword
 msgid "Author"
 msgstr ""
 
-#: lib/admin.php:320
+#: lib/admin.php:353
 #@ shiword
 msgid "Back to defaults"
 msgstr ""
 
-#: lib/custom-device-color.php:326
+#: lib/custom-device-color.php:334
 #: lib/my-custom-background.php:101
 #: lib/my-custom-background.php:145
 #@ shiword
 msgid "Background"
 msgstr ""
 
-#: lib/custom-device-color.php:400
+#: lib/custom-device-color.php:420
 #: lib/my-custom-background.php:392
 #: lib/my-custom-background.php:396
 #@ shiword
@@ -155,12 +155,12 @@ msgstr ""
 msgid "Bamboo"
 msgstr ""
 
-#: sidebar.php:43
+#: sidebar-primary.php:44
 #@ shiword
 msgid "Blogroll"
 msgstr ""
 
-#: lib/custom-device-color.php:327
+#: lib/custom-device-color.php:335
 #@ shiword
 msgid "Borders"
 msgstr ""
@@ -170,57 +170,57 @@ msgstr ""
 msgid "Bottom of page"
 msgstr ""
 
-#: lib/custom-device-color.php:446
+#: lib/custom-device-color.php:440
 #@ shiword
 msgid "Buttons Style"
 msgstr ""
 
-#: lib/widgets.php:826
+#: lib/widgets.php:933
 #@ shiword
 msgid "Camera"
 msgstr ""
 
-#: lib/widgets.php:825
+#: lib/widgets.php:932
 #@ shiword
 msgid "Caption"
 msgstr ""
 
 #: allcat.php:21
-#: functions.php:693
-#: functions.php:758
-#: functions.php:1153
-#: lib/widgets.php:1066
+#: functions.php:606
+#: functions.php:671
+#: functions.php:1076
+#: lib/widgets.php:1173
 #: quickbar.php:121
-#: sidebar.php:50
+#: sidebar-primary.php:51
 #@ shiword
 msgid "Categories"
 msgstr ""
 
-#: functions.php:779
-#: lib/widgets.php:756
+#: functions.php:692
+#: lib/widgets.php:863
 #: mobile/core-mobile.php:301
 #@ shiword
 msgid "Category"
 msgstr ""
 
-#: functions.php:562
+#: functions.php:457
 #: mobile/core-mobile.php:265
 #@ shiword
 msgid "Child pages"
 msgstr ""
 
-#: lib/custom-device-color.php:363
+#: lib/custom-device-color.php:371
 #@ shiword
 msgid "Choose an image from your computer:"
 msgstr ""
 
-#: lib/widgets.php:1194
+#: lib/widgets.php:1301
 #@ shiword
 msgid "Clean Archives"
 msgstr ""
 
 #: footer.php:49
-#: functions.php:2047
+#: functions.php:2032
 #@ shiword
 msgid "Close"
 msgstr ""
@@ -230,38 +230,38 @@ msgstr ""
 msgid "Color"
 msgstr ""
 
-#: lib/custom-device-color.php:345
+#: lib/custom-device-color.php:353
 #, php-format
 #@ shiword
 msgid "Colors updated. <a href=\"%s\">Visit your site</a> to see how it looks."
 msgstr ""
 
-#: lib/widgets.php:329
+#: lib/widgets.php:433
 #, php-format
 #@ shiword
 msgid "Comment authors <strong>must</strong> use a name and a valid e-mail in order to use this widget. Check the <a href=\"%1$s\">Discussion settings</a>"
 msgstr ""
 
-#: functions.php:720
-#: functions.php:756
-#: lib/widgets.php:396
+#: functions.php:633
+#: functions.php:669
+#: lib/widgets.php:500
 #: mobile/comments-mobile.php:21
 #: quickbar.php:175
 #@ shiword
 msgid "Comments"
 msgstr ""
 
-#: lib/widgets.php:344
+#: lib/widgets.php:448
 #@ shiword
 msgid "Compact view (only avatars)"
 msgstr ""
 
-#: lib/widgets.php:822
+#: lib/widgets.php:929
 #@ shiword
 msgid "Copyright"
 msgstr ""
 
-#: lib/widgets.php:823
+#: lib/widgets.php:930
 #@ shiword
 msgid "Credit"
 msgstr ""
@@ -271,33 +271,34 @@ msgstr ""
 msgid "Custom Background"
 msgstr ""
 
-#: lib/custom-device-color.php:153
-#: lib/custom-device-color.php:341
+#: lib/custom-device-color.php:152
+#: lib/custom-device-color.php:349
 #@ shiword
 msgid "Custom Colors"
 msgstr ""
 
-#: functions.php:784
-#: lib/widgets.php:1058
+#: functions.php:697
+#: lib/widgets.php:1165
 #: mobile/core-mobile.php:306
 #@ shiword
 msgid "Date"
 msgstr ""
 
-#: lib/widgets.php:821
+#: lib/widgets.php:928
 #@ shiword
 msgid "Date Taken"
 msgstr ""
 
-#: lib/custom-device-color.php:410
-#: lib/custom-device-color.php:428
-#: lib/custom-device-color.php:441
-#: lib/custom-device-color.php:476
+#: lib/admin.php:309
+#: lib/admin.php:339
+#: lib/custom-device-color.php:423
+#: lib/custom-device-color.php:436
+#: lib/custom-device-color.php:465
 #@ shiword
 msgid "Default"
 msgstr ""
 
-#: lib/custom-device-color.php:382
+#: lib/custom-device-color.php:402
 #@ shiword
 msgid "Default Images"
 msgstr ""
@@ -307,7 +308,7 @@ msgstr ""
 msgid "Default is <u>normal</u>. If you modify the width of the main frame, your site may be displayed incorrectly for some of your readers. <u>Don't change this setting unless you're sure of what you're doing!</u>"
 msgstr ""
 
-#: lib/admin.php:231
+#: lib/admin.php:264
 #@ shiword
 msgid "Defaults values loaded."
 msgstr ""
@@ -317,31 +318,31 @@ msgstr ""
 msgid "Desktop View"
 msgstr ""
 
-#: lib/widgets.php:791
+#: lib/widgets.php:898
 #@ shiword
 msgid "Display image details. It's visible ONLY in single attachments"
 msgstr ""
 
-#: functions.php:748
-#: functions.php:759
+#: functions.php:661
+#: functions.php:672
 #: loop/post-aside.php:22
 #: loop/post-status.php:29
 #@ shiword
 msgid "Edit"
 msgstr ""
 
-#: functions.php:1993
+#: functions.php:1930
 #: mobile/core-mobile.php:346
 #@ shiword
 msgid "Email"
 msgstr ""
 
-#: functions.php:257
+#: lib/widgets.php:108
 #@ shiword
 msgid "Enrich the page 404 with some useful widgets"
 msgstr ""
 
-#: lib/widgets.php:587
+#: lib/widgets.php:694
 #, php-format
 #@ shiword
 msgid "Enter %1$s account link:"
@@ -358,7 +359,7 @@ msgstr ""
 msgid "Equalizer"
 msgstr ""
 
-#: lib/custom-device-color.php:352
+#: lib/custom-device-color.php:360
 #@ shiword
 msgid "Exterior Colors"
 msgstr ""
@@ -368,28 +369,28 @@ msgstr ""
 msgid "Flowers"
 msgstr ""
 
-#: lib/widgets.php:827
+#: lib/widgets.php:934
 #@ shiword
 msgid "Focal Length"
 msgstr ""
 
-#: lib/widgets.php:514
-#: lib/widgets.php:555
+#: lib/widgets.php:618
+#: lib/widgets.php:662
 #@ shiword
 msgid "Follow Me"
 msgstr ""
 
-#: functions.php:213
+#: lib/widgets.php:68
 #@ shiword
 msgid "Footer Widget Area #1"
 msgstr ""
 
-#: functions.php:224
+#: lib/widgets.php:78
 #@ shiword
 msgid "Footer Widget Area #2"
 msgstr ""
 
-#: functions.php:235
+#: lib/widgets.php:88
 #@ shiword
 msgid "Footer Widget Area #3"
 msgstr ""
@@ -399,35 +400,30 @@ msgstr ""
 msgid "Google web font"
 msgstr ""
 
-#: functions.php:202
+#: lib/widgets.php:58
 #@ shiword
 msgid "Header Widget Area"
 msgstr ""
 
-#: lib/widgets.php:820
+#: lib/widgets.php:927
 #@ shiword
 msgid "Height"
 msgstr ""
 
-#: 404.php:29
+#: 404.php:30
 #@ shiword
 msgid "Here is something that might help:"
 msgstr ""
 
-#: lib/custom-device-color.php:294
-#: lib/custom-device-color.php:297
-#: lib/custom-device-color.php:300
-#: lib/custom-device-color.php:303
-#: lib/custom-device-color.php:306
-#: lib/custom-device-color.php:330
-#: lib/custom-device-color.php:333
+#: lib/custom-device-color.php:302
+#: lib/custom-device-color.php:305
+#: lib/custom-device-color.php:308
+#: lib/custom-device-color.php:311
+#: lib/custom-device-color.php:314
+#: lib/custom-device-color.php:338
+#: lib/custom-device-color.php:341
 #@ shiword
 msgid "Highlighted Links"
-msgstr ""
-
-#: lib/custom-device-color.php:433
-#@ shiword
-msgid "Hightlighted Buttons Border"
 msgstr ""
 
 #: quickbar.php:299
@@ -440,56 +436,56 @@ msgstr ""
 msgid "I like it"
 msgstr ""
 
-#: lib/widgets.php:829
+#: lib/widgets.php:936
 #@ shiword
 msgid "ISO"
 msgstr ""
 
-#: lib/custom-device-color.php:384
+#: lib/custom-device-color.php:404
 #@ shiword
 msgid "If you don&lsquo;t want to upload your own image, you can choose from one of the following."
 msgstr ""
 
-#: lib/admin.php:332
+#: lib/admin.php:365
 #@ shiword
 msgid "If you like/dislike this theme, or if you encounter any issues, please let us know it."
 msgstr ""
 
-#: lib/custom-device-color.php:507
+#: lib/custom-device-color.php:496
 #@ shiword
 msgid "Image Upload Error"
 msgstr ""
 
-#: lib/widgets.php:792
-#: lib/widgets.php:857
+#: lib/widgets.php:899
+#: lib/widgets.php:964
 #@ shiword
 msgid "Image details"
 msgstr ""
 
-#: lib/admin.php:240
-#: lib/admin.php:325
+#: lib/admin.php:273
+#: lib/admin.php:358
 #@ shiword
 msgid "Info"
 msgstr ""
 
-#: lib/custom-device-color.php:331
+#: lib/custom-device-color.php:339
 #@ shiword
 msgid "Inner borders"
 msgstr ""
 
-#: lib/custom-device-color.php:459
+#: lib/custom-device-color.php:453
 #@ shiword
 msgid "Interior Colors"
 msgstr ""
 
-#: lib/widgets.php:125
-#: lib/widgets.php:151
+#: lib/widgets.php:229
+#: lib/widgets.php:255
 #@ shiword
 msgid "Latest activity"
 msgstr ""
 
-#: lib/widgets.php:240
-#: lib/widgets.php:268
+#: lib/widgets.php:344
+#: lib/widgets.php:372
 #@ shiword
 msgid "Latest comment authors"
 msgstr ""
@@ -500,29 +496,29 @@ msgstr ""
 msgid "Leave a comment"
 msgstr ""
 
-#: lib/admin.php:333
+#: lib/admin.php:366
 #@ shiword
 msgid "Leave a feedback"
 msgstr ""
 
-#: lib/custom-device-color.php:294
-#: lib/custom-device-color.php:297
-#: lib/custom-device-color.php:300
-#: lib/custom-device-color.php:303
-#: lib/custom-device-color.php:306
-#: lib/custom-device-color.php:329
-#: lib/custom-device-color.php:332
+#: lib/custom-device-color.php:302
+#: lib/custom-device-color.php:305
+#: lib/custom-device-color.php:308
+#: lib/custom-device-color.php:311
+#: lib/custom-device-color.php:314
+#: lib/custom-device-color.php:337
+#: lib/custom-device-color.php:340
 #@ shiword
 msgid "Links"
 msgstr ""
 
-#: functions.php:247
+#: lib/widgets.php:99
 #@ shiword
 msgid "Located after the post/page content, it is the ideal place for your widgets related to individual entries"
 msgstr ""
 
-#: functions.php:2041
-#: functions.php:2044
+#: functions.php:2026
+#: functions.php:2029
 #@ shiword
 msgid "Log in"
 msgstr ""
@@ -538,18 +534,18 @@ msgstr ""
 msgid "Logged in as %s"
 msgstr ""
 
-#: functions.php:2006
+#: functions.php:1944
 #, php-format
 #@ shiword
 msgid "Logged in as <a href=\"%1$s\">%2$s</a>."
 msgstr ""
 
-#: lib/custom-device-color.php:464
+#: lib/custom-device-color.php:458
 #@ shiword
 msgid "Main Content"
 msgstr ""
 
-#: functions.php:1365
+#: functions.php:1292
 #@ shiword
 msgid "Main Navigation Menu"
 msgstr ""
@@ -559,7 +555,7 @@ msgstr ""
 msgid "Menu"
 msgstr ""
 
-#: sidebar.php:27
+#: sidebar-primary.php:28
 #@ shiword
 msgid "Meta"
 msgstr ""
@@ -574,18 +570,18 @@ msgstr ""
 msgid "More..."
 msgstr ""
 
-#: lib/widgets.php:570
+#: lib/widgets.php:677
 #@ shiword
 msgid "NOTE: Enter the <strong>full</strong> addresses ( with <em>http://</em> )"
 msgstr ""
 
-#: functions.php:1991
+#: functions.php:1928
 #: mobile/core-mobile.php:344
 #@ shiword
 msgid "Name"
 msgstr ""
 
-#: mobile/core-mobile.php:126
+#: mobile/core-mobile.php:123
 #@ shiword
 msgid "Navigation Menu for mobiles<br><small>only supports the first level of hierarchy</small>"
 msgstr ""
@@ -611,15 +607,15 @@ msgid "Next page"
 msgstr ""
 
 #: comments.php:26
-#: functions.php:721
-#: functions.php:756
+#: functions.php:634
+#: functions.php:669
 #@ shiword
 msgid "No Comments"
 msgstr ""
 
-#: functions.php:707
-#: functions.php:757
-#: functions.php:1156
+#: functions.php:620
+#: functions.php:670
+#: functions.php:1079
 #@ shiword
 msgid "No Tags"
 msgstr ""
@@ -644,24 +640,24 @@ msgstr ""
 msgid "Not logged in"
 msgstr ""
 
-#: lib/widgets.php:492
+#: lib/widgets.php:596
 #@ shiword
 msgid "Number of categories to show"
 msgstr ""
 
-#: lib/widgets.php:1177
+#: lib/widgets.php:1284
 #@ shiword
 msgid "Number of comments to show"
 msgstr ""
 
-#: lib/widgets.php:105
-#: lib/widgets.php:219
-#: lib/widgets.php:773
+#: lib/widgets.php:209
+#: lib/widgets.php:323
+#: lib/widgets.php:880
 #@ shiword
 msgid "Number of posts to show"
 msgstr ""
 
-#: lib/widgets.php:339
+#: lib/widgets.php:443
 #@ shiword
 msgid "Number of users to show"
 msgstr ""
@@ -671,22 +667,22 @@ msgstr ""
 msgid "Older Posts"
 msgstr ""
 
-#: lib/custom-device-color.php:414
+#: lib/custom-device-color.php:427
 #@ shiword
 msgid "Opacity"
 msgstr ""
 
-#: lib/admin.php:252
+#: lib/admin.php:285
 #@ shiword
 msgid "Options"
 msgstr ""
 
-#: lib/admin.php:226
+#: lib/admin.php:259
 #@ shiword
 msgid "Options saved."
 msgstr ""
 
-#: functions.php:255
+#: lib/widgets.php:106
 #@ shiword
 msgid "Page 404"
 msgstr ""
@@ -700,42 +696,42 @@ msgstr ""
 #: mobile/loop-single-mobile.php:24
 #: one-column-page.php:44
 #: page.php:44
-#: sidebar.php:36
+#: sidebar-primary.php:37
 #: single/post.php:30
 #@ shiword
 msgid "Pages"
 msgstr ""
 
-#: lib/custom-device-color.php:465
+#: lib/custom-device-color.php:459
 #@ shiword
 msgid "Pages Menu and Floating Menu"
 msgstr ""
 
-#: functions.php:553
+#: functions.php:448
 #: mobile/core-mobile.php:281
 #@ shiword
 msgid "Parent page"
 msgstr ""
 
-#: 404.php:35
+#: 404.php:45
 #@ shiword
 msgid "Perhaps using the search form will help too..."
 msgstr ""
 
-#: lib/widgets.php:440
-#: lib/widgets.php:446
+#: lib/widgets.php:544
+#: lib/widgets.php:550
 #@ shiword
 msgid "Popular Categories"
 msgstr ""
 
-#: lib/widgets.php:19
-#: lib/widgets.php:41
+#: lib/widgets.php:123
+#: lib/widgets.php:145
 #@ shiword
 msgid "Popular Posts"
 msgstr ""
 
-#: lib/widgets.php:990
-#: lib/widgets.php:1022
+#: lib/widgets.php:1097
+#: lib/widgets.php:1129
 #: mobile/core-mobile.php:382
 #@ shiword
 msgid "Post details"
@@ -746,7 +742,7 @@ msgstr ""
 msgid "Posts"
 msgstr ""
 
-#: functions.php:1214
+#: functions.php:1137
 #@ shiword
 msgid "Powered by WordPress"
 msgstr ""
@@ -776,14 +772,14 @@ msgstr ""
 msgid "Print"
 msgstr ""
 
-#: functions.php:734
-#: functions.php:755
+#: functions.php:647
+#: functions.php:668
 #, php-format
 #@ shiword
 msgid "Published on: %1$s"
 msgstr ""
 
-#: functions.php:357
+#: functions.php:246
 #@ shiword
 msgid "Quote"
 msgstr ""
@@ -793,13 +789,13 @@ msgstr ""
 msgid "RSS feed"
 msgstr ""
 
-#: lib/widgets.php:1123
+#: lib/widgets.php:1230
 #: quickbar.php:135
 #@ shiword
 msgid "Recent Comments"
 msgstr ""
 
-#: lib/widgets.php:1082
+#: lib/widgets.php:1189
 #@ shiword
 msgid "Recent Comments (Enhanced)"
 msgstr ""
@@ -810,19 +806,19 @@ msgstr ""
 msgid "Recent Posts"
 msgstr ""
 
-#: lib/widgets.php:697
+#: lib/widgets.php:804
 #, php-format
 #@ shiword
 msgid "Recent Posts in %s"
 msgstr ""
 
-#: lib/widgets.php:673
+#: lib/widgets.php:780
 #@ shiword
 msgid "Recent Posts in Category"
 msgstr ""
 
-#: lib/custom-device-color.php:392
-#: lib/custom-device-color.php:395
+#: lib/custom-device-color.php:412
+#: lib/custom-device-color.php:415
 #@ shiword
 msgid "Remove Image"
 msgstr ""
@@ -839,118 +835,110 @@ msgstr ""
 msgid "Return to %s"
 msgstr ""
 
-#: lib/custom-device-color.php:488
+#: lib/custom-device-color.php:476
 #@ shiword
 msgid "Save Changes"
 msgstr ""
 
-#: functions.php:2004
+#: functions.php:1942
 #: mobile/core-mobile.php:359
 #@ shiword
 msgid "Say It!"
 msgstr ""
 
-#: functions.php:801
+#: functions.php:714
 #: mobile/core-mobile.php:323
 #, php-format
 #@ shiword
 msgid "Search results for &#8220;%s&#8221;"
 msgstr ""
 
-#: functions.php:1365
+#: functions.php:1292
 #@ shiword
 msgid "Secondary Navigation Menu<br><small>only supports the first level of hierarchy</small>"
 msgstr ""
 
-#: lib/custom-device-color.php:406
-#: lib/custom-device-color.php:426
-#: lib/custom-device-color.php:439
-#: lib/custom-device-color.php:474
-#@ shiword
-msgid "Select a Color"
-msgstr ""
-
-#: lib/widgets.php:1044
+#: lib/widgets.php:1151
 #@ shiword
 msgid "Select avatar size"
 msgstr ""
 
-#: lib/widgets.php:965
+#: lib/widgets.php:1072
 #@ shiword
 msgid "Select icon size"
 msgstr ""
 
-#: lib/widgets.php:1257
+#: lib/widgets.php:1364
 #@ shiword
 msgid "Select month style"
 msgstr ""
 
-#: lib/widgets.php:601
+#: lib/widgets.php:708
 #@ shiword
 msgid "Select your icon size"
 msgstr ""
 
-#: lib/widgets.php:894
-#: lib/widgets.php:949
+#: lib/widgets.php:1001
+#: lib/widgets.php:1056
 #@ shiword
 msgid "Share this"
 msgstr ""
 
-#: lib/widgets.php:919
+#: lib/widgets.php:1026
 #, php-format
 #@ shiword
 msgid "Share with %s"
 msgstr ""
 
-#: lib/admin.php:78
+#: lib/admin.php:116
 #, php-format
 #@ shiword
 msgid "Shiword theme says: \"Don't forget to set <a href=\"%s\">my options</a> and the header image!\" "
 msgstr ""
 
-#: lib/widgets.php:1193
+#: lib/widgets.php:1300
 #@ shiword
 msgid "Show archives in a cleaner way"
 msgstr ""
 
-#: lib/widgets.php:1181
+#: lib/widgets.php:1288
 #@ shiword
 msgid "Show excerpt"
 msgstr ""
 
-#: lib/widgets.php:111
-#: lib/widgets.php:225
-#: lib/widgets.php:778
+#: lib/widgets.php:215
+#: lib/widgets.php:329
+#: lib/widgets.php:885
 #@ shiword
 msgid "Show post thumbnails"
 msgstr ""
 
-#: lib/widgets.php:989
+#: lib/widgets.php:1096
 #@ shiword
 msgid "Show some details and links related to the current post. It's visible ONLY in single posts"
 msgstr ""
 
-#: lib/widgets.php:893
+#: lib/widgets.php:1000
 #@ shiword
 msgid "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments"
 msgstr ""
 
-#: lib/widgets.php:425
+#: lib/widgets.php:529
 #@ shiword
 msgid "Show user gravatar"
 msgstr ""
 
-#: lib/widgets.php:830
+#: lib/widgets.php:937
 #@ shiword
 msgid "Shutter Speed"
 msgstr ""
 
-#: functions.php:190
+#: lib/widgets.php:43
 #@ shiword
 msgid "Sidebar Widget Area"
 msgstr ""
 
-#: functions.php:245
+#: lib/widgets.php:97
 #@ shiword
 msgid "Single Widget Area"
 msgstr ""
@@ -960,7 +948,7 @@ msgstr ""
 msgid "Slideshow"
 msgstr ""
 
-#: lib/widgets.php:357
+#: lib/widgets.php:461
 #@ shiword
 msgid "Some useful links for users"
 msgstr ""
@@ -982,94 +970,94 @@ msgstr ""
 msgid "Sorry, you're looking for something that isn't here"
 msgstr ""
 
-#: functions.php:1304
+#: functions.php:1233
 #@ shiword
 msgid "Syndicate this site using RSS 2.0"
 msgstr ""
 
-#: functions.php:780
+#: functions.php:693
 #: mobile/core-mobile.php:302
 #@ shiword
 msgid "Tag"
 msgstr ""
 
-#: functions.php:706
-#: functions.php:757
-#: functions.php:1157
-#: lib/widgets.php:1062
+#: functions.php:619
+#: functions.php:670
+#: functions.php:1080
+#: lib/widgets.php:1169
 #@ shiword
 msgid "Tags"
 msgstr ""
 
-#: functions.php:781
+#: functions.php:694
 #: mobile/core-mobile.php:303
 #@ shiword
 msgid "Taxonomy"
 msgstr ""
 
-#: lib/custom-device-color.php:294
-#: lib/custom-device-color.php:297
-#: lib/custom-device-color.php:300
-#: lib/custom-device-color.php:303
-#: lib/custom-device-color.php:306
-#: lib/custom-device-color.php:328
+#: lib/custom-device-color.php:302
+#: lib/custom-device-color.php:305
+#: lib/custom-device-color.php:308
+#: lib/custom-device-color.php:311
+#: lib/custom-device-color.php:314
+#: lib/custom-device-color.php:336
 #@ shiword
 msgid "Text"
 msgstr ""
 
-#: lib/custom-device-color.php:420
+#: lib/custom-device-color.php:433
 #@ shiword
 msgid "Text Color"
 msgstr ""
 
-#: lib/widgets.php:239
+#: lib/widgets.php:343
 #@ shiword
 msgid "The latest comment authors"
 msgstr ""
 
-#: lib/widgets.php:124
+#: lib/widgets.php:228
 #@ shiword
 msgid "The latest commented posts/pages of your site"
 msgstr ""
 
-#: lib/widgets.php:18
+#: lib/widgets.php:122
 #@ shiword
 msgid "The most commented posts on your site"
 msgstr ""
 
-#: lib/widgets.php:1081
+#: lib/widgets.php:1188
 #@ shiword
 msgid "The most recent comments"
 msgstr ""
 
-#: lib/widgets.php:672
+#: lib/widgets.php:779
 #@ shiword
 msgid "The most recent posts in a single category"
 msgstr ""
 
-#: functions.php:1659
-#: lib/admin.php:20
-#: lib/admin.php:221
+#: functions.php:1600
+#: lib/admin.php:61
+#: lib/admin.php:254
 #@ shiword
 msgid "Theme Options"
 msgstr ""
 
-#: lib/admin.php:237
+#: lib/admin.php:270
 #@ shiword
 msgid "Theme features"
 msgstr ""
 
-#: 404.php:34
+#: 404.php:44
 #@ shiword
 msgid "There are several links scattered around the page, maybe they can help you on finding what you're looking for."
 msgstr ""
 
-#: lib/widgets.php:511
+#: lib/widgets.php:615
 #@ shiword
 msgid "This widget lets visitors of your blog subscribe to it and follow you on popular social networks like Twitter, FaceBook etc."
 msgstr ""
 
-#: lib/custom-device-color.php:394
+#: lib/custom-device-color.php:414
 #@ shiword
 msgid "This will remove the background image."
 msgstr ""
@@ -1079,29 +1067,29 @@ msgstr ""
 msgid "This will restore the original background image."
 msgstr ""
 
-#: lib/widgets.php:1037
+#: lib/widgets.php:1144
 #@ shiword
 msgid "Thumbnail"
 msgstr ""
 
-#: functions.php:204
+#: lib/widgets.php:60
 #@ shiword
 msgid "Tips: Don&apos;t drag too much widgets here. Use small &quot;graphical&quot; widgets (eg icons, buttons, the search form, etc.)"
 msgstr ""
 
-#: lib/widgets.php:100
-#: lib/widgets.php:214
-#: lib/widgets.php:334
-#: lib/widgets.php:420
-#: lib/widgets.php:487
-#: lib/widgets.php:566
-#: lib/widgets.php:751
-#: lib/widgets.php:824
-#: lib/widgets.php:860
-#: lib/widgets.php:961
-#: lib/widgets.php:1032
-#: lib/widgets.php:1174
-#: lib/widgets.php:1253
+#: lib/widgets.php:204
+#: lib/widgets.php:318
+#: lib/widgets.php:438
+#: lib/widgets.php:524
+#: lib/widgets.php:591
+#: lib/widgets.php:673
+#: lib/widgets.php:858
+#: lib/widgets.php:931
+#: lib/widgets.php:967
+#: lib/widgets.php:1068
+#: lib/widgets.php:1139
+#: lib/widgets.php:1281
+#: lib/widgets.php:1360
 #@ shiword
 msgid "Title"
 msgstr ""
@@ -1116,22 +1104,22 @@ msgstr ""
 msgid "Trackback URL"
 msgstr ""
 
-#: lib/admin.php:318
+#: lib/admin.php:351
 #@ shiword
 msgid "Undo Changes"
 msgstr ""
 
-#: lib/admin.php:317
+#: lib/admin.php:350
 #@ shiword
 msgid "Update Options"
 msgstr ""
 
-#: lib/custom-device-color.php:367
+#: lib/custom-device-color.php:375
 #@ shiword
 msgid "Upload"
 msgstr ""
 
-#: lib/custom-device-color.php:357
+#: lib/custom-device-color.php:365
 #@ shiword
 msgid "Upload Image"
 msgstr ""
@@ -1141,23 +1129,23 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: lib/widgets.php:358
+#: lib/widgets.php:462
 #@ shiword
 msgid "User quick links"
 msgstr ""
 
-#: lib/widgets.php:465
+#: lib/widgets.php:569
 #@ shiword
 msgid "View all"
 msgstr ""
 
-#: lib/widgets.php:465
+#: lib/widgets.php:569
 #: quickbar.php:124
 #@ shiword
 msgid "View all categories"
 msgstr ""
 
-#: functions.php:683
+#: functions.php:596
 #: loop/post-status.php:27
 #, php-format
 #@ shiword
@@ -1175,52 +1163,47 @@ msgstr ""
 msgid "View full size"
 msgstr ""
 
-#: functions.php:983
-#: functions.php:1018
+#: functions.php:905
+#: functions.php:939
 #@ shiword
 msgid "View gallery"
 msgstr ""
 
-#: functions.php:1995
+#: functions.php:1932
 #: mobile/core-mobile.php:348
 #@ shiword
 msgid "Website"
 msgstr ""
 
-#: lib/widgets.php:367
+#: lib/widgets.php:471
 #: quickbar.php:211
 #, php-format
 #@ shiword
 msgid "Welcome %s"
 msgstr ""
 
-#: lib/widgets.php:819
+#: lib/widgets.php:926
 #@ shiword
 msgid "Width"
 msgstr ""
 
-#: lib/custom-device-color.php:359
-#@ shiword
-msgid "You can upload a custom background image."
-msgstr ""
-
-#: lib/custom-device-color.php:638
+#: lib/custom-device-color.php:618
 #@ shiword
 msgid "You do not have permission to customize headers."
 msgstr ""
 
-#: lib/admin.php:196
+#: lib/admin.php:229
 #@ shiword
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: lib/widgets.php:387
+#: lib/widgets.php:491
 #: quickbar.php:166
 #@ shiword
 msgid "Your Profile"
 msgstr ""
 
-#: functions.php:1736
+#: functions.php:1676
 #@ shiword
 msgid "a month ago"
 msgstr ""
@@ -1230,7 +1213,7 @@ msgstr ""
 msgid "a small login form in the user panel"
 msgstr ""
 
-#: lib/widgets.php:1260
+#: lib/widgets.php:1367
 #@ shiword
 msgid "acronym"
 msgstr ""
@@ -1250,7 +1233,7 @@ msgstr ""
 msgid "animation speed"
 msgstr ""
 
-#: lib/widgets.php:1217
+#: lib/widgets.php:1324
 #@ shiword
 msgid "apr"
 msgstr ""
@@ -1265,7 +1248,7 @@ msgstr ""
 msgid "audio"
 msgstr ""
 
-#: lib/widgets.php:1217
+#: lib/widgets.php:1324
 #@ shiword
 msgid "aug"
 msgstr ""
@@ -1280,9 +1263,9 @@ msgstr ""
 msgid "blank titles"
 msgstr ""
 
-#: functions.php:684
-#: functions.php:754
-#: lib/slider.php:165
+#: functions.php:597
+#: functions.php:667
+#: lib/slider.php:175
 #: quickbar.php:429
 #: quickbar.php:470
 #, php-format
@@ -1325,7 +1308,7 @@ msgstr ""
 msgid "content summary"
 msgstr ""
 
-#: lib/options.php:923
+#: lib/options.php:914
 #@ shiword
 msgid "custom CSS code"
 msgstr ""
@@ -1340,19 +1323,14 @@ msgstr ""
 msgid "custom widgets"
 msgstr ""
 
-#: lib/custom-device-color.php:450
+#: lib/custom-device-color.php:444
 #@ shiword
 msgid "dark"
 msgstr ""
 
-#: lib/widgets.php:1217
+#: lib/widgets.php:1324
 #@ shiword
 msgid "dec"
-msgstr ""
-
-#: lib/options.php:542
-#@ shiword
-msgid "default"
 msgstr ""
 
 #: lib/options.php:644
@@ -1365,7 +1343,7 @@ msgstr ""
 msgid "default <code>2500</code>"
 msgstr ""
 
-#: lib/widgets.php:420
+#: lib/widgets.php:524
 #, php-format
 #@ shiword
 msgid "default: \"Welcome %s\" , where %s is the user name"
@@ -1416,7 +1394,7 @@ msgstr ""
 msgid "excerpt lenght"
 msgstr ""
 
-#: lib/widgets.php:1217
+#: lib/widgets.php:1324
 #@ shiword
 msgid "feb"
 msgstr ""
@@ -1522,7 +1500,7 @@ msgstr ""
 msgid "in posts overview"
 msgstr ""
 
-#: lib/widgets.php:1217
+#: lib/widgets.php:1324
 #@ shiword
 msgid "jan"
 msgstr ""
@@ -1532,12 +1510,12 @@ msgstr ""
 msgid "javascript animations"
 msgstr ""
 
-#: lib/widgets.php:1217
+#: lib/widgets.php:1324
 #@ shiword
 msgid "jul"
 msgstr ""
 
-#: lib/widgets.php:1217
+#: lib/widgets.php:1324
 #@ shiword
 msgid "jun"
 msgstr ""
@@ -1547,17 +1525,12 @@ msgstr ""
 msgid "l"
 msgstr ""
 
-#: lib/options.php:914
-#@ shiword
-msgid "language code"
-msgstr ""
-
 #: lib/options.php:114
 #@ shiword
 msgid "leave a comment"
 msgstr ""
 
-#: lib/custom-device-color.php:449
+#: lib/custom-device-color.php:443
 #@ shiword
 msgid "light"
 msgstr ""
@@ -1567,12 +1540,12 @@ msgstr ""
 msgid "link"
 msgstr ""
 
-#: lib/widgets.php:1217
+#: lib/widgets.php:1324
 #@ shiword
 msgid "mar"
 msgstr ""
 
-#: lib/widgets.php:1217
+#: lib/widgets.php:1324
 #@ shiword
 msgid "may"
 msgstr ""
@@ -1617,17 +1590,17 @@ msgstr ""
 msgid "normal"
 msgstr ""
 
-#: lib/widgets.php:1217
+#: lib/widgets.php:1324
 #@ shiword
 msgid "nov"
 msgstr ""
 
-#: lib/widgets.php:1259
+#: lib/widgets.php:1366
 #@ shiword
 msgid "number"
 msgstr ""
 
-#: lib/widgets.php:1217
+#: lib/widgets.php:1324
 #@ shiword
 msgid "oct"
 msgstr ""
@@ -1663,12 +1636,12 @@ msgstr ""
 msgid "other"
 msgstr ""
 
-#: functions.php:1727
+#: functions.php:1667
 #@ shiword
 msgid "over a year ago"
 msgstr ""
 
-#: functions.php:453
+#: functions.php:346
 #: mobile/core-mobile.php:227
 #, php-format
 #@ shiword
@@ -1680,7 +1653,7 @@ msgstr ""
 msgid "pause duration"
 msgstr ""
 
-#: lib/options.php:933
+#: lib/options.php:924
 #@ shiword
 msgid "please, don't hide theme credits. TwoBeers.net's authors reserve themselfs to give support only to those who recognize TwoBeers work, keeping TwoBeers.net credits visible on their site."
 msgstr ""
@@ -1742,7 +1715,7 @@ msgstr ""
 msgid "print preview"
 msgstr ""
 
-#: functions.php:1723
+#: functions.php:1663
 #@ shiword
 msgid "quite a long while ago..."
 msgstr ""
@@ -1757,7 +1730,7 @@ msgstr ""
 msgid "quote link"
 msgstr ""
 
-#: functions.php:1674
+#: functions.php:1614
 #@ shiword
 msgid "quoted on"
 msgstr ""
@@ -1772,7 +1745,7 @@ msgstr ""
 msgid "recent posts"
 msgstr ""
 
-#: lib/admin.php:278
+#: lib/admin.php:311
 #@ shiword
 msgid "requires"
 msgstr ""
@@ -1782,12 +1755,12 @@ msgstr ""
 msgid "right sidebar"
 msgstr ""
 
-#: lib/widgets.php:1217
+#: lib/widgets.php:1324
 #@ shiword
 msgid "sep"
 msgstr ""
 
-#: lib/admin.php:374
+#: lib/admin.php:39
 #@ shiword
 msgid "shiword Default Gravatar"
 msgstr ""
@@ -1918,7 +1891,7 @@ msgstr ""
 msgid "the fixed navigation bar on the right. Note: Is strongly recommended to keep it enabled"
 msgstr ""
 
-#: lib/options.php:932
+#: lib/options.php:923
 #@ shiword
 msgid "theme credits"
 msgstr ""
@@ -2010,13 +1983,13 @@ msgstr ""
 msgid "Copy and paste <a href=\"http://www.google.com/webfonts\" target=\"_blank\"><strong>Google web font</strong></a> name here. Example: <code>Architects Daughter</code>"
 msgstr ""
 
-#: functions.php:1906
+#: functions.php:1848
 #@ shiword
 msgid "post"
 msgstr ""
 
-#: functions.php:982
-#: functions.php:1017
+#: functions.php:904
+#: functions.php:938
 #, php-format
 #@ shiword
 msgid "This gallery contains <a %1$s><strong>%2$s</strong> image</a>"
@@ -2024,23 +1997,23 @@ msgid_plural "This gallery contains <a %1$s><strong>%2$s</strong> images</a>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: functions.php:2018
-#: functions.php:2020
+#: functions.php:1957
+#: functions.php:1959
 #@ shiword
 msgid "Search"
 msgstr ""
 
-#: lib/audio-player.php:31
+#: lib/audio-player.php:37
 #@ shiword
 msgid "unknown media format"
 msgstr ""
 
-#: lib/audio-player.php:69
+#: lib/audio-player.php:74
 #@ shiword
 msgid "this audio type is not supported by your browser"
 msgstr ""
 
-#: lib/custom-device-color.php:408
+#: lib/custom-device-color.php:424
 #@ shiword
 msgid "Set to \"transparent\""
 msgstr ""
@@ -2061,7 +2034,7 @@ msgid "embed an audio player before the post content for linked mp3 files"
 msgstr ""
 
 #. translators: comments widget: 1: comment author, 2: post link
-#: lib/widgets.php:1142
+#: lib/widgets.php:1249
 #, php-format
 #@ shiword
 msgctxt "widgets"
@@ -2074,22 +2047,22 @@ msgstr ""
 msgid "Leave a Reply to %s"
 msgstr ""
 
-#: functions.php:356
+#: functions.php:245
 #@ shiword
 msgid "Post loading, please wait..."
 msgstr ""
 
-#: functions.php:358
+#: functions.php:247
 #@ shiword
 msgid "Add selected text as a quote"
 msgstr ""
 
-#: functions.php:359
+#: functions.php:248
 #@ shiword
 msgid "Nothing to quote. First of all you should select some text..."
 msgstr ""
 
-#: functions.php:1966
+#: functions.php:1901
 #, php-format
 #@ shiword
 msgid "Page %s"
@@ -2117,38 +2090,33 @@ msgstr ""
 msgid "a slideshow for your most important posts/pages. Select them in <a href=\"%s\">posts</a> list or in <a href=\"%s\">pages</a> list by clicking \"Add to Slideshow\" link for each post/page you wanto to add. A small icon %s will appear beside the title. Click \"Remove from Slideshow\" to remove"
 msgstr ""
 
-#: lib/options.php:915
-#@ shiword
-msgid "this will override the language settings of the front side of your site"
-msgstr ""
-
-#: lib/slider.php:29
+#: lib/slider.php:34
 #@ shiword
 msgid "this post is added to the slideshow"
 msgstr ""
 
-#: lib/slider.php:83
+#: lib/slider.php:48
 #@ shiword
 msgid "Remove from Slider"
 msgstr ""
 
-#: lib/slider.php:85
+#: lib/slider.php:50
 #@ shiword
 msgid "Add to Slider"
 msgstr ""
 
-#: functions.php:797
+#: functions.php:710
 #, php-format
 #@ shiword
 msgid "%s archive"
 msgstr ""
 
-#: functions.php:1160
+#: functions.php:1083
 #@ shiword
 msgid "Published on"
 msgstr ""
 
-#: functions.php:1186
+#: functions.php:1109
 #, php-format
 #@ shiword
 msgid "Follow %s on %s"
@@ -2173,5 +2141,31 @@ msgstr ""
 #: mobile/footer-mobile.php:27
 #@ shiword
 msgid "Visit theme authors homepage"
+msgstr ""
+
+#: lib/custom-device-color.php:367
+#@ shiword
+msgid "You can upload a custom skin image."
+msgstr ""
+
+#: lib/custom-device-color.php:389
+#: lib/custom-device-color.php:396
+#@ shiword
+msgid "Choose Image"
+msgstr ""
+
+#: lib/custom-device-color.php:392
+#@ shiword
+msgid "Choose an image from your media library:"
+msgstr ""
+
+#: lib/custom-device-color.php:395
+#@ shiword
+msgid "Choose a Custom Skin"
+msgstr ""
+
+#: lib/custom-device-color.php:396
+#@ shiword
+msgid "Set as skin"
 msgstr ""
 

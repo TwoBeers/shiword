@@ -539,7 +539,7 @@ function shiword_get_coa( $option = false ) {
 							'type' => 'col',
 							'default' => '#000000',
 							'description' => __( 'background color', 'shiword' ),
-							'info' => __('default','shiword' ) . ' = #000000',
+							'info' => '',
 							'req' => '',
 							'sub' => false
 						),
@@ -906,15 +906,6 @@ function shiword_get_coa( $option = false ) {
 							'info' => __( 'embed an audio player before the post content for linked mp3 files', 'shiword' ),
 							'req' => ''
 						),
-		'shiword_lang_code' =>
-						array(
-							'group' => 'other',
-							'type' => 'txt',
-							'default' => WPLANG,
-							'description' => __( 'language code', 'shiword' ),
-							'info' => __( 'this will override the language settings of the front side of your site', 'shiword' ),
-							'req' => ''
-		),
 		'shiword_custom_css' =>
 						array(
 							'group' => 'other',

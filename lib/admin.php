@@ -8,118 +8,152 @@
  * @since 3.0
  */
 
-// Add custom menus
-add_action( 'admin_menu', 'shiword_create_menu' );
-add_filter( 'user_contactmethods', 'shiword_new_contactmethods',10,1 );
 
-// create custom theme settings menu
-if ( !function_exists( 'shiword_create_menu' ) ) {
-	function shiword_create_menu() {
+/* Custom filters - WP hooks */
+
+add_filter( 'user_contactmethods'	, 'shiword_new_contactmethods',10,1 );
+add_filter( 'avatar_defaults'		, 'shiword_addgravatar' );
+
+
+//Add new contact methods to author panel
+if ( !function_exists( 'shiword_new_contactmethods' ) ) {
+	function shiword_new_contactmethods( $contactmethods = array() ) {
+
+		$contactmethods['twitter'] = 'Twitter'; //add Twitter
+
+		$contactmethods['facebook'] = 'Facebook'; //add Facebook
+
+		$contactmethods['googleplus'] = 'Google+'; //add Google+
+
+		return $contactmethods;
+
+	}
+}
+
+
+//add a default gravatar
+if ( !function_exists( 'shiword_addgravatar' ) ) {
+	function shiword_addgravatar( $avatar_defaults ) {
+
+		$myavatar = get_template_directory_uri() . '/images/user.png';
+		$avatar_defaults[$myavatar] = __( 'shiword Default Gravatar', 'shiword' );
+
+		return $avatar_defaults;
+
+	}
+}
+
+
+class Shiword_Admin {
+
+	function __construct() {
+
+		add_action( 'admin_menu'							, array( $this, 'create_menu' ) );
+		add_action( 'admin_init'							, array( $this, 'default_options' ) );
+
+	}
+
+
+	// create custom theme settings menu
+	function create_menu() {
 
 		//create sub menu page to the Appearance menu - Theme Options
-		$optionspage = add_theme_page( __( 'Theme Options', 'shiword' ), __( 'Theme Options', 'shiword' ), 'edit_theme_options', 'tb_shiword_functions', 'shiword_edit_options' );
+		$optionspage = add_theme_page( __( 'Theme Options', 'shiword' ), __( 'Theme Options', 'shiword' ), 'edit_theme_options', 'tb_shiword_functions', array( $this, 'edit_options' ) );
 
 		//call register settings function
-		add_action( 'admin_init', 'shiword_register_settings' );
+		add_action( 'admin_init'							, array( $this, 'register_settings' ) );
 
 		//call custom stylesheet function
-		add_action( 'admin_print_styles-widgets.php', 'shiword_widgets_style' );
-		add_action( 'admin_print_scripts-widgets.php', 'shiword_widgets_scripts' );
-		add_action( 'admin_print_styles-' . $optionspage, 'shiword_optionspage_style' );
-		add_action( 'admin_print_scripts-' . $optionspage, 'shiword_optionspage_script' );
-		add_action( 'admin_notices', 'shiword_setopt_admin_notice' );
+		add_action( 'admin_print_styles-widgets.php'		, array( $this, 'widgets_style' ) );
+		add_action( 'admin_print_scripts-widgets.php'		, array( $this, 'widgets_scripts' ) );
+		add_action( 'admin_print_styles-' . $optionspage	, array( $this, 'options_style' ) );
+		add_action( 'admin_print_scripts-' . $optionspage	, array( $this, 'options_script' ) );
+		add_action( 'admin_notices'							, array( $this, 'setopt_admin_notice' ) );
 
 	}
-}
 
-//add custom stylesheet
-if ( !function_exists( 'shiword_widgets_style' ) ) {
-	function shiword_widgets_style() {
 
-		wp_enqueue_style( 'sw-widgets-style', get_template_directory_uri() . '/css/admin-widgets.css', '', false, 'screen' );
+	//add custom stylesheet
+	function widgets_style() {
 
-	}
-}
-
-//add custom stylesheet
-if ( !function_exists( 'shiword_optionspage_style' ) ) {
-	function shiword_optionspage_style() {
-
-		wp_enqueue_style( 'sw-options-style', get_template_directory_uri() . '/css/admin-options.css', array( 'farbtastic' ), false, 'screen' );
+		wp_enqueue_style( 'shiword-widgets-style', get_template_directory_uri() . '/css/admin-widgets.css', '', false, 'screen' );
 
 	}
-}
 
-if ( !function_exists( 'shiword_widgets_scripts' ) ) {
-	function shiword_widgets_scripts() {
 
-		wp_enqueue_script( 'sw-widgets-script', get_template_directory_uri() . '/js/admin-widgets.dev.js', array('jquery'), shiword_get_info( 'version' ), true );
+	function widgets_scripts() {
+
+		wp_enqueue_script( 'shiword-widgets-script', get_template_directory_uri() . '/js/admin-widgets.dev.js', array('jquery'), shiword_get_info( 'version' ), true );
 
 	}
-}
 
-if ( !function_exists( 'shiword_optionspage_script' ) ) {
-	function shiword_optionspage_script() {
 
-		wp_enqueue_script( 'sw-options-script', get_template_directory_uri() . '/js/admin-options.dev.js', array( 'jquery', 'farbtastic' ), shiword_get_info( 'version' ), true ); //shiword js
+	//add custom stylesheet
+	function options_style() {
+
+		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_style( 'shiword-options-style', get_template_directory_uri() . '/css/admin-options.css', array(), false, 'screen' );
+
+	}
+
+
+	function options_script() {
+
+		wp_enqueue_script( 'wp-color-picker' );
+		wp_enqueue_script( 'shiword-options-script', get_template_directory_uri() . '/js/admin-options.dev.js', array( 'jquery' ), shiword_get_info( 'version' ), true ); //shiword js
 		$data = array(
 			'confirm_to_defaults' => __( 'Are you really sure you want to set all the options to their default values?', 'shiword' )
 		);
-		wp_localize_script( 'sw-options-script', 'sw_l10n', $data );
+		wp_localize_script( 'shiword-options-script', 'sw_l10n', $data );
 
 	}
-}
 
-// print a reminder message for set the options after the theme is installed
-if ( !function_exists( 'shiword_setopt_admin_notice' ) ) {
-	function shiword_setopt_admin_notice() {
+
+	// print a reminder message for set the options after the theme is installed
+	function setopt_admin_notice() {
 
 		if ( current_user_can( 'manage_options' ) && shiword_get_opt( 'version' ) < shiword_get_info( 'version' ) ) {
 			echo '<div class="updated"><p><strong>' . sprintf( __( "Shiword theme says: \"Don't forget to set <a href=\"%s\">my options</a> and the header image!\" ", 'shiword' ), get_admin_url() . 'themes.php?page=tb_shiword_functions' ) . '</strong></p></div>';
 		}
 
 	}
-}
 
 
-if ( !function_exists( 'shiword_register_settings' ) ) {
-	function shiword_register_settings() {
+	function register_settings() {
 
-		register_setting( 'shiword_settings_group', 'shiword_options', 'shiword_sanitize_options' ); //register general settings
-
+		register_setting( 'shiword_settings_group', 'shiword_options', array( $this, 'sanitize_options' ) ); //register general settings
 		register_setting( 'shiword_colors_group', 'shiword_colors'  ); //register colors settings
 
 	}
-}
 
 
-// check and set default options 
-function shiword_default_options() {
+	// check and set default options 
+	function default_options() {
 
-		$the_opt = get_option( 'shiword_options' );
-		$the_coa = shiword_get_coa();
+			$the_opt = get_option( 'shiword_options' );
+			$the_coa = shiword_get_coa();
 
-		// if options are empty, sets the default values
-		if ( empty( $the_opt ) || !isset( $the_opt ) ) {
-			foreach ( $the_coa as $key => $val ) {
-				$the_opt[$key] = $the_coa[$key]['default'];
+			// if options are empty, sets the default values
+			if ( empty( $the_opt ) || !isset( $the_opt ) ) {
+				foreach ( $the_coa as $key => $val ) {
+					$the_opt[$key] = $the_coa[$key]['default'];
+				}
+				$the_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
+				update_option( 'shiword_options' , $the_opt );
+			} else if ( !isset( $the_opt['version'] ) || $the_opt['version'] < shiword_get_info( 'version' ) ) {
+				// check for unset values and set them to default value -> when updated to new version
+				foreach ( $the_coa as $key => $val ) {
+					if ( !isset( $the_opt[$key] ) ) $the_opt[$key] = $the_coa[$key]['default'];
+				}
+				$the_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
+				update_option( 'shiword_options' , $the_opt );
+
 			}
-			$the_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
-			update_option( 'shiword_options' , $the_opt );
-		} else if ( !isset( $the_opt['version'] ) || $the_opt['version'] < shiword_get_info( 'version' ) ) {
-			// check for unset values and set them to default value -> when updated to new version
-			foreach ( $the_coa as $key => $val ) {
-				if ( !isset( $the_opt[$key] ) ) $the_opt[$key] = $the_coa[$key]['default'];
-			}
-			$the_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
-			update_option( 'shiword_options' , $the_opt );
+	}
 
-		}
-}
 
-// sanitize options value
-if ( !function_exists( 'shiword_sanitize_options' ) ) {
-	function shiword_sanitize_options( $input ){
+	// sanitize options value
+	function sanitize_options( $input ){
 
 		$the_coa = shiword_get_coa();
 
@@ -185,11 +219,10 @@ if ( !function_exists( 'shiword_sanitize_options' ) ) {
 		return $input;
 
 	}
-}
 
-// the option page
-if ( !function_exists( 'shiword_edit_options' ) ) {
-	function shiword_edit_options() {
+
+	// the option page
+	function edit_options() {
 		global $shiword_opt;
 
 		if ( !current_user_can( 'edit_theme_options' ) ) {
@@ -203,7 +236,7 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 		if ( isset( $_GET['erase'] ) ) {
 			$_SERVER['REQUEST_URI'] = remove_query_arg( 'erase', $_SERVER['REQUEST_URI'] );
 			delete_option( $the_option_name );
-			shiword_default_options();
+			$this->default_options();
 			$shiword_opt = get_option( $the_option_name );
 		}
 
@@ -272,8 +305,8 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 									<label title="<?php echo esc_attr($option); ?>"><input type="radio" <?php checked( $the_opt[$key], $option ); ?> value="<?php echo $option; ?>" name="shiword_options[<?php echo $key; ?>]"> <span><?php echo $the_coa[$key]['options_readable'][$optionkey]; ?></span></label>
 								<?php } ?>
 							<?php } elseif ( $the_coa[$key]['type'] == 'col' ) { ?>
-								<input class="sw-color" style="background-color:<?php echo $the_opt[$key]; ?>;" onclick="shiwordOptions.showColorPicker('<?php echo $key; ?>');" id="sw-color-<?php echo $key; ?>" type="text" name="shiword_options[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" />
-								<div class="sw-colorpicker" id="sw-colorpicker-<?php echo $key; ?>"></div>
+								<input class="color_picker" type="text" name="shiword_options[<?php echo $key; ?>]" id="shiword_options[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" data-default-color="<?php echo $the_coa[$key]['default']; ?>" />
+								<span class="description hide-if-js"><?php _e( 'Default' , 'shiword' ); ?>: <?php echo $the_coa[$key]['default']; ?></span>
 							<?php }	?>
 								<?php if ( $the_coa[$key]['req'] != '' ) { ?><div class="column-req"><?php echo '<u>' . __('requires','shiword') . '</u>: ' . $the_coa[$the_coa[$key]['req']]['description']; ?></div><?php } ?>
 								<div class="column-des"><?php echo $the_coa[$key]['info']; ?></div>
@@ -302,8 +335,8 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 										<?php } ?>
 									<?php } elseif ( $the_coa[$subval]['type'] == 'col' ) { ?>
 										<span class="sw-sub-opt-nam"><?php echo $the_coa[$subval]['description']; ?></span> :
-										<input class="sw-color" style="background-color:<?php echo $the_opt[$subval]; ?>;" onclick="shiwordOptions.showColorPicker('<?php echo $subval; ?>');" id="sw-color-<?php echo $subval; ?>" type="text" name="shiword_options[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
-										<div class="sw-colorpicker" id="sw-colorpicker-<?php echo $subval; ?>"></div>
+										<input class="color_picker" type="text" name="shiword_options[<?php echo $subval; ?>]" id="shiword_options[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" data-default-color="<?php echo $the_coa[$subval]['default']; ?>" />
+										<span class="description hide-if-js"><?php _e( 'Default' , 'shiword' ); ?>: <?php echo $the_coa[$subval]['default']; ?></span>
 									<?php }	?>
 									<?php if ( $the_coa[$subval]['info'] != '' ) { ?> - <span class="sw-sub-opt-des"><?php echo $the_coa[$subval]['info']; ?></span><?php } ?>
 									</br>
@@ -340,42 +373,7 @@ if ( !function_exists( 'shiword_edit_options' ) ) {
 		<?php
 
 	}
+
 }
 
-// Styles the header image displayed on the Appearance > Header admin panel.
-if ( !function_exists( 'shiword_admin_header_style' ) ) {
-	function shiword_admin_header_style() {
-
-		echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/admin-custom_header.css" />' . "\n";
-
-	}
-}
-
-//Add new contact methods to author panel
-if ( !function_exists( 'shiword_new_contactmethods' ) ) {
-	function shiword_new_contactmethods( $contactmethods = array() ) {
-
-		$contactmethods['twitter'] = 'Twitter'; //add Twitter
-
-		$contactmethods['facebook'] = 'Facebook'; //add Facebook
-
-		$contactmethods['googleplus'] = 'Google+'; //add Google+
-
-		return $contactmethods;
-
-	}
-}
-
-//add a default gravatar
-if ( !function_exists( 'shiword_addgravatar' ) ) {
-	function shiword_addgravatar( $avatar_defaults ) {
-
-		$myavatar = get_template_directory_uri() . '/images/user.png';
-		$avatar_defaults[$myavatar] = __( 'shiword Default Gravatar', 'shiword' );
-
-		return $avatar_defaults;
-
-	}
-}
-
-?>
+new Shiword_Admin;

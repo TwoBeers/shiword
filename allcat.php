@@ -8,9 +8,9 @@
  * @package Shiword
  * @since 1.00
  */
-?>
 
-<?php get_header(); ?>
+
+get_header(); ?>
 
 <?php shiword_get_layout(); ?>
 

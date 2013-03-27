@@ -17,7 +17,7 @@
 
 	<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 
-	<meta name = "viewport" content = "width = device-width" />
+	<meta name="viewport" content="width=100%; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;" />
 
 	<title><?php wp_title( '&laquo;', true, 'right' ); ?></title>
 
@@ -36,17 +36,15 @@
 	<?php shiword_hook_body_top(); ?>
 
 	<div id="sw_background">
-		<div id="sw_body" class="pad_bg">
-			<div id="sw_body_overlay">
-				<div id="sw_body_inner"></div>
-			</div>
+		<div id="sw_body">
+			<div id="sw_body_inner"></div>
 		</div>
 	</div>
 
 	<div id="main">
 
 		<div id="head_cont">
-			<div id="head" class="pad_bg">
+			<div id="head">
 				<div id="head_overlay">
 					<?php shiword_site_title(); ?>
 				</div>

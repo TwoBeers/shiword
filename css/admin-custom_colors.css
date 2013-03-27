@@ -71,18 +71,18 @@ input[type="submit"] {
 	background-color: #111;
 	color:#aaa;
 }
+body #headimg-bg #preview-main {
+	font-family: verdana !important;
+}
 #preview-main span{
 	padding: 5px;
 	border-right: 1px solid transparent;
 }
 #preview-button {
-	border-radius: 5px;
-	border-style:solid;
-	border-width:3px;
-	bottom:5px;
+	bottom:10px;
 	display:block;
 	height:50px;
-	left:-64px;
+	left:-62px;
 	position:absolute;
 	width:50px;
 	background-color: transparent;
@@ -120,8 +120,8 @@ input[type="submit"] {
 }
 #preview-meta {
 	border-radius: 5px;
-	background-color: #404040;
-	border:1px solid #fff;
+	background-color: #111;
+	border:1px solid #404040;
 	margin:10px 50px;
 	padding:5px;
 }
@@ -149,29 +149,25 @@ input[type="submit"] {
 }
 #preview-pages .preview-link, #preview-menu .preview-link,
 #preview-pages .preview-linkhi, #preview-menu .preview-linkhi {
-	text-shadow:1px 1px 1px #000;
 }
 .color_preview_box {
 	width:2em;
 	border:1px solid #262626;
 }
 .h3_field {
-	background: #E9E9E9;
-	background-image: -ms-linear-gradient(top,#F9F9F9,#E9E9E9) !important;
-	background-image: -moz-linear-gradient(top,#F9F9F9,#E9E9E9) !important;
-	background-image: -o-linear-gradient(top,#F9F9F9,#E9E9E9) !important;
-	background-image: -webkit-gradient(linear,left top,left bottom,from(#F9F9F9),to(#E9E9E9)) !important;
-	background-image: -webkit-linear-gradient(top,#F9F9F9,#E9E9E9) !important;
-	background-image: linear-gradient(top,#F9F9F9,#E9E9E9) !important;
-    font-family: georgia;
-    font-size: 15px;
-    font-weight: normal;
-    list-style: none outside none;
-    overflow: hidden;
-    padding: 5px 10px;
-    text-shadow: 0 1px 0 #FFFFFF;
-    border-radius: 5px;
-    border: 1px solid #DFDFDF;
+	background: #f7f7f7;
+	font-size: 15px;
+	font-weight: normal;
+	list-style: none outside none;
+	overflow: hidden;
+	padding: 5px 10px;
+	text-shadow: 0 1px 0 #FFFFFF;
+	border: 1px solid #fff;
+	box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+	color: #777;
+}
+.h3_field:hover {
+	color: #000;
 }
 .h3_field a {
 	text-decoration:none;
@@ -186,24 +182,24 @@ input[type="submit"] {
  *
  * http://docs.jquery.com/UI/Slider#theming
  */
-.ui-slider { position: relative; text-align: left; }
-.ui-slider .ui-slider-handle { position: absolute; z-index: 2; width: 1.2em; height: 1.2em; cursor: default; }
-.ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: .7em; display: block; border: 0; background-position: 0 0; }
+#alpha_slider_wrap .ui-slider { position: relative; text-align: left; }
+#alpha_slider_wrap .ui-slider .ui-slider-handle { position: absolute; z-index: 2; width: 1.2em; height: 1.2em; cursor: default; }
+#alpha_slider_wrap .ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: .7em; display: block; border: 0; background-position: 0 0; }
 
-.ui-slider-horizontal { height: .8em; }
-.ui-slider-horizontal .ui-slider-handle { top: -.3em; margin-left: -.6em; }
-.ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
-.ui-slider-horizontal .ui-slider-range-min { left: 0; }
-.ui-slider-horizontal .ui-slider-range-max { right: 0; }
+#alpha_slider_wrap .ui-slider-horizontal { height: .8em; }
+#alpha_slider_wrap .ui-slider-horizontal .ui-slider-handle { top: -.3em; margin-left: -.6em; }
+#alpha_slider_wrap .ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
+#alpha_slider_wrap .ui-slider-horizontal .ui-slider-range-min { left: 0; }
+#alpha_slider_wrap .ui-slider-horizontal .ui-slider-range-max { right: 0; }
 
-.ui-slider {
+#alpha_slider_wrap .ui-slider {
 	background-color: #F8F8F8;
 	border: 1px solid #DDDDDD;
 	margin: 0.5em 0;
 	width: 200px;
 	float: left;
 }
-.ui-slider .ui-slider-handle {
+#alpha_slider_wrap .ui-slider .ui-slider-handle {
 	background: #E9E9E9;
 	background-image: -ms-linear-gradient(top,#F9F9F9,#E9E9E9) !important;
 	background-image: -moz-linear-gradient(top,#F9F9F9,#E9E9E9) !important;
@@ -215,19 +211,15 @@ input[type="submit"] {
 	height: 1.3em;
 	border: 1px solid #21759B;
 }
-.ui-slider .ui-slider-handle:hover {
+#alpha_slider_wrap .ui-slider .ui-slider-handle:hover {
 	border: 1px solid #D54E21;
 }
-.ui-corner-all {
+#alpha_slider_wrap .ui-corner-all {
     border-radius: 3px;
 }
-.ui-slider-range {
+#alpha_slider_wrap .ui-slider-range {
 	background: #EAF2FA;
 }
-.shi_cp {
-	z-index: 100; 
-	background:#eee; 
-	border:1px solid #ccc; 
-	position:absolute; 
-	display:none;
+.wp-color-result {
+	margin-bottom: 0;
 }

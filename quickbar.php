@@ -27,7 +27,7 @@ if ( !function_exists( 'shiword_fixed_footer' ) ) {
 
 <div id="fixedfoot_cont">
 	<div id="fixedfoot_bg">
-		<div id="fixedfoot" class="pad_bg">
+		<div id="fixedfoot">
 			<div id="fixedfoot_overlay">
 				<?php shiword_qbar() ?>
 				<?php shiword_statusbar() ?>
@@ -473,5 +473,3 @@ if ( !function_exists( 'shiword_get_categories_wpr' ) ) {
 		}
 	}
 }
-
-?>

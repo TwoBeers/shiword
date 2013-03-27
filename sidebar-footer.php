@@ -21,7 +21,7 @@
 
 	<div class="fixfloat">
 		<?php shiword_hook_sidebar_top(); ?>
-		<?php shiword_hook_sidebar_footer_top(); ?>
+		<?php shiword_hook_this_sidebar_top( 'footer' ); ?>
 	</div>
 
 	<div id="first_fwa" class="widget-area">
@@ -37,7 +37,7 @@
 	</div><!-- #third .widget-area -->
 
 	<div class="fixfloat">
-		<?php shiword_hook_sidebar_footer_bottom(); ?>
+		<?php shiword_hook_this_sidebar_bottom( 'footer' ); ?>
 		<?php shiword_hook_sidebar_bottom(); ?>
 	</div>
 

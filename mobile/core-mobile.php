@@ -77,7 +77,6 @@ class Shiword_Mobile {
 
 
 	function init () {
-		global $content_width;
 
 		if ( ! $this->is_mobile ) return;
 
@@ -104,9 +103,6 @@ class Shiword_Mobile {
 		add_filter( 'comment_form_defaults' ,					array( $this, 'comment_form_defaults' ), 90 );
 		add_filter( 'shiword_filter_taxomony_separator' ,		array( $this, 'taxomony_separator' ) );
 
-		// Set the content width
-		$content_width = 300;
-
 		if ( is_page() )
 			if ( is_front_page() )
 				locate_template( array( 'mobile/loop-front-page-mobile.php' ), true, false );
@@ -122,8 +118,12 @@ class Shiword_Mobile {
 
 
 	function setup() {
+		global $content_width;
 
 		register_nav_menus( array( 'mobile' => __( 'Navigation Menu for mobiles<br><small>only supports the first level of hierarchy</small>', 'shiword' ) ) );
+
+		// Set the content width
+		if ( $this->is_mobile ) $content_width = 300;
 
 	}
 

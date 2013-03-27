@@ -9,101 +9,110 @@
  */
 
 
-add_action( 'admin_init', 'shiword_slider_update' );
-add_action( 'admin_print_styles-edit.php', 'shiword_posts_table_style' );
-add_action( 'shiword_hook_header_after', 'shiword_slider_init', 11 );
+class Shiword_Slider {
+
+	function __construct() {
+
+		add_action( 'admin_init'					, array( $this, 'update' ) );
+		add_action( 'admin_print_styles-edit.php'	, array( $this, 'posts_table_style' ) );
+		add_action( 'shiword_hook_header_after'		, array( $this, 'init' ), 11 );
+
+		add_filter( 'post_row_actions'				, array( $this, 'add_posts_link' ), 10, 2 );
+		add_filter( 'page_row_actions'				, array( $this, 'add_posts_link' ), 10, 2 );
+		add_filter( 'display_post_states'			, array( $this, 'add_post_state' ) );
+
+	}
 
 
-add_filter( 'post_row_actions', 'shiword_slider_add_posts_link', 10, 2 );
-add_filter( 'page_row_actions', 'shiword_slider_add_posts_link', 10, 2 );
-add_filter( 'display_post_states', 'shiword_slider_add_post_state' );
-
-
-// add the black icon in posts/pages lists
-function shiword_slider_add_post_state( $post_states ) {
-	global $post;
-
-	$posts_list = get_option( 'shiword_slideshow' ); //get the selected posts list
-
-	if ( in_array( $post->ID, $posts_list ) )
-		$post_states['slideshow'] = '<img class="in-slider-icon" src="' . get_template_directory_uri().'/images/inslider.png" alt="in slider" title="' . __( 'this post is added to the slideshow', 'shiword' ) . '" />';
-
-	return $post_states;
-
-}
-
-// update the "shiword_slideshow" option 
-function shiword_slider_update() {
-
-	if ( isset( $_GET['slider_action'] ) && isset( $_GET['post'] ) ) {
-
-		$post_id = (int) $_GET['post'];
-
-		if ( $post_id == 0 ) return;
-
+	// add the icon in posts/pages lists
+	function add_post_state( $post_states ) {
+		global $post;
 
 		$posts_list = get_option( 'shiword_slideshow' ); //get the selected posts list
 
-		switch ( $_GET['slider_action'] ) {
+		if ( in_array( $post->ID, $posts_list ) )
+			$post_states['slideshow'] = '<img class="in-slider-icon" src="' . get_template_directory_uri().'/images/inslider.png" alt="in slider" title="' . __( 'this post is added to the slideshow', 'shiword' ) . '" />';
 
-			case 'add':
-				check_admin_referer( 'add-to-slider_' . $post_id );
-				$key = array_search( $post_id, $posts_list );
-				if ( !$key ) {
-					$posts_list[] = $post_id;
-					update_option( 'shiword_slideshow' , $posts_list );
-				}
-				break;
+		return $post_states;
 
-			case 'remove':
-				check_admin_referer( 'remove-from-slider_' . $post_id );
-				$key = array_search( $post_id, $posts_list );
-				if ( $key ) {
-					unset( $posts_list[$key] );
-					update_option( 'shiword_slideshow' , $posts_list );
-				}
-				break;
+	}
 
-			default:
-				// nop
+
+	// add the "add/remove" link in posts/pages lists
+	function add_posts_link( $actions, $post ) {
+
+		$posts_list = get_option( 'shiword_slideshow' ); //get the selected posts list
+
+		if ( $post->post_status == 'publish' ) {
+			if ( in_array( $post->ID, $posts_list ) )
+				$actions['slideshow'] = "<a class='remove' href='" . wp_nonce_url( "edit.php?post_type=$post->post_type&amp;slider_action=remove&amp;post=$post->ID", 'remove-from-slider_' . $post->ID ) . "'>" . __( 'Remove from Slider', 'shiword' ) . "</a>";
+			else
+				$actions['slideshow'] = "<a class='add' href='" . wp_nonce_url( "edit.php?post_type=$post->post_type&amp;slider_action=add&amp;post=$post->ID", 'add-to-slider_' . $post->ID ) . "'>" . __( 'Add to Slider', 'shiword' ) . "</a>";
+		}
+		return $actions;
+
+	}
+
+
+	// update the "shiword_slideshow" option 
+	function update() {
+
+		if ( isset( $_GET['slider_action'] ) && isset( $_GET['post'] ) ) {
+
+			$post_id = (int) $_GET['post'];
+
+			if ( $post_id == 0 ) return;
+
+
+			$posts_list = get_option( 'shiword_slideshow' ); //get the selected posts list
+
+			switch ( $_GET['slider_action'] ) {
+
+				case 'add':
+					check_admin_referer( 'add-to-slider_' . $post_id );
+					$key = array_search( $post_id, $posts_list );
+					if ( !$key ) {
+						$posts_list[] = $post_id;
+						update_option( 'shiword_slideshow' , $posts_list );
+					}
+					break;
+
+				case 'remove':
+					check_admin_referer( 'remove-from-slider_' . $post_id );
+					$key = array_search( $post_id, $posts_list );
+					if ( $key ) {
+						unset( $posts_list[$key] );
+						update_option( 'shiword_slideshow' , $posts_list );
+					}
+					break;
+
+				default:
+					// nop
+
+			}
 
 		}
 
 	}
 
-}
 
-// add the "add/remove" link in posts/pages lists
-function shiword_slider_add_posts_link( $actions, $post ) {
+	//add custom stylesheet
+	function posts_table_style() {
 
-	$posts_list = get_option( 'shiword_slideshow' ); //get the selected posts list
+		wp_enqueue_style( 'shiword-posts-table-style', get_template_directory_uri() . '/css/admin-posts-table.css', false, '', 'screen' );
 
-	if ( $post->post_status == 'publish' ) {
-		if ( in_array( $post->ID, $posts_list ) )
-			$actions['slideshow'] = "<a class='remove' href='" . wp_nonce_url( "edit.php?post_type=$post->post_type&amp;slider_action=remove&amp;post=$post->ID", 'remove-from-slider_' . $post->ID ) . "'>" . __( 'Remove from Slider', 'shiword' ) . "</a>";
-		else
-			$actions['slideshow'] = "<a class='add' href='" . wp_nonce_url( "edit.php?post_type=$post->post_type&amp;slider_action=add&amp;post=$post->ID", 'add-to-slider_' . $post->ID ) . "'>" . __( 'Add to Slider', 'shiword' ) . "</a>";
 	}
-	return $actions;
-
-}
-
-//add custom stylesheet
-function shiword_posts_table_style() {
-	wp_enqueue_style( 'shiword-posts-table-style', get_template_directory_uri() . '/css/admin-posts-table.css', false, '', 'screen' );
-}
 
 
-if ( !function_exists( 'shiword_slider_register_settings' ) ) {
-	function shiword_slider_register_settings() {
+
+	function register_settings() {
 
 		register_setting( 'shiw_slideshow_group', 'shiword_slideshow', 'shiword_slider_sanitize'  ); //register slideshow settings
 
 	}
-}
 
-if ( !function_exists( 'shiword_slider_sanitize' ) ) {
-	function shiword_slider_sanitize( $input ){
+
+	function sanitize( $input ){
 
 		if ( !empty($input) ) {
 			//check for numeric value
@@ -118,25 +127,25 @@ if ( !function_exists( 'shiword_slider_sanitize' ) ) {
 		return $input;
 
 	}
-}
 
-// the slider init
-function shiword_slider_init(){
 
-	if ( shiword_get_opt( 'shiword_sticky' ) && !is_404() ) {
-		if (
-			( is_page() && shiword_get_opt( 'shiword_sticky_pages' ) ) ||
-			( is_single() && shiword_get_opt( 'shiword_sticky_posts' ) ) ||
-			( is_front_page() && shiword_get_opt( 'shiword_sticky_front' ) ) ||
-			( ( is_archive() || is_search() ) && shiword_get_opt( 'shiword_sticky_over' ) )
-		) shiword_slider(); 
+	// the slider init
+	function init(){
+
+		if ( shiword_get_opt( 'shiword_sticky' ) && !is_404() ) {
+			if (
+				( is_page() && shiword_get_opt( 'shiword_sticky_pages' ) ) ||
+				( is_single() && shiword_get_opt( 'shiword_sticky_posts' ) ) ||
+				( is_front_page() && shiword_get_opt( 'shiword_sticky_front' ) ) ||
+				( ( is_archive() || is_search() ) && shiword_get_opt( 'shiword_sticky_over' ) )
+			) $this->the_slider(); 
+		}
+
 	}
 
-}
 
-// display a slideshow for the selected posts
-if ( !function_exists( 'shiword_slider' ) ) {
-	function shiword_slider() {
+	// display a slideshow for the selected posts
+	function the_slider() {
 		global $post;
 
 		if ( shiword_is_printpreview() ) return; // no slider in print preview
@@ -155,6 +164,7 @@ if ( !function_exists( 'shiword_slider' ) ) {
 
 		$r = new WP_Query( $args );
 		if ($r->have_posts()) {
+
 ?>
 			<div id="sw_slider-wrap">
 				<div id="sw_sticky_slider">
@@ -181,24 +191,20 @@ if ( !function_exists( 'shiword_slider' ) ) {
 				}
 ?>
 				</div>
+				<div class="sw_slider-fade"> </div>
 				<?php if ( $r->post_count > 1 ) { ?>
 					<div class="sw_slider-skip toright"> </div>
 					<div class="sw_slider-skip toleft"> </div>
 				<?php } ?>
 			</div>
-			<script type='text/javascript'>
-			// <![CDATA[
-			jQuery(document).ready(function($){
-				$('#sw_sticky_slider').sw_sticky_slider({
-					speed : <?php echo shiword_get_opt( 'shiword_sticky_speed' ) ? shiword_get_opt( 'shiword_sticky_speed' ) : '2500';?>,
-					pause : <?php echo shiword_get_opt( 'shiword_sticky_pause' ) ? shiword_get_opt( 'shiword_sticky_pause' ) : '2000';?>
-				})
-			})
-			// ]]>
-			</script>
 <?php
+
 		}
+
 		wp_reset_postdata();
+
 	}
+
 }
 
+new Shiword_Slider;
