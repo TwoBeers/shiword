@@ -104,7 +104,7 @@ function shiword_widget_areas_init() {
 	register_sidebar( array_merge( 
 		array(
 			'name' => __( 'Page 404', 'shiword' ),
-			'id' => '404-widgets-area',
+			'id' => 'error404-widgets-area',
 			'description' => __( 'Enrich the page 404 with some useful widgets', 'shiword' ),
 		),
 		shiword_get_default_widget_args()

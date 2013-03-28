@@ -17,14 +17,20 @@
 	}
 ?>
 
+<?php shiword_hook_sidebars_before( 'header' ); ?>
+
 <div id="header-widget-area">
 
-	<div class="fixfloat"><?php shiword_hook_sidebar_top(); ?></div> 
+	<?php shiword_hook_sidebar_top( 'header' ); ?>
 
 	<div><?php dynamic_sidebar( 'header-widget-area' ); ?></div>
 
-	<div class="fixfloat"><?php shiword_hook_sidebar_bottom(); ?></div> 
+	<div class="fixfloat"> </div> 
+
+	<?php shiword_hook_sidebar_bottom( 'header' ); ?>
 
 </div>
 
 <!-- end Header widget area -->
+
+<?php shiword_hook_sidebars_after( 'header' ); ?>

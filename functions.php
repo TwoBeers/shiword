@@ -149,19 +149,9 @@ if ( ! isset( $content_width ) )
 if ( !function_exists( 'shiword_get_sidebar' ) ) {
 	function shiword_get_sidebar( $name = 'primary' ) {
 
-		if ( shiword_is_printpreview() ) return;
-
 		if ( $name == 'primary' && shiword_get_layout() == 'wide' ) return;
 
-		shiword_hook_sidebars_before();
-
-		shiword_hook_this_sidebar_before( $name );
-
 		get_sidebar( $name );
-
-		shiword_hook_this_sidebar_after( $name );
-
-		shiword_hook_sidebars_after();
 
 	}
 }

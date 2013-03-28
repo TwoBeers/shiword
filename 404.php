@@ -23,21 +23,11 @@ get_header(); ?>
 		<p><?php _e( "Sorry, you're looking for something that isn't here" ,'shiword' ); ?>: <u><?php echo home_url() . esc_html( $_SERVER['REQUEST_URI'] ); ?></u></p>
 		<br>
 
-		<?php shiword_hook_this_sidebar_before( 'footer' ); ?>
-
-		<?php if ( is_active_sidebar( '404-widgets-area' ) ) { ?>
+		<?php if ( is_active_sidebar( 'error404-widgets-area' ) ) { ?>
 
 			<p><?php _e( 'Here is something that might help:','shiword' ); ?></p>
 
-			<div id="error404-widget-area">
-
-				<?php shiword_hook_this_sidebar_top( 'footer' ); ?>
-
-				<?php dynamic_sidebar( '404-widgets-area' ); ?>
-
-				<?php shiword_hook_this_sidebar_bottom( 'footer' ); ?>
-
-			</div>
+			<?php shiword_get_sidebar( 'error404' ); ?>
 
 		<?php } else { ?>
 
@@ -48,8 +38,6 @@ get_header(); ?>
 		<?php } ?>
 
 		<div class="fixfloat"> </div>
-
-		<?php shiword_hook_this_sidebar_after( 'footer' ); ?>
 
 	</div>
 

@@ -13,6 +13,9 @@
 /** Grab the THA theme hooks file */
 require_once( get_template_directory() . '/tha/tha-theme-hooks.php' );
 
+/**
+ * the <head> section
+ */
 function shiword_hook_head_top() {
 	tha_head_top();
 	do_action( 'shiword_hook_head_top' );
@@ -23,6 +26,9 @@ function shiword_hook_head_bottom() {
 	tha_head_bottom();
 }
 
+/**
+ * the header section
+ */
 function shiword_hook_header_before() {
 	tha_header_before();
 	do_action( 'shiword_hook_header_before' );
@@ -43,6 +49,9 @@ function shiword_hook_header_bottom() {
 	tha_header_bottom();
 }
 
+/**
+ * the content section
+ */
 function shiword_hook_content_before() {
 	tha_content_before();
 	do_action( 'shiword_hook_content_before' );
@@ -63,6 +72,9 @@ function shiword_hook_content_bottom() {
 	tha_content_bottom();
 }
 
+/**
+ * the entry section
+ */
 function shiword_hook_entry_before() {
 	tha_entry_before();
 	do_action( 'shiword_hook_entry_before' );
@@ -83,6 +95,9 @@ function shiword_hook_entry_bottom() {
 	tha_entry_bottom();
 }
 
+/**
+ * the comments section
+ */
 function shiword_hook_comments_before() {
 	tha_comments_before();
 	do_action( 'shiword_hook_comments_before' );
@@ -93,42 +108,52 @@ function shiword_hook_comments_after() {
 	tha_comments_after();
 }
 
-function shiword_hook_sidebars_before() {
-	tha_sidebars_before();
-	do_action( 'shiword_hook_sidebars_before' );
+function shiword_hook_comments_list_before() {
+	do_action( 'shiword_hook_comments_list_before' );
 }
 
-function shiword_hook_sidebars_after() {
+function shiword_hook_comments_list_after() {
+	do_action( 'shiword_hook_comments_list_after' );
+}
+
+/**
+ * the sidebars section
+ *
+ * currently supported $location:
+ * - primary -> sidebar-primary.php
+ * - secondary -> sidebar-secondary.php
+ * - header -> sidebar-header.php
+ * - footer -> sidebar-footer.php
+ * - single -> sidebar-single.php
+ * - error404 -> sidebar-error404.php
+ */
+function shiword_hook_sidebars_before( $location = 'undefined' ) {
+	tha_sidebars_before();
+	do_action( 'shiword_hook_sidebars_before' );
+	do_action( 'shiword_hook_' . $location . '_sidebar_before' );
+}
+
+function shiword_hook_sidebars_after( $location = 'undefined' ) {
+	do_action( 'shiword_hook_' . $location . '_sidebar_after' );
 	do_action( 'shiword_hook_sidebars_after' );
 	tha_sidebars_after();
 }
 
-function shiword_hook_sidebar_top() {
+function shiword_hook_sidebar_top( $location = 'undefined' ) {
 	tha_sidebar_top();
 	do_action( 'shiword_hook_sidebar_top' );
+	do_action( 'shiword_hook_' . $location . '_sidebar_top' );
 }
 
-function shiword_hook_sidebar_bottom() {
+function shiword_hook_sidebar_bottom( $location = 'undefined' ) {
+	do_action( 'shiword_hook_' . $location . '_sidebar_bottom' );
 	do_action( 'shiword_hook_sidebar_bottom' );
 	tha_sidebar_bottom();
 }
 
-function shiword_hook_this_sidebar_top( $location ) {
-	do_action('shiword_hook_' . $location . '_sidebar_top');
-}
-
-function shiword_hook_this_sidebar_bottom( $location ) {
-	do_action('shiword_hook_' . $location . '_sidebar_bottom');
-}
-
-function shiword_hook_this_sidebar_before( $location ) {
-	do_action('shiword_hook_' . $location . '_sidebar_before');
-}
-
-function shiword_hook_this_sidebar_after( $location ) {
-	do_action('shiword_hook_' . $location . '_sidebar_after');
-}
-
+/**
+ * the footer section
+ */
 function shiword_hook_footer_before() {
 	tha_footer_before();
 	do_action( 'shiword_hook_footer_before' );
@@ -149,46 +174,44 @@ function shiword_hook_footer_bottom() {
 	tha_footer_bottom();
 }
 
-function shiword_hook_statusbar() {
-	do_action('shiword_hook_statusbar');
-}
-
-function shiword_hook_post_title_before() {
-	do_action('shiword_hook_post_title_before');
-}
-
-function shiword_hook_post_title_after() {
-	do_action('shiword_hook_post_title_after');
-}
-
-function shiword_hook_comments_list_before() {
-	do_action('shiword_hook_comments_list_before');
-}
-
-function shiword_hook_comments_list_after() {
-	do_action('shiword_hook_comments_list_after');
-}
-
+/**
+ * the <body> section
+ */
 function shiword_hook_body_top() {
-	do_action('shiword_hook_body_top');
+	do_action( 'shiword_hook_body_top' );
 }
 
 function shiword_hook_body_bottom() {
-	do_action('shiword_hook_body_bottom');
+	do_action( 'shiword_hook_body_bottom' );
+}
+
+/**
+ * miscellaneous
+ */
+function shiword_hook_statusbar() {
+	do_action( 'shiword_hook_statusbar' );
+}
+
+function shiword_hook_post_title_before() {
+	do_action( 'shiword_hook_post_title_before' );
+}
+
+function shiword_hook_post_title_after() {
+	do_action( 'shiword_hook_post_title_after' );
 }
 
 function shiword_hook_change_view() {
-	do_action('shiword_hook_change_view');
+	do_action( 'shiword_hook_change_view' );
 }
 
 function shiword_hook_attachment_before() {
-	do_action('shiword_hook_attachment_before');
+	do_action( 'shiword_hook_attachment_before' );
 }
 
 function shiword_hook_attachment_after() {
-	do_action('shiword_hook_attachment_after');
+	do_action( 'shiword_hook_attachment_after' );
 }
 
 function shiword_hook_like_it() {
-	do_action('shiword_hook_like_it');
+	do_action( 'shiword_hook_like_it' );
 }

@@ -18,14 +18,20 @@
 	}
 ?>
 
+<?php shiword_hook_sidebars_before( 'single' ); ?>
+
 <div id="single-widget-area">
 
-	<div class="fixfloat"><?php shiword_hook_sidebar_top(); ?></div> 
+	<?php shiword_hook_sidebar_top( 'single' ); ?>
 
 	<div><?php dynamic_sidebar( 'single-widget-area' ); ?></div>
 
-	<div class="fixfloat"><?php shiword_hook_sidebar_bottom(); ?></div> 
+	<div class="fixfloat"> </div> 
+
+	<?php shiword_hook_sidebar_bottom( 'single' ); ?>
 
 </div>
 
 <!-- end Single widget area -->
+
+<?php shiword_hook_sidebars_after( 'single' ); ?>

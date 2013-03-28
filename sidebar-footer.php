@@ -17,12 +17,11 @@
 	}
 ?>
 
+<?php shiword_hook_sidebars_before( 'footer' ); ?>
+
 <div id="footer-widget-area">
 
-	<div class="fixfloat">
-		<?php shiword_hook_sidebar_top(); ?>
-		<?php shiword_hook_this_sidebar_top( 'footer' ); ?>
-	</div>
+	<?php shiword_hook_sidebar_top( 'footer' ); ?>
 
 	<div id="first_fwa" class="widget-area">
 			<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) dynamic_sidebar( 'first-footer-widget-area' ); ?>
@@ -36,11 +35,12 @@
 			<?php if ( is_active_sidebar( 'third-footer-widget-area' ) ) dynamic_sidebar( 'third-footer-widget-area' ); ?>
 	</div><!-- #third .widget-area -->
 
-	<div class="fixfloat">
-		<?php shiword_hook_this_sidebar_bottom( 'footer' ); ?>
-		<?php shiword_hook_sidebar_bottom(); ?>
-	</div>
+	<div class="fixfloat"> </div>
+
+	<?php shiword_hook_sidebar_bottom( 'footer' ); ?>
 
 </div>
 
 <!-- end Footer widget area -->
+
+<?php shiword_hook_sidebars_after( 'footer' ); ?>

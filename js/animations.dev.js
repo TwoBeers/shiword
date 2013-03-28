@@ -212,7 +212,7 @@ shiwordAnimations = {
 	entry_meta_apply : function() {
 
 		//meta animation
-		$('.top_meta.ani_meta').removeClass('ani_meta').addClass('ani_meta_js').children('.metafield').each( function(){  //get every metafield item
+		$('#maincontent').find('.top_meta.ani_meta').removeClass('ani_meta').addClass('ani_meta_js').children('.metafield').each( function(){  //get every metafield item
 			var $this = $(this);
 			var list = $this.children('.metafield_content'); // get the sub list for each metafield item
 			var parent = $this.parent();
@@ -224,10 +224,10 @@ shiwordAnimations = {
 					{'height': mysize , 'padding-top': 25 },
 					200
 				);
-				parent.addClass('meta_shadowed').css({ 'border-color' : '#555' });
+				parent.addClass('meta_shadowed'));
 			}).mouseleave( function(){ //when mouse leaves, hide the sub list
 				list.stop().css({ 'display' : '', 'height' : 0 , 'padding-top' : 0 });
-				parent.removeClass('meta_shadowed').css({ 'border-color' : '' });
+				parent.removeClass('meta_shadowed');
 			});
 		});
 

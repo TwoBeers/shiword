@@ -43,10 +43,6 @@ if ( !function_exists( 'shiword_custom_device_colors_init' ) ) {
 				'url' => '%s/images/device/ice.png',
 				'description' => 'ice'
 			),
-			'metal' => array(
-				'url' => '%s/images/device/metal.png',
-				'description' => 'metal'
-			),
 			'stripe' => array(
 				'url' => '%s/images/device/stripe.png',
 				'description' => 'stripe'
@@ -55,9 +51,17 @@ if ( !function_exists( 'shiword_custom_device_colors_init' ) ) {
 				'url' => '%s/images/device/flower.png',
 				'description' => 'flower'
 			),
+			'metal' => array(
+				'url' => '%s/images/device/metal.png',
+				'description' => 'metal'
+			),
 			'wood' => array(
 				'url' => '%s/images/device/wood.jpg',
 				'description' => 'wood'
+			),
+			'cracked' => array(
+				'url' => '%s/images/device/cracked.jpg',
+				'description' => 'cracked'
 			)
 		) );
 
@@ -152,7 +156,6 @@ class Custom_device_color {
 		$this->page = $page = add_theme_page(__( 'Custom Colors', 'shiword' ), __( 'Custom Colors', 'shiword' ), 'edit_theme_options' , 'device-color' , array( &$this , 'admin_page' ));
 		add_action( "admin_print_scripts-$page" , array(&$this, 'js_includes' ) );
 		add_action( "admin_print_styles-$page" , array(&$this, 'css_includes' ) );
-		add_action( "admin_head-$page" , array(&$this, 'build_style' ) );
 		add_action( "admin_head-$page" , array(&$this, 'take_action' ), 50 );
 	}
 		
@@ -221,7 +224,7 @@ class Custom_device_color {
 			$header_desc = $header['description'];
 			echo '<label class="default-device-image">';
 			echo '<input class="default-device-input" name="default-device-image" type="radio" value="' . esc_attr($header_key) . '" ' . checked($header_url, $shiword_colors['device_image'], false) . ' />';
-			echo '<img src="' . $header_url . '" alt="' . esc_attr($header_desc) .'" title="' . esc_attr($header_desc) .'" />';
+			echo '<img width="100" height="100" src="' . $header_url . '" alt="' . esc_attr($header_desc) .'" title="' . esc_attr($header_desc) .'" />';
 			echo '</label>';
 		}
 		echo '<div class="clear"></div></div>';
@@ -233,14 +236,13 @@ class Custom_device_color {
 		$color = get_background_color();
 		if ( ! $color ) $color = 'b6b6b6';
 
-?>
-	<style type="text/css">#headimg-bg { background-color: #<?php echo $color; ?> !important; }</style>
-<?php
-
 		$device_rgba = shiword_hex2rgba( $shiword_colors['device_color'], $shiword_colors['device_opacity']);
 
 ?>
 	<style type="text/css">
+		#headimg-bg {
+			background-color: #<?php echo $color; ?> !important;
+		}
 		#headimage {
 			background: <?php echo $device_rgba; ?> url('<?php echo $shiword_colors['device_image']; ?>') left top repeat;
 		}
@@ -326,7 +328,7 @@ class Custom_device_color {
 	
 	/* Display main custom colors page. */
 	function step_1() {
-		
+
 		global $shiword_colors;
 		
 		/* Holds the inside colors descriptions */
@@ -342,6 +344,8 @@ class Custom_device_color {
 		);
 
 		$this->process_default_device_images();
+
+		$this->build_style();
 
 ?>
 <div class="wrap">
@@ -578,7 +582,7 @@ class Custom_device_color {
 			if ( isset($this->default_device_images[$_POST['default-device-image']]) )
 				$shiword_colors['device_image'] = esc_url( $this->default_device_images[$_POST['default-device-image']]['url'] );
 		}
-		if ( isset($_POST['custom-device-image']) ) {
+		if ( isset($_POST['custom-device-image']) && ! empty( $_POST['custom-device-image'] ) ) {
 			$shiword_colors['device_image'] = esc_url( $_POST['custom-device-image'] );
 		}
 		foreach ( $this->default_device_colors as $key => $val ) {

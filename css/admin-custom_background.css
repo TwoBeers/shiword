@@ -22,8 +22,8 @@ div#custom-background-image {
 }
 .appearance_page_custom-background #available-bg label img {
 	vertical-align: middle;
-	border: 3px solid #fff;
-	box-shadow: 0px 0px 3px #555;
+	border: 1px solid #DFDFDF;
+	padding: 3px;
 }
 #custom-background div#custom-background-image {
 	min-height: 600px;
