@@ -553,6 +553,15 @@ function shiword_get_coa( $option = false ) {
 							'req' => '',
 							'sub' => false
 						),
+		'shiword_tinynav' =>
+						array(
+							'group' => 'other',
+							'type' => 'chk',
+							'default' => 1,
+							'description' => '<a href="https://github.com/viljamis/TinyNav.js">Tinynav</a>',
+							'info' => __( 'tiny navigation menu for small screen','shiword' ),
+							'req' => 'shiword_jsani'
+						),
 		'shiword_sticky' =>
 						array(
 							'group' => 'slideshow',

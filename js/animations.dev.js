@@ -58,6 +58,10 @@ shiwordAnimations = {
 					this.slider();
 					break;
 
+				case 'tinynav':
+					this.tinynav();
+					break;
+
 				default :
 					//no default action
 					break;
@@ -224,7 +228,7 @@ shiwordAnimations = {
 					{'height': mysize , 'padding-top': 25 },
 					200
 				);
-				parent.addClass('meta_shadowed'));
+				parent.addClass('meta_shadowed');
 			}).mouseleave( function(){ //when mouse leaves, hide the sub list
 				list.stop().css({ 'display' : '', 'height' : 0 , 'padding-top' : 0 });
 				parent.removeClass('meta_shadowed');
@@ -305,6 +309,15 @@ shiwordAnimations = {
 			speed : parseInt(shiword_l10n.slider_speed),
 			pause : parseInt(shiword_l10n.slider_pause)
 		})
+	},
+
+	tinynav : function() {
+		if ( $(window).width() > 800 ) return false;
+		$(".nav-menu").tinyNav({
+			active: 'current_page_item', // Set the "active" class for default menu
+			label: '', // String: Sets the <label> text for the <select> (if not set, no label will be added)
+			header: '' // String: Specify text for "header" and show header instead of the active item
+		});
 	}
 
 };

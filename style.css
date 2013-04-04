@@ -726,10 +726,16 @@ input[type=password]:focus {
 	display: block;
 	height: 0;
 }
+.tinynav {
+	display: none;
+}
+.navhome {
+	display: none;
+}
 /* meta 
 ----------------------------------------------------------*/
 .meta {
-	background-color: #111;
+	background-color: #262626;
 	min-height: 12px;
 	position: relative;
 	border-radius: 5px;
@@ -742,11 +748,9 @@ input[type=password]:focus {
 }
 .ani_meta,
 .ani_meta_js {
-	border: 1px solid #404040;
 }
 .ani_meta:hover {
 	z-index: 300;
-	border: 1px solid #fff;
 	box-shadow: 0 2px 2px #000;
 }
 .ani_meta_js:hover {
@@ -1257,7 +1261,8 @@ li.pingback {
 	color: #555;
 }
 
-.navigate_comments a, .navigate_comments span {
+.navigate_comments a,
+.navigate_comments span {
 	margin-right: 0.5em;
 }
 #comments {
@@ -1591,24 +1596,26 @@ img.aligncenter {
 	min-height: 26px;
 }
 .sw-I-like-it {
-	background: #262626;
+	background-color: #262626;
 	border-radius: 5px;
 	margin-bottom: 20px;
 	padding: 10px 10px 5px;
-	border: 1px solid #404040;
+	min-height: 26px;
 }
 .sw-I-like-it + .meta_container {
 	margin-top: -25px;
 }
 .sw-I-like-it + .meta_container .meta {
 	border-radius: 0 0 5px 5px;
-	border-top-color: #404040;
-	border-top: none;
 }
 .format-aside .sw-I-like-it,
 .format-status .sw-I-like-it {
 	margin: 10px 0 0;
 	clear: both;
+}
+.single .format-aside .sw-I-like-it,
+.single .format-status .sw-I-like-it {
+	margin: 0 0 20px 0;
 }
 
 /* Frame widths 
@@ -1964,7 +1971,7 @@ body .gcard {
 		background: #111 !important;
 	}
 	#main {
-		padding: 0 52px 0 0 !important;
+		padding: 0 48px 0 0 !important;
 		width: auto !important;
 		margin: 0 !important;
 	}
@@ -2032,11 +2039,11 @@ body .gcard {
 		margin-top: 30px;
 	}
 	#sidebardx .widget {
-		width: 30%;
-		margin: 20px 1.5%;
+		width: 47.5%;
+		margin: 20px 1%;
 		float: left;
 	}
-	#sidebardx .widget:nth-child(3n+1) {
+	#sidebardx .widget:nth-of-type(2n+1) {
 		clear: left;
 	}
 	#sw_slider-wrap {
@@ -2067,5 +2074,33 @@ body .gcard {
 	.minib_rss,
 	.minib_track {
 		display: none;
+	}
+	.sss_inner_item {
+		padding: 20px;
+	}
+	.tinynav {
+		display: block;
+		width: 100%;
+		padding: 5px;
+	}
+	.tinynav option {
+		margin: 5px 0;
+	}
+	.sw-js .nav-menu {
+		display: none !important;
+	}
+	#head a, #head .description, #statusbar {
+		color: #fff !important;
+	}
+	.minib_img,
+	.menuitem_img,
+	.search-form,
+	.comment-reply-link,
+	.mft_date,
+	.mft_cat,
+	.mft_tag,
+	.mft_comm,
+	.mft_hier {
+		background-image: url("http://localhost/wordpress/wp-content/themes/shiword/images/minibuttons-light.png") !important;
 	}
 }
