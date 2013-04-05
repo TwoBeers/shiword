@@ -71,7 +71,7 @@ class Shiword_Slider {
 				case 'add':
 					check_admin_referer( 'add-to-slider_' . $post_id );
 					$key = array_search( $post_id, $posts_list );
-					if ( !$key ) {
+					if ( $key === false ) {
 						$posts_list[] = $post_id;
 						update_option( 'shiword_slideshow' , $posts_list );
 					}
@@ -80,7 +80,7 @@ class Shiword_Slider {
 				case 'remove':
 					check_admin_referer( 'remove-from-slider_' . $post_id );
 					$key = array_search( $post_id, $posts_list );
-					if ( $key ) {
+					if ( $key !== false ) {
 						unset( $posts_list[$key] );
 						update_option( 'shiword_slideshow' , $posts_list );
 					}
