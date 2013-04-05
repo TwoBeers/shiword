@@ -1286,7 +1286,7 @@ function shiword_add_home_link( $items = '', $args = null ) {
 	$args = wp_parse_args( $args, $defaults );
 
 	if ( ( $args['theme_location'] === 'primary' ) && ( 'posts' == get_option( 'show_on_front' ) ) ) {
-		if (is_front_page())
+		if ( is_front_page() || is_single() )
 			$class = ' current_page_item';
 		else
 			$class = '';

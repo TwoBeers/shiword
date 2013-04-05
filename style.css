@@ -222,7 +222,7 @@ input[type=password]:focus {
 	height: 30px;
 	left: 0;
 	position: absolute;
-	width: 100%;	
+	width: 100%;
 }
 #fixedfoot {
 	width: 972px;
@@ -926,13 +926,13 @@ span.lc-user-name {
 .social-like li a img:hover {
 	border: 1px solid #ff8d39;
 }
-.sw-post-details-thumb {
+.post-details-thumb {
 	margin: 0 0 5px;
 }
-.sw-clean-archives a {
+.tb_clean_archives a {
 	margin-right: .5em;
 }
-.sw-year-link {
+.year-link {
 	font-size: 1.2em;
 	font-weight: bold;
 }
@@ -1558,34 +1558,38 @@ img.aligncenter {
 
 /* author bio
 ----------------------------------------------------------*/
-.sw-author-bio {
+.tb-author-bio {
 	background-color: #262626;
 	padding: 5px;
 	margin: 0 0 20px;
 	border-radius: 5px;
 }
-.widget .sw-author-bio {
+.widget .tb-author-bio {
 	margin: 0 0 5px;
 }
-.sw-author-bio img.avatar {
+.tb-author-bio img.avatar {
 	border-radius: 5px;
 	margin-right: 10px;
 	float: left;
 }
-.sw-author-bio .author-name {
+.tb-author-bio .author-name {
 	font-size: 1.5em;
 	margin-bottom: 10px;
 }
-.sw-author-bio .author-description {
+.tb-author-bio .author-description {
 }
-.sw-author-bio .author-social {
+.tb-author-bio .author-social {
 	border-top:1px solid #404040;
 	margin-top:5px;
 	padding-top:5px;
 	clear: both;
 }
-.sw-author-bio .author-social img {
+.tb-author-bio .author-social img {
 	margin-right: 5px;
+}
+.tb-author-bio ul {
+	list-style: none outside none;
+	margin: 0;
 }
 
 /* "Like" badges
@@ -1964,16 +1968,18 @@ body .gcard {
 	#quickbar,
 	#statusbar,
 	#sw_background,
-	#fixedfoot_reflect {
+	#fixedfoot_reflect,
+	#sw_body {
 		display: none;
 	}
 	body {
 		background: #111 !important;
 	}
 	#main {
-		padding: 0 48px 0 0 !important;
+		border-right: 1px solid #404040;
+		margin: 0 48px 0 0 !important;
+		padding: 0 !important;
 		width: auto !important;
-		margin: 0 !important;
 	}
 	#maincontent{
 		padding: 0 !important;
@@ -2013,17 +2019,21 @@ body .gcard {
 	}
 	#navbuttons {
 		border: none;
-		border-left: 1px solid #404040;
-		border-radius: 0;
 		bottom: 0;
-		padding: 2000px 13px 5px 10px;
+		padding: 5px 11px;
 		position: fixed;
 		right: 0;
-		background: #222;
+		background: transparent;
 		margin: 0;
+	}
+	.minib_img {
+		opacity: 1;
 	}
 	.minibutton .nb_tooltip {
 		display: none !important;
+	}
+	.minibutton {
+		margin: 20px 0 0;
 	}
 	.posts_narrow {
 		border: none;
@@ -2062,6 +2072,10 @@ body .gcard {
 	}
 	#fixedfoot {
 		border: none;
+		width: auto !important;
+	}
+	#footer-hook-cont {
+		width: auto !important;
 	}
 	#themecredits {
 		padding: 25px;
@@ -2101,6 +2115,21 @@ body .gcard {
 	.mft_tag,
 	.mft_comm,
 	.mft_hier {
-		background-image: url("http://localhost/wordpress/wp-content/themes/shiword/images/minibuttons-light.png") !important;
+		background-image: url("images/minibuttons-light.png") !important;
+	}
+	.storytitle {
+		word-wrap: break-word;
+	}
+	.sw-player-container {
+		max-width: 94%;
+		padding: 5px 2%;
+	}
+	.storycontent img {
+		max-width: 100% !important;
+	}
+	.widget-area {
+		padding: 0 3%;
+		width: 94%;
+		clear: both;
 	}
 }
