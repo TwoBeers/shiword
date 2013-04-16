@@ -26,6 +26,10 @@ shiwordAnimations = {
 					this.navigation_buttons();
 					break;
 
+				case 'smooth_scroll':
+					this.smooth_scroll();
+					break;
+
 				case 'quickbar_panels':
 					this.quickbar_panels();
 					break;
@@ -78,17 +82,15 @@ shiwordAnimations = {
 		$('#mainmenu').children('.menu-item-parent').each(function(){ //get every main list item
 			var $this = $(this);
 			var d = $this.children('ul'); //for each main item, get the sub list
-			d.css({'opacity' : 0 , 'display' : 'block'});
-			var mysize = d.height(); //retrieve the height of the sub list
-			d.css({'opacity' : 1 , 'display' : '', 'height': 0});
-			$this.mouseenter(function(){ //when mouse enters, slide down the sub list
-				d.animate(
-					{ 'height' : mysize	},
-					200
-				);
-			}).mouseleave(function(){ //when mouse leaves, hide the sub list
-				d.stop().css({'display' : '', 'height': 0});
-			});
+			d.css({'display' : 'block'}).hide();
+			$this.hoverIntent(
+				function(){ //when mouse enters, slide down the sub list
+					d.slideDown(200);
+				},
+				function(){ //when mouse leaves, hide the sub list
+					d.hide();
+				}
+			);
 		});
 
 	},
@@ -98,21 +100,23 @@ shiwordAnimations = {
 		//navbuttons tooltip animation
 		$('#navbuttons').children('.minibutton').each( function(){ //get every minibutton
 			var $this = $(this);
-			var list = $this.find('span.nb_tooltip');
-			list.css({ 'opacity' : 0, 'display' : 'block', 'min-width' : 0 });
-			var mysize = list.width(); //retrieve the height of the minibutton tooltip
-			list.css({ 'opacity' : 1, 'display' : '', 'width' : 0 });
-			if (mysize < 200) mysize = 200;
-			$this.mouseenter( function(){ //when mouse enters, slide left the tooltip and animate the minibutton
-				list.animate(
-					{ 'width': mysize },
-					200
-				);
-			}).mouseleave( function(){ //when mouse leaves, hide the tooltip
-				list.stop();
-				list.css({ 'opacity' : 1, 'display' : '', 'width' : 0 });
-			});	
+			var label = $this.find('span.nb_tooltip');
+			label.css({ 'opacity' : 0, 'display' : 'block' });
+			var mysize = label.width(); //retrieve the height of the minibutton tooltip
+			label.css({ 'opacity' : 1, 'width' : 0, 'min-width' : 0 }).hide();
+			$this.hoverIntent( 
+				function(){ //when mouse enters, slide left the tooltip and animate the minibutton
+					label.show().animate({ 'width': mysize }, 200);
+				},
+				function(){ //when mouse leaves, hide the tooltip
+					label.stop().css({ 'width' : 0 }).hide();
+				}
+			);
 		});
+
+	},
+
+	smooth_scroll : function() {
 
 		// fade in/out on scroll
 		top_but = $('#navbuttons').find('a[href="#"] span');
@@ -161,21 +165,18 @@ shiwordAnimations = {
 		//quickbar animation
 		$('#quickbar').children('.menuitem').each( function(){ //get every quickbar item
 			var $this = $(this);
-			var list = $this.children('.menuback'); // get the sub list for each quickbar item
-			list.css({ 'display' : '', 'width' : 0 }).removeClass('mi_shadowed'); //hide the box shadow (for speeding up the animation)
-			$this.mouseenter( function(){ //when mouse enters, slide left the sub list, restore its shadow and animate the button
-				if ( $('#sw-user_login').hasClass('keepme') ) return;
-				list.animate(
-					{ 'width': 832 },
-					400,
-					'',
-					function(){ list.addClass('mi_shadowed'); }
-				);
-			}).mouseleave( function(){ //when mouse leaves, hide the submenu
-				if ( $('#sw-user_login').hasClass('keepme') ) return;
-				list.stop();
-				list.removeClass('mi_shadowed').css({ 'display' : '', 'width' : 0 });
-			});	
+			var panel = $this.children('.menuback'); // get the sub panel for each quickbar item
+			panel.css({ 'display' : 'block', 'width' : 0 }).removeClass('mi_shadowed').hide(); //hide the box shadow (for speeding up the animation)
+			$this.hoverIntent(
+				function(){ //when mouse enters, slide left the sub panel, restore its shadow and animate the button
+					if ( $('#sw-user_login').hasClass('keepme') ) return;
+					panel.show().animate({ 'width': 832 },400,'',function(){ panel.addClass('mi_shadowed'); });
+				},
+				function(){ //when mouse leaves, hide the submenu
+					if ( $('#sw-user_login').hasClass('keepme') ) return;
+					panel.stop().css({ 'width' : 0 }).removeClass('mi_shadowed').hide();
+				}
+			);
 		});
 
 	},
@@ -220,19 +221,17 @@ shiwordAnimations = {
 			var $this = $(this);
 			var list = $this.children('.metafield_content'); // get the sub list for each metafield item
 			var parent = $this.parent();
-			list.css({ 'opacity' : 0, 'display' : 'block' });
-			var mysize = list.height(); //retrieve the height of the sub list
-			list.css({ 'opacity' : 1, 'display' : '', 'height' : 0 , 'padding-top' : 0 });
-			$this.mouseenter( function(){ //when mouse enters, slide down the sub list
-				list.animate(
-					{'height': mysize , 'padding-top': 25 },
-					200
-				);
-				parent.addClass('meta_shadowed');
-			}).mouseleave( function(){ //when mouse leaves, hide the sub list
-				list.stop().css({ 'display' : '', 'height' : 0 , 'padding-top' : 0 });
-				parent.removeClass('meta_shadowed');
-			});
+			list.css({ 'display' : 'block' }).hide();
+			$this.hoverIntent(
+				function(){ //when mouse enters, slide down the sub list
+					list.slideDown(200);
+					parent.addClass('meta_shadowed');
+				},
+				function(){ //when mouse leaves, hide the sub list
+					list.hide();
+					parent.removeClass('meta_shadowed');
+				}
+			);
 		});
 
 	},
@@ -332,7 +331,7 @@ $(document).ready(function($){ shiwordAnimations.init(shiword_l10n.script_module
  */
 
 (function($) {
-	
+
 	$.fn.sw_sticky_slider = function(options) {
 
 		// set default options
@@ -343,21 +342,22 @@ $(document).ready(function($){ shiwordAnimations.init(shiword_l10n.script_module
 
 		// Take the options that the user selects, and merge them with defaults.
 		options = $.extend(defaults, options);
-		
+
 		// for each item in the wrapped set
 		return this.each(function() {
-		
+
 			// cache "this."
 			var $this = $(this);
-			
+
 			var ready_to_slide = true;
-			
+
 			// Set the width to a really high number. Adjusting the "left" css values, so need to set positioning.
 			$this.css({
 				'width' : '50000px',
 				'position' : 'relative',
 				'display' : 'block'
 			});
+
 			// initialize
 			$this.children().css({
 				'float' : 'left',
@@ -365,33 +365,39 @@ $(document).ready(function($){ shiwordAnimations.init(shiword_l10n.script_module
 				'height' : $this.parent().css('height'),
 				'width' : $this.parent().css('width')
 			});
+
 			if ($this.children().size() > 1) {
-			
+
 				// call the slide function.
 				timId = timed_slide();
-				
+
 				//react to mouse event
-				$this.parent().mouseenter(function(){ //when mouse enters the slider
-					clearInterval(timId);
-				}).mouseleave(function(){  //when mouse leaves the slider
-					timId = timed_slide();
-				});
-				
+				$this.parent().hover(
+					function(){ //when mouse enters the slider
+						clearInterval(timId);
+					},
+					function(){  //when mouse leaves the slider
+						timId = timed_slide();
+					}
+				);
+
 				$('.sw_slider-skip.toright',$this.parent()).click(function(){
 					slide();
 				})
-				
+
 				$('.sw_slider-skip.toleft',$this.parent()).click(function(){
 					slide('toleft');
 				})
-				
+
 			}
+
 			function timed_slide() {
 				timId = setInterval(function() {
 					slide();
 				}, (options.speed + options.pause));
 				return timId;
 			} // end timed_slide
+
 			function slide( direction ) {
 				if( $this.is(':animated') ) return;
 				if ( direction == 'toleft' ) {

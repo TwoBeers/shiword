@@ -545,6 +545,7 @@ input[type=password]:focus {
 	position: absolute;
 	right: 0;
 	bottom: 50px;
+	z-index:99;
 }
 .minibutton {
 	position: relative;

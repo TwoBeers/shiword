@@ -207,6 +207,7 @@ function shiword_get_js_modules() {
 		'quickbar_panels',
 		'entry_meta',
 		'widgets_style',
+		'smooth_scroll',
 	);
 
 	if ( shiword_get_opt( 'shiword_tinynav' ) )						$modules[] = 'tinynav';
@@ -234,7 +235,7 @@ if ( !function_exists( 'shiword_scripts' ) ) {
 		//tinynav script
 		if ( shiword_get_opt( 'shiword_tinynav' ) ) wp_enqueue_script( 'shiword-tinynav', get_template_directory_uri().'/js/tinynav/tinynav.min.js', array( 'jquery' ), shiword_get_info( 'version' ), true );
 
-		wp_enqueue_script( 'shiword-script', get_template_directory_uri().'/js/animations.min.js', array( 'jquery' ), shiword_get_info( 'version' ), true ); //shiword js
+		wp_enqueue_script( 'shiword-script', get_template_directory_uri().'/js/animations.min.js', array( 'jquery', 'hoverIntent' ), shiword_get_info( 'version' ), true ); //shiword js
 		$data = array(
 			'script_modules'		=> shiword_get_js_modules(),
 			'slider_speed'			=> shiword_get_opt( 'shiword_sticky_speed' ) ? shiword_get_opt( 'shiword_sticky_speed' ) : '2500',
