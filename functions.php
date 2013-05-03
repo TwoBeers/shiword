@@ -454,90 +454,72 @@ if ( !function_exists( 'shiword_multipages' ) ) {
 function shiword_like_it(){
 	global $post;
 
-	if ( shiword_is_printpreview() ) return;
+	if ( ! shiword_get_opt( 'shiword_I_like_it' ) || shiword_is_printpreview() || ! is_singular() ) return;
 
-	if ( ! is_singular() || ! shiword_get_opt( 'shiword_I_like_it' ) ) return;
+	$enc_title			= rawurlencode( get_the_title() );
+	$enc_href			= rawurlencode( get_permalink() );
+	$enc_href_short		= rawurlencode( home_url() . '/?p=' . $post->ID );
+
+	$esc_href			= esc_url( get_permalink() );
+	$esc_title			= esc_attr( get_the_title() );
+	$esc_href_short		= esc_url( home_url() . '/?p=' . $post->ID );
 
 	$text = '';
 
 	if ( shiword_get_opt( 'shiword_I_like_it_plus1' ) )
-		$text .='<div class="sw-I-like-it-button"><div class="g-plusone" data-size="medium" data-href="' . rawurlencode( get_permalink() ) . '"></div></div>';
+		$text .='<div class="sw-I-like-it-button"><div class="g-plusone" data-size="medium" data-href="' . $esc_href . '"></div></div>';
+
 	if ( shiword_get_opt( 'shiword_I_like_it_twitter' ) )
-		$text .='<div class="sw-I-like-it-button"><div class="t-twits"><a href="https://twitter.com/share" class="twitter-share-button" data-url="' . rawurlencode( get_permalink() ) . '" data-text="' . rawurlencode( get_the_title() . ': ' . home_url() . '/?p=' . get_the_ID() ) . '" data-count="horizontal" data-counturl="' . rawurlencode( str_replace( 'https://', 'http://', get_permalink() ) ) . '"></a></div></div>';
+		$text .='<div class="sw-I-like-it-button"><div class="t-twits"><a href="//twitter.com/share" class="twitter-share-button" data-url="' . $esc_href . '" data-text="' . $esc_title . '&#10;' . $esc_href_short . '" data-count="horizontal"></a></div></div>';
+
 	if ( shiword_get_opt( 'shiword_I_like_it_facebook' ) )
-		$text .='<div class="sw-I-like-it-button"><div class="fb-like" data-href="' . rawurlencode( get_permalink() ) . '" data-send="false" data-layout="button_count" data-show-faces="false"></div></div>';
+		$text .='<div class="sw-I-like-it-button"><div class="fb-like" data-href="' . $esc_href . '" data-send="false" data-layout="button_count" data-show-faces="false"></div></div>';
+
 	if ( shiword_get_opt( 'shiword_I_like_it_linkedin' ) )
-		$text .='<div class="sw-I-like-it-button"><script type="IN/Share" data-url="' . rawurlencode( get_permalink() ) . '" data-counter="right"></script></div>';
+		$text .='<div class="sw-I-like-it-button"><script type="IN/Share" data-url="' . $esc_href . '" data-counter="right"></script></div>';
+
 	if ( shiword_get_opt( 'shiword_I_like_it_stumbleupon' ) )
-		$text .='<div class="sw-I-like-it-button"><script src="http://www.stumbleupon.com/hostedbadge.php?s=1&r=' . rawurlencode( get_permalink() ) . '"></script></div>';
+		$text .='<div class="sw-I-like-it-button"><script src="//www.stumbleupon.com/hostedbadge.php?s=1&r=' . $enc_href . '"></script></div>';
+
 	if ( shiword_get_opt( 'shiword_I_like_it_pinterest' ) && is_attachment() && wp_attachment_is_image() )
-		$text .='<div class="sw-I-like-it-button"><a href="http://pinterest.com/pin/create/button/?url=' . rawurlencode( get_permalink() ) . '&media=' . rawurlencode( wp_get_attachment_url() ) . '&description=' . rawurlencode( $post->post_excerpt ) . '" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a></div>';
+		$text .='<div class="sw-I-like-it-button"><a href="//pinterest.com/pin/create/button/?url=' . $enc_href . '&media=' . rawurlencode( wp_get_attachment_url() ) . '&description=' . rawurlencode( $post->post_excerpt ) . '" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" /></a></div>';
 
 	if ( $text ) {
-		echo '<div class="sw-I-like-it">' . apply_filters( 'shiword_filter_like_it', $text ) . '<div class="fixfloat"> </div></div>';
+		echo '<div class="sw-I-like-it">' . apply_filters( 'shiword_filter_like_it', $text ) . '</div>';
 		add_action( 'wp_footer', 'shiword_like_it_scripts' );
 	}
+
 }
 
 
-//"like" badges scripts
+// the "like" badges scripts
 if ( !function_exists( 'shiword_like_it_scripts' ) ) {
 	function shiword_like_it_scripts(){
 
-		if ( shiword_get_opt( 'shiword_I_like_it_plus1' ) ) {
-
 ?>
-	<script type="text/javascript">
-		(function() {
-			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-			po.src = '//apis.google.com/js/plusone.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-		})();
-	</script>
-<?php
 
-		}
+<?php if ( shiword_get_opt( 'shiword_I_like_it_plus1' ) ) { ?>
+	<script type="text/javascript" src="//apis.google.com/js/plusone.js"></script>
+<?php } ?>
 
-		if ( shiword_get_opt( 'shiword_I_like_it_twitter' ) ) {
-
-?>
+<?php if ( shiword_get_opt( 'shiword_I_like_it_twitter' ) ) { ?>
 	<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-<?php
+<?php } ?>
 
-		}
-
-		if ( shiword_get_opt( 'shiword_I_like_it_facebook' ) ) {
-
-?>
+<?php if ( shiword_get_opt( 'shiword_I_like_it_facebook' ) ) { ?>
 	<div id="fb-root"></div>
-	<script>
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) {return;}
-			js = d.createElement(s); js.id = id;
-			js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-	</script>
-<?php
+	<script type="text/javascript" src="//connect.facebook.net/en_US/all.js#xfbml=1"></script>
+<?php } ?>
 
-		}
-
-		if ( shiword_get_opt( 'shiword_I_like_it_linkedin' ) ) {
-
-?>
+<?php if ( shiword_get_opt( 'shiword_I_like_it_linkedin' ) ) { ?>
 	<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-<?php
+<?php } ?>
 
-		}
-
-		if ( shiword_get_opt( 'shiword_I_like_it_pinterest' ) && is_attachment() && wp_attachment_is_image() ) {
-
-?>
+<?php if ( shiword_get_opt( 'shiword_I_like_it_pinterest' ) && is_attachment() && ( wp_attachment_is_image() ) ) { ?>
 	<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
-<?php
+<?php } ?>
 
-		}
+<?php
 
 	}
 }
@@ -1645,36 +1627,36 @@ function shiword_excerpt_length( $length ) {
 
 
 // add links to admin bar
-	function shiword_admin_bar_plus() {
-		global $wp_admin_bar;
+function shiword_admin_bar_plus() {
+	global $wp_admin_bar;
 
-		if ( !current_user_can( 'edit_theme_options' ) || !is_admin_bar_showing() )
-			return;
-		$add_menu_meta = array(
-			'target'    => '_blank'
-		);
-		$wp_admin_bar->add_menu(array(
-			'id'        => 'sw_theme_options',
-			'parent'    => 'appearance',
-			'title'     => __( 'Theme Options', 'shiword' ),
-			'href'      => get_admin_url() . 'themes.php?page=tb_shiword_functions',
-			'meta'      => $add_menu_meta
-		));
+	if ( !current_user_can( 'edit_theme_options' ) || !is_admin_bar_showing() )
+		return;
+	$add_menu_meta = array(
+		'target'    => '_blank'
+	);
+	$wp_admin_bar->add_menu(array(
+		'id'        => 'sw_theme_options',
+		'parent'    => 'appearance',
+		'title'     => __( 'Theme Options', 'shiword' ),
+		'href'      => get_admin_url() . 'themes.php?page=tb_shiword_functions',
+		'meta'      => $add_menu_meta
+	));
 
-	}
+}
 
 
 // add 'quoted on' before trackback/pingback comments link
-	function shiword_add_quoted_on( $return ) {
-		global $comment;
+function shiword_add_quoted_on( $return ) {
+	global $comment;
 
-		$text = '';
-		if ( get_comment_type() != 'comment' ) {
-			$text = '<span class="sw-quotedon">' . __( 'quoted on', 'shiword' ) . ' </span>';
-		}
-		return $text . $return;
-
+	$text = '';
+	if ( get_comment_type() != 'comment' ) {
+		$text = '<span class="sw-quotedon">' . __( 'quoted on', 'shiword' ) . ' </span>';
 	}
+	return $text . $return;
+
+}
 
 
 // the real comment count
