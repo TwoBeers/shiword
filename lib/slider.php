@@ -30,8 +30,8 @@ class Shiword_Slider {
 
 		$posts_list = get_option( 'shiword_slideshow' ); //get the selected posts list
 
-		if ( in_array( $post->ID, $posts_list ) )
-			$post_states['slideshow'] = '<img class="in-slider-icon" src="' . get_template_directory_uri().'/images/inslider.png" alt="in slider" title="' . __( 'this post is added to the slideshow', 'shiword' ) . '" />';
+		if ( is_array( $posts_list ) && in_array( $post->ID, $posts_list ) )
+			$post_states['slideshow'] = '<img class="in-slider-icon" src="' . esc_url( get_template_directory_uri() . '/images/inslider.png' ) . '" alt="in slider" title="' . esc_attr__( 'this post is added to the slideshow', 'shiword' ) . '" />';
 
 		return $post_states;
 
@@ -44,7 +44,7 @@ class Shiword_Slider {
 		$posts_list = get_option( 'shiword_slideshow' ); //get the selected posts list
 
 		if ( $post->post_status == 'publish' ) {
-			if ( in_array( $post->ID, $posts_list ) )
+			if ( is_array( $posts_list ) && in_array( $post->ID, $posts_list ) )
 				$actions['slideshow'] = "<a class='remove' href='" . wp_nonce_url( "edit.php?post_type=$post->post_type&amp;slider_action=remove&amp;post=$post->ID", 'remove-from-slider_' . $post->ID ) . "'>" . __( 'Remove from Slider', 'shiword' ) . "</a>";
 			else
 				$actions['slideshow'] = "<a class='add' href='" . wp_nonce_url( "edit.php?post_type=$post->post_type&amp;slider_action=add&amp;post=$post->ID", 'add-to-slider_' . $post->ID ) . "'>" . __( 'Add to Slider', 'shiword' ) . "</a>";
@@ -171,16 +171,15 @@ class Shiword_Slider {
 <?php
 				while ($r->have_posts()) {
 					$r->the_post();
-					$post_title = get_the_title();
 					$post_author = ! shiword_get_opt( 'shiword_sticky_author' ) ? '' : '<span class="sw-slider-auth">' . sprintf( __( 'by %s', 'shiword' ), get_the_author() ) . '</span>';
 ?>
 						<div class="sss_item">
 							<div class="sss_inner_item">
-								<a href="<?php echo get_permalink(); ?>" title="<?php echo $post_title; ?>">
+								<a href="<?php echo esc_url( get_permalink() ); ?>" title="<?php the_title_attribute(); ?>">
 									<?php echo shiword_get_the_thumb( array( 'width' => 120, 'height' => 120, 'class' => 'alignleft' ) ); ?>
 								</a>
 								<div style="padding-left: 130px;">
-									<h2 class="storytitle"><a href="<?php echo get_permalink( $post->ID ); ?>" title="<?php echo $post_title; ?>"><?php echo $post_title; ?></a></h2> <?php echo $post_author; ?>
+									<h2 class="storytitle"><a href="<?php echo get_permalink( $post->ID ); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2> <?php echo $post_author; ?>
 									<div class="storycontent">
 										<?php the_excerpt(); ?>
 									</div>

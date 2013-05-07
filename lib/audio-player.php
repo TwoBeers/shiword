@@ -70,7 +70,7 @@ class Shiword_Audio_Player {
 	<small><?php echo $result[0][$key];?></small>
 	<div class="sw-player-content">
 		<audio controls="" id="sw-player-<?php echo $instance . '-' . $post->ID; ?>" class="no-player">
-			<source src="<?php echo $result[3][$key];?>" />
+			<source src="<?php echo esc_url( $result[3][$key] );?>" />
 			<span class="sw-player-notice"><?php _e( 'this audio type is not supported by your browser','shiword' ); ?></span>
 		</audio>
 	</div>

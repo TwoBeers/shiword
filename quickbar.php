@@ -84,8 +84,8 @@ if ( !function_exists( 'shiword_qbar' ) ) {
 	foreach ( $elements as $key => $element ) {
 ?>
 
-		<div class="menuitem <?php echo $key; ?>">
-			<div class="menuitem_img" style="background-image:url(<?php echo $element['image'] ?>)"></div>
+		<div class="menuitem <?php echo esc_attr( $key ); ?>">
+			<div class="menuitem_img" style="background-image:url(<?php echo esc_url( $element['image'] ); ?>)"></div>
 			<div class="menuback custom-element">
 				<div class="menu_sx">
 					<div class="mentit"><?php echo $element['title'] ?></div>
@@ -252,7 +252,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 				if ( get_query_var( 'cpage' ) ) {
 					$query_vars['cpage'] = esc_html( get_query_var( 'cpage' ) );
 				}
-				echo add_query_arg( $query_vars, get_permalink( $post->ID ) );
+				echo esc_url( add_query_arg( $query_vars, get_permalink( $post->ID ) ) );
 				?>">
 				<span class="minib_img minib_print">&nbsp;</span>
 			</a>
@@ -273,7 +273,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php // ------- RSS feed -------
 		if ( shiword_get_opt( 'shiword_navbuttons_feed' ) && $feed && $is_singular && comments_open( $post->ID ) && !post_password_required() ) { ?>
 		<div class="minibutton">
-			<a href="<?php echo get_post_comments_feed_link( $post->ID, 'rss2' ); ?> ">
+			<a href="<?php echo esc_url( get_post_comments_feed_link( $post->ID, 'rss2' ) ); ?> ">
 				<span class="minib_img minib_rss">&nbsp;</span>
 			</a>
 			<span class="nb_tooltip"><?php _e( 'feed for comments on this post', 'shiword' ); ?></span>
@@ -283,7 +283,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php // ------- Trackback -------
 		if ( shiword_get_opt( 'shiword_navbuttons_trackback' ) && $trackback && $is_singular && pings_open() ) { ?>
 		<div class="minibutton">
-			<a href="<?php echo get_trackback_url(); ?>" rel="trackback">
+			<a href="<?php echo esc_url( get_trackback_url() ); ?>" rel="trackback">
 				<span class="minib_img minib_track">&nbsp;</span>
 			</a>
 			<span class="nb_tooltip"><?php _e( 'Trackback URL','shiword' ); ?></span>
@@ -293,7 +293,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php // ------- Home -------
 		if ( shiword_get_opt( 'shiword_navbuttons_home' ) && $home ) { ?>
 		<div class="minibutton">
-			<a href="<?php echo home_url(); ?>">
+			<a href="<?php echo esc_url( home_url() ); ?>">
 				<span class="minib_img minib_home">&nbsp;</span>
 			</a>
 			<span class="nb_tooltip"><?php _e( 'Home','shiword' ); ?></span>
@@ -304,7 +304,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 		if ( $is_image ) { ?>
 		<?php if ( !empty( $post->post_parent ) ) { ?>
 			<div class="minibutton">
-				<a href="<?php echo get_permalink( $post->post_parent ); ?>" rel="gallery">
+				<a href="<?php echo esc_url( get_permalink( $post->post_parent ) ); ?>" rel="gallery">
 					<span class="minib_img minib_backtopost">&nbsp;</span>
 				</a>
 				<span class="nb_tooltip"><?php esc_attr( printf( __( 'Return to %s', 'shiword' ), get_the_title( $post->post_parent ) ) ); ?></span>
@@ -315,7 +315,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php // ------- Next post -------
 		if ( shiword_get_opt( 'shiword_navbuttons_nextprev' ) && $next_prev && $is_post && get_next_post() ) { ?>
 		<div class="minibutton">
-			<a href="<?php echo get_permalink( get_next_post() ); ?>">
+			<a href="<?php echo esc_url( get_permalink( get_next_post() ) ); ?>">
 				<span class="minib_img minib_npage">&nbsp;</span>
 			</a>
 			<span class="nb_tooltip"><?php esc_attr( printf( __( 'Next Post', 'shiword' ) . ': %s', get_the_title( get_next_post() ) ) ); ?></span>
@@ -325,7 +325,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 	<?php // ------- Previous post -------
 		if ( shiword_get_opt( 'shiword_navbuttons_nextprev' ) && $next_prev && $is_post && get_previous_post() ) { ?>
 		<div class="minibutton">
-			<a href="<?php echo get_permalink( get_previous_post() ); ?>">
+			<a href="<?php echo esc_url( get_permalink( get_previous_post() ) ); ?>">
 				<span class="minib_img minib_ppage">&nbsp;</span>
 			</a>
 			<span class="nb_tooltip"><?php esc_attr( printf( __( 'Previous Post', 'shiword' ) . ': %s', get_the_title( get_previous_post() ) ) ); ?></span>
@@ -394,7 +394,7 @@ if ( !function_exists( 'shiword_get_recentcomments' ) ) {
 					//shrink the comment author if > 20 chars
 					$com_auth = mb_strimwidth( $comment->comment_author, 0, 20, '&hellip;' );
 				}
-				$output .= '<li>'. $com_auth . ' ' . __( 'on', 'shiword' ) . ' <a href="' . get_permalink( $post->ID ) . '#comment-' . $comment->comment_ID . '">' . $post_title_short . '</a><div class="preview">';
+				$output .= '<li>'. $com_auth . ' ' . __( 'on', 'shiword' ) . ' <a href="' . esc_url( get_permalink( $post->ID ) . '#comment-' . $comment->comment_ID ) . '">' . $post_title_short . '</a><div class="preview">';
 			if ( post_password_required( $post ) ) {
 				$output .= '[' . __( 'No preview: this is a comment of a protected post', 'shiword' ) . ']';
 			} else {
@@ -426,9 +426,9 @@ if ( !function_exists( 'shiword_get_recententries' ) ) {
 				
 				$post_auth = mb_strimwidth( get_the_author(), 0, 20, '&hellip;' );
 
-				echo '<li><a href="' . get_permalink() . '" title="' . the_title_attribute( array( 'echo' => 0 ) ) . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '<div class="preview">';
+				echo '<li><a href="' . esc_url( get_permalink() ) . '" title="' . the_title_attribute( array( 'echo' => 0 ) ) . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '<div class="preview">';
 				if ( post_password_required() ) {
-					echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . get_template_directory_uri() . '/images/thumb.png" alt="thumb" title="' . $post_title_short . '" />';
+					echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . esc_url( get_template_directory_uri() . '/images/thumb.png' ) . '" alt="thumb" title="' . esc_attr( $post_title_short ) . '" />';
 					echo '[' . __('No preview: this is a protected post', 'shiword' ) . ']';
 				} else {
 					echo shiword_get_the_thumb( array( 'id' => get_the_ID(), 'width' => 50, 'height' => 50, 'class' => 'alignleft' ) );
@@ -451,8 +451,8 @@ if ( !function_exists( 'shiword_get_categories_wpr' ) ) {
 		);
 		$categories = get_categories( $args );
 		foreach( $categories as $category ) {
-			$cat_title = category_description( $category->cat_ID ) ? esc_attr( strip_tags( category_description( $category->cat_ID ) ) ) : sprintf( __( 'View all posts in %s', 'shiword' ), $category->name );
-			echo '<li><a href="' . get_category_link( $category->term_id ) . '" title="' . $cat_title . '" >' . $category->name . '</a> (' . $category->count . ')<div class="cat_preview"><div class="mentit">' . __( 'Recent Posts', 'shiword' ) . '</div><ul class="solid_ul">';
+			$cat_title = category_description( $category->cat_ID ) ? esc_attr( strip_tags( category_description( $category->cat_ID ) ) ) : esc_attr( sprintf( __( 'View all posts in %s', 'shiword' ), $category->name ) );
+			echo '<li><a href="' . esc_url( get_category_link( $category->term_id ) ) . '" title="' . $cat_title . '" >' . $category->name . '</a> (' . $category->count . ')<div class="cat_preview"><div class="mentit">' . __( 'Recent Posts', 'shiword' ) . '</div><ul class="solid_ul">';
 			$tmp_cat_ID = $category->cat_ID;
 			$post_search_args = array(
 				'numberposts' => 5,
@@ -467,7 +467,7 @@ if ( !function_exists( 'shiword_get_categories_wpr' ) ) {
 				$post_title_short = mb_strimwidth( $post_title, 0, 35, '&hellip;' );
 				//shrink the post author if > 20 chars
 				$post_auth = mb_strimwidth( get_the_author(), 0, 20, '&hellip;' );
-				echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . esc_html( $post_title ) . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '</li>';
+				echo '<li><a href="' . esc_url( get_permalink( $post->ID ) ) . '" title="' . esc_attr( $post_title ) . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '</li>';
 			}
 			echo '</ul></div></li>';
 		}

@@ -184,7 +184,7 @@ function shiword_stylesheet(){
 function shiword_ie6_style() {
 
 ?>
-	<!--[if lte IE 6]><link media="screen" rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/ie6.css" type="text/css" /><![endif]-->
+	<!--[if lte IE 6]><link media="screen" rel="stylesheet" href="<?php echo esc_url( get_template_directory_uri() . '/css/ie6.css' ); ?>" type="text/css" /><![endif]-->
 <?php
 
 }
@@ -370,9 +370,9 @@ function shiword_navigate_images() {
 	$prev_k = $key - 1;
 	$next_k = $key + 1;
 
-	$prev_image = ( isset( $attachments[ $prev_k ] ) ) ? '<a class="size-thumbnail" href="' . get_attachment_link( $attachments[ $prev_k ]->ID ) . '">&laquo; ' . wp_get_attachment_image( $attachments[ $prev_k ]->ID, array( 50, 50 ) ) . '</a>' : '';
+	$prev_image = ( isset( $attachments[ $prev_k ] ) ) ? '<a class="size-thumbnail" href="' . esc_url( get_attachment_link( $attachments[ $prev_k ]->ID ) ) . '">&laquo; ' . wp_get_attachment_image( $attachments[ $prev_k ]->ID, array( 50, 50 ) ) . '</a>' : '';
 
-	$next_image = ( isset( $attachments[ $next_k ] ) ) ? '<a class="size-thumbnail" href="' . get_attachment_link( $attachments[ $next_k ]->ID ) . '">' . wp_get_attachment_image( $attachments[ $next_k ]->ID, array( 50, 50 ) ) . ' &raquo;</a>' : '';
+	$next_image = ( isset( $attachments[ $next_k ] ) ) ? '<a class="size-thumbnail" href="' . esc_url( get_attachment_link( $attachments[ $next_k ]->ID ) ) . '">' . wp_get_attachment_image( $attachments[ $next_k ]->ID, array( 50, 50 ) ) . ' &raquo;</a>' : '';
 
 ?>
 	<div class="img-navi">
@@ -426,14 +426,14 @@ if ( !function_exists( 'shiword_multipages' ) ) {
 				<div class="metafield_content">
 					<?php
 					if ( $the_parent_page ) {
-						$the_parent_link = '<a href="' . get_permalink( $the_parent_page ) . '" title="' . esc_attr( strip_tags( get_the_title( $the_parent_page ) ) ) . '">' . get_the_title( $the_parent_page ) . '</a>';
+						$the_parent_link = '<a href="' . esc_url( get_permalink( $the_parent_page ) ) . '" title="' . esc_attr( strip_tags( get_the_title( $the_parent_page ) ) ) . '">' . get_the_title( $the_parent_page ) . '</a>';
 						echo __( 'Parent page', 'shiword' ) . ': ' . $the_parent_link ; // echoes the parent
 					}
 					if ( ( $childrens ) && ( $the_parent_page ) ) { echo ' - '; } // if parent & child, echoes the separator
 					if ( $childrens ) {
 						$the_child_list = '';
 						foreach ( $childrens as $children ) {
-							$the_child_list[] = '<a href="' . get_permalink( $children ) . '" title="' . esc_attr( strip_tags( get_the_title( $children ) ) ) . '">' . get_the_title( $children ) . '</a>';
+							$the_child_list[] = '<a href="' . esc_url( get_permalink( $children ) ) . '" title="' . esc_attr( strip_tags( get_the_title( $children ) ) ) . '">' . get_the_title( $children ) . '</a>';
 						}
 						$the_child_list = implode( ', ' , $the_child_list );
 						echo __( 'Child pages', 'shiword' ) . ': ' . $the_child_list; // echoes the childs
@@ -444,6 +444,7 @@ if ( !function_exists( 'shiword_multipages' ) ) {
 			<?php
 			$has_herarchy = true;
 		}
+
 		return $has_herarchy;
 
 	}
@@ -530,13 +531,13 @@ if ( !function_exists( 'shiword_extrainfo' ) ) {
 	function shiword_extrainfo( $args = '' ) {
 
 		$defaults = array(
-			'auth' => 1,
-			'date' => 1,
-			'comms' => 1,
-			'tags' => 1,
-			'cats' => 1,
-			'hiera' => 1,
-			'in_index' => 1
+			'auth'		=> 1,
+			'date'		=> 1,
+			'comms'		=> 1,
+			'tags'		=> 1,
+			'cats'		=> 1,
+			'hiera'		=> 1,
+			'in_index'	=> 1,
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -557,7 +558,7 @@ if ( !function_exists( 'shiword_extrainfo' ) ) {
 			<?php
 			// author
 			if ( $args['auth'] && ( shiword_get_opt( 'shiword_byauth' ) ) ) { ?>
-				<?php $post_auth = ( $args['auth'] === 1 ) ? '<a class="author vcard" href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . esc_attr( sprintf( __( 'View all posts by %s', 'shiword' ), get_the_author() ) ) . '">' . get_the_author() . '</a>' : $args['auth']; ?>
+				<?php $post_auth = ( $args['auth'] === 1 ) ? '<a class="author vcard" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '" title="' . esc_attr( sprintf( __( 'View all posts by %s', 'shiword' ), get_the_author() ) ) . '">' . get_the_author() . '</a>' : $args['auth']; ?>
 				<div class="metafield_trigger" style="left: 10px;"><?php printf( __( 'by %s', 'shiword' ), $post_auth ); ?></div>
 			<?php
 			}
@@ -628,7 +629,7 @@ if ( !function_exists( 'shiword_extrainfo' ) ) {
 		<?php
 		} else { //static xinfos ?>
 			<div class="meta">
-				<?php if ( $args['auth'] && shiword_get_opt( 'shiword_byauth' ) ) { printf( __( 'by %s', 'shiword' ), '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . esc_attr( sprintf( 'View all posts by %s', get_the_author() ) ) . '">' . get_the_author() . '</a>' ); echo '<br />'; }; ?>
+				<?php if ( $args['auth'] && shiword_get_opt( 'shiword_byauth' ) ) { printf( __( 'by %s', 'shiword' ), '<a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '" title="' . esc_attr( sprintf( 'View all posts by %s', get_the_author() ) ) . '">' . get_the_author() . '</a>' ); echo '<br />'; }; ?>
 				<?php if ( $args['date'] && shiword_get_opt( 'shiword_xinfos_date' ) ) { printf( __( 'Published on: %1$s', 'shiword' ), get_the_time( get_option( 'date_format' ) ) ) ; echo '<br />'; }?>
 				<?php if ( $args['comms'] && shiword_get_opt( 'shiword_xinfos_comm' ) ) { echo __( 'Comments', 'shiword' ) . ': '; comments_popup_link( __( 'No Comments', 'shiword' ), __( '1 Comment', 'shiword' ), __( '% Comments', 'shiword' ) ); echo '<br />'; } ?>
 				<?php if ( $args['tags'] && shiword_get_opt( 'shiword_xinfos_tag' ) ) { echo __( 'Tags', 'shiword' ) . ': '; if ( !get_the_tags() ) { _e( 'No Tags', 'shiword' ); } else { the_tags( '', ', ', '' ); }; echo '<br />';  } ?>
@@ -708,13 +709,17 @@ function shiword_search_reminder() {
 function shiword_wmode_transparent($html, $url, $attr) {
 
 	if ( strpos( $html, '<embed ' ) !== false ) {
+
 		$html = str_replace( '</param><embed', '</param><param name="wmode" value="transparent"></param><embed', $html);
 		$html = str_replace( '<embed ', '<embed wmode="transparent" ', $html);
-		return $html;
-	} elseif ( strpos ( $html, 'feature=oembed' ) !== false )
-		return str_replace( 'feature=oembed', 'feature=oembed&wmode=transparent', $html );
-	else
-		return $html;
+
+	} elseif ( strpos ( $html, 'feature=oembed' ) !== false ) {
+
+		$html = str_replace( 'feature=oembed', 'feature=oembed&wmode=transparent', $html );
+
+	}
+
+	return $html;
 
 }
 
@@ -811,6 +816,7 @@ if ( !function_exists( 'shiword_get_gallery_shortcode' ) ) {
 
 		if (   preg_match_all( '/'. $pattern .'/s', $post->post_content, $matches )
 			&& array_key_exists( 2, $matches )
+			&& is_array( $matches[2] )
 			&& in_array( 'gallery', $matches[2] ) ) // gallery shortcode is being used
 		{
 			$key = array_search( 'gallery', $matches[2] );
@@ -828,6 +834,7 @@ if ( !function_exists( 'shiword_gallery_preview' ) ) {
 
 		$attrs = shiword_get_gallery_shortcode();
 		$attrs['preview'] = true;
+
 		return shiword_gallery_shortcode( '', $attrs );
 
 	}
@@ -847,7 +854,7 @@ if ( !function_exists( 'shiword_gallery_preview_walker' ) ) {
 		if ( empty( $attachments ) )
 			return false;
 
-		$permalink = get_permalink( $id );
+		$permalink = esc_url( get_permalink( $id ) );
 
 		$images_count = count( $attachments );
 		$first_image = array_shift( $attachments );
@@ -855,52 +862,37 @@ if ( !function_exists( 'shiword_gallery_preview_walker' ) ) {
 		if ( ( shiword_get_opt( 'shiword_xcont' ) == 1 ) || is_archive() || is_search() ) { // compact view
 
 			$first_image_data = wp_get_attachment_image_src( $first_image->ID, 'thumbnail' );
-			$gallery_thumb_width = min( get_option('thumbnail_size_w'), $first_image_data[1] );
-
-?>
-	<div class="gallery gallery-preview">
-
-		<div class="gallery-item img-caption" style="width: <?php echo $gallery_thumb_width; ?>px;">
-			<a href="<?php echo $permalink; ?>"><?php echo wp_get_attachment_image( $first_image->ID, 'thumbnail' ); ?></a>
-		</div><!-- .gallery-thumb -->
-
-		<p class="info">
-			<em><?php printf( _n( 'This gallery contains <a %1$s><strong>%2$s</strong> image</a>', 'This gallery contains <a %1$s><strong>%2$s</strong> images</a>', $images_count, 'shiword' ),
-				'href="' . get_permalink() . '" title="' . __( 'View gallery', 'shiword' ) . '" rel="bookmark"',
-				number_format_i18n( $images_count )
-				); ?></em>
-		</p>
-
-	</div>
-<?php
+			$first_image_tag = wp_get_attachment_image( $first_image->ID, 'thumbnail' );
+			$gallery_thumb_width = esc_attr( min( get_option('thumbnail_size_w'), $first_image_data[1] ) );
+			$other_imgs = array();
+			$other_imgs_width = 0;
 
 		} else { // normal view
 
 			$first_image_data = wp_get_attachment_image_src( $first_image->ID, 'medium' );
-			$gallery_thumb_width = min( get_option('medium_size_w'), $first_image_data[1] );
+			$first_image_tag = wp_get_attachment_image( $first_image->ID, 'medium' );
+			$gallery_thumb_width = esc_attr( min( get_option('medium_size_w'), $first_image_data[1] ) );
+			$other_imgs = array_slice( $attachments, 0, 4 );
+			$other_imgs_width = floor( get_option('thumbnail_size_w')/2 );
+
+		}
 
 ?>
 	<div class="gallery gallery-preview">
 
 		<div class="gallery-item img-caption" style="width: <?php echo $gallery_thumb_width; ?>px;">
-			<a href="<?php echo $permalink; ?>"><?php echo wp_get_attachment_image( $first_image->ID, 'medium' ); ?></a>
+			<a href="<?php echo $permalink; ?>"><?php echo $first_image_tag; ?></a>
 		</div><!-- .gallery-thumb -->
 
-		<?php 
-			$other_imgs = array_slice( $attachments, 0, 4 );
-			$other_imgs_width = floor( get_option('thumbnail_size_w')/2 );
-			foreach ($other_imgs as $image) {
-				?>
-				<div class="gallery-item img-caption" style="width: <?php echo $other_imgs_width; ?>px;">
-					<a href="<?php echo $permalink; ?>"><?php echo wp_get_attachment_image( $image->ID, array( $other_imgs_width, $other_imgs_width ) ); ?></a>
-				</div>
-				<?php
-			}
-		?>
+		<?php foreach ($other_imgs as $image) { ?>
+			<div class="gallery-item img-caption" style="width: <?php echo $other_imgs_width; ?>px;">
+				<a href="<?php echo $permalink; ?>"><?php echo wp_get_attachment_image( $image->ID, array( $other_imgs_width, $other_imgs_width ) ); ?></a>
+			</div>
+		<?php } ?>
 
 		<p class="info">
 			<em><?php printf( _n( 'This gallery contains <a %1$s><strong>%2$s</strong> image</a>', 'This gallery contains <a %1$s><strong>%2$s</strong> images</a>', $images_count, 'shiword' ),
-				'href="' . get_permalink() . '" title="' . __( 'View gallery', 'shiword' ) . '" rel="bookmark"',
+				'href="' . $permalink . '" title="' . __( 'View gallery', 'shiword' ) . '" rel="bookmark"',
 				number_format_i18n( $images_count )
 				); ?></em>
 		</p>
@@ -908,9 +900,8 @@ if ( !function_exists( 'shiword_gallery_preview_walker' ) ) {
 	</div>
 <?php
 
-		}
-
 		return true;
+
 	}
 }
 
@@ -920,12 +911,12 @@ function shiword_get_the_thumb( $args = '' ) {
 	global $post;
 
 	$defaults = array(
-		'id' => $post->ID,
-		'width' => shiword_get_opt( 'shiword_pthumb_size' ),
-		'height' => shiword_get_opt( 'shiword_pthumb_size' ),
-		'class' => '',
-		'linked' => 0,
-		'onlyformat' => 0
+		'id'			=> $post->ID,
+		'width'			=> shiword_get_opt( 'shiword_pthumb_size' ),
+		'height'		=> shiword_get_opt( 'shiword_pthumb_size' ),
+		'class'			=> '',
+		'linked'		=> 0,
+		'onlyformat'	=> 0,
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -938,11 +929,11 @@ function shiword_get_the_thumb( $args = '' ) {
 		} else {
 			$format = 'thumb';
 		}
-		$output = '<img class="' . $args['class'] . ' wp-post-image" width="' . $args['width'] . '" height="' . $args['height'] . '" alt="thumb" src="' . get_template_directory_uri() . '/images/thumbs/' . $format . '.png" />';
+		$output = '<img class="' . esc_attr( $args['class'] ) . ' wp-post-image" width="' . esc_attr( $args['width'] ) . '" height="' . esc_attr( $args['height'] ) . '" alt="thumb" src="' . esc_url( get_template_directory_uri() . '/images/thumbs/' . $format . '.png' ) . '" />';
 	}
 
 	if ( $args['linked'] )
-		$output = '<a href="' . get_permalink( $args['id'] ) . '" rel="bookmark">' . $output . '</a>';
+		$output = '<a href="' . esc_url( get_permalink( $args['id'] ) ) . '" rel="bookmark">' . $output . '</a>';
 
 	return apply_filters( 'shiword_filter_get_the_thumb', $output );
 
@@ -966,12 +957,12 @@ if ( !function_exists( 'shiword_post_title' ) ) {
 		global $post;
 
 		$defaults = array(
-			'alternative' => '',
-			'featured' => 0,
-			'href' => get_permalink(),
-			'target' => '',
-			'title' => the_title_attribute( array( 'echo' => 0 ) ),
-			'extra' => ''
+			'alternative'	=> '',
+			'featured'		=> 0,
+			'href'			=> get_permalink(),
+			'target'		=> '',
+			'title'			=> the_title_attribute( array( 'echo' => 0 ) ),
+			'extra'			=> '',
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -988,14 +979,14 @@ if ( !function_exists( 'shiword_post_title' ) ) {
 		else
 			$miniicon = apply_filters( 'shiword_filter_mini_icon', shiword_get_the_thumb( array( 'width' => 32, 'height' => 32, 'class' => 'alignleft', 'linked' => 1, 'onlyformat' => 1 ) ) );
 
-		if ( $post_title ) $post_title = '<h2 class="storytitle entry-title">' . $miniicon . $args['extra'] . '<a title="' . esc_attr( $args['title'] ) . '" href="' . $args['href'] . '"' . $link_target . ' rel="bookmark">' . $post_title . '</a></h2>';
+		if ( $post_title ) $post_title = '<h2 class="storytitle entry-title">' . $miniicon . $args['extra'] . '<a title="' . esc_attr( $args['title'] ) . '" href="' . esc_url( $args['href']) . '"' . esc_attr( $link_target ) . ' rel="bookmark">' . $post_title . '</a></h2>';
 
 		shiword_hook_post_title_before();
 
 		if ( $has_featured_image ) {
 			?>
 			<div class="storycontent sd-post-title">
-				<img src="<?php echo $image[0]; ?>" width="<?php echo $image[1]; ?>" height="<?php echo $image[2]; ?>">
+				<img src="<?php echo esc_url( $image[0] ); ?>" width="<?php echo esc_attr( $image[1] ); ?>" height="<?php echo esc_attr( $image[2] ); ?>">
 				<?php echo $post_title; ?>
 			</div>
 			<?php
@@ -1015,13 +1006,13 @@ if ( !function_exists( 'shiword_post_details' ) ) {
 		global $post;
 
 		$defaults = array(
-			'author' => 1,
-			'date' => 1,
-			'tags' => 1,
-			'categories' => 1,
-			'avatar_size' => 48,
-			'featured' => 0,
-			'echo' => 1
+			'author'		=> 1,
+			'date'			=> 1,
+			'tags'			=> 1,
+			'categories'	=> 1,
+			'avatar_size'	=> 48,
+			'featured'		=> 0,
+			'echo'			=> 1,
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -1039,12 +1030,13 @@ if ( !function_exists( 'shiword_post_details' ) ) {
 		if ( $args['categories'] )
 			$output .= '<div class="tb-post-details"><span class="post-details-cats">' . __( 'Categories', 'shiword' ) . ': </span>' . get_the_category_list( $tax_separator ) . '</div>';
 
-		if ( $args['tags'] )
+		if ( $args['tags'] ) {
 			$tags = get_the_tags() ? get_the_tag_list( '</span>', $tax_separator, '' ) : __( 'No Tags', 'shiword' ) . '</span>';
 			$output .= '<div class="tb-post-details"><span class="post-details-tags">' . __( 'Tags', 'shiword' ) . ': ' . $tags . '</div>';
+		}
 
 		if ( $args['date'] )
-			$output .= '<div class="tb-post-details"><span class="post-details-date">' . __( 'Published on', 'shiword' ) . ': </span><a href="' . get_day_link(get_the_time('Y'), get_the_time('m'), get_the_time('d')) . '">' . get_the_time( get_option( 'date_format' ) ) . '</a></div>';
+			$output .= '<div class="tb-post-details"><span class="post-details-date">' . __( 'Published on', 'shiword' ) . ': </span><a href="' . esc_url( get_day_link( get_the_time( 'Y' ), get_the_time( 'm' ), get_the_time( 'd' ) ) ) . '">' . get_the_time( get_option( 'date_format' ) ) . '</a></div>';
 
 		if ( ! $args['echo'] )
 			return $output;
@@ -1066,11 +1058,11 @@ function shiword_author_badge( $author = '', $size ) {
 
 	$description = get_the_author_meta( 'description', $author ); // bio
 
-	$author_link = get_author_posts_url($author); // link to author posts
+	$author_link = esc_url( get_author_posts_url($author) ); // link to author posts
 
 	$author_net = ''; // author social networks
 	foreach ( array( 'twitter' => 'Twitter', 'facebook' => 'Facebook', 'googleplus' => 'Google+' ) as $s_key => $s_name ) {
-		if ( get_the_author_meta( $s_key, $author ) ) $author_net .= '<a target="_blank" class="url" title="' . esc_attr( sprintf( __('Follow %s on %s', 'shiword'), $name, $s_name ) ) . '" href="'.get_the_author_meta( $s_key, $author ).'"><img alt="' . $s_key . '" class="social-icon" width="24" height="24" src="' . get_template_directory_uri() . '/images/follow/' . $s_key . '.png" /></a>';
+		if ( get_the_author_meta( $s_key, $author ) ) $author_net .= '<a target="_blank" class="url" title="' . esc_attr( sprintf( __('Follow %s on %s', 'shiword'), $name, $s_name ) ) . '" href="' . esc_url( get_the_author_meta( $s_key, $author ) ) . '"><img alt="' . $s_key . '" class="social-icon" width="24" height="24" src="' . esc_url( get_template_directory_uri() . '/images/follow/' . $s_key . '.png' ) . '" /></a>';
 	}
 
 	$output = '<li class="author-avatar">' . $avatar . '</li>';
@@ -1089,21 +1081,21 @@ function shiword_author_badge( $author = '', $size ) {
 if ( !function_exists( 'shiword_theme_credits' ) ) {
 	function shiword_theme_credits() {
 
-	?>
-		&copy; <?php echo date( 'Y' ); ?> <strong><?php bloginfo( 'name' ); ?></strong>
+?>
+	&copy; <?php echo date( 'Y' ); ?> <strong><?php bloginfo( 'name' ); ?></strong>
 
-		<?php shiword_hook_change_view(); ?>
+	<?php shiword_hook_change_view(); ?>
 
-		<?php if ( shiword_get_opt( 'shiword_tbcred' ) ) { ?>
-			<a href="http://www.twobeers.net/" title="Shiword theme<?php echo ' ' . esc_attr( shiword_get_info( 'version' ) ); ?> by TwoBeers Crew">
-				<img alt="twobeers.net" src="<?php echo esc_url( get_template_directory_uri() . '/images/tb_micrologo.png' ); ?>" />
-			</a>
-			<a href="http://wordpress.org/" title="<?php esc_attr_e( 'Powered by WordPress', 'shiword' ); ?>">
-				<img alt="WordPress" src="<?php echo esc_url( get_template_directory_uri() . '/images/wp_micrologo.png' ); ?>" />
-			</a>
-		<?php } ?>
+	<?php if ( shiword_get_opt( 'shiword_tbcred' ) ) { ?>
+		<a href="http://www.twobeers.net/" title="Shiword theme<?php echo ' ' . esc_attr( shiword_get_info( 'version' ) ); ?> by TwoBeers Crew">
+			<img alt="twobeers.net" src="<?php echo esc_url( get_template_directory_uri() . '/images/tb_micrologo.png' ); ?>" />
+		</a>
+		<a href="http://wordpress.org/" title="<?php esc_attr_e( 'Powered by WordPress', 'shiword' ); ?>">
+			<img alt="WordPress" src="<?php echo esc_url( get_template_directory_uri() . '/images/wp_micrologo.png' ); ?>" />
+		</a>
+	<?php } ?>
  <?php
-	
+
 	}
 }
 
@@ -1187,14 +1179,14 @@ if ( !function_exists( 'shiword_site_title' ) ) {
 	function shiword_site_title() {
 
 		if ( shiword_get_opt( 'shiword_site_title' ) )
-			echo '<h1><a href="' . home_url() . '/">' . get_bloginfo( 'name' ) . '</a></h1>';
+			echo '<h1><a href="' . esc_url( home_url() ) . '/">' . get_bloginfo( 'name' ) . '</a></h1>';
 
 		if ( shiword_get_opt( 'shiword_site_description' ) )
 			echo '<div class="description">' . get_bloginfo( 'description' ) . '</div>';
 
 ?>
 	<div id="rss_imglink" class="minibutton">
-		<a href="<?php echo apply_filters( 'shiword_filter_rss_service', get_bloginfo( 'rss2_url' ) ); ?>" title="<?php esc_attr_e( 'Syndicate this site using RSS 2.0', 'shiword' ); ?>">
+		<a href="<?php echo esc_url( apply_filters( 'shiword_filter_rss_service', get_bloginfo( 'rss2_url' ) ) ); ?>" title="<?php esc_attr_e( 'Syndicate this site using RSS 2.0', 'shiword' ); ?>">
 			<span class="minib_img">&nbsp;</span>
 		</a>
 	</div>
@@ -1207,10 +1199,23 @@ if ( !function_exists( 'shiword_site_title' ) ) {
 //print some microdata tags
 function shiword_microdata() {
 
-	if ( is_singular() ) { ?>
-		<meta itemprop="name" content="<?php the_title(); ?>">
-		<?php if( has_post_thumbnail() ) { $image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id() ); ?><meta itemprop="image" content="<?php echo $image_attributes[0]; ?>"><?php } ?>
-	<?php }
+	if ( ! is_singular() ) return;
+
+	$name = the_title_attribute( array( 'echo' => false ) );
+
+?>
+	<meta itemprop="name" content="<?php echo $name; ?>">
+<?php
+
+	if( has_post_thumbnail() ) {
+		$image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id() );
+		$image = esc_url( $image_attributes[0] );
+
+?>
+	<meta itemprop="image" content="<?php echo $image; ?>">
+<?php
+
+	}
 
 }
 
@@ -1224,11 +1229,11 @@ function shiword_main_menu() {
 	<div id="sw-pri-menu" class="sw-menu">
 		<?php
 			wp_nav_menu( array(
-				'container' => false,
-				'menu_id' => 'mainmenu',
-				'menu_class' => 'nav-menu',
-				'fallback_cb' => 'shiword_pages_menu',
-				'theme_location' => 'primary'
+				'container'			=> false,
+				'menu_id'			=> 'mainmenu',
+				'menu_class'		=> 'nav-menu',
+				'fallback_cb'		=> 'shiword_pages_menu',
+				'theme_location'	=> 'primary'
 			) );
 		?>
 	</div>
@@ -1259,11 +1264,11 @@ if ( !function_exists( 'shiword_pages_menu' ) ) {
 function shiword_add_home_link( $items = '', $args = null ) {
 
 	$defaults = array(
-		'theme_location' => 'undefined',
-		'before' => '',
-		'after' => '',
-		'link_before' => '',
-		'link_after' => '',
+		'theme_location'	=> 'undefined',
+		'before'			=> '',
+		'after'				=> '',
+		'link_before'		=> '',
+		'link_after'		=> '',
 	);
 
 	$args = wp_parse_args( $args, $defaults );
@@ -1277,7 +1282,7 @@ function shiword_add_home_link( $items = '', $args = null ) {
 		$homeMenuItem =
 				'<li class="menu-item navhome' . $class . '">' .
 				$args['before'] .
-				'<a href="' . home_url( '/' ) . '" title="' . esc_attr__( 'Home', 'shiword' ) . '">' .
+				'<a href="' . esc_url( home_url( '/' ) ) . '" title="' . esc_attr__( 'Home', 'shiword' ) . '">' .
 				$args['link_before'] . __( 'Home', 'shiword' ) . $args['link_after'] .
 				'</a>' .
 				$args['after'] .
@@ -1327,30 +1332,30 @@ if ( !function_exists( 'shiword_setup' ) ) {
 		// Default custom headers packaged with the theme. %s is a placeholder for the theme template directory URI.
 		register_default_headers( array(
 			'green' => array(
-				'url' => '%s/images/headers/green.jpg',
-				'thumbnail_url' => '%s/images/headers/green_thumbnail.jpg',
-				'description' => 'green'
+				'url'			=> '%s/images/headers/green.jpg',
+				'thumbnail_url'	=> '%s/images/headers/green_thumbnail.jpg',
+				'description'	=> 'green'
 			),
 			'black' => array(
-				'url' => '%s/images/headers/black.jpg',
-				'thumbnail_url' => '%s/images/headers/black_thumbnail.jpg',
-				'description' => 'black'
+				'url'			=> '%s/images/headers/black.jpg',
+				'thumbnail_url'	=> '%s/images/headers/black_thumbnail.jpg',
+				'description'	=> 'black'
 			),
 			'brown' => array(
-				'url' => '%s/images/headers/brown.jpg',
-				'thumbnail_url' => '%s/images/headers/brown_thumbnail.jpg',
-				'description' => 'brown'
+				'url'			=> '%s/images/headers/brown.jpg',
+				'thumbnail_url'	=> '%s/images/headers/brown_thumbnail.jpg',
+				'description'	=> 'brown'
 			),
 			'blue' => array(
-				'url' => '%s/images/headers/blue.jpg',
-				'thumbnail_url' => '%s/images/headers/blue_thumbnail.jpg',
-				'description' => 'blue'
+				'url'			=> '%s/images/headers/blue.jpg',
+				'thumbnail_url'	=> '%s/images/headers/blue_thumbnail.jpg',
+				'description'	=> 'blue'
 			),
 			'butterflies' => array(
-				'url' => '%s/images/headers/butterflies.gif',
-				'thumbnail_url' => '%s/images/headers/butterflies_thumbnail.jpg',
-				'description' => 'butterflies'
-			)
+				'url'			=> '%s/images/headers/butterflies.gif',
+				'thumbnail_url'	=> '%s/images/headers/butterflies_thumbnail.jpg',
+				'description'	=> 'butterflies'
+			),
 		) );
 
 	}
@@ -1387,7 +1392,7 @@ if ( !function_exists( 'shiword_setup_custom_header' ) ) {
 if ( !function_exists( 'shiword_admin_header_style' ) ) {
 	function shiword_admin_header_style() {
 
-		echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/admin-custom_header.css" />' . "\n";
+		echo '<link rel="stylesheet" type="text/css" href="' . esc_url( get_template_directory_uri() . '/css/admin-custom_header.css' ) . '" />' . "\n";
 
 	}
 }
@@ -1480,9 +1485,6 @@ if ( !function_exists( 'shiword_header_style' ) ) {
 			color: <?php echo $shiword_colors['device_textcolor']; ?>;
 		}
 		.menuitem:hover .menuitem_img,
-		.minib_img:hover {
-			/* border-color: <?php echo $shiword_colors['device_button']; ?>; */
-		}
 		a {
 			color : <?php echo $shiword_colors['main3']; ?>;
 		}
@@ -1632,16 +1634,17 @@ function shiword_admin_bar_plus() {
 
 	if ( !current_user_can( 'edit_theme_options' ) || !is_admin_bar_showing() )
 		return;
+
 	$add_menu_meta = array(
-		'target'    => '_blank'
+		'target'	=> '_blank'
 	);
-	$wp_admin_bar->add_menu(array(
-		'id'        => 'sw_theme_options',
-		'parent'    => 'appearance',
-		'title'     => __( 'Theme Options', 'shiword' ),
-		'href'      => get_admin_url() . 'themes.php?page=tb_shiword_functions',
-		'meta'      => $add_menu_meta
-	));
+	$wp_admin_bar->add_menu( array(
+		'id'		=> 'sw_theme_options',
+		'parent'	=> 'appearance',
+		'title'		=> __( 'Theme Options', 'shiword' ),
+		'href'		=> get_admin_url() . 'themes.php?page=tb_shiword_functions',
+		'meta'		=> $add_menu_meta,
+	) );
 
 }
 
@@ -1654,6 +1657,7 @@ function shiword_add_quoted_on( $return ) {
 	if ( get_comment_type() != 'comment' ) {
 		$text = '<span class="sw-quotedon">' . __( 'quoted on', 'shiword' ) . ' </span>';
 	}
+
 	return $text . $return;
 
 }
@@ -1665,10 +1669,10 @@ function shiword_comment_count( $count ) {
 	if ( ! is_admin() ) {
 		global $id;
 		$comments_by_type = &separate_comments(get_comments( 'status=approve&post_id=' . $id));
-		return count($comments_by_type['comment']);
-	} else {
-		return $count;
+		$count = count($comments_by_type['comment']);
 	}
+
+	return $count;
 
 } 
 
@@ -1678,6 +1682,7 @@ if ( !function_exists( 'shiword_is_post_format_available' ) ) {
 	function shiword_is_post_format_available( $id ) {
 
 		$is_available = get_post_format( $id ) && shiword_get_opt( 'shiword_postformat_' . get_post_format( $id ) );
+
 		return $is_available;
 
 	}
@@ -1743,18 +1748,19 @@ function shiword_quote_content( $content ) {
 	}
 
 	return $content;
+
 }
 
 
 // custom image caption
 function shiword_img_caption_shortcode( $deprecated, $attr, $content = null) {
 
-	extract(shortcode_atts(array(
-		'id'	=> '',
-		'align'	=> 'alignnone',
-		'width'	=> '',
-		'caption' => ''
-	), $attr));
+	extract( shortcode_atts( array(
+		'id'		=> '',
+		'align'		=> 'alignnone',
+		'width'		=> '',
+		'caption'	=> '',
+	), $attr) );
 
 	if ( 1 > (int) $width || empty($caption) )
 		return $content;
@@ -1888,9 +1894,10 @@ function shiword_title_tags_filter( $title = '', $id = 0 ) {
 		if ( ! shiword_get_opt( 'shiword_blank_title' ) ) return '';
 		$postdata = array( get_post_format( $id )? get_post_format_string( get_post_format( $id ) ): __( 'post', 'shiword' ), get_the_time( get_option( 'date_format' ), $id ), $id );
 		$codes = array( '%f', '%d', '%n' );
-		return str_replace( $codes, $postdata, shiword_get_opt( 'shiword_blank_title' ) );
-	} else
-		return $title;
+		$title = str_replace( $codes, $postdata, shiword_get_opt( 'shiword_blank_title' ) );
+	}
+
+	return $title;
 
 }
 
@@ -1901,8 +1908,9 @@ function shiword_new_excerpt_more( $more ) {
 
 	if ( is_admin() ) return $more;
 	if ( $text = shiword_get_opt( 'shiword_xcont_more_txt' ) ) {
-		$more = shiword_get_opt( 'shiword_xcont_more_link' ) ? '<a href="' . get_permalink() . '">' . $text . '</a>' : $text;
+		$more = shiword_get_opt( 'shiword_xcont_more_link' ) ? '<a href="' . esc_url( get_permalink() ) . '">' . $text . '</a>' : $text;
 	}
+
 	return $more;
 
 }
@@ -1915,6 +1923,7 @@ function shiword_more_link( $more_link, $more_link_text = '' ) {
 		$more_text = str_replace ( '%t', get_the_title(), shiword_get_opt( 'shiword_more_tag' ) );
 		$more_link = str_replace( $more_link_text, $more_text, $more_link );
 	}
+
 	return $more_link;
 
 }
@@ -1942,6 +1951,7 @@ function shiword_filter_wp_title( $title, $sep = '&laquo' ) {
 		$title = "$title $sep " . sprintf( __( 'Page %s', 'shiword' ), max( $paged, $page ) );
 
 	return $title;
+
 }
 
 
@@ -1960,9 +1970,10 @@ function shiword_filter_body_class( $classes ) {
 
 // Custom form fields for the comment form
 function shiword_comments_form_fields( $fields ) {
-	$commenter	=	wp_get_current_commenter();
-	$req		=	get_option( 'require_name_email' );
-	$aria_req	=	( $req ? " aria-required='true'" : '' );
+
+	$commenter	= wp_get_current_commenter();
+	$req		= get_option( 'require_name_email' );
+	$aria_req	= ( $req ? " aria-required='true'" : '' );
 
 	$custom_fields =  array(
 		'author' => '<p class="comment-form-author">' . '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" aria-required="true" />' .
@@ -1972,7 +1983,9 @@ function shiword_comments_form_fields( $fields ) {
 		'url'    => '<p class="comment-form-url">' . '<input id="url" name="url" type="text" value="' . esc_url( $commenter['comment_author_url'] ) . '" size="30" />' .
 					'<label for="url">' . __( 'Website', 'shiword' ) . '</label>' .'</p>',
 	);
+
 	return $custom_fields;
+
 }
 
 
@@ -1982,7 +1995,7 @@ function shiword_comment_form_defaults( $defaults ) {
 
 	$defaults['label_submit']	= __( 'Say It!', 'shiword' );
 	$defaults['comment_field']	= '<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="7" aria-required="true"></textarea></p>';
-	$defaults['logged_in_as']	= '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>.', 'shiword' ), admin_url( 'profile.php' ), $user_identity ) . '</p>';
+	$defaults['logged_in_as']	= '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>.', 'shiword' ), esc_url( admin_url( 'profile.php' ) ), $user_identity ) . '</p>';
 
 	return $defaults;
 
@@ -2032,21 +2045,24 @@ function shiword_add_menu_parent_class( $items ) {
 	}
 
 	foreach ( $items as $item ) {
-		if ( in_array( $item->ID, $parents ) ) {
+		if ( is_array( $parents ) && in_array( $item->ID, $parents ) ) {
 			if ( ! $item->menu_item_parent )
 				$item->classes[] = 'menu-item-parent'; 
 		}
 	}
 
-	return $items;    
+	return $items;
+
 }
 
 
 // wrap the categories count with a span
 function shiword_wrap_categories_count( $output ) {
+
 	$pattern = '/<\/a>\s(\(\d+\))/i';
 	$replacement = ' <span class="details">$1</span></a>';
 	return preg_replace( $pattern, $replacement, $output );
+
 }
 
 
@@ -2090,6 +2106,7 @@ if ( !function_exists( 'mb_strimwidth' ) ) {
 		} else {
 			$ret_string = $string;
 		}
+
 		return $ret_string;
 
 	}
