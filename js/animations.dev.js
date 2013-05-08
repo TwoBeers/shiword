@@ -62,6 +62,10 @@ shiwordAnimations = {
 					this.slider();
 					break;
 
+				case 'resize_video':
+					this.resize_video();
+					break;
+
 				case 'tinynav':
 					this.tinynav();
 					break;
@@ -308,6 +312,30 @@ shiwordAnimations = {
 			speed : parseInt(shiword_l10n.slider_speed),
 			pause : parseInt(shiword_l10n.slider_pause)
 		})
+	},
+
+	resize_video : function() {
+		// https://github.com/chriscoyier/Fluid-Width-Video
+		var $fluidEl = $("#maincontent").find(".storycontent");
+		var $allVideos = $("iframe[src^='http://player.vimeo.com'], iframe[src^='http://www.youtube.com'], object, embed",$fluidEl);
+
+		$allVideos.each(function() {
+			$(this)
+				// jQuery .data does not work on object/embed elements
+				.attr('data-aspectRatio', this.height / this.width)
+				.removeAttr('height')
+				.removeAttr('width');
+		});
+
+		$(window).resize(function() {
+			var newWidth = $fluidEl.width();
+			$allVideos.each(function() {
+				var $el = $(this);
+				$el
+					.width(newWidth)
+					.height(newWidth * $el.attr('data-aspectRatio'));
+			});
+		}).resize();
 	},
 
 	tinynav : function() {

@@ -201,20 +201,20 @@ function shiword_deregister_styles() {
 // get js modules
 function shiword_get_js_modules() {
 
-	$modules = array(
-		'main_menu',
-		'navigation_buttons',
-		'quickbar_panels',
-		'entry_meta',
-		'widgets_style',
-		'smooth_scroll',
-	);
+	$modules[] = 'widgets_style';
 
-	if ( shiword_get_opt( 'shiword_tinynav' ) )						$modules[] = 'tinynav';
-	if ( shiword_get_opt( 'shiword_sticky' ) )						$modules[] = 'slider';
-	if ( shiword_get_opt( 'shiword_qbar_minilogin' ) )				$modules[] = 'minilogin';
-	if ( shiword_get_opt( 'shiword_thickbox' ) )					$modules[] = 'thickbox';
-	if ( shiword_get_opt( 'shiword_quotethis' ) && is_singular() )	$modules[] = 'quote_this';
+	if ( shiword_get_opt( 'shiword_basic_animation_main_menu' ) )			$modules[] = 'main_menu';
+	if ( shiword_get_opt( 'shiword_basic_animation_navigation_buttons' ) )	$modules[] = 'navigation_buttons';
+	if ( shiword_get_opt( 'shiword_basic_animation_quickbar_panels' ) )		$modules[] = 'quickbar_panels';
+	if ( shiword_get_opt( 'shiword_basic_animation_entry_meta' ) )			$modules[] = 'entry_meta';
+	if ( shiword_get_opt( 'shiword_basic_animation_smooth_scroll' ) )		$modules[] = 'smooth_scroll';
+	if ( shiword_get_opt( 'shiword_basic_animation_resize_video' ) )		$modules[] = 'resize_video';
+
+	if ( shiword_get_opt( 'shiword_tinynav' ) )								$modules[] = 'tinynav';
+	if ( shiword_get_opt( 'shiword_sticky' ) )								$modules[] = 'slider';
+	if ( shiword_get_opt( 'shiword_qbar_minilogin' ) )						$modules[] = 'minilogin';
+	if ( shiword_get_opt( 'shiword_thickbox' ) )							$modules[] = 'thickbox';
+	if ( shiword_get_opt( 'shiword_quotethis' ) && is_singular() )			$modules[] = 'quote_this';
 
 	$modules = implode( ',', $modules);
 
@@ -410,11 +410,11 @@ if ( !function_exists( 'shiword_multipages' ) ) {
 		global $post;
 
 		$args = array(
-			'post_type' => 'page',
-			'post_parent' => $post->ID,
-			'order' => 'ASC',
-			'orderby' => 'menu_order',
-			'numberposts' => 0
+			'post_type'		=> 'page',
+			'post_parent'	=> $post->ID,
+			'order'			=> 'ASC',
+			'orderby'		=> 'menu_order',
+			'numberposts'	=> 0,
 			);
 		$childrens = get_posts( $args ); // retrieve the child pages
 		$the_parent_page = $post->post_parent; // retrieve the parent page
@@ -493,32 +493,42 @@ function shiword_like_it(){
 }
 
 
-// the "like" badges scripts
+// the "like" badges scripts ( async load http://css-tricks.com/thinking-async/ )
 if ( !function_exists( 'shiword_like_it_scripts' ) ) {
 	function shiword_like_it_scripts(){
 
 ?>
-
-<?php if ( shiword_get_opt( 'shiword_I_like_it_plus1' ) ) { ?>
-	<script type="text/javascript" src="//apis.google.com/js/plusone.js"></script>
-<?php } ?>
-
-<?php if ( shiword_get_opt( 'shiword_I_like_it_twitter' ) ) { ?>
-	<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-<?php } ?>
-
-<?php if ( shiword_get_opt( 'shiword_I_like_it_facebook' ) ) { ?>
 	<div id="fb-root"></div>
-	<script type="text/javascript" src="//connect.facebook.net/en_US/all.js#xfbml=1"></script>
-<?php } ?>
+	<script type="text/javascript">
+		(function(doc, script) {
+			var js, 
+				fjs = doc.getElementsByTagName(script)[0],
+				add = function(url, id) {
+					if (doc.getElementById(id)) {return;}
+					js = doc.createElement(script);
+					js.src = url;
+					id && (js.id = id);
+					fjs.parentNode.insertBefore(js, fjs);
+				};
 
-<?php if ( shiword_get_opt( 'shiword_I_like_it_linkedin' ) ) { ?>
-	<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-<?php } ?>
+			<?php
+				if ( shiword_get_opt( 'shiword_I_like_it_plus1' ) )
+					echo "add( '//apis.google.com/js/plusone.js' );\n";
 
-<?php if ( shiword_get_opt( 'shiword_I_like_it_pinterest' ) && is_attachment() && ( wp_attachment_is_image() ) ) { ?>
-	<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
-<?php } ?>
+				if ( shiword_get_opt( 'shiword_I_like_it_twitter' ) ) 
+					echo "add( '//platform.twitter.com/widgets.js', 'twitter-wjs' );\n";
+
+				if ( shiword_get_opt( 'shiword_I_like_it_facebook' ) ) 
+					echo "add( '//connect.facebook.net/en_US/all.js#xfbml=1', 'facebook-jssdk' );\n";
+
+				if ( shiword_get_opt( 'shiword_I_like_it_linkedin' ) ) 
+					echo "add( '//platform.linkedin.com/in.js' );\n";
+
+				if ( shiword_get_opt( 'shiword_I_like_it_pinterest' ) && is_attachment() && ( wp_attachment_is_image() ) ) 
+					echo "add( '//assets.pinterest.com/js/pinit.js' );\n";
+			?>
+		}(document, 'script'));
+	</script>
 
 <?php
 
@@ -2071,12 +2081,13 @@ if ( !function_exists( 'shiword_mini_login' ) ) {
 	function shiword_mini_login() {
 
 		$args = array(
-			'redirect' => home_url(),
-			'form_id' => 'sw-loginform',
-			'id_username' => 'sw-user_login',
-			'id_password' => 'sw-user_pass',
-			'id_remember' => 'sw-rememberme',
-			'id_submit' => 'sw-submit' );
+			'redirect'		=> home_url(),
+			'form_id'		=> 'sw-loginform',
+			'id_username'	=> 'sw-user_login',
+			'id_password'	=> 'sw-user_pass',
+			'id_remember'	=> 'sw-rememberme',
+			'id_submit'		=> 'sw-submit',
+		);
 
 ?>
 	<li class="ql_cat_li">
