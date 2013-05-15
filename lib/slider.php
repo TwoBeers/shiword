@@ -64,7 +64,7 @@ class Shiword_Slider {
 			if ( $post_id == 0 ) return;
 
 
-			$posts_list = get_option( 'shiword_slideshow' ); //get the selected posts list
+			$posts_list = get_option( 'shiword_slideshow', array() ); //get the selected posts list
 
 			switch ( $_GET['slider_action'] ) {
 

@@ -904,7 +904,7 @@ function shiword_get_coa( $option = false ) {
 	if ( $option == 'groups' )
 		return $shiword_groups;
 	elseif ( $option )
-		return $shiword_coa[$option];
+		return ( isset( $shiword_coa[$option] ) ) ? $shiword_coa[$option] : false ;
 	else
 		return $shiword_coa;
 

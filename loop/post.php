@@ -36,5 +36,7 @@
 		<?php shiword_hook_entry_bottom(); ?>
 
 	</div>
+
 	<div class="fixfloat"> </div>
+
 </div>
