@@ -13,7 +13,7 @@ get_header(); ?>
 
 <?php shiword_get_layout( 'one-column' ); ?>
 
-<div class="<?php shiword_content_class(); ?>">
+<div id="posts-container" class="<?php shiword_content_class(); ?>">
 
 	<?php if ( have_posts() ) {
 
