@@ -13,6 +13,9 @@ class Shiword_Slider {
 
 	function __construct() {
 
+		if ( ! shiword_get_opt( 'shiword_sticky' ) )
+			return;
+
 		add_action( 'admin_init'					, array( $this, 'update' ) );
 		add_action( 'admin_print_styles-edit.php'	, array( $this, 'posts_table_style' ) );
 		add_action( 'shiword_hook_header_after'		, array( $this, 'init' ), 11 );

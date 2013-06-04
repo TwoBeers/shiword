@@ -95,7 +95,7 @@ function shiword_get_info( $field ) {
 
 require_once( 'lib/options.php' ); // load theme default options
 
-if ( shiword_get_opt( 'shiword_custom_widgets' ) == 1 ) require_once( 'lib/widgets.php' ); // load custom widgets module
+require_once( 'lib/widgets.php' ); // load custom widgets module
 
 $shiword_is_mobile = false;
 require_once( 'mobile/core-mobile.php' ); // load mobile functions

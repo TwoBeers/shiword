@@ -1382,21 +1382,24 @@ function shiword_register_widgets() {
 	if ( !is_blog_installed() )
 		return;
 
+	if ( ! shiword_get_opt( 'shiword_custom_widgets' ) )
+		return;
+
 	unregister_widget( 'WP_Widget_Recent_Comments' );
 
 	$value = array(
-		'Shiword_Widget_Popular_Posts' => 1,
-		'Shiword_Widget_Latest_Commented_Posts' => 1,
-		'Shiword_Widget_Latest_Commentators' => 1,
-		'Shiword_Widget_User_Quick_Links' => 1,
-		'Shiword_Widget_Pop_Categories' => 1,
-		'Shiword_Widget_Social' => 1,
-		'Shiword_Widget_Recent_Posts' => 1,
-		'Shiword_Widget_Image_Details' => 1,
-		'Shiword_Widget_Share_This' => 1,
-		'Shiword_Widget_Post_Details' => 1,
-		'Shiword_Widget_Recent_Comments' => 1,
-		'Shiword_Widget_Clean_Archives'  => 1
+		'Shiword_Widget_Popular_Posts'			=> 1,
+		'Shiword_Widget_Latest_Commented_Posts'	=> 1,
+		'Shiword_Widget_Latest_Commentators'	=> 1,
+		'Shiword_Widget_User_Quick_Links'		=> 1,
+		'Shiword_Widget_Pop_Categories'			=> 1,
+		'Shiword_Widget_Social'					=> 1,
+		'Shiword_Widget_Recent_Posts'			=> 1,
+		'Shiword_Widget_Image_Details'			=> 1,
+		'Shiword_Widget_Share_This'				=> 1,
+		'Shiword_Widget_Post_Details'			=> 1,
+		'Shiword_Widget_Recent_Comments'		=> 1,
+		'Shiword_Widget_Clean_Archives'			=> 1,
 	);
 
 	$widgets = apply_filters( 'shiword_filter_widgets', $value );
