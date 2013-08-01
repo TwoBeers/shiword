@@ -37,20 +37,18 @@ function shiword_get_default_widget_args() {
 function shiword_widget_areas_init() {
 	
 	// Area 1, located at the top of the sidebar.
-	if ( shiword_get_opt( 'shiword_rsideb' ) ) {
-		register_sidebar( array_merge( 
-			array(
-				'name' => __( 'Sidebar Widget Area', 'shiword' ),
-				'id' => 'primary-widget-area',
-				'description' => '',
-				'before_widget' => '<div id="%1$s" class="widget %2$s">',
-				'after_widget' => '</div>',
-				'before_title' => '<div class="w_title">',
-				'after_title' => '</div>',
-			),
-			shiword_get_default_widget_args()
-		) );
-	};
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Sidebar Widget Area', 'shiword' ),
+			'id' => 'primary-widget-area',
+			'description' => '',
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget' => '</div>',
+			'before_title' => '<div class="w_title">',
+			'after_title' => '</div>',
+		),
+		shiword_get_default_widget_args()
+	) );
 
 	// Area 2, located in the header. Empty by default.
 	register_sidebar( array_merge( 
@@ -118,10 +116,23 @@ function shiword_widget_areas_init() {
  */
 class Shiword_Widget_Popular_Posts extends WP_Widget {
 
+	var $default_options = array();
+
+	var $available_thumb_size = array ();
+
 	function Shiword_Widget_Popular_Posts() {
 		$widget_ops = array( 'classname' => 'tb_popular_posts', 'description' => __( 'The most commented posts on your site', 'shiword' ) );
 		$this->WP_Widget( 'shi-popular-posts', __( 'Popular Posts', 'shiword' ), $widget_ops);
 		$this->alt_option_name = 'tb_popular_posts';
+
+		$this->available_thumb_size = array ( '32', '48', '64', '128', '256' );
+
+		$this->default_options = array(
+			'title' => __( 'Popular Posts', 'shiword' ),
+			'number' => 5,
+			'thumb' => 1,
+			'thumb_size' => '48',
+		);
 
 		add_action( 'save_post', array(&$this, 'flush_widget_cache' ) );
 		add_action( 'deleted_post', array(&$this, 'flush_widget_cache' ) );
@@ -142,15 +153,18 @@ class Shiword_Widget_Popular_Posts extends WP_Widget {
 		ob_start();
 		extract($args);
 
-		$title = apply_filters( 'widget_title', empty($instance['title']) ? __( 'Popular Posts', 'shiword' ) : $instance['title'], $instance, $this->id_base);
+		$instance = wp_parse_args( (array) $instance, $this->default_options );
+
+		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base);
 		if ( !$number = (int) $instance['number'] )
-			$number = 10;
+			$number = 5;
 		else if ( $number < 1 )
 			$number = 1;
 		else if ( $number > 15 )
 			$number = 15;
-		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
-		
+		$use_thumbs = (int) $instance['thumb'];
+		$thumb_size = (int) $instance['thumb_size'];
+
 		$r = new WP_Query(array( 'showposts' => $number, 'nopaging' => 0, 'post_status' => 'publish', 'ignore_sticky_posts' => 1, 'orderby' => 'comment_count' ));
 		if ($r->have_posts()) :
 ?>
@@ -159,7 +173,7 @@ class Shiword_Widget_Popular_Posts extends WP_Widget {
 		<ul<?php if ( $use_thumbs ) echo ' class="with-thumbs"'; ?>>
 		<?php  while ($r->have_posts()) : $r->the_post(); ?>
 			<li>
-				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_ID()); ?>"><?php if ( $use_thumbs ) echo shiword_get_the_thumb( array( 'id' => get_the_ID(), 'width' => 50, 'height' => 50 ) ); ?> <?php if ( get_the_title() ) the_title(); else the_ID(); ?> <span class="details">(<?php echo get_comments_number(); ?>)</span></a>
+				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_ID()); ?>"><?php if ( $use_thumbs ) echo shiword_get_the_thumb( array( 'id' => get_the_ID(), 'width' => $thumb_size, 'height' => $thumb_size ) ); ?> <?php if ( get_the_title() ) the_title(); else the_ID(); ?> <span class="details">(<?php echo get_comments_number(); ?>)</span></a>
 			</li>
 		<?php endwhile; ?>
 		</ul>
@@ -175,12 +189,15 @@ class Shiword_Widget_Popular_Posts extends WP_Widget {
 	}
 
 	function update( $new_instance, $old_instance ) {
+
 		$instance = $old_instance;
+
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['number'] = (int) $new_instance['number'];
 		$instance['thumb'] = (int) $new_instance['thumb'] ? 1 : 0;
-		$this->flush_widget_cache();
+		$instance["thumb_size"] = in_array( $new_instance["thumb_size"], $this->available_thumb_size ) ? $new_instance["thumb_size"] : '48' ;
 
+		$this->flush_widget_cache();
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
 		if ( isset($alloptions['sw-widget-popular-posts']) )
 			delete_option( 'sw-widget-popular-posts' );
@@ -193,28 +210,44 @@ class Shiword_Widget_Popular_Posts extends WP_Widget {
 	}
 
 	function form( $instance ) {
-		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
-		if ( !isset($instance['number']) || !$number = (int) $instance['number'] )
-			$number = 5;
-		$thumb = 1;
-		if ( isset($instance['thumb']) && !$thumb = (int) $instance['thumb'] )
-			$thumb = 0;
+
+		$instance = wp_parse_args( (array) $instance, $this->default_options );
+
+		$title		= esc_attr( $instance['title'] );
+		$number		= (int) $instance['number'];
+		$thumb		= (int) $instance['thumb'];
+		$thumb_size	= (int) $instance['thumb_size'];
+
 ?>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?>:</label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
-		</p>
+	<p>
+		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?>:</label>
+		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
+	</p>
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of posts to show', 'shiword' ); ?>:</label>
-			<input id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>" size="3" />
-		</p>
+	<p>
+		<label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of posts to show', 'shiword' ); ?>:</label>
+		<input id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>" size="3" />
+	</p>
 
-		<p>
-			<input id="<?php echo $this->get_field_id( 'thumb' ); ?>" name="<?php echo $this->get_field_name( 'thumb' ); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
-			<label for="<?php echo $this->get_field_id( 'thumb' ); ?>"><?php _e( 'Show post thumbnails', 'shiword' ); ?></label>
-		</p>	
+	<p>
+		<input id="<?php echo $this->get_field_id( 'thumb' ); ?>" name="<?php echo $this->get_field_name( 'thumb' ); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
+		<label for="<?php echo $this->get_field_id( 'thumb' ); ?>"><?php _e( 'Show post thumbnails', 'shiword' ); ?></label>
+	</p>
+
+	<p>
+		<label for="<?php echo $this->get_field_id( 'thumb_size' ); ?>"><?php _e( 'Select thumbnails size', 'shiword' ); ?>:</label><br />
+		<select name="<?php echo $this->get_field_name( 'thumb_size' ); ?>" id="<?php echo $this->get_field_id( 'thumb_size' ); ?>" >
 <?php
+		foreach( $this->available_thumb_size as $size ) {
+?>
+			<option value="<?php echo $size; ?>" <?php selected( $thumb_size, $size ); ?>><?php echo $size; ?>px</option>
+<?php
+		}
+?>
+		</select>
+	</p>
+<?php
+
 	}
 }
 
@@ -224,10 +257,23 @@ class Shiword_Widget_Popular_Posts extends WP_Widget {
  */
 class Shiword_Widget_Latest_Commented_Posts extends WP_Widget {
 
+	var $default_options = array();
+
+	var $available_thumb_size = array ();
+
 	function Shiword_Widget_Latest_Commented_Posts() {
 		$widget_ops = array( 'classname' => 'tb_latest_commented_posts', 'description' => __( 'The latest commented posts/pages of your site', 'shiword' ) );
 		$this->WP_Widget( 'shi-recent-comments', __( 'Latest activity', 'shiword' ), $widget_ops);
 		$this->alt_option_name = 'tb_latest_commented_posts';
+
+		$this->available_thumb_size = array ( '32', '48', '64', '128', '256' );
+
+		$this->default_options = array(
+			'title' => __( 'Latest activity', 'shiword' ),
+			'number' => 5,
+			'thumb' => 1,
+			'thumb_size' => '48',
+		);
 
 		add_action( 'comment_post', array(&$this, 'flush_widget_cache' ) );
 		add_action( 'transition_comment_status', array(&$this, 'flush_widget_cache' ) );
@@ -250,15 +296,20 @@ class Shiword_Widget_Latest_Commented_Posts extends WP_Widget {
 			return;
 		}
 
- 		extract($args, EXTR_SKIP);
- 		$output = '';
- 		$title = apply_filters( 'widget_title', empty($instance['title']) ? __( 'Latest activity', 'shiword' ) : $instance['title']);
+		extract($args, EXTR_SKIP);
+		$output = '';
 
-		if ( ! $number = (int) $instance['number'] )
- 			$number = 5;
- 		else if ( $number < 1 )
- 			$number = 1;
-		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
+		$instance = wp_parse_args( (array) $instance, $this->default_options );
+
+		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base);
+		if ( !$number = (int) $instance['number'] )
+			$number = 5;
+		else if ( $number < 1 )
+			$number = 1;
+		else if ( $number > 15 )
+			$number = 15;
+		$use_thumbs = (int) $instance['thumb'];
+		$thumb_size = (int) $instance['thumb_size'];
 
 		$comments = get_comments( array( 'status' => 'approve', 'type' => 'comment', 'number' => 200 ) );
 		$post_array = array();
@@ -275,7 +326,7 @@ class Shiword_Widget_Latest_Commented_Posts extends WP_Widget {
 					$post = get_post( $comment->comment_post_ID );
 					setup_postdata( $post );
 					if ( $use_thumbs ) {
-						$the_thumb = shiword_get_the_thumb( array( 'id' => $post->ID, 'width' => 50, 'height' => 50 ) );
+						$the_thumb = shiword_get_the_thumb( array( 'id' => $post->ID, 'width' => $thumb_size, 'height' => $thumb_size ) );
 					} else {
 						$the_thumb = '';
 					}
@@ -298,6 +349,7 @@ class Shiword_Widget_Latest_Commented_Posts extends WP_Widget {
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['number'] = (int) $new_instance['number'];
 		$instance['thumb'] = (int) $new_instance['thumb'] ? 1 : 0;
+		$instance['thumb_size'] = (int) $new_instance['thumb_size'];
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
@@ -308,27 +360,44 @@ class Shiword_Widget_Latest_Commented_Posts extends WP_Widget {
 	}
 
 	function form( $instance ) {
-		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
-		$number = isset($instance['number']) ? absint($instance['number']) : 5;
-		$thumb = 1;
-		if ( isset($instance['thumb']) && !$thumb = (int) $instance['thumb'] )
-			$thumb = 0;
+
+		$instance = wp_parse_args( (array) $instance, $this->default_options );
+
+		$title		= esc_attr( $instance['title'] );
+		$number		= (int) $instance['number'];
+		$thumb		= (int) $instance['thumb'];
+		$thumb_size	= (int) $instance['thumb_size'];
+
 ?>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?>:</label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
-		</p>
+	<p>
+		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?>:</label>
+		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
+	</p>
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of posts to show', 'shiword' ); ?>:</label>
-			<input id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>" size="3" />
-		</p>
+	<p>
+		<label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of posts to show', 'shiword' ); ?>:</label>
+		<input id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>" size="3" />
+	</p>
 
-		<p>
-			<input id="<?php echo $this->get_field_id( 'thumb' ); ?>" name="<?php echo $this->get_field_name( 'thumb' ); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
-			<label for="<?php echo $this->get_field_id( 'thumb' ); ?>"><?php _e( 'Show post thumbnails', 'shiword' ); ?></label>
-		</p>
+	<p>
+		<input id="<?php echo $this->get_field_id( 'thumb' ); ?>" name="<?php echo $this->get_field_name( 'thumb' ); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
+		<label for="<?php echo $this->get_field_id( 'thumb' ); ?>"><?php _e( 'Show post thumbnails', 'shiword' ); ?></label>
+	</p>
+
+	<p>
+		<label for="<?php echo $this->get_field_id( 'thumb_size' ); ?>"><?php _e( 'Select thumbnails size', 'shiword' ); ?>:</label><br />
+		<select name="<?php echo $this->get_field_name( 'thumb_size' ); ?>" id="<?php echo $this->get_field_id( 'thumb_size' ); ?>" >
 <?php
+		foreach( $this->available_thumb_size as $size ) {
+?>
+			<option value="<?php echo $size; ?>" <?php selected( $thumb_size, $size ); ?>><?php echo $size; ?>px</option>
+<?php
+		}
+?>
+		</select>
+	</p>
+<?php
+
 	}
 }
 
@@ -708,7 +777,7 @@ class Shiword_Widget_Social extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select your icon size', 'shiword' ); ?></label><br />
 			<select name="<?php echo $this->get_field_name( 'icon_size' ); ?>" id="<?php echo $this->get_field_id( 'icon_size' ); ?>" >
 <?php
-			$size_array = array ( '16px', '24px', '32px', '40px', '50px', '60px' );
+			$size_array = array ( '16px', '24px', '32px', '48px', '64px' );
 			foreach($size_array as $size) {
 ?>
 				<option value="<?php echo $size; ?>" <?php if ($instance['icon_size'] == $size) { echo " selected "; } ?>><?php echo $size; ?></option>
@@ -775,10 +844,25 @@ class Shiword_Widget_Social extends WP_Widget {
  */
 class Shiword_Widget_Recent_Posts extends WP_Widget {
 
+
+	var $default_options = array();
+
+	var $available_thumb_size = array ();
+
 	function Shiword_Widget_Recent_Posts() {
 		$widget_ops = array( 'classname' => 'tb_recent_entries', 'description' => __( "The most recent posts in a single category", 'shiword' ) );
 		$this->WP_Widget( 'shi-recent-posts', __( 'Recent Posts in Category', 'shiword' ), $widget_ops);
 		$this->alt_option_name = 'tb_recent_entries';
+
+		$this->available_thumb_size = array ( '32', '48', '64', '128', '256' );
+
+		$this->default_options = array(
+			'title'			=> __( 'Recent Posts in %s', 'shiword' ),
+			'number'		=> 5,
+			'thumb'			=> 1,
+			'thumb_size'	=> '48',
+			'category'		=> '',
+		);
 
 		add_action( 'save_post', array(&$this, 'flush_widget_cache' ) );
 		add_action( 'deleted_post', array(&$this, 'flush_widget_cache' ) );
@@ -799,12 +883,19 @@ class Shiword_Widget_Recent_Posts extends WP_Widget {
 		ob_start();
 		extract($args);
 
-		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
-		$category = isset( $instance['category']) ? absint($instance['category'] ) : '';
-		$title = apply_filters( 'widget_title', empty($instance['title']) ? __( 'Recent Posts in %s', 'shiword' ) : $instance['title'], $instance, $this->id_base);
+		$instance = wp_parse_args( (array) $instance, $this->default_options );
+
+		$category = absint( $instance['category'] );
+		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base);
 		$title = sprintf( $title, '<a href="' . get_category_link( $category ) . '">' . get_cat_name( $category ) . '</a>' );
-		if ( ! $number = absint( $instance['number'] ) )
- 			$number = 10;
+		if ( !$number = (int) $instance['number'] )
+			$number = 5;
+		else if ( $number < 1 )
+			$number = 1;
+		else if ( $number > 15 )
+			$number = 15;
+		$use_thumbs = (int) $instance['thumb'];
+		$thumb_size = (int) $instance['thumb_size'];
 
 		$r = new WP_Query( array( 'cat' => $category, 'posts_per_page' => $number, 'nopaging' => 0, 'post_status' => 'publish', 'ignore_sticky_posts' => true ) );
 		if ($r->have_posts()) :
@@ -814,7 +905,7 @@ class Shiword_Widget_Recent_Posts extends WP_Widget {
 		<ul<?php if ( $use_thumbs ) echo ' class="with-thumbs"'; ?>>
 		<?php  while ($r->have_posts()) : $r->the_post(); ?>
 			<li>
-				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_date()); ?>"><?php if ( $use_thumbs ) echo shiword_get_the_thumb( array( 'id' => get_the_ID(), 'width' => 50, 'height' => 50 ) ); ?><?php if ( get_the_title() ) the_title(); else echo get_the_date(); ?></a>
+				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_date()); ?>"><?php if ( $use_thumbs ) echo shiword_get_the_thumb( array( 'id' => get_the_ID(), 'width' => $thumb_size, 'height' => $thumb_size ) ); ?><?php if ( get_the_title() ) the_title(); else echo get_the_date(); ?></a>
 			</li>
 		<?php endwhile; ?>
 		</ul>
@@ -835,6 +926,7 @@ class Shiword_Widget_Recent_Posts extends WP_Widget {
 		$instance['number'] = (int) $new_instance['number'];
 		$instance['category'] = (int) $new_instance['category'];
 		$instance['thumb'] = (int) $new_instance['thumb'] ? 1 : 0;
+		$instance['thumb_size'] = (int) $new_instance['thumb_size'];
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
@@ -849,43 +941,61 @@ class Shiword_Widget_Recent_Posts extends WP_Widget {
 	}
 
 	function form( $instance ) {
-		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
-		$number = isset($instance['number']) ? absint($instance['number']) : 5;
-		$category = isset($instance['category']) ? absint($instance['category']) : '';
-		$thumb = isset($instance['thumb']) ? absint($instance['thumb']) : 1;
+
+		$instance = wp_parse_args( (array) $instance, $this->default_options );
+
+		$title		= esc_attr( $instance['title'] );
+		$number		= (int) $instance['number'];
+		$thumb		= (int) $instance['thumb'];
+		$thumb_size	= (int) $instance['thumb_size'];
+		$category	= absint( $instance['category'] );
+
 ?>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?>:</label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
-		</p>
+	<p>
+		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'shiword' ); ?>:</label>
+		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
+	</p>
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'category' ); ?>"><?php _e( 'Category', 'shiword' ); ?>:</label>
-			<?php wp_dropdown_categories( Array(
-						'orderby'			=> 'ID', 
-						'order'			  => 'ASC',
-						'show_count'		 => 1,
-						'hide_empty'		 => 0,
-						'hide_if_empty'	  => false,
-						'echo'			   => 1,
-						'selected'		   => $category,
-						'hierarchical'	   => 1, 
-						'name'			   => $this->get_field_name( 'category' ),
-						'id'				 => $this->get_field_id( 'category' ),
-						'class'			  => 'widefat',
-						'taxonomy'		   => 'category',
-					) ); ?>
-		</p>
+	<p>
+		<label for="<?php echo $this->get_field_id( 'category' ); ?>"><?php _e( 'Category', 'shiword' ); ?>:</label>
+		<?php wp_dropdown_categories( Array(
+					'orderby'			=> 'ID', 
+					'order'			  => 'ASC',
+					'show_count'		 => 1,
+					'hide_empty'		 => 0,
+					'hide_if_empty'	  => false,
+					'echo'			   => 1,
+					'selected'		   => $category,
+					'hierarchical'	   => 1, 
+					'name'			   => $this->get_field_name( 'category' ),
+					'id'				 => $this->get_field_id( 'category' ),
+					'class'			  => 'widefat',
+					'taxonomy'		   => 'category',
+				) ); ?>
+	</p>
 
-		<p><label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of posts to show', 'shiword' ); ?>:</label>
-		<input id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>" size="3" /></p>
+	<p><label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of posts to show', 'shiword' ); ?>:</label>
+	<input id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>" size="3" /></p>
 
-		<p>
-			<input id="<?php echo $this->get_field_id( 'thumb' ); ?>" name="<?php echo $this->get_field_name( 'thumb' ); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
-			<label for="<?php echo $this->get_field_id( 'thumb' ); ?>"><?php _e( 'Show post thumbnails', 'shiword' ); ?></label>
-		</p>	
+	<p>
+		<input id="<?php echo $this->get_field_id( 'thumb' ); ?>" name="<?php echo $this->get_field_name( 'thumb' ); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
+		<label for="<?php echo $this->get_field_id( 'thumb' ); ?>"><?php _e( 'Show post thumbnails', 'shiword' ); ?></label>
+	</p>
 
+	<p>
+		<label for="<?php echo $this->get_field_id( 'thumb_size' ); ?>"><?php _e( 'Select thumbnails size', 'shiword' ); ?>:</label><br />
+		<select name="<?php echo $this->get_field_name( 'thumb_size' ); ?>" id="<?php echo $this->get_field_id( 'thumb_size' ); ?>" >
 <?php
+		foreach( $this->available_thumb_size as $size ) {
+?>
+			<option value="<?php echo $size; ?>" <?php selected( $thumb_size, $size ); ?>><?php echo $size; ?>px</option>
+<?php
+		}
+?>
+		</select>
+	</p>
+<?php
+
 	}
 }
 

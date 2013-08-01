@@ -45,10 +45,10 @@ class Shiword_Mobile {
 		// #2 check: mobile override, the user clicked the "switch to desktop/mobile" link. a cookie will be set
 		if ( isset( $_GET['mobile_override'] ) ) {
 			if ( md5( $_GET['mobile_override'] ) == '532c28d5412dd75bf975fb951c740a30' ) { // 'mobile'
-				setcookie( "mobile_override", "mobile", time()+(60*60*24*30*12) );
+				setcookie( "mobile_override", "mobile", time()+(60*60*24*30*12), '/' );
 				return true;
 			} else {
-				setcookie( "mobile_override", "desktop", time()+(60*60*24*30*12) );
+				setcookie( "mobile_override", "desktop", time()+(60*60*24*30*12), '/' );
 				return false;
 			}
 		}

@@ -215,3 +215,8 @@ function shiword_hook_attachment_after() {
 function shiword_hook_like_it() {
 	do_action( 'shiword_hook_like_it' );
 }
+
+function shiword_hook_breadcrumb() {
+	do_action( 'tha_breadcrumb_navigation' );
+	do_action( 'shiword_hook_breadcrumb' );
+}

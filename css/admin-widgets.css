@@ -43,3 +43,12 @@ div[id*=_shi-] .widget-title {
 .sw-service-input input[type="checkbox"] {
 	vertical-align:middle; 
 }
+.sector-header {
+	border-bottom: 1px solid #ddd;
+}
+.mp6 .sector-header {
+	background:#0074A2;
+	padding: 5px;
+	color: #fff;
+	margin: 10px -6px;
+}

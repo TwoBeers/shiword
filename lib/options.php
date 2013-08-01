@@ -229,8 +229,8 @@ function shiword_get_coa( $option = false ) {
 							'default'			=> 0,
 							'description'		=> __( 'posts thumbnail', 'shiword' ),
 							'info'				=> '',
-							'req'				=> 'shiword_xcont',
-							'sub'				=> array( 'shiword_pthumb_size' )
+							'req'				=> '',
+							'sub'				=> array( 'shiword_pthumb_size', '', 'shiword_pthumb_qr' )
 		),
 		'shiword_pthumb_size' => array(
 							'group'				=> 'content',
@@ -240,6 +240,15 @@ function shiword_get_coa( $option = false ) {
 							'options_readable'	=> array( '64px', '96px', '120px' ),
 							'description'		=> __( 'thumbnail size', 'shiword' ),
 							'info'				=> '',
+							'req'				=> '',
+							'sub'				=> false
+		),
+		'shiword_pthumb_qr' => array(
+							'group'				=> 'content',
+							'type'				=> 'chk',
+							'default'			=> 0,
+							'description'		=> '<a href="http://www.denso-wave.com/qrcode/index-e.html">' . __( 'QR code &trade;', 'shiword' ) . '</a>',
+							'info'				=> __( 'Images are generated using Google Chart Tools: <a href="https://developers.google.com/chart/infographics/docs/qr_codes">Infographics</a>', 'shiword'),
 							'req'				=> '',
 							'sub'				=> false
 		),
@@ -429,22 +438,32 @@ function shiword_get_coa( $option = false ) {
 							'info'				=> __( 'show a link for easily add the selected text as a quote inside the comment form', 'shiword' ),
 							'req'				=> ''
 		),
-		'shiword_rsideb' => array(
+		'shiword_rsideb_group' => array(
 							'group'				=> 'sidebar',
-							'type'				=> 'chk',
+							'type'				=> '',
 							'default'			=> 1,
 							'description'		=> __( 'right sidebar', 'shiword' ),
 							'info'				=> '',
 							'req'				=> '',
-							'sub'				=> array( 'shiword_rsidebpages', 'shiword_rsidebposts', 'shiword_rsidebattachment' )
+							'sub'				=> array( 'shiword_rsideb', 'shiword_rsidebpages', 'shiword_rsidebposts', 'shiword_rsidebattachment' )
+		),
+		'shiword_rsideb' => 
+						array(
+							'group'				=> 'sidebar',
+							'type'				=> 'chk',
+							'default'			=> 1,
+							'description'		=> __( 'on indexes', 'shiword' ),
+							'info'				=> __( '(archives, search, main index...)', 'shiword' ),
+							'req'				=> '',
+							'sub'				=> false
 		),
 		'shiword_rsidebpages' => array(
 							'group'				=> 'sidebar',
 							'type'				=> 'chk',
 							'default'			=> 0,
 							'description'		=> __( 'on pages', 'shiword' ),
-							'info'				=> sprintf( __( 'show right sidebar on pages. If you prefer to hide the sidebar just for a single page, you can use the <a href="http://codex.wordpress.org/Pages#Page_Templates" target="_blank">page template</a> named "%s"', 'shiword' ), 'One column, no sidebar' ),
-							'req'				=> 'shiword_rsideb',
+							'info'				=> sprintf( __( 'If you prefer to hide the sidebar just for a single page, you can use the <a href="http://codex.wordpress.org/Pages#Page_Templates" target="_blank">page template</a> named "%s"', 'shiword' ), 'One column, no sidebar' ),
+							'req'				=> '',
 							'sub'				=> false
 		),
 		'shiword_rsidebposts' => array(
@@ -452,8 +471,8 @@ function shiword_get_coa( $option = false ) {
 							'type'				=> 'chk',
 							'default'			=> 0,
 							'description'		=> __( 'on posts', 'shiword' ),
-							'info'				=> __( 'show right sidebar on posts', 'shiword' ),
-							'req'				=> 'shiword_rsideb',
+							'info'				=> '',
+							'req'				=> '',
 							'sub'				=> false
 		),
 		'shiword_rsidebattachment' => array(
@@ -461,8 +480,8 @@ function shiword_get_coa( $option = false ) {
 							'type'				=> 'chk',
 							'default'			=> 0,
 							'description'		=> __( 'on attachments', 'shiword' ),
-							'info'				=> __( 'show right sidebar on attachments', 'shiword' ),
-							'req'				=> 'shiword_rsideb',
+							'info'				=> '',
+							'req'				=> '',
 							'sub'				=> false
 		),
 		'shiword_jsani' => array(
@@ -810,69 +829,6 @@ function shiword_get_coa( $option = false ) {
 							'req'				=> '',
 							'sub'				=> false
 		),
-		'shiword_I_like_it' => array(
-							'group'				=> 'other',
-							'type'				=> 'chk',
-							'default'			=> 1,
-							'description'		=> __( 'I like it', 'shiword' ),
-							'info'				=> __( 'show "like" badges beside the post content', 'shiword' ),
-							'req'				=> '',
-							'sub'				=> array( 'shiword_I_like_it_plus1', 'shiword_I_like_it_twitter', 'shiword_I_like_it_facebook', 'shiword_I_like_it_linkedin', 'shiword_I_like_it_stumbleupon', 'shiword_I_like_it_pinterest' )
-		),
-		'shiword_I_like_it_plus1' => array(
-							'group'				=> 'other',
-							'type'				=> 'chk',
-							'default'			=> 1,
-							'description'		=> 'Google +1',
-							'info'				=> '',
-							'req'				=> 'shiword_I_like_it',
-							'sub'				=> false
-		),
-		'shiword_I_like_it_twitter' => array(
-							'group'				=> 'other',
-							'type'				=> 'chk',
-							'default'			=> 0,
-							'description'		=> 'Twitter',
-							'info'				=> '',
-							'req'				=> 'shiword_I_like_it',
-							'sub'				=> false
-		),
-		'shiword_I_like_it_facebook' => array(
-							'group'				=> 'other',
-							'type'				=> 'chk',
-							'default'			=> 0,
-							'description'		=> 'Facebook',
-							'info'				=> '',
-							'req'				=> 'shiword_I_like_it',
-							'sub'				=> false
-		),
-		'shiword_I_like_it_linkedin' => array(
-							'group'				=> 'other',
-							'type'				=> 'chk',
-							'default'			=> 0,
-							'description'		=> 'LinkedIn',
-							'info'				=> '',
-							'req'				=> 'shiword_I_like_it',
-							'sub'				=> false
-		),
-		'shiword_I_like_it_stumbleupon' => array(
-							'group'				=> 'other',
-							'type'				=> 'chk',
-							'default'			=> 0,
-							'description'		=> 'StumbleUpon',
-							'info'				=> '',
-							'req'				=> 'shiword_I_like_it',
-							'sub'				=> false
-		),
-		'shiword_I_like_it_pinterest' => array(
-							'group'				=> 'other',
-							'type'				=> 'chk',
-							'default'			=> 0,
-							'description'		=> 'Pinterest',
-							'info'				=> __( 'visible ONLY in attachments', 'shiword' ),
-							'req'				=> 'shiword_I_like_it',
-							'sub'				=> false
-		),
 		'shiword_audio_player' => array(
 							'group'				=> 'other',
 							'type'				=> 'chk',
@@ -894,7 +850,7 @@ function shiword_get_coa( $option = false ) {
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'theme credits', 'shiword' ),
-							'info'				=> __( "please, don't hide theme credits. TwoBeers.net's authors reserve themselfs to give support only to those who recognize TwoBeers work, keeping TwoBeers.net credits visible on their site.", 'shiword' ),
+							'info'				=> __( "It is completely optional, but if you like the Theme we would appreciate it if you keep the credit link at the bottom. TwoBeers.net's authors reserve themselfs to give support only to those who recognize TwoBeers work, keeping TwoBeers.net credits visible on their site.", 'shiword' ),
 							'req'				=> ''
 		)
 	);
@@ -915,7 +871,7 @@ if ( !function_exists( 'shiword_get_opt' ) ) {
 	function shiword_get_opt( $opt ) {
 		global $shiword_opt;
 
-		if ( isset( $shiword_opt[$opt] ) ) return apply_filters( 'shiword_option_override', $shiword_opt[$opt], $opt );
+		if ( isset( $shiword_opt[$opt] ) ) return apply_filters( 'shiword_option_' . $opt, $shiword_opt[$opt], $opt );
 
 		$defopt = shiword_get_coa( $opt );
 

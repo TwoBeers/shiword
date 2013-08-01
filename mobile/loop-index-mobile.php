@@ -21,12 +21,27 @@ locate_template( array( 'mobile/header-mobile.php' ), true, false ); ?>
 		the_post(); ?>
 
 		<li>
+
 			<a href="<?php the_permalink() ?>" rel="bookmark">
-				<span class="tb-thumb-format <?php echo get_post_format( $post->ID ); ?>"></span>
+
+				<?php if ( has_post_thumbnail() ) { ?>
+
+					<?php the_post_thumbnail( array( 32, 32 ), array( 'class' => 'tb-thumb-format' ) ); ?>
+
+				<?php } else { ?>
+
+					<span class="tb-thumb-format <?php echo get_post_format() ? get_post_format() : 'standard'; ?>"></span>
+
+				<?php } ?>
+
 				<?php the_title(); ?>
+
 				<br>
+
 				<span class="tbm-details"><?php the_author(); ?> - <?php the_time( get_option( 'date_format' ) ); ?> - <?php comments_number('(0)', '(1)','(%)'); ?></span>
+
 			</a>
+
 		</li>
 
 	<?php } ?>

@@ -2,7 +2,7 @@
 Theme Name: Shiword
 Theme URI: http://www.twobeers.net/annunci/shiword
 Description: Simple dark theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, a posts slideshow, the custom header, the print preview and many other. Shiword is fully customizable (there's also a skin builder!), with one or two columns, up to 6 widgets areas, custom widgets ( "Social links", "Popular Post", "Latest Activity", "User quick links", "Popular Categories", "Latest comment authors", "Recent Posts in Category" and many more ) and two menu. It supports custom menus, posts thumbnail and post formats.
-Version: 4.03
+Version: 4.04
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, blue, black, orange, dark, sticky-post, right-sidebar, custom-colors, custom-background, editor-style, rtl-language-support, post-formats
 Author: TwoBeers Crew
 Author URI: http://www.twobeers.net/
@@ -189,9 +189,8 @@ input[type=password]:focus {
 }
 #maincontent {
 	background-color: #111;
-	padding-top: 79px;
+	padding-top: 78px;
 	width: 850px;
-	padding-bottom: 50px;
 	margin: 0 auto;
 }
 #sidebardx {
@@ -269,9 +268,6 @@ input[type=password]:focus {
 	width: 100%;
 	z-index: -10;
 }
-.admin-bar #sw_background {
-	top: 28px;
-}
 #sw_body {
 	height:4000px;
 	margin:0 auto;
@@ -295,15 +291,11 @@ input[type=password]:focus {
 ----------------------------------------------------------*/
 #head_cont {
 	position: fixed;
-	top: 0;
 	padding-top: .6em;
 	background: #b6b6b6;
 	z-index: 301;
 	width: 100%;
 	left: 0;
-}
-.admin-bar #head_cont {
-	margin-top: 28px;
 }
 #head {
 	border-radius: 30px 30px 0 0;
@@ -360,6 +352,7 @@ input[type=password]:focus {
 	clear: both;
 	text-align: right;
 	background: none repeat scroll 0 0 #404040;
+	padding-bottom: 4em;
 }
 #themecredits {
 	padding: 5px;
@@ -879,6 +872,9 @@ input[type=password]:focus {
 	margin: 0;
 	padding: 0;
 }
+.search-form.searching {
+	background: url(images/searching.gif) no-repeat 5px center #262626;
+}
 .tb_popular_posts img,
 .tb_latest_commented_posts img,
 .tb_latest_commentators img,
@@ -892,7 +888,6 @@ input[type=password]:focus {
 .tb_recent_entries img,
 .tb_latest_commented_posts img {
 	border: 1px solid #404040;
-	border-radius: 5px;
 	background: #111;
 }
 .widget.tb_popular_posts img,
@@ -999,7 +994,8 @@ span.lc-user-name {
 .storycontent {
 	font-size: 1.18em;
 }
-.storycontent img {
+.storycontent img,
+.widget img {
 	max-width:100%;
 	height:auto;
 }
@@ -1802,6 +1798,13 @@ img.wp-post-image {
 body .gcard {
 	z-index: 301;
 }
+#main-breadcrumb-navigation {
+	font-size: 1.18em;
+	padding: 5px 15px;
+	background: #262626;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
 
 /* TB Chat Post
 ----------------------------------------------------------*/
@@ -1944,6 +1947,13 @@ body .gcard {
 	border-top: none;
 	padding: 5px 0;
 }
+.sw-I-like-it div.sharedaddy h3.sd-title {
+	display: none;
+}
+.sw-I-like-it div.sharedaddy .sd-content {
+	width: auto;
+	float: none;
+}
 .sw-I-like-it div.sharedaddy a.sd-button {
 	background: transparent;
 	box-shadow: none;
@@ -1964,6 +1974,36 @@ body .gcard {
 	clear: both;
 	padding-top: 10px;
 	margin-top: 30px;
+}
+
+/* AddThis
+----------------------------------------------------------*/
+#main .storycontent .addthis_toolbox,
+#main .storycontent .addthis_button {
+	margin: 10px 0;
+}
+#main .storycontent .addthis_button {
+	display: inline-block;
+}
+
+/* BuddyPress
+----------------------------------------------------------*/
+#buddypress div.dir-search {
+	margin: 0;
+}
+#buddypress button,
+#buddypress a.button,
+#buddypress input[type="submit"],
+#buddypress input[type="button"],
+#buddypress input[type="reset"],
+#buddypress ul.button-nav li a,
+#buddypress div.generic-button a,
+#buddypress .comment-reply-link,
+a.bp-title-button {
+	box-shadow: none;
+	margin: 0;
+	font-weight: normal;
+	border-radius: 0;
 }
 
 /* Low Resolutions

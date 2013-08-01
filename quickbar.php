@@ -70,7 +70,7 @@ if ( !function_exists( 'shiword_qbar' ) ) {
 	function shiword_add_my_element( $elements ) {
 		$elements['my-first-element'] = array(
 			'title' => 'my title',
-			'image' => 'http://www.my-site.net/wp-content/uploads/2012/06/my-50x50-image.jpg',
+			'image' => 'http://www.my-site.net/wp-content/uploads/2012/06/my-48x48-image.jpg',
 			'content' => 'this is the content of my custom element. Hurray!'
 		);
 		return $elements;
@@ -152,10 +152,10 @@ if ( !function_exists( 'shiword_qbar' ) ) {
 							if ( is_user_logged_in() ) { //fix for notice when user not log-in
 								get_currentuserinfo();
 								$sw_email = $current_user->user_email;
-								echo get_avatar( sanitize_email( $sw_email ), 50, $default= get_template_directory_uri() . '/images/user.png','user-avatar' );
+								echo get_avatar( sanitize_email( $sw_email ), 48, $default= get_template_directory_uri() . '/images/user.png','user-avatar' );
 								printf( __( 'Logged in as %s', 'shiword' ), '<strong>' . $current_user->display_name . '</strong>' );
 							} else {
-								echo get_avatar( 'dummyemail', 50, $default= get_template_directory_uri() . '/images/user.png','user-avatar' );
+								echo get_avatar( 'dummyemail', 48, $default= get_template_directory_uri() . '/images/user.png','user-avatar' );
 								echo __( 'Not logged in', 'shiword' );
 							}
 							?>
@@ -428,10 +428,10 @@ if ( !function_exists( 'shiword_get_recententries' ) ) {
 
 				echo '<li><a href="' . esc_url( get_permalink() ) . '" title="' . the_title_attribute( array( 'echo' => 0 ) ) . '">' . $post_title_short . '</a> ' . sprintf( __( 'by %s', 'shiword' ), $post_auth ) . '<div class="preview">';
 				if ( post_password_required() ) {
-					echo '<img class="alignleft wp-post-image"  height="50" width="50" src="' . esc_url( get_template_directory_uri() . '/images/thumb.png' ) . '" alt="thumb" title="' . esc_attr( $post_title_short ) . '" />';
+					echo '<img class="alignleft wp-post-image"  height="48" width="48" src="' . esc_url( get_template_directory_uri() . '/images/thumb.png' ) . '" alt="thumb" title="' . esc_attr( $post_title_short ) . '" />';
 					echo '[' . __('No preview: this is a protected post', 'shiword' ) . ']';
 				} else {
-					echo shiword_get_the_thumb( array( 'id' => get_the_ID(), 'width' => 50, 'height' => 50, 'class' => 'alignleft' ) );
+					echo shiword_get_the_thumb( array( 'id' => get_the_ID(), 'width' => 48, 'height' => 48, 'class' => 'alignleft' ) );
 					the_excerpt();
 				}
 				echo '</div></li>';
