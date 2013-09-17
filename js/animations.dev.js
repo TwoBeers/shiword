@@ -125,20 +125,27 @@ shiwordAnimations = {
 		// fade in/out on scroll
 		top_but = $('#navbuttons').find('a[href="#"] span');
 		bot_but = $('#navbuttons').find('a[href="#footer"] span');
+		top_fade = $('#top_fade');
+		bottom_fade = $('#bottom_fade');
 		top_but.hide();
+		bottom_fade.show();
 		$(function () {
 			$(window).scroll(function () {
 				// check for top action
 				if ($(this).scrollTop() > 100) {
 					top_but.slideDown();
+					top_fade.slideDown();
 				} else {
 					top_but.slideUp();
+					top_fade.slideUp();
 				}
 				// check for bottom action
 				if ( $('body').height()-$(window).scrollTop()-$(window).height() < 100) {
 					bot_but.slideUp();
+					bottom_fade.slideUp();
 				} else {
 					bot_but.slideDown();
+					bottom_fade.slideDown();
 				}
 
 			});

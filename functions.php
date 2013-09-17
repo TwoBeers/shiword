@@ -116,8 +116,6 @@ require_once( 'quickbar.php' ); // load quickbar functions
 
 require_once( 'lib/plugins.php' ); // plugins support
 
-if ( shiword_get_opt( 'shiword_audio_player' ) ) require_once( 'lib/audio-player.php' ); // load the audio player module
-
 
 /* conditional tags */
 
@@ -173,9 +171,9 @@ function shiword_stylesheet(){
 		wp_enqueue_style( 'shiword-print-style-preview', get_template_directory_uri() . '/css/print.css', false, shiword_get_info( 'version' ), 'screen' );
 		wp_enqueue_style( 'shiword-general-style-preview', get_template_directory_uri() . '/css/print_preview.css', false, shiword_get_info( 'version' ), 'screen' );
 	} else { //normal view
-		//thickbox style
-		if ( shiword_get_opt( 'shiword_thickbox' ) ) wp_enqueue_style( 'thickbox' );
+		if ( shiword_get_opt( 'shiword_thickbox' ) ) wp_enqueue_style( 'thickbox' ); //thickbox style
 		wp_enqueue_style( 'shiword-general-style', get_stylesheet_uri(), false, shiword_get_info( 'version' ), 'screen' );
+		if ( shiword_get_opt( 'shiword_adaptive' ) ) wp_enqueue_style( 'shiword-adaptive-layout', get_template_directory_uri() . '/css/adaptive-layout.css', false, shiword_get_info( 'version' ), 'screen' );
 	}
 	//google font
 	if ( shiword_get_opt( 'shiword_google_font_family' ) ) wp_enqueue_style( 'shiword-google-fonts', '//fonts.googleapis.com/css?family=' . urlencode( shiword_get_opt( 'shiword_google_font_family' ) ) );
@@ -1307,7 +1305,7 @@ if ( !function_exists( 'shiword_setup' ) ) {
 if ( !function_exists( 'shiword_setup_custom_header' ) ) {
 	function shiword_setup_custom_header() {
 
-		$head_h = shiword_get_opt( 'shiword_head_h' ) ? str_replace( 'px', '', shiword_get_opt( 'shiword_head_h' ) ) : 100;
+		$head_h = 100;
 		$head_w = shiword_get_opt( 'shiword_frame_width' ) ? shiword_get_opt( 'shiword_frame_width' ) : 850;
 
 		$args = array(
@@ -1382,7 +1380,7 @@ if ( !function_exists( 'shiword_header_style' ) ) {
 
 		if ( shiword_is_mobile() ) return;
 		$device_rgba = shiword_hex2rgba( $shiword_colors['device_color'], $shiword_colors['device_opacity']);
-		$head_h = get_custom_header()->height;
+		$head_h = get_header_image() ? get_custom_header()->height : 0;
 
 ?>
 	<style type="text/css">

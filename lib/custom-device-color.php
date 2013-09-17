@@ -123,7 +123,7 @@ if ( !function_exists( 'shiword_add_custom_device_colors' ) ) {
 		if ( ! is_admin() )
 			return;
 
-		$GLOBALS['custom_device_color'] =& new Custom_device_color();
+		$GLOBALS['custom_device_color'] = new Custom_device_color();
 		add_action( 'admin_menu' , array(&$GLOBALS['custom_device_color'] , 'init' ));
 	}
 }

@@ -46,8 +46,11 @@
 		<div id="head_cont">
 			<div id="head">
 				<div id="head_overlay">
-					<?php shiword_site_title(); ?>
+					<div id="head_inner">
+						<?php shiword_site_title(); ?>
+					</div>
 				</div>
+				<div id="top_fade"></div>
 			</div>
 		</div>
 

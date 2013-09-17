@@ -19,7 +19,7 @@
  */
 if ( !function_exists( 'shiword_fixed_footer' ) ) {
 	function shiword_fixed_footer() {
-		
+
 		if ( shiword_is_printpreview() ) return; // useless in print preview
 ?>
 
@@ -35,6 +35,7 @@ if ( !function_exists( 'shiword_fixed_footer' ) ) {
 			</div>
 		</div>
 	</div>
+	<div id="bottom_fade"></div>
 	<div id="fixedfoot_reflect"></div>
 </div>
 
@@ -78,9 +79,9 @@ if ( !function_exists( 'shiword_qbar' ) ) {
 
 */
 	$elements = array();
-	
+
 	$elements = apply_filters('shiword_qbar_elements', $elements);
-	
+
 	foreach ( $elements as $key => $element ) {
 ?>
 
@@ -231,7 +232,7 @@ if ( !function_exists( 'shiword_navbuttons' ) ) {
 		if ( ! shiword_get_opt( 'shiword_navbuttons' ) ) return;
 
 		wp_reset_postdata();
-		
+
 		$is_post = is_single() && !is_attachment() && !shiword_is_allcat();
 		$is_image = is_attachment() && !shiword_is_allcat();
 		$is_page = is_singular() && !is_single() && !is_attachment() && !shiword_is_allcat();

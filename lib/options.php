@@ -668,7 +668,7 @@ function shiword_get_coa( $option = false ) {
 		'shiword_navlinks' => array(
 							'group'				=> 'navigation',
 							'type'				=> 'chk',
-							'default'			=> 0,
+							'default'			=> 1,
 							'description'		=> __( 'classic navigation links', 'shiword' ),
 							'info'				=> __( "show the classic navigation links (paged posts navigation, next/prev post, etc). Note: the same links are already located in the easy-navigation bar", 'shiword' ),
 							'req'				=> ''
@@ -707,16 +707,6 @@ function shiword_get_coa( $option = false ) {
 							'info'				=> __( "show the \"welcome\" message and the date reminder in the bottom right", 'shiword' ),
 							'req'				=> ''
 		),
-		'shiword_head_h' => array(
-							'group'				=> 'other',
-							'type'				=> 'sel',
-							'default'			=> '100px',
-							'options'			=> array( '0px', '100px', '150px', '200px', '250px', '300px' ),
-							'options_readable'	=> array( '0px', '100px', '150px', '200px', '250px', '300px' ),
-							'description'		=> __( 'header height', 'shiword' ),
-							'info'				=> '',
-							'req'				=> ''
-		),
 		'shiword_frame_width' => array(
 							'group'				=> 'other',
 							'type'				=> 'sel',
@@ -725,6 +715,14 @@ function shiword_get_coa( $option = false ) {
 							'options_readable'	=> array( __( 'narrow', 'shiword' ), __( 'normal', 'shiword' ), __( 'wide', 'shiword' ) ),
 							'description'		=> __( 'frame width', 'shiword' ),
 							'info'				=> __( "Default is <u>normal</u>. If you modify the width of the main frame, your site may be displayed incorrectly for some of your readers. <u>Don't change this setting unless you're sure of what you're doing!</u>", 'shiword' ),
+							'req'				=> ''
+		),
+		'shiword_adaptive' => array(
+							'group'				=> 'other',
+							'type'				=> 'chk',
+							'default'			=> 1,
+							'description'		=> __( 'adaptive layout', 'shiword' ),
+							'info'				=> __( 'theme changes its layout in order to fit small screens', 'shiword' ),
 							'req'				=> ''
 		),
 		'shiword_font_family'=> array(
@@ -828,14 +826,6 @@ function shiword_get_coa( $option = false ) {
 							'info'				=> __( "", 'shiword' ),
 							'req'				=> '',
 							'sub'				=> false
-		),
-		'shiword_audio_player' => array(
-							'group'				=> 'other',
-							'type'				=> 'chk',
-							'default'			=> 1,
-							'description'		=> __( 'swf audio player', 'shiword' ),
-							'info'				=> __( 'embed an audio player before the post content for linked mp3 files', 'shiword' ),
-							'req'				=> ''
 		),
 		'shiword_custom_css' => array(
 							'group'				=> 'other',
